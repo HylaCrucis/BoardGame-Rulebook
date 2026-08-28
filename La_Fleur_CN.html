@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Fleur（繁花）— 游戏规则</title>
+<style>
+  :root{
+    --cream:#faf6ed; --cream2:#f2ead8; --ink:#3a3025; --ink-soft:#7a6e5e;
+    --sage:#4a7c59; --sage-d:#355c42; --sage-l:#e8f0ea;
+    --gold:#b8860b; --gold-d:#8b6508; --gold-l:#fdf3d8;
+    --rose:#c4787a; --rose-d:#a85a5c; --rose-l:#fce8e9;
+    --line:#ddd4c0; --card:#fffdf7;
+    --nav-bg:#3a5044; --nav-text:#e8ede9;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--cream); color:var(--ink);
+    font-family:"Songti SC","Noto Serif SC","Source Han Serif SC",STSong,
+                "Iowan Old Style","Palatino Linotype",Georgia,serif;
+    line-height:1.82; font-size:17px;
+  }
+  .wrap{display:flex; align-items:flex-start; max-width:1200px; margin:0 auto;}
+  nav{
+    position:sticky; top:0; align-self:flex-start;
+    width:250px; flex:0 0 250px; height:100vh; overflow-y:auto;
+    background:var(--nav-bg); color:var(--nav-text); padding:24px 16px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;
+    border-radius:0 16px 16px 0;
+  }
+  nav h2{font-size:13px; letter-spacing:.15em; text-transform:uppercase;
+    color:var(--gold); margin:0 0 14px; border-bottom:1px solid rgba(184,134,11,.3);
+    padding-bottom:8px;}
+  nav ol{list-style:none; margin:0; padding:0;}
+  nav a{display:block; color:var(--nav-text); text-decoration:none; font-size:14px;
+    padding:8px 12px; border-radius:8px; transition:background .2s;}
+  nav a:hover{background:rgba(255,255,255,.1);}
+  nav a.active{background:rgba(184,134,11,.25); color:#fff;}
+  main{flex:1 1 auto; min-width:0; padding:0 44px 80px;}
+  .cover{
+    background:linear-gradient(145deg,var(--sage-d),#5a9068,#6ba078);
+    color:#fff; padding:64px 44px; border-radius:0 0 20px 20px;
+    margin-bottom:40px; text-align:center;
+    box-shadow:0 10px 36px rgba(53,92,66,.28);}
+  .cover h1{font-size:42px; margin:0 0 8px; letter-spacing:.06em;
+    font-family:"Georgia","Noto Serif SC",serif;}
+  .cover .sub{font-size:17px; opacity:.92; font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;
+    letter-spacing:.04em;}
+  .cover .tag{display:inline-block; margin-top:18px; padding:7px 18px;
+    border:1px solid rgba(255,255,255,.45); border-radius:22px; font-size:14px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; opacity:.9;}
+  section{padding:16px 0 10px; border-bottom:1px solid var(--line); scroll-margin-top:18px;}
+  section:last-of-type{border-bottom:none;}
+  h2.sec{font-size:27px; color:var(--sage-d); margin:20px 0 8px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  h2.sec .num{color:var(--gold); font-weight:700; margin-right:10px;}
+  h3{font-size:20px; color:var(--sage); margin:24px 0 8px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  p{margin:10px 0;}
+  ul,ol{margin:10px 0 10px 4px; padding-left:22px;}
+  li{margin:5px 0;}
+  .lead{font-size:18px; color:var(--ink-soft);}
+  .comp-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:18px 0;}
+  .comp{border:1px solid var(--line); background:var(--card); border-radius:12px;
+    padding:14px 18px; box-shadow:0 2px 6px rgba(0,0,0,.04);}
+  .comp b{color:var(--sage-d);}
+  .callout{border-left:5px solid var(--gold); background:var(--gold-l);
+    padding:13px 18px; margin:16px 0; border-radius:0 10px 10px 0;}
+  .callout.tip{border-color:var(--sage); background:var(--sage-l);}
+  .callout.tip b{color:var(--sage);}
+  .callout.adv{border-color:var(--rose-d); background:var(--rose-l);}
+  .callout.adv b{color:var(--rose-d);}
+  .steps{counter-reset:step; list-style:none; padding-left:0; margin:14px 0;}
+  .steps li{position:relative; padding:11px 14px 11px 54px; margin:8px 0;
+    background:var(--card); border:1px solid var(--line); border-radius:10px;}
+  .steps li::before{counter-increment:step; content:counter(step);
+    position:absolute; left:13px; top:50%; transform:translateY(-50%);
+    width:30px; height:30px; background:var(--sage); color:#fff;
+    border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-weight:700; font-family:Arial,sans-serif; font-size:15px;}
+  .skill{border:1px solid var(--line); background:var(--card); border-radius:12px;
+    padding:14px 18px; margin:12px 0; box-shadow:0 2px 6px rgba(0,0,0,.04);}
+  .skill .name{font-weight:700; color:var(--sage-d); font-size:17px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .skill .name .ico{display:inline-block; min-width:22px; color:var(--gold);}
+  .req{border:1px solid var(--line); background:var(--card); border-radius:10px;
+    padding:12px 16px; margin:10px 0;}
+  .req .sym{font-weight:700; color:var(--sage-d);}
+  .ex{font-size:15px; color:var(--ink-soft); border-top:1px dashed var(--line);
+    margin-top:8px; padding-top:8px;}
+  .ex.ok::before{content:"✓ 得分示例 — "; color:var(--sage); font-weight:700;}
+  .ex.no::before{content:"✗ 不得分示例 — "; color:var(--rose-d); font-weight:700;}
+  figure{margin:18px 0; text-align:center;}
+  figure img{max-width:100%; border:1px solid var(--line); border-radius:12px;
+    box-shadow:0 4px 14px rgba(0,0,0,.08); background:#fff;}
+  figcaption{font-size:13px; color:var(--ink-soft); margin-top:6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .two{display:grid; grid-template-columns:1fr 1fr; gap:16px; align-items:start;}
+  .allure-grid{display:flex; flex-wrap:wrap; gap:10px; margin:14px 0;}
+  .allure-chip{display:inline-flex; align-items:center; gap:6px;
+    padding:6px 14px; border-radius:20px; font-size:14px; font-weight:600;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  @media(max-width:900px){
+    .wrap{flex-direction:column;}
+    nav{position:static; width:100%; height:auto; flex-basis:auto; border-radius:0 0 16px 16px;}
+    main{padding:0 18px 60px;}
+    .comp-grid,.two{grid-template-columns:1fr;}
+  }
+  footer{margin-top:40px; font-size:13px; color:var(--ink-soft);
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; text-align:center;}
+  .credits{background:var(--cream2); border:1px solid var(--line); border-radius:12px;
+    padding:16px 20px; margin-top:14px;}
+  .credits b{color:var(--sage-d);}
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <h1>La Fleur</h1>
+  <div class="sub">繁花 · 法国洛可可花园策略桌游 · 游戏规则</div>
+  <div class="tag">2–4 人 &nbsp;|&nbsp; 约 60 分钟 &nbsp;|&nbsp; 12 岁以上<span style="font-size:11px;opacity:.75;">&nbsp;（来源：规则书封面包装信息）</span></div>
+</header>
+
+<div class="wrap">
+  <nav>
+    <h2>目录</h2>
+    <ol>
+      <li><a href="#intro">简介与目标</a></li>
+      <li><a href="#components">游戏组件</a></li>
+      <li><a href="#setup">游戏板设置</a></li>
+      <li><a href="#player-setup">玩家设置</a></li>
+      <li><a href="#scoring">声望获取方式</a></li>
+      <li><a href="#round">回合流程</a></li>
+      <li><a href="#start-round">回合开始</a></li>
+      <li><a href="#artisans">工匠放置</a></li>
+      <li><a href="#locations">地点说明</a></li>
+      <li><a href="#garden-features">花园景观</a></li>
+      <li><a href="#special-invitation">特别邀请</a></li>
+      <li><a href="#garden-party">花园派对</a></li>
+      <li><a href="#end-round">回合结束</a></li>
+      <li><a href="#end-game">游戏结束</a></li>
+      <li><a href="#solo">单人模式</a></li>
+      <li><a href="#credits">制作人员</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+<!-- ==================== 1. 简介 ==================== -->
+<section id="intro">
+<h2 class="sec"><span class="num">1</span>简介与目标</h2>
+
+<p class="lead"><strong>La Fleur（繁花）</strong>是一款策略桌游。你扮演一位法国洛可可时代的花园爱好者，建造你的城堡、举办花园派对、积累足够的声望，成为所有花园中最伟大的存在——<strong>盛大晚会（Grande Soirée）</strong>的主人！</p>
+
+<p>每位玩家从几个角色中选择一个开始游戏，每个角色拥有不同的城堡——但这些城堡起手都颇为朴素空旷（嗯……就是又朴素又空旷）。你将吸引访客来到你的城堡，建立你的声誉：没有喷泉可欣赏、没有小径可漫步、最重要的是——没有花朵？那可不行！</p>
+
+<p>每回合，你要派遣<strong>工匠（Artisan）</strong>前往巴黎各处获取花卉之美、雇佣额外帮手、赚取金币、委托新的花园景观……但资源有限，每个地点的顶尖工匠只有一位。<strong>快！</strong>每回合结束时都会举办花园派对，来自全球各地的访客带着声望和机遇蜂拥而至。小心你的邻居——有些访客可能更愿意去他们的派对而不是你的！<strong>Sacrébleu！（天哪！）</strong></p>
+
+<p>随着你城堡的美名传开，越来越多的访客会涌向你的花园。当一名玩家获得足够多的声望时，所有玩家根据各自的目标（花园景观、花牌和金币）计分。声望最高的玩家被宣布为<strong>盛大晚会的主人</strong>！</p>
+
+<div style="text-align:center;margin:24px 0;">
+  <div style="display:inline-flex;gap:20px;align-items:center;flex-wrap:wrap;justify-content:center;font-size:15px;color:var(--ink-soft);">
+    <span>🌸 获取花牌</span> <span style="font-size:20px;">→</span>
+    <span>🏛️ 使用花牌购买花园景观</span> <span style="font-size:20px;">→</span>
+    <span>👗 吸引访客到美丽的花园</span>
+  </div>
+</div>
+
+<figure>
+  <img src="La_Fleur_Rules_images/page_01.jpg" alt="简介页">
+  <figcaption>简介与目标（原书第 1 页）</figcaption>
+</figure>
+
+<h3>游戏目标与概览</h3>
+<p><strong>目标：</strong>玩家通过吸引访客到自己的城堡并赚取终局奖励来竞争声望，奖励来源包括花园景观、花牌和金币。声望最高的玩家获胜！</p>
+<p><strong>概览：</strong>游戏由一系列回合组成。每回合以持有<strong>起始玩家标记</strong>的玩家开始，玩家轮流在游戏板上的各个位置放置工匠并执行相应行动。当所有玩家都放完可用工匠后，回合以<strong>花园派对</strong>结束——面板上的面朝上访客移动到总魅力值匹配且最高的玩家城堡处。游戏持续进行，直到某位玩家达到 12 点声望，此时举行盛大晚会，宣布胜者！</p>
+</section>
+
+<!-- ==================== 2. 组件 ==================== -->
+<section id="components">
+<h2 class="sec"><span class="num">2</span>游戏组件</h2>
+<div class="comp-grid">
+  <div class="comp"><b>1 块游戏主板</b><br>包含巴黎地图及各类区域</div>
+  <div class="comp"><b>4 块城堡板</b><br>每位玩家一块，含魅力追踪条</div>
+  <div class="comp"><b>10 张角色卡</b><br>含角色能力描述</div>
+  <div class="comp"><b>55 张花园景观卡</b><br>可购买的花园建筑/装饰</div>
+  <div class="comp"><b>35 张访客卡</b><br>吸引到城堡的贵宾</div>
+  <div class="comp"><b>88 张花牌</b><br>用于购买花园景观的资源</div>
+  <div class="comp"><b>20 张工匠卡</b><br>可雇佣的工匠</div>
+  <div class="comp"><b>30 张事件卡</b><br>每回合触发的事件效果</div>
+  <div class="comp"><b>90 枚金币（纸板）</b><br>通用货币</div>
+  <div class="comp"><b>16 个木质米宝</b><br>代表工匠</div>
+  <div class="comp"><b>20 个魅力标记</b><br>追踪各类型魅力值</div>
+  <div class="comp"><b>4 个声望标记</b><br>追踪声望得分</div>
+  <div class="comp"><b>1 个起始玩家标记</b><br>标识当前起始玩家</div>
+</div>
+<figure>
+  <img src="La_Fleur_Rules_images/page_02.jpg" alt="组件一览">
+  <figcaption>游戏组件（原书第 2 页）</figcaption>
+</figure>
+</section>
+
+<!-- ==================== 3. 游戏板设置 ==================== -->
+<section id="setup">
+<h2 class="sec"><span class="num">3</span>游戏板设置</h2>
+<ol class="steps">
+  <li><strong>主板：</strong>将游戏主板放在桌子中央，确保为每位玩家的城堡板和花园区域留出足够空间。</li>
+  <li><strong>花园景观卡：</strong>洗匀花园景观牌堆，正面朝下放在游戏板上。</li>
+  <li><strong>花牌：</strong>洗匀花牌牌堆，正面朝下放在游戏板上。</li>
+  <li><strong>访客卡：</strong>洗匀访客牌堆，正面朝下放在游戏板上。</li>
+  <li><strong>工匠卡：</strong>洗匀工匠牌堆，正面朝下放在游戏板上。</li>
+  <li><strong>事件卡：</strong>洗匀事件牌堆，正面朝下放在游戏板上。</li>
+  <li><strong>剩余米宝和金币：</strong>将剩余的米宝和金币放在所有玩家都能拿到的地方。</li>
+</ol>
+<figure>
+  <img src="La_Fleur_Rules_images/page_03.jpg" alt="游戏板设置">
+  <figcaption>游戏板设置示意图（原书第 3 页）</figcaption>
+</figure>
+</section>
+
+<!-- ==================== 4. 玩家设置 ==================== -->
+<section id="player-setup">
+<h2 class="sec"><span class="num">4</span>玩家设置</h2>
+<p>每位玩家领取以下组件，摆在自己面前的游戏区域内：</p>
+<ol class="steps">
+  <li><strong>1 块城堡板：</strong>放在面前。城堡板旁边的区域是你的花园景观区。</li>
+  <li><strong>1 张角色卡 + 2 张工匠卡：</strong>角色和工匠协同工作帮助建造城堡。给每位玩家发 2 张角色卡，再从工匠牌堆给每位玩家发 3 张工匠卡。每位玩家从角色卡中选 1 张，放到城堡板的左侧；再从工匠卡中选 2 张，分别放到城堡板的第一个和第二个工匠空间。其余未使用的角色卡和工匠卡放回对应牌堆。</li>
+  <li><strong>1 个声望标记：</strong>取 1 枚自己颜色的声望标记，放在游戏板上的声望追踪条起点。</li>
+  <li><strong>4 个米宝：</strong>取 4 个自己颜色的米宝。前两个分别放在城堡板的第一和第二个工匠空间。剩余 2 个放在城堡板旁边备用。</li>
+  <li><strong>5 个魅力追踪标记：</strong>取每种颜色各 1 个魅力标记（共 5 个），放在城堡板旁边。</li>
+  <li><strong>3 枚金币：</strong>从供应区取 3 枚金币，放在城堡板旁边。金币用于整局游戏中购买花牌、雇佣额外工匠等。</li>
+  <li><strong>3 张花牌：</strong>从花牌堆随机发 3 张给每位玩家。将手牌收好，不要展示给其他玩家看。</li>
+</ol>
+
+<div class="callout tip">
+<b>💡 提示：</b>选择工匠时，有些玩家喜欢选择有多种魅力类型的工匠以便在购买花园景观时有更多选择；另一些玩家则偏好只有 1–2 种魅力类型的工匠，以便针对特定花园景观集中购买力。
+</div>
+
+<figure>
+  <img src="La_Fleur_Rules_images/page_04.jpg" alt="玩家设置">
+  <figcaption>玩家设置与城堡板详解（原书第 4 页）</figcaption>
+</figure>
+</section>
+
+<!-- ==================== 5. 声望获取方式 ==================== -->
+<section id="scoring">
+<h2 class="sec"><span class="num">5</span>声望获取方式</h2>
+<p class="lead">声望是评判谁配得上"盛大晚会主人"称号的核心指标。以下是游戏中获取声望的各种途径：</p>
+
+<ul>
+  <li><strong>访客（Visitors）：</strong>某些访客在花园派对阶段访问你的城堡时会给予声望。</li>
+  <li><strong>声望位置（Prestige Location）：</strong>每回合一次，可以在声望位置放置 1 名工匠来获取显示的声望值。</li>
+  <li><strong>花园景观能力：</strong>部分花园景观在被购入、被访问、回合末或游戏结束时满足条件会给予声望。</li>
+  <li><strong>金币（Coins）：</strong>游戏结束时，根据手中剩余的金币数量计算声望。</li>
+  <li><strong>花牌（Flower Cards）：</strong>游戏结束时，根据手中持有的花牌数量计算声望。</li>
+</ul>
+
+<p><strong>获取声望的方法：</strong>在声望追踪条上将声望标记向前移动等于所获声望值的格数。</p>
+
+<h3>魅力类型（Allure Types）</h3>
+<p>游戏中共有 <strong>6 种魅力类型</strong>，这些符号代表花园的不同方面，出现在各种卡牌上：</p>
+<div class="allure-grid">
+  <span class="allure-chip" style="background:#e8dcc8;color:#6b4423;">🏛️ 建筑（Architecture）</span>
+  <span class="allure-chip" style="background:#d4e8d4;color:#2d5a3d;">🛤️ 小径（Paths）</span>
+  <span class="allure-chip" style="background:#d8ecf4;color:#2a5a7a;">💧 水景（Water）</span>
+  <span class="allure-chip" style="background:#fef3cd;color:#8a6d00;">🌸 花卉（Flowers）</span>
+  <span class="allure-chip" style="background:#e8dce8;color:#5a2d5a;">🖼️ 景致（Vistas）</span>
+  <span class="allure-chip" style="background:#f5e6d3;color:#8b6914;">🍃 野生（Wild）</span>
+</div>
+
+<ul>
+  <li><strong>花园景观卡：</strong>显示购买该景观所需的花牌魅力类型和数量，以及你城堡的总魅力值要求（见第 10 页）。</li>
+  <li><strong>访客卡：</strong>显示该访客在花园派对阶段被吸引到你城堡所需的魅力类型（见第 14 页）。</li>
+  <li><strong>工匠卡：</strong>显示该工匠每回合可为购买花园景观贡献的魅力类型（见第 11 页）。</li>
+  <li><strong>花牌：</strong>显示该花牌可为购买花园景观贡献的魅力类型（见第 10 页）。</li>
+</ul>
+
+<figure>
+  <img src="La_Fleur_Rules_images/page_05.jpg" alt="声望获取与魅力类型">
+  <figcaption>声望获取方式与魅力类型（原书第 5 页）</figcaption>
+</figure>
+</section>
+
+<!-- ==================== 6. 回合流程 ==================== -->
+<section id="round">
+<h2 class="sec"><span class="num">6</span>进行一回合</h2>
+<p>每回合按以下顺序依次执行四个阶段：</p>
+<ol class="steps">
+  <li><strong>回合开始（Start of Round）：</strong>玩家抽牌补满面板上的面朝上花牌、花园景观、事件和访客空位。</li>
+  <li><strong>放置工匠（Placing Artisans）：</strong>从持有起始玩家标记的玩家开始，玩家轮流在游戏板上的各个位置放置 1 名工匠并执行其行动，每人一轮。</li>
+  <li><strong>花园派对（Garden Party）：</strong>当所有玩家都放完了所有可用工匠后，回合进入花园派对阶段。面板上面朝上的访客移动到总魅力值匹配且最高的玩家城堡处。</li>
+  <li><strong>回合结束（End of Round）：</strong>每位玩家将自己工匠米宝收回城堡板；将来到自己花园派对的访客（同伴除外）移至访客弃牌堆。起始玩家标记顺时针传给下一位玩家，然后进入下一回合。</li>
+</ol>
+<figure>
+  <img src="La_Fleur_Rules_images/page_06.jpg" alt="回合流程概览">
+  <figcaption>回合流程示意（原书第 6 页）</figcaption>
+</figure>
+</section>
+
+<!-- ==================== 7. 回合开始 ==================== -->
+<section id="start-round">
+<h2 class="sec"><span class="num">7</span>回合开始</h2>
+<p>每回合开始时依次执行以下操作：</p>
+
+<h3>1. 花牌</h3>
+<p>抽牌并将 1 张花牌正面朝上放入游戏板上每个空的花牌空间。</p>
+
+<h3>2. 花园景观卡</h3>
+<p>抽牌并将 1 张花园景观卡正面朝上放入游戏板上每个空的花园景观空间。</p>
+
+<h3>3. 访客卡</h3>
+<p>随着你美丽花园的名声传开，越来越多访客会来参加你的花园派对。游戏板上的声望追踪条有 3 个指定位置（分别在 4、8 和 12 声望处），标示着每回合新增多少访客。按以下规则抽取新访客卡：</p>
+<ul>
+  <li>首先翻开等于玩家人数的访客卡，正面朝上放入空的访客卡空间。<strong>2 人游戏翻 2 张，3 人游戏翻 3 张，4 人游戏翻 4 张。</strong></li>
+  <li>接下来，对 4、8 和 12 声望处的每个已到达或被跳过的指定空间，额外翻 1 张访客卡。（无论有多少玩家到达或跳过该位置，每个空间只额外翻 1 张。）</li>
+</ul>
+<p><strong>示例：</strong>Ronan、Poppy 和 Amy 在玩 3 人游戏。Ronan 以 8 声望领先。回合开始时，玩家们翻出 5 张总访客卡（3 张基础 + 2 张额外，因为有人达到/跳过了 4 声望和 8 声望），放入空的访客卡空间。</p>
+<p>部分卡牌和游戏效果可能允许抽取额外的访客。如果所有可用访客空间都已填满，将额外访客放在访客空间的旁边。</p>
+
+<h3>4. 事件卡</h3>
+<p>从第二回合起直到游戏结束，每回合从事件牌堆顶端抽 1 张事件卡，正面朝上放入事件弃牌堆。（第一回合不抽事件卡！）部分事件卡的效果立即生效，部分在整个回合期间持续生效，部分在回合末生效。按照事件卡上的指示来结算效果。</p>
+
+<div class="callout">
+<b>事件卡结构：</b><br>
+A. <b>标题（Title）：</b>事件的名称。<br>
+B. <b>效果（Effect）：</b>每位玩家必须/可以执行的效果，可能在回合开始时、回合中或回合结束时触发。
+</div>
+
+<figure>
+  <img src="La_Fleur_Rules_images/page_07.jpg" alt="回合开始详情">
+  <figcaption>回合开始：补牌与事件（原书第 7 页）</figcaption>
+</figure>
+</section>
+
+<!-- ==================== 8. 工匠放置 ==================== -->
+<section id="artisans">
+<h2 class="sec"><span class="num">8</span>工匠放置</h2>
+<p>一旦"回合开始"步骤完成，玩家开始放置工匠。从持有起始玩家标记的玩家开始，按顺时针顺序轮流在游戏板上的各个位置放置 1 名工匠。如果某玩家没有可用的工匠位置了（即其城堡板上已无空余工匠位），则跳过该玩家，继续下一位，直到所有人都放完了所有工匠。</p>
+
+<h3>如何使用工匠</h3>
+<p>每位玩家开局拥有 2 名工匠，游戏过程中可通过工匠行会额外雇佣最多 2 名（见第 12 页）。</p>
+
+<h3>放置工匠</h3>
+<p>每名正在为你工作的工匠由你城堡板上对应的卡牌及其同名米宝代表。当你把米宝放到游戏板上的某个位置时，就相当于派遣该工匠去那个位置执行行动。</p>
+<p>取走你选择要雇佣的那位工匠的米宝，放到你想访问的游戏板位置上。</p>
+<p><strong>每名工匠每回合只能使用一次</strong>（除非某个事件或其他效果另有规定）。</p>
+
+<h3>工匠能力</h3>
+<p>任何工匠都可以放在任意位置上。然而，每名工匠都有独特的能力，对应特定位置。如果你将自己的工匠放在与其能力对应的位置上，就可以激活该工匠的能力。</p>
+
+<div class="callout">
+<b>工匠卡结构：</b><br>
+A. <b>魅力类型（Allure Type）：</b>该工匠可用于购买花园景观的魅力类型，每回合使用一次。<br>
+B. <b>职业（Occupation）：</b>工匠的专业特长。<br>
+C. <b>能力位置（Ability Location）：</b>该工匠的能力可在哪个位置激活。<br>
+D. <b>能力（Ability）：</b>当该工匠的米宝放在其能力位置时激活的效果。
+</div>
+
+<div class="callout tip">
+<b>💡 提示：</b>购买花园景观时一定要检查工匠的魅力类型！有时你可以仅用花牌就买到花园景观，而不需要使用工匠的魅力类型。记住：<strong>每名工匠的魅力类型对花园景观的贡献每回合只能使用一次。</strong>
+</div>
+
+<figure>
+  <img src="La_Fleur_Rules_images/page_08.jpg" alt="工匠放置">
+  <figcaption>工匠放置与工匠卡详解（原书第 8 页）</figcaption>
+</figure>
+</section>
+
+<!-- ==================== 9. 地点说明 ==================== -->
+<section id="locations">
+<h2 class="sec"><span class="num">9</span>地点说明</h2>
+<p>游戏板上有 <strong>6 个位置</strong>可供玩家放置工匠：</p>
+
+<div class="comp-grid">
+  <div class="comp"><b>🌺 花市（Flower Market）</b><br>购买花牌，用于购买花园景观。</div>
+  <div class="comp"><b>👑 声望（Prestige）</b><br>获得 +1 声望。</div>
+  <div class="comp"><b>✉️ 特别邀请（Special Invitation）</b><br>发送特别邀请函给访客，邀请其参加你的花园派对（或在平局时使其成为你的同伴）。</div>
+  <div class="comp"><b>🔨 工匠行会（Artisan Guild）</b><br>雇佣额外工匠或替换现有工匠。</div>
+  <div class="comp"><b>🏡 花园景观（Garden Features）</b><br>使用花牌和工匠的魅力类型购买花园景观，增加城堡的总魅力值并在每回合结束时吸引访客。</div>
+  <div class="comp"><b>💰 金币（Coin）</b><br>获得 +2 金币。</div>
+</div>
+
+<h3>花市（Flower Market）</h3>
+<p>将工匠米宝放在花市位置来购买 1 张花牌。玩家可以选择购买列表中的任意花牌（即按卡上所标价格购买——Wild 牌标 1 枚金币）。如果一张花牌没有标价，则购买价格为 0 枚金币。或者，玩家也可以支付 1 枚金币从花牌堆顶端购买一张面朝下的花牌。购买花牌所用的金币放入供应区。</p>
+<p><strong>每位工匠每回合只能购买 1 张花牌</strong>（除非有工匠能力、事件等特殊效果允许更多）。购买的花牌放入玩家手牌（记住：面朝上的花牌不会在新回合前被刷新，除非游戏中有某种效果导致提前刷新）。</p>
+
+<div class="callout">
+<b>花牌费用：</b><br>
+1. 有 <strong>2 种魅力类型</strong>的花牌花费 <strong>2 枚金币</strong>。<br>
+2. <strong>Wild 牌</strong>花费 <strong>1 枚金币</strong>。<br>
+3. 只有 <strong>1 种魅力类型</strong>的花牌花费 <strong>0 枚金币</strong>。<br>
+4. 从牌堆顶端抽取的面朝下花牌花费 <strong>1 枚金币</strong>。
+</div>
+
+<div class="callout">
+<b>花牌结构：</b><br>
+A. <b>魅力类型（Allure Type(s)）：</b>该花牌可用于购买花园景观的魅力类型。<br>
+B. <b>费用（Cost）：</b>购买该花牌所需金币数。<br>
+C. <b>花名（Flower Name）：</b>该花的通用名和学名。
+</div>
+
+<figure>
+  <img src="La_Fleur_Rules_images/page_09.jpg" alt="地点说明">
+  <figcaption>地点说明与花市详解（原书第 9 页）</figcaption>
+</figure>
+</section>
+
+<!-- ==================== 10. 花园景观 ==================== -->
+<section id="garden-features">
+<h2 class="sec"><span class="num">10</span>花园景观</h2>
+<p>将工匠米宝放在花园景观位置来购买 1 张面朝上的花园景观卡。花园景观的购买价格由卡牌右上角的魅力符号的种类和数量决定。</p>
+
+<p>如果在购买花园景观之前有空闲的花园景观空间，玩家可以支付 1 枚金币到供应区，从花园景观牌堆抽取 1 张花园景观卡，正面朝上放入空闲的花园景观空间。只要还有空闲的花园景观空间，此操作可以重复多次。</p>
+
+<h3>购买花园景观</h3>
+<p>花园景观可以使用<strong>任何组合</strong>的花牌和工匠卡来购买，只要这些卡牌的魅力类型总和覆盖了花园景观卡上要求的全部魅力类型。</p>
+
+<h3>1. 使用花牌</h3>
+<p>如果你的手牌中有魅力类型符合要求的花牌，它们可以为购买花园景观做贡献：</p>
+<ul>
+  <li>如果一张弃掉的花牌有超过 1 种魅力类型，且这几种类型都是花园景观所需要的，那么这张单张花牌可以同时支付两种所需的魅力类型。</li>
+  <li>然而，如果一张有超过 1 种魅力类型的花牌被弃掉，而花园景观只需要其中 1 种类型，那么多余的那种魅力类型不会被使用，视为浪费。</li>
+  <li><strong>Wild 牌 🍃</strong>可以作为花园景观所需的<strong>任何 1 种</strong>魅力类型使用。</li>
+  <li>玩家可以弃掉任意 2 张花牌（无论其魅力类型如何）来当作花园景观所需的<strong>任意 1 种</strong>魅力类型。</li>
+</ul>
+
+<h3>2. 使用工匠卡</h3>
+<p>每位玩家的工匠每回合可以为购买 1 张花园景观贡献 1 次其魅力类型。工匠的米宝不需要在花园景观位置或玩家的城堡板上——玩家只需声明他们正在用该工匠的魅力类型来参与本次购买即可。将参与购买的工匠卡以约 45 度角倾斜放置，表明该工匠本轮已贡献了魅力。</p>
+<p><strong>注意：工匠的魅力类型不计入你城堡的总魅力值。</strong></p>
+
+<h3>更新魅力追踪条</h3>
+<p>一旦支付了购买所需的费用，将花园景观卡放入你的游戏区域。在你城堡板的魅力追踪条上，将与购买的花园景观卡上每种魅力符号相匹配的魅力标记向前推进相应的格数。</p>
+
+<div class="callout tip">
+<b>💡 提示：</b>按魅力类型分组或叠放你的花园景观卡是一个好习惯，方便随时了解哪些能力在何时激活。
+</div>
+
+<h3>购买示例</h3>
+<p><strong>凉亭（Pavilion）</strong>花园景观的费用如下。你能使用的最可行的花牌组合是：双粉红苏格兰野蔷薇（Double Pink Scotch Briar Rose）贡献 1 个 🖼️ 景致 + 1 个 🏛️ 建筑魅力；Wild 牌贡献 1 个 🛤️ 小径魅力；常春藤（Common Ivy）贡献第二个所需的 🏛️ 建筑魅力，而常春藤上多余的 🏛️ 建筑魅力则浪费掉。</p>
+
+<figure>
+  <img src="La_Fleur_Rules_images/page_10.jpg" alt="花园景观购买">
+  <figcaption>花园景观购买规则（原书第 10 页）</figcaption>
+</figure>
+
+<figure>
+  <img src="La_Fleur_Rules_images/page_11.jpg" alt="工匠卡与魅力追踪">
+  <figcaption>工匠卡贡献与魅力追踪条更新示例（原书第 11 页）</figcaption>
+</figure>
+
+<h3>花园景观能力类型</h3>
+<p>每张花园景观卡拥有以下 4 种能力类型之一，在满足触发条件时按卡牌指示结算：</p>
+<div class="two">
+  <div>
+    <div class="req"><span class="sym">📥 获得时（When Acquired）</span><br>购买花园景观卡时立即结算该能力文本。</div>
+    <div class="req"><span class="sym">👁️ 被访问时（When Visited）</span><br>每回合花园派对步骤中当你可能收到访客时结算该效果。</div>
+  </div>
+  <div>
+    <div class="req"><span class="sym">🔄 回合末（End of Round）</span><br>每回合"回合结束"步骤时结算该效果。</div>
+    <div class="req"><span class="sym">🏁 游戏终（Game End）</span><br>游戏结束时，计分阶段结算该效果。</div>
+  </div>
+</div>
+
+<h3>工匠行会（Artisan Guild）</h3>
+<p>将工匠米宝放在工匠行会位置来<strong>雇佣 1 名新工匠</strong>或<strong>抽取 1 张新工匠卡替换现有工匠</strong>。</p>
+<p><strong>雇佣新工匠：</strong>如果你拥有的工匠少于 4 名，向供应区支付 8 枚金币，从工匠牌堆顶端抽取 1 张工匠卡。将工匠卡正面朝上放在你城堡板的一个空余工匠空间上方。取 1 个该工匠颜色的米宝放在新工匠卡的空余米宝空间中。你可以在本回合的下一轮开始使用这名新工匠。</p>
+<p><strong>替换工匠：</strong>向供应区支付 4 枚金币，从工匠牌堆顶端抽取 1 张工匠卡。你可以保留新的工匠卡或将其弃掉。如果你想保留当前城堡板上的旧工匠，则将新抽到的工匠卡放到旧工匠卡之前占据的空间上（即原来被弃掉的工匠卡所在的位置）。</p>
+
+<div class="callout tip">
+<b>💡 提示：</b>雇佣更多工匠意味着每回合有更多行动机会，但你需要平衡——工匠需要配合购买花园景观和吸引访客才能发挥作用。
+</div>
+
+<figure>
+  <img src="La_Fleur_Rules_images/page_12.jpg" alt="花园景观能力与工匠行会">
+  <figcaption>花园景观能力类型与工匠行会（原书第 12 页）</figcaption>
+</figure>
+</section>
+
+<!-- ==================== 11. 特别邀请 ==================== -->
+<section id="special-invitation">
+<h2 class="sec"><span class="num">11</span>特别邀请</h2>
+<p>在花园派对步骤中，访客通常会访问总魅力值最高且匹配其魅力类型的玩家城堡（见第 14 页）。将工匠米宝放在<strong>特别邀请</strong>位置来邀请一名特定访客参加你的花园派对，或让一名访客成为你的<strong>同伴（Companion）</strong>。</p>
+
+<p>每张访客卡上只能放置 1 个米宝。除非游戏中有明确说明，否则任何能力或其他效果都不能从访客区域弃掉带有米宝的访客卡。</p>
+
+<div class="callout">
+<b>访客卡结构：</b><br>
+A. <b>魅力类型（Allure Type(s)）：</b>该访客被吸引到的魅力类型。<br>
+B. <b>姓名（Name）：</b>访客的虚构姓名。<br>
+C. <b>效果（Effect）：</b>在花园派对步骤中获得的效果。
+</div>
+
+<h3>邀请访客</h3>
+<p>如果你与另一名玩家在匹配某访客魅力类型的数值上打平，你可以在特别邀请位置放置工匠来打破平局，让该访客访问你的城堡而非对手的。但要<strong>谨慎</strong>——如果你的对手在该访客的魅力类型上比你更高，那么在花园派对步骤中，该访客会忽略你的邀请而去访问对手的城堡！</p>
+<p>要邀请一名访客，取你在特别邀请位置放置的工匠米宝，放到你想邀请的访客卡上。</p>
+
+<h3>浪漫同伴</h3>
+<p>如果你的城堡有 5 个或更多匹配某访客魅力类型的魅力值，你可以<strong>浪漫</strong>该访客并使其成为你的同伴。要浪漫一名访客，将你在特别邀请位置放置的工匠米宝放到你想浪漫的访客卡上。如果该访客在你的花园派对步骤中访问了你的城堡，该访客将变成你的<strong>同伴卡</strong>。同伴不是返回到访客弃牌堆，而是留在你的城堡并在每回合结束时赋予你效果。每位玩家<strong>最多只能拥有 1 名同伴</strong>。没有足够魅力值的玩家无法使访客成为同伴。</p>
+
+<div class="callout tip">
+<b>💡 提示：</b>获得同伴意味着你拥有一个永久访客和一个强大的优势——因为同伴的效果在每回合结束时触发。
+</div>
+
+<div class="two">
+  <div class="req"><span class="sym">👑 声望（Prestige）</span><br>将工匠放在声望位置获得 +1 声望。每位玩家每回合在此位置只能放置 1 次。</div>
+  <div class="req"><span class="sym">💰 金币（Coin）</span><br>将工匠放在金币位置获得 +2 金币。从供应区取金币放入自己的游戏区域。</div>
+</div>
+
+<figure>
+  <img src="La_Fleur_Rules_images/page_13.jpg" alt="特别邀请">
+  <figcaption>特别邀请与同伴机制（原书第 13 页）</figcaption>
+</figure>
+</section>
+
+<!-- ==================== 12. 花园派对 ==================== -->
+<section id="garden-party">
+<h2 class="sec"><span class="num">12</span>花园派对</h2>
+<p>当所有玩家都放完了所有可用工匠后，<strong>花园派对</strong>步骤开始。面板上面朝上的访客卡会访问总魅力值最高且匹配访客魅力类型的玩家城堡，然后移动到该玩家的游戏区域。如果多名玩家并列最高，则该访客无法决定去谁的城堡（见第 13 页"特别邀请"中关于打破平局的说明）。<strong>一名玩家在一次花园派对中可以接收的访客数量没有上限。</strong></p>
+
+<div class="callout adv">
+<b>⚠ 注意：</b>有少数访客没有魅力类型要求，他们会根据卡牌文本中的条件来决定访问哪位玩家的花园派对。请阅读访客文本来确定他们会访问谁。
+</div>
+
+<h3>访客</h3>
+<p>一旦所有面朝上的访客卡都被移动到了玩家的游戏区域（平局时或留在访客区域），从持有起始玩家标记的玩家开始，按回合顺序依次处理每位玩家的访客。对于每位玩家，可以任意选择顺序，依次结算其访客卡（包括同伴卡，如果有）上的效果文本。</p>
+
+<h3>访客效果</h3>
+<p>按照访客卡上的文字说明来结算效果。如果访客指示玩家获得 +1 或更多花牌，这些花牌可以从花牌堆顶端免费抽取或从面朝上的花牌中以零成本获取。</p>
+
+<h3>"被访问时"能力</h3>
+<p>如果你拥有带"被访问时（When Visited）"能力的花园景观卡，在此时结算该能力。你的同伴也作为访客计入，目的是触发和结算花园景观能力。</p>
+
+<h3>访客回收（Au Revoir）</h3>
+<p>一旦所有玩家都结算完了各自游戏区域内的访客卡文本，将所有访客卡（同伴除外）以及仍留在游戏板访客区域的面朝上访客卡移至访客弃牌堆。</p>
+
+<div class="callout tip">
+<b>💡 提示：</b>有些花园景观卡拥有"被访问时"能力，允许玩家以较少的魅力值浪漫同伴。
+</div>
+
+<figure>
+  <img src="La_Fleur_Rules_images/page_14.jpg" alt="花园派对">
+  <figcaption>花园派对流程（原书第 14 页）</figcaption>
+</figure>
+
+<figure>
+  <img src="La_Fleur_Rules_images/page_15.jpg" alt="花园派对示例">
+  <figcaption>花园派对完整示例（原书第 15 页）</figcaption>
+</figure>
+</section>
+
+<!-- ==================== 13. 回合结束 ==================== -->
+<section id="end-round">
+<h2 class="sec"><span class="num">13</span>回合结束</h2>
+<p>一旦花园派对步骤完成，每位玩家需要结算自己角色卡和花园景观卡上的"回合末"效果。然后所有玩家整理游戏板和城堡板，准备下一回合。</p>
+
+<h3>操作清单</h3>
+<ol class="steps">
+  <li><strong>弃置面朝上的访客：</strong>将仍在访客区域的所有面朝上访客卡移至访客弃牌堆。</li>
+  <li><strong>回收工匠米宝：</strong>从游戏板取回你的工匠米宝，放回城堡板上的工匠空间。</li>
+  <li><strong>传递起始玩家标记：</strong>将起始玩家标记传给顺时针方向的下一位玩家。</li>
+  <li><strong>花园景观"回合末"能力：</strong>从持有起始玩家标记的玩家开始，按顺序依次结算每位玩家拥有的任意花园景观卡的"回合末"能力文本。</li>
+  <li><strong>角色能力：</strong>同样从持有起始玩家标记的玩家开始，按顺序依次结算每位玩家角色卡上的"回合末"能力文本。</li>
+  <li><strong>重置工匠：</strong>重置所有参与了花园景观购买的工匠卡，将它们恢复为垂直状态（不再倾斜）。</li>
+  <li><strong>检查盛大晚会：</strong>如果没有玩家达到 12 或更多声望，下一回合开始并回到"回合开始"步骤。如果有一名或多名玩家达到了 12+ 声望，则**盛大晚会（Grande Soirée）回合**开始——它仍然按"回合开始"步骤进行，但**这是游戏的最终一回合**，游戏将在这一回合结束后终止（见第 17 页"游戏结束"）。</li>
+</ol>
+
+<p><strong>注意：</strong>面朝上的花园景观卡和花牌不会被弃掉，留在游戏板上供下一回合使用。</p>
+
+<div class="callout">
+<b>角色卡结构：</b><br>
+A. <b>姓名（Name）：</b>角色的虚构姓名。<br>
+B. <b>能力（Abilities）：</b>在每回合结束时激活的能力。
+</div>
+
+<h3>角色能力示例</h3>
+<p>Aurora 在回合结束时检查自己的角色能力。她的第一个能力："回合末，每拥有 3 点花卉魅力值（在城堡魅力追踪条上），获得 +1 张花牌。"Aurora 的城堡有 7 点花卉魅力，所以她获得 +2 张花牌。<br>
+她的第二个能力："回合末，每拥有 3 点景致魅力值（在城堡魅力追踪条上），获得 +1 枚金币。"Aurora 的城堡有 4 点景致魅力，所以她获得 +1 枚金币。<br>
+她的第三个能力："回合末，如果你有 5+ 张花牌，获得 +1 声望。"Aurora 手中有 6 张花牌，所以她在游戏板的声望追踪条上获得 +1 声望。</p>
+
+<figure>
+  <img src="La_Fleur_Rules_images/page_16.jpg" alt="回合结束">
+  <figcaption>回合结束流程与角色能力示例（原书第 16 页）</figcaption>
+</figure>
+</section>
+
+<!-- ==================== 14. 游戏结束 ==================== -->
+<section id="end-game">
+<h2 class="sec"><span class="num">14</span>游戏结束</h2>
+<p><strong>游戏结束触发条件：</strong>当任意玩家达到 12 或更多声望时，游戏在最终回合（盛大晚会回合）完成后结束。</p>
+
+<h3>终局计分</h3>
+<p>从持有起始玩家标记的玩家开始，按顺序依次结算：</p>
+
+<div class="req"><span class="sym">🏡 花园景观"游戏终"能力</span><br>每位玩家依次结算自己拥有的带"游戏终"能力的花园景观卡上的能力文本（每次只结算 1 张）。</div>
+
+<div class="req"><span class="sym">💰 金币</span><br>每位玩家每保留 8 枚金币，获得 +1 声望。</div>
+
+<div class="req"><span class="sym">🌸 花牌</span><br>每位玩家每保留 3 张花牌，获得 +1 声望。</div>
+
+<div class="req"><span class="sym">👑 盛大晚会主人（Host of the Grande Soirée）</span><br>声望最高的玩家被宣布为盛大晚会的主人并获得游戏胜利！如果仍有平局，则在城堡板上总魅力值最高的玩家获胜。如果仍然平局，则共享胜利。</div>
+
+<h3>终局计分示例</h3>
+<p>游戏结束时，James 有 14 点声望。他拥有 3 张花园景观，每张都有"游戏终"能力，他逐一结算它们。</p>
+<p>第一张花园景观的能力："如果你拥有 2 种或以上的每种魅力类型，获得 +3 声望。"James 有 2+ 的路径、景致、花卉和建筑魅力，但他的城堡只有 1 点水景魅力。因此 James 无法从该能力获得奖励。</p>
+<p>第二张花园景观的能力："+1 声望，每拥有 3 点花卉魅力（在花园景观上）再 +1。"James 的花园景观累计有 4 点花卉魅力，因此他在声望追踪条上获得 +1 声望，总计 15 点声望。</p>
+<p>第三张花园景观的能力："如果你拥有 4+ 花卉魅力，获得 +2 声望。"同样，James 的城堡有 4 点花卉魅力，因此该能力再次激活，他又获得 +2 声望，总计 17 点声望。</p>
+<p>最后 James 结算剩余的金币和花牌。他有 10 枚金币剩余，获得 +1 声望（总计 18 点）。他还剩 6 张花牌，获得 +2 声望（总计 20 点）。</p>
+<p>James 最终得分为 20 点声望。对比 Aurora 的 19 点声望，由于 James 拥有最高总声望，他被宣布为盛大晚会的主人并赢得游戏！</p>
+
+<figure>
+  <img src="La_Fleur_Rules_images/page_17.jpg" alt="游戏结束">
+  <figcaption>游戏结束与终局计分（原书第 17 页）</figcaption>
+</figure>
+</section>
+
+<!-- ==================== 15. 单人模式 ==================== -->
+<section id="solo">
+<h2 class="sec"><span class="num">15</span>单人模式</h2>
+<p>当你玩 La Fleur 单人模式时，你与游戏中的另一张角色卡作为对手竞技。对手会获取花牌和金币并移动其魅力标记，具体规则如下。所有未被提及的规则与正常 2 人游戏相同。</p>
+
+<p>按照正常的 2 人游戏设置游戏板和你的游戏区域。此外，在你的旁边设置一块城堡板和魅力标记给你的对手。执行以下额外设置：</p>
+
+<h3>单人模式设置</h3>
+<ul>
+  <li><strong>角色卡：</strong>洗匀 Mademoiselle Niwa、Marie-Amélie、Louise-Marie 和 Captain George 这几张角色卡，随机选择 1 张作为你的对手。你只需使用这张卡及其起始资源（更多信息见下文）来游玩。</li>
+  <li><strong>事件卡：</strong>移除带有 🔥 符号的以下事件卡：La Seine、On the Terrace、Goats、Grand Château 和 Hot Air Balloon Voyage。</li>
+  <li><strong>访客卡：</strong>移除带有 🔥 符号的以下访客卡：Kai 和 Catherine。</li>
+  <li><strong>花园景观卡：</strong>移除带有 🔥 符号的以下花园景观卡：Pergola。</li>
+</ul>
+
+<h3>回合顺序</h3>
+<p>你总是在第一回合先行动，之后轮到你的对手。（记得**每回合都轮换**起始玩家标记，确保你和你对手公平地轮流先手。）将所有工匠按你和你对手之间的顺序交替放置——你一次放一个，而不是与你对手一起轮流。</p>
+
+<p>在你对手的回合中，它按以下方式行动：</p>
+<ol class="steps">
+  <li>将最右边的一张花牌弃入花牌弃牌堆。</li>
+  <li>从花园景观牌堆顶端取 1 张花园景观卡，正面朝上放在对手面前。适时结算与同伴、花园景观或工匠相关的效果（注意：与同伴、花园景观或工匠相关的奖励永远不会被对手触发计分）。你的对手不会从这张花园景观获得魅力值。</li>
+  <li>从花牌堆顶端抽取等同于访客区域当前访客数量的花牌，并根据各花牌上的魅力类型为对手获得相应的魅力。对每张 Wild 牌，根据**花园派对中访客**出现频率最高的魅力类型（如果并列，选择最先出现的）来获得。如果没有该魅力类型，则对手从该 Wild 牌不获得任何魅力。将这些花牌按抽取顺序（先抽先弃）弃入花牌弃牌堆，然后在你的对手的魅力追踪条上计分。</li>
+  <li>如果你面对的是最难级别的对手，注意他们也会从前 3 张展示的访客（或只有 2 张访客时则从前 2 张）那里获得显示的魅力值。</li>
+</ol>
+
+<h3>回合结束与下一回合开始</h3>
+<p>回合结束时，你的对手会像你和其他对手一样结算声望、花牌和金币，以及来自访客和他们自身角色能力的"回合末"/"被访问时"花园景观效果（如适用）。在多人游戏中计分。开始下一回合前，将所有花园景观卡向下滑动、所有花牌向右滑动，分别填补各自的空位。你的对手会将通过访客和角色奖励获得的花牌面朝下保留。他们永远不会收集工匠卡。</p>
+
+<p><strong>关于事件和访客的注意事项：</strong>你的对手总是会采取行动（比如花费金币或花牌来获取声望），前提是事件卡和访客卡允许他们这样做。某些事件不适用于你的对手（但你仍然可以利用它们！）对于 Notre Dame de Paris，你的对手总是获得 +1 声望。</p>
+
+<h3>游戏结束</h3>
+<p>一旦有 1 名玩家达到 12 或更多声望，就打出最终回合。游戏结束时，你的对手会获得花牌奖励（每 3 张花牌 +1 声望）和金币奖励（每 8 枚金币 +1 声望）来得到最终声望分数。如果你的声望更高，恭喜你赢了！你可能已经准备好挑战更高难度了（见下方挑战）。</p>
+
+<h3>单人难度级别</h3>
+<p>选择你的难度等级，并据此设置/游玩：</p>
+<ul>
+  <li><strong>简单（Easier）：</strong>对手在魅力追踪条上从零开始，拥有 3 枚金币和 3 张花牌。</li>
+  <li><strong>标准（Starting Level / normal）：</strong>对手从 3 枚金币和 3 张花牌开始。每回合（含第一回合），对手从出现的魅力类型中最频繁的一种获得 1 点魅力（如果并列则选最先出现的）。如有必要，抽取额外访客来获得底部没有的魅力类型，然后将多余访客放在访客牌堆底部。</li>
+  <li><strong>困难（Harder）：</strong>对手从零魅力、3 枚金币、3 张花牌开始。每回合（含第一回合），对手从出现的魅力类型中最频繁的一种获得 1 点魅力（如果并列则选最先出现的）。如有必要，抽取额外访客来获得底部没有的魅力类型，然后将多余访客放在访客牌堆底部。</li>
+  <li><strong>极难（Hardest）：</strong>对手从零魅力、3 枚金币、3 张花牌开始。每回合，对手也从展示的前 3 名访客（或只有 2 名访客时则从前 2 名）那里获得 1 点魅力。如果某种魅力类型不存在，你的对手不从该访客获得魅力。</li>
+</ul>
+
+<h3>单人挑战目标</h3>
+<p>想要更大的挑战？尝试按顺序完成以下场景：</p>
+<ol>
+  <li>以 20+ 声望获胜。</li>
+  <li>游戏结束时拥有 10+ 枚金币。</li>
+  <li>在最终回合触发游戏结束。</li>
+  <li>以<strong>恰好 2 种魅力类型</strong>获胜，且每种都达到 10+。</li>
+  <li>你的<strong>所有魅力类型</strong>在游戏结束时都达到 5+。</li>
+  <li>在游戏结束时拥有 <strong>6 个或更少</strong>花园景观。</li>
+  <li>在游戏结束时手中有 7+ 张花牌。</li>
+  <li>以 30+ 声望获胜。</li>
+  <li>在游戏结束时只拥有 2 名工匠。</li>
+  <li>全程不激活角色的任何能力而获胜。</li>
+</ol>
+
+<figure>
+  <img src="La_Fleur_Rules_images/page_18.jpg" alt="单人模式">
+  <figcaption>单人模式规则（原书第 18 页）</figcaption>
+</figure>
+</section>
+
+<!-- ==================== 16. 制作人员 ==================== -->
+<section id="credits">
+<h2 class="sec">制作人员</h2>
+<div class="credits">
+  <p><b>游戏设计（Game Design）：</b>Amy and Dusty Droz</p>
+  <p><b>游戏开发（Game Development）：</b>Amy Droz, Dusty Droz, and Aaron Kemp</p>
+  <p><b>单人模式设计（Solo Mode Design）：</b>Joe Slack</p>
+  <p><b>规则编辑（Rule Editing）：</b>Christina Doka and William Niebling</p>
+  <p><b>美术（Art）：</b>大部分美术素材来源于公共领域（Public Domain），来自作品起源国及其他国家/地区，版权期限为作者寿命加 70 年或更长。附加艺术由 Elizabeth Wakou 提供。部分洛可可风格图片由 Trillium Rare Prints 提供。</p>
+  <hr style="border:none;border-top:1px solid var(--line);margin:12px 0;">
+  <p><b>致谢：</b>衷心感谢我们所有的 Kickstarter 支持者！没有你们的大力支持，我们就不会有今天。我们对你们感激不尽，也很荣幸能为大家设计游戏！</p>
+</div>
+
+<div class="callout" style="margin-top:20px;">
+<b>📜 设计师注记 — 关于历史准确性</b><br><br>
+<em>这款游戏在历史上准确吗？</em> La Fleur 是一部虚构作品。游戏中的大部分美术素材来自洛可可时期的历史艺术品。然而，角色和访客的姓名、故事、事件以及游戏中的其他内容都是我们的奇思妙想和想象力的产物。游戏中的任何历史不准确之处都是由于从 18 世纪获取公共领域美术资源的限制造成的，我们并不声称这些人物或场所与真实历史人物有任何关联或联系。花牌的通用名和学名尽可能准确地反映了当时植物学认知的发展，同时也考虑了原始艺术家捕捉其相似之处时的不一致性或艺术许可。
+</div>
+
+<figure>
+  <img src="La_Fleur_Rules_images/page_19.jpg" alt="制作人员">
+  <figcaption>单人挑战、制作人员与设计师注记（原书第 19 页）</figcaption>
+</figure>
+</section>
+
+  <footer>
+    《La Fleur（繁花）》中文规则书 — 内容译自原版英文规则书；版式与导航为便于阅读而添加。仅供学习交流使用。
+  </footer>
+  </main>
+</div>
+</body>
+</html>

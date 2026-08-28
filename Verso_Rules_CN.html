@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verso（双面景观）— 游戏规则</title>
+<style>
+  :root{
+    /* GIGAMIC 法式古典：海军蓝 + 芥末黄 + 砖红 */
+    --bg:#f6efe0; --bg2:#e8dac4; --ink:#1a2230; --ink-soft:#4a556a;
+    --navy:#1f3a68; --navy-d:#142848; --navy-l:#3d6098;
+    --mustard:#d8b54e; --mustard-d:#a0832a; --mustard-l:#ecd382;
+    --brick:#a04130; --brick-d:#762a1d; --brick-l:#c46651;
+    --blue:#3a6db4; --green:#5a8a4a; --orange:#e07a3a;
+    --line:#cdc0a3; --card:#fbf3df;
+    --shadow:rgba(20,40,72,.18);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"Songti SC","Noto Serif SC","Source Han Serif SC",STSong,
+                "Iowan Old Style","Palatino Linotype",Georgia,serif;
+    line-height:1.85; font-size:16px;
+  }
+  .wrap{display:flex; align-items:flex-start; max-width:1180px; margin:0 auto;}
+  nav{
+    position:sticky; top:0; align-self:flex-start;
+    width:248px; flex:0 0 248px; height:100vh; overflow-y:auto;
+    background:linear-gradient(180deg,var(--navy-d),var(--navy));
+    color:#f3eede; padding:22px 16px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;
+  }
+  nav h2{font-size:13px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--mustard); margin:0 0 12px;}
+  nav ol{list-style:none; margin:0; padding:0;}
+  nav a{display:block; color:#f3eede; text-decoration:none; font-size:14px;
+    padding:7px 10px; border-radius:7px;}
+  nav a:hover{background:var(--mustard); color:var(--navy-d);}
+  main{flex:1 1 auto; min-width:0; padding:0 40px 80px;}
+  .cover{
+    background:linear-gradient(160deg,var(--navy-d),var(--navy) 50%,var(--brick));
+    color:#f6efe0; padding:62px 40px; border-radius:0 0 18px 18px;
+    margin-bottom:36px; text-align:center;
+    box-shadow:0 10px 30px var(--shadow);
+  }
+  .cover h1{font-size:46px; margin:0 0 6px; letter-spacing:.08em;
+    font-family:Arial,"PingFang SC","Microsoft YaHei",sans-serif;}
+  .cover .sub{font-size:17px; opacity:.95;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .cover .tag{display:inline-block; margin-top:16px; padding:6px 16px;
+    border:1px solid rgba(255,255,255,.45); border-radius:20px; font-size:14px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  section{padding:14px 0 8px; border-bottom:1px solid var(--line); scroll-margin-top:18px;}
+  h2.sec{font-size:26px; color:var(--navy-d); margin:18px 0 6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  h2.sec .num{color:var(--brick); font-weight:700; margin-right:10px;}
+  h3{font-size:18px; color:var(--navy-d); margin:22px 0 6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  p{margin:10px 0;}
+  ul,ol{margin:10px 0 10px 4px; padding-left:22px;}
+  li{margin:5px 0;}
+  .lead{font-size:17px;}
+  .comp-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:16px 0;}
+  .comp{border:1px solid var(--line); background:var(--card); border-radius:12px;
+    padding:14px 16px; box-shadow:0 2px 6px var(--shadow);}
+  .comp b{color:var(--navy-d);}
+  ol.setup{counter-reset:setup; list-style:none; padding-left:0;}
+  ol.setup > li{position:relative; padding:8px 8px 8px 56px; margin:6px 0;
+    background:var(--card); border:1px solid var(--line); border-radius:8px;}
+  ol.setup > li::before{counter-increment:setup; content:counter(setup);
+    position:absolute; left:10px; top:8px;
+    width:30px; height:30px; background:var(--navy); color:#fff;
+    border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-weight:700; font-family:Arial,sans-serif;}
+  ol.bank{counter-reset:bank; list-style:none; padding-left:0;}
+  ol.bank > li{position:relative; padding:8px 8px 8px 56px; margin:6px 0;
+    background:var(--card); border:1px solid var(--line); border-radius:8px;}
+  ol.bank > li::before{counter-increment:bank; content:counter(bank);
+    position:absolute; left:10px; top:8px;
+    width:30px; height:30px; background:var(--brick); color:#fff;
+    border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-weight:700; font-family:Arial,sans-serif;}
+  .action-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:18px 0;}
+  .action{border:2px solid; border-radius:12px; padding:14px 18px; background:var(--card);
+    box-shadow:0 2px 6px var(--shadow);}
+  .action.draw{border-color:var(--blue);}
+  .action.bank{border-color:var(--brick);}
+  .action h3{margin-top:0;}
+  .color{display:inline-block; padding:2px 10px; border-radius:4px; font-weight:700;
+    font-family:Arial,sans-serif; font-size:14px; color:#fff; margin:0 2px;}
+  .color.b{background:var(--blue);}
+  .color.g{background:var(--green);}
+  .color.o{background:var(--orange);}
+  .die-num{display:inline-block; min-width:24px; padding:2px 8px; margin:0 2px;
+    border-radius:6px; font-weight:700; font-family:Arial,sans-serif;
+    border:2px solid var(--ink); font-size:14px; background:#fff;}
+  .ex{border:1px solid var(--mustard-d); background:var(--mustard-l);
+    padding:12px 18px; border-radius:10px; margin:14px 0;}
+  .ex .label{display:inline-block; background:var(--navy); color:#fff;
+    padding:2px 10px; border-radius:12px; font-weight:700; font-size:14px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; margin-right:8px;}
+  .important{border:2px dashed var(--brick); padding:12px 18px; border-radius:10px;
+    margin:14px 0; background:#fff;}
+  .important b{color:var(--brick-d);}
+  .note{border-left:3px solid var(--mustard-d); padding:8px 14px; background:var(--bg2);
+    border-radius:0 8px 8px 0; margin:14px 0;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; font-size:14px;}
+  .score-tier{border:1px solid var(--line); border-radius:8px; padding:8px 12px;
+    margin:6px 0; background:var(--card); display:flex; align-items:center;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; font-size:14px;}
+  .score-tier .range{display:inline-block; min-width:90px; font-weight:700;
+    font-family:Arial,sans-serif; color:var(--navy-d);}
+  figure{margin:18px 0; text-align:center;}
+  figure img{max-width:100%; border:1px solid var(--line); border-radius:12px;
+    box-shadow:0 4px 14px var(--shadow); background:#fff;}
+  figcaption{font-size:13px; color:var(--ink-soft); margin-top:6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .credits{background:var(--bg2); border:1px solid var(--line); border-radius:12px;
+    padding:16px 20px; margin-top:14px; font-size:15px;}
+  .credits b{color:var(--navy-d);}
+  footer{margin-top:40px; font-size:13px; color:var(--ink-soft);
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; text-align:center;}
+  @media(max-width:900px){
+    .wrap{flex-direction:column;}
+    nav{position:static; width:100%; height:auto; flex-basis:auto;}
+    main{padding:0 18px 60px;}
+    .comp-grid,.action-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <h1>VERSO</h1>
+  <div class="sub">双面景观 · 游戏规则（中文版 / 英文版转中文）</div>
+  <div class="tag">8 岁以上 &nbsp;|&nbsp; 2&ndash;6 人 &nbsp;|&nbsp; 约 30 分钟</div>
+</header>
+
+<div class="wrap">
+  <nav>
+    <h2>目录</h2>
+    <ol>
+      <li><a href="#intro">简介</a></li>
+      <li><a href="#components">配件</a></li>
+      <li><a href="#goal">游戏目标</a></li>
+      <li><a href="#anatomy">卡片构成</a></li>
+      <li><a href="#characteristics">卡片特性</a></li>
+      <li><a href="#setup">准备</a></li>
+      <li><a href="#play">游戏流程</a></li>
+      <li><a href="#draw">抽牌</a></li>
+      <li><a href="#bank">结清序列</a></li>
+      <li><a href="#square">方阵</a></li>
+      <li><a href="#end">游戏结束</a></li>
+      <li><a href="#solo">单人模式</a></li>
+      <li><a href="#challenge">终极挑战</a></li>
+      <li><a href="#credits">制作信息</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+  <section id="intro">
+    <h2 class="sec"><span class="num">1</span>简介</h2>
+    <p class="lead">翻动你的卡牌，看看反面会有什么不一样的景观！你会发现哪一种全景——<b>陆地（green/绿）</b>、<b>海洋（blue/蓝）</b>，还是<b>天空（orange/橙）</b>？</p>
+    <p class="note">原文：「翻 your cards to reveal another landscape on the reverse! 哪个 panorama will you find: 陆地, sea or sky?」</p>
+  </section>
+
+  <section id="components">
+    <h2 class="sec"><span class="num">2</span>配件</h2>
+    <div class="comp-grid">
+      <div class="comp"><b>90 张卡牌</b><br>由 GIGAMIC 提供的双面卡牌。</div>
+      <div class="comp"><b>60 个胜利点标记</b><br>用于记录玩家的胜利点。</div>
+      <div class="comp" style="grid-column:1/-1;"><b>3 种颜色 / 6 种数字 / 2 种点数</b><br>每张卡为 3 色（蓝 sea/绿 land/橙 sky）× 6 数字（1&ndash;6 + 百搭牌）× 2 胜利点（1 或 3）的组合之一。</div>
+    </div>
+  </section>
+
+  <section id="goal">
+    <h2 class="sec"><span class="num">3</span>游戏目标</h2>
+    <p>组合卡牌组成<b>序列</b>和<b>方阵</b>，获取最多的<b>胜利点</b>。</p>
+  </section>
+
+  <section id="anatomy">
+    <h2 class="sec"><span class="num">4</span>卡片构成</h2>
+    <p>每张卡牌有 <b>2 个面</b>。每个面包含：</p>
+    <ul>
+      <li><b>一种颜色</b>：蓝、绿 或 橙；</li>
+      <li><b>一个数字</b>：1&ndash;6（或 百搭牌）；</li>
+      <li><b>一定胜利点</b>：1 或 3 点。</li>
+    </ul>
+  </section>
+
+  <section id="characteristics">
+    <h2 class="sec"><span class="num">5</span>卡片特性</h2>
+    <p>一张卡牌的 2 个面<b>始终不同</b>：</p>
+    <ul>
+      <li>蓝色卡片的反面颜色一定是 <b>绿</b> 或 <b>橙</b>。</li>
+      <li>若某一面显示 <b>1 胜利点</b>，其反面一定显示 <b>3 胜利点</b>。</li>
+      <li>一张卡正反两面的<b>数字</b>一定<b>相邻</b>（即 <b>+1</b> 或 <b>&minus;1</b>）。<br>
+      <b>示例：</b>一面是 3 的卡片，另一面是 2 或 4。<br>
+      注意：数字为 <b>6</b> 的卡片，反面是 <b>5</b> 或 <b>1</b>。</li>
+    </ul>
+    <div class="note">
+      <b>百搭牌</b>是例外，反面可以是任意数字，且<b>始终为 1 胜利点</b>。
+    </div>
+  </section>
+
+  <section id="setup">
+    <h2 class="sec"><span class="num">6</span>准备</h2>
+    <ol class="setup">
+      <li>每位玩家使用 <b>15 张卡牌</b>。<b>6 人局</b>则使用全部卡牌。洗混所有卡牌，在桌中央组成<b>一摞牌堆</b>，并预留位置形成<b>弃牌堆</b>。剩余卡牌放回盒中。</li>
+      <li>将<b>胜利点标记</b>放在桌中央。</li>
+      <li>最近一次去旅行的玩家为<b>起始玩家</b>。</li>
+    </ol>
+  </section>
+
+  <section id="play">
+    <h2 class="sec"><span class="num">7</span>游戏流程</h2>
+    <p>玩家<b>按顺时针方向</b>轮流进行。回合中，玩家必须从以下<b>两个动作</b>中选 <b>一个</b>：</p>
+    <div class="action-grid">
+      <div class="action draw"><h3>① 抽 A 卡牌 / 抽牌</h3>
+        <p>从牌堆顶取走一张卡牌，可以<b>保留正面</b>（不翻看反面），或<b>翻开</b>后保留<b>反面</b>。<b>一旦看到反面，不可再改回</b>。</p>
+      </div>
+      <div class="action bank"><h3>② 结清 A 序列 / 结清序列</h3>
+        <p>将自己<b>已有</b>的一条序列兑换为胜利点，并触发对手翻牌。</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="draw">
+    <h2 class="sec"><span class="num">8</span>抽牌</h2>
+    <p>取牌堆顶的牌。然后将牌加入你面前的<b>牌组布局</b>。</p>
+    <h3>摆位规则</h3>
+    <ul>
+      <li>所有卡牌必须<b>始终可见</b>。</li>
+      <li>将卡牌按<b>颜色</b>（绿 land、蓝 sea、橙 sky）排成<b>水平横列</b>，在每条横列内按<b>数字从小到大、从左到右</b>排成序列。</li>
+      <li>布局<b>可随时调整</b>：任何时刻都可重新排列自己的卡牌。</li>
+    </ul>
+    <div class="important">
+      <b>重要！</b>同一时刻你面前<b>不能同时存在</b>两张「<b>同色同号</b>」的卡牌，<b>也不能同时拥有两张同色 百搭牌</b>。若发生这种情况，<b>弃掉你刚抽到的那张</b>，不可换一张。
+    </div>
+    <div class="ex">
+      <p><span class="label">【示例】</span><b>Gail</b> 从牌堆顶取走一张<b>橙 5</b>（仅值 1 胜利点）。她决定<b>不翻</b>保留正面，因为若翻开<b>有可能</b>得到 <span class="color b">蓝 6</span> 或 <span class="color g">绿 6</span>（她已有）。她把这张 <span class="color o">橙 5</span> 放在自己的牌组布局里，作为橙卡的序列起点。</p>
+    </div>
+  </section>
+
+  <section id="bank">
+    <h2 class="sec"><span class="num">9</span>结清序列</h2>
+    <p>一条「<b>序列</b>」是由 <b>2 到 6 张同色数字连续</b>的卡牌组成的横列。<b>百搭牌</b> 可以当作你选择的<b>任意 1&ndash;6</b> 的数字。</p>
+    <p>要结清一条序列，按以下 <b>4 步</b> 操作：</p>
+    <ol class="bank">
+      <li><b>宣布</b>你要结清的序列的颜色。</li>
+      <li>你的 <b>2 位直接相邻</b>玩家，必须立即<b>翻开</b>他们手中该颜色<b>最高数字的卡</b>（若持有）。<br>
+      <span class="note" style="display:inline-block; margin:4px 0;">注：若该颜色的卡是 百搭牌 且是其手中<b>唯一的</b>该色卡，才需翻 百搭牌。</span><br>
+      翻开后若出现<b>同色同号</b>的卡（即自己布局里已有相同颜色+数字），<b>必须弃掉刚翻开的那张</b>。</li>
+      <li>立即<b>拿取等同于该序列顶端卡片所示胜利点</b>数量的胜利点标记。</li>
+      <li>无论序列中有几张卡，<b>只弃掉该序列中数字最高的 2 张卡</b>。</li>
+    </ol>
+    <div class="ex">
+      <p><span class="label">【示例】</span><b>Ben</b> 结清一条由 3 张 <span class="color b">蓝</span> 卡组成的序列：<span class="die-num">3</span> &ndash; <span class="die-num">百搭牌</span> &ndash; <span class="die-num">5</span>。他获得 <b>5 个胜利点</b>，并弃掉 百搭牌（代表 4）和 5。他<b>两位直接相邻玩家</b>必须各自翻开他们手中数字最高的蓝卡。</p>
+      <p style="margin-top:8px;"><b>Peter</b>（Ben 的相邻玩家之一）手里有 <span class="color b">蓝 1</span> 和 <b>百搭牌</b>。他必须翻开 1（<b>不是 百搭牌</b>，因为 百搭牌 不是唯一的蓝卡）。1 翻开后变成 <span class="color g">绿 6</span>，但他手里<b>已经有绿 6</b>，所以<b>弃掉刚翻的这张</b>。</p>
+    </div>
+  </section>
+
+  <section id="square">
+    <h2 class="sec"><span class="num">10</span>方阵</h2>
+    <p>游戏任何时刻，若你手中每种颜色（<span class="color b">蓝 sea</span>、<span class="color g">绿 land</span>、<span class="color o">橙 sky</span>）<b>都至少有 3 张</b>卡牌，你立即获得 <b>7 个胜利点</b>，视为组成了一个「<b>方阵</b>」。此时你<b>不弃任何卡</b>，也<b>不引发对手翻牌</b>。</p>
+    <p>方阵既可以通过抽牌组成，也可以通过「对手结清序列后你重新整理手中翻开的卡」组成。</p>
+    <p>想要再次获得新的 7 胜利点前，你必须<b>先撤销原方阵</b>，再重新组建。</p>
+    <div class="ex">
+      <p><span class="label">【示例 1】</span><b>Helen</b> 抽到一张 <span class="color g">绿 5</span> 并加入布局。这使她得到一个由 9 张卡组成的方阵，因此获得 <b>7 个胜利点</b>。</p>
+      <p style="margin-top:8px;"><span class="label">【示例 2】</span><b>John</b> 结清一条 2 张 <span class="color g">绿</span> 卡（绿 2 和 绿 3）的序列。他<b>弃掉 2 和 3</b>，获得 <b>4 胜利点</b>。这意味着 <b>Sofia</b> 和 <b>Helen</b>（他的两位相邻玩家）必须各自翻他们手中数字最高的绿卡。Sofia 翻了 <span class="color g">绿 6</span>，反转为 <span class="color o">橙 1</span>。于是她有了<b>第三张橙卡</b>，把这张放下，恰好完成一个方阵——Sofia 立即获得 <b>7 个胜利点</b>。</p>
+      <p style="margin-top:6px;"><b>注：</b>即使布局里超过 9 张卡，也可以组成方阵（参见示例 2 的 Sofia）。</p>
+    </div>
+  </section>
+
+  <section id="end">
+    <h2 class="sec"><span class="num">11</span>游戏结束</h2>
+    <p>当玩家抽到<b>牌堆最后一张卡</b>时，游戏立即结束。</p>
+    <p>每位玩家可以再结清一次最终序列，但这次<b>相邻玩家不翻牌</b>。</p>
+    <p>汇总各玩家的胜利点，<b>分数最高的玩家获胜</b>。<b>平局时，并列玩家共享胜利</b>。</p>
+  </section>
+
+  <section id="solo">
+    <h2 class="sec"><span class="num">12</span>单人模式</h2>
+    <h3>目标</h3>
+    <p>尽可能获得最高分，看看你能否<b>超过设计师的分数</b>！</p>
+    <h3>准备</h3>
+    <p>组成一摞 <b>35 张卡牌</b>。</p>
+    <h3>玩法</h3>
+    <p>每回合依然必须从「抽牌」或「结清序列」中<b>二选一</b>。回合结束后，模拟对手行动：将<b>牌堆顶的牌翻开看反面</b>。</p>
+    <ul>
+      <li>若翻开卡中有一面是 <b>百搭牌</b>：什么都不发生。</li>
+      <li>若<b>反面的数字</b>高于<b>原面可见的数字</b>：翻你手中与<b>反面颜色相同</b>的最高数字卡。</li>
+      <li>弃掉对手的卡，进入下一回合。</li>
+    </ul>
+    <p>牌堆用完即游戏结束，记录最终胜利点。</p>
+  </section>
+
+  <section id="challenge">
+    <h2 class="sec"><span class="num">13</span>终极挑战</h2>
+    <p>Verso 的设计师们在对战中拿到了 <b>64 分</b>！你能在他们的游戏中击败他们吗？祝最佳玩家好运！</p>
+    <div class="score-tier"><span class="range">60+ 分</span>令人惊叹的表现！牌堆 传奇 加冕！</div>
+    <div class="score-tier"><span class="range">55&ndash;59 分</span>你无疑是个 专业！</div>
+    <div class="score-tier"><span class="range">50&ndash;54 分</span>你是模范玩家，致敬！</div>
+    <div class="score-tier"><span class="range">45&ndash;49 分</span>才华横溢！</div>
+    <div class="score-tier"><span class="range">40&ndash;44 分</span>干得漂亮！</div>
+    <div class="score-tier"><span class="range">35&ndash;39 分</span>不错，你已经达到了 Verso 的平均分！</div>
+    <figure>
+      <img src="Verso_Rules_images/page_01.jpg" alt="规则书第 1 页（封面 + 配件 + 卡构成 + 准备 + 抽 A 卡牌 + 结清 A 序列 上半）">
+      <figcaption>原文第 1 页（封面、配件、目标、卡牌 构成、卡牌 特性、准备、玩法 说明 玩法、抽 A 卡牌、结清 A 序列 上半）</figcaption>
+    </figure>
+    <figure>
+      <img src="Verso_Rules_images/page_02.jpg" alt="规则书第 2 页（结清 A 序列 续 + 游戏 结束 + 方阵 + 单人 模式 + 终极挑战 + 制作信息）">
+      <figcaption>原文第 2 页（结清 A 序列 续、游戏 结束、方阵、示例 1&2、单人 模式、终极挑战、制作信息与进口信息）</figcaption>
+    </figure>
+  </section>
+
+  <section id="credits">
+    <h2 class="sec"><span class="num">14</span>制作信息</h2>
+    <div class="credits">
+      <p><b>游戏设计（游戏 设计者）：</b>Alexis Allard &amp; Joan Dufour</p>
+      <p><b>插画（插画）：</b>Zongoh</p>
+      <p><b>平面设计（平面设计）：</b>Geoffrey Noël</p>
+      <p><b>开发与文案（开发 &amp; copywriting）：</b>Caroline Ansel</p>
+      <p><b>出版主管（出版主管）：</b>Alain Mihranyan</p>
+      <p style="margin-top:10px;"><b>出版（出版）：</b>GIGAMIC · ZAL Les Garennes, F 62930 Wimereux, France &nbsp;|&nbsp; <span style="color:var(--navy);">www.gigamic.com</span></p>
+      <p><b>英国进口：</b>Hachette Boardgames UK Ltd, Carmelite House, 50 Victoria Embankment, London EC4Y ODZ, UK</p>
+      <p><b>美国进口：</b>Hachette Boardgames USA, 2363 James St 537, Syracuse, NY 13206, USA</p>
+      <p style="margin-top:10px;">® &amp; © GIGAMIC 2024 &nbsp;|&nbsp; 12-2024</p>
+    </div>
+    <p class="note" style="margin-top:14px;"><b>安全警告：</b>本产品含有小部件，<b>不适合 3 岁以下儿童</b>使用，避免误吞。请妥善保留本说明。</p>
+    <footer>
+      — Verso / 双面景观 — 中文版规则书 &nbsp;·&nbsp; 译自 GIGAMIC 2024 英文版 —
+    </footer>
+  </section>
+
+  </main>
+
+<p style="margin-top: 20px; font-size: 13px; color: #666;"><b>翻译说明：</b>保留英文的专名：Verso、Zongoh、Geoffrey Noël、Caroline Ansel、Alain Mihranyan、GIGAMIC（人名/公司/游戏名）。其他专名（方阵 / 结清序列 / 百搭牌 / 卡牌 等）全部译为中文。</p>
+
+</div>
+
+</body>
+</html>

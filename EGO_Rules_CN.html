@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EGO（外星问候组织）— 游戏规则</title>
+<style>
+  :root{
+    --bone:#eef3f8; --bone2:#e1e9f2; --ink:#1b2733; --ink-soft:#54627a;
+    --space:#1f5d8c; --space-d:#103a5c; --space-l:#5fa8d3;
+    --star:#e0a93d; --star-d:#b9851f;
+    --green:#2f7d52; --green-l:#e1f0e7;
+    --red:#b14231; --red-l:#f5e2de;
+    --line:#cdd8e6; --card:#fffdf9;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bone); color:var(--ink);
+    font-family:"Songti SC","Noto Serif SC","Source Han Serif SC",STSong,
+                "Iowan Old Style",Palatino,Georgia,serif;
+    line-height:1.9; font-size:17px;
+  }
+  .wrap{display:flex; align-items:flex-start; max-width:1200px; margin:0 auto;}
+  nav{
+    position:sticky; top:0; align-self:flex-start;
+    width:260px; flex:0 0 260px; height:100vh; overflow-y:auto;
+    background:linear-gradient(180deg,var(--space-d),var(--space));
+    color:#eaf2f9; padding:22px 14px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;
+  }
+  nav h2{font-size:12px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--space-l); margin:0 0 12px;}
+  nav ol{list-style:none; margin:0; padding:0; counter-reset:navc;}
+  nav a{display:block; color:#eaf2f9; text-decoration:none; font-size:13.5px;
+    padding:6px 10px; border-radius:7px; border-left:3px solid transparent;}
+  nav a:hover{background:rgba(255,255,255,.12); border-left-color:var(--star);}
+  main{flex:1 1 auto; min-width:0; padding:0 40px 80px;}
+  .cover{
+    background:linear-gradient(160deg,var(--space-d),var(--space) 70%,#1a6a93);
+    color:#f3f7fb; padding:58px 40px; border-radius:0 0 18px 18px;
+    margin-bottom:34px; text-align:center;
+    box-shadow:0 10px 30px rgba(16,58,92,.28);
+  }
+  .cover .kicker{font-size:13px; letter-spacing:.3em; text-transform:uppercase;
+    color:var(--star); font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .cover h1{font-size:46px; margin:8px 0 6px; letter-spacing:.04em;}
+  .cover .sub{font-size:16px; opacity:.92; font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .cover .tag{display:inline-block; margin-top:18px; padding:7px 18px;
+    border:1px solid rgba(255,255,255,.4); border-radius:22px; font-size:14px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  section{padding:14px 0 8px; border-bottom:1px solid var(--line); scroll-margin-top:18px;}
+  h2.sec{font-size:27px; color:var(--space-d); margin:18px 0 6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  h2.sec .num{color:var(--star); font-weight:800; margin-right:10px;}
+  h3{font-size:19px; color:var(--space); margin:22px 0 6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  h4{font-size:16px; color:var(--space-d); margin:16px 0 4px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  p{margin:10px 0;}
+  ul,ol{margin:10px 0 10px 4px; padding-left:22px;}
+  li{margin:5px 0;}
+  .lead{font-size:18px;}
+  .comp-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:16px 0;}
+  .comp{border:1px solid var(--line); background:var(--card); border-radius:12px;
+    padding:12px 14px; box-shadow:0 2px 6px rgba(0,0,0,.04);}
+  .comp b{color:var(--space-d);}
+  .sym-table{width:100%; border-collapse:collapse; margin:14px 0; font-size:15px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .sym-table th,.sym-table td{border:1px solid var(--line); padding:8px 10px; text-align:left; vertical-align:top;}
+  .sym-table th{background:var(--bone2); color:var(--space-d);}
+  .sym-table td.sym{font-weight:700; color:var(--space-d); white-space:nowrap;}
+  .callout{border-left:5px solid var(--star); background:var(--bone2);
+    padding:12px 18px; margin:16px 0; border-radius:0 10px 10px 0;}
+  .callout b{color:var(--star-d);}
+  .callout.tip{border-color:var(--green); background:var(--green-l);}
+  .callout.tip b{color:var(--green);}
+  .callout.warn{border-color:var(--red); background:var(--red-l);}
+  .callout.warn b{color:var(--red);}
+  .steps{counter-reset:step; list-style:none; padding-left:0; margin:14px 0;}
+  .steps li{position:relative; padding:10px 14px 10px 52px; margin:8px 0;
+    background:var(--card); border:1px solid var(--line); border-radius:10px;}
+  .steps li::before{counter-increment:step; content:counter(step);
+    position:absolute; left:12px; top:50%; transform:translateY(-50%);
+    width:28px; height:28px; background:var(--space); color:#fff;
+    border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-weight:700; font-family:Arial,sans-serif;}
+  .event{display:grid; grid-template-columns:160px 1fr; gap:14px; align-items:start;
+    border:1px solid var(--line); background:var(--card); border-radius:12px;
+    padding:12px 16px; margin:12px 0; box-shadow:0 2px 6px rgba(0,0,0,.04);}
+  .event .tag{font-weight:700; color:#fff; background:var(--space); border-radius:8px;
+    padding:6px 10px; text-align:center; font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; font-size:14px;}
+  figure{margin:18px 0; text-align:center;}
+  figure img{max-width:100%; border:1px solid var(--line); border-radius:12px;
+    box-shadow:0 4px 14px rgba(0,0,0,.08); background:#fff;}
+  figcaption{font-size:13px; color:var(--ink-soft); margin-top:6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .two{display:grid; grid-template-columns:1fr 1fr; gap:16px; align-items:start;}
+  .board-seq{font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; font-size:14px; line-height:1.9;}
+  .board-seq .b{display:inline-block; background:var(--space); color:#fff; border-radius:6px;
+    padding:2px 9px; margin:2px 3px;}
+  @media(max-width:900px){
+    .wrap{flex-direction:column;}
+    nav{position:static; width:100%; height:auto; flex-basis:auto;}
+    main{padding:0 18px 60px;}
+    .comp-grid,.two,.event{grid-template-columns:1fr;}
+  }
+  footer{margin-top:40px; font-size:13px; color:var(--ink-soft);
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; text-align:center;}
+  .credits{background:var(--bone2); border:1px solid var(--line); border-radius:12px;
+    padding:16px 20px; margin-top:14px;}
+  .credits b{color:var(--space-d);}
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <div class="kicker">Reiner Knizia · Bitewing Games</div>
+  <h1>EGO</h1>
+  <div class="sub">EGO（外星问候组织，Extraterrestrial Greeting Organization）— 游戏规则</div>
+  <div class="tag">2–5 人 &nbsp;|&nbsp; 40–80 分钟 &nbsp;|&nbsp; 14 岁以上</div>
+</header>
+
+<div class="wrap">
+  <nav>
+    <h2>目录</h2>
+    <ol>
+      <li><a href="#overview">1. 概览</a></li>
+      <li><a href="#components">2. 组件</a></li>
+      <li><a href="#setup">3. 准备</a></li>
+      <li><a href="#gameplay">4. 游戏流程</a></li>
+      <li><a href="#cards">5. 战术卡与标记</a></li>
+      <li><a href="#minor">6. 次要事件</a></li>
+      <li><a href="#negotiation">7. 谈判事件</a></li>
+      <li><a href="#bidding">8. 竞价事件</a></li>
+      <li><a href="#power">9. 能力卡</a></li>
+      <li><a href="#credit">10. 信用事件</a></li>
+      <li><a href="#transmission">11. 传输事件</a></li>
+      <li><a href="#arrival">12. 抵达与计分</a></li>
+      <li><a href="#extension">13. 扩展版图</a></li>
+      <li><a href="#id">14. ID 扩展</a></li>
+      <li><a href="#quickref">15. 快速查阅</a></li>
+      <li><a href="#icons">16. 卡牌、图标与符号</a></li>
+      <li><a href="#credits">17. 制作人员与说明</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+  <section id="overview">
+    <h2 class="sec"><span class="num">1</span>概览</h2>
+    <p class="lead">我们并不孤单！如今是 23 世纪，太阳系之外终于发现了外星生命的证据。近期科技的发展引发了一连串的发现——在银河系的众多行星、卫星与小行星上，都已确认存在智慧生命与先进文明。</p>
+    <p>如今，与各外星文明建立星际关系的竞赛已经展开。地球（Earth）、火星（Mars）、金星（Venus）、水星（Mercury）与木星（Jupiter）的人民都知道，任何一个行星都能通过建立强大的外星联盟来主导并统治整个星系。</p>
+    <p>但各行星自身都无法建造跨越星系的飞船。我们抵达外星生命的唯一机会，是汇聚所有资源共同建造所需的<b>超级飞船（Super Ship）</b>。在行星政府之间前所未有（且并不安稳）的合作下，太阳系各族人民终于建造出第一艘这样的飞船。</p>
+    <p>于是，被称为<b>外星问候组织（EGO，Extraterrestrial Greeting Organization）</b>的联盟现已准备开启首次旅程。EGO 的使命是造访银河系中众多先进文明，在我们的太阳系与外星人之间建立友好关系。通过审慎的政治手腕，五大行星政府旨在获取盟友，并从这些星际关系中获益。</p>
+    <div class="callout">
+      <b>目标。</b>每位大使都暗中被委以使命，确保其母星脱颖而出。外星种族极易被过于激进的举动所冒犯——这可能导致不利后果，甚至让整个任务失败。游戏结束时获得最多<b>成功标记（success token）</b>者获胜。
+    </div>
+    <figure>
+      <img src="EGO_Rules_images/page_01.jpg" alt="封面页">
+      <figcaption>封面页与背景故事（原书第 1 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="components">
+    <h2 class="sec"><span class="num">2</span>组件</h2>
+    <div class="comp-grid">
+      <div class="comp"><b>92 张战术卡（tactic card）</b><br>用于在游戏中遭遇的各类事件中施展战术（礼物、说服、阴谋、技术交易，以及百搭的魅力图标）。</div>
+      <div class="comp"><b>17 张能力卡（power card）</b><br>谈判/条约结果的奖励；提供即时、手牌或一次性能力。</div>
+      <div class="comp"><b>6 块文明版图（civilization board）</b><br>旅程地图：太阳系、联盟星系、宝藏星系、险恶星系、市场星系、抵达。</div>
+      <div class="comp"><b>5 块扩展版图（extension board）</b><br>可选版图（每个星系一块），以新事件延长旅程。</div>
+      <div class="comp"><b>5 张清算卡（Reckoning card）</b><br>显示游戏结束时根据你持有的冒犯标记数量，获得或失去多少成功标记。</div>
+      <div class="comp"><b>70 个成功标记（success token）</b><br>10× 值1、15× 值3、30× 值5、15× 值10。决定胜负。</div>
+      <div class="comp"><b>35 个信用标记（credit token）</b><br>10× 值1、15× 值2、10× 值3。游戏过程中的宝贵资源。</div>
+      <div class="comp"><b>50 个联盟标记（alliance token）</b><br>成功：7× 值1–2、15× 值3；信用：7× 值1–3。面朝下保留。</div>
+      <div class="comp"><b>50 个冒犯标记（offense token）</b><br>记录你冒犯外星人的次数；在游戏结束时换算为成功或失败。</div>
+      <div class="comp"><b>1 个超级飞船棋子及底座</b><br>沿旅程地图在事件间移动。</div>
+      <div class="comp"><b>1 个任务领队棋子</b><br>由当前领先任务的玩家持有。</div>
+      <div class="comp"><b>3 个玩家数量标记（player count piece）</b><br>在少于 5 名玩家时，用于标记谈判事件中不可用的结果。</div>
+      <div class="comp"><b>5 个优先标记（priority piece）</b><br>编号 1–5；决定玩家选择结果的顺序。</div>
+    </div>
+    <figure>
+      <img src="EGO_Rules_images/page_02.jpg" alt="组件与版图顺序">
+      <figcaption>组件清单与文明版图事件顺序（原书第 2 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="setup">
+    <h2 class="sec"><span class="num">3</span>准备</h2>
+    <ol class="steps">
+      <li>布置旅程地图：先放文明版图<b>「太阳系（Solar System）」</b>。然后在其后依次摆放三块随机选出的文明版图（「抵达（Arrival）」除外）。最后摆放文明版图<b>「抵达」</b>。第六块文明版图放回盒中。核心游戏中，扩展版图也留在盒中。</li>
+      <li>将超级飞船放在文明版图「太阳系」的起始位置。</li>
+      <li>将所有联盟标记放入布袋并充分混合。</li>
+      <li>将成功标记、信用标记与冒犯标记放在大家够得到的地方。</li>
+      <li>使用编号从「1」到玩家人数的优先标记，放在版图旁。少于五人时，较高的编号标记留在盒中。</li>
+      <li>由最具魅力的玩家担任首位任务领队，或随机选出首位任务领队。将该玩家放上任务领队棋子。</li>
+      <li>少于五名玩家时，在「太阳系」版图旁放上对应的玩家数量标记（其余放回盒中）。五名玩家时，玩家数量标记留在盒中。</li>
+      <li>洗匀能力卡，作为面向下的牌库放在版图旁。翻开五张，作为一行面向上的卡放在牌库旁。</li>
+      <li>洗匀战术卡，作为面向下的牌库放在所有玩家都方便取用的地方。在牌库旁留出空间作为面向上的弃牌堆。</li>
+      <li>给每位玩家一张「清算」参考卡。多余的放回盒中。</li>
+    </ol>
+  </section>
+
+  <section id="gameplay">
+    <h2 class="sec"><span class="num">4</span>游戏流程</h2>
+    <p>选出的任务领队推动超级飞船从一个事件移动到下一个事件。事件按以下顺序进行：</p>
+    <ul>
+      <li>每一块版图上的所有事件都解决完后，才进入下一块版图；从最左（若分多行则是最上）的版图开始，向右进行。</li>
+      <li>每块版图内的事件逐<b>列</b>解决，从最左列开始向右。若同一列有多个事件，则自上而下进行。</li>
+      <li>每块文明版图标题旁显示大使抵达该版图时各自获得的东西（若有）。在「太阳系」中，每位玩家获得手牌五张战术卡与一枚联盟标记。</li>
+    </ul>
+    <div class="callout tip"><b>说明。</b>每位玩家手中牌的数量，在游戏过程中属于公开信息。</div>
+    <h4>文明版图事件顺序</h4>
+    <div class="board-seq">
+      <span class="b">太阳系（Solar System）</span> 风险（Risk）· 选拔（Select）· 准备（Prepare）· 赋能（Empowerment）· 补给（Supply）<br>
+      <span class="b">联盟星系（Alliance System）</span> 风险 · 联结（Bond）· 修补（Mend）· 组成（Compose）· 条约（Treaty）· 投资（Invest）<br>
+      <span class="b">宝藏星系（Treasure System）</span> 风险 · 贪婪（Greed）· 贪婪 · 修补 · 补给 · 宝藏（Treasure）<br>
+      <span class="b">险恶星系（Sinister System）</span> 风险 · 虚张（Bluff）· 贿赂（Bribe）· 修补 · 组成 · 冲突（Conflict）<br>
+      <span class="b">市场星系（Market System）</span> 提议（Offer）· 交易（Deal）· 修补 · 市场（Market）· 风险 · 准备<br>
+      <span class="b">抵达（Arrival）</span> 简报（Debrief）· 遗言（Last Word）· 清算（Reckoning）· 修补
+    </div>
+    <figure>
+      <img src="EGO_Rules_images/page_04.jpg" alt="旅程地图与流程">
+      <figcaption>旅程地图与超级飞船推进方式（原书第 4 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="cards">
+    <h2 class="sec"><span class="num">5</span>战术卡与标记</h2>
+    <h3>战术卡</h3>
+    <p>战术卡让玩家能在游戏途中遭遇的各类事件中施展不同战术。战术卡显示四种不同图标：</p>
+    <ul>
+      <li><b>礼物（Gifts）</b>、<b>说服（Persuasion）</b>、<b>阴谋（Intrigue）</b>、<b>技术交易（Tech Trade）</b>——多数卡显示一种图标，部分卡显示两个相同图标。</li>
+      <li><b>魅力（Charisma）</b>——第五种战术图标，也是百搭王牌：在任何事件中可代表其他四种战术图标中的任意一种（除非该事件另有说明）。</li>
+      <li>部分卡还显示值为 1 的信用；这些卡也可当作一个信用标记使用。</li>
+    </ul>
+    <h3>成功标记与信用标记</h3>
+    <p>成功标记与信用标记有不同面值，不能互相兑换。只有在某些值用尽这种极少见的情况下才允许兑换。事件对标记的称呼分两种方式：</p>
+    <ul>
+      <li><b>总值</b>——标记的总值（如 5 或以上），可由任意数量的标记组成。</li>
+      <li><b>标记数量</b>——标记的数量（如恰好 3 个），不论其面值大小。</li>
+    </ul>
+    <h3>联盟标记</h3>
+    <p>联盟标记代表大使们与各银河系派系和文明建立的联盟。这些标记面朝下保留。玩家可随时查看自己的联盟标记，但不能查看他人的。一枚联盟标记可能显示值为 1、2 或 3 的成功标记，或值为 1、2 或 3 的信用标记。</p>
+    <p>当玩家使用一枚联盟标记时，该标记被翻开。若标记仍留在玩家手中，则再次翻回面朝下。</p>
+    <h3>冒犯标记</h3>
+    <p>冒犯标记代表大使们（不论意外或故意）冒犯外星人、败坏自身声誉的各种方式。收集后作为公开信息放在每位玩家面前。游戏结束时，玩家将根据你的冒犯标记数量获得或失去分数。</p>
+    <div class="callout"><b>公开但可叠放。</b>玩家的成功、信用与冒犯标记供应均为公开信息，但可叠放以节省空间。信用标记是游戏过程中的宝贵资源；成功标记在终局决定胜负。</div>
+    <h3>弃除卡牌与标记</h3>
+    <ul>
+      <li>若弃除一张<b>卡</b>，将其放在战术卡牌库旁的面向上的弃牌堆（discard pile）。</li>
+      <li>若弃除<b>成功、信用或冒犯标记</b>，将其退回供应区（supply）。</li>
+      <li>若弃除一枚<b>联盟标记</b>，将其重新混入布袋。</li>
+    </ul>
+    <figure>
+      <img src="EGO_Rules_images/page_05.jpg" alt="战术卡与标记">
+      <figcaption>战术卡图标与四种标记类型（原书第 5 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="minor">
+    <h2 class="sec"><span class="num">6</span>次要事件</h2>
+    <p>游戏过程中会出现四类次要事件：<b>选项（Option）</b>、<b>风险（Risk）</b>、<b>准备与组成（Prepare &amp; Compose）</b>与<b>补给（Supply）</b>。</p>
+
+    <div class="event">
+      <div class="tag">选项</div>
+      <div>
+        <p>选项事件（以箭头 <b>→</b> 表示）出现在所有文明版图上，给每位玩家行动的选择权。前半部分显示对玩家的要求，箭头之后显示玩家作为回报获得的东西。</p>
+        <ul>
+          <li>「太阳系」的第一个事件让所有玩家可选择弃除恰好两张手牌，然后抽取两张新牌。</li>
+          <li>若玩家参与该事件，必须弃除所示的全部要求，并接受所示的全部结果。有时对玩家完全没有任何要求。</li>
+          <li>所有选项事件按顺时针顺序进行：任务领队先决定，其余玩家依次绕一圈。每个选项事件每位玩家只能参与一次。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="event">
+      <div class="tag">风险</div>
+      <div>
+        <p>风险事件（以黄色三角形符号表示）出现在除「抵达」外所有文明版图上，给每位玩家获取更多卡牌的机会。顶部显示翻开多少张卡，中间显示需匹配的战术图标，底部显示可能的负面影响。魅力卡总能匹配任何战术图标。</p>
+        <p>与选项事件相同，所有风险事件按顺时针顺序进行。要参与，玩家从牌库翻开相应数量的战术卡。有三种可能结果：</p>
+        <ul>
+          <li><b>全胜（Total success）</b>——所有卡都匹配所示图标（含魅力）。玩家收下全部卡牌加入手牌，无惩罚。</li>
+          <li><b>部分成功（Partial success）</b>——至少一张（但非全部）匹配。玩家收下匹配的卡；其余弃除。玩家同时承受风险图标底部所示的惩罚（通常为一到两个冒犯标记）。</li>
+          <li><b>全败（Total failure）</b>——没有一张匹配。玩家弃除所有翻开的卡，不受惩罚（只是令人困惑、难堪）。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="event">
+      <div class="tag">准备与组成</div>
+      <div>
+        <p>在<b>准备（prepare）</b>事件中，任务领队从牌库翻开的卡数等于玩家人数。任务领队先选一张，其余玩家按顺时针顺序各选一次，绕一圈。每位玩家获得一张卡。</p>
+        <p>在<b>组成（compose）</b>事件中，任务领队从牌库翻开的卡数为玩家人数的两倍。任务领队先选一张，其余玩家按顺时针顺序各选一次，此时绕两圈。每位玩家获得两张卡。</p>
+        <div class="callout tip"><b>平衡说明。</b>准备与组成事件因选择面更广，让任务领队（及较先行动的玩家）占优。这由谈判事件平衡——在谈判中较后行动的玩家略占优势。所有大使一致认为这很公平！</div>
+      </div>
+    </div>
+
+    <div class="event">
+      <div class="tag">补给</div>
+      <div>
+        <p>补给事件很简单。它们给每位玩家更多奖励的选择权。所有补给事件按顺时针顺序进行：先由任务领队任选所示奖励之一并取走，其余玩家依次绕一圈。同一奖励可被多名玩家重复选择。</p>
+      </div>
+    </div>
+    <figure>
+      <img src="EGO_Rules_images/page_06.jpg" alt="选项与风险事件">
+      <figcaption>选项与风险事件（原书第 6 页）</figcaption>
+    </figure>
+    <figure>
+      <img src="EGO_Rules_images/page_07.jpg" alt="准备、组成与补给事件">
+      <figcaption>准备、组成与补给事件（原书第 7 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="negotiation">
+    <h2 class="sec"><span class="num">7</span>谈判事件</h2>
+    <p>谈判事件是任务中最复杂的事件。主轮盘上深色楔形显示该事件可能带给玩家的千差万别的结果。谈判事件以轮盘外顺时针圆圈与<b>绿色顶部楔形</b>标识。</p>
+    <ul>
+      <li>少于五名玩家时，可选结果的数量限制为玩家人数。任务领队将玩家数量标记放在其余不可用的结果上。</li>
+      <li>谈判按顺时针进行。轮到某位玩家行动时，必须一张接一张地从手牌中面向出牌。图标须匹配事件轮盘顶部楔形所示战术图标（含魅力）。每出一张牌后，玩家报出已打出的图标总数。一旦总数等于或超过上一位玩家报出的总数，玩家必须停止。</li>
+      <li>或者，玩家可以选择<b>跳过（pass）</b>：取走可用编号最大的优先标记，并退出谈判（将成为最后选择者）。</li>
+    </ul>
+    <h3>开局与结算</h3>
+    <p>任务领队通过打出一张牌（图标匹配顶部楔形）并报出图标数量来开启谈判。谈判按顺时针进行多轮。在之后的轮次中，玩家必须至少再打出一张牌，即使其总数仍与上一位玩家持平。若玩家改为跳过，其已打出的所有牌弃除。</p>
+    <ul>
+      <li>谈判胜者持有最高优先标记（「1」），可优先从所有可用结果中选择，然后是「2」，依此类推。并非所有结果都是好的，但每位玩家必须选一个。</li>
+      <li>当只剩一名玩家时，谈判结束。该玩家即为谈判胜者——弃除其打出的牌，取走最后可用的优先标记（「1」），成为新任任务领队，并接过任务领队棋子。</li>
+      <li>结束时，新任任务领队移走玩家数量标记与所有优先标记，然后将超级飞船推进到下一个事件。</li>
+    </ul>
+    <div class="callout warn"><b>谨慎。</b>你可能很想在一次谈判中打出很多牌，结果却获益甚少。请明智地选择如何使用你的牌。任务漫长，你的同僚大使会利用你表现出的任何弱点。</div>
+    <div class="callout warn"><b>险恶星系——冲突（Conflict）。</b>在「险恶星系」中，「冲突」谈判事件只带来负面结果。若玩家选择交出卡牌、一个成功标记或联盟标记作为结果，却无力交出，则每样交不出的物品，该玩家获得一个冒犯标记。</div>
+    <figure>
+      <img src="EGO_Rules_images/page_08.jpg" alt="谈判事件">
+      <figcaption>谈判事件与事件轮盘（原书第 8 页）</figcaption>
+    </figure>
+    <h4>示例推演</h4>
+    <div class="callout">
+      <b>Venus（金星）</b>（任务领队）打出一张阴谋牌，报出「1」。<b>Cosmo（宇宙）</b>打出一张带两个礼物图标的牌，报出「2」。<b>Starla（星拉）</b>说「跳过」，取走最高优先标记（「3」）。回到 Venus，她再加一张魅力图标到原有的一张阴谋上，报出「2」。Cosmo 在自己的两个礼物图标上再加一张阴谋图标，报出「3」。Venus 说「跳过」并取走优先标记（「2」），弃除其已打出的牌。Cosmo 获胜，取走剩余标记（「1」）与任务领队棋子。<br><br>
+      Cosmo 选择了两个联盟标记作为奖励。随后 Venus 选择了那张能力卡。最后 Starla 必须选择最后一个可用结果——一个冒犯标记。
+    </div>
+    <figure>
+      <img src="EGO_Rules_images/page_09.jpg" alt="谈判示例">
+      <figcaption>谈判示例（原书第 9 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="bidding">
+    <h2 class="sec"><span class="num">8</span>竞价事件</h2>
+    <p>竞价事件与谈判事件非常相似。主要区别在于所有玩家<b>同时</b>行动。竞价事件以轮盘中央向内的箭头与<b>红色顶部楔形</b>标识。</p>
+    <ul>
+      <li>所有玩家秘密从手牌中选出想要竞价的牌（最好藏在桌下）。只有图标匹配顶部楔形所示战术图标（含魅力）的牌才能竞价。</li>
+      <li>当所有玩家选好后，同时亮牌。图标总数最高者获得最高优先标记（「1」）并先选，其次最高者获得「2」，依此类推。</li>
+      <li>所有竞价出的牌弃除到弃牌堆（能力卡退回盒中）。</li>
+      <li><b>重要：</b>所有玩家必须至少竞价一张牌。含一个或多个不匹配图标的竞价视为零竞价，不会回到玩家手牌。玩家不能在竞价事件中冒险。</li>
+      <li>竞价事件后，任务领队<b>不变</b>。</li>
+    </ul>
+    <h3>平局判定——圆圈数字</h3>
+    <p>所有战术卡都有唯一的<b>圆圈数字</b>。它们用于打破竞价事件的平局：当多位玩家打出相同图标数时，以他们所出牌中圆圈数字较大者胜出。</p>
+    <div class="callout tip"><b>说明。</b>竞价事件十分微妙——你对他人举动完全不知情。然而，采取中庸之道、只竞价少量图标往往得到最糟结果。尽管如此，你的同僚大使们都诚恳建议你这么做。</div>
+    <figure>
+      <img src="EGO_Rules_images/page_11.jpg" alt="竞价事件">
+      <figcaption>竞价事件与圆圈数字平局判定（原书第 11 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="power">
+    <h2 class="sec"><span class="num">9</span>能力卡</h2>
+    <p>部分谈判结果会让能力卡登场。若你选择获得一张能力卡的结果，从面向上的能力卡行中任选一张。该行不会立即补充；较后行动的玩家选择更少。事件结束时，从牌库抽牌将行数补满至五张。</p>
+    <ul>
+      <li><b>即时能力卡（绿色底）</b>：立刻用来获取所示资源，然后退回盒中——不要弃到牌堆上。</li>
+      <li><b>战术图标能力卡（米色底）</b>：加入手牌，当作战术卡使用。一旦使用，退回盒中。</li>
+      <li><b>一次性能力卡（橙色底）</b>：面向放在你面前展示；一旦使用，退回盒中。</li>
+    </ul>
+    <h3>谈判中的冒险</h3>
+    <p>每次轮到你行动时，你可在开头承担一次风险。如顶部楔形所示，你从牌库翻开两张牌，将所有匹配所示战术图标（含魅力）的牌加入桌上你的牌中，其余弃除。</p>
+    <ul>
+      <li><b>全胜</b>（两张都匹配）：无惩罚；两张翻开的牌都加入。</li>
+      <li><b>部分成功</b>（一张匹配）：承受惩罚，但加入匹配的牌。</li>
+      <li><b>全败</b>（两张都不匹配）：无惩罚，但你必须立即跳过并退出谈判——你慌乱地退回超级飞船。</li>
+    </ul>
+    <p>在全胜或部分成功后，若你的图标总数已等于或超过上一位玩家，则必须停止并报数（本回合不再从手牌出牌）。若仍过低，则必须继续出牌或可选择跳过。</p>
+    <figure>
+      <img src="EGO_Rules_images/page_10.jpg" alt="能力卡与谈判中的冒险">
+      <figcaption>能力卡与谈判中的冒险（原书第 10 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="credit">
+    <h2 class="sec"><span class="num">10</span>信用事件</h2>
+    <p>信用事件（扩展版图事件）的玩法类似谈判事件，但玩家用<b>信用</b>而非战术图标来谈判。</p>
+    <ul>
+      <li>任务领队将一个信用标记（或一枚信用联盟标记，或一张带信用符号的战术卡）放在桌上并报出其值——或跳过。</li>
+      <li>按顺时针，每位玩家必须一张接一张地放上信用符号；一旦等于或超过上一位的总数，必须停止。或者玩家可选择跳过。</li>
+      <li>在之后的轮次中，玩家必须至少再放一个信用，即使其总数仍与上一位持平。</li>
+      <li>第一个跳过的玩家获得事件轮盘所示的冒犯标记，但保留自己所有信用。之后跳过的玩家也保留信用，不受负面影响。</li>
+      <li><b>胜者</b>是唯一必须交出桌上所有信用者；作为回报，其获得轮盘底部所示的成功标记。</li>
+      <li>信用事件胜者成为新任任务领队。</li>
+    </ul>
+    <h3>信用事件中的冒险</h3>
+    <p>每回合你可在开头承担一次风险——但方式不同：你从布袋翻开一枚联盟标记。</p>
+    <ul>
+      <li>若显示<b>信用值</b>，你获得该标记并放在桌上，同时获得一个冒犯标记（全胜仍被视为不光彩）。若你的总数随后等于或超过上一位玩家，必须停止；否则继续出牌或跳过。</li>
+      <li>若<b>不</b>显示信用值，你须将标记放回布袋并退出该事件。你不能再放信用，但保留已放下的所有信用。</li>
+    </ul>
+    <figure>
+      <img src="EGO_Rules_images/page_14.jpg" alt="信用与传输事件">
+      <figcaption>信用事件与传输事件（原书第 14 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="transmission">
+    <h2 class="sec"><span class="num">11</span>传输事件</h2>
+    <p>传输事件出现在所有扩展版图上，让每位玩家通过太空传输向母星政府炫耀。它们以<b>传输符号</b>为特征；所需卡牌图标在符号前显示，玩家获得的东西在符号后显示。</p>
+    <ul>
+      <li>在所有传输事件中，玩家仅<b>展示</b>所需图标，但卡牌保留在手中。</li>
+      <li>通常传输符号表示<b>不能使用魅力图标</b>进行传输——只有硬事实才算数。</li>
+      <li>传输事件可并行进行，因为凡能做到的玩家通常都会进行传输。</li>
+    </ul>
+    <h3>竞赛型传输事件</h3>
+    <p>竞赛型传输事件要求所有玩家同时选出想要展示的牌。只有显示所需图标的牌可被选中（传输符号表示不能使用魅力）。亮出所选牌，所有玩家报出所展示的匹配图标总数。</p>
+    <ul>
+      <li>总数<b>最高</b>的所有玩家获得一个值 5 的成功标记。</li>
+      <li>总数<b>最低</b>的所有玩家获得一个冒犯标记。</li>
+      <li>其余玩家从战术卡牌库获得一张牌。</li>
+      <li>若部分玩家无法选任何牌，他们算作最低，获得一个冒犯标记。若所有玩家打平，则都获得一张战术卡。</li>
+    </ul>
+    <figure>
+      <img src="EGO_Rules_images/page_18.jpg" alt="竞赛型传输事件">
+      <figcaption>竞赛型传输事件（原书第 18 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="arrival">
+    <h2 class="sec"><span class="num">12</span>抵达与计分</h2>
+    <p>最后一块文明版图「抵达」，在银河议会大厅中总结任务成果、评估每位大使的成就。</p>
+    <h3>最终清算（游戏结束）</h3>
+    <ul>
+      <li>此最终阶段允许兑换成功标记的面值。</li>
+      <li>最后两个选项事件让你将任意五个联盟标记，或总值 10（或以上）的任何信用标记，兑换为值 15 的成功标记。每个选项事件只能使用一次。</li>
+      <li>结束时，所有玩家用「清算」卡将自己的冒犯标记换算为成功……或失败（见下表）。</li>
+      <li>所有玩家将自己的成功标记值相加（含作为成功标记的联盟标记）。<b>其余都不计！</b>总数最高者获胜。</li>
+      <li>平局时，以剩余信用较多者胜；若仍无法打破平局，则并列玩家同为赢家。</li>
+    </ul>
+    <h4>清算卡——冒犯标记换算成功分数</h4>
+    <table class="sym-table">
+      <tr><th>冒犯标记数</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11+</td></tr>
+      <tr><th>成功标记数</th><td>+20</td><td>+10</td><td>+5</td><td>+3</td><td>+2</td><td>+1</td><td>−2</td><td>−5</td><td>−10</td><td>−20</td><td>−30</td><td>−40</td></tr>
+    </table>
+    <figure>
+      <img src="EGO_Rules_images/page_12.jpg" alt="抵达与最终清算">
+      <figcaption>抵达版图与最终清算（原书第 12 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="extension">
+    <h2 class="sec"><span class="num">13</span>扩展版图</h2>
+    <p>用竞价事件与信用事件的扩展版图，延长你的银河旅程！它们带来更多运用你辛苦赚来的战术卡与信用的机会。</p>
+    <h3>准备</h3>
+    <ul>
+      <li>准备阶段，用对应星系的扩展版图延长旅程地图。将扩展版图直接摆在相应文明版图之后。</li>
+      <li>可纳入全部对应扩展版图，或将部分留在盒中，视期望的旅程长度而定。我们建议总共只放五块文明版图（含「太阳系」与「抵达」），再加任意想要的扩展版图。</li>
+    </ul>
+    <h3>进行</h3>
+    <p>扩展版图显示各类已介绍过的事件，外加两类新事件：<b>信用事件</b>（第 10 节）与<b>传输事件</b>（第 11 节）。「太阳系」扩展版图在离开太阳系前给每位玩家一张能力卡。</p>
+    <div class="callout tip"><b>建议。</b>纳入信用事件时，建议在旅程地图中同时包含「宝藏星系」与「市场星系」的文明版图及其扩展版图。</div>
+    <figure>
+      <img src="EGO_Rules_images/page_13.jpg" alt="扩展版图">
+      <figcaption>扩展版图的准备与进行（原书第 13 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="id">
+    <h2 class="sec"><span class="num">14</span>ID 扩展（星际纷扰）</h2>
+    <p>EGO 首发即搭配 ID（Interstellar Disruptions，星际纷扰）扩展，新增特殊联盟标记，并以刺激飞船版图（含全新竞赛型传输事件）延长旅程地图。</p>
+    <h3>概览与组件</h3>
+    <ul>
+      <li><b>8 枚特殊联盟标记</b>——任意准备下的可选添加；混入联盟标记布袋。</li>
+      <li><b>5 块飞船版图</b>——两块描绘 E.G.O. 超级飞船，三块描绘敌对外星飞船。</li>
+    </ul>
+    <h3>飞船模块（Ships Module）</h3>
+    <ul>
+      <li>飞船模块在各文明访问之间加入简短却有力的飞船事件。我们建议用五块文明版图（再加相应扩展与飞船版图，若需要）。</li>
+      <li>准备阶段，在每块文明版图（或其扩展版图）之后加一块随机飞船版图。没有飞船版图跟在「抵达」之后——剩余飞船版图放回盒中。</li>
+      <li>确保「太阳系」之后的第一块飞船版图显示超级飞船，而非敌对外星飞船。</li>
+      <li>完成一块文明版图（可能含扩展）的所有事件后，推进到飞船版图；飞船版图走完后，超级飞船推进到下一块文明版图。</li>
+      <li>一块超级飞船版图显示一个传输事件：所有手牌中同时持有全部四种图标（魅力不算）的玩家——展示后退回——获得一个值 5 的成功标记。</li>
+    </ul>
+    <h3>敌对飞船版图上的竞赛型传输</h3>
+    <ul>
+      <li><b>魅力版图</b>：魅力图标总数最高的所有玩家获得一个值 1 的成功标记；最少者获得两个冒犯标记；其余获得一个。若全部持平，则都获得一个。</li>
+      <li><b>联盟标记版图</b>：比较每位玩家拥有的联盟标记数量（正面保持保密）。最多者获得一个值 1 的成功标记；最少者获得两个冒犯标记；其余获得一个。若全部持平，则都获得一个。</li>
+    </ul>
+    <h3>特殊联盟标记模块</h3>
+    <p>这八枚联盟标记是 EGO 任意准备下的可选添加；混入布袋。花费它们可获得其收益（花费后将标记退回布袋）：</p>
+    <ul>
+      <li>可随时花费，将一个冒犯标记退回供应区。</li>
+      <li>可随时花费，从战术卡牌库抽取两张牌。</li>
+    </ul>
+    <figure>
+      <img src="EGO_Rules_images/page_16.jpg" alt="ID 扩展概览">
+      <figcaption>ID 扩展概览与组件（原书第 16 页）</figcaption>
+    </figure>
+    <figure>
+      <img src="EGO_Rules_images/page_17.jpg" alt="飞船模块">
+      <figcaption>飞船模块的准备与进行（原书第 17 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="quickref">
+    <h2 class="sec"><span class="num">15</span>快速查阅</h2>
+    <div class="comp-grid">
+      <div class="comp"><b>选项事件</b><br>可弃 X 以得 Y。</div>
+      <div class="comp"><b>风险事件</b><br>可从牌库/供应区翻开此数量物品。保留匹配类型（含魅力）。部分成功 = 承受惩罚。</div>
+      <div class="comp"><b>准备 / 组成事件</b><br>翻开 1× / 2× 玩家人数的战术卡。按行动顺序每人取一张。</div>
+      <div class="comp"><b>补给事件</b><br>每位玩家可选五个奖励中的任意一个。</div>
+      <div class="comp"><b>谈判事件</b><br>顺时针：每次打出一张匹配图标（含魅力）的牌，直到达到或超过当前总数，或跳过（取最高优先标记，弃除已打出的牌）。每回合开头可冒险；全败则强制跳过。最后一名玩家取优先标记「1」+ 任务领队棋子；按优先顺序选结果。</div>
+      <div class="comp"><b>竞价事件</b><br>秘密选出匹配图标的牌，同时亮牌。图标最多者得优先「1」，其次得「2」，依此类推。圆圈数字大者破平。都必须至少竞价一张。不能冒险。任务领队不变。</div>
+      <div class="comp"><b>信用事件</b><br>顺时针：每次放一个信用标记（或信用联盟标记 / 信用战术卡），直到达到或超过当前总数，或跳过（首个跳过者承受惩罚）。每回合开头可冒险（摸一枚联盟标记；信用→打出它 + 1 个冒犯，非信用→放回并跳过）。最后一名弃除信用并取走奖励。</div>
+      <div class="comp"><b>传输事件</b><br>展示（不弃除）手中恰好匹配的图标，以获得所示奖励。</div>
+      <div class="comp"><b>竞赛型传输事件</b><br>所有人展示恰好匹配的图标或联盟标记数。最多者得奖励；最少者受罚；其余取中间奖励/惩罚。全部平局 → 都取中间。</div>
+      <div class="comp"><b>清算事件</b><br>须依终局冒犯标记总数获得或失去分数（见「清算」卡）。</div>
+    </div>
+    <figure>
+      <img src="EGO_Rules_images/page_19.jpg" alt="快速查阅指南">
+      <figcaption>快速查阅指南（原书第 19 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="icons">
+    <h2 class="sec"><span class="num">16</span>卡牌、图标与符号</h2>
+    <h3>战术图标</h3>
+    <ul>
+      <li><b>礼物（Gifts）</b>、<b>阴谋（Intrigue）</b>、<b>说服（Persuasion）</b>、<b>技术交易（Tech Trade）</b>——四种基础战术图标。</li>
+      <li><b>魅力（Charisma）</b>——百搭王牌；可代表任意其他四种图标（除非另有说明）。</li>
+      <li><b>值 1 信用</b>——此牌可作为信用使用，取代其所示图标。</li>
+      <li><b>圆圈数字</b>——竞价事件中打出数字最大者破平。</li>
+    </ul>
+    <h3>能力卡底色</h3>
+    <ul>
+      <li><b>米色底</b>——将此卡加入手牌；当作战术卡使用。</li>
+      <li><b>绿色底</b>——立即收取所示奖励。</li>
+      <li><b>橙色底</b>——将此卡面向放在你面前；可随时使用。</li>
+      <li>所有能力卡使用后均退回盒中（不弃到牌堆）。</li>
+    </ul>
+    <h3>奖励、惩罚与结果</h3>
+    <table class="sym-table">
+      <tr><th class="sym">获取</th><td>获取所示值的成功标记（1/3/5/10）或信用标记（1/2/3）。</td></tr>
+      <tr><th class="sym">抽取</th><td>从布袋抽一枚联盟标记，或从牌库抽一张战术卡。</td></tr>
+      <tr><th class="sym">弃除</th><td>弃除一个冒犯标记、一个信用/联盟标记、一个成功标记（或成功联盟标记），或所示数量的信用/成功标记（不论面值）/至少此总值的任意数量信用/成功标记。</td></tr>
+      <tr><th class="sym">承受</th><td>承受一个冒犯标记，或从面向上的展示中取一张能力卡（仅事件结束时补充）。</td></tr>
+      <tr><th class="sym">若无力……</th><td>若无法弃除成功标记 → 承受一个冒犯标记。若无法弃除 1–2 张战术卡 / 1–2 枚联盟标记 → 分别承受 1–2 个冒犯标记。</td></tr>
+      <tr><th class="sym">随时</th><td>你可随时取走所示供应之一。</td></tr>
+    </table>
+    <figure>
+      <img src="EGO_Rules_images/page_20.jpg" alt="卡牌、图标与符号">
+      <figcaption>卡牌、图标与符号参考（原书第 20 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="credits">
+    <h2 class="sec"><span class="num">17</span>制作人员与说明</h2>
+    <div class="credits">
+      <p><b>设计：</b>Reiner Knizia</p>
+      <p><b>美术：</b>Marie Bergeron &nbsp;|&nbsp; <b>平面设计：</b>Marie Bergeron &amp; Brigette Indelicato</p>
+      <p><b>编辑：</b>Scott Darrington &nbsp;|&nbsp; <b>飞船模型设计：</b>Marie Bergeron &amp; Daniel Profiri</p>
+      <p><b>出版：</b>Nick Murray &amp; Kyle Spackman（Bitewing Games）</p>
+      <p><b>玩家：</b>2–5 人 &nbsp;|&nbsp; <b>时长：</b>40–80 分钟 &nbsp;|&nbsp; <b>年龄：</b>14 岁以上</p>
+      <p><b>版权：</b>© Dr. Reiner Knizia, 2025。版权所有。 &nbsp; © Bitewing Games LLC, 2025。版权所有。</p>
+      <p><b>测试玩家：</b>Rudi Gebhardt、Dorette Peters、Andreas Stamer、Stefan Willkofer。</p>
+    </div>
+    <div class="callout">
+      <b>出版者寄语（Nick Murray）。</b> EGO 是对策略性、拼胆竞价游戏《贝奥武夫：传奇（Beowulf: The Legend）》（Reiner Knizia，2005）的彻底重塑，也是 Bitewing Games「冠冕之选（Crown Jewel Selection）」系列的第四款游戏。它改良了两极分化的风险机制却保留其刺激感，通过随机文明版图实现准备多样性，精简了终局货币，引入货币卡与传输事件，以排名卡平衡竞价平局，加快了游戏节奏，并以 Marie Bergeron 的银河美术拓宽了主题。EGO 首发亦搭配 ID（Interstellar Disruptions，星际纷扰）扩展。
+    </div>
+    <figure>
+      <img src="EGO_Rules_images/page_15.jpg" alt="出版者说明">
+      <figcaption>出版者说明（原书第 15 页）</figcaption>
+    </figure>
+  </section>
+
+  <footer>
+    由《EGO》规则书（Bitewing Games，2025）本地化重排。为便于阅读增添了版式与导航；所有规则文字译自原英文版。© Dr. Reiner Knizia &amp; Bitewing Games LLC, 2025。
+  </footer>
+  </main>
+</div>
+</body>
+</html>

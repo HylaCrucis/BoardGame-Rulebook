@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Iliad（伊利亚特）— 游戏规则</title>
+<style>
+  :root{
+    /* 古希腊：陶罐红 + 大理石白 + 海蓝 */
+    --bg:#f7f1e8; --bg2:#e6d9c4; --ink:#2a1e16; --ink-soft:#5a463a;
+    --terra:#a6432e; --terra-d:#7e2e1c; --terra-l:#c4785e;
+    --marble:#f7f1e8; --marble-d:#d4c9b6;
+    --sea:#3b6e8f; --sea-d:#234963; --sea-l:#5a8eaf;
+    --gold:#c89c4e; --gold-d:#a07a2e;
+    --red-deep:#7a2828; --blue-deep:#1f3a68;
+    --line:#c4b890; --card:#fffae6;
+    --shadow:rgba(126,46,28,.18);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"Songti SC","Noto Serif SC","Source Han Serif SC",STSong,
+                "Iowan Old Style","Palatino Linotype",Georgia,serif;
+    line-height:1.85; font-size:16px;
+  }
+  .wrap{display:flex; align-items:flex-start; max-width:1180px; margin:0 auto;}
+  nav{
+    position:sticky; top:0; align-self:flex-start;
+    width:248px; flex:0 0 248px; height:100vh; overflow-y:auto;
+    background:linear-gradient(180deg,var(--terra-d),var(--terra));
+    color:var(--marble); padding:22px 16px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;
+  }
+  nav h2{font-size:13px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--gold); margin:0 0 12px;}
+  nav ol{list-style:none; margin:0; padding:0;}
+  nav a{display:block; color:var(--marble); text-decoration:none; font-size:14px;
+    padding:7px 10px; border-radius:7px;}
+  nav a:hover{background:var(--gold); color:var(--terra-d);}
+  main{flex:1 1 auto; min-width:0; padding:0 40px 80px;}
+  .cover{
+    background:linear-gradient(160deg,var(--sea-d),var(--sea) 50%,var(--terra));
+    color:var(--marble); padding:62px 40px; border-radius:0 0 18px 18px;
+    margin-bottom:36px; text-align:center;
+    box-shadow:0 10px 30px var(--shadow);
+  }
+  .cover h1{font-size:46px; margin:0 0 6px; letter-spacing:.08em;
+    font-family:"Iowan Old Style","Palatino Linotype",Georgia,serif;
+    text-shadow:2px 2px 0 var(--terra-d);}
+  .cover .sub{font-size:17px; opacity:.95;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .cover .tag{display:inline-block; margin-top:16px; padding:6px 16px;
+    border:1px solid rgba(255,255,255,.45); border-radius:20px; font-size:14px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  section{padding:14px 0 8px; border-bottom:1px solid var(--line); scroll-margin-top:18px;}
+  h2.sec{font-size:26px; color:var(--terra-d); margin:18px 0 6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  h2.sec .num{color:var(--sea-d); font-weight:700; margin-right:10px;}
+  h3{font-size:18px; color:var(--terra-d); margin:22px 0 6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  p{margin:10px 0;}
+  ul,ol{margin:10px 0 10px 4px; padding-left:22px;}
+  li{margin:5px 0;}
+  .lead{font-size:17px;}
+  .comp-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:16px 0;}
+  .comp{border:1px solid var(--line); background:var(--card); border-radius:12px;
+    padding:14px 16px; box-shadow:0 2px 6px var(--shadow);}
+  .comp b{color:var(--terra-d);}
+  ol.setup{counter-reset:setup; list-style:none; padding-left:0;}
+  ol.setup > li{position:relative; padding:8px 8px 8px 56px; margin:6px 0;
+    background:var(--card); border:1px solid var(--line); border-radius:8px;}
+  ol.setup > li::before{counter-increment:setup; content:counter(setup);
+    position:absolute; left:10px; top:8px;
+    width:30px; height:30px; background:var(--terra); color:#fff;
+    border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-weight:700; font-family:Arial,sans-serif;}
+  .god-grid{display:grid; grid-template-columns:repeat(5, 1fr); gap:10px;
+    margin:14px 0; font-family:Arial,sans-serif;}
+  .god{border:2px solid var(--gold); border-radius:8px;
+    padding:10px 8px; text-align:center; background:var(--card);}
+  .god .name{font-size:14px; font-weight:700; color:var(--terra-d);}
+  .god .type{font-size:11px; color:var(--ink-soft);}
+  .token-grid{display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; margin:14px 0;}
+  .token-cat{border:1px solid var(--line); border-radius:10px;
+    padding:10px 14px; background:var(--card); font-family:Arial,sans-serif;}
+  .token-cat .lbl{font-weight:700; color:var(--terra-d);}
+  .token-cat .items{margin-top:6px; font-size:14px;}
+  .token-cat .pill{display:inline-block; padding:2px 8px; margin:0 2px;
+    border-radius:6px; font-weight:700; color:#fff;}
+  .token-cat .pill.pos{background:var(--sea);}
+  .token-cat .pill.neg{background:var(--terra);}
+  .token-cat .pill.marriage{background:var(--gold); color:var(--ink);}
+  .tile-dist{display:grid; grid-template-columns:repeat(6, 1fr); gap:8px;
+    margin:14px 0; font-family:Arial,sans-serif;}
+  .tile-dist .t{border:2px solid var(--line); border-radius:8px;
+    padding:8px 4px; text-align:center; background:var(--card); font-weight:700;
+    color:var(--terra-d); font-size:16px;}
+  .tile-dist .t.dolos{background:var(--sea); color:#fff; border-color:var(--sea-d);}
+  .tile-dist .t .qty{font-size:11px; color:var(--ink-soft); display:block;}
+  .effect-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:14px 0;}
+  .effect{border:1px solid var(--line); border-radius:12px;
+    padding:14px 16px; background:var(--card);}
+  .effect .v{display:inline-block; min-width:30px; padding:2px 10px;
+    background:var(--terra); color:#fff; border-radius:6px;
+    font-weight:700; font-family:Arial,sans-serif; font-size:16px; margin-right:8px;}
+  .effect h4{margin:0 0 6px; color:var(--terra-d);}
+  .dolos-rule{border:1px dashed var(--sea); padding:12px 18px; border-radius:10px;
+    margin:14px 0; background:var(--card);}
+  .dolos-rule b{color:var(--sea-d);}
+  .ex{border:1px solid var(--gold-d); background:#fdf3c5;
+    padding:12px 18px; border-radius:10px; margin:14px 0;}
+  .ex .label{display:inline-block; background:var(--terra); color:var(--marble);
+    padding:2px 10px; border-radius:12px; font-weight:700; font-size:14px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; margin-right:8px;}
+  .important{border:2px dashed var(--terra); padding:12px 18px; border-radius:10px;
+    margin:14px 0; background:var(--card);}
+  .important b{color:var(--terra-d);}
+  .note{border-left:3px solid var(--gold-d); padding:8px 14px; background:var(--bg2);
+    border-radius:0 8px 8px 0; margin:14px 0;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; font-size:14px;}
+  figure{margin:18px 0; text-align:center;}
+  figure img{max-width:100%; border:1px solid var(--line); border-radius:12px;
+    box-shadow:0 4px 14px var(--shadow); background:#fff;}
+  figcaption{font-size:13px; color:var(--ink-soft); margin-top:6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .credits{background:var(--bg2); border:1px solid var(--line); border-radius:12px;
+    padding:16px 20px; margin-top:14px; font-size:15px;}
+  .credits b{color:var(--terra-d);}
+  footer{margin-top:40px; font-size:13px; color:var(--ink-soft);
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; text-align:center;}
+  @media(max-width:900px){
+    .wrap{flex-direction:column;}
+    nav{position:static; width:100%; height:auto; flex-basis:auto;}
+    main{padding:0 18px 60px;}
+    .comp-grid,.effect-grid,.token-grid,.tile-dist,.god-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <h1>ILIAD</h1>
+  <div class="sub">伊利亚特 · 游戏规则（中文版 / 英文版转中文）</div>
+  <div class="tag">14 岁以上 &nbsp;|&nbsp; 2 人 &nbsp;|&nbsp; 约 30 分钟</div>
+</header>
+
+<div class="wrap">
+  <nav>
+    <h2>目录</h2>
+    <ol>
+      <li><a href="#intro">简介</a></li>
+      <li><a href="#components">配件</a></li>
+      <li><a href="#setup">准备</a></li>
+      <li><a href="#objective">目标</a></li>
+      <li><a href="#play">游戏流程</a></li>
+      <li><a href="#effects">牌效果（4 种）</a></li>
+      <li><a href="#scoring">计分行</a></li>
+      <li><a href="#end">游戏结束</a></li>
+      <li><a href="#effects-ref">牌效果速查</a></li>
+      <li><a href="#credits">制作信息</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+  <section id="intro">
+    <h2 class="sec"><span class="num">1</span>简介</h2>
+    <p class="lead">特洛伊战争已经打响，冲突的双方都在追逐任何可能获得的<b>优势</b>。<b>两军对垒的英雄</b>——特洛伊方的<b>赫克托耳（Hector）</b>与希腊方的<b>阿喀琉斯（Achilles）</b>——争相祈求众神的支持与命运的垂青。只有一方能最终胜出——其英雄将成为<b>《伊利亚特》</b>的传奇。</p>
+    <p class="note">原著：Reiner Knizia | 插画：Harry Conway | 平面设计：Brigette Indelicato | 编辑：Scott Darrington | 出版：Nick Murray &amp; Kyle Spackman</p>
+  </section>
+
+  <section id="components">
+    <h2 class="sec"><span class="num">2</span>配件</h2>
+    <div class="comp-grid">
+      <div class="comp"><b>布板 ×1</b><br>1 张 6×6 格的布质游戏板</div>
+      <div class="comp"><b>蓝色赫克托耳牌 ×18</b><br>Hector of 特洛伊（蓝方）</div>
+      <div class="comp"><b>红色阿喀琉斯牌 ×18</b><br>Achilles of the 希腊军（红方）</div>
+      <div class="comp"><b>成功标记 ×29</b><br>含 5 神 + 正负值 + 结婚标记</div>
+      <div class="comp" style="grid-column:1/-1;"><b>标记袋 ×1</b><br>用于洗混成功标记</div>
+    </div>
+
+    <h3>成功标记种类</h3>
+    <div class="god-grid">
+      <div class="god"><div class="name">Zeus</div><div class="type">宙斯</div></div>
+      <div class="god"><div class="name">Apollo</div><div class="type">阿波罗</div></div>
+      <div class="god"><div class="name">Athena</div><div class="type">雅典娜</div></div>
+      <div class="god"><div class="name">Poseidon</div><div class="type">波塞冬</div></div>
+      <div class="god"><div class="name">Aphrodite</div><div class="type">阿佛洛狄忒</div></div>
+    </div>
+
+    <div class="token-grid">
+      <div class="token-cat"><div class="lbl">正向值</div><div class="items"><span class="pill pos">+10</span>（3 张，分别与 Achilles 的盾 / Hector 的矛 / 战车 战车配对）</div></div>
+      <div class="token-cat"><div class="lbl">负向值</div><div class="items"><span class="pill neg">-3</span><span class="pill neg">-5</span><span class="pill neg">-10</span>（削弱 士气 / 瘟疫 / 火风暴 灾难）</div></div>
+      <div class="token-cat"><div class="lbl">结婚标记</div><div class="items"><span class="pill marriage">✦</span>×2（代表与<b>海伦（Helen）</b>结婚）</div></div>
+    </div>
+  </section>
+
+  <section id="setup">
+    <h2 class="sec"><span class="num">3</span>准备</h2>
+    <ol class="setup">
+      <li>将所有成功标记放入袋中并洗混。</li>
+      <li>摊开游戏板。板上呈现 <b>6 行 × 6 列</b>共 <b>36 个格子</b>，牌将放在这些格子上。一半格子是<b>蓝色特洛伊格</b>，另一半是<b>红色希腊格</b>。每行每列的两端各有一个空格用于放置成功标记。</li>
+      <li>从袋中逐张抽 5 张<b>非负</b>标记（不出现 -3 / -5 / -10），面朝上展示在板旁边。若中途抽到负向标记，将其与剩余标记一起<b>洗回袋中</b>，继续抽直到凑足 5 张非负标记。</li>
+      <li>用剩下的标记沿板边填满：从任意一边开始，按顺时针方向，每格放一张面朝上的标记，直到全部用完。</li>
+      <li>每位玩家选择一种颜色（红或蓝），拿取自己颜色的 18 张牌。每副牌包括：3 张值 1、3 张值 2、3 张值 3、3 张值 4、3 张值 5、3 张 <b>诡计卡 卡 卡 牌</b>。</li>
+      <li>洗混自己颜色的牌，作为一摞面朝下的<b>牌堆</b>放在面前。</li>
+      <li>从自己牌堆抽 2 张，随机放在板上自己颜色的<b>两个中央格</b>（面朝上）。若抽到<b>两张相同</b>的牌，<b>放回</b>牌堆重新洗，<b>直到</b>抽到两张不同的牌为止。</li>
+      <li>从牌堆抽 2 张作为<b>手牌</b>。你的手牌<b>只自己可见</b>，不能让对手看到。</li>
+    </ol>
+
+    <h3>你的牌组分布</h3>
+    <div class="tile-dist">
+      <span class="t">1<span class="qty">×3</span></span>
+      <span class="t">2<span class="qty">×3</span></span>
+      <span class="t">3<span class="qty">×3</span></span>
+      <span class="t">4<span class="qty">×3</span></span>
+      <span class="t">5<span class="qty">×3</span></span>
+      <span class="t dolos">诡计卡 卡 卡<span class="qty">×3</span></span>
+    </div>
+  </section>
+
+  <section id="objective">
+    <h2 class="sec"><span class="num">4</span>目标</h2>
+    <p class="lead">轮流放置一张牌，争取获得<b>全部 5 位神</b>的青睐。游戏结束时，收集到代表全部 5 位神的成功标记的玩家获胜。若<b>双方都满足</b>或<b>双方都不满足</b>该条件，则<b>点数高</b>的玩家获胜。</p>
+  </section>
+
+  <section id="play">
+    <h2 class="sec"><span class="num">5</span>游戏流程</h2>
+    <p>由<b>最近一次翻开一本书（不是规则书）</b>的玩家先手（或随机决定）。之后两位玩家交替行动。在你的回合中，将手牌中的一张牌<b>面朝上</b>放到板上：</p>
+    <div class="important">
+      <b>放置规则：</b>你必须将自己的牌放在<b>自己颜色的空格</b>上，并且你的牌必须与场上<b>至少一张已放置的牌的某侧相邻</b>。<br>
+      由于板上的颜色布局，所有相邻的牌都属于对手。<b>你的牌永远不相邻自己的牌。</b>
+    </div>
+    <ul>
+      <li>放置 1&ndash;4 值的牌后，你可以执行该牌的<b>效果</b>（详见 §6）。<b>值 5 的牌</b>和 <b>诡计卡 卡 卡 牌</b>不会触发任何效果。</li>
+      <li>回合结束时，<b>检查</b>是否有行/列被占满需要<b>计分</b>（详见 §7）。</li>
+      <li>从牌堆抽一张新牌，<b>补充手牌至 2 张</b>。</li>
+    </ul>
+    <p class="note">所有效果都是<b>可选的</b>。你可以不使用牌的效果，但若要使用，必须在放下牌的<b>当下一刻</b>立即使用。</p>
+  </section>
+
+  <section id="effects">
+    <h2 class="sec"><span class="num">6</span>牌效果（4 种）</h2>
+
+    <div class="effect-grid">
+      <div class="effect"><h4><span class="v">1</span>移动对手的一张「可动的」牌</h4>
+        <p>「可动的」指该牌<b>至少有一个相邻空格</b>。移动时必须遵循<b>放置规则</b>。被移动的牌<b>不会重新触发</b>其效果。</p>
+        <div class="note">你可以移动这张蓝 1，即使它会让红 1 失去相邻。</div>
+      </div>
+      <div class="effect"><h4><span class="v">2</span>移动自己的一张「可动的」牌</h4>
+        <p>定义与值 1 相同。移动时必须遵循放置规则。被移动的牌不会重新触发其效果。</p>
+        <div class="note">你可以移动这张红 3，即使它会让蓝 2 失去相邻。</div>
+      </div>
+      <div class="effect"><h4><span class="v">3</span>交换成功标记</h4>
+        <p>将你手中的<b>一张成功标记</b>与板边展示的 5 张标记中的<b>任一张</b>交换。</p>
+        <div class="note">在你得分完一行/列前，<b>你不会有成功标记可以交换</b>。</div>
+      </div>
+      <div class="effect"><h4><span class="v">4</span>翻面朝下</h4>
+        <p>将此牌翻为<b>面朝下</b>，然后将一张<b>相邻的对手牌</b>也翻为面朝下。<b>面朝下的牌仍占据</b>其格子，但<b>没有值</b>。面朝下的牌仍可被值 1/2 的牌效果移动。</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="scoring">
+    <h2 class="sec"><span class="num">7</span>计分行</h2>
+    <p>如果在你的回合结束时出现<b>已完成的行或列</b>（6 个格子全部被占满），则<b>立即计分</b>（前提是之前没计过该行/列）。如果有多个行/列同时计分，由你决定这些行/列的计分<b>顺序</b>。</p>
+
+    <p>计分时，<b>双方</b>各自计算本行/列中自己牌的值之和。总和由<b>所有牌的值（1&ndash;5）</b>加上<b>任何 诡计卡 卡 卡 牌的值</b>组成。<b>面朝下</b>的牌没有值。</p>
+
+    <div class="dolos-rule">
+      <b>诡计卡 卡 卡 牌</b> 在计分行中，值 = 其两侧相邻两牌（属于对手）的值之<b>和</b>。<br>
+      如果 诡计卡 卡 卡 牌在行/列的<b>端点</b>，它取<b>单一相邻牌</b>的值。<br>
+      如果两张 诡计卡 卡 卡 牌相邻，则它们<b>互不得分</b>。
+    </div>
+
+    <p>值总和较高的一方赢得该行/列。<b>平局</b>由<b>轮到出牌的玩家</b>赢得。</p>
+    <p>赢得该行/列的玩家选择该行/列<b>两端的成功标记</b>中的<b>一张</b>，另一张归对手。所有的成功标记面朝上放在自己面前。</p>
+
+    <div class="ex">
+      <p><span class="label">【示例】</span>该行蓝方总值 <b>10</b>（3 + 6 + 1），红方总值 <b>9</b>（4 + 2 + 3），<b>蓝方赢得该行</b>。</p>
+    </div>
+  </section>
+
+  <section id="end">
+    <h2 class="sec"><span class="num">8</span>游戏结束</h2>
+    <p>当你的牌堆用完后，继续出牌直到你将<b>所有牌</b>都放到板上。<b>游戏结束</b>的条件是：所有牌都已放出，板上所有格子被占满，且所有行列都已计分。</p>
+
+    <h3>胜负判定</h3>
+    <p><b>1. 全神支持判定</b></p>
+    <ul>
+      <li>首先看你的<b>神成功标记</b>：你是否拥有代表<b>全部 5 位神</b>的标记？或拥有 <b>4 位神 + 2 张结婚标记</b>？如果是，你已经获得<b>众神的支持</b>！</li>
+      <li>如果你拥有众神支持而对手没有，<b>你立即获胜</b>。</li>
+    </ul>
+
+    <p><b>2. 点数比较</b></p>
+    <p>如果你和对手都拥有众神支持（或都没有），则按<b>成功标记的点数</b>决出胜负：</p>
+    <ul>
+      <li>对每位神，<b>只算你持有的最高值</b>标记。</li>
+      <li>再加上你所有的<b>非神标记</b>（正负值都算）。</li>
+      <li><b>结婚标记没有点数</b>。</li>
+    </ul>
+
+    <div class="ex">
+      <p><span class="label">【示例】</span>双方都获得众神支持。红方总点数 <b>30</b>（8+8+7+7+5+10&minus;10&minus;5），蓝方总点数 <b>32</b>（1+3+6+8+10+10&minus;3&minus;3），<b>蓝方获胜</b>。</p>
+    </div>
+
+    <p><b>3. 平局处理</b></p>
+    <ul>
+      <li>若平局，比较两人手中<b>较低值神标记的点数总和</b>（之前未计入的那些）。</li>
+      <li>若仍平局，比较两人持有的<b>Zeus 标记</b>的点数。</li>
+      <li>若仍平局，比较两人持有的 <b>Poseidon</b> 标记的点数。</li>
+    </ul>
+
+    <figure>
+      <img src="Iliad_Rules_images/page_03.jpg" alt="规则书第 3 页（示例 + 计分规则）">
+      <figcaption>原文第 3 页（牌组分布与计分示例）</figcaption>
+    </figure>
+    <figure>
+      <img src="Iliad_Rules_images/page_06.jpg" alt="规则书第 6 页（诡计卡 卡 卡 规则 + 计分详解）">
+      <figcaption>原文第 6 页（诡计卡 卡 卡 牌规则、计分行详解、蓝方 10:9 胜示例）</figcaption>
+    </figure>
+    <figure>
+      <img src="Iliad_Rules_images/page_07.jpg" alt="规则书第 7 页（游戏结束 + 蓝方 32 胜示例）">
+      <figcaption>原文第 7 页（游戏结束、全神支持判定、点数比较 32:30 示例）</figcaption>
+    </figure>
+  </section>
+
+  <section id="effects-ref">
+    <h2 class="sec"><span class="num">9</span>牌效果速查</h2>
+    <div class="effect-grid">
+      <div class="effect"><h4><span class="v">1</span>移动对手</h4><p>移动对手一张「可动的」的牌，遵循放置规则，不重新触发效果。</p></div>
+      <div class="effect"><h4><span class="v">2</span>移动自己</h4><p>移动自己一张「可动的」的牌，遵循放置规则，不重新触发效果。</p></div>
+      <div class="effect"><h4><span class="v">3</span>交换标记</h4><p>将自己一张成功标记与板边展示的 5 张标记中的任一张交换。</p></div>
+      <div class="effect"><h4><span class="v">4</span>翻面朝下</h4><p>将此牌翻面朝下，再翻一面朝下的相邻对手牌。</p></div>
+    </div>
+  </section>
+
+  <section id="credits">
+    <h2 class="sec"><span class="num">10</span>制作信息</h2>
+    <div class="credits">
+      <p><b>游戏设计（游戏 by）：</b>Dr. Reiner Knizia</p>
+      <p><b>插画（插画）：</b>Harry Conway</p>
+      <p><b>平面设计（平面 设计 by）：</b>Brigette Indelicato</p>
+      <p><b>编辑（编辑 by）：</b>Scott Darrington</p>
+      <p><b>出版（出版）：</b>Nick Murray &amp; Kyle Spackman</p>
+      <p style="margin-top:10px;"><b>出版（出版）：</b>Bitewing Games LLC</p>
+      <p style="margin-top:10px;">ⓒ 2024 Bitewing Games LLC. All rights reserved.</p>
+      <p>ⓒ 2024 Dr. Reiner Knizia. All rights reserved.</p>
+      <p style="margin-top:10px;">订阅更新：<span style="color:var(--sea-d);">https://bitewinggames.com/subscribe</span></p>
+    </div>
+    <div class="note" style="margin-top:14px;">
+      <b>致谢：</b>Reiner Knizia 感谢所有参与测试的玩家。特别感谢 <b>Jens Jahnke</b> 与 <b>Britta Stöckmann</b> 对游戏创建与测试的重大贡献。
+    </div>
+    <p class="note" style="margin-top:14px;">本规则书的简体中文译本以 Bitewing Games 2024 英文版（<b>Iliad / v. 2024</b>）为权威源。专有名词（神名「Zeus / Apollo / Athena / Poseidon / Aphrodite / Helen」、人名、出版商）首次出现时附英文括注。</p>
+    <footer>
+      — Iliad / 伊利亚特 — 中文版规则书 &nbsp;·&nbsp; 译自 Bitewing Games 2024 英文版 —
+    </footer>
+  </section>
+
+  </main>
+
+<p style="margin-top: 20px; font-size: 13px; color: #666;"><b>翻译说明：</b>保留英文的专名：Iliad、Reiner Knizia、Harry Conway、Brigette Indelicato、Scott Darrington、Nick Murray、Kyle Spackman、Bitewing Games、Hector、Achilles、Zeus、Poseidon、Apollo、Athena、Aphrodite（人名/公司/游戏名/神名）。其他专名（化身 / 诡计卡 / 区域多数 / 回合多数 / 圆点 等）全部译为中文。</p>
+
+</div>
+
+</body>
+</html>

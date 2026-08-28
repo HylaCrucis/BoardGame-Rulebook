@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>马埃（Mahe）— 游戏规则</title>
+<style>
+  :root{
+    /* 海岛主题：海蓝绿 + 沙滩米 + 热带橙 */
+    --bg:#efe5cf; --bg2:#e2d3b1; --ink:#1f3038; --ink-soft:#506468;
+    --sea:#2e6f6a; --sea-d:#1c4a47; --sea-l:#5fa39d;
+    --sand:#f7e6c4; --sand-d:#c4a86d;
+    --sun:#e08a3c; --sun-d:#b3661f;
+    --coral:#d35d4a; --tortoise:#7a5230;
+    --line:#cdc1a3; --card:#fbf2dd;
+    --egg-red:#c84a3a; --egg-blue:#3a7bb4; --egg-yellow:#dec23a; --egg-green:#5a8a4a;
+    --egg-purple:#7e4aa0; --egg-orange:#e07a3a;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"Songti SC","Noto Serif SC","Source Han Serif SC",STSong,
+                "Iowan Old Style","Palatino Linotype",Georgia,serif;
+    line-height:1.85; font-size:16px;
+  }
+  .wrap{display:flex; align-items:flex-start; max-width:1180px; margin:0 auto;}
+  nav{
+    position:sticky; top:0; align-self:flex-start;
+    width:248px; flex:0 0 248px; height:100vh; overflow-y:auto;
+    background:linear-gradient(180deg,var(--sea-d),var(--sea));
+    color:#eaf2f1; padding:22px 16px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;
+  }
+  nav h2{font-size:13px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--sun); margin:0 0 12px;}
+  nav ol{list-style:none; margin:0; padding:0;}
+  nav a{display:block; color:#eaf2f1; text-decoration:none; font-size:14px;
+    padding:7px 10px; border-radius:7px;}
+  nav a:hover{background:var(--sun); color:var(--sea-d);}
+  main{flex:1 1 auto; min-width:0; padding:0 40px 80px;}
+  .cover{
+    background:linear-gradient(160deg,var(--sea-d),var(--sea) 50%,var(--sun));
+    color:#fbf2dd; padding:62px 40px; border-radius:0 0 18px 18px;
+    margin-bottom:36px; text-align:center;
+    box-shadow:0 10px 30px rgba(44,74,71,.3);
+  }
+  .cover h1{font-size:44px; margin:0 0 6px; letter-spacing:.02em;}
+  .cover .sub{font-size:17px; opacity:.95;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .cover .tag{display:inline-block; margin-top:16px; padding:6px 16px;
+    border:1px solid rgba(255,255,255,.45); border-radius:20px; font-size:14px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  section{padding:14px 0 8px; border-bottom:1px solid var(--line); scroll-margin-top:18px;}
+  h2.sec{font-size:26px; color:var(--sea-d); margin:18px 0 6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  h2.sec .num{color:var(--sun); font-weight:700; margin-right:10px;}
+  h3{font-size:18px; color:var(--sea-d); margin:22px 0 6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  p{margin:10px 0;}
+  ul,ol{margin:10px 0 10px 4px; padding-left:22px;}
+  li{margin:5px 0;}
+  .lead{font-size:17px;}
+  .comp-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:16px 0;}
+  .comp{border:1px solid var(--line); background:var(--card); border-radius:12px;
+    padding:14px 16px; box-shadow:0 2px 6px rgba(0,0,0,.05);}
+  .comp b{color:var(--sea-d);}
+  ol.setup{counter-reset:setup; list-style:none; padding-left:0;}
+  ol.setup > li{position:relative; padding:8px 8px 8px 56px; margin:6px 0;
+    background:var(--card); border:1px solid var(--line); border-radius:8px;}
+  ol.setup > li::before{counter-increment:setup; content:counter(setup);
+    position:absolute; left:10px; top:8px;
+    width:30px; height:30px; background:var(--sea); color:#fff;
+    border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-weight:700; font-family:Arial,sans-serif;}
+  .dice-calc{display:inline-block; min-width:46px; padding:4px 10px;
+    background:var(--sun); color:#fff; border-radius:6px; font-weight:700;
+    font-family:Arial,sans-serif; font-size:16px; margin:0 2px;}
+  .math{display:inline-block; font-family:Arial,sans-serif; font-weight:700;
+    color:var(--sun-d); padding:0 4px;}
+  .ex{border:1px solid var(--sand-d); background:var(--sand);
+    padding:12px 18px; border-radius:10px; margin:14px 0;}
+  .ex .label{display:inline-block; background:var(--sun); color:#fff;
+    padding:2px 10px; border-radius:12px; font-weight:700; font-size:14px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; margin-right:8px;}
+  .die{display:inline-block; min-width:30px; padding:2px 8px; margin:0 2px;
+    border-radius:6px; font-weight:700; font-family:Arial,sans-serif;
+    border:2px solid var(--ink); font-size:14px; background:#fff; color:var(--ink);}
+  .bubble{border:1px dashed var(--sea-l); padding:14px 18px; border-radius:10px;
+    margin:14px 0; background:#fff;}
+  .bubble b{color:var(--sea-d);}
+  figure{margin:18px 0; text-align:center;}
+  figure img{max-width:100%; border:1px solid var(--line); border-radius:12px;
+    box-shadow:0 4px 14px rgba(0,0,0,.08); background:#fff;}
+  figcaption{font-size:13px; color:var(--ink-soft); margin-top:6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .note{border-left:3px solid var(--sun); padding:8px 14px; background:var(--bg2);
+    border-radius:0 8px 8px 0; margin:14px 0;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; font-size:14px;}
+  .credits{background:var(--bg2); border:1px solid var(--line); border-radius:12px;
+    padding:16px 20px; margin-top:14px; font-size:15px;}
+  .credits b{color:var(--sea-d);}
+  footer{margin-top:40px; font-size:13px; color:var(--ink-soft);
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; text-align:center;}
+  @media(max-width:900px){
+    .wrap{flex-direction:column;}
+    nav{position:static; width:100%; height:auto; flex-basis:auto;}
+    main{padding:0 18px 60px;}
+    .comp-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <h1>马埃</h1>
+  <div class="sub">马埃 · 游戏规则（中文版 / 韩文版转中文）</div>
+  <div class="tag">8 岁以上 &nbsp;|&nbsp; 2&ndash;7 人 &nbsp;|&nbsp; 约 30 分钟</div>
+</header>
+
+<div class="wrap">
+  <nav>
+    <h2>目录</h2>
+    <ol>
+      <li><a href="#intro">背景</a></li>
+      <li><a href="#objective">游戏目标</a></li>
+      <li><a href="#components">配件</a></li>
+      <li><a href="#setup">准备</a></li>
+      <li><a href="#play">游戏流程</a></li>
+      <li><a href="#move">乌龟移动</a></li>
+      <li><a href="#stack-base">乌龟叠骑</a></li>
+      <li><a href="#stack-top">乌龟塔（多人叠骑规则）</a></li>
+      <li><a href="#egg">蛋卡</a></li>
+      <li><a href="#end">7 分终局与计分</a></li>
+      <li><a href="#end-example">计分示例</a></li>
+      <li><a href="#few">2&ndash;3 人变体</a></li>
+      <li><a href="#variant">变体：蛋卡代替骰子</a></li>
+      <li><a href="#credits">制作信息</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+  <section id="intro">
+    <h2 class="sec"><span class="num">1</span>背景</h2>
+    <p class="lead"><b>马埃</b>是塞舌尔（塞舌尔，印度洋西部的 92 岛共和国，首都：维多利亚 Victoria）中一座岛屿的名字。该岛风光秀丽，深受游客喜爱，同时也以<b>乌龟产卵地</b>闻名于世。</p>
+    <p>本桌游 <b>马埃</b> 便是以岛上的<b>乌龟赛跑</b>为题材：每只乌龟绕岛而行，有时<b>骑上</b>其他乌龟的背，有时则<b>被他人骑</b>。当乌龟们绕过岛屿、<b>到达或经过 21 号格</b>时，便按「<b>蛋卡（알 카드）</b>」牌堆最上面那张卡片所示的数字产下相应数量的蛋。当所有蛋卡都用完时，进入最后一轮，玩家们有机会<b>一下子夺得 7 枚蛋</b>，最后<b>蛋卡分数最高</b>的玩家获胜。</p>
+  </section>
+
+  <section id="objective">
+    <h2 class="sec"><span class="num">2</span>游戏目标</h2>
+    <p>让你的乌龟绕岛跑起来，多多收集<b>蛋卡</b>，积累最多蛋分。</p>
+  </section>
+
+  <section id="components">
+    <h2 class="sec"><span class="num">3</span>配件</h2>
+    <div class="comp-grid">
+      <div class="comp"><b>游戏板 ×1</b><br>1 张岛形赛道的游戏板</div>
+      <div class="comp"><b>骰子 ×3</b><br>3 颗骰子</div>
+      <div class="comp"><b>乌龟棋子 ×7</b><br>7 只乌龟棋子</div>
+      <div class="comp"><b>乌龟卡 ×7</b><br>7 张乌龟卡</div>
+      <div class="comp" style="grid-column:1/-1;"><b>蛋卡 24 张（点数 1~6）</b><br>1&ndash;6 分不等的蛋卡 24 张</div>
+    </div>
+  </section>
+
+  <section id="setup">
+    <h2 class="sec"><span class="num">4</span>准备</h2>
+    <ol class="setup">
+      <li>每位玩家各选 1 只乌龟棋子，放在游戏板上的<b>「筏子（뗏목）」</b>处。<br><span class="note" style="display:inline-block;">筏子在 1 号格的前面。</span></li>
+      <li>每位玩家拿 1 张与自己乌龟棋子<b>同色</b>的「乌龟卡」，放在自己面前（用于标记属于你的乌龟）。</li>
+      <li>将 24 张蛋卡充分洗混，<b>面朝下</b>成一摞。<b>丢弃最上面 4 张面朝下的卡</b>（这 4 张在游戏中不使用）。将剩余 20 张蛋卡面朝下放在游戏板上<b>「产卵地（알 낳는 곳）」</b>（即<b>7 分</b>所在的位置）。这一摞称为「<b>蛋堆（떡）</b>」。</li>
+      <li>翻开<b>蛋堆最上面</b> 1 张蛋卡，面朝上放在蛋堆上方。</li>
+      <li>玩家们轮流进行。任意指定<b>起始玩家</b>，由该玩家拿 3 颗骰子开始游戏。</li>
+    </ol>
+  </section>
+
+  <section id="play">
+    <h2 class="sec"><span class="num">5</span>游戏流程</h2>
+    <p>每位玩家的回合握有 <b>3 颗骰子</b>，一次掷 <b>1 颗</b>。关键规则是：<b>骰子点数之和不得超过 7</b>（点数和为 7 还行）。</p>
+    <h3>掷骰流程</h3>
+    <ol>
+      <li>掷第一颗骰子。点数天然不超 7，<b>可放心掷</b>。</li>
+      <li>视情况决定要不要掷第二颗。若掷了，两颗的点数之和仍不超过 7，可以继续掷第三颗。</li>
+      <li>掷第二颗或第三颗时，如果点数和超过 7：<br>—— 你<b>当前回合</b>控制的乌龟（连同其上所有乌龟）无论从哪一格出发，立刻<b>回到筏子上</b>，回合结束，由下一位玩家开始。</li>
+    </ol>
+
+    <div class="ex">
+      <p><span class="label">【示例】</span>第一颗骰子掷出 <span class="die">2</span>，你判断局势有利，于是掷了第二颗，掷出 <span class="die">6</span>。两颗点数和为 8 超过 7，你本回合控制的乌龟立即<b>被送回筏子</b>。</p>
+    </div>
+  </section>
+
+  <section id="move">
+    <h2 class="sec"><span class="num">6</span>乌龟移动</h2>
+    <p>乌龟沿<b>逆时针方向</b>移动，可以<b>路过</b>其他乌龟所占的格。但若到达的那一格<b>已经有一只乌龟</b>，你的乌龟就要<b>骑到</b>那只乌龟背上（详见 <a href="#stack-base">§7 叠骑</a>）。</p>
+    <p>走过 21 号格之后，会路过 1 号格继续新的一圈；从<b>筏子离开</b>时，是从 <b>1 号格</b>出发。</p>
+
+    <h3>前进格数</h3>
+    <p>掷完骰子后，根据掷出的骰子数量，前进格数计算如下：</p>
+    <ul>
+      <li>掷 <b>1 颗</b>：前进 <span class="math">点数和 × 1</span>（即该骰点数）。</li>
+      <li>掷 <b>2 颗</b>（点数和 ≤ 7）：前进 <span class="math">点数和 × 2</span>。</li>
+      <li>掷 <b>3 颗</b>（点数和 ≤ 7）：前进 <span class="math">点数和 × 3</span>。</li>
+    </ul>
+
+    <div class="ex">
+      <p><span class="label">【示例 2 颗】</span>两颗骰子掷出 <span class="die">2</span> 与 <span class="die">4</span>。点数和为 6，乘以 2：你的乌龟前进 <span class="math">12 格</span>（<span class="math">(2+4) × 2</span>）。</p>
+      <p style="margin-top:6px;"><span class="label">【示例 3 颗】</span>三颗骰子掷出 <span class="die">2</span>、<span class="die">1</span>、<span class="die">4</span>。点数和为 7，乘以 3：你的乌龟前进 <span class="math">21 格</span>（<span class="math">(2+1+4) × 3</span>）。这一次刚好绕岛一圈回到起点位置；如果是从<b>筏子</b>出发，则刚好到达 <b>21 号格</b>。</p>
+    </div>
+  </section>
+
+  <section id="stack-base">
+    <h2 class="sec"><span class="num">7</span>乌龟叠骑</h2>
+    <p>绕岛游泳的过程中，乌龟<b>可以路过</b>其他乌龟所在的格。但是当你要<b>抵达</b>的格子上<b>已经有另一只乌龟</b>时，你的乌龟就要<b>叠到它背上</b>（骑乘）。</p>
+    <div class="ex">
+      <p><span class="label">【详细示例】</span>场上有一只<b>灰色</b>乌龟在底，<b>木色</b>乌龟叠在灰色上，<b>粉色</b>乌龟又叠在最上面。现在是<b>粉色</b>乌龟的回合。</p>
+      <p>粉色乌龟掷第一颗骰子：<span class="die">1</span>。位于最上方的粉色乌龟决定掷第二颗骰子：<span class="die">2</span>。再决定掷第三颗：<span class="die">3</span>。点数和为 6，乘以 3：粉色乌龟叠着<b>整个塔（含木色与灰色）</b>一起前进 <span class="math">18 格</span>（<span class="math">(1+2+3) × 3</span>）。</p>
+    </div>
+    <div class="tip">
+      <b>注意：</b>粉色乌龟带动整叠乌龟（自己 + 下面的木色 + 最下面的灰色）一起移动；但只有"最顶上的玩家"决定是否掷第二 / 第三颗骰子。一旦移动，<b>整叠乌龟</b>一起前进。
+    </div>
+  </section>
+
+  <section id="stack-top">
+    <h2 class="sec"><span class="num">8</span>乌龟塔（多人叠骑规则）</h2>
+    <p>接下来轮到被压在<b>下方</b>（被骑）的乌龟回合时，由<b>位于最上方的乌龟</b>（玩家）决定要<b>否</b>掷第二颗、第三颗骰子：</p>
+    <ul>
+      <li>若点数和 ≤ 7：<b>当前玩家的乌龟</b>连同其上的<b>所有乌龟</b>一起前进。</li>
+      <li>若点数和 > 7：<b>当前玩家的乌龟</b>连同其上的<b>所有乌龟</b>一起被送回<b>筏子</b>。</li>
+    </ul>
+    <p>游戏中可能出现 <b>3、4 层</b>甚至更多层的叠塔。无论如何，<b>每只乌龟的回合</b>中，是否掷第二 / 第三颗骰子都由<b>位于最顶上的乌龟</b>决定。一旦发生移动，<b>当前玩家</b>的乌龟及其上的<b>所有乌龟</b>一同移动。</p>
+    <p>被压在塔<b>底部</b>的乌龟们，<b>不受当前玩家掷骰点数影响</b>，原地不动。这一点即使在点数和超过 7 而整叠乌龟一起被送回筏子时也是如此——<b>只有当前玩家的乌龟及其上方的乌龟</b>回筏子。</p>
+  </section>
+
+  <section id="egg">
+    <h2 class="sec"><span class="num">9</span>蛋卡</h2>
+    <p>当你的乌龟<b>到达或经过 21 号格</b>时，从蛋堆中拿取 <b>1 张面朝上的蛋卡</b>，<b>面朝下</b>放在自己面前。卡上的数字即为你这一次产下的蛋数。</p>
+    <p>如果是<b>整叠叠塔</b>一起到达或经过 21 号格，蛋卡<b>只能由最上面那只乌龟的玩家</b>拿走，下面的其他乌龟拿不到蛋。</p>
+    <p>之后翻<b>蛋堆最上面 1 张</b>新的蛋卡面朝上，取代拿走的卡片。</p>
+  </section>
+
+  <section id="end">
+    <h2 class="sec"><span class="num">10</span>7 分终局与计分</h2>
+    <p>当蛋堆的<b>最后一张蛋卡</b>被拿走后，游戏板上的「产卵地」（原蛋堆位置）会显出 <b>「7」</b>。如果此时有乌龟<b>单独</b>或作为整叠叠塔<b>最顶上的那只</b>，<b>到达或经过 21 号格</b>，该乌龟即获得 <b>7 分</b>，游戏立即结束。</p>
+    <p>之后<b>将各自蛋卡的点数加总</b>，<b>分数最高</b>的玩家获胜。如果出现<b>并列</b>，则<b>蛋卡张数</b>多者获胜（产卵地的 7 分也算作 1 张蛋卡）。</p>
+  </section>
+
+  <section id="end-example">
+    <h2 class="sec"><span class="num">11</span>计分示例</h2>
+    <div class="bubble">
+      <p>游戏结束时：</p>
+      <ul>
+        <li><b>Martin</b> 拿到 1、3、3、4、5、6 分的蛋卡 6 张，共 <b>22 分</b>。</li>
+        <li><b>Eva</b> 拿到 1、2、4、4、6 分的蛋卡 5 张，共 <b>17 分</b>。</li>
+        <li><b>David</b> 拿到 2、3、4、6 分的蛋卡 4 张，并从产卵地获得 <b>7 分</b>，共 <b>22 分</b>。</li>
+        <li><b>Andrea</b> 拿到 3、3、4、5、5 分的蛋卡 5 张，共 <b>20 分</b>。</li>
+      </ul>
+      <p style="margin-top:8px;"><b>并列处理：</b>Martin 和 David 都是 22 分，并列。Martin 的蛋卡张数为 6，David 为 5 张（含产卵地 7 分算 1 张），Martin 多 1 张，因此 <b>Martin 获胜</b>。</p>
+    </div>
+  </section>
+
+  <section id="few">
+    <h2 class="sec"><span class="num">12</span>2&ndash;3 人变体</h2>
+    <p>当游戏为 <b>2 或 3 人局</b>时，每位玩家各拿 <b>2 只乌龟</b>进行游戏（否则乌龟叠骑与被叠的机会会大幅减少）。</p>
+    <p>自己的回合中，先对一只乌龟掷骰并移动，<b>之后</b>再轮到自己的下一只乌龟。但是，<b>哪只乌龟先动</b>应当事先约定好，游戏中固定不变。</p>
+    <p>无需为每只乌龟单独收集蛋卡——游戏结束时，把两只乌龟各自的蛋卡点数<b>相加</b>即可。</p>
+  </section>
+
+  <section id="variant">
+    <h2 class="sec"><span class="num">13</span>变体：蛋卡代替骰子</h2>
+    <p>在自己的回合中，不是掷骰子，而是<b>可以用已经获得的蛋卡</b>，即蛋卡的点数可以「代替」骰子的点数。但<b>每次</b>最多只能使用 <b>1 张蛋卡</b>，且<b>只能</b>用于代替第二颗或第三颗骰子的点数。<b>不能用蛋卡代替第一颗骰子。</b></p>
+    <p>此情况下，骰子点数与蛋卡点数之和同样<b>不得超过 7</b>。</p>
+    <p>被这样使用掉的蛋卡会被<b>弃掉</b>，本局不再用，且游戏结束时<b>不计入</b>该玩家的蛋分。</p>
+
+    <div class="ex">
+      <p><span class="label">【示例】</span>当前玩家手中有一张 <b>2 分</b> 的蛋卡。本回合已掷出第一颗骰子 <span class="die">5</span>。<b>不再继续掷骰子</b>，改用蛋卡代替第二颗骰子的点数：总点数为 5 + 2 = 7，乘以 2 = 14，于是前进 <span class="math">14 格</span>（<span class="math">(5 + 2) × 2</span>）。该 <b>2 分蛋卡</b> 即被弃掉，之后不计入玩家的蛋分总分。</p>
+    </div>
+
+    <p><b>多乌龟塔的蛋卡</b>：在叠塔中，如果是<b>中间层乌龟</b>的回合，则<b>最上层的乌龟</b>可以让该中间层乌龟用其自己的蛋卡代替骰子。但<b>不可强求</b>中间层乌龟使用其蛋卡。</p>
+
+    <figure>
+      <img src="Mahe_Rules_images/page_02.jpg" alt="规则书第 2 页（准备 2/3/4/5、玩家流程、乌龟移动、叠骑、蛋卡、变体）">
+      <figcaption>原文第 2 页（准备 2&ndash;5、游戏流程、乌龟移动、乌龟叠骑、乌龟塔规则、蛋卡、变体：蛋卡代替骰子）</figcaption>
+    </figure>
+  </section>
+
+  <section id="credits">
+    <h2 class="sec"><span class="num">14</span>制作信息</h2>
+    <div class="credits">
+      <p><b>游戏设计（设计）：</b>Alex Randolph</p>
+      <p><b>插画（插画）：</b>Atlier198、Wanjin Gill</p>
+      <p><b>出版（出版）：</b>基于 franjos Spieleverlag 与（주）게임올로지（Gameology Inc.）的授权合约制作</p>
+      <p style="margin-top:10px;"><b>合作出版：</b>franjos Spieleverlag · playte &nbsp;|&nbsp; <span style="color:var(--sea-d);">www.franjos.de</span> · <span style="color:var(--sea-d);">www.playte.com</span></p>
+      <p style="margin-top:10px;">※ 本规则书的简体中文译本以 Gameology 与 franjos 联合发行的韩文版（<b>韩文版 / 马埃 / 마헤</b>）为权威源。</p>
+    </div>
+    <p class="note" style="margin-top:14px;">术语对照：<b>乌龟（거북이, turtle）</b>、<b>筏子（뗏목, raft，失败时返回的起点区）</b>、<b>蛋卡（알 카드, egg card）</b>、<b>产卵地（알 낳는 곳, nest）</b>、<b>21 号格（21번 칸）</b>。专有名词（游戏名「马埃 / 마헤」、岛屿名「塞舌尔 / Victoria」、人名、颜色、出版商）保留英文 / 韩文原文。</p>
+    <footer>
+      — 马埃 / 马埃 — 中文版规则书 &nbsp;·&nbsp; 韩文版转中文，源：Gameology × franjos Spieleverlag —
+    </footer>
+  </section>
+
+  </main>
+</div>
+
+</body>
+</html>

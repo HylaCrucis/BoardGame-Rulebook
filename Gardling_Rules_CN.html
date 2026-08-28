@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gardling（园艺精灵）— 游戏规则</title>
+<style>
+  :root{
+    /* 花园主题配色：深叶绿 + 大地棕 + 花橙 + 宝石色点缀 */
+    --bone:#f5f1e4; --bone2:#ece4d2; --ink:#2c2a25; --ink-soft:#6b6358;
+    --leaf:#3f7d52; --leaf-d:#1f4d30; --leaf-l:#6fae82;
+    --soil:#7a5230; --soil-d:#543722; --bloom:#cf7a3a; --bloom-d:#a85a26;
+    --gem-blue:#3e7cb1; --gem-purple:#8a5cc4; --gem-yellow:#e0b53d;
+    --gem-orange:#e08035; --gem-green:#4f9d5f;
+    --red:#a8392f; --red-l:#f6e3e0;
+    --line:#ddd3bd; --card:#fffdf7;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bone); color:var(--ink);
+    font-family:"Songti SC","Noto Serif SC","Source Han Serif SC",STSong,
+                "Iowan Old Style","Palatino Linotype",Georgia,serif;
+    line-height:1.85; font-size:17px;
+  }
+  .wrap{display:flex; align-items:flex-start; max-width:1180px; margin:0 auto;}
+  nav{
+    position:sticky; top:0; align-self:flex-start;
+    width:248px; flex:0 0 248px; height:100vh; overflow-y:auto;
+    background:linear-gradient(180deg,var(--leaf-d),var(--leaf));
+    color:#eef6ef; padding:22px 16px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;
+  }
+  nav h2{font-size:13px; letter-spacing:.12em; text-transform:uppercase;
+    color:#bfe3c9; margin:0 0 12px;}
+  nav ol{list-style:none; margin:0; padding:0;}
+  nav a{display:block; color:#eef6ef; text-decoration:none; font-size:14px;
+    padding:7px 10px; border-radius:7px;}
+  nav a:hover{background:var(--leaf-l); color:#1f3326;}
+  main{flex:1 1 auto; min-width:0; padding:0 40px 80px;}
+  .cover{
+    background:linear-gradient(160deg,var(--leaf-d),var(--leaf) 60%,var(--bloom));
+    color:#f5f1e4; padding:62px 40px; border-radius:0 0 18px 18px;
+    margin-bottom:36px; text-align:center;
+    box-shadow:0 10px 30px rgba(31,77,48,.28);
+  }
+  .cover h1{font-size:42px; margin:0 0 6px; letter-spacing:.02em;}
+  .cover .sub{font-size:17px; opacity:.95; font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .cover .tag{display:inline-block; margin-top:16px; padding:6px 16px;
+    border:1px solid rgba(255,255,255,.45); border-radius:20px; font-size:14px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  section{padding:14px 0 8px; border-bottom:1px solid var(--line); scroll-margin-top:18px;}
+  h2.sec{font-size:28px; color:var(--leaf-d); margin:18px 0 6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  h2.sec .num{color:var(--bloom); font-weight:700; margin-right:10px;}
+  h3{font-size:20px; color:var(--soil); margin:24px 0 6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  p{margin:10px 0;}
+  ul,ol{margin:10px 0 10px 4px; padding-left:22px;}
+  li{margin:5px 0;}
+  .lead{font-size:18px;}
+  .comp-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:16px 0;}
+  .comp{border:1px solid var(--line); background:var(--card); border-radius:12px;
+    padding:14px 16px; box-shadow:0 2px 6px rgba(0,0,0,.04);}
+  .comp b{color:var(--leaf-d);}
+  .callout{border-left:5px solid var(--bloom); background:var(--bone2);
+    padding:12px 18px; margin:16px 0; border-radius:0 10px 10px 0;}
+  .callout.tip{border-color:var(--leaf); background:#e6f1e9;}
+  .callout.tip b{color:var(--leaf);}
+  .callout.adv{border-color:var(--red); background:var(--red-l);}
+  .callout.adv b{color:var(--red);}
+  .steps{counter-reset:step; list-style:none; padding-left:0; margin:14px 0;}
+  .steps li{position:relative; padding:10px 14px 10px 52px; margin:8px 0;
+    background:var(--card); border:1px solid var(--line); border-radius:10px;}
+  .steps li::before{counter-increment:step; content:counter(step);
+    position:absolute; left:12px; top:50%; transform:translateY(-50%);
+    width:28px; height:28px; background:var(--leaf); color:#fff;
+    border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-weight:700; font-family:Arial,sans-serif;}
+  .skill{border:1px solid var(--line); background:var(--card); border-radius:12px;
+    padding:14px 18px; margin:12px 0; box-shadow:0 2px 6px rgba(0,0,0,.04);}
+  .skill .name{font-weight:700; color:var(--leaf-d); font-size:18px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .skill .name .ico{display:inline-block; min-width:22px; color:var(--bloom);}
+  .req{border:1px solid var(--line); background:var(--card); border-radius:10px;
+    padding:12px 16px; margin:10px 0;}
+  .req .sym{font-weight:700; color:var(--leaf-d);}
+  .ex{font-size:15px; color:var(--ink-soft); border-top:1px dashed var(--line);
+    margin-top:8px; padding-top:8px;}
+  .ex.ok::before{content:"✓ 示例 — "; color:var(--leaf); font-weight:700;}
+  .ex.no::before{content:"✗ 反例 — "; color:var(--red); font-weight:700;}
+  figure{margin:18px 0; text-align:center;}
+  figure img{max-width:100%; border:1px solid var(--line); border-radius:12px;
+    box-shadow:0 4px 14px rgba(0,0,0,.08); background:#fff;}
+  figcaption{font-size:13px; color:var(--ink-soft); margin-top:6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .legend{display:flex; flex-wrap:wrap; gap:10px 16px; margin:12px 0;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; font-size:14px;}
+  .gem{display:inline-block; width:14px; height:14px; border-radius:50%;
+    vertical-align:middle; margin-right:5px;
+    box-shadow:inset 0 0 0 2px rgba(255,255,255,.55);}
+  .gem.b{background:var(--gem-blue);} .gem.p{background:var(--gem-purple);}
+  .gem.y{background:var(--gem-yellow);} .gem.o{background:var(--gem-orange);}
+  .gem.g{background:var(--gem-green);}
+  table.medal{border-collapse:collapse; margin:14px 0; width:100%;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; font-size:15px;}
+  table.medal th,table.medal td{border:1px solid var(--line); padding:8px 12px; text-align:center;}
+  table.medal th{background:var(--leaf-d); color:#eef6ef;}
+  table.medal tr:nth-child(even) td{background:var(--bone2);}
+  .two{display:grid; grid-template-columns:1fr 1fr; gap:16px; align-items:start;}
+  @media(max-width:900px){
+    .wrap{flex-direction:column;}
+    nav{position:static; width:100%; height:auto; flex-basis:auto;}
+    main{padding:0 18px 60px;}
+    .comp-grid,.two{grid-template-columns:1fr;}
+  }
+  footer{margin-top:40px; font-size:13px; color:var(--ink-soft);
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; text-align:center;}
+  .credits{background:var(--bone2); border:1px solid var(--line); border-radius:12px;
+    padding:16px 20px; margin-top:14px;}
+  .credits b{color:var(--leaf-d);}
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <h1>Gardling</h1>
+  <div class="sub">园艺精灵 · 游戏规则（中文版）</div>
+  <div class="tag">1–4 人 &nbsp;|&nbsp; 8 岁以上 &nbsp;|&nbsp; 约 20 分钟</div>
+</header>
+
+<div class="wrap">
+  <nav>
+    <h2>目录</h2>
+    <ol>
+      <li><a href="#goal">游戏目标</a></li>
+      <li><a href="#components">组件</a></li>
+      <li><a href="#setup">准备</a></li>
+      <li><a href="#build">建造花园</a></li>
+      <li><a href="#buy">购买新牌</a></li>
+      <li><a href="#win">胜利与新轮</a></li>
+      <li><a href="#advanced">进阶规则</a></li>
+      <li><a href="#creatures">生物能力</a></li>
+      <li><a href="#solo">单人模式</a></li>
+      <li><a href="#credits">制作人员</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+  <section id="goal">
+    <h2 class="sec"><span class="num">1</span>游戏目标</h2>
+    <p class="lead">每轮，所有玩家<b>同时</b>在自己面前建造花园：从自己的布袋里抽牌并放置。
+    你可以随时停止抽牌——因为若抽到太多<b>地精（gnome）</b>，它们会偷走你的一些<b>宝石（gem）</b>。
+    回合结束时，用花园中已配对的宝石去买一张新牌；随后所有玩家把牌收回布袋，进行下一轮。
+    <b>第一个凑够宝石、买下胜利牌的玩家获胜。</b></p>
+    <figure>
+      <img src="Gardling_Rules_images/page_01.jpg" alt="准备与组件页">
+      <figcaption>准备与组件总览（原书第 1 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="components">
+    <h2 class="sec"><span class="num">2</span>组件</h2>
+    <div class="comp-grid">
+      <div class="comp"><b>96 张生物牌</b><br>生物牌（creature tiles），含各类花园生物与宝石。</div>
+      <div class="comp"><b>1 张胜利牌</b><br>胜利牌（victory tile），买下即获胜。</div>
+      <div class="comp"><b>1 块游戏板</b><br>游戏板（game board），放置牌堆与胜利牌。</div>
+      <div class="comp"><b>28 枚硬币</b><br>硬币（coins），用于提升购买力。</div>
+      <div class="comp"><b>4 个布袋</b><br>布袋（cloth bags），每位玩家一个。</div>
+      <div class="comp"><b>1 个起始玩家标记 / 玩家辅助卡</b><br>起始玩家标记 / 玩家辅助卡（start player marker / Player aid）。</div>
+      <div class="comp"><b>24 张地精牌</b><br>地精牌（gnome tiles），分为单地精与双地精。</div>
+    </div>
+    <p>游戏中费用等级以宝石颜色区分，对应不同牌堆：</p>
+    <div class="legend">
+      <span><span class="gem b"></span>蓝（blue）</span>
+      <span><span class="gem p"></span>紫（purple）</span>
+      <span><span class="gem y"></span>黄（yellow）</span>
+      <span><span class="gem o"></span>橙（orange）</span>
+      <span><span class="gem g"></span>绿（green）</span>
+    </div>
+  </section>
+
+  <section id="setup">
+    <h2 class="sec"><span class="num">3</span>准备</h2>
+    <ul>
+      <li>将游戏板放在桌子中央。</li>
+      <li>将硬币叠成一摞，放在游戏板左侧。</li>
+      <li>把生物牌按<b>背面</b>分拣成若干堆（按背面图案区分），每堆洗牌。将<b>怜悯猪（pity pig，米色背景）</b>正面朝下放在游戏板左侧；其他牌堆正面朝上环绕游戏板摆放（如第 1 页右图）。</li>
+      <li>取 6 枚硬币，在<b>蓝、紫、黄</b>三堆旁各放一枚。</li>
+      <li>将黑色胜利牌放在游戏板右侧，数字 <b>“20”</b> 朝上。</li>
+      <li>将绿、蓝、紫、橙四色牌各分成大致相等的两堆，一上一下放在游戏板两侧。</li>
+      <li>每位玩家开局在布袋中有 <b>4 张单地精牌、2 张双地精牌、2 只怜悯猪</b>（全部随机）。未使用的地精牌放回游戏盒。</li>
+      <li>将起始玩家标记交给最年轻的玩家，<b>绿色面</b>朝上。</li>
+    </ul>
+    <div class="callout tip">
+      <b>短局变体：</b>想玩短局，把胜利牌翻到 <b>“17”</b> 朝上。建议第一局就这么做。<br>
+      <b>进阶规则提示：</b>原书中红框内的规则为进阶规则，第一局可忽略。若要使用进阶规则，把起始玩家标记<b>红色面</b>朝上；也可只选用部分进阶规则。<br>
+      <b>更多人游玩：</b>合并两盒游戏可支持最多 8 人，加入更多盒可支持 12、16、20 人……
+    </div>
+  </section>
+
+  <section id="build">
+    <h2 class="sec"><span class="num">4</span>建造花园</h2>
+    <p>所有玩家<b>同时</b>从自己的布袋抽牌，在自己面前建造花园。当所有玩家都停止抽牌时，本轮结束。</p>
+    <p>从布袋逐张抽牌并放置，拼出你的花园。每张新牌必须遵循以下规则：</p>
+    <ul>
+      <li>所有牌（第一张除外）必须至少与一张已放置的牌<b>相邻</b>。</li>
+      <li>所有相邻牌相接的<b>边缘必须匹配</b>：宝石边接宝石边，空白边接空白边。牌的<b>背景颜色无关紧要</b>。</li>
+    </ul>
+    <p>你可以<b>随时停止</b>从布袋抽牌。若抽得太多，可能会抽到过多地精！牌可随意旋转。</p>
+    <div class="callout tip">
+      <b>提示：</b>摆放牌时，尽量为后续牌留出更多匹配宝石的机会！<br>
+      所有相邻牌相接的边缘都必须匹配，<b>包括空白边缘</b>。下图给出非法放置示例。
+    </div>
+    <div class="callout">
+      <b>太多地精：</b>你的花园最多容纳 <b>5 个地精</b>（基础规则，所有对局适用）。若抽到的牌会让地精数超过 5，就不能再抽牌；最后抽到的那张地精牌不会被放置，而是正面朝下留在面前，提醒你地精将偷走一些宝石（见下一节「购买新牌」）。<br>
+      <b>示例：</b>Maria 抽到一张使地精数量超过 5 的牌，必须停止抽牌（且不能放置最后抽到的那张牌）。
+      <b>罕见情况：</b>若抽到一张无法放置的牌，必须停止抽牌（忽略最后抽到的这张牌）。
+    </div>
+    <figure>
+      <img src="Gardling_Rules_images/page_02.jpg" alt="建造花园页">
+      <figcaption>建造花园：放置规则、地精上限与示例（原书第 2 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="buy">
+    <h2 class="sec"><span class="num">5</span>购买新牌</h2>
+    <p>当所有玩家都停止抽牌（自愿，或因抽到太多地精），每位玩家必须购买一张新牌。
+    持有起始玩家标记的玩家先买，其余玩家按<b>顺时针</b>顺序跟随。</p>
+    <p>清点你花园中<b>已完成的宝石</b>数量，可购买费用不超过该数量的牌（从对应费用等级的牌堆顶端取一张）。</p>
+    <div class="callout">
+      <b>地精偷宝石：</b>若本轮抽到太多地精，地精会偷走你 <b>3 颗宝石</b>（基础规则；进阶玩法改为偷走一半，见「进阶规则」）。清点宝石时减 3。
+    </div>
+    <div class="callout tip">
+      <b>硬币：</b>每退还供应区一枚硬币，相当于多 1 颗宝石（提升购买力）；也可留到后续轮次。
+      游戏开始时蓝、紫、黄三堆旁各放了一枚硬币——第一个<b>不花硬币</b>就从这三堆之一买到牌的玩家，同时取走对应的硬币。<br>
+      <b>怜悯猪：</b>若宝石少于 4 颗、买不起任何牌，必须改拿 1 只怜悯猪和 1 枚硬币。
+    </div>
+    <div class="ex ok">Maria 花园有 7 颗完成的宝石，但抽到太多地精，只剩 4 颗可用。她可买费用 4 的绿牌，或花 3 枚硬币买费用 7 的蓝牌；也可拿一只怜悯猪和一枚硬币。</div>
+    <div class="callout">
+      <b>注意：</b>每轮你必须<b>恰好买 1 张牌</b>（不能拆分购买力买多张）。允许买比宝石数更便宜的牌（或拿怜悯猪和硬币），但未用完的宝石不会补偿。若某费用等级的两堆牌都用完，就不能再买该等级的牌。
+    </div>
+  </section>
+
+  <section id="win">
+    <h2 class="sec"><span class="num">6</span>胜利与新轮</h2>
+    <h3>胜利条件</h3>
+    <p>若你至少有 <b>20 颗宝石</b>（短局为 17），即可买下胜利牌获胜。<b>不能用硬币买胜利牌。</b></p>
+    <p>若多名玩家都凑够买胜利牌的宝石：宝石最多者胜；宝石并列则硬币最多者胜；硬币也并列，则本轮无人能买胜利牌（须改买其他牌），游戏进入新一轮。</p>
+    <div class="ex ok">Daniel 有 23 颗宝石，可买胜利牌；Aleksander 也是 23 颗，平局。Aleksander 硬币更多，赢得平局与游戏。若硬币也平，则无人能买，游戏继续。</div>
+    <h3>新一轮</h3>
+    <p>若无人买下胜利牌，所有玩家把牌<b>全部收回布袋</b>（含新买的牌和上一轮抽的所有牌），开始下一轮；并将起始玩家标记<b>顺时针</b>传给下一位玩家。</p>
+    <figure>
+      <img src="Gardling_Rules_images/page_03.jpg" alt="胜利与单人模式页">
+      <figcaption>胜利结算、平局与单人奖章门槛（原书第 3 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="advanced">
+    <h2 class="sec"><span class="num">7</span>进阶规则</h2>
+    <div class="callout adv">
+      <b>池塘（Ponds）：</b>若你用牌围出一块任意大小的空区域，就造出一个池塘。购买新牌前，花园中每有一个池塘得 1 枚硬币。即使对角相邻空格为空，池塘也算完成（见上页图示：一个池塘 / 两个池塘）。
+    </div>
+    <div class="callout adv">
+      <b>地精（进阶）：</b>地精不偷 3 颗宝石，而是偷走你<b>一半</b>的宝石——你只能用一半（向上取整）的宝石去买新牌。
+    </div>
+  </section>
+
+  <section id="creatures">
+    <h2 class="sec"><span class="num">8</span>生物能力</h2>
+    <div class="skill"><div class="name"><span class="ico">🌿</span>园丁（Gardener）</div>
+      <p>园丁的<b>三连宝石</b>若与另一名园丁的三连宝石配对，价值 3 颗宝石。</p></div>
+    <div class="skill"><div class="name"><span class="ico">🍄</span>蘑菇（Mushies）</div>
+      <p>蘑菇有由一条线连接的<b>成对宝石</b>。若一对中的两颗宝石都完成，你还计入连线上显示的额外奖励宝石。
+      两对都完成 → 计 3 颗宝石；仅底对完成 → 计 1 颗奖励宝石（共 5 颗）。</p></div>
+    <div class="skill"><div class="name"><span class="ico">🐉</span>龙（Dragons）</div>
+      <p>若花园中有 <b>3 只或更多龙</b>，可忽略 1 个地精（即最多容 6 个地精）。</p>
+      <div class="callout adv"><b>进阶：</b>一旦有 3 只或更多龙，大声向其他玩家宣布——所有其他玩家本轮从花园失去 2 颗宝石（发生在地精偷宝石之前）。若多名玩家都有 3 只龙，他们互不影响，其他玩家仍只失 2 颗。想要更友好就用龙的基础规则；<b>单人游戏必须用龙的基础规则</b>。</div></div>
+    <div class="skill"><div class="name"><span class="ico">🦄</span>独角兽（Unicorns）</div>
+      <p>独角兽可<b>随时移动</b>——即使抽了其他牌之后，也可把它移到花园中另一处。若移动会拆散花园，则不允许移动。</p></div>
+    <div class="skill"><div class="name"><span class="ico">🐷</span>猪（Pigs）</div>
+      <p>若花园中有 <b>3 只或更多猪</b>，购买新牌前从供应区取 1 枚硬币。</p>
+      <div class="ex ok">Daniel 花园有 3 只猪，因此获得 1 枚硬币。</div>
+      <div class="callout adv"><b>进阶（变异）：</b>若你有 3 只或更多猪，其中一只会变异——本轮买完新牌后，把一只猪牌归还对应供应区（放牌堆底部），再从供应区取一张比丢弃的猪<b>高一级</b>的牌。
+      例：把蓝猪放回蓝堆底部，从任意紫堆顶端取一张牌。变异对照：米色猪→绿牌，绿猪→蓝牌，蓝猪→紫牌，紫猪→黄牌。</div></div>
+    <div class="skill"><div class="name"><span class="ico">🥚</span>小鸟（Birdie）</div>
+      <p>小鸟的<b>彩虹蛋</b>可与任意颜色的<b>单颗</b>宝石配对（不能与双连或三连宝石配对）。</p></div>
+    <figure>
+      <img src="Gardling_Rules_images/page_04.jpg" alt="生物能力页">
+      <figcaption>生物能力详解与示例（原书第 4 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="solo">
+    <h2 class="sec"><span class="num">9</span>单人模式</h2>
+    <p>单人游戏结束时，清点你拥有的<b>牌数</b>（含胜利牌和布袋中的牌）。<b>牌越少，得分越高。</b></p>
+    <table class="medal">
+      <tr><th>奖章</th><th>标准局（牌数）</th><th>短局（牌数）</th></tr>
+      <tr><td>🥇 金质奖章 Gold</td><td>≤ 13</td><td>≤ 15</td></tr>
+      <tr><td>🥈 银质奖章 Silver</td><td>14–16</td><td>16–18</td></tr>
+      <tr><td>🥉 铜质奖章 Bronze</td><td>17–19</td><td>19–21</td></tr>
+      <tr><td>🔁 再试一次 Try Again</td><td>&gt; 19</td><td>&gt; 21</td></tr>
+    </table>
+  </section>
+
+  <section id="credits">
+    <h2 class="sec">制作人员</h2>
+    <div class="credits">
+      <p><b>游戏设计：</b>Kristian A Østby、Maria Østby</p>
+      <p><b>美术、平面设计与排版：</b>Gjermund Mørkved Bohne</p>
+      <p><b>Alion Games：</b>Kristian A Østby、Kjetil Svendsen</p>
+      <p><b>版权：</b>© Alion Games 2024，保留所有权利</p>
+      <p><b>地址：</b>Alion Games, Bekkestien 5, 1406 Ski, Norway</p>
+      <p><b>鸣谢：</b>感谢所有试玩者，特别是 Marianne Ringås、Aleksander Østby、Karl Thomas Hjelmervik、Karina Hjelmervik、Morten Rønning、Hege Stensland、Helge Meissner、Anna Wermlund、Sturla Naas Johansen；并特别感谢 Matthew Dunstan 激发本游戏的灵感对话。</p>
+    </div>
+  </section>
+
+  <footer>
+    本页基于《Gardling》规则书（v10）整理并译为中文，供阅读便利；版式与导航为便于阅读而添加。
+    游戏名 Gardling 暂译「园艺精灵」（非官方译名）。专有名词（人名、公司名、生物名）保留英文。
+  </footer>
+  </main>
+</div>
+</body>
+</html>

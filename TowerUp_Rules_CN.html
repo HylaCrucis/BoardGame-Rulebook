@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tower Up（楼起）— 游戏规则</title>
+<style>
+  :root{
+    /* 都市夜景：夜空黑 + 霓虹蓝紫 + 信号橙 */
+    --bg:#0e1626; --bg2:#16223a; --ink:#e6ebf5; --ink-soft:#9caacb;
+    --night:#0e1626; --night-d:#070d18; --night-l:#1d2a45;
+    --neon:#5b8df7; --neon-d:#3a6cd9; --neon-l:#88aafa;
+    --signal:#ff7530; --signal-d:#cc5a1e; --signal-l:#ff9555;
+    --white:#ffffff; --line:#2c3a5a; --card:#15233e;
+    --gold-chip:#f5c542; --shadow:rgba(5,8,15,.6);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"Songti SC","Noto Serif SC","Source Han Serif SC",STSong,
+                "Iowan Old Style","Palatino Linotype",Georgia,serif;
+    line-height:1.85; font-size:16px;
+  }
+  .wrap{display:flex; align-items:flex-start; max-width:1180px; margin:0 auto;}
+  nav{
+    position:sticky; top:0; align-self:flex-start;
+    width:248px; flex:0 0 248px; height:100vh; overflow-y:auto;
+    background:linear-gradient(180deg,var(--night-d),var(--night));
+    color:var(--ink); padding:22px 16px; border-right:1px solid var(--neon-d);
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;
+  }
+  nav h2{font-size:13px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--signal); margin:0 0 12px;}
+  nav ol{list-style:none; margin:0; padding:0;}
+  nav a{display:block; color:var(--ink-soft); text-decoration:none; font-size:14px;
+    padding:7px 10px; border-radius:7px;}
+  nav a:hover{background:var(--signal); color:var(--night-d);}
+  main{flex:1 1 auto; min-width:0; padding:0 40px 80px;}
+  .cover{
+    background:linear-gradient(160deg,var(--night-d),var(--night) 60%,var(--signal));
+    color:var(--ink); padding:62px 40px; border-radius:0 0 18px 18px;
+    margin-bottom:36px; text-align:center;
+    box-shadow:0 10px 30px var(--shadow);
+  }
+  .cover h1{font-size:46px; margin:0 0 6px; letter-spacing:.06em;
+    font-family:"Iowan Old Style","Palatino Linotype",Georgia,serif;
+    color:var(--ink); text-shadow:2px 2px 0 var(--neon-d);}
+  .cover .sub{font-size:17px; opacity:.95;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .cover .tag{display:inline-block; margin-top:16px; padding:6px 16px;
+    border:1px solid rgba(255,255,255,.45); border-radius:20px; font-size:14px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  section{padding:14px 0 8px; border-bottom:1px solid var(--line); scroll-margin-top:18px;}
+  h2.sec{font-size:26px; color:var(--neon); margin:18px 0 6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  h2.sec .num{color:var(--signal); font-weight:700; margin-right:10px;}
+  h3{font-size:18px; color:var(--neon); margin:22px 0 6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  p{margin:10px 0;}
+  ul,ol{margin:10px 0 10px 4px; padding-left:22px;}
+  li{margin:5px 0;}
+  .lead{font-size:17px;}
+  .comp-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:16px 0;}
+  .comp{border:1px solid var(--line); background:var(--card); border-radius:12px;
+    padding:14px 16px; box-shadow:0 2px 6px var(--shadow);}
+  .comp b{color:var(--signal);}
+  ol.setup{counter-reset:setup; list-style:none; padding-left:0;}
+  ol.setup > li{position:relative; padding:8px 8px 8px 56px; margin:6px 0;
+    background:var(--card); border:1px solid var(--line); border-radius:8px;
+    color:var(--ink);}
+  ol.setup > li::before{counter-increment:setup; content:counter(setup);
+    position:absolute; left:10px; top:8px;
+    width:30px; height:30px; background:var(--signal); color:#fff;
+    border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-weight:700; font-family:Arial,sans-serif;}
+  .supply-grid{display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px;
+    margin:14px 0; font-family:Arial,sans-serif;}
+  .supply{border:1px solid var(--line); border-radius:8px;
+    padding:10px; text-align:center; background:var(--card);}
+  .supply .lbl{font-size:13px; color:var(--ink-soft);}
+  .supply .v{font-size:22px; font-weight:700; color:var(--signal);}
+  .turn-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:18px 0;}
+  .action{border:2px solid; border-radius:12px; padding:14px 18px; background:var(--card);}
+  .action.draw{border-color:var(--neon);}
+  .action.build{border-color:var(--signal);}
+  .action h3{margin-top:0;}
+  .important{border:2px dashed var(--signal); padding:12px 18px; border-radius:10px;
+    margin:14px 0; background:var(--card);}
+  .important b{color:var(--signal-l);}
+  .rule-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:14px 0;}
+  .rule-box{border:1px solid var(--line); border-radius:10px;
+    padding:12px 16px; background:var(--card);}
+  .rule-box .n{display:inline-block; min-width:24px; padding:2px 8px;
+    background:var(--signal); color:#fff; border-radius:6px;
+    font-weight:700; font-family:Arial,sans-serif; margin-right:6px;}
+  .rule-box b{color:var(--signal-l);}
+  .bubble{border:1px dashed var(--neon); padding:14px 18px; border-radius:10px;
+    margin:14px 0; background:var(--card);}
+  .bubble b{color:var(--signal-l);}
+  .obj-grid{display:grid; grid-template-columns:1fr 1fr; gap:10px;
+    margin:14px 0; font-size:14px;}
+  .obj{border:1px solid var(--line); border-radius:8px;
+    padding:10px 14px; background:var(--card);}
+  .obj .n{display:inline-block; min-width:24px; padding:2px 6px;
+    background:var(--neon); color:#fff; border-radius:6px;
+    font-weight:700; font-family:Arial,sans-serif; font-size:12px; margin-right:6px;}
+  .ex{border:1px solid var(--neon); background:var(--night-l);
+    padding:12px 18px; border-radius:10px; margin:14px 0;}
+  .ex .label{display:inline-block; background:var(--signal); color:#fff;
+    padding:2px 10px; border-radius:12px; font-weight:700; font-size:14px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; margin-right:8px;}
+  .note{border-left:3px solid var(--signal); padding:8px 14px; background:var(--card);
+    border-radius:0 8px 8px 0; margin:14px 0;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; font-size:14px;}
+  figure{margin:18px 0; text-align:center;}
+  figure img{max-width:100%; border:1px solid var(--line); border-radius:12px;
+    box-shadow:0 4px 14px var(--shadow); background:#fff;}
+  figcaption{font-size:13px; color:var(--ink-soft); margin-top:6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .credits{background:var(--card); border:1px solid var(--line); border-radius:12px;
+    padding:16px 20px; margin-top:14px; font-size:15px;}
+  .credits b{color:var(--signal);}
+  footer{margin-top:40px; font-size:13px; color:var(--ink-soft);
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; text-align:center;}
+  @media(max-width:900px){
+    .wrap{flex-direction:column;}
+    nav{position:static; width:100%; height:auto; flex-basis:auto;}
+    main{padding:0 18px 60px;}
+    .comp-grid,.turn-grid,.rule-grid,.supply-grid,.obj-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <h1>楼起 楼起</h1>
+  <div class="sub">楼起 · 游戏规则（中文版 / 英文版转中文）</div>
+  <div class="tag">10 岁以上 &nbsp;|&nbsp; 2&ndash;4 人 &nbsp;|&nbsp; 约 45 分钟</div>
+</header>
+
+<div class="wrap">
+  <nav>
+    <h2>目录</h2>
+    <ol>
+      <li><a href="#intro">简介</a></li>
+      <li><a href="#components">配件</a></li>
+      <li><a href="#setup">准备</a></li>
+      <li><a href="#turn">游戏回合</a></li>
+      <li><a href="#draw">抽 1 张材料卡</a></li>
+      <li><a href="#build">起 1 座新建筑</a></li>
+      <li><a href="#roof">放 1 个屋顶</a></li>
+      <li><a href="#extra">额外回合</a></li>
+      <li><a href="#objectives">目标卡</a></li>
+      <li><a href="#end">游戏结束</a></li>
+      <li><a href="#tactics">战术建议</a></li>
+      <li><a href="#rules">补充说明与变体</a></li>
+      <li><a href="#credits">制作信息</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+  <section id="intro">
+    <h2 class="sec"><span class="num">1</span>简介</h2>
+    <p class="lead">市中心扩建正如火如荼地进行。你是受命承建所有摩天大楼的建筑公司负责人之一：新建大楼、丰厚奖励，以及——若一切顺利——所有财富！</p>
+    <p>不过，城市规划相当严苛：每当你要开建一座新大楼，都必须为所有<b>直接相邻</b>的建筑添砖加瓦；而且市议会还有另一条铁律：<b>相邻的两栋建筑永远不能是同一颜色</b>。</p>
+    <p>你不是唯一参与这个项目的公司，竞争想必十分激烈。想要<b>抢先</b>赢得比赛，你需要仔细规划建造、敢于抓住机会，同时还要尽量减少对手的选择空间。</p>
+    <div class="important">
+      <b>策略：</b>本游戏的收入来自三个独立来源——<br>
+      ① 把你的屋顶放到<b>高建筑</b>上；<br>
+      ② 尽可能快地达成<b>城市规划目标</b>；<br>
+      ③ 游戏结束时让你的屋顶占据<b>更多建筑</b>。<br>
+      这三者并非总能协同，你需要找到三者间的最佳平衡。
+    </div>
+  </section>
+
+  <section id="components">
+    <h2 class="sec"><span class="num">2</span>配件</h2>
+    <div class="comp-grid">
+      <div class="comp"><b>1 张游戏板（双面）</b><br>正面 3&ndash;4 人；背面 2 人。板面显示 5 个区域的市中心。<br>板上呈现许多由白色街道网连接的方形<b>建筑工地</b>。</div>
+      <div class="comp"><b>120 张楼层（4 色）</b><br>按颜色堆叠形成不同高度的建筑。每色 30 张。</div>
+      <div class="comp"><b>40 个屋顶</b><br>每位玩家 10 个对应颜色，用来标记你在建筑中的出现。</div>
+      <div class="comp"><b>4 张个人板</b><br>每位玩家一张，标记自己的进度。</div>
+      <div class="comp"><b>44 张材料卡</b><br>让你从<b>公共供应区</b>中拿取楼层加入个人供应区。</div>
+      <div class="comp"><b>10 张目标卡</b><br>展示市议会的当前指令，可能为你赢得<b>奖励标记</b>。</div>
+      <div class="comp"><b>12 枚奖励标记</b><br>3 种形状 × 3 种价值（<b>7M / 5M / 3M</b> 百万）。</div>
+      <div class="comp"><b>16 个交通工具标记</b><br>4 色 × 4 个，放在个人板的对应轨道上。</div>
+      <div class="comp"><b>4 个交通锥标记</b><br>放在个人板底部，表示<b>终局奖励</b>。</div>
+    </div>
+    <h3>楼层堆叠示例</h3>
+    <div class="supply-grid">
+      <div class="supply"><div class="lbl">1 层楼</div><div class="v">·</div></div>
+      <div class="supply"><div class="lbl">2 层楼</div><div class="v">··</div></div>
+      <div class="supply"><div class="lbl">4 层楼</div><div class="v">··· ·</div></div>
+    </div>
+    <p>同一栋楼里的屋顶：<b>只要你的屋顶在该建筑中任何一层，就算你「出现」在该建筑中</b>。同一建筑可多次出现；不同玩家也可同时出现。</p>
+  </section>
+
+  <section id="setup">
+    <h2 class="sec"><span class="num">3</span>准备</h2>
+    <ol class="setup">
+      <li>将游戏板放在桌子中央。<b>2 人局</b>则把板翻面到背面，使用 2 人局半场板。</li>
+      <li>洗混所有<b>材料卡</b>，组成一摞<b>抽牌堆</b>放在容器左侧空间。</li>
+      <li>翻开 3 张卡牌，作为<b>市场</b>展示在容器上。</li>
+      <li>摆 <b>3 个起始楼层</b>：检查 市场 中的卡——<br>
+      &nbsp;&nbsp;• 每张卡最底部的楼层对应 1 张楼层，从容器取出；<br>
+      &nbsp;&nbsp;• 把这 3 张楼层放到<b>任意 3 个工地</b>上。<br>
+      <span class="note" style="display:inline-block; margin:4px 0;">注：若卡片底部的楼层是<b>多色</b>，可任选颜色。</span></li>
+      <li>把容器（含 4 色屋顶）放在游戏板旁边。</li>
+      <li>每人选一张<b>个人板</b>放在面前；将 4 个交通工具标记放在对应轨道的<b>第 1 格</b>；拿取<b>10 个自己颜色</b>的屋顶；拿 1 个对应的交通锥标记放在一旁。</li>
+      <li>每人从容器拿<b>1 张各色楼层</b>放在个人板前——这是你的<b>起始供应区</b>。</li>
+      <li>把<b>奖励标记</b>按形状和值摆到板上的对应空格。<br>
+      <span class="note" style="display:inline-block; margin:4px 0;">3 人局：每个形状可省 1 枚 <b>3M</b>；2 人局：只摆 <b>7M</b> 和每个形状 1 枚 <b>3M</b>。</span></li>
+      <li>将 <b>3 张起始卡</b>（右下角带 <b>⟨S⟩</b> 标记）摆在板上对应位置（首次游戏用）。熟悉后，从 10 张目标卡中抽 3 张随机使用。</li>
+    </ol>
+    <div class="important">
+      <b>注意：</b>同一颜色的两层<b>不可相邻</b>（在第 4 步放起始楼层时也需遵守）。
+    </div>
+    <p class="note">准备工作就绪！<b>住在最高楼层</b>的玩家为起始玩家。</p>
+  </section>
+
+  <section id="turn">
+    <h2 class="sec"><span class="num">4</span>游戏回合</h2>
+    <p>游戏按<b>顺时针方向</b>进行，由起始玩家开始。在你的回合中，你必须从以下 2 个动作中选 <b>1 个</b>：</p>
+    <div class="turn-grid">
+      <div class="action draw"><h3>① 抽 1 张材料卡</h3>
+        <p>从市场抽 1 张，立即获得卡上所示内容（楼层 + 车辆前进）。补 1 张到市场。</p>
+      </div>
+      <div class="action build"><h3>② 起 1 座新建筑</h3>
+        <p>从供应拿 1 张楼层放到工地 → 为相邻建筑各加 1 张「付款」楼层 → 放 1 个屋顶 → 移动对应色交通工具标记。</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="draw">
+    <h2 class="sec"><span class="num">5</span>抽 1 张材料卡</h2>
+    <p>从<b>市场</b>选择 1 张卡，弃到容器右侧的弃牌空间，立即获得卡上所示内容：</p>
+    <ul>
+      <li>每张所示楼层：从容器取对应颜色的楼层，加入你的供应。</li>
+      <li><b>多色楼层</b>是<b>万能</b>，可任选颜色。</li>
+      <li>每个所示车辆：可把对应颜色的<b>交通工具标记</b>在自己的轨道上前进 <b>1 步</b>。</li>
+    </ul>
+    <p>立即从抽牌堆补 1 张牌到市场，保持市场始终有 3 张。</p>
+    <div class="important">
+      <b>回合末限制：</b>你的供应区<b>不能超过 10 张楼层</b>。若超过，把多余的（任意颜色）放回容器。
+    </div>
+  </section>
+
+  <section id="build">
+    <h2 class="sec"><span class="num">6</span>起 1 座新建筑</h2>
+    <p>从你的供应区拿 1 张楼层，放到游戏板上的<b>一个空格工地</b>。必须遵守以下两条规则：</p>
+    <div class="rule-grid">
+      <div class="rule-box"><span class="n">1</span>这个工地必须<b>相邻</b>至少 1 栋现有建筑（由白色街道连接）。</div>
+      <div class="rule-box"><span class="n">2</span>你新建的建筑<b>颜色不能与任何相邻建筑相同</b>。</div>
+    </div>
+
+    <h3>「支付」新建筑的价格</h3>
+    <p>你必须在<b>每一栋相邻建筑</b>上各加 1 张楼层。</p>
+    <ul>
+      <li>这些楼层必须从你的<b>供应区</b>付出。</li>
+      <li>付出的楼层必须与所在建筑颜色<b>相同</b>（因此不可能建成多色建筑）。</li>
+      <li>如果无法支付，<b>不能开建</b>该建筑。</li>
+    </ul>
+
+    <div class="ex">
+      <p><span class="label">【示例】</span>你是蓝方，要建一栋<b>黑色</b>建筑在棕色建筑旁。有 2 个可选工地（标记 <b>✓</b>）。其中一个旁边有已存在的黑色建筑，被禁止（标记 <b>✗</b>）。</p>
+      <ol>
+        <li>把黑色楼层放到选中的工地。</li>
+        <li>向每栋相邻建筑「付款」各 1 张楼层（白 + 棕）。</li>
+        <li>选择在新建筑或任一付款楼层上放 1 个屋顶。</li>
+        <li>把对应色（黑色）交通工具标记前进 <b>2 步</b>（该建筑 2 层）。</li>
+      </ol>
+    </div>
+
+    <div class="note">
+      <b>注意：</b>每次回合只能开建 <b>1 栋</b>新建筑，每次回合只能放 <b>1 个</b> 屋顶。<br>
+      你可以在同一栋建筑中<b>出现多次</b>（即放多个屋顶）。<br>
+      为新建筑「付款」时，可能覆盖你已有的屋顶（这是允许的）。
+    </div>
+  </section>
+
+  <section id="roof">
+    <h2 class="sec"><span class="num">7</span>放 1 个屋顶</h2>
+    <p>开建新建筑并支付完成后，你必须把你 10 个屋顶中的 <b>1 个</b>（且仅 1 个）放到刚才所放的 1 张楼层上。可以是新建筑本身，也可以是任何 1 张付款楼层。</p>
+    <p>最后，把对应颜色的<b>交通工具标记</b>在该轨道上前进若干步，步数 = 你放的屋顶所在建筑的<b>总层数</b>。</p>
+  </section>
+
+  <section id="extra">
+    <h2 class="sec"><span class="num">8</span>额外回合</h2>
+    <p>每当你<b>移动自己某个交通工具标记</b>之后，检查是否所有标记都已到达（或超过）个人板上的<b>星列</b>。如果是，<b>你立即获得一个额外回合</b>（可再抽 1 张卡或再建 1 座建筑）。</p>
+    <div class="note">
+      <b>备注：</b>不需要超过星列，<b>到达</b>即可。<br>
+      一个落后的标记有时会一次性跨越 2 个星列，但这仍只触发 1 个额外回合。<br>
+      额外回合中的动作可能再次触发额外的额外回合。
+    </div>
+  </section>
+
+  <section id="objectives">
+    <h2 class="sec"><span class="num">9</span>目标卡</h2>
+    <p>3 张目标卡每张可能为你赢得 1 个奖励标记，价值从 3M 到 7M 不等。<b>达成目标</b>的条件：在指定数量的建筑中以特定模式<b>出现</b>。</p>
+    <p>达成目标后，从卡旁取最高值的奖励标记放在个人板的对应形状空格里。<b>每种目标最多只能领取一次奖励。</b></p>
+    <div class="obj-grid">
+      <div class="obj"><span class="n">①</span>每个颜色都有你的<b>1 栋建筑</b>。</div>
+      <div class="obj"><span class="n">②</span>城市全部 <b>5 个区域</b>都有你的建筑。</div>
+      <div class="obj"><span class="n">③</span>在 <b>5 栋相连</b>的建筑中出现。</div>
+      <div class="obj"><span class="n">④</span>在 <b>3 栋不同的灰色区域建筑</b>和<b>另一个灰色区域 2 栋</b>中出现。</div>
+      <div class="obj"><span class="n">⑤</span>在 <b>4 栋不同的棕色建筑</b>中出现。</div>
+      <div class="obj"><span class="n">⑥</span>在 <b>4 栋不同临湖建筑</b>中出现。</div>
+      <div class="obj"><span class="n">⑦</span>在 <b>2 栋不同的建筑</b>中各放 2 个屋顶。</div>
+      <div class="obj"><span class="n">⑧</span>在 <b>1 / 2 / 3 / 4 层</b> 各至少出现 1 次（同一建筑可复用）。</div>
+      <div class="obj"><span class="n">⑨</span>跨越 <b>2 个不同区域边界</b>的两侧（同建筑不可重计）。</div>
+      <div class="obj"><span class="n">⑩</span>在 <b>4 栋不同的临公园建筑</b>中出现。</div>
+    </div>
+  </section>
+
+  <section id="end">
+    <h2 class="sec"><span class="num">10</span>游戏结束</h2>
+    <p>放完<b>最后一个屋顶</b>（你的第 10 个）触发终局阶段：</p>
+    <ul>
+      <li>正常完成你的回合，然后立即数你在建筑顶的<b>屋顶数量</b>。这个数字决定你的交通锥放在个人板底部的哪一格（从左数，最大 7）。</li>
+      <li>所有对手还可以继续他们的最终回合（可能包括额外回合）。结束时，他们也数可见的屋顶并放置交通锥。</li>
+      <li>所有人都完成后，汇总：<br>
+        &nbsp;&nbsp;• 所有交通工具标记前进的<b>百万数</b>；<br>
+        &nbsp;&nbsp;• 所有奖励标记的<b>百万数</b>。</li>
+    </ul>
+    <div class="important">
+      <b>最有钱的玩家获胜！</b><br>
+      平局时，剩余供应中<b>楼层最多</b>者赢；仍平局则并列玩家<b>共享胜利</b>。
+    </div>
+  </section>
+
+  <section id="tactics">
+    <h2 class="sec"><span class="num">11</span>战术建议</h2>
+    <ul>
+      <li>花点时间研究板面，根据目标卡确定哪些工地最值得开发。</li>
+      <li>有时为了<b>更快达成目标</b>，选矮一点的建筑反而比高建筑更好。</li>
+      <li>留意对手的供应区，你可以判断他们<b>能否负担</b>某个工地——决定你的行动优先级。</li>
+    </ul>
+    <figure>
+      <img src="TowerUp_Rules_images/page_01.jpg" alt="规则书第 1 页（封面 + 战略）">
+      <figcaption>原文第 1 页（封面、故事背景、战略概览）</figcaption>
+    </figure>
+    <figure>
+      <img src="TowerUp_Rules_images/page_06.jpg" alt="规则书第 6 页（游戏回合 + 起新建筑示例）">
+      <figcaption>原文第 6 页（游戏回合图示 + 起新建筑 / 放屋顶 / 计分示例）</figcaption>
+    </figure>
+    <figure>
+      <img src="TowerUp_Rules_images/page_07.jpg" alt="规则书第 7 页（额外回合 + 目标 + 游戏结束 + 终局计分）">
+      <figcaption>原文第 7 页（额外回合、目标卡说明、终局触发、计分）</figcaption>
+    </figure>
+    <figure>
+      <img src="TowerUp_Rules_images/page_08.jpg" alt="规则书第 8 页（目标卡详图 + 补充说明 + 变体）">
+      <figcaption>原文第 8 页（目标卡详图、补充说明与变体）</figcaption>
+    </figure>
+  </section>
+
+  <section id="rules">
+    <h2 class="sec"><span class="num">12</span>补充说明与变体</h2>
+    <h3>补充说明</h3>
+    <ul>
+      <li><b>回合回合：</b>每次回合只能开建 1 栋新建筑，每次回合只能放 1 个屋顶。</li>
+      <li><b>同建筑多屋顶：</b>你可以在同一栋建筑中<b>出现多次</b>。</li>
+      <li><b>付款覆盖：</b>为新建筑付款时，可能覆盖你自己已有的屋顶。</li>
+      <li><b>计分：</b>若某个交通工具标记到达轨道末端，<b>不再前进</b>，之后该轨道的移动忽略。</li>
+      <li><b>额外回合：</b>不需要超过星列，到达即可。一个落后标记一次性跨 2 个星列只算 1 个额外回合。额外回合中的动作可能再次触发额外回合。</li>
+      <li><b>终局可能抽无用卡：</b>你最后一回合可能只能抽到一张无意义的卡，仍需执行并补市场。</li>
+      <li><b>组件短缺：</b>若抽卡时所需颜色楼层已用完，可改拿<b>任意其他颜色</b>的楼层。</li>
+    </ul>
+    <h3>变体</h3>
+    <ul>
+      <li><b>2 或 3 人局</b>：可放置最多 <b>7 个</b> 起始楼层（多抽材料卡再洗回牌堆）。</li>
+      <li><b>4 人局</b>：可放最多 <b>5 个</b> 起始楼层，但终局会更紧。</li>
+    </ul>
+  </section>
+
+  <section id="credits">
+    <h2 class="sec"><span class="num">13</span>制作信息</h2>
+    <div class="credits">
+      <p><b>游戏设计（游戏 设计）：</b>Frank Crittin、Grégoire Largey、Sébastien Pauchon</p>
+      <p><b>项目经理（项目 经理）：</b>Chloé Girodon</p>
+      <p><b>产品经理（产品 经理）：</b>Sébastien Pauchon</p>
+      <p><b>插画（插画）：</b>Laurent Escoffier、Geoffrey Stepourenko、Nadège Calegari</p>
+      <p><b>平面设计（平面设计 &amp; layout）：</b>Laurent Escoffier、Sébastien Pauchon、Nadège Calegari</p>
+      <p><b>制作经理（制作 manager）：</b>Benoit Stella（Synergy Games）</p>
+      <p><b>校对（校对）：</b>Antoine Prono - Transludis</p>
+      <p style="margin-top:10px;"><b>出版（出版）：</b>MONOLITH 游戏板 游戏</p>
+      <p>153 Boulevard Haussmann, 75008 Paris - France</p>
+      <p><b>英国进口 / 发行：</b>Esdevium Games T/A, Asmodee UK — Hogmoor House, Templars Way, Bordon, Hampshire GU35 9GQ</p>
+      <p style="margin-top:10px;">ⓒ 2024 MONOLITH 游戏板 游戏 &nbsp;|&nbsp; 版本 v2, 2024-04-23</p>
+    </div>
+    <div class="note" style="margin-top:14px;">
+      <b>致谢（致谢）：</b>设计师与出版商感谢所有测试者，特别是 Sylvie、Louise、Anne、Jules、Catherine、Salomé、Nathan、Ismaël、Marc-Antoine、Laurent、Nini、Stéphanie、Joanne、Géraldine、Serge、Attila、Nath、Sébastien、Arnaud、Kate、Marie-Adeline、Michaël、Aikin、Malcolm、Djé、Léo、Steve、Tour de Play 团队、On Joue-Tu? 三人组，以及所有被历史遗忘的人；最后特别感谢 Vincent Dutrait。
+    </div>
+    <p class="note" style="margin-top:14px;">本规则书的简体中文译本以 MONOLITH 游戏板 游戏 2024 年英文版（<b>Tower Up / v2</b>）为权威源。专有名词（游戏名「Tower Up / 楼起」、颜色、人名、出版商、版次）首次出现时附英文括注。</p>
+    <footer>
+      — Tower Up / 楼起 — 中文版规则书 &nbsp;·&nbsp; 译自 MONOLITH 游戏板 游戏 2024 英文版 —
+    </footer>
+  </section>
+
+  </main>
+
+<p style="margin-top: 20px; font-size: 13px; color: #666;"><b>翻译说明：</b>保留英文的专名：Tower Up、Frank Crittin、Grégoire Largey、Sébastien Pauchon、Chloé Girodon、Laurent Escoffier、Geoffrey Stepourenko、Nadège Calegari、Benoit Stella、Antoine Prono、MONOLITH（人名/公司/游戏名）。其他专名（楼起 / 玩家辅助板 / 个人板 / 建筑工地 / 屋顶 / 楼层 / 终点 / 起点 等）全部译为中文。</p>
+
+</div>
+
+</body>
+</html>

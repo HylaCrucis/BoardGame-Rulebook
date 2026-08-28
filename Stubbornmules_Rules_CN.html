@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>顽固的驴（Stubborn Mules）— 游戏规则</title>
+<style>
+  :root{
+    /* 沙漠毛驴色板：沙岩土棕 + 麦秆黄 + 深岩灰 */
+    --bg:#f5ecd7; --bg2:#e8d8b0; --ink:#2a2520; --ink-soft:#6a5f50;
+    --soil:#8d6e4a; --soil-d:#5e4630; --soil-l:#b89070;
+    --straw:#e6c873; --straw-d:#a8893d;
+    --rock:#3a342a; --rock-d:#25201a;
+    --cream:#fbf3df; --line:#d6c8a8; --card:#fdf6e3;
+    --red:#c8382a; --orange:#e07a3a; --yellow:#dec23a;
+    --green:#5a8a4a; --blue:#3a6db4; --purple:#7e4aa0;
+    --shadow:rgba(94,70,48,.16);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"Songti SC","Noto Serif SC","Source Han Serif SC",STSong,
+                "Iowan Old Style","Palatino Linotype",Georgia,serif;
+    line-height:1.85; font-size:16px;
+  }
+  .wrap{display:flex; align-items:flex-start; max-width:1180px; margin:0 auto;}
+  nav{
+    position:sticky; top:0; align-self:flex-start;
+    width:248px; flex:0 0 248px; height:100vh; overflow-y:auto;
+    background:linear-gradient(180deg,var(--rock-d),var(--soil-d));
+    color:#f5ecd7; padding:22px 16px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;
+  }
+  nav h2{font-size:13px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--straw); margin:0 0 12px;}
+  nav ol{list-style:none; margin:0; padding:0;}
+  nav a{display:block; color:#f5ecd7; text-decoration:none; font-size:14px;
+    padding:7px 10px; border-radius:7px;}
+  nav a:hover{background:var(--straw); color:var(--rock);}
+  main{flex:1 1 auto; min-width:0; padding:0 40px 80px;}
+  .cover{
+    background:linear-gradient(160deg,var(--rock-d),var(--soil-d) 50%,var(--straw));
+    color:#fbf3df; padding:62px 40px; border-radius:0 0 18px 18px;
+    margin-bottom:36px; text-align:center;
+    box-shadow:0 10px 30px var(--shadow);
+  }
+  .cover h1{font-size:42px; margin:0 0 6px; letter-spacing:.02em;}
+  .cover .sub{font-size:17px; opacity:.95;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .cover .tag{display:inline-block; margin-top:16px; padding:6px 16px;
+    border:1px solid rgba(255,255,255,.45); border-radius:20px; font-size:14px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  section{padding:14px 0 8px; border-bottom:1px solid var(--line); scroll-margin-top:18px;}
+  h2.sec{font-size:26px; color:var(--soil-d); margin:18px 0 6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  h2.sec .num{color:var(--soil); font-weight:700; margin-right:10px;}
+  h3{font-size:18px; color:var(--rock); margin:22px 0 6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  p{margin:10px 0;}
+  ul,ol{margin:10px 0 10px 4px; padding-left:22px;}
+  li{margin:5px 0;}
+  .lead{font-size:17px;}
+  .comp-grid{display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; margin:16px 0;}
+  .comp{border:1px solid var(--line); background:var(--card); border-radius:12px;
+    padding:12px 14px; box-shadow:0 2px 6px var(--shadow);}
+  .comp b{color:var(--soil-d);}
+  table.setup{width:100%; border-collapse:collapse; margin:14px 0;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; font-size:14px;}
+  table.setup th, table.setup td{border:1px solid var(--line); padding:8px 10px; vertical-align:top;}
+  table.setup th{background:var(--soil-d); color:#fbf3df; font-weight:700;}
+  table.setup td:first-child{font-weight:700; color:var(--soil-d); width:80px; text-align:center;}
+  table.setup tr:nth-child(even) td{background:var(--bg2);}
+  .rule-grid{display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; margin:14px 0;}
+  .rule{border:1px solid var(--line); background:var(--card); border-radius:12px;
+    padding:12px 14px; text-align:center; box-shadow:0 2px 6px var(--shadow);}
+  .rule .big{font-size:30px; font-weight:700; color:var(--soil-d);
+    font-family:Arial,sans-serif; line-height:1;}
+  .rule .what{font-size:14px; color:var(--ink); margin-top:6px;}
+  .ex{border:1px solid var(--straw-d); background:var(--cream);
+    padding:12px 18px; border-radius:10px; margin:14px 0;}
+  .ex .label{display:inline-block; background:var(--straw); color:var(--rock);
+    padding:2px 10px; border-radius:12px; font-weight:700; font-size:14px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; margin-right:8px;}
+  .die{display:inline-block; min-width:30px; padding:2px 8px; margin:0 2px;
+    border-radius:6px; font-weight:700; font-family:Arial,sans-serif;
+    border:2px solid var(--rock); font-size:14px;}
+  .die.r{background:var(--red); color:#fff;}
+  .die.o{background:var(--orange); color:#fff;}
+  .die.y{background:var(--yellow); color:var(--rock);}
+  .die.g{background:var(--green); color:#fff;}
+  .die.b{background:var(--blue); color:#fff;}
+  .die.p{background:var(--purple); color:#fff;}
+  figure{margin:18px 0; text-align:center;}
+  figure img{max-width:100%; border:1px solid var(--line); border-radius:12px;
+    box-shadow:0 4px 14px var(--shadow); background:#fff;}
+  figcaption{font-size:13px; color:var(--ink-soft); margin-top:6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .note{border-left:3px solid var(--straw-d); padding:8px 14px; background:var(--bg2);
+    border-radius:0 8px 8px 0; margin:14px 0;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; font-size:14px;}
+  .credits{background:var(--bg2); border:1px solid var(--line); border-radius:12px;
+    padding:16px 20px; margin-top:14px; font-size:15px;}
+  .credits b{color:var(--soil-d);}
+  footer{margin-top:40px; font-size:13px; color:var(--ink-soft);
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; text-align:center;}
+  @media(max-width:900px){
+    .wrap{flex-direction:column;}
+    nav{position:static; width:100%; height:auto; flex-basis:auto;}
+    main{padding:0 18px 60px;}
+    .comp-grid,.rule-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <h1>顽固 骡子</h1>
+  <div class="sub">顽固的驴 · 游戏规则（中文版 / 原繁体版转简体）</div>
+  <div class="tag">8 岁以上 &nbsp;|&nbsp; 2&ndash;5 人 &nbsp;|&nbsp; 约 20 分钟</div>
+</header>
+
+<div class="wrap">
+  <nav>
+    <h2>目录</h2>
+    <ol>
+      <li><a href="#intro">简介</a></li>
+      <li><a href="#components">配件</a></li>
+      <li><a href="#setup">准备</a></li>
+      <li><a href="#rules">游戏规则</a></li>
+      <li><a href="#example">示例</a></li>
+      <li><a href="#turnback">抵达终点（掉头）</a></li>
+      <li><a href="#home">回家与出场</a></li>
+      <li><a href="#privilege">第一匹回家者的特权</a></li>
+      <li><a href="#end">游戏结束</a></li>
+      <li><a href="#credits">制作信息</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+  <section id="intro">
+    <h2 class="sec"><span class="num">1</span>简介</h2>
+    <p class="lead">驴子们在荒野上肆意奔跑、乱踢乱跳，任性改变方向，完全不受控制…在这场游戏中，如果牧羊人成功将所有驴子赶回家，那么第一匹回到家的驴子将成为赢家；相反地，如果所有牧羊人都回到家，但仍有驴子留在草原上，那么最后一匹未返家的驴子将赢得游戏！</p>
+    <p class="note">原文节录（繁体）：「驢子們在荒野上肆意奔跑、亂踢亂跳，任性改變方向，完全不受控制…」。正文按原文用字统一采用「<b>驴子</b>」（不译作「骡子」）；颜色名保留中文（红、橘、黄、绿、蓝、紫）。</p>
+  </section>
+
+  <section id="components">
+    <h2 class="sec"><span class="num">2</span>配件</h2>
+    <div class="comp-grid">
+      <div class="comp"><b>1 张荒野图板</b><br>游戏板为荒野赛道</div>
+      <div class="comp"><b>5 匹驴子</b><br>不同颜色棋子</div>
+      <div class="comp"><b>3 名牧羊人</b><br>中立棋子</div>
+      <div class="comp" style="grid-column:1/-1;"><b>3 颗骰子</b><br>每颗骰子的 6 面颜色各不相同（与图板上的驴子、牧羊人 6 种颜色一一对应）</div>
+    </div>
+  </section>
+
+  <section id="setup">
+    <h2 class="sec"><span class="num">3</span>准备</h2>
+    <p>根据玩家人数，使用不同数量的驴子和牧羊人。</p>
+    <table class="setup">
+      <thead>
+        <tr><th>人数</th><th>使用驴子（按颜色）</th><th>使用牧羊人（按颜色）</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>2 人</td><td>红、橘、黄、绿</td><td>蓝、紫</td></tr>
+        <tr><td>3 人</td><td>红、橘、黄</td><td>所有 6 色（红、橘、黄、绿、蓝、紫）</td></tr>
+        <tr><td>4 人</td><td>红、橘、黄、绿</td><td>蓝、紫</td></tr>
+        <tr><td>5 人</td><td>所有 6 色（红、橘、黄、绿、蓝、紫）</td><td>所有 6 色（红、橘、黄、绿、蓝、紫）</td></tr>
+      </tbody>
+    </table>
+    <ul>
+      <li>无论哪种情况，游戏中都会有 <b>6 种不同颜色</b>的驴子与牧羊人参与。</li>
+      <li>将所有棋子放在荒野图板的<b>起点线之前</b>，每位玩家选<b>一匹驴子</b>。</li>
+      <li><b>牧羊人是中立角色</b>，不属于任何玩家。</li>
+      <li><b>2 人局特别说明</b>：每位玩家各选一匹驴子，剩下的两匹驴子也作为中立角色使用。</li>
+    </ul>
+  </section>
+
+  <section id="rules">
+    <h2 class="sec"><span class="num">4</span>游戏规则</h2>
+    <p>由<b>最固执的玩家</b>担任起始玩家。起始玩家掷 3 颗骰子开始游戏，并根据骰子的颜色结果决定移动方向。</p>
+
+    <h3>骰子颜色的结算</h3>
+    <div class="rule-grid">
+      <div class="rule"><div class="big">×1</div><div class="what">某色<b>只出现 1 次</b><br>该色的驴子或牧羊人<b>前进 1 步</b></div></div>
+      <div class="rule"><div class="big">×2</div><div class="what">某色<b>刚好出现 2 次</b><br>该色的驴子或牧羊人<b>后退 1 步</b></div></div>
+      <div class="rule"><div class="big">×3</div><div class="what">三颗骰子<b>显示同一颜色</b><br>该色的驴子或牧羊人<b>前进 3 步</b></div></div>
+    </div>
+
+    <div class="note">
+      <b>重要限制：</b>一旦驴子或牧羊人离开起点线，就<b>不能再使用「后退」</b>的移动方式回到起点线之前。
+    </div>
+
+    <h3>留骰规则</h3>
+    <p>起始玩家完成移动后，轮到<b>左边的玩家</b>。玩家掷出的骰子颜色结果都<b>保留在场上</b>，由下一位玩家选择是否重掷 1 颗、2 颗或全部 3 颗骰子；<b>未选择重掷的骰子颜色将在本回合中继续使用</b>。</p>
+  </section>
+
+  <section id="example">
+    <h2 class="sec"><span class="num">5</span>示例</h2>
+    <div class="ex">
+      <p><span class="label">【示例】</span>上一位玩家掷出 1 个红色和 2 个黄色。现在轮到 <b>Susie</b> 的回合，她决定<b>重掷场上的 2 颗黄色骰子</b>：她掷出 1 个红色和 1 个橙色，加上原本场上的 1 颗红色骰子，最后场上的颜色是 <b>2 个红色和 1 个橙色</b>。</p>
+      <p>所以这回合中，Susie 必须让<b>橙色的驴子前进 1 步</b>，<b>红色的驴子后退 1 步</b>。</p>
+      <p style="margin:6px 0 0;"><b>场上结算示意：</b></p>
+      <p style="margin:4px 0;">
+        <span class="die r">红</span><span class="die r">红</span><span class="die o">橘</span>
+        &nbsp;→
+        <span style="color:var(--orange); font-weight:700;">橘色 ×1</span> = 前进 1 步&nbsp;
+        <span style="color:var(--red); font-weight:700;">红色 ×2</span> = 后退 1 步
+      </p>
+    </div>
+  </section>
+
+  <section id="turnback">
+    <h2 class="sec"><span class="num">6</span>抵达终点（掉头）</h2>
+    <p>接下来的玩家也须选择重新掷 1、2 或全部 3 颗骰子，并重复这样的回合动作，直到某匹驴子或牧羊人<b>抵达图板的边缘（终点）</b>。</p>
+    <p>一旦有人或驴抵达终点，立即将图板上的<b>所有</b>驴子和牧羊人掉头。接下来的回合中，所有驴子和牧羊人都必须<b>朝向起点线方向移动</b>。</p>
+  </section>
+
+  <section id="home">
+    <h2 class="sec"><span class="num">7</span>回家与出场</h2>
+    <p>游戏按原先的方式继续进行；当某匹驴子或牧羊人<b>回到家（返回起点线内）</b>时，将其<b>移出游戏</b>，并按<b>抵达顺序</b>放在图板旁边。这些已回家的驴子或牧羊人在接下来的游戏中将不再被移动。</p>
+  </section>
+
+  <section id="privilege">
+    <h2 class="sec"><span class="num">8</span>第一匹回家者的特权</h2>
+    <p>让<b>第一匹驴子回到家</b>的玩家虽然不能再移动自己的驴子，但<b>可以继续掷骰</b>并移动其他驴子或牧羊人，直到<b>所有牧羊人都回到家</b>为止。</p>
+    <p>后续才让驴子回到家的玩家则<b>不能再掷骰</b>，因为他们已经不可能赢得游戏<b>（两人游戏除外）</b>。</p>
+  </section>
+
+  <section id="end">
+    <h2 class="sec"><span class="num">9</span>游戏结束</h2>
+    <p>当发生以下情况时，游戏<b>立即结束</b>（有可能在回合进行到一半时结束）：</p>
+    <ol>
+      <li><b>A.</b> 如果所有牧羊人都已经回到家，而图板上<b>只剩下一匹驴子</b>，由这匹驴子获胜。<br>
+      <span class="note" style="display:inline-block; margin:6px 0;">〔在两人游戏中，如果最后剩下的是中立驴子，则排除中立驴子后，最后到家的驴子获胜。〕</span></li>
+      <li><b>B.</b> 如果图板上<b>只剩下牧羊人</b>，那么<b>最早回家</b>的驴子获胜。</li>
+    </ol>
+    <figure>
+      <img src="Stubbornmules_Rules_images/page_01.jpg" alt="规则书第 1 页（顽固的驴 / 顽固 骡子 / 横版 4 栏繁体原文）">
+      <figcaption>原文第 1 页（横版 4 栏繁体原文：简介 / 配件 / 准备 / 规则 / 示例 / 抵达终点 / 回家 / 特权 / 结束 / 制作）</figcaption>
+    </figure>
+  </section>
+
+  <section id="credits">
+    <h2 class="sec"><span class="num">10</span>制作信息</h2>
+    <div class="credits">
+      <p><b>游戏设计（设计）：</b>Hartmut Kommerell</p>
+      <p><b>插画（插画）：</b>Haewool Nam、Wanjin Gill</p>
+      <p><b>出版（出版）：</b>Gameology Inc. &nbsp;|&nbsp; playte &nbsp;|&nbsp; <span style="color:var(--soil-d);">www.playte.com</span></p>
+      <p><b>繁体中文翻译：</b>Mimi Leung</p>
+      <p><b>繁体中文校稿：</b>Smoox Chen</p>
+      <p style="margin-top:10px;">ⓒ 2022. Gameology Inc. All rights reserved.</p>
+    </div>
+    <p class="note" style="margin-top:14px;">本规则书的简体化以 Gameology 2022 年繁体版（<b>顽固 骡子 / 頑固驢子</b>）为权威源，译本已取得繁体中文翻译（Mimi Leung 译 / Smoox Chen 校稿）的双语对照素材。简体版正文采用「<b>顽固的驴 / 顽固 骡子</b>」为中文游戏名；专有名词（颜色名、人名、公司名、文件名）保留英文。</p>
+    <footer>
+      — 顽固 骡子 / 顽固的驴 — 中文版规则书 &nbsp;·&nbsp; 简体化自 Gameology 2022 繁体版 —
+    </footer>
+  </section>
+
+  </main>
+</div>
+
+</body>
+</html>

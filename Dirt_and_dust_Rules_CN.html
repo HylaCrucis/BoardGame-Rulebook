@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>泥土与尘埃（Dirt & Dust）— 游戏规则</title>
+<style>
+:root {
+  --sand: #b78a3e;
+  --jeans: #3a5d8f;
+  --dirt: #c25a36;
+  --cream: #f5ecd7;
+  --paper: #fbf5e3;
+  --ink: #2a2014;
+  --rust: #8a4520;
+  --shadow: rgba(194, 90, 54, 0.15);
+  --serif: "Iowan Old Style", "Palatino Linotype", "Source Han Serif SC", "Songti SC", "Noto Serif CJK SC", Georgia, serif;
+  --sans: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--cream);
+  background-image: linear-gradient(135deg, transparent 49%, rgba(184, 138, 62, 0.06) 50%, transparent 51%),
+                    linear-gradient(45deg, transparent 49%, rgba(184, 138, 62, 0.06) 50%, transparent 51%);
+  background-size: 60px 60px;
+  font-family: var(--serif);
+  color: var(--ink);
+  line-height: 1.75;
+  font-size: 15px;
+  padding: 0 0 80px;
+}
+header {
+  background: linear-gradient(135deg, var(--dirt) 0%, #d97648 40%, var(--sand) 100%);
+  color: var(--cream);
+  padding: 60px 36px;
+  text-align: center;
+  border-bottom: 8px double var(--dirt);
+  box-shadow: 0 6px 0 var(--shadow);
+}
+header h1 {
+  margin: 0;
+  font-size: 60px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-shadow: 2px 2px 0 rgba(0,0,0,0.3);
+}
+header h2 {
+  margin: 14px 0 0;
+  font-size: 22px;
+  font-weight: 400;
+  opacity: 0.92;
+  letter-spacing: 0.1em;
+  font-style: italic;
+}
+header .meta {
+  margin-top: 24px;
+  font-size: 14px;
+  opacity: 0.9;
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+header .meta span {
+  background: rgba(255,255,255,0.15);
+  padding: 6px 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.35);
+}
+.container {
+  max-width: 1080px;
+  margin: 40px auto;
+  background: var(--paper);
+  padding: 0 0 80px;
+  box-shadow: 0 8px 24px var(--shadow);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px solid var(--sand);
+}
+nav.toc {
+  background: linear-gradient(180deg, var(--paper) 0%, #ecdfb8 100%);
+  padding: 24px 36px;
+  border-bottom: 2px solid var(--sand);
+}
+nav.toc h3 {
+  margin: 0 0 12px;
+  font-size: 16px;
+  color: var(--rust);
+  letter-spacing: 0.15em;
+  border-left: 4px solid var(--dirt);
+  padding-left: 10px;
+}
+nav.toc ol {
+  margin: 0;
+  padding-left: 22px;
+  columns: 2;
+  font-size: 14px;
+}
+nav.toc ol li { margin: 4px 0; }
+nav.toc ol li a {
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--sand);
+}
+nav.toc ol li a:hover { color: var(--dirt); border-bottom-color: var(--dirt); }
+section {
+  padding: 50px 36px 30px;
+  border-bottom: 1px dashed var(--sand);
+  position: relative;
+}
+section:last-child { border-bottom: none; }
+.sec {
+  margin: 0 0 24px;
+  font-size: 28px;
+  color: var(--rust);
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.sec .num {
+  background: var(--dirt);
+  color: var(--cream);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 700;
+  flex-shrink: 0;
+  border: 2px solid var(--rust);
+}
+h3 {
+  margin: 28px 0 12px;
+  color: var(--rust);
+  font-size: 19px;
+  letter-spacing: 0.05em;
+  border-left: 4px solid var(--dirt);
+  padding-left: 12px;
+}
+h4 {
+  margin: 18px 0 8px;
+  color: var(--rust);
+  font-size: 16px;
+}
+p { margin: 10px 0; }
+strong { color: var(--dirt); font-weight: 700; }
+em { color: var(--jeans); font-style: italic; }
+.tip {
+  background: #fff3d8;
+  border-left: 4px solid var(--sand);
+  padding: 14px 18px;
+  margin: 14px 0;
+  font-size: 14px;
+  border-radius: 0 8px 8px 0;
+  border: 1px dashed var(--sand);
+}
+.tip b { color: var(--rust); font-style: italic; }
+.callout {
+  background: #f9e8d4;
+  border: 2px solid var(--dirt);
+  border-radius: 8px;
+  padding: 16px 22px;
+  margin: 16px 0;
+  border-left: 6px solid var(--rust);
+}
+.callout b { color: var(--rust); }
+.callout.adv { background: #ecf0f8; border-color: var(--jeans); }
+.callout.adv b { color: var(--jeans); }
+ul, ol { padding-left: 24px; margin: 10px 0; }
+li { margin: 4px 0; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  background: var(--cream);
+}
+table th, table td {
+  border: 1px solid var(--sand);
+  padding: 8px 12px;
+  text-align: center;
+  font-size: 14px;
+}
+table th {
+  background: var(--rust);
+  color: var(--cream);
+  font-weight: 700;
+}
+table td { background: var(--paper); }
+.ex {
+  background: #f7e7c5;
+  border: 1px dashed var(--sand);
+  border-radius: 8px;
+  padding: 14px 20px;
+  margin: 14px 0;
+  font-size: 14px;
+}
+.ex .label { font-weight: 700; color: var(--rust); }
+.figure {
+  margin: 20px 0;
+  text-align: center;
+}
+.figure img {
+  max-width: 100%;
+  border: 4px solid var(--cream);
+  box-shadow: 0 4px 12px var(--shadow);
+  background: #ecdfb8;
+}
+.figure figcaption {
+  font-size: 13px;
+  color: #8a4520;
+  margin-top: 8px;
+  font-style: italic;
+}
+.three-col {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin: 16px 0;
+}
+@media (max-width: 720px) { .three-col { grid-template-columns: repeat(2, 1fr); } }
+.comp-card {
+  background: var(--cream);
+  border: 2px solid var(--sand);
+  border-radius: 8px;
+  padding: 14px;
+  text-align: center;
+}
+.comp-card .num { font-size: 22px; font-weight: 700; color: var(--dirt); }
+.comp-card .name { color: var(--rust); margin-top: 6px; font-weight: 700; font-size: 13px; }
+.phase-flow {
+  background: #fff3d8;
+  padding: 18px 22px;
+  border-radius: 8px;
+  margin: 14px 0;
+  border: 1px solid var(--sand);
+}
+.phase-flow b { color: var(--rust); }
+.flow-chart {
+  background: var(--paper);
+  padding: 24px;
+  border-radius: 12px;
+  margin: 16px 0;
+  border: 2px solid var(--sand);
+}
+.flow-step {
+  background: var(--cream);
+  border: 2px solid var(--sand);
+  border-radius: 6px;
+  padding: 10px 16px;
+  margin: 8px 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.flow-step .n {
+  background: var(--dirt);
+  color: var(--cream);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.flow-arrow {
+  text-align: center;
+  color: var(--rust);
+  font-size: 20px;
+  margin: 4px 0;
+}
+.action-list {
+  background: #f7e7c5;
+  border: 2px solid var(--sand);
+  border-radius: 8px;
+  padding: 18px 22px;
+  margin: 14px 0;
+}
+.action-list b { color: var(--rust); }
+.action-list ul { margin: 8px 0; }
+.term-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin: 16px 0;
+}
+@media (max-width: 720px) { .term-grid { grid-template-columns: 1fr; } }
+.term {
+  background: var(--cream);
+  border: 2px solid var(--sand);
+  border-radius: 8px;
+  padding: 12px 16px;
+}
+.term h4 {
+  margin: 0 0 6px;
+  color: var(--rust);
+  font-size: 15px;
+  border-left: 3px solid var(--dirt);
+  padding-left: 8px;
+}
+.term p { margin: 0; font-size: 13px; }
+.credits {
+  background: linear-gradient(180deg, var(--paper) 0%, #ecdfb8 100%);
+  padding: 30px 36px;
+  border-top: 4px solid var(--sand);
+}
+.credits h3 { color: var(--rust); border-left-color: var(--sand); }
+.intro {
+  background: linear-gradient(135deg, var(--rust) 0%, var(--dirt) 100%);
+  color: var(--cream);
+  padding: 40px 36px;
+  text-align: center;
+}
+.intro h2 { margin: 0 0 16px; font-size: 28px; color: var(--sand); }
+.intro p { margin: 12px auto; max-width: 720px; font-size: 16px; opacity: 0.95; }
+</style>
+</head>
+<body>
+
+<div class="intro">
+  <h2>泥土与尘埃</h2>
+  <p><strong>Dirt & Dust</strong> 把你扔进刺激的拉力赛车世界——策略与速度的交汇。组建一支顶级的支援团队，把赛车调校到完美，并做出分秒必争的决策来征服挑战性的赛道。每一次选择都至关重要，你将突破极限，平衡精准与风险以争取胜利。你是否具备将对手抛在身后、赢得终极荣耀的技巧、胆识与决心？比赛即将开始——让肾上腺素飙升！</p>
+</div>
+
+<header>
+  <h1>泥土与尘埃</h1>
+  <h2>Dirt & Dust</h2>
+  <div class="meta">
+    <span>2-4 人</span>
+    <span>10 岁以上</span>
+    <span>60-90 分钟</span>
+  </div>
+</header>
+
+  <div class="figure" style="margin:24px auto 0;max-width:460px;">
+    <img src="Dirt_and_dust_Rules_images/cover.jpg" alt="《泥土与尘埃》游戏封面">
+    <figcaption>《泥土与尘埃 / Dirt &amp; Dust》封面</figcaption>
+  </div>
+
+<nav class="toc">
+  <h3>目录</h3>
+  <ol>
+    <li><a href="#components">配件清单</a></li>
+    <li><a href="#overview">游戏概览</a></li>
+    <li><a href="#goal">游戏目标</a></li>
+    <li><a href="#player-comp">玩家组件</a></li>
+    <li><a href="#setup">游戏设置</a></li>
+    <li><a href="#flow">游戏流程</a></li>
+    <li><a href="#dice-roll">掷骰阶段</a></li>
+    <li><a href="#resources">资源与骰子</a></li>
+    <li><a href="#driving">驾驶阶段</a></li>
+    <li><a href="#speed">结算速度点</a></li>
+    <li><a href="#hazard">危险骰与伤害</a></li>
+    <li><a href="#eval">赛道评估阶段</a></li>
+    <li><a href="#preparation">准备阶段</a></li>
+    <li><a href="#end-game">游戏结束</a></li>
+    <li><a href="#difficulty">难度调整</a></li>
+    <li><a href="#trial">试跑赛道模式</a></li>
+    <li><a href="#solo">单人模式</a></li>
+    <li><a href="#example">轮次示例</a></li>
+    <li><a href="#perm-damage">永久伤害标记</a></li>
+    <li><a href="#icons">游戏图标</a></li>
+    <li><a href="#credits">制作信息</a></li>
+  </ol>
+</nav>
+
+<div class="container">
+
+  <section id="components">
+    <h2 class="sec"><span class="num">1</span>配件清单</h2>
+
+    <h3>共用组件</h3>
+    <div class="three-col">
+      <div class="comp-card"><div class="num">1</div><div class="name">赛道板块</div></div>
+      <div class="comp-card"><div class="num">5</div><div class="name">赛道卡组（每组 10 张）</div></div>
+      <div class="comp-card"><div class="num">1</div><div class="name">人气骰</div></div>
+      <div class="comp-card"><div class="num">10</div><div class="name">红色加速骰</div></div>
+      <div class="comp-card"><div class="num">20</div><div class="name">被动效果标记</div></div>
+      <div class="comp-card"><div class="num">1</div><div class="name">试跑赛道卡组（5 张）</div></div>
+      <div class="comp-card"><div class="num">1</div><div class="name">幽灵车手卡（单人模式）</div></div>
+      <div class="comp-card"><div class="num">9</div><div class="name">基础游戏赛车团队卡组 A（每组 8 张）</div></div>
+      <div class="comp-card"><div class="num">9</div><div class="name">扩展游戏赛车团队卡组 B（每组 8 张）</div></div>
+    </div>
+
+    <h3>板块说明</h3>
+    <div class="term-grid">
+      <div class="term">
+        <h4>玩家板块</h4>
+        <p>每位玩家有一块板块，用于追踪赛车位置、所受损伤以及持有的资源量。所有玩家板块完全相同。板上分为若干区域：灰区（计速度分、加速、减速、伤害轨道、牵引力、扳手、危险骰槽、永久伤害标记槽、位置区、抽牌堆、人气骰槽、赛道卡组、弃牌堆、人气轨道、速度分轨道、赛道卡槽、激活卡槽）；黄区（计速度分）；红区（计人气分）；以及骰子数值、玩家骰槽等字段。</p>
+      </div>
+      <div class="term">
+        <h4>赛车团队板块</h4>
+        <p>每位玩家有一块赛车团队板块，用于存放抽牌堆、激活的卡与弃牌堆。这也是放置玩家骰的地方，是玩家的主要操作区。</p>
+      </div>
+      <div class="term">
+        <h4>赛道板块</h4>
+        <p>赛道板块用于追踪速度分与人气分。它还提供空间放置赛道卡组，并展示 6 张面朝上的赛道卡。</p>
+      </div>
+    </div>
+
+    <figure class="figure">
+      <img src="Dirt_and_dust_Rules_images/page_6.jpg" alt="规则书第 6 页（配件说明）">
+      <figcaption>配件说明（原版第 6 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="overview">
+    <h2 class="sec"><span class="num">2</span>游戏概览</h2>
+    <p><strong>泥土与尘埃</strong>是一款以拉力赛为主题的卡牌游戏，玩家通过获取卡牌来组建终极支援团队并将赛车调到完美。游戏以<b>回合</b>进行，每回合中玩家<b>同时</b>完成 <b>4 个阶段</b>。玩家购买卡牌、用<b>骰子</b>激活卡牌效果、控制赛车的<b>速度</b>，平衡加速与减速以最大化卡牌效果收益。他们谨慎选择<b>车道</b>，赚取<b>速度分</b>和粉丝<b>人气分</b>。玩家铺设<b>赛道</b>来收集速度分，必要时修理赛车，并通过大胆操控来推动冲刺，给观众留下深刻印象。</p>
+  </section>
+
+  <section id="goal">
+    <h2 class="sec"><span class="num">3</span>游戏目标</h2>
+    <p>游戏目标是尽可能获得最多的<b>速度分</b>。速度分最多的玩家获胜。</p>
+  </section>
+
+  <section id="player-comp">
+    <h2 class="sec"><span class="num">4</span>玩家组件</h2>
+    <div class="three-col">
+      <div class="comp-card"><div class="num">4</div><div class="name">赛车团队板块</div></div>
+      <div class="comp-card"><div class="num">4</div><div class="name">玩家板块</div></div>
+      <div class="comp-card"><div class="num">4×7</div><div class="name">永久伤害标记</div></div>
+      <div class="comp-card"><div class="num">4×3</div><div class="name">玩家骰</div></div>
+      <div class="comp-card"><div class="num">4×3</div><div class="name">黑色危险骰</div></div>
+      <div class="comp-card"><div class="num">4×10</div><div class="name">导航标记</div></div>
+      <div class="comp-card"><div class="num">4</div><div class="name">玩家辅助卡</div></div>
+      <div class="comp-card"><div class="num">4</div><div class="name">车手卡组（每组 5 张）</div></div>
+      <div class="comp-card"><div class="num">4</div><div class="name">起始赛车团队卡组 S（每组 5 张）</div></div>
+      <div class="comp-card"><div class="num">4</div><div class="name">赛车模型</div></div>
+      <div class="comp-card"><div class="num">4</div><div class="name">速度分标记</div></div>
+      <div class="comp-card"><div class="num">4</div><div class="name">伤害标记</div></div>
+      <div class="comp-card"><div class="num">4</div><div class="name">人气分标记</div></div>
+    </div>
+
+    <h3>车手</h3>
+    <div class="term-grid">
+      <div class="term"><h4>Harry Jordan</h4><p>被动效果：支付 2 个人气分，将所有未使用的骰子设为 6。然后将此卡弃入弃牌堆。</p></div>
+      <div class="term"><h4>Aiko Yamamoto</h4><p>被动效果：将你一次掷出的所有危险骰视为空白。然后将此卡弃入弃牌堆。</p></div>
+      <div class="term"><h4>Sofía Fernández</h4><p>被动效果：选择 1 张你已移除的卡，打到你的赛车团队板块。获得 1 个人气分。</p></div>
+      <div class="term"><h4>Ferenc Kovács</h4><p>被动效果：免费获得 1 张花费 1 或 2 扳手的卡，放到你的抽牌堆顶。</p></div>
+    </div>
+
+    <h3>卡牌类型</h3>
+    <div class="term-grid">
+      <div class="term">
+        <h4>车手卡</h4>
+        <p>每位玩家开局牌组中有 5 张车手卡。这些卡提供玩家可执行的独特效果。车手卡拥有<b>黄色标题底色</b>，所有车手各不相同。</p>
+      </div>
+      <div class="term">
+        <h4>赛车团队卡</h4>
+        <p>赛车团队卡放在由 9 摞组成的共享展示区，玩家在游戏中进行中可从中购买。这些卡提供多样效果，部分还会在游戏结束时贡献速度分。赛车团队卡分两种：标 <b>A</b> 符号的<b>基础游戏</b>卡，与标 <b>B</b> 符号的<b>扩展游戏</b>卡，两者均以青绿色标题底色便于辨识。</p>
+      </div>
+      <div class="term">
+        <h4>赛道卡</h4>
+        <p>共有 5 副赛道卡，每副 10 张。赛道卡代表赛车道，参与赛道的玩家有机会使用特殊效果，或在驾车转弯时被强制承受惩罚。参与赛道可带来速度分。</p>
+      </div>
+      <div class="term">
+        <h4>起始赛车团队卡</h4>
+        <p>每位玩家开局拥有 5 张起始卡，提供可施放的基础效果。这些卡拥有<b>灰色标题底色</b>，右下角标 <b>S</b> 符号，所有起始卡组完全相同。</p>
+      </div>
+    </div>
+
+    <figure class="figure">
+      <img src="Dirt_and_dust_Rules_images/page_2.jpg" alt="规则书第 2 页（玩家板块示例）">
+      <figcaption>玩家板块示例（原版第 2 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="setup">
+    <h2 class="sec"><span class="num">5</span>游戏设置</h2>
+    <ol>
+      <li>把<b>赛道板块</b>放在桌面中央，所有玩家都能轻松看到。选择其中一条赛道。<b>第一次游戏</b>建议用<b>试跑赛道</b>——这条较短较易的赛道能帮你熟悉主要机制（试跑赛道设置见第 14 页）。之后你可以随机或协商选择赛道。不过，<b>海营赛道</b>是开启你拉力生涯的好起点。</li>
+      <li>每条标准赛道正好由 <b>10 张赛道卡</b>组成，面朝下按降序排列成牌组：右下角标「10」的卡在牌组底部，其上是「9」，依此类推。把赛道卡组放在赛道板块的高亮空格上。然后翻开顶 <b>6 张</b>（逐张），面朝上放在赛道板块对应的空格上，从最远位（卡「1」）开始，到牌组旁的空格（卡「6」）结束。</li>
+      <li>把每位玩家的<b>速度分标记</b>放在速度分轨道上，<b>人气标记</b>放在人气轨道上。</li>
+      <li>创建<b>赛车团队卡展示区</b>：由 9 摞组成，每摞含同一张卡的 8 份副本。把卡面朝上放在桌上，所有玩家都能拿取，并按升序排列各摞。第一次游戏使用所有标 <b>A</b> 的卡（基础游戏赛车团队卡组）。之后的游戏，你可以用更进阶的 <b>B 组</b>（扩展游戏赛车团队卡组）替换 A 组，或只把 A 组中部分卡与 B 组交换。无论如何，供应区必须始终正好有 <b>9 摞卡</b>（每摞 8 张），编号 1–9（编号不可重复）。</li>
+      <li>把<b>红色加速骰</b>放在所有玩家都够得着的地方。把<b>人气骰</b>放在赛道板块上。</li>
+      <li>每位玩家拿取一个<b>赛车团队板块</b>，并在其上方放一个<b>玩家板块</b>。把<b>赛车模型</b>放在玩家板块的<b>位置区</b>——即板块顶排标记为 4 的中央格。</li>
+      <li>在玩家板块上按升序（<b>1–7</b>）放<b>永久伤害标记</b>，黑白带朝上，最后一格留空。在永久伤害标记下方放 <b>3 颗黑色危险骰</b>（朝向任意）。</li>
+      <li>在危险骰下方可找到<b>伤害轨道</b>。把伤害标记放在该轨道最左格（标 0 处）。</li>
+      <li>把<b>扳手</b>和<b>牵引力</b>刻度盘调到 0。</li>
+      <li>每位玩家把<b>导航标记</b>和<b>被动效果标记</b>放在玩家板块附近。为每位玩家准备 3 颗同色<b>玩家骰</b>的骰池。</li>
+      <li>把<b>玩家辅助卡</b>放在游戏区内，以备查阅。</li>
+      <li>每位玩家用<b>起始赛车团队卡组</b>（右下角标字母 S，包含：2× 准备 1 S、1× 上路 2 S、1× 拧紧螺丝 3 S、1× 引擎调校 4 S）与自己选择的<b>车手卡组</b>（5 张）洗成起始抽牌堆。第一次游戏车手可随机分配；之后的游戏你可自选喜欢的车手——每位车手鼓励一种独特玩法，带来全新体验。</li>
+      <li>洗混你的牌组，面朝下放在赛车团队板块左侧，抽 <b>5 张</b>。游戏设置完成。你能感受到引擎原始动力的轰鸣，迫不及待要冲上赛道了吗？</li>
+    </ol>
+
+    <figure class="figure">
+      <img src="Dirt_and_dust_Rules_images/page_4.jpg" alt="规则书第 4 页（游戏设置）">
+      <figcaption>游戏设置（原版第 4 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="flow">
+    <h2 class="sec"><span class="num">6</span>游戏流程</h2>
+    <p>游戏进行若干<b>回合</b>，回合数由<b>赛道卡组</b>中的卡牌数量决定。每回合包含 4 个短阶段，玩家可以<b>同时</b>执行各阶段。当所有玩家完成某一阶段后，才进入下一阶段——如此循环，直到最后一张赛道卡离开赛道板块，触发游戏结束。这 4 个阶段依次是：</p>
+    <div class="flow-chart">
+      <div class="flow-step"><span class="n">1</span><span><b>掷骰阶段</b></span></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step"><span class="n">2</span><span><b>驾驶阶段</b>（任意顺序、无重复限制）</span></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step"><span class="n">3</span><span><b>赛道评估阶段</b></span></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step"><span class="n">4</span><span><b>准备阶段</b></span></div>
+    </div>
+  </section>
+
+  <section id="dice-roll">
+    <h2 class="sec"><span class="num">7</span>掷骰阶段</h2>
+    <ol>
+      <li>首先，<b>人气分最高</b>的玩家拿取<b>人气骰</b>。若两名或以上玩家人气分相同，则无人拿取人气骰。</li>
+      <li>所有玩家掷自己<b>个人骰池</b>中的骰子。骰池始终包含 3 颗<b>玩家骰</b>、之前各轮获得的任意<b>黑色危险骰</b>，以及<b>人气骰</b>（仅人气分最高的玩家可用）。</li>
+      <li>若你的骰池中有<b>黑色危险骰</b>，必须在掷出后<b>立即结算</b>其骰子结果（见第 12 页「危险与伤害」）。</li>
+      <li>将剩余骰子按掷出的点数分配到<b>赛车团队板块</b>上对应的数字格。板块上可以存在多颗同点数的骰子。这些骰子现在成为<b>激活骰子</b>，可供玩家在下一阶段结算激活的卡。</li>
+    </ol>
+    <div class="callout">
+      <b>提示：</b>危险骰有 2 种符号：<b>撞车</b> 与 <b>人气</b>。每个<b>撞车</b>符号要把伤害标记在伤害轨道上右移 1 格；每个<b>人气</b>符号把人气分标记在人气轨道上前进 1 格。
+    </div>
+
+
+    <figure class="figure">
+      <img src="Dirt_and_dust_Rules_images/page_8.jpg" alt="规则书第 8 页（掷骰与游戏流程示例）">
+      <figcaption>掷骰与游戏流程示例（原版第 8 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="resources">
+    <h2 class="sec">资源与骰子</h2>
+    <p>在《泥土与尘埃》中，你将管理<b>两种基本资源</b>与<b>一种额外资源</b>。当玩家获得扳手或牵引力时，在玩家板块的扳手或牵引力刻度盘上记录。玩家任意时刻最多持有 <b>10 点扳手</b>与 <b>10 点牵引力</b>。两种资源都会<b>跨轮保留</b>，不必在获得的当轮用完。</p>
+    <div class="term-grid">
+      <div class="term">
+        <h4>扳手</h4>
+        <p>代表支援团队的技艺，包括调校赛车、调整悬挂、选配与充气轮胎、改装差速器等。游戏中用于<b>购买新卡</b>、触发各种效果，以及<b>操作骰子</b>。</p>
+      </div>
+      <div class="term">
+        <h4>牵引力</h4>
+        <p>代表领航员解读试驾笔记、与计时员协作、精准引导车手顺畅通过每一赛段。用于<b>铺设赛道</b>（车手与领航员的通畅沟通保障无缝驾驶），也可在<b>减速时</b>调整赛车位置。</p>
+      </div>
+      <div class="term">
+        <h4>人气</h4>
+        <p>观众青睐构成的额外资源。获得人气分时，在赛道板块的人气轨道上相应前进。可用于支付某些卡牌效果。掷骰阶段人气分最高的玩家获得特殊的人气骰加入骰池。玩家最多可拥有 <b>15 点人气分</b>。</p>
+      </div>
+      <div class="term">
+        <h4>加速骰</h4>
+        <p>当你获得一颗红色加速骰，立即掷出并作为<b>玩家骰</b>使用。仅可用 1 轮，须在准备阶段归还共用供应区。</p>
+      </div>
+      <div class="term">
+        <h4>人气骰</h4>
+        <p>在所有方面视为<b>玩家骰</b>，但只有 1 和 2 两种值，绝不可改成 3 或更高。空白面表示本回合该玩家不结算此骰。重要：掷出人气骰后，你立即扣减等于掷出值的人气分。</p>
+      </div>
+    </div>
+    <div class="callout adv">
+      <b>黄金法则：</b>卡牌效果优先于本规则书所列规则。若某张卡与游戏中的任何规则冲突，其效果仍须完整执行。
+    </div>
+    <p>注：玩家可能掷出与之前各轮卡牌已占格相对应的骰子值。此时玩家可再次结算那些卡，或执行特殊动作来调整骰子数值。</p>
+  </section>
+
+  <section id="driving">
+    <h2 class="sec"><span class="num">8</span>驾驶阶段</h2>
+    <p>在第二阶段，玩家可在若干动作间自由抉择，这些动作是顺畅驾驶的要素。玩家可<b>同时</b>执行这些动作，在本阶段任何时刻、以任意顺序、无次数限制地进行。这些动作是：</p>
+    <div class="three-col">
+      <div class="action-card">① 打出一张卡</div>
+      <div class="action-card">② 购买新赛车团队卡</div>
+      <div class="action-card">③ 结算激活的卡</div>
+      <div class="action-card">④ 铺设赛道</div>
+      <div class="action-card">⑤ 执行特殊动作</div>
+    </div>
+
+    <h3>打出一张卡</h3>
+    <p>玩家可从手牌中将一张卡放到<b>赛车团队板块</b>的任意空位。一旦放上，该卡立即被视为<b>激活</b>，无论玩家是否结算其效果。该卡一直保持激活，直到离开赛车团队板块并进入弃牌堆。打出卡<b>不消耗任何资源</b>。只要手牌还有卡、板块还有空位，此动作可重复执行。</p>
+
+    <h3>购买新赛车团队卡</h3>
+    <p>玩家可在驾驶阶段任何时刻购买赛车团队卡。展示区中的卡左上角始终标明其成本。玩家花费所需的<b>扳手</b>数量，将购得的卡<b>面朝上</b>放在自己的弃牌堆。可以购买同一张卡的多个副本。若展示区中某类卡已售罄，则不能再购买。</p>
+    <p>若多名玩家都想购买某副卡中最后一张，<b>人气分较高者</b>优先；若人气分相同，则<b>速度分较低者</b>优先；若仍相同，则这些玩家本回合均不可购买该卡。</p>
+
+    <h3>结算激活的卡</h3>
+    <p>在本阶段任何时刻——即便在打出其他卡之间——只要某张激活的卡上方放有骰子，玩家即可结算它。结算时，玩家把放在所选卡正上方的骰子，从赛车团队板块上方区域移到板块下方，然后<b>以任意顺序</b>结算卡上列出的效果。卡上所有效果必须<b>一次性</b>结算完毕，不可被其他动作打断。</p>
+    <p>赛车团队板块上可以存在多颗同点数的骰子，这允许玩家<b>多次结算同一张卡</b>。一张卡上的所有效果须完整结算后，玩家才能把另一颗骰子从上方区域移到下方区域、再次激活该卡。所有卡牌效果都是<b>可选的</b>（标有声的例外），玩家可以选择不结算；但若要使用某卡上的效果，必须<b>完整结算</b>。</p>
+
+    <h3>铺设赛道</h3>
+    <p>赛道板块上的每张赛道卡，左上角标明其<b>牵引力</b>成本。玩家花费所需的牵引力，将自己的<b>导航标记</b>放在所选赛道卡上。每位玩家在每张赛道卡上<b>至多放 1 个导航标记</b>（除非特定卡另有说明）。玩家可以按任意顺序铺设赛道；一旦在某张赛道卡上放了导航标记，就必须<b>自上而下逐条</b>结算其效果。赛道卡包含调整玩家板块上赛车位置的提示及其他效果。</p>
+    <p>把导航标记放在赛道卡上所需牵引力，等于该卡上的值（最左格），减去 1（每已放在该卡上的导航标记）。你的赛车按赛道卡上的数字相应移动（左 / 右）。</p>
+
+    <h3>执行特殊动作</h3>
+    <p>常见的特殊动作包括：花费牵引力调整赛车位置（含定中心）、花费扳手调整骰子数值、触发被动效果、主动拿取危险骰；此外也可拿取红色加速骰（详见资源与骰子一节）。</p>
+    <h4>调整位置</h4>
+    <p>若你的赛车正在<b>减速</b>（即位于下排），你可花费 1 点<b>牵引力</b>将其向左或右调整 1 格。可花费多点牵引力进行多次移动，但不能用牵引力在<b>上排与下排之间</b>移动。若你的赛车正在<b>加速</b>（位于上排），则无法花费牵引力调整位置——那种速度下根本没有时间做精细操作。你也可将赛车<b>定中心</b>（移到位置区前排标记为 4 的中央位置）。</p>
+    <h4>调整骰子数值</h4>
+    <p>花费 1 点<b>扳手</b>，可在驾驶阶段将一颗骰的数值上调或下调 1。只要有足够扳手，可重复进行。但无法仅花 1 点扳手就把值 1 直接改成 6、或值 6 直接改成 1——若确实需要，须花费 5 点扳手。</p>
+    <h4>结算被动效果</h4>
+    <p>被动效果由黄底黄盔图标标示。只要卡处于激活状态（即在赛车团队板块上），每回合可<b>自由触发一次</b>，即便卡上方没有骰子。这些效果在同一回合内绝不可多次触发，且骰子对其无影响。为记录本回合已用过的被动效果，触发后在对应卡上放一个<b>被动效果标记</b>。</p>
+    <h4>拿取危险骰</h4>
+    <p>在驾驶阶段任何时刻，你可主动从自己的供应区<b>拿取一颗危险骰</b>，掷出并立即结算其效果，然后将该骰加入你的骰池供后续各轮使用，直到通过某个游戏效果修理、从而返回玩家板块上的供应区。这代表把赛车推向极限。一旦主动拿取危险骰，你立即获得 <b>2 点牵引力</b>。只要供应区还有危险骰，此动作可重复。注意：若你的骰池已满 3 颗危险骰，则无法执行此特殊动作。</p>
+
+    <h3>卡牌效果类型</h3>
+    <p>所有效果均为可选，除非标有感叹号——此类必须结算。卡牌效果共有 6 类：无条件效果、基于赛车位置的条件效果、基于赛车所在颜色区域的条件效果、基于特定骰子或骰上特定值的条件效果，以及被动效果。所有卡牌右侧的效果取决于赛车在玩家板块上的位置：<b>上排</b>仅在赛车<b>加速</b>（位于位置区上排）时结算；<b>下排</b>仅在赛车<b>减速</b>（位于位置区下排）时结算。某些效果需要特定骰子（如红色加速骰）或特定数值才能结算；若效果显示一个值为 5 的骰子，则只有显示该值的骰子能结算它。卡牌效果也可能指向玩家板块上特定颜色标记的区域。完整图标清单见本规则书末尾。</p>
+
+    <figure class="figure">
+      <img src="Dirt_and_dust_Rules_images/page_11.jpg" alt="规则书第 11 页（导航标记与铺设赛道示例）">
+      <figcaption>驾驶阶段示例：导航标记与铺设赛道（原版第 11 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="speed">
+    <h2 class="sec"><span class="num">9</span>结算速度点</h2>
+    <p>每个<b>激活的骰子</b>在骰池中计 1 速度点。被翻面的卡不计速度点。</p>
+    <div class="ex">
+      <p><span class="label">【示例】</span>蓝色玩家在最近一轮有 41 速度分。然后他从卡牌中拿到 4 速度分。因为他骰池里有 2 颗危险骰，所以失去 2 速度分。最后他在人气轨道上以第二名的位置获得 1 速度分。蓝色玩家的最终分数是 <b>44 速度分</b>。</p>
+    </div>
+
+
+    <figure class="figure">
+      <img src="Dirt_and_dust_Rules_images/page_13.jpg" alt="规则书第 13 页（速度点结算示例）">
+      <figcaption>速度点结算示例（原版第 13 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="hazard">
+    <h2 class="sec"><span class="num">10</span>危险骰与伤害</h2>
+    <p>危险骰有 2 种符号：<b>撞车</b> 与 <b>人气</b>。</p>
+    <p>玩家在游戏中可能遭受危险并造成赛车损伤，最常见的情形包括：赛道卡效果、对赛车的自愿施压、偏离赛道，或冒险操作。当规则要求玩家遭受危险时，玩家从自己玩家板块供应区拿取一颗<b>黑色危险骰</b>，立即掷出并结算其效果。之后该骰加入骰池，并在后续各轮与其他骰子一起掷出，直到通过游戏效果修理。危险骰<b>不用于结算卡牌</b>。危险骰总体上代表赛车承受的潜在损耗，影响车况；玩家板块上的伤害轨道则倒计着赛车走向不可逆摧毁的时间。</p>
+    <p><b>最多承受 3 次危险：</b>玩家的骰池中最多可有 <b>3 颗危险骰</b>。若被要求拿取第 4 颗危险骰，则改为掷出并结算骰池中已有的 1 颗危险骰。</p>
+    <p>对于每个<b>撞车</b>符号，你必须把伤害标记在伤害轨道上右移 1 格。一旦标记到达轨道终点，立即翻开最左侧的<b>未激活永久伤害标记</b>，并把伤害标记放回伤害轨道的起点。从现在开始，你将受到第 18-19 页永久伤害表的描述影响。如果你还有撞车要承受，继续将伤害标记从起点重新移动。</p>
+    <div class="callout">
+      <b>重要：</b>如果你必须翻开第 <b>8</b> 个永久伤害标记，你的赛车将被彻底摧毁，你被<b>移出游戏</b>。你失去所有速度分和人气分！
+    </div>
+    <p>危险骰可在游戏中通过适当效果<b>修理</b>（参见第 20 页游戏图标），但永久伤害会一直跟着你到游戏结束，并显著影响赛车的能力。</p>
+    <p>每个<b>人气</b>符号将你的人气分标记在人气轨道上前移 1 格。</p>
+    <div class="ex">
+      <p><span class="label">【示例】</span>你的伤害标记在伤害轨道的第 2 格。你承受了 4 次撞车。经过 3 次移动后，你的标记到达轨道终点，必须立即翻开最左侧的永久伤害标记并把伤害标记放回伤害轨道起点（标记为 0）。然后再前进 1 格。</p>
+    </div>
+
+
+    <figure class="figure">
+      <img src="Dirt_and_dust_Rules_images/page_15.jpg" alt="规则书第 15 页（危险骰与伤害示例）">
+      <figcaption>危险骰与伤害示例（原版第 15 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="eval">
+    <h2 class="sec"><span class="num">11</span>赛道评估阶段</h2>
+    <p>在本阶段开始时，将赛道板块上的所有赛道卡<b>下移 1 格</b>。移出赛道板块的赛道卡<b>立即结算</b>。</p>
+    <p>结算赛道卡时，玩家检查自己是否在该卡上有导航标记。若有，则根据自己玩家板块上<b>赛车模型下方空格</b>所指示的数字，立即获得相应数量的速度分。</p>
+    <p>若玩家的赛车位于玩家板块的<b>红区</b>，则获得的是人气分而非速度分（数量如板块所示）。弯道贴得够紧，观众必定沸腾！</p>
+    <div class="callout">
+      <b>重要：</b>速度分或人气分基于<b>赛道卡离开赛道板块时</b>赛车的当前位置发放，而非玩家把导航标记放上该卡时所在的位置。
+    </div>
+    <p>如果玩家没有在赛道卡上放导航标记，他就没有正确规划该路段，<b>无奖励</b>。把所有导航标记从该赛道卡上返回供应区，把该卡放到赛道卡弃牌堆中。从牌组顶翻开一张新赛道卡放入赛道板块顶部的空格。</p>
+  </section>
+
+  <section id="preparation">
+    <h2 class="sec"><span class="num">12</span>准备阶段</h2>
+    <p>在本阶段开始时，所有玩家把赛车团队板块上的卡右移 1 格。如果卡从最右格移出，玩家把它面朝上放在弃牌堆。玩家把所有<b>被动效果标记</b>返回供应区。</p>
+    <p>人气骰和所有加速骰返回共用供应区。所有其他骰子返回玩家的个人骰池，准备下一轮掷骰。</p>
+    <p>每位玩家可以从手牌中弃掉任意张牌，然后补抽到手牌 5 张。如果抽牌堆空了，需要先洗混弃牌堆作为新的抽牌堆。</p>
+  </section>
+
+  <section id="end-game">
+    <h2 class="sec"><span class="num">13</span>游戏结束</h2>
+    <p>游戏在最后（第 10）张赛道卡离开赛道板块时<b>立即结束</b>。该卡结算后，游戏结束。</p>
+
+    <h3>计分</h3>
+    <p>玩家现在结算得分。在游戏中获得的速度分基础上，加上卡牌得分和人气轨道位置分，减去危险骰惩罚：</p>
+    <ul>
+      <li>每位玩家拿起自己的<b>整副</b>卡组（包括抽牌堆、弃牌堆、手牌和激活的卡）。他们审查牌组中所有卡，把每张卡<b>右上角</b>的速度分<b>加到</b>（或从）总分。</li>
+      <li>每位玩家的骰池中（不在玩家板块上）每颗<b>危险骰</b>失去 1 速度点。</li>
+      <li>人气分最高的玩家获得 <b>3 速度分</b>，第二高的获得 <b>1 速度分</b>（他们至少要 1 个人气分）。并列玩家都获得该速度分。</li>
+    </ul>
+    <div class="callout adv">
+      <b>提示：</b>如果总分超过 <b>50 分</b>，翻转速度分标记到另一面，从轨道上的 1 继续计数。游戏结束时速度分最多的玩家获胜。**平局**时：人气分最多的玩家胜；若仍平局，翻开的永久伤害标记最少的玩家胜；若仍平局，所有平局玩家<b>共享胜利</b>。
+    </div>
+  </section>
+
+  <section id="difficulty">
+    <h2 class="sec"><span class="num">14</span>难度调整</h2>
+    <p>如果你和孩子们一起玩，或想要更轻松的游戏体验，游戏设置时只揭示 5 张赛道卡。反之，如果你想要更多挑战，开始游戏时让 1 或 2 个永久伤害标记面朝上翻开。</p>
+
+    <figure class="figure">
+      <img src="Dirt_and_dust_Rules_images/page_14.jpg" alt="规则书第 14 页（难度调整与试跑赛道）">
+      <figcaption>难度调整与试跑赛道（原版第 14 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="trial">
+    <h2 class="sec"><span class="num">15</span>游戏模式：试跑赛道</h2>
+    <p>如果你正在玩第一次游戏，或想向新玩家介绍这款游戏，可以玩这个短模式。</p>
+
+    <h3>游戏设置</h3>
+    <p>试跑赛道玩 5 轮。把 5 张试跑赛道卡按 1 到 5 的顺序放到赛道板块上，从最远位（卡 1）开始到最近位（卡 5）。赛道牌组空间旁边的一个位置保持空位。可购买的行动卡组由 1 A、3 A、5 A 和 6 A 牌组组成。</p>
+    <p>每位玩家以 <b>5 张起始卡</b>（标有字母 S）、2 张 1 B、2 张 3 B、1 张 8 B 开始——总共 10 张。洗混牌组，玩家按标准规则抽 5 张。<b>车手卡不在试跑赛道中使用</b>，可以和其他剩余卡一起放在盒子里。</p>
+
+    <h3>试跑赛道流程</h3>
+    <p>游戏流程与标准游戏相同，唯一的区别是玩家顺序。决定谁先手（例如最近开过车的人）。该玩家将完成整个驾驶阶段，然后按顺时针轮到下一位玩家。当所有玩家完成驾驶阶段后，接着是下一轮的赛道评估阶段和准备阶段，按标准规则同时进行。</p>
+
+    <h3>获胜</h3>
+    <p>自然，你可以庆祝试跑赛道的获胜者，但所有得分至少 15 分的玩家都有资格参加第一次真正的赛道。</p>
+  </section>
+
+  <section id="solo">
+    <h2 class="sec"><span class="num">16</span>游戏模式：单人</h2>
+    <p><strong>泥土与尘埃</strong>也可以单人玩。你能超越你的对手——<b>幽灵车手</b>，更快到达终点，还是得分更少的<b>速度分</b>成为失败者？</p>
+
+    <h3>游戏设置</h3>
+    <p>按标准规则准备游戏。另外留出 3 颗额外的危险骰和 3 颗任意颜色的玩家骰。这些额外的骰子代表赛道上的<b>幽灵车手</b>。但是这些骰子暂时还不对手者开放；他将逐步获得。</p>
+    <p>把幽灵车手的 1 颗危险骰放到赛道上的前 3 张卡上。把幽灵车手卡放在赛道板块旁边。他的玩家骰暂时放在一旁。</p>
+
+    <h3>游戏流程</h3>
+    <p>幽灵车手不玩第一回合。然而，在第一回合结束时的赛道评估阶段，当第一张赛道卡离开赛道板块时，他的第一颗危险骰被解锁。把这一颗危险骰加到他的骰供应，再加 1 颗玩家骰。</p>
+    <p>在第二回合开始时，幽灵车手骰供应中正好有 1 颗危险骰和 1 颗玩家骰。两颗都会在掷骰阶段掷出并放到幽灵车手卡上。</p>
+    <p>在第二回合结束时，再加 1 颗危险骰和 1 颗玩家骰。第三回合结束时同样。第四回合及之后，幽灵车手不再获得骰子，使用 3 颗危险骰和 3 颗玩家骰直到游戏结束。</p>
+
+    <h3>掷骰阶段的变化</h3>
+    <p>玩家总是先掷幽灵车手的骰子；掷出后总是随机配对成 1 颗危险骰 + 1 颗玩家骰。</p>
+
+    <h3>驾驶阶段的变化</h3>
+    <p>在驾驶阶段的任何时刻，玩家可以从自己的骰池中将 1 颗激活的（未使用的）骰子放到幽灵车手的危险骰上，只要该骰子的值与该配对中幽灵车手的玩家骰匹配。</p>
+
+    <h3>赛道评估阶段的变化</h3>
+    <p>在赛道评估阶段，幽灵车手总是获得等于他骰子上红色撞车符号之和的速度分。被覆盖的骰子符号不计。幽灵车手也获得他骰子上每个人气符号的人气分。</p>
+
+    <div class="ex">
+      <p><span class="label">【示例】</span>你决定通过牺牲你的蓝色玩家骰（值为 6）来消除最大危险。</p>
+      <p><span class="label">【示例】</span>幽灵车手（紫色车手）将获得 1 速度分和 0 人气分。但是，如果玩家没有在他们回合中牺牲一颗值为 6 的骰子，幽灵车手将获得 4 速度分和 2 人气分。</p>
+    </div>
+
+    <h3>难度调整（简化）</h3>
+    <ul>
+      <li><b>业余级：</b>游戏设置时把危险骰往后放 1 张卡。第一张卡上不放骰子，所以你会先打 2 个准备回合再开始追你。</li>
+      <li><b>新手级：</b>危险骰往后放 2 张卡。</li>
+      <li><b>初学者：</b>危险骰往后放 3 张卡，放到赛道板上最外面 3 张卡上。</li>
+    </ul>
+
+    <h3>难度调整（挑战）</h3>
+    <ul>
+      <li><b>挑战者：</b>游戏设置时只在赛道卡上放 2 颗危险骰。幽灵车手在游戏开始时骰供应中有 1 颗危险骰和 1 颗玩家骰，第一回合就开始追赶你。</li>
+      <li><b>老兵：</b>只在 1 张赛道卡上放 1 颗危险骰。幽灵车手游戏开始时骰供应中有 2 颗危险骰和 2 颗玩家骰。</li>
+      <li><b>野兽：</b>幽灵车手从第一回合起骰供应中就有 3 颗危险骰和 3 颗玩家骰。</li>
+    </ul>
+  </section>
+
+  <section id="example">
+    <h2 class="sec"><span class="num">17</span>轮次示例</h2>
+    <p>现在是 Nick 的回合。他有 <b>3 扳手</b>和 <b>5 牵引力</b>可用，他的赛车在玩家板块<b>位置区</b>的<b>下排</b>。他已经翻开了 2 个永久伤害标记。</p>
+
+    <h3>1. 掷骰阶段</h3>
+    <p>Nick 掷骰池中的所有骰子。除了 3 颗玩家骰，他还有 1 颗危险骰，由于目前人气分最高，他也拿取人气骰。</p>
+    <p>在危险骰上，Nick 掷出 <b>3 个撞车符号</b>和 <b>1 个人气符号</b>。他在各自轨道上把对应标记前移。在人气骰上，Nick 掷出 <b>值 2</b>，把它放到赛车团队板块的"<b>2</b>"号位，并在人气轨道上减去 2 人气分。</p>
+
+    <h3>2. 驾驶阶段</h3>
+    <ul>
+      <li>首先，Nick 使用 <b>9 A（赛车线）</b>卡的被动效果，用标记标记已使用，拿取 1 颗加速骰，立即掷出。他掷出值 1，放到赛车团队板块的位置 1，那里已有另一颗骰子。</li>
+      <li>Nick 把 <b>5 A（路书）</b>卡打到位置 1 并用该位置的两颗骰子激活——先完整解决第一次激活，再用第二颗骰子。这给了他总共 <b>4 牵引力</b>，记在牵引力刻度盘上。他选择不使用那个把所有激活卡从赛车团队板块弃掉的效果。</li>
+      <li>Nick 花费 <b>6 牵引力</b>，把导航标记放在最后一张赛道卡上，该卡有允许每张赛道卡最多放 3 个导航标记的效果。放上导航标记后，Nick 必须把赛车左移 4 格（3 给赛道卡 + 1 给 Nick 的永久伤害）。</li>
+      <li>Nick 花费 <b>1 扳手</b>把一颗值为 5 的骰子改成 6，并移到对应位置。</li>
+      <li>接着，Nick 激活卡 <b>6 A（预检）</b>，这允许他从赛车团队板块移除 1 张卡（5 A 路书）放到一旁作为他的已移除卡。由于 Nick 的赛车在下排，他获得 <b>2 牵引力</b>。</li>
+      <li>然后 Nick 打出车手卡在位置 4 并使用其被动效果——他从已移除卡堆中拿取卡 <b>5 A（路书）</b>放到赛车团队板块位置 2。通过使用这张卡的被动效果，Nick 获得 <b>1 人气分</b>。</li>
+      <li>Nick 决定再次激活路书卡，获得 <b>2 牵引力</b>。他现在总共有 <b>7 牵引力</b>。</li>
+      <li>Nick 花费 <b>3 牵引力</b>把第二个导航标记放到赛道卡 5 上。他把赛车右移 3 格（2 给赛道卡 + 1 给他的永久伤害）。由于 Nick 的赛车在下排，赛道卡的强制效果对他不适用。如果 Nick 在上排，他就必须拿一颗危险骰并立即掷出结算。</li>
+      <li>Nick 花费 <b>4 牵引力</b>把第二个导航标记放到赛道卡 8 上。这把他的赛车右移 2 格。他还使用卡的效果，允许他修理 1 颗危险骰。</li>
+      <li>为了最大化速度分收益，Nick 主动拿 1 颗危险骰，获得 2 牵引力。他必须立即掷出危险骰，掷出 <b>2 撞车</b>，记在伤害轨道上。由于他的伤害轨道到达终点，Nick 必须翻开下一个未激活的永久伤害标记：结果是，在游戏剩余时间内，往赛道卡上放导航标记的成本增加 <b>1 牵引力</b>。</li>
+      <li>Nick 用 2 牵引力作为特殊动作，把赛车左移 2 格。在本回合结束时，Nick 没有牵引力剩余。</li>
+      <li>Nick 把 <b>2 A</b> 卡打到位置 6 并立即激活。首先，他把赛车移到上排，以在赛道评估阶段获得更多速度分。在上排，他还获得 <b>2 扳手</b>。</li>
+      <li>最后，在本阶段结束时，Nick 用 4 扳手（3 是标准价 + 1 由于 Nick 的永久伤害）购买 <b>7 A（发夹弯）</b>卡。</li>
+    </ul>
+
+    <h3>3. 赛道评估阶段</h3>
+    <p>在赛道评估阶段，赛道卡"5"离开赛道板块。Nick 在那里有 2 个导航标记。</p>
+    <p>根据赛车在玩家板块上的位置，每个导航标记 Nick 获得速度分。由于 Nick 的赛车在<b>中段上排</b>，他每个导航标记获得 <b>4 速度分</b>。因此，在本回合 Nick 共获得 <b>8 速度分</b>。</p>
+
+    <h3>4. 准备阶段</h3>
+    <ul>
+      <li>Nick 把赛车团队板块上的所有卡右移 1 格。如果某张卡从最右格移出，他就会弃掉它。</li>
+      <li>他把人气骰放回赛道板块，加速骰放回共用供应区。</li>
+      <li>他移除标记被动效果已使用的所有标记，把它们放到玩家板块旁边。</li>
+      <li>Nick 决定从手牌中弃 1 张卡到弃牌堆，抽取到 5 张手牌。然而，他的抽牌堆只有 3 张，他拿走这 3 张。然后他洗混弃牌堆作为新的抽牌堆，抽取剩余的 2 张。</li>
+    </ul>
+
+    <figure class="figure">
+      <img src="Dirt_and_dust_Rules_images/page_16.jpg" alt="规则书第 16 页（轮次示例）">
+      <figcaption>轮次示例（原版第 16 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="perm-damage">
+    <h2 class="sec"><span class="num">18</span>永久伤害标记</h2>
+    <p>永久伤害标记按从 1 到 7 顺序列出，翻开即生效：</p>
+
+    <div class="term-grid">
+      <div class="term">
+        <h4>1. 移动成本 +1</h4>
+        <p>在赛道卡上放导航标记时，赛车左右移动的格数 <b>+1</b>。</p>
+      </div>
+      <div class="term">
+        <h4>2. 卡片成本 +1 扳手</h4>
+        <p>卡牌成本 <b>+1 扳手</b>（不影响赛车团队板块上骰子调整的成本）。</p>
+      </div>
+      <div class="term">
+        <h4>3. 导航成本 +1 牵引力</h4>
+        <p>在赛道卡上放导航标记的成本 <b>+1 牵引力</b>（不影响赛车位置调整的成本）。</p>
+      </div>
+      <div class="term">
+        <h4>4. 手牌上限减为 3</h4>
+        <p>你的手牌上限减为 <b>3 张</b>。</p>
+      </div>
+      <div class="term">
+        <h4>5. 永久伤害 #1 叠加</h4>
+        <p>参见永久伤害 #1（效果叠加）。</p>
+      </div>
+      <div class="term">
+        <h4>6. 被动效果失效</h4>
+        <p>玩家卡上的被动效果<b>无效</b>。</p>
+      </div>
+      <div class="term">
+        <h4>7. 资源不累积</h4>
+        <p>每回合结束时重置牵引力和扳手刻度盘——你的资源<b>不再</b>带到下一回合。</p>
+      </div>
+    </div>
+
+    <h3>8. 赛车被毁</h3>
+    <div class="callout">
+      <b>重要：</b>如果你必须翻开第 <b>8</b> 个永久伤害标记，你的赛车将被彻底摧毁，你被移出游戏。你失去所有速度分和人气分！
+    </div>
+
+
+    <figure class="figure">
+      <img src="Dirt_and_dust_Rules_images/page_18.jpg" alt="规则书第 18 页（车手卡与永久伤害标记）">
+      <figcaption>车手卡与永久伤害标记（原版第 18 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="icons">
+    <h2 class="sec"><span class="num">19</span>游戏图标</h2>
+    <div class="term-grid">
+      <div class="term">
+        <h4>游戏中的速度分</h4>
+        <p>任意骰：图标指玩家骰、红色加速骰和人气骰。</p>
+      </div>
+      <div class="term">
+        <h4>游戏结束时的速度分</h4>
+        <p>骰池中所有激活的骰子。</p>
+      </div>
+      <div class="term">
+        <h4>牵引力</h4>
+        <p>用于支付卡牌效果、在赛道卡上放导航标记，或调整赛车在玩家板块上的位置（减速时）。</p>
+      </div>
+      <div class="term">
+        <h4>扳手</h4>
+        <p>用于购买新卡、支付卡牌效果，操作骰子。</p>
+      </div>
+      <div class="term">
+        <h4>人气</h4>
+        <p>人气轨道在赛道板块上。准备阶段期间，人气分最高的玩家获得人气骰。</p>
+      </div>
+      <div class="term">
+        <h4>玩家骰</h4>
+        <p>骰池中拥有此骰的玩家。</p>
+      </div>
+      <div class="term">
+        <h4>红色加速骰</h4>
+        <p>玩家可用 1 回合。该回合结束时，准备阶段把红色加速骰返回共用供应区。</p>
+      </div>
+      <div class="term">
+        <h4>危险骰</h4>
+        <p>骰池中的危险骰。</p>
+      </div>
+      <div class="term">
+        <h4>加速 / 减速</h4>
+        <p>赛车在玩家板块位置区的上排 / 下排。</p>
+      </div>
+      <div class="term">
+        <h4>赛车位置区</h4>
+        <p>红区 / 灰区 / 黄区（玩家板块上的位置）。</p>
+      </div>
+      <div class="term">
+        <h4>承受危险</h4>
+        <p>拿一颗危险骰，立即掷出结算。若供应区空，必须从自己已有的骰子中掷出一颗。</p>
+      </div>
+      <div class="term">
+        <h4>特殊动作：拿危险骰</h4>
+        <p>仅当你供应区还有危险骰时，可主动拿并立即掷出结算，获得 2 牵引力。</p>
+      </div>
+      <div class="term">
+        <h4>被动效果</h4>
+        <p>每回合可随时触发一次，不受玩家骰子影响。</p>
+      </div>
+      <div class="term">
+        <h4>强制效果</h4>
+        <p>此效果必须结算。</p>
+      </div>
+      <div class="term">
+        <h4>所有危险骰</h4>
+        <p>单次掷出的所有危险骰。</p>
+      </div>
+      <div class="term">
+        <h4>翻 2 张最左激活卡</h4>
+        <p>把赛车团队板块上最左侧 2 张激活卡翻面（面朝下）。</p>
+      </div>
+      <div class="term">
+        <h4>翻任意激活卡</h4>
+        <p>把任意一张激活卡翻面（面朝下）。</p>
+      </div>
+      <div class="term">
+        <h4>费用支付</h4>
+        <p>红色轮廓表示支付资源。</p>
+      </div>
+      <div class="term">
+        <h4>支付所有人气分</h4>
+        <p>支付你所有的人气分。</p>
+      </div>
+      <div class="term">
+        <h4>骰子值修改</h4>
+        <p>将一颗激活骰子的值修改 1。</p>
+      </div>
+      <div class="term">
+        <h4>骰子定值</h4>
+        <p>将一颗激活骰子的值设为指定值。</p>
+      </div>
+      <div class="term">
+        <h4>骰子指定为 6</h4>
+        <p>任意骰子值 6。</p>
+      </div>
+      <div class="term">
+        <h4>骰子任意值</h4>
+        <p>任意骰子任意值。</p>
+      </div>
+      <div class="term">
+        <h4>拿红色加速骰</h4>
+        <p>拿一颗红色加速骰，立即掷出，作为玩家骰使用。</p>
+      </div>
+      <div class="term">
+        <h4>定中心</h4>
+        <p>把赛车放到玩家板块位置区前排标记为 4 的中央位置。</p>
+      </div>
+      <div class="term">
+        <h4>弃牌堆洗为抽牌堆</h4>
+        <p>把弃牌堆洗混作为抽牌堆。</p>
+      </div>
+      <div class="term">
+        <h4>弃置激活卡</h4>
+        <p>把任意激活卡（包括此卡）弃到弃牌堆。</p>
+      </div>
+      <div class="term">
+        <h4>弃置所有激活卡</h4>
+        <p>把所有激活的卡弃到弃牌堆。</p>
+      </div>
+      <div class="term">
+        <h4>弃置此卡</h4>
+        <p>把此卡弃到弃牌堆。</p>
+      </div>
+      <div class="term">
+        <h4>翻最左激活卡</h4>
+        <p>把最左激活卡翻面（面朝下）。翻面卡如普通激活卡，只是失去效果。</p>
+      </div>
+      <div class="term">
+        <h4>换位</h4>
+        <p>交换任意两张激活卡的位置。</p>
+      </div>
+      <div class="term">
+        <h4>赛车移动</h4>
+        <p>速度调整：赛车可在玩家板块上前后移动。移到下排时，可选对应两个位置之一。</p>
+      </div>
+      <div class="term">
+        <h4>黄区效果</h4>
+        <p>赛车在黄区（上/下排皆可）：获得 1 人气分 + 1 扳手（部分效果）；或承受危险 + 获得 3 牵引力（部分效果）；或弃置任意激活卡；或弃置此卡 + 获得 2 牵引力；获得等于已移除卡数的扳手（最多 3）。</p>
+      </div>
+      <div class="term">
+        <h4>已移除卡</h4>
+        <p>任意已移除的卡：从游戏中拿出。不到弃牌堆，而是放到已移除卡堆。某些车手需要访问已移除卡。</p>
+      </div>
+      <div class="term">
+        <h4>修理</h4>
+        <p>修理 1 颗危险骰（返回玩家板块上的供应区）。</p>
+      </div>
+      <div class="term">
+        <h4>赛车团队板块空闲位</h4>
+        <p>赛车团队板块上空着的位置。</p>
+      </div>
+      <div class="term">
+        <h4>免费获得卡</h4>
+        <p>免费获得花费 1 或 2 扳手的卡，放到抽牌堆顶。</p>
+      </div>
+      <div class="term">
+        <h4>已激活骰子</h4>
+        <p>骰池中已激活的骰子（未被翻面、未弃掉）。</p>
+      </div>
+    </div>
+    <div class="figure">
+      <img src="Dirt_and_dust_Rules_images/page_20.jpg" alt="规则书第 20 页（游戏图标）">
+      <figcaption>游戏图标（图例）</figcaption>
+    </div>
+  </section>
+
+  <section id="credits" class="credits">
+    <h2 class="sec"><span class="num">20</span>制作信息</h2>
+
+    <h3>作者致谢</h3>
+    <p>我想把这款游戏献给我的父亲。看，爸爸？我正在兑现我的承诺——我一直在创造新东西。我不可能有别的方式；我像你一样。我想你。</p>
+
+    <h3>特别感谢</h3>
+    <p>感谢 <strong>Ondřej Bystroň</strong>，他不断激励我设计游戏并讲述小象的美好故事；感谢 <strong>Jakub Politzer</strong>，首先要感谢他精彩的插画，也感谢他把游戏当作自己的作品并全情投入；感谢 <strong>Ondra Cigánek</strong>，他坚持不懈的测试和富有洞察力的反馈；感谢 <strong>Tomáš Holek</strong>，感谢他所有的游戏、谦逊和乐观精神；以及所有我的家人和朋友。</p>
+    <p>我也要感谢整个 Albi 团队对我的信任和对我的游戏的支持。我深深感激所获得的机会。</p>
+
+    <h3>致测试者</h3>
+    <p>感谢 Albi 的所有最专注的测试者和各种试玩活动：Anežka Bělohoubková、Ján "Harry" Novodomský、Michal Šmíd、Jan Cízner、Barbora Šulcová、David Rozsíval、Libor Pešl、Martin Mravec、Václav Falco Mužík、Matúš Sedlák、Filip Veselý、Michal Požárek、Michal Peichl、Petr Popelka、Petr Vojtěch、Jindra Pavlásek、Adam Španěl、Kentán Anyone、Honza Hykš、Vašek Matyska、Ondra Podlešák、Petr Linhart、Roman Švec、Ondřej Krajča、Lenka Tripesová、Ondra Cigánek、Petr Těšínský、Hynek Palatin。</p>
+    <p>感谢 Zlín 的 Portal 节、Brnohraní、GameCon 以及 Kolín 的 KODEK 桌游俱乐部的所有玩家。</p>
+
+    <h3>制作信息</h3>
+    <ul>
+      <li><b>游戏设计：</b>Petr Čáslava</li>
+      <li><b>插画：</b>Jakub Politzer</li>
+      <li><b>平面与排版：</b>Anežka Bělohoubková、Jakub Politzer</li>
+      <li><b>开发：</b>Petr Čáslava、Michal Šmíd、Jan Cízner</li>
+      <li><b>项目管理：</b>Michal Šmíd</li>
+      <li><b>制作：</b>Jan Cízner</li>
+      <li><b>规则编辑：</b>Barbora Šulcová</li>
+      <li><b>翻译：</b>Šárka Tůmová</li>
+      <li><b>校对：</b>Corinna Spellerberg（Textguru）</li>
+    </ul>
+    <div class="figure">
+      <img src="Dirt_and_dust_Rules_images/page_17.jpg" alt="规则书第 17 页（轮次示例结尾 + 制作信息）">
+      <figcaption>轮次示例结尾 + 制作信息</figcaption>
+    </div>
+  </section>
+
+</div>
+
+<div class="credits" style="background: var(--cream); padding: 30px 36px; border-top: 4px solid var(--sand);">
+  <h3 style="color: var(--rust); border-left-color: var(--dirt);">泥土与尘埃 / Dirt & Dust · 中文本地化版本</h3>
+  <p>翻译规则严格遵循"专名 vs 普通术语"桌游本地化准则：人名 / 地名 / 公司名保留英文；其他专名（卡牌名 / 能力名 / 大佬 名 / 章节标题 / 制作标签 / 普通术语）全部译为中文。</p>
+  <p>保留英文的专名：Petr Čáslava、Jakub Politzer、Anežka Bělohoubková、Michal Šmíd、Jan Cízner、Barbora Šulcová、Šárka Tůmová、Corinna Spellerberg、Ondřej Bystroň、Ondra Cigánek、Tomáš Holek、Harry Jordan、Aiko Yamamoto、Sofía Fernández、Ferenc Kovács、Albi、Harry（Novodomský 测试者）。</p>
+</div>
+
+</body>
+</html>

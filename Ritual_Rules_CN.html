@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ritual · 仪式 · 规则书</title>
+<style>
+  :root {
+    --bg: #f7f3e8;
+    --paper: #fffdf7;
+    --ink: #2b2118;
+    --muted: #6b5e52;
+    --accent: #8c3b2a;
+    --accent2: #2e6b5e;
+    --border: #d8d0c0;
+    --shadow: rgba(43,33,24,0.08);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.75;
+  }
+  .wrap {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 32px 24px 64px;
+  }
+  header {
+    text-align: center;
+    padding: 48px 24px 36px;
+    background: var(--paper);
+    border: 2px solid var(--border);
+    border-top: 8px solid var(--accent);
+    box-shadow: 0 4px 16px var(--shadow);
+    margin-bottom: 32px;
+    position: relative;
+  }
+  header::before, header::after {
+    content: "";
+    display: block;
+    height: 10px;
+    background: repeating-linear-gradient(90deg,
+      #c94f4f 0 12px, #4f8cc9 12px 24px, #5a9e6b 24px 36px, #d4a843 36px 48px, #8b5a9f 48px 60px);
+    opacity: .55;
+  }
+  header::before { position: absolute; top: 0; left: 0; right: 0; }
+  header::after { margin-top: 28px; }
+  h1 {
+    margin: 0 0 8px;
+    font-size: 3.2rem;
+    letter-spacing: 6px;
+    font-weight: 800;
+    color: var(--ink);
+  }
+  .subtitle {
+    font-size: 1.25rem;
+    color: var(--muted);
+    letter-spacing: 2px;
+    margin-bottom: 18px;
+  }
+  .meta {
+    font-size: .9rem;
+    color: var(--muted);
+  }
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(247,243,232,.95);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 0;
+    margin-bottom: 28px;
+  }
+  nav ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 14px;
+    margin: 0;
+    padding: 0;
+  }
+  nav a {
+    text-decoration: none;
+    color: var(--ink);
+    font-size: .88rem;
+    padding: 4px 10px;
+    border-radius: 4px;
+    border: 1px solid transparent;
+  }
+  nav a:hover { background: #efe8d8; border-color: var(--border); }
+  section {
+    background: var(--paper);
+    padding: 28px 30px;
+    margin-bottom: 24px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 10px var(--shadow);
+    border-radius: 4px;
+  }
+  h2 {
+    margin: 0 0 16px;
+    font-size: 1.6rem;
+    color: var(--accent);
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 8px;
+  }
+  h3 {
+    margin: 24px 0 10px;
+    font-size: 1.2rem;
+    color: var(--accent2);
+  }
+  h4 {
+    margin: 18px 0 8px;
+    font-size: 1.05rem;
+    color: var(--ink);
+  }
+  p { margin: 10px 0; }
+  ul, ol { margin: 10px 0; padding-left: 24px; }
+  li { margin: 6px 0; }
+  strong { color: var(--accent); }
+  .term { font-weight: 600; color: var(--accent2); }
+  .note {
+    background: #f3eee2;
+    border-left: 4px solid var(--accent);
+    padding: 12px 16px;
+    margin: 16px 0;
+    border-radius: 0 4px 4px 0;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0;
+    font-size: .95rem;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 8px 10px;
+    text-align: center;
+  }
+  th { background: #efe8d8; color: var(--ink); }
+  tr:nth-child(even) { background: #faf8f2; }
+  .ritual-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    margin-top: 16px;
+  }
+  .ritual-card {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 16px;
+    background: #fdfbf6;
+  }
+  .ritual-card h4 { margin-top: 0; color: var(--accent); }
+  .ritual-card p { font-size: .92rem; color: var(--muted); }
+  .footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: .85rem;
+    margin-top: 32px;
+  }
+  .rune { display: inline-block; width: 14px; height: 14px; border-radius: 3px; margin: 0 2px; vertical-align: middle; }
+  .rune-red { background: #c94f4f; }
+  .rune-blue { background: #4f8cc9; }
+  .rune-green { background: #5a9e6b; }
+  .rune-yellow { background: #d4a843; }
+  .rune-purple { background: #8b5a9f; }
+  .figure {
+    margin: 20px 0;
+    text-align: center;
+  }
+  .figure img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    box-shadow: 0 2px 10px var(--shadow);
+  }
+  .figure-small {
+    max-width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .figure-caption {
+    font-size: .88rem;
+    color: var(--muted);
+    margin-top: 8px;
+    font-style: italic;
+  }
+  .image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+    margin-top: 16px;
+  }
+  .image-grid .figure { margin: 0; }
+  .image-grid img { width: 100%; }
+  @media (max-width: 600px) {
+    h1 { font-size: 2.2rem; }
+    .wrap { padding: 16px; }
+    section { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>RITUAL</h1>
+    <div class="subtitle">仪式 · 规则书</div>
+    <div class="meta">
+      设计师：Tomás Tarragón · 插画：Sonya Kolmanovskaya<br>
+      出版：T-Tower Games · 2022 · ritualthegame.com
+    </div>
+    <figure class="figure" style="max-width: 320px; margin: 20px auto 0;">
+      <img src="Ritual_Rules_images/cover.jpg" alt="Ritual 规则书封面">
+      <figcaption class="figure-caption">原书封面</figcaption>
+    </figure>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="#overview">简介</a></li>
+      <li><a href="#components">配件</a></li>
+      <li><a href="#setup">设置</a></li>
+      <li><a href="#howtoplay">流程</a></li>
+      <li><a href="#actions">行动</a></li>
+      <li><a href="#inspiration">感召牌</a></li>
+      <li><a href="#2player">双人变体</a></li>
+      <li><a href="#tips">提示</a></li>
+      <li><a href="#rituals">仪式古卷</a></li>
+    </ul>
+  </nav>
+
+  <section id="overview">
+    <h2>简介（Overview）</h2>
+    <p><strong>《Ritual》</strong>是一款合作、实时、静默沟通的桌游。玩家扮演<span class="term">萨满（Shamans）</span>，需在不交谈的情况下协作完成仪式，释放自然之力以保护部落：平息怒海、熄灭野火、让河流与庄稼复苏，甚至让火山喷发。</p>
+    <p><strong>胜利条件：</strong>完成全部 <strong>6 个仪式步骤</strong>。</p>
+    <p>仪式共分 <strong>3 个限时轮次</strong>。每轮中，每位玩家有一个秘密的<span class="term">个人目标</span>，以及一个所有人共享的<span class="term">共同目标</span>——即完成仪式牌上显示的某些步骤。</p>
+    <p>游戏开始时，没人知道下一轮要完成哪些步骤。为了探明下一步，玩家必须先完成个人目标：通过收集<span class="term">感召牌（Inspiration Cards）</span>上显示的<span class="term">符文（Runes）</span>来<span class="term">获得感召（Get Inspired）</span>。</p>
+    <div class="note">开始执行仪式步骤前，必须有 <strong>3 名玩家</strong> 获得感召。仪式牌会告诉玩家符文应如何分配；尽管只有一名玩家知道“下一步”是什么，但所有人都应尝试理解需要做什么，共同完成它。</div>
+  </section>
+
+  <section id="components">
+    <h2>配件（Components）</h2>
+    <ul>
+      <li><strong>10</strong> 块 <span class="term">仪式板（Ritual Boards）</span></li>
+      <li><strong>60</strong> 张 <span class="term">仪式牌（Ritual Cards）</span></li>
+      <li><strong>25</strong> 张 <span class="term">感召牌（Inspiration Cards）</span></li>
+      <li><strong>6</strong> 个 <span class="term">神秘位面（Mystic Planes）</span></li>
+      <li><strong>40</strong> 枚 <span class="term">符文（Runes）</span>——每种颜色各 8 枚：红 <span class="rune rune-red"></span>、蓝 <span class="rune rune-blue"></span>、绿 <span class="rune rune-green"></span>、黄 <span class="rune rune-yellow"></span>、紫 <span class="rune rune-purple"></span></li>
+      <li><strong>6</strong> 个 <span class="term">顺序标记（Order Tokens）</span>（编号 1–6）</li>
+      <li><strong>3</strong> 个 <span class="term">感召标记（Inspiration Tokens）</span></li>
+      <li><strong>1</strong> 个 <span class="term">回合图腾（Turn Totem）</span></li>
+    </ul>
+    <figure class="figure">
+      <img src="Ritual_Rules_images/overview_components_setup.jpg" alt="配件清单与设置概览">
+      <figcaption class="figure-caption">原书「简介、配件与设置」跨页</figcaption>
+    </figure>
+  </section>
+
+  <section id="setup">
+    <h2>设置（Setup）</h2>
+    <ol>
+      <li>给每位玩家发 <strong>4 枚随机符文</strong>（始终公开）。</li>
+      <li>给每位玩家发 <strong>1 张感召牌</strong>（保密，不可给他人看）。</li>
+      <li>每位玩家面前放置 <strong>1 个神秘位面</strong>。</li>
+      <li>从<span class="term">仪式古卷（Ancient Book of Rituals）</span>中选择一项仪式，将对应<span class="term">仪式板</span>正面朝上放置。</li>
+      <li>洗匀对应仪式牌，面朝下放在仪式板旁。</li>
+      <li>将第一张仪式牌放在桌面中央附近。</li>
+      <li>将编号 <strong>1</strong> 的顺序标记放在该牌上。</li>
+      <li>其余符文组成<span class="term">供应区（Supply）</span>。</li>
+      <li>将 <strong>3 个感召标记</strong>灰色面朝上放置。</li>
+      <li>将<span class="term">回合图腾</span>放在任意玩家旁。</li>
+    </ol>
+    <div class="note">若有新手玩家，建议从「启蒙仪式（Initiation Ritual）」开始。</div>
+  </section>
+
+  <section id="howtoplay">
+    <h2>游戏流程（How to Play）</h2>
+    <p>游戏共 <strong>3 轮</strong>，每轮限时，逐步完成 6 个仪式步骤：</p>
+    <ul>
+      <li><strong>第 1 轮：</strong>完成第 1 个仪式步骤。</li>
+      <li><strong>第 2 轮：</strong>完成接下来 2 个仪式步骤。</li>
+      <li><strong>第 3 轮：</strong>完成最后 3 个仪式步骤。</li>
+    </ul>
+
+    <h3>每轮时长</h3>
+    <p>时长取决于玩家人数和所选难度。可使用简单计时器，也可使用官网 / App / 音轨。</p>
+    <table>
+      <thead>
+        <tr><th>玩家</th><th>学徒 Apprentice</th><th>萨满 Shaman</th><th>大师 Guru</th><th>传说 Legend</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>2</td><td>4:30</td><td>4:00</td><td>3:30</td><td>3:00</td></tr>
+        <tr><td>3</td><td>6:30</td><td>5:30</td><td>4:30</td><td>4:00</td></tr>
+        <tr><td>4</td><td>7:00</td><td>6:00</td><td>5:00</td><td>4:30</td></tr>
+        <tr><td>5</td><td>7:30</td><td>6:30</td><td>5:30</td><td>5:00</td></tr>
+        <tr><td>6</td><td>8:00</td><td>7:00</td><td>6:00</td><td>5:30</td></tr>
+      </tbody>
+    </table>
+    <figure class="figure">
+      <img src="Ritual_Rules_images/how_to_play_actions.jpg" alt="游戏流程与行动说明">
+      <figcaption class="figure-caption">原书「游戏流程与行动」跨页，含各难度时长表</figcaption>
+    </figure>
+
+    <h3>回合图腾与行动循环</h3>
+    <p>整局游戏中，<span class="term">回合图腾（Turn Totem）</span>会沿顺时针方向不断传递。拿到图腾的玩家必须<strong>恰好执行 1 个行动</strong>，然后把图腾传给右侧玩家。</p>
+    <p>这个循环贯穿每一轮的<strong>感召阶段</strong>和<strong>仪式阶段</strong>，从不中断。两个阶段并不是两套回合结构，而是同一套「轮流行动」在不同目标下的状态：</p>
+    <ul>
+      <li><strong>感召阶段：</strong>大家主要通过行动移动符文，让 3 名玩家陆续获得「感召」。</li>
+      <li><strong>仪式阶段：</strong>继续通过行动调整符文分布，满足当前仪式牌条件后，用行动完成仪式步骤。</li>
+    </ul>
+    <div class="note">静默规则下，行动本身就是唯一的沟通方式。观察别人把符文给谁、放到哪里，是推断其目标和下一步需求的核心途径。</div>
+
+    <h3>轮次概览</h3>
+    <p>每轮从 <span class="term">感召阶段（Inspiration Phase）</span> 开始。当 <strong>3 名玩家</strong>都获得感召后，进入 <span class="term">仪式阶段（Ritual Phase）</span>。若在规定时间内完成该轮所有可用仪式步骤，则该轮成功。</p>
+
+    <h3>感召阶段</h3>
+    <p>玩家通过行动（给予、拿取、放置、取回、交换）调整自己面前的符文，试图凑齐<span class="term">感召牌（Inspiration Card）</span>上显示的图案。</p>
+    <p>当某玩家手上的符文与感召牌完全一致时，轮到其持有回合图腾，即可执行 <span class="term">「获得感召（Get Inspired）」</span> 行动。执行后：</p>
+    <ul>
+      <li>将 <strong>1 个感召标记</strong>由灰翻面为彩色；</li>
+      <li>若本轮还有未分配的仪式牌，拿取 <strong>1 张仪式牌</strong>并查看其内容（你将因此知道本轮的某一个仪式步骤）。</li>
+    </ul>
+    <p>当 <strong>3 个感召标记</strong>全部被翻为彩色，感召阶段结束，仪式阶段立即开始。</p>
+
+    <h3>仪式阶段</h3>
+    <p>进入仪式阶段后，玩家继续通过行动调整符文，使场上符文分布满足当前<span class="term">仪式牌（Ritual Card）</span>的要求。</p>
+    <p>当某位玩家认为当前仪式牌的条件已达成，轮到其持有回合图腾时，可执行 <span class="term">「完成仪式步骤（Complete a Ritual Step）」</span> 行动。执行后：</p>
+    <ul>
+      <li>翻开对应的仪式牌；</li>
+      <li>将其与对应的<span class="term">顺序标记（Order Token）</span>一起放到<span class="term">仪式板（Ritual Board）</span>上；</li>
+      <li>接着继续按顺序挑战下一张仪式牌。</li>
+    </ul>
+    <div class="note">仪式牌会告诉玩家符文应如何分配；规则书原文强调：即便只有一名玩家知道「下一步」是什么，所有人也应通过观察行动来理解需求，共同完成。</div>
+
+    <h3>静默规则</h3>
+    <div class="note">玩家不允许说话、打手势、做动作或以任何方式引起他人注意。<strong>唯一的沟通方式是通过行动。</strong></div>
+
+    <h3>准备下一轮</h3>
+    <p><span class="term">弃除（Discard）</span>所有感召牌并重新发牌。根据要准备的第 2 轮或第 3 轮，在桌面中央放置接下来的 2 张或 3 张仪式牌，并将下一组顺序标记放在上面。</p>
+  </section>
+
+  <section id="actions">
+    <h2>行动（Actions）</h2>
+    <p>持有<span class="term">回合图腾</span>的玩家执行以下 <strong>1 个行动</strong>，然后将其传给右侧玩家。<strong>所有阶段目标都必须通过行动来达成。</strong></p>
+
+    <h3>行动分类</h3>
+    <p><strong>1. 移动 / 调整符文</strong>——用于凑感召牌或满足仪式牌条件：</p>
+    <ul>
+      <li><strong>给予：</strong>将 1 枚符文交给任意玩家（仅当自己拥有 3+ 枚符文时）。</li>
+      <li><strong>拿取：</strong>从左侧玩家处拿 1 枚符文（仅当该玩家有 3+ 枚符文时）。</li>
+      <li><strong>放置：</strong>将 1 枚符文放到自己的神秘位面上（仅当该位面为空时）。</li>
+      <li><strong>取回：</strong>从自己的神秘位面上取回符文。</li>
+      <li><strong>交换：</strong>用供应区中的 1 枚不同符文，与另一名玩家神秘位面上的符文交换。</li>
+    </ul>
+    <p><strong>2. 阶段目标</strong>——当条件满足时，用一次行动直接推进游戏：</p>
+    <ul>
+      <li><strong>获得感召：</strong>你面前的符文与感召牌完全一致时，在回合图腾轮到你时执行。</li>
+      <li><strong>完成仪式步骤：</strong>场上符文满足当前仪式牌条件时，在回合图腾轮到你时执行。</li>
+    </ul>
+    <div class="note">神秘位面上的符文不能被给予或窃取。玩家拥有的符文数量包含其神秘位面上的符文（若有）。</div>
+
+    <h3>双人变体行动</h3>
+    <p>移动 / 调整符文：</p>
+    <ul>
+      <li><strong>给予：</strong>将某组中的 1 枚符文交给对方玩家的某组（仅当<strong>要给出的那组</strong>有 3+ 枚符文时）。</li>
+      <li><strong>放置：</strong>将某组中的 1 枚符文放到对应的神秘位面上（仅当为空时）。</li>
+      <li><strong>取回：</strong>将某神秘位面上的符文放回对应组。</li>
+      <li><strong>交换：</strong>用供应区中的不同符文，与对方神秘位面上的符文交换。</li>
+    </ul>
+    <p>阶段目标：</p>
+    <ul>
+      <li><strong>获得感召</strong>或<strong>完成仪式步骤</strong>（条件满足时执行）。</li>
+    </ul>
+    <div class="note">双人变体中，不能从对方玩家处「拿取」符文，也不能在同一玩家的两组之间传递符文。</div>
+  </section>
+
+  <section id="inspiration">
+    <h2>感召牌（Inspiration Cards）</h2>
+    <p>感召牌是私密信息，每位玩家可随时查看自己的。共有 3 种类型：</p>
+    <figure class="figure">
+      <img src="Ritual_Rules_images/inspiration_tips_2player.jpg" alt="感召牌、提示与技巧、双人变体">
+      <figcaption class="figure-caption">原书「感召牌 / 提示与技巧 / 双人变体」跨页，左页上方为感召牌类型示例</figcaption>
+    </figure>
+    <ul>
+      <li><strong>5 枚同色</strong>——共 5 张。</li>
+      <li><strong>3 枚，分属 2 种不同颜色</strong>——共 10 张。</li>
+      <li><strong>2 枚，分属 3 种不同颜色</strong>——共 10 张。</li>
+    </ul>
+    <div class="note">让所有玩家知道这些信息很重要，因为这有助于推断每位玩家需要什么。</div>
+  </section>
+
+  <section id="2player">
+    <h2>双人变体（2 Player Variant）</h2>
+    <p>在双人游戏中，每位玩家控制 <strong>2 组符文</strong>：左手组和右手组。每组有自己的神秘位面。</p>
+    <figure class="figure figure-small">
+      <img src="Ritual_Rules_images/inspiration_tips_2player.jpg" alt="双人变体规则">
+      <figcaption class="figure-caption">原书双人变体规则（上页右半部分）</figcaption>
+    </figure>
+    <figure class="figure figure-small">
+      <img src="Ritual_Rules_images/actions.jpg" alt="双人变体下的全部行动">
+      <figcaption class="figure-caption">原书双人变体「全部可选行动」单页（行动说明文字顶部明确写着 2 player variant）</figcaption>
+    </figure>
+
+    <h3>设置差异</h3>
+    <ul>
+      <li>给每位玩家发 <strong>8 枚符文</strong>：右手 4 枚、左手 4 枚。</li>
+      <li>给每位玩家发 <strong>2 张感召牌</strong>。</li>
+      <li>放置 <strong>2 个感召标记</strong>（灰色面朝上）。</li>
+      <li>在每组符文旁各放 <strong>1 个神秘位面</strong>。</li>
+      <li>仪式板、仪式牌与供应区按通常方式设置。</li>
+    </ul>
+
+    <h3>感召与仪式</h3>
+    <p>要获得感召，必须同时满足两张感召牌——每组符文中完成一张（具体哪张完成哪组不限）。</p>
+    <p>完成仪式步骤时，<strong>每组符文视为不同玩家</strong>。此外，当完成步骤 5 时，两名玩家都会揭示步骤 6。</p>
+    <p>若两名玩家都已获得感召，且该轮仪式步骤全部完成，则该轮成功。</p>
+  </section>
+
+  <section id="tips">
+    <h2>提示与技巧（Tips and Tricks）</h2>
+    <figure class="figure figure-small">
+      <img src="Ritual_Rules_images/inspiration_tips_2player.jpg" alt="提示与技巧">
+      <figcaption class="figure-caption">原书提示与技巧（上页左半部分下方）</figcaption>
+    </figure>
+    <ul>
+      <li>《Ritual》是团队合作游戏。符文不够让所有人同时获得感召，不互相帮助就走不远。</li>
+      <li>注意观察其他玩家拿走、给出和放到神秘位面上的符文，以此推断他们拥有哪张感召牌。</li>
+      <li>不要执着于自己的目标；有时帮助他人效果更好。</li>
+      <li>尽快处理掉不需要的符文，避免混淆。</li>
+      <li>当玩家只剩 2 枚符文时，行动会受到限制。尽量避免这种情况。</li>
+    </ul>
+  </section>
+
+  <section id="rituals">
+    <h2>仪式古卷（Ancient Book of Rituals）</h2>
+    <p>一旦所有人都完成了符文的启蒙仪式，你们便可执行其他仪式。但请谨慎行事：建议所有仪式先以「学徒」速度完成，直到能熟练驾驭符文。熟练掌握后，可再切换到「萨满」速度，让你们的仪式更加强力。</p>
+    <div class="note"><strong>致所有萨满的警告：</strong>在熟练掌握全部仪式之前，尝试以「大师」或「传说」速度执行任何仪式，都可能带来灾难性的后果。</div>
+    <p>古卷记载了文明世代相传的仪式，分为 <strong>4 个难度（速度）等级</strong>，由易到难依次为「学徒 / 萨满 / 大师 / 传说」。</p>
+    <p>我在每个仪式下方留了 <strong>4 个记录框</strong>，完成后可在其中一个内写入萨满团队的名字，让你们被人铭记。</p>
+    <p>建议所有萨满至少以「学徒」速度完成一次启蒙仪式，否则可能无法和谐协作。</p>
+    <figure class="figure" style="max-width: 420px; margin: 20px auto;">
+      <img src="Ritual_Rules_images/ancient_book_cover.jpg" alt="仪式古卷封面">
+      <figcaption class="figure-caption">仪式古卷（Ancient Book of Rituals）封面</figcaption>
+    </figure>
+
+    <h3>第一章：灵性启蒙（Spiritual Initiation）</h3>
+    <p>介绍仪式最基础的步骤，帮助新手理解个人目标与共同目标的关系。该章仪式牌条件示例：</p>
+    <ul>
+      <li>只有一名萨满可以拥有某种颜色；场上必须有至少 3 枚该颜色符文。</li>
+      <li>所有萨满必须恰好拥有 1 枚某种颜色符文。</li>
+    </ul>
+    <figure class="figure">
+      <img src="Ritual_Rules_images/chapter1_spiritual_initiation.jpg" alt="第一章：灵性启蒙">
+      <figcaption class="figure-caption">原书第一章「灵性启蒙（Spiritual Initiation）」与启蒙仪式牌示例</figcaption>
+    </figure>
+
+    <h3>第二章：基础仪式（Basic Rituals）—— 结组（Grouping）</h3>
+    <p>本章引入 <span class="term">结组（Grouping）</span>概念：仪式牌上若显示多个符文在一个矩形框内，表示所有显示颜色的符文必须组成“组”（成对、3 枚一组等）。</p>
+    <div class="note">例：红-蓝标记 3+，表示场上所有红色与蓝色符文必须两两配对，且至少需要 3 个这样的配对。神秘位面上的符文仍视为该玩家符文的一部分，参与结组。</div>
+
+    <div class="ritual-grid">
+      <div class="ritual-card">
+        <h4>熄灭野火（Extinguish the Wild Flames）</h4>
+        <p>野火威胁森林与庄稼，唯有水的力量能保护珍贵的自然。牌组涉及颜色隔离、恰好数量、红蓝配对等条件。</p>
+      </div>
+    </div>
+    <figure class="figure">
+      <img src="Ritual_Rules_images/chapter2_basic_rituals.jpg" alt="第二章：基础仪式">
+      <figcaption class="figure-caption">原书第二章「基础仪式（Basic Rituals）」：结组（Grouping）概念与熄灭野火</figcaption>
+    </figure>
+
+    <h3>第三章：进阶仪式（Advanced Rituals）—— 结阵（Formations）</h3>
+    <p>本章引入 <span class="term">结阵（Formation）</span>概念：仪式步骤由多个“组”构成，必须由相邻萨满组成。所有显示颜色的符文都必须处于有效的结阵中。</p>
+    <div class="note">例：绿-蓝-绿 表示所有蓝色符文必须组成 2 人一组，且相邻两名萨满都必须各有 1 枚绿色符文。可以有任意数量的结阵，但所有相关颜色都必须且只能属于 1 个结阵。</div>
+
+    <div class="ritual-grid">
+      <div class="ritual-card">
+        <h4>平息夜海（Calm the Ocean at Night）</h4>
+        <p>海洋与黑夜激烈搏斗，只有调和自然力量才能确保生存。牌组涉及颜色均分、结阵、恰好数量与配对。</p>
+      </div>
+    </div>
+    <figure class="figure">
+      <img src="Ritual_Rules_images/chapter3_advanced_rituals.jpg" alt="第三章：进阶仪式">
+      <figcaption class="figure-caption">原书第三章「进阶仪式（Advanced Rituals）」：结阵（Formation）概念与平息夜海</figcaption>
+    </figure>
+
+    <h3>第四章：专家仪式（Expert Rituals）—— 神秘位面（Mystic Plane）</h3>
+    <p>本章最复杂，需要驾驭神秘位面的力量。当符文图标周围有光环时，表示它应被放到神秘位面上。</p>
+    <div class="note">例：2+ 绿色带光环，表示场上所有绿色符文必须组成 2 枚一组，且每组中必须有 1 枚位于神秘位面上。若两个符文标有相同字母，则必须属于同一类型。</div>
+
+    <div class="ritual-grid">
+      <div class="ritual-card">
+        <h4>成为自然（Become One With Nature）</h4>
+        <p>成为自然是成为 Guru 之路的终点。若决定执行它，你将面临终极挑战：决定用哪些符文来完成某些步骤。</p>
+        <div class="note">例：标有字母 A 的两枚符文（其中一枚带光环、表示应在神秘位面上）组成 2 枚一组，标记 3+。每组中必须恰好 1 枚位于神秘位面。由于两枚符文都标有 A，所以必须属于相同类型。</div>
+      </div>
+      <div class="ritual-card">
+        <h4>缔造大森林（Create a Great Forest）</h4>
+        <p>自然灾害过后，我们必须恢复珍贵的森林；若没有森林，我们所熟知的生活将不复存在。引导我们全部的自然能量，可让恢复过程几乎在瞬间完成。</p>
+      </div>
+    </div>
+    <figure class="figure">
+      <img src="Ritual_Rules_images/chapter4_expert_rituals.jpg" alt="第四章：专家仪式">
+      <figcaption class="figure-caption">原书第四章「专家仪式（Expert Rituals）」：神秘位面（Mystic Plane）概念与缔造大森林</figcaption>
+    </figure>
+
+    <h3>其他仪式</h3>
+    <div class="ritual-grid">
+      <div class="ritual-card">
+        <h4>能量再平衡（Energy Rebalance）</h4>
+        <p>当未知力量的厄运降临时，可进行能量再平衡。危险，但或许是唯一生机。</p>
+      </div>
+      <div class="ritual-card">
+        <h4>凛冬终结（Winter's End）</h4>
+        <p>寒冬久驻不去，结束遥遥无期。庄稼与牲畜受苦。必须让白昼开始驱散黑夜，使植物走出漫长的荫蔽，重新生长。</p>
+      </div>
+      <div class="ritual-card">
+        <h4>自然庇护（Nature's Protection）</h4>
+        <p>植物、水、火、日、黑暗皆有伟力。编织这些能量，可结成强大的保护链。</p>
+      </div>
+      <div class="ritual-card">
+        <h4>火山喷发（Erupt a Volcano）</h4>
+        <p>集中火之能量并以乌云环绕，可让火山重焕生机，拥抱其令人惊叹的力量。</p>
+      </div>
+      <div class="ritual-card">
+        <h4>河流与庄稼的复苏（Rise of the River and Crops）</h4>
+        <p>干旱与歉收与任何敌人一样危险。唯一的解决之道：让河流与庄稼复苏。</p>
+      </div>
+    </div>
+
+    <h4 style="margin-top: 28px;">原书其他仪式牌图示</h4>
+    <div class="image-grid">
+      <figure class="figure">
+        <img src="Ritual_Rules_images/energy_rebalance_become_one.jpg" alt="能量再平衡与成为自然">
+        <figcaption class="figure-caption">能量再平衡 / 成为自然</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="Ritual_Rules_images/winters_end_natures_protection.jpg" alt="凛冬终结与自然庇护">
+        <figcaption class="figure-caption">凛冬终结 / 自然庇护</figcaption>
+      </figure>
+      <figure class="figure">
+        <img src="Ritual_Rules_images/erupt_volcano_river_crops.jpg" alt="火山喷发与河流庄稼复苏">
+        <figcaption class="figure-caption">火山喷发 / 河流与庄稼的复苏</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <div class="footer">
+    本网页由 WorkBuddy 根据《Ritual》实体规则书扫描件整理生成，仅供个人参考。<br>
+    版权归属 T-Tower Games 及原设计师 / 插画师所有。
+  </div>
+</div>
+</body>
+</html>

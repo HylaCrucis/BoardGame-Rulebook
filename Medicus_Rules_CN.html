@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>医者（Medicus）— 游戏规则</title>
+<style>
+:root {
+  --ink: #2a2018;
+  --paper: #f7f0e0;
+  --cream: #ebe0c8;
+  --brass: #a87d2e;
+  --crimson: #7a2230;
+  --crimson-deep: #5a1622;
+  --gold: #b8893a;
+  --shadow: rgba(90, 22, 34, 0.18);
+  --serif: "Iowan Old Style", "Palatino Linotype", "Source Han Serif SC", "Songti SC", "Noto Serif CJK SC", Georgia, serif;
+  --sans: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--cream);
+  font-family: var(--serif);
+  color: var(--ink);
+  line-height: 1.8;
+  font-size: 15px;
+  padding: 0 0 80px;
+}
+header {
+  background: linear-gradient(135deg, var(--crimson-deep) 0%, #6e1c2a 45%, var(--crimson) 100%);
+  color: var(--paper);
+  padding: 56px 36px;
+  text-align: center;
+  border-bottom: 8px double var(--brass);
+  box-shadow: 0 6px 0 var(--shadow);
+}
+header h1 {
+  margin: 0;
+  font-size: 58px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-shadow: 2px 2px 0 rgba(0,0,0,0.35);
+}
+header h2 {
+  margin: 14px 0 0;
+  font-size: 20px;
+  font-weight: 400;
+  opacity: 0.92;
+  letter-spacing: 0.08em;
+  font-style: italic;
+}
+header .meta {
+  margin-top: 22px;
+  font-size: 14px;
+  opacity: 0.9;
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+header .meta span {
+  background: rgba(255,255,255,0.14);
+  padding: 6px 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.3);
+}
+.container {
+  max-width: 1080px;
+  margin: 40px auto;
+  background: var(--paper);
+  padding: 0 0 60px;
+  box-shadow: 0 8px 24px var(--shadow), inset 0 0 80px rgba(168, 125, 46, 0.06);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px solid var(--brass);
+}
+nav.toc {
+  background: linear-gradient(180deg, var(--paper) 0%, #ecdfc2 100%);
+  padding: 24px 36px;
+  border-bottom: 2px solid var(--brass);
+}
+nav.toc h3 {
+  margin: 0 0 12px;
+  font-size: 16px;
+  color: var(--crimson);
+  letter-spacing: 0.15em;
+  border-left: 4px solid var(--brass);
+  padding-left: 10px;
+}
+nav.toc ol { margin: 0; padding-left: 22px; }
+nav.toc ol li { margin: 4px 0; }
+nav.toc ol ol { margin-top: 4px; }
+nav.toc a { color: var(--crimson-deep); text-decoration: none; }
+nav.toc a:hover { text-decoration: underline; }
+section {
+  padding: 8px 40px 4px;
+  border-bottom: 1px solid rgba(168, 125, 46, 0.18);
+  scroll-margin-top: 20px;
+}
+h2.sec {
+  font-size: 26px;
+  color: var(--crimson);
+  border-bottom: 3px solid var(--brass);
+  padding-bottom: 8px;
+  margin: 32px 0 16px;
+}
+h2.sec .num {
+  display: inline-block;
+  background: var(--crimson);
+  color: var(--paper);
+  width: 38px; height: 38px;
+  line-height: 38px;
+  text-align: center;
+  border-radius: 50%;
+  font-size: 19px;
+  margin-right: 12px;
+  vertical-align: middle;
+}
+h3 {
+  font-size: 19px;
+  color: var(--crimson-deep);
+  margin: 22px 0 8px;
+  border-left: 4px solid var(--brass);
+  padding-left: 10px;
+}
+h4 {
+  font-size: 16px;
+  color: var(--ink);
+  margin: 16px 0 6px;
+}
+p { margin: 10px 0; }
+ul, ol { margin: 10px 0; padding-left: 26px; }
+li { margin: 5px 0; }
+b { color: var(--crimson-deep); }
+.page-img {
+  display: block;
+  width: 100%;
+  max-width: 960px;
+  margin: 24px auto;
+  border: 2px solid var(--brass);
+  border-radius: 6px;
+  box-shadow: 0 4px 12px var(--shadow);
+}
+figcaption {
+  text-align: center;
+  font-size: 13px;
+  color: #777;
+  margin: 6px 0 20px;
+  font-style: italic;
+}
+.tip, .important, .ex {
+  background: rgba(168, 125, 46, 0.1);
+  border-left: 4px solid var(--gold);
+  padding: 10px 16px;
+  margin: 14px 0;
+  border-radius: 0 6px 6px 0;
+}
+.tip b, .important b, .ex b { color: var(--crimson); }
+.comp-list { columns: 2; column-gap: 30px; }
+.comp-list li { break-inside: avoid; }
+.footer-note {
+  margin: 30px 40px 0;
+  padding: 16px 20px;
+  background: linear-gradient(180deg, #ecdfc2, var(--paper));
+  border: 1px solid var(--brass);
+  border-radius: 6px;
+  font-size: 13px;
+  color: #555;
+}
+.footer-note b { color: var(--crimson); }
+</style>
+</head>
+<body>
+<header>
+  <h1>医者</h1>
+  <h2>Medicus · 中世纪理发师的从医之路</h2>
+  <div class="meta">
+    <span>设计：Stefan Feld</span>
+    <span>插画 / 排版：Dennis Lohausen</span>
+    <span>出版：Pegasus Spiele · Hall Games</span>
+  </div>
+</header>
+<div class="container">
+<nav class="toc">
+  <h3>目录</h3>
+  <ol>
+    <li><a href="#intro">引言</a></li>
+    <li><a href="#imprint">出版信息</a></li>
+    <li><a href="#components">共有组件</a></li>
+    <li><a href="#setup">设置
+      <ol>
+        <li><a href="#setup-board">游戏板与牌堆</a></li>
+        <li><a href="#setup-2p">两人额外设置</a></li>
+        <li><a href="#setup-player">玩家设置</a></li>
+      </ol>
+    </li>
+    <li><a href="#gameplay">游戏流程
+      <ol>
+        <li><a href="#gp-overview">总览</a></li>
+        <li><a href="#gp-before">首轮前</a></li>
+        <li><a href="#gp-start">每轮开始</a></li>
+        <li><a href="#gp-turn">回合</a></li>
+      </ol>
+    </li>
+    <li><a href="#secondary">次要行动
+      <ol>
+        <li><a href="#sec-remedy">收集药剂</a></li>
+        <li><a href="#sec-sell">出售药剂</a></li>
+        <li><a href="#sec-appr">支付学徒</a></li>
+        <li><a href="#sec-letter">投递信件</a></li>
+        <li><a href="#sec-recipe">购买配方书</a></li>
+        <li><a href="#sec-medicus">拜见医者</a></li>
+      </ol>
+    </li>
+    <li><a href="#main">主要行动
+      <ol>
+        <li><a href="#main-money">拿取金钱</a></li>
+        <li><a href="#main-favor">拿取恩惠卡牌</a></li>
+        <li><a href="#main-train">训练学徒</a></li>
+        <li><a href="#main-instr">购买器械</a></li>
+        <li><a href="#main-end">回合结束</a></li>
+      </ol>
+    </li>
+    <li><a href="#roundend">轮次结束
+      <ol>
+        <li><a href="#re-duel">声望对决</a></li>
+        <li><a href="#re-pass">传递起始玩家</a></li>
+      </ol>
+    </li>
+    <li><a href="#finalscoring">终局与最终计分</a></li>
+    <li><a href="#favorcards">附录：恩惠卡牌</a></li>
+    <li><a href="#knowledgemarkers">知识标记</a></li>
+  </ol>
+</nav>
+
+<section id="intro">
+  <h2 class="sec"><span class="num">1</span>引言</h2>
+  <p>在中世纪的欧洲，受过训练的医生十分稀少。四处游走的理发师竭尽全力照料百姓的健康，其中不止一人曾梦想有朝一日能习得渊博的学识、赢得“医者（Medicus）”的声誉。</p>
+  <p>在本游戏中，你扮演这样一位理发师，在旅途中不断积累配得上“医者”之名的学识。为此，你穿梭于一座座城市，完成各式各样的任务：</p>
+  <ul>
+    <li>► 沿途收集珍稀药剂，到集市上出售。</li>
+    <li>► 替教会送信，赢得神职人员的善意。</li>
+    <li>► 在修道院图书馆搜寻疗方。</li>
+    <li>► 在大城市里购置医疗器械、送孩子去澡堂受训，或医治城主赢得其青睐。你甚至可能遇见著名的医者本人，得到他的指点。</li>
+  </ul>
+  <p>最终，谁真正具备成为医者的资质，将见分晓！</p>
+  <p class="tip">v1.0 版权所有。未经事先许可，不得翻印或出版本手册、游戏配件或插图。</p>
+  <figure>
+    <img class="page-img" src="Medicus_Rules_images/page_2.jpg" alt="规则书第 2 页（引言与出版信息）">
+    <figcaption>规则书第 2 页（引言与出版信息原文）</figcaption>
+  </figure>
+</section>
+
+<section id="imprint">
+  <h2 class="sec"><span class="num">2</span>出版信息</h2>
+  <p>出版方与设计师感谢所有参与测试、校对并提供宝贵反馈的人！</p>
+  <ul>
+    <li>游戏设计：Stefan Feld</li>
+    <li>插画与排版：Dennis Lohausen</li>
+    <li>规则排版：Georg Wild</li>
+    <li>实现：Ralph Bruhn</li>
+    <li>翻译：Tim Schleimer</li>
+    <li>Pegasus Spiele GmbH</li>
+    <li>Am Straßbach 3, 61169 Friedberg, Deutschland</li>
+    <li>© 2026 Hall Games</li>
+    <li>Ralph Bruhn, Herderstr. 36, 53332 Bornheim</li>
+    <li>www.hallgames.de</li>
+  </ul>
+  <p>规则说明、视频及更多信息见：<b>https://hallgames.de/en-us/spiele-medico</b></p>
+</section>
+
+<section id="components">
+  <h2 class="sec"><span class="num">3</span>共有组件</h2>
+  <p>玩家配件（玩家颜色：蓝、黄、绿、红）。注：药剂、知识标记和钱币数量不限。若用完，可用替代物代替。</p>
+  <ul class="comp-list">
+    <li>49 件器械</li>
+    <li>14 根医神之杖（金 7 银 7）</li>
+    <li>42 封信</li>
+    <li>38 张恩惠卡牌</li>
+    <li>4 张起始恩惠卡牌（带颜色背面）</li>
+    <li>7 张地点卡牌</li>
+    <li>8 张概览卡牌</li>
+    <li>4 个中立学徒</li>
+    <li>4 个 50/100 标记</li>
+    <li>4 块玩家面板</li>
+    <li>4 个选择盘（首次游戏前组装圆盘、指针和别针）</li>
+    <li>4 个额外袋子</li>
+    <li>24 个学徒（4 色各 8）</li>
+    <li>4 个计分标记</li>
+    <li>4 个声望标记</li>
+    <li>1 块模组游戏板（8 片）</li>
+    <li>1 块计分板</li>
+    <li>28 本配方书</li>
+    <li>28 个市场摊位</li>
+    <li>7 个起始摊位（不同背面）</li>
+    <li>1 个医者模型</li>
+    <li>1 个声望标记（供医者用）</li>
+    <li>20 个知识标记</li>
+    <li>37 枚钱币</li>
+    <li>56 份药剂（7 色各 8）</li>
+    <li>4 个理发师（玩家棋子）</li>
+  </ul>
+  <figure>
+    <img class="page-img" src="Medicus_Rules_images/page_3.jpg" alt="规则书第 3 页（共有组件）">
+    <figcaption>规则书第 3 页（共有组件原文图示）</figcaption>
+  </figure>
+</section>
+
+<section id="setup">
+  <h2 class="sec"><span class="num">4</span>设置</h2>
+
+  <h3 id="setup-board">4.1 游戏板与牌堆</h3>
+  <p>用 8 片任意拼出游戏板，旁边放计分板。</p>
+  <p><b>恩惠卡牌：</b>洗混，背面朝下。► 每个地点放置 3 张正面朝上的恩惠卡牌。► 剩余恩惠卡牌背面朝下放在计分板旁。</p>
+  <p><b>器械：</b>洗混，背面朝下。► 每个地点放置 2 叠正面朝上的器械，每叠 3 件。► 剩余器械背面朝下放在计分板旁。</p>
+  <p><b>配方书：</b>洗混，背面朝下。► 每个地点放置 3 本正面朝上的配方书。► 剩余配方书背面朝下放在计分板旁。</p>
+  <p><b>市场摊位：</b>洗混，背面朝下。► 每个地点放置 3 个正面朝上的市场摊位。► 剩余市场摊位背面朝下放在计分板旁。</p>
+  <p class="tip">首次游戏或想轻松入门时，可在每个牌堆上放置 1 个随机起始摊位，确保药剂分布均匀。熟悉游戏后可忽略起始摊位。</p>
+  <p><b>信件：</b>按封印分拣，各堆洗混后正面朝上放在对应地点。注：为方便，信件堆正面朝上放置。你不得翻找，但不小心看到下一张也无妨。若你愿意，也可背面朝下放置，只翻最上面一张。</p>
+
+  <h3 id="setup-2p">4.2 两人额外设置</h3>
+  <p>增加 2 个中立学徒与第 3 种颜色的理发师、声望标记。此理发师称<b>中立理发师</b>。</p>
+  <ul>
+    <li>► 再翻开 1 张地点卡牌。将中立理发师和 2 个中立学徒放在该地点。给此理发师 2 点声望（标记放在医者的标记上）。</li>
+    <li>► 重新洗混地点卡牌。它们构成中立理发师从第 2 轮起移动的牌堆。</li>
+  </ul>
+  <p>依玩家人数而异的规则以紫色高亮。</p>
+
+  <h3 id="setup-player">4.3 玩家设置</h3>
+  <ul>
+    <li>每位玩家选一种颜色，拿取对应配件。</li>
+    <li>将玩家面板、理发师、选择盘、起始恩惠卡牌和概览卡牌放在面前。</li>
+    <li>每人从抽牌堆抽取 1 本配方书，放在玩家面板左侧。</li>
+    <li>将学徒放在玩家面板的对应格上。</li>
+    <li>将计分标记放在计分板的 0 格。</li>
+    <li>随机决定起始玩家，该玩家拿取起始玩家棋子。</li>
+    <li>每位玩家拿取 3 枚钱币。3 或 4 人游戏时，起始玩家给右手边玩家 1 枚钱币。</li>
+    <li>起始玩家将声望标记放在声望轨道 0 格。其他玩家按顺时针顺序叠在其上，形成堆叠。每当有人获得声望，将对应标记在声望轨道上前进。</li>
+    <li>收起额外袋子和 50/100 标记。</li>
+    <li>未用的玩家颜色放回盒中。</li>
+  </ul>
+  <figure>
+    <img class="page-img" src="Medicus_Rules_images/page_4.jpg" alt="规则书第 4 页（设置）">
+    <figcaption>规则书第 4 页（设置流程原文）</figcaption>
+  </figure>
+  <figure>
+    <img class="page-img" src="Medicus_Rules_images/page_5.jpg" alt="规则书第 5 页（设置续）">
+    <figcaption>规则书第 5 页（设置续原文）</figcaption>
+  </figure>
+  <figure>
+    <img class="page-img" src="Medicus_Rules_images/page_6.jpg" alt="规则书第 6 页（玩家设置）">
+    <figcaption>规则书第 6 页（玩家设置原文）</figcaption>
+  </figure>
+</section>
+
+<section id="gameplay">
+  <h2 class="sec"><span class="num">5</span>游戏流程</h2>
+
+  <h3 id="gp-overview">5.1 总览</h3>
+  <p>游戏进行 <b>8 轮</b>。3 人游戏进行 9 轮，使每人起始轮数相等。</p>
+  <ul>
+    <li>► 首轮前：确定理发师的起始位置。</li>
+    <li>► 每轮开始：在各自选择盘上同时秘密选择目的地。</li>
+    <li>► 回合：从起始玩家开始，翻开选择盘、移动理发师、沿途进行次要行动，在目的地执行 1 个主要行动。</li>
+    <li>► 轮次结束：在有多于 1 个棋子（理发师/医者）的地点解决声望对决。</li>
+    <li>► 游戏结束：进行最终计分。得分最高者胜。</li>
+  </ul>
+  <p>: 立即获得的分数　　: 最终计分时获得的分数</p>
+
+  <h3 id="gp-before">5.2 首轮前</h3>
+  <p>从起始玩家开始顺时针，每位玩家为理发师选一个未被占用的起始地点（医者所在地点除外）。</p>
+  <p>在你所选地点：</p>
+  <ol>
+    <li>将理发师放在市场摊位上。</li>
+    <li>在最低费用的学徒格免费放置 1 个学徒。</li>
+    <li>拿取该地点的信件放在玩家面板上。</li>
+  </ol>
+  <p class="tip">首次游戏可翻开更多地点卡牌随机分配起始位置。熟悉后你会更愿自选起始地点。</p>
+
+  <h3 id="gp-start">5.3 每轮开始</h3>
+  <ul>
+    <li>► <b>第 2 轮起：</b>医者顺时针移动 1 个地点，获得 2 点声望。</li>
+    <li>► <b>两人游戏额外步骤（第 2 轮起）：</b>
+      <ul>
+        <li>翻开下一张中立地点卡牌，将中立理发师移到该地点。</li>
+        <li>在市场摊位的下一个空位放置 1 份对应药剂。学徒按“支付学徒”（见第 8 页）获得收入。</li>
+        <li>若市场摊位填满，按“出售药剂”（见第 8 页）退回盒中。</li>
+        <li>中立理发师获得 2 点声望。</li>
+      </ul>
+    </li>
+    <li>► <b>所有玩家：</b>在各自选择盘上秘密选新目的地。不得停留在当前地点。仅在轮到你时翻开选择盘。</li>
+  </ul>
+
+  <h3 id="gp-turn">5.4 回合</h3>
+  <p>轮到你时：</p>
+  <ol>
+    <li>翻开选择盘。</li>
+    <li>将理发师放在当前地点的市场摊位上。</li>
+    <li>沿最短路径移动理发师至所选目的地。</li>
+    <li>经过每个站点时可进行次要行动（见第 8 页）。</li>
+    <li>在目的地选并执行 1 个主要行动（见第 9 页）。</li>
+  </ol>
+  <p>除支付学徒和主要行动外，所有行动均为可选。</p>
+  <figure>
+    <img class="page-img" src="Medicus_Rules_images/page_7.jpg" alt="规则书第 7 页（游戏流程）">
+    <figcaption>规则书第 7 页（游戏流程原文）</figcaption>
+  </figure>
+</section>
+
+<section id="secondary">
+  <h2 class="sec"><span class="num">6</span>次要行动</h2>
+  <p>数量不限，按给定顺序（可选）：</p>
+  <ul>
+    <li>• 收集药剂（每类最多 1 份）</li>
+    <li>• 出售药剂</li>
+    <li>• 支付学徒（强制）</li>
+    <li>• 投递信件（奖励：声望/钱币）</li>
+    <li>• 购买配方书</li>
+    <li>• 拜见医者（回合结束时放知识标记）</li>
+  </ul>
+
+  <h3 id="sec-remedy">6.1 收集药剂</h3>
+  <p>沿途你收集工作所需之物……沿路你最多可拿取每种经过类型的药剂 1 份，前提是能以下列两种方式之一放置：</p>
+  <ol>
+    <li>放在玩家面板上的一个空袋子。你可随时将袋子里的药剂退回供应区腾出空间。</li>
+    <li>放在某本配方书的对应符号上。若这是放在该配方书上的第 2 份药剂，配方完成。立即获得配方书上所示声望（相同药剂获得 2 声望，不同药剂获得 1 声望）。将完成的配方书背面朝下放在玩家面板指定格。</li>
+  </ol>
+  <p class="important"><b>重要：</b>一旦放置，药剂不得在袋子和配方书间移动。</p>
+
+  <h3 id="sec-sell">6.2 出售药剂</h3>
+  <p>各地需求不同——希望你有带对的东西……在目的地，你可把袋子里的 1 份或多份药剂卖给市场摊位，放在对应符号上。</p>
+  <p>每售出 1 份药剂：</p>
+  <ul>
+    <li>► 拿取与市场摊位空位数相等的钱币（1、2 或 3）。</li>
+    <li>► 将药剂放在其中一个空位。</li>
+  </ul>
+  <p>只要还有空位，可继续出售。若填满市场摊位的最后 1 格：</p>
+  <ul>
+    <li>► 将该市场摊位上所有药剂退回供应区。</li>
+    <li>► 拿取市场摊位板块，背面朝下放在玩家面板上。</li>
+  </ul>
+  <p>若此市场摊位有知识标记，且你在此至少售出 1 份药剂，可取走它。在回合结束时放在玩家面板上（见第 9 页，回合结束）。</p>
+
+  <h3 id="sec-appr">6.3 支付学徒</h3>
+  <p>你对教育的投资开始回报……若你本回合至少售出 1 份药剂，此地点除你以外的所有学徒从供应区获得 1 枚钱币。</p>
+  <p class="tip">清楚宣布谁获得钱币，以免遗漏。</p>
+
+  <h3 id="sec-letter">6.4 投递信件</h3>
+  <p>作为旅人，你答应携带并投递信件……总有一天会送到。若你玩家面板上最上面的信件的大纹章显示你正移向的地点，则投递：</p>
+  <ul>
+    <li>► 选择 1 枚钱币或 1 点声望作为奖励。</li>
+    <li>► 保留已投信件（用于最终计分）。</li>
+    <li>► 拿取该地点的信件放在玩家面板上作为新投递目标。若无更多信件，跳过此步，你无法再投递（极少发生）。</li>
+  </ul>
+
+  <h3 id="sec-recipe">6.5 购买配方书</h3>
+  <p>学习新配方是你的本行——要是书不那么贵就好了……支付 1 枚钱币，若你的 2 个槽位中至少有 1 个空，可买配方书放在面板左侧。</p>
+
+  <h3 id="sec-medicus">6.6 拜见医者</h3>
+  <p>你喜欢向最优秀者学习，为此花钱值得！有朝一日你也想成为医者……若医者在此地点，你可支付 2 枚钱币从供应区拿取 1 个知识标记。在回合结束时放在玩家面板上（见第 9 页，回合结束）。</p>
+  <figure>
+    <img class="page-img" src="Medicus_Rules_images/page_8.jpg" alt="规则书第 8 页（次要行动）">
+    <figcaption>规则书第 8 页（次要行动原文）</figcaption>
+  </figure>
+</section>
+
+<section id="main">
+  <h2 class="sec"><span class="num">7</span>主要行动</h2>
+  <p>在目的地，从 4 个主要行动中选 <b>恰好 1 个</b>。将理发师放在对应行动格。</p>
+
+  <h3 id="main-money">7.1 拿取金钱</h3>
+  <p>你为所提供的医疗诊治收取报酬。从供应区拿取 2 枚钱币。</p>
+
+  <h3 id="main-favor">7.2 拿取恩惠卡牌</h3>
+  <p>你诊治了贵族，其感激授予你恩惠——往往比钱更有价值……拿取此地点正面朝上的恩惠卡牌放在玩家面板旁。除非另有说明，你可在回合中任何时候（含立即）使用恩惠卡牌。你可持有或打出任意多张恩惠卡牌。</p>
+
+  <h3 id="main-train">7.3 训练学徒</h3>
+  <p>训练学徒要花钱，但是对未来的投资！支付玩家面板上最低费用学徒格所示费用，将玩家面板上下一个学徒移到该格。获得该学徒在玩家面板上所示的声望。每个地点你最多只能有 1 个学徒。</p>
+
+  <h3 id="main-instr">7.4 购买器械</h3>
+  <p>一套好器械非常实用，也能给顾客留下印象……你可从此地点的展示区购买器械。</p>
+  <ul>
+    <li>► 支付 1 枚钱币购买 1 件器械。</li>
+    <li>► 若有至少 1 个其他棋子（理发师或医者）在场，可改支付 3 枚钱币购买两件器械。</li>
+    <li>► 不得从同一叠拿取两件器械。</li>
+  </ul>
+  <p class="ex"><b>例：</b>因医者当前在此地点，你可支付 3 枚钱币购买两件器械，或支付 1 枚钱币购买 1 件。每件器械放在玩家面板上方，从左到右。相同器械叠放。每放置 1 件新器械：获得器械所示的立即奖励（钱币和/或声望）；器械的分数仅在最终计分授予。</p>
+
+  <h3 id="main-end">7.5 回合结束</h3>
+  <ul>
+    <li>► 若本回合获得知识标记，现在放在玩家面板标记格以获得额外能力。这些能力可能影响下次声望对决，但不影响当前回合（见第 12 页，知识标记）。</li>
+    <li>► 检查是否首次满足医神之杖条件。若是，拿取对应之杖（先金后银）放在玩家面板。</li>
+    <li>► 从计分板旁的供应区补充恩惠卡牌、器械、配方书或市场摊位的空位。若供应区空，留空。</li>
+  </ul>
+  <figure>
+    <img class="page-img" src="Medicus_Rules_images/page_9.jpg" alt="规则书第 9 页（主要行动）">
+    <figcaption>规则书第 9 页（主要行动原文）</figcaption>
+  </figure>
+</section>
+
+<section id="roundend">
+  <h2 class="sec"><span class="num">8</span>轮次结束</h2>
+
+  <h3 id="re-duel">8.1 声望对决</h3>
+  <p>你的努力值得奖赏！但竞争者不会乐意……所有玩家行动后，从医者开始顺时针检查每个地点。若有 2 个或更多棋子（理发师或医者）在同一地点，发生声望对决。</p>
+  <ul>
+    <li>► 声望最高者胜。平局由声望轨道上位置更高的标记打破。</li>
+    <li>► 胜者在此地点执行 1 个额外主要行动，但必须与回合中所执行的行动不同。</li>
+  </ul>
+  <p class="ex"><b>例：</b>你主要行动拿取了恩惠卡牌，因此现在必须选不同主要行动作为奖励，如购买器械。</p>
+  <ul>
+    <li>► 对决解决后，胜者（若适用含医者）失去 1 点声望。</li>
+    <li>► 若医者或中立棋子赢得对决：在该地点市场摊位放置 1 个知识标记。下个在此市场摊位出售的玩家获得该标记。</li>
+  </ul>
+
+  <h3 id="re-pass">8.2 传递起始玩家</h3>
+  <p>顺时针传递起始玩家棋子。最终轮后进入最终计分。</p>
+  <p class="tip">轮数取决于玩家人数：<br>
+  4 人：当医者移回游戏开始所在地点时，最终轮开始。<br>
+  3 人：进行 9 轮；医者须比 4 人游戏多移动 1 个地点。<br>
+  2 人：地点卡牌堆决定 8 轮。最后一张卡标记最后一轮。</p>
+  <figure>
+    <img class="page-img" src="Medicus_Rules_images/page_10.jpg" alt="规则书第 10 页（轮次结束与终局计分）">
+    <figcaption>规则书第 10 页（轮次结束与终局计分原文）</figcaption>
+  </figure>
+</section>
+
+<section id="finalscoring">
+  <h2 class="sec"><span class="num">9</span>终局与最终计分</h2>
+  <p>最终轮后，进行最终计分。在计分板记录分数：</p>
+  <ul>
+    <li>► 统计背面朝下的配方书和市场摊位。各值 +1 后相乘。</li>
+    <li>► 每个地点的学徒值 2–6 分，取决于玩家面板上的格。</li>
+    <li>► 每封信值 1 分 + 每个信使知识标记额外 1 分。</li>
+    <li>► 每件器械值 1–4 分，取决于其在玩家面板上的位置。</li>
+    <li>► 金医神之杖各值 4 分，银杖各值 2 分。</li>
+    <li>► 每 2 枚剩余钱币和药剂值 1 分。</li>
+    <li>► 专家知识标记：你拥有的每种器械类型若至少达 3 件，额外值 5 分。</li>
+  </ul>
+  <p>平局由声望轨道上最高的玩家打破。</p>
+  <p class="ex"><b>最终计分示例：</b><br>
+  ► 3 本配方书和 2 个市场摊位 → 4×3 = 12 分<br>
+  ► 所有器械之和：19 分<br>
+  ► 所有学徒之和：2+3+4 = 9 分<br>
+  ► 4 封信 × 倍数 3：12 分<br>
+  ► 医神之杖：4+4+2 = 10 分<br>
+  ► 1 张未用恩惠卡牌：2 分<br>
+  ► 3 枚钱币和 2 份药剂：2 分<br>
+  ► 专家：5 分<br>
+  <b>总计：71 分</b></p>
+</section>
+
+<section id="favorcards">
+  <h2 class="sec"><span class="num">10</span>附录：恩惠卡牌</h2>
+  <p>以下是游戏中全部 19 张恩惠卡牌的说明：</p>
+  <ol>
+    <li><b>独行路径的恩惠：</b>若当前轮中在你之前的玩家选了相同目的地，可改目的地。<br><span class="tip">注：这是设置时每位玩家收到的起始恩惠卡牌，背面显示玩家颜色。</span></li>
+    <li><b>先至者的恩惠：</b>在起始地点执行 1 个自选主要行动。</li>
+    <li><b>最佳时机的恩惠：</b>拿取 1 根少 1 项条件的医神之杖。</li>
+    <li><b>友好馈赠的恩惠：</b>在起始地点或目的地，为每个其他在场棋子（理发师或医者）从供应区拿取 2 枚钱币。</li>
+    <li><b>顺手牵羊的恩惠：</b>主要行动后：从市场摊位拿取任意多份药剂。获得 2 分。</li>
+    <li><b>紧俏之物的恩惠：</b>在市场摊位出售 1 份与所示符号不符的药剂。</li>
+    <li><b>丰厚发现的恩惠：</b>收集药剂时，选 1 种药剂并尽数拿取你能储存的数量。你可填满所有需要此药剂的袋子和配方书。</li>
+    <li><b>自由选择的恩惠：</b>可沿较长路径而非较短路径移动。</li>
+    <li><b>现钱实利的恩惠：</b>支付 3 枚钱币在目的地执行所有主要行动，而非仅 1 个。</li>
+    <li><b>惬意居停的恩惠：</b>选起始地点作目的地。跳过收集药剂；改拿取 1 份自选药剂，并从市场摊位步骤继续回合。</li>
+    <li><b>光辉业绩的恩惠：</b>立即获得 2 点声望。</li>
+    <li><b>私人授业的恩惠：</b>在医者地点，支付 3 枚钱币获得 2 个知识标记（而非 2 枚钱币获得 1 个）。</li>
+    <li><b>特权交易的恩惠：</b>若在市场摊位售出最后 1 份药剂，从牌堆抽取 2 张恩惠卡牌。</li>
+    <li><b>深厚友情的恩惠：</b>若你的地点有 3 个或更多棋子（含你自己的），获得 4 分。</li>
+    <li><b>先见之明的恩惠：</b>投递信件时，立即满足你收到的下一封信的要求。从该地点拿取新信件放在玩家面板。你也获得这第二封信的投递奖励（1 点声望或 1 枚钱币）。</li>
+    <li><b>互通有无的恩惠：</b>在目的地，与展示区交换 2 件自选器械。先从玩家面板取回 2 件器械入手，再放 2 件新器械并获得其立即奖励。</li>
+    <li><b>附赠好礼的恩惠：</b>若你购买 2 件器械，从牌堆额外抽取 1 件器械*。</li>
+    <li><b>慷慨馈赠的恩惠：</b>若你恰好购买 1 件器械，免费从展示区拿取另 1 件（即使你独自在地点）。</li>
+    <li><b>丰厚回报的恩惠：</b>出售 1 件器械*获得 5 枚钱币。<br><span class="tip">*注：若因新器械叠在相同器械上而出现空隙，保留这些空隙。</span></li>
+  </ol>
+  <figure>
+    <img class="page-img" src="Medicus_Rules_images/page_11.jpg" alt="规则书第 11 页（恩惠卡牌附录）">
+    <figcaption>规则书第 11 页（恩惠卡牌附录原文）</figcaption>
+  </figure>
+</section>
+
+<section id="knowledgemarkers">
+  <h2 class="sec"><span class="num">11</span>知识标记</h2>
+  <p>获得知识标记时，在回合结束时放在玩家面板对应格。每个标记授予永久能力（另有说明除外）。</p>
+  <ul>
+    <li><b>讨价还价：</b>出售药剂时，获得与市场摊位上药剂图标数（含被覆盖图标）相等的钱币。取代通常“获得与空位数相等钱币”的规则。<br><span class="ex">例：若市场摊位显示 3 个药剂图标，每售 1 份获得 3 枚钱币，无论市场摊位上已有多少药剂。</span></li>
+    <li><b>名人：</b>完成配方书时立即获得额外分数：显示 1 星获得 2 分，2 星获得 3 分。</li>
+    <li><b>奥波勒斯：</b>当玩家在你的地点售药剂，每售 1 份你获得 1 枚钱币，而非最多 1 枚。你自己的销售也获得钱币。<br><span class="ex">例：红售 2 份药剂。因蓝和红都有奥波勒斯标记，蓝获得 2 枚钱币而非 1 枚。红因此也为其学徒获得 2 枚钱币，外加 2 份药剂销售的 3 枚钱币。</span></li>
+    <li><b>信使费用：</b>获得此标记时立即获得 1 点声望和 1 枚钱币。此后投递信件时，两样奖励都获得（1 声望和 1 钱币，而非选 1）。</li>
+    <li><b>多面手：</b>赢得声望对决时，可执行该地点你回合中未执行的所有主要行动，而非仅 1 个。</li>
+    <li><b>特权：</b>回合开始时，可将你当前地点对面的药剂放入玩家面板的空袋子里。</li>
+    <li><b>厌倦：</b>立即获得 4 分。</li>
+    <li><b>专家：</b>最终计分时，你拥有的每种器械类型若至少达 3 份，额外获得 5 分。</li>
+    <li><b>信使：</b>游戏结束时，你每有 1 封信，每个信使标记额外值 1 分。</li>
+    <li><b>额外袋子：</b>将额外袋子放置在玩家面板上。现可多存 1 份药剂。此外，回合中可将药剂从袋子移到配方书。不得从配方书移回袋子。</li>
+    <li><b>医神之杖：</b>在他人之前满足特定条件获得医神之杖：首个满足条件者获得金杖（值 4 分）；第二个满足同条件者获得银杖（值 2 分）。条件显示在玩家面板和计分板上。将所得之杖放在玩家面板，最终计分计入。</li>
+  </ul>
+  <p><b>知识标记条件：</b>6 封信 / 15 点声望 / 5 个知识标记 / 6 种不同器械类型 / 4 本已完成配方书 / 5 个市场摊位 / 在 5 个不同地点的学徒。</p>
+  <figure>
+    <img class="page-img" src="Medicus_Rules_images/page_12.jpg" alt="规则书第 12 页（知识标记）">
+    <figcaption>规则书第 12 页（知识标记原文）</figcaption>
+  </figure>
+</section>
+
+<div class="footer-note">
+  <b>翻译说明：</b>保留英文的专名——人名（Stefan Feld、Dennis Lohausen、Ralph Bruhn、Georg Wild、Tim Schleimer）、公司（Pegasus Spiele GmbH、Hall Games）、游戏名（Medicus）、古希腊专名（Asclepius 医神、Obolus 奥波勒斯古钱币）。其余术语均译为中文。
+</div>
+
+</div>
+</body>
+</html>

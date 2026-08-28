@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bad Baby Lich Lords（熊孩子巫妖领主）— 游戏规则</title>
+<style>
+  :root{
+    --bone:#f6f1e7; --bone2:#efe7d6; --ink:#2b2533; --ink-soft:#5b5366;
+    --purple:#5b3a8c; --purple-d:#3f2863; --purple-l:#8a6bc0;
+    --accent:#c8743a; --accent-d:#a85a26;
+    --green:#3f7d52; --green-l:#e4f0e7;
+    --red:#a8392f; --red-l:#f6e3e0;
+    --line:#d8cfbd;
+    --card:#fffdf8;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bone); color:var(--ink);
+    font-family:"Songti SC","Noto Serif SC","Source Han Serif SC",STSong,serif;
+    line-height:1.8; font-size:17px;
+  }
+  .wrap{display:flex; align-items:flex-start; max-width:1180px; margin:0 auto;}
+  nav{
+    position:sticky; top:0; align-self:flex-start;
+    width:248px; flex:0 0 248px; height:100vh; overflow-y:auto;
+    background:var(--purple-d); color:#efe9f6; padding:22px 16px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;
+  }
+  nav h2{font-size:13px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--purple-l); margin:0 0 12px;}
+  nav ol{list-style:none; margin:0; padding:0; counter-reset:sec;}
+  nav li{margin:0;}
+  nav a{display:block; color:#efe9f6; text-decoration:none; font-size:14px;
+    padding:7px 10px; border-radius:7px;}
+  nav a:hover{background:var(--purple);}
+  nav a.sub{padding-left:24px; font-size:13px; color:#cdbce8;}
+  main{flex:1 1 auto; min-width:0; padding:0 40px 80px;}
+  .cover{
+    background:linear-gradient(160deg,var(--purple-d),var(--purple));
+    color:#f6f1e7; padding:60px 40px; border-radius:0 0 18px 18px;
+    margin-bottom:36px; text-align:center;
+    box-shadow:0 10px 30px rgba(63,40,99,.25);
+  }
+  .cover h1{font-size:38px; margin:0 0 8px; letter-spacing:.01em;}
+  .cover .sub{font-size:16px; opacity:.9; font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .cover .tag{display:inline-block; margin-top:16px; padding:6px 16px;
+    border:1px solid rgba(255,255,255,.4); border-radius:20px; font-size:14px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  section{padding:14px 0 8px; border-bottom:1px solid var(--line); scroll-margin-top:18px;}
+  h2.sec{font-size:28px; color:var(--purple-d); margin:18px 0 6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; letter-spacing:.01em;}
+  h2.sec .num{color:var(--accent); font-weight:700; margin-right:10px;}
+  h3{font-size:20px; color:var(--purple); margin:24px 0 6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  p{margin:10px 0;}
+  ul,ol{margin:10px 0 10px 4px; padding-left:22px;}
+  li{margin:5px 0;}
+  .lead{font-size:18px;}
+  .comp-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:16px 0;}
+  .comp{border:1px solid var(--line); background:var(--card); border-radius:12px;
+    padding:14px 16px; box-shadow:0 2px 6px rgba(0,0,0,.04);}
+  .comp b{color:var(--purple-d);}
+  .callout{border-left:5px solid var(--accent); background:var(--bone2);
+    padding:12px 18px; margin:16px 0; border-radius:0 10px 10px 0;}
+  .callout.warn{border-color:var(--red); background:var(--red-l);}
+  .callout.tip{border-color:var(--green); background:var(--green-l);}
+  .callout b{color:var(--accent-d);}
+  .callout.tip b{color:var(--green);}
+  .steps{counter-reset:step; list-style:none; padding-left:0; margin:14px 0;}
+  .steps li{position:relative; padding:10px 14px 10px 52px; margin:8px 0;
+    background:var(--card); border:1px solid var(--line); border-radius:10px;}
+  .steps li::before{counter-increment:step; content:counter(step);
+    position:absolute; left:12px; top:50%; transform:translateY(-50%);
+    width:28px; height:28px; background:var(--purple); color:#fff;
+    border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-weight:700; font-family:Arial,sans-serif;}
+  .skill{border:1px solid var(--line); background:var(--card); border-radius:12px;
+    padding:14px 18px; margin:12px 0; box-shadow:0 2px 6px rgba(0,0,0,.04);}
+  .skill .name{font-weight:700; color:var(--purple-d); font-size:18px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .skill .name .ico{display:inline-block; min-width:22px; color:var(--accent);}
+  .req{border:1px solid var(--line); background:var(--card); border-radius:10px;
+    padding:12px 16px; margin:10px 0;}
+  .req .sym{font-weight:700; color:var(--purple-d);}
+  .ex{font-size:15px; color:var(--ink-soft); border-top:1px dashed var(--line);
+    margin-top:8px; padding-top:8px;}
+  .ex.ok::before{content:"✓ 得分示例 — "; color:var(--green); font-weight:700;}
+  .ex.no::before{content:"✗ 不得分示例 — "; color:var(--red); font-weight:700;}
+  figure{margin:18px 0; text-align:center;}
+  figure img{max-width:100%; border:1px solid var(--line); border-radius:12px;
+    box-shadow:0 4px 14px rgba(0,0,0,.08); background:#fff;}
+  figcaption{font-size:13px; color:var(--ink-soft); margin-top:6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .two{display:grid; grid-template-columns:1fr 1fr; gap:16px; align-items:start;}
+  @media(max-width:900px){
+    .wrap{flex-direction:column;}
+    nav{position:static; width:100%; height:auto; flex-basis:auto;}
+    main{padding:0 18px 60px;}
+    .comp-grid,.two{grid-template-columns:1fr;}
+  }
+  .pill{display:inline-block; background:var(--purple-l); color:#fff; font-size:12px;
+    padding:2px 10px; border-radius:12px; font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;
+    vertical-align:middle; margin-left:6px;}
+  footer{margin-top:40px; font-size:13px; color:var(--ink-soft);
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; text-align:center;}
+  .credits{background:var(--bone2); border:1px solid var(--line); border-radius:12px;
+    padding:16px 20px; margin-top:14px;}
+  .credits b{color:var(--purple-d);}
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <h1>Bad Baby Lich Lords</h1>
+  <div class="sub">熊孩子巫妖领主 · 游戏规则</div>
+  <div class="tag">2–4 人 &nbsp;|&nbsp; 20–30 分钟 &nbsp;|&nbsp; 8 岁以上</div>
+</header>
+
+<div class="wrap">
+  <nav>
+    <h2>目录</h2>
+    <ol>
+      <li><a href="#overview">概览</a></li>
+      <li><a href="#components">组件</a></li>
+      <li><a href="#setup">准备（双人）</a></li>
+      <li><a href="#play">游戏流程</a></li>
+      <li><a href="#spells">施放法术</a></li>
+      <li><a href="#scoring">领域计分</a></li>
+      <li><a href="#skills">技能</a></li>
+      <li><a href="#reqs">计分条件</a></li>
+      <li><a href="#multi">3–4 人规则</a></li>
+      <li><a href="#ref">快速查阅</a></li>
+      <li><a href="#credits">制作人员</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+  <!-- ============ 概览 ============ -->
+  <section id="overview">
+    <h2 class="sec"><span class="num">1</span>概览</h2>
+    <p class="lead">我们的父亲——巫妖王（Lich King），把王国里所有人都变成了骷髅，好让自己能歇一歇。没了家长看管，你和一群调皮的兄弟姐妹正把王国重新变回生机勃勃的样子。</p>
+    <p>在 <b>Bad Baby Lich Lords（熊孩子巫妖领主）</b> 中，玩家轮流从某个骨堆（Bonepile）抓取骷髅，翻面并亮出在自己某个领域（Realm）的一侧。骷髅翻面后变成随从（Minion）。随从可不服管了！它们四处移动、互相打斗、施放法术，还会把别的骷髅唤醒，闹出各种出人意料的状况！</p>
+    <p>你的目标是凑齐正确的卡牌组合，在某个领域得分并占领它，同时阻止对手得逞。每次有人计分，巫妖王就会在睡梦中翻个身，把该领域里所有卡牌清空。<b>率先累计 5 点噪音（Noise）、吵醒巫妖王的玩家获胜。</b></p>
+    <figure>
+      <img src="BBLL_Rules_images/page_02.jpg" alt="游戏概览与背景故事页">
+      <figcaption>游戏概览、背景故事与制作人员（原书第 2 页）</figcaption>
+    </figure>
+  </section>
+
+  <!-- ============ 组件 ============ -->
+  <section id="components">
+    <h2 class="sec"><span class="num">2</span>组件</h2>
+    <div class="comp-grid">
+      <div class="comp"><b>4 个领域（Realms）</b><br>共有 4 个不同领域：扎德学院（Zard College）、自由民废料场（Freeple Scrapyard）、诺布林森林（Noblin Forest）和食尸鬼大墓城（Ghoulie Necropolis）。</div>
+      <div class="comp"><b>随从 / 骷髅（Minions / Skeletons）</b><br>双面牌，正面是随从，背面是骷髅，并印有一组技能图标，标明把它唤醒后随从会做什么。</div>
+      <div class="comp"><b>领域托盘（Realm Tray）</b><br>用来放置领域牌，以及被称为骨堆（Bonepile）的随从/骷髅牌牌库。</div>
+      <div class="comp"><b>领域牌（Realm Cards）</b><br>每张都有一个<b>噪音值（Noise Value）</b>和<b>计分条件（Scoring Requirements）</b>。</div>
+      <div class="comp"><b>老爸的法术书（Dad's Spellbook）</b><br>即法术牌。<i>宝宝勿动！</i>（详见<a href="#spells">施放法术</a>。）</div>
+      <div class="comp"><b>骨堆（Bonepile）</b><br>插在领域托盘中的随从/骷髅牌牌库（即骨堆 Bonepile）。</div>
+    </div>
+    <figure>
+      <img src="BBLL_Rules_images/page_03.jpg" alt="组件概览">
+      <figcaption>组件标注：领域、随从/骷髅、领域托盘、领域牌、法术（原书第 3 页）</figcaption>
+    </figure>
+  </section>
+
+  <!-- ============ 准备 ============ -->
+  <section id="setup">
+    <h2 class="sec"><span class="num">3</span>准备（双人）</h2>
+    <ol class="steps">
+      <li><b>摆放领域托盘。</b>任选 <b>3 个领域托盘</b>排成一列，置于两名对向玩家之间（见图）。玩家与领域托盘之间留出放牌的空间。第 <b>4 个领域</b>放在一旁——本局不使用。</li>
+      <li><b>洗混领域。</b>将每个领域的骨堆和领域牌分别洗混。骨堆牌<b>骷髅面朝上</b>；领域牌<b>正面朝上</b>。</li>
+      <li><b>洗混法术。</b>洗混法术牌（老爸的法术书），牌面朝下放在双方都能拿到的地方。</li>
+      <li><b>决定先手。</b>选择或随机决定谁先手。</li>
+    </ol>
+    <div class="callout tip"><b>新手提示（Learning Lich Lords）：</b>第一次玩双人局，建议使用自由民（Freeple）、诺布林（Noblin）和扎德（Zard）三个领域。若某位玩家经验较少，可将中央的牌摆正朝向他，方便其阅读。</div>
+    <p>完成上述步骤后，<b>即可开始游戏！</b></p>
+    <figure>
+      <img src="BBLL_Rules_images/page_04.jpg" alt="准备布局图">
+      <figcaption>双人准备布局：玩家之间的领域托盘、骨堆与领域牌（原书第 4 页）</figcaption>
+    </figure>
+  </section>
+
+  <!-- ============ 游戏流程 ============ -->
+  <section id="play">
+    <h2 class="sec"><span class="num">4</span>游戏流程</h2>
+    <h3>王国（The Kingdom）</h3>
+    <p>你面前的一片区域是你的一侧（Side）王国；对面则是<b>对手的一侧（Side）</b>。放在领域托盘任意一侧的卡牌，都视为处于该领域之中。</p>
+
+    <h3>巫妖行动（Lich Actions）</h3>
+    <p>你的回合选择一项巫妖行动：</p>
+    <ul>
+      <li><b>抓取并唤醒（Grab &amp; Raise）</b>——从任意骨堆顶端取一张骷髅，移到你任意某个领域的一侧并翻面。</li>
+      <li><b>原地唤醒（Raise in Place, R.I.P.）</b>——将你王国一侧任意一只已有的骷髅翻面，它仍留在同一领域。</li>
+    </ul>
+
+    <h3>回合流程（Turn Summary）</h3>
+    <ul>
+      <li>选择一项巫妖行动：<b>抓取并唤醒</b>，或 <b>原地唤醒</b>。</li>
+      <li>结算所有 <b>随从行动（Minion Actions）</b>。</li>
+      <li>若手中有法术，可在回合内任何其他行动之前或之后<b>施放</b>。</li>
+      <li>全部完成后，进行<b>领域计分</b>并结束回合。</li>
+    </ul>
+
+    <h3>随从行动（Minion Actions）</h3>
+    <p>每当你将一只骷髅翻面，它变成随从并开始<b>行动（Act）</b>，按从左到右的顺序执行其全部技能。</p>
+    <ul>
+      <li>随从必须尽可能执行每一项技能。</li>
+      <li>每张牌每回合只能行动一次。</li>
+      <li>若你导致对手一侧的某张牌行动，在该牌行动期间由你操控。</li>
+    </ul>
+    <div class="callout"><b>注意：</b>所有技能都必须尽可能执行——常常会造成令人捧腹的"自爆"！</div>
+    <figure>
+      <img src="BBLL_Rules_images/page_05.jpg" alt="游戏流程：王国、巫妖行动、回合流程、随从行动">
+      <figcaption>王国布局、巫妖行动、回合流程与随从行动（原书第 5 页）</figcaption>
+    </figure>
+  </section>
+
+  <!-- ============ 施放法术 ============ -->
+  <section id="spells">
+    <h2 class="sec"><span class="num">5</span>施放法术</h2>
+    <p>要<b>施放法术（Cast a Spell）</b>，亮出你手中的一张法术，执行牌面描述的效果，然后将其<b>焚烧（Burn）</b>（放入焚烧堆 Burn Pile）。</p>
+    <div class="callout"><b>禁忌组合（Forbidden Combo！）</b>若你手中有两张相同的法术，可同时打出，触发牌底标注的禁忌组合效果，随后将两张牌都焚烧。</div>
+    <p>部分随从技能会要求你抽一张法术。只要手中有法术，你就能在回合内施放。</p>
+    <ul>
+      <li>回合内你可不限次数施放法术。</li>
+      <li>法术可在唤醒骷髅之前或之后打出。</li>
+      <li>随从行动期间<b>不得</b>施放法术。</li>
+    </ul>
+    <div class="callout"><b>示例——"他的烈焰凝视（His Fiery Gaze！）"：</b>你可以同时打出两张战斗（Fight）法术，触发组合效果"他的烈焰凝视！"，将一只随从送进焚烧堆——直接移出游戏！</div>
+    <p>法术用完时，把焚烧堆里的法术洗回，组成新牌库即可。</p>
+    <figure>
+      <img src="BBLL_Rules_images/page_06.jpg" alt="施放法术与禁忌组合">
+      <figcaption>施放法术、禁忌组合，以及"他的烈焰凝视"示例（原书第 6 页）</figcaption>
+    </figure>
+  </section>
+
+  <!-- ============ 领域计分 ============ -->
+  <section id="scoring">
+    <h2 class="sec"><span class="num">6</span>领域计分</h2>
+    <p>完成巫妖行动、结算完所有随从行动、施放完法术后，检查是否有领域被占领计分。</p>
+    <p>若某玩家在其领域一侧拥有一组满足<b>计分条件（Scoring Requirements）</b>的卡牌，该领域即被<b>占领（Scored）</b>。</p>
+    <h3>谁计分？</h3>
+    <ul>
+      <li>你领域一侧的所有卡牌都计入该领域计分。</li>
+      <li>若对手一侧满足条件，则由对手占领该领域。</li>
+      <li>若多名玩家同时满足同一领域的计分条件，由当前回合的玩家占领。</li>
+      <li>领域仅在你的回合结束时计分。</li>
+      <li>一旦满足条件，<b>必须</b>计分。</li>
+    </ul>
+    <h3>当你占领一个领域</h3>
+    <ol class="steps">
+      <li><b>拿走领域牌（Take the Realm Card）。</b>露出牌库中的下一张领域牌。</li>
+      <li><b>巫妖王苏醒了！（The Lich King Stirs！）</b>将领域内所有卡牌（含对手的）收走并弃入焚烧堆。</li>
+    </ol>
+    <p>你拿走的领域牌组成你的<b>计分堆（Score Pile）</b>。率先累计 <b>5 点噪音（Noise）</b>者获胜！</p>
+    <figure>
+      <img src="BBLL_Rules_images/page_07.jpg" alt="领域计分示例">
+      <figcaption>计分堆、焚烧堆，以及得分/不得分示例（原书第 7 页）</figcaption>
+    </figure>
+  </section>
+
+  <!-- ============ 技能 ============ -->
+  <section id="skills">
+    <h2 class="sec"><span class="num">7</span>技能</h2>
+    <p>本节说明所有随从技能。你也可以在规则书封底找到速查表。<b>所有技能都必须尽可能执行。</b></p>
+
+    <div class="skill"><div class="name"><span class="ico">⛏</span>挖（Dig）</div>
+      <p>将本领域的骨堆顶端骷髅移到本领域的任意一侧。"本领域"指行动随从所在的同一领域。</p></div>
+
+    <div class="skill"><div class="name"><span class="ico">⚔</span>战斗（Fight）</div>
+      <p>在本领域中，将一只战斗技能较少的随从翻面（翻成骷髅面）。拥有多个战斗技能的随从，每个技能各触发一次。</p></div>
+
+    <div class="skill"><div class="name"><span class="ico">➤</span>离开（Leave）</div>
+      <p>将此随从移到相邻领域，不改变所属一侧。</p></div>
+
+    <div class="skill"><div class="name"><span class="ico">↑</span>唤醒（Raise）</div>
+      <p>将本领域任意一侧的一只骷髅翻为随从面。该随从行动，执行其全部技能。唤醒不可指定骨堆上的骷髅。</p>
+      <div class="ex">当你唤醒对手的随从时，由你决定它如何行动！</div></div>
+
+    <div class="skill"><div class="name"><span class="ico">✎</span>教导（Teach）</div>
+      <p>从法术书中抽一张法术。</p></div>
+
+    <div class="skill"><div class="name"><span class="ico">★</span>头目（Boss）</div>
+      <p>选择本领域任意一只随从，令其行动。不可指定本回合已行动过的随从。</p></div>
+
+    <div class="skill"><div class="name"><span class="ico">◑</span>或（Or）</div>
+      <p>此随从行动时，仅选择其一项技能执行。两项技能仍都计入领域计分。</p>
+      <div class="ex">萨米（Sammy Slothclaw）会选择战斗或挖掘——你来决定！</div></div>
+
+    <div class="skill"><div class="name"><span class="ico">✦</span>施法（Cast）</div>
+      <p>抽一张法术并立即打出。</p></div>
+
+    <div class="skill"><div class="name"><span class="ico">♥</span>友谊（Friendship）</div>
+      <p>将另一领域的一只随从移到本领域，不改变所属一侧。</p></div>
+
+    <div class="skill"><div class="name"><span class="ico">☠</span>附身（Possess）</div>
+      <p>选择本领域或骨堆中的一只骷髅，使其立即行动，如同随从一样执行其全部技能。</p>
+      <div class="ex">被附身的骨堆上的骷髅可以自己挖掘，或移动到相邻的骨堆！</div></div>
+
+    <h3>骷髅行动（Skeleton Actions）</h3>
+    <p>通常骷髅从不行动。<b>附身</b>是例外！需注意以下几点：</p>
+    <ul>
+      <li>骨堆上的骷髅<b>离开</b>时，移到相邻的骨堆。</li>
+      <li>骨堆上的骷髅<b>挖掘</b>时，以自身为目标。</li>
+      <li>由于唤醒（Raise）只能指定其他牌，骷髅无法唤醒自己。</li>
+      <li>每张牌每回合不能行动超过一次；若一只骷髅先行动，之后本回合被翻面，则不会再进行一次随从行动。</li>
+    </ul>
+    <figure>
+      <img src="BBLL_Rules_images/page_08.jpg" alt="技能：挖、战斗">
+      <figcaption>技能速查——挖 与 战斗（原书第 8 页）</figcaption>
+    </figure>
+    <div class="two">
+      <figure><img src="BBLL_Rules_images/page_09.jpg" alt="技能：教导、离开、唤醒"><figcaption>教导、离开、唤醒（原书第 9 页）</figcaption></figure>
+      <figure><img src="BBLL_Rules_images/page_10.jpg" alt="技能：头目、或、施法、友谊"><figcaption>头目、或、施法、友谊（原书第 10 页）</figcaption></figure>
+    </div>
+    <figure>
+      <img src="BBLL_Rules_images/page_11.jpg" alt="技能：附身与骷髅行动">
+      <figcaption>附身与骷髅行动，含示例（原书第 11 页）</figcaption>
+    </figure>
+  </section>
+
+  <!-- ============ 计分条件 ============ -->
+  <section id="reqs">
+    <h2 class="sec"><span class="num">8</span>计分条件</h2>
+    <p>所有条件必须同时满足才能占领领域。领域牌上标明其噪音值与所需卡牌组合。</p>
+
+    <div class="req"><span class="sym">骷髅（Skeleton）</span> —— 一张骷髅牌（图标可带数量，如 <b>= 任意 2 只骷髅</b>，即需 2 只骷髅）。图标上有几个符号即代表需要几只骷髅。
+      <div class="ex ok">满足所示数量的两只骷髅。</div></div>
+
+    <div class="req"><span class="sym">随从（Minion）</span> —— 一张随从牌（图标可带数量，如 <b>= 任意 3 名随从</b>，即需 3 名随从）。图标上有几个符号即代表需要几名随从。
+      <div class="ex ok">满足所示数量的三名随从。</div></div>
+
+    <div class="req"><span class="sym">无随从！（No Minions！）</span> 你领域一侧不能有随从牌。
+      <div class="ex no">即便有 2 只骷髅，一只随从也会阻止计分。</div></div>
+
+    <div class="req"><span class="sym">无骷髅！（No Skeletons！）</span> 你领域一侧不能有骷髅牌。
+      <div class="ex no">即便有 3 名随从，一只骷髅也会阻止计分。</div></div>
+
+    <div class="req"><span class="sym">相同技能（Matching Skills）</span> 要求任意数量随从中存在指定数量的相同技能。骷髅技能不计入。
+      <div class="ex ok">任意数量随从中 3 个相同技能——如 2 名随从共 3 个离开（Leave）图标。</div>
+      <div class="ex no">若相同技能数量不足要求（例如只凑出 2 个离开图标而非 3 个），则不得分。</div></div>
+
+    <div class="req"><span class="sym">技能（Skill）</span> 要求任意随从上出现指定技能。所有随从的全部技能都计入。
+      <div class="ex ok">任意数量随从中出现战斗、离开、挖掘技能——两名随从的合计技能即可满足条件。</div></div>
+
+    <div class="req"><span class="sym">无此技能！（No Skill！）</span> 要求指定技能不在你的任何随从身上出现。骷髅技能不计入。
+      <div class="ex ok">1 名随从、1 只骷髅，且无带挖掘技能的随从——由于挖掘技能在骷髅而非随从上，仍可计分。</div>
+      <div class="ex no">若随从带该技能则阻止计分。</div></div>
+
+    <div class="req"><span class="sym">无相同技能！（No Matching Skills！）</span> 要求所有随从中没有任何相同技能。骷髅技能不计入。
+      <div class="ex no">即便有 2 名随从，若它们带有相同的离开技能，也会阻止计分。</div></div>
+
+    <div class="req"><span class="sym">特定技能随从（Skilled Minion）</span> 要求一名带有指定技能的随从。一张牌同一时间只能满足其中一项条件。
+      <div class="ex ok">1 名带战斗的随从 且 1 名带离开的随从。</div></div>
+
+    <div class="req"><span class="sym">相同技能随从（Matching Minions）</span> 要求指定数量的随从至少共享一项技能。
+      <div class="ex ok">3 名随从至少共享一项技能（如 3 名随从共享挖掘技能）。</div></div>
+
+    <div class="req"><span class="sym">相同技能骷髅（Matching Skeletons）</span> 要求指定数量的骷髅至少共享一项骷髅技能。
+      <div class="ex ok">2 只骷髅共享一项技能（唤醒）。</div></div>
+
+    <div class="req"><span class="sym">相同骷髅技能（Matching Skeleton Skills）</span> 要求任意数量骷髅中指定数量的相同骷髅技能。
+      <div class="ex ok">任意数量骷髅中 3 个相同骷髅技能——如 2 只骷髅共 3 个战斗图标。</div></div>
+
+    <div class="two">
+      <figure><img src="BBLL_Rules_images/page_12.jpg" alt="条件：骷髅、随从、无随从、无骷髅"><figcaption>条件示例（原书第 12 页）</figcaption></figure>
+      <figure><img src="BBLL_Rules_images/page_13.jpg" alt="相同技能、技能、无技能、无相同"><figcaption>相同/技能类条件示例（原书第 13 页）</figcaption></figure>
+    </div>
+    <figure>
+      <img src="BBLL_Rules_images/page_14.jpg" alt="特定技能随从、相同技能随从、相同技能骷髅">
+      <figcaption>特定技能随从、相同技能随从、相同技能骷髅示例（原书第 14 页）</figcaption>
+    </figure>
+  </section>
+
+  <!-- ============ 3-4 人 ============ -->
+  <section id="multi">
+    <h2 class="sec"><span class="num">9</span>3–4 人规则</h2>
+
+    <h3>3 人——自由混战（Free-For-All）</h3>
+    <ul>
+      <li>使用全部 4 个领域。</li>
+      <li>中央领域有 3 侧，由三名玩家共用。</li>
+      <li>每名玩家的一侧还包含其左右两侧的领域。</li>
+      <li>法术可影响王国中任意位置。</li>
+      <li>随从不可在由不同玩家控制的领域间移动。</li>
+      <li>率先累计 5 分者获胜。</li>
+    </ul>
+
+    <h3>4 人——2 对 2 组队战（Team Battle）</h3>
+    <ul>
+      <li>使用全部 4 个领域。</li>
+      <li>与队友坐在桌子同一侧。</li>
+      <li>从右上角玩家开始，顺时针轮流。</li>
+      <li>每名玩家的一侧由 2 个领域（而非 3 个）组成。</li>
+      <li>随从可在队友控制的领域间移动。</li>
+      <li>法术可影响王国中任意位置。</li>
+      <li>队友可互相展示手中的法术。</li>
+      <li>率先由队伍合计累计 5 分者获胜。</li>
+    </ul>
+    <figure>
+      <img src="BBLL_Rules_images/page_15.jpg" alt="3-4 人准备布局图">
+      <figcaption>三人自由混战与四人组队战布局（原书第 15 页）</figcaption>
+    </figure>
+  </section>
+
+  <!-- ============ 快速查阅 ============ -->
+  <section id="ref">
+    <h2 class="sec"><span class="num">10</span>快速查阅</h2>
+
+    <h3>技能速查（Skills Reference）</h3>
+    <ul>
+      <li><b>挖（Dig）：</b>将本领域的骨堆顶端骷髅移到本领域的任意一侧。</li>
+      <li><b>战斗（Fight）：</b>将本领域中一只战斗技能较少的随从翻面（翻成骷髅面）。拥有多个战斗技能图标的随从，每个图标各触发一次。</li>
+      <li><b>头目（Boss）：</b>激活本领域中任意另一只随从。不可指定本回合已行动过的随从。</li>
+      <li><b>施法（Cast）：</b>抽一张法术并立即施放。</li>
+      <li><b>附身（Possess）：</b>激活本领域或骨堆中的一只骷髅，使其如同随从一样执行骷髅技能。</li>
+      <li><b>友谊（Friendship）：</b>将另一领域的一只随从移到本领域，不改变所属一侧。</li>
+      <li><b>教导（Teach）：</b>从法术书中抽一张法术。</li>
+      <li><b>离开（Leave）：</b>将此随从移到相邻领域，不改变所属一侧。</li>
+      <li><b>唤醒（Raise）：</b>将本领域任意一侧的一只骷髅翻面，其执行一次随从行动。不可指定骨堆上的骷髅。</li>
+    </ul>
+
+    <h3>计分速查（Scoring Reference）</h3>
+    <ul>
+      <li><b>骷髅（Skeleton）：</b>一张骷髅牌。</li>
+      <li><b>随从（Minion）：</b>一张随从牌。</li>
+      <li><b>计分条件（Requirements）：</b>所有条件必须同时满足才能计分。</li>
+      <li><b>技能（Skill）：</b>要求任意随从上出现指定技能。所有随从的全部技能都计入。</li>
+      <li><b>特定技能随从（Skilled Minion）：</b>要求一名带有指定技能的随从。一张牌同一时间只能满足其中一项条件。</li>
+      <li><b>相同技能骷髅（Matching Skeletons）：</b>要求指定数量的骷髅至少共享一项骷髅技能。</li>
+      <li><b>相同骷髅技能（Matching Skeleton Skills）：</b>要求任意数量骷髅中指定数量的相同骷髅技能。</li>
+      <li><b>相同技能（Matching Skills）：</b>要求任意数量随从中存在指定数量的相同技能。骷髅技能不计入。</li>
+      <li><b>相同技能随从（Matching Minions）：</b>要求指定数量的随从至少共享一项技能。</li>
+      <li><b>无随从！（No Minions！）：</b>你领域一侧不能有随从牌。</li>
+      <li><b>无骷髅！（No Skeletons！）：</b>你领域一侧不能有骷髅牌。</li>
+      <li><b>无此技能！（No Skill！）：</b>要求指定技能不在你的任何随从身上出现。骷髅技能不计入。</li>
+      <li><b>无相同技能！（No Matching Skills！）：</b>要求所有随从中没有任何相同技能。</li>
+    </ul>
+    <div class="two">
+      <figure><img src="BBLL_Rules_images/page_16.jpg" alt="计分速查"><figcaption>计分速查（原书第 16 页）</figcaption></figure>
+      <figure><img src="BBLL_Rules_images/page_17.jpg" alt="技能速查封底"><figcaption>技能速查——封底（原书第 17 页）</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- ============ 制作人员 ============ -->
+  <section id="credits">
+    <h2 class="sec">制作人员</h2>
+    <div class="credits">
+      <p><b>美术与概念（Art &amp; Concept）：</b>Taylor Dow</p>
+      <p><b>主设计（Lead Designers）：</b>Ross Cowman, Taylor Dow, Pat Kemp</p>
+      <p><b>额外设计（Additional Design）：</b>Nathan Weisman, Wonderbow Games</p>
+      <p><b>设计实习（Design Intern）：</b>Isak Urrego</p>
+      <p><b>平面设计（Graphic Design）：</b>Ross Cowman, Taylor Dow</p>
+      <p><b>排版与产品设计（Layout and Product Design）：</b>Ross Cowman</p>
+      <p><b>3D 建模（3D Modeling）：</b>Aidan Vasquaz, Pat Kemp</p>
+      <p><b>特别鸣谢（Special Thanks）：</b>3D 原型制作 — Pye Games</p>
+      <p><b>版权（Copyright）：</b>2023 Heart of the Deernicorn，保留所有权利 — heartofthedeernicorn.com</p>
+    </div>
+  </section>
+
+  <footer>
+    中文重排版 — 基于《Bad Baby Lich Lords》游戏规则 v1.0。内容译自原版规则书；版式与导航为便于阅读而添加。
+  </footer>
+
+  </main>
+</div>
+</body>
+</html>

@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ORBIT（星际游客轨道竞速）— 游戏规则</title>
+<style>
+  :root{
+    --bone:#eef2f8; --bone2:#e1e8f3; --ink:#19223a; --ink-soft:#54607a;
+    --space:#1d3f73; --space-d:#0e2347; --space-l:#5b8fcf;
+    --cyan:#19a6c4; --cyan-d:#137d95;
+    --star:#8b97ad;
+    --green:#2f8f5b; --green-l:#e2f1e9;
+    --red:#c0392b; --red-l:#f6e0dc;
+    --line:#c9d4e6; --card:#fbfcfe;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bone); color:var(--ink);
+    font-family:"Songti SC","Noto Serif SC","Source Han Serif SC",STSong,
+                "Iowan Old Style","Palatino Linotype",Georgia,serif;
+    line-height:1.85; font-size:17px;
+  }
+  .wrap{display:flex; align-items:flex-start; max-width:1180px; margin:0 auto;}
+  nav{
+    position:sticky; top:0; align-self:flex-start;
+    width:248px; flex:0 0 248px; height:100vh; overflow-y:auto;
+    background:var(--space-d); color:#eaf1fa; padding:22px 16px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;
+  }
+  nav h2{font-size:13px; letter-spacing:.12em; color:var(--space-l); margin:0 0 12px;}
+  nav ol{list-style:none; margin:0; padding:0;}
+  nav a{display:block; color:#eaf1fa; text-decoration:none; font-size:14px;
+    padding:7px 10px; border-radius:7px;}
+  nav a:hover{background:var(--space);}
+  nav .sub a{padding-left:26px; font-size:13px; color:#bcd0ea;}
+  main{flex:1 1 auto; min-width:0; padding:0 40px 80px;}
+  .cover{
+    background:linear-gradient(160deg,var(--space-d),var(--space) 55%,var(--cyan));
+    color:#eef4fb; padding:60px 40px; border-radius:0 0 18px 18px;
+    margin-bottom:36px; text-align:center;
+    box-shadow:0 10px 30px rgba(14,35,71,.28);
+  }
+  .cover h1{font-size:42px; margin:0 0 6px; letter-spacing:.04em;}
+  .cover .sub{font-size:16px; opacity:.92; font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .cover .tag{display:inline-block; margin-top:16px; padding:6px 16px;
+    border:1px solid rgba(255,255,255,.4); border-radius:20px; font-size:14px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .cover .cred{margin-top:18px; font-size:12.5px; opacity:.82;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  section{padding:14px 0 8px; border-bottom:1px solid var(--line); scroll-margin-top:18px;}
+  h2.sec{font-size:28px; color:var(--space-d); margin:18px 0 6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  h2.sec .num{color:var(--cyan); font-weight:700; margin-right:10px;}
+  h3{font-size:20px; color:var(--space); margin:24px 0 6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  p{margin:10px 0;}
+  ul,ol{margin:10px 0 10px 4px; padding-left:22px;}
+  li{margin:5px 0;}
+  .lead{font-size:18px;}
+  .comp-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:16px 0;}
+  .comp{border:1px solid var(--line); background:var(--card); border-radius:12px;
+    padding:14px 16px; box-shadow:0 2px 6px rgba(0,0,0,.04);}
+  .comp b{color:var(--space-d);}
+  .callout{border-left:5px solid var(--cyan); background:var(--bone2);
+    padding:12px 18px; margin:16px 0; border-radius:0 10px 10px 0;}
+  .callout.tip{border-color:var(--green); background:var(--green-l);}
+  .callout.tip b{color:var(--green);}
+  .callout.adv{border-color:var(--red); background:var(--red-l);}
+  .callout.adv b{color:var(--red);}
+  .steps{counter-reset:step; list-style:none; padding-left:0; margin:14px 0;}
+  .steps li{position:relative; padding:10px 14px 10px 52px; margin:8px 0;
+    background:var(--card); border:1px solid var(--line); border-radius:10px;}
+  .steps li::before{counter-increment:step; content:counter(step);
+    position:absolute; left:12px; top:50%; transform:translateY(-50%);
+    width:28px; height:28px; background:var(--space); color:#fff;
+    border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-weight:700; font-family:Arial,sans-serif;}
+  .skill{border:1px solid var(--line); background:var(--card); border-radius:12px;
+    padding:14px 18px; margin:12px 0; box-shadow:0 2px 6px rgba(0,0,0,.04);}
+  .skill .name{font-weight:700; color:var(--space-d); font-size:18px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .skill .name .ico{display:inline-block; min-width:22px; color:var(--cyan);}
+  .req{border:1px solid var(--line); background:var(--card); border-radius:10px;
+    padding:12px 16px; margin:10px 0;}
+  .req .sym{font-weight:700; color:var(--space-d);}
+  figure{margin:18px 0; text-align:center;}
+  figure img{max-width:100%; border:1px solid var(--line); border-radius:12px;
+    box-shadow:0 4px 14px rgba(0,0,0,.08); background:#fff;}
+  figcaption{font-size:13px; color:var(--ink-soft); margin-top:6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .two{display:grid; grid-template-columns:1fr 1fr; gap:16px; align-items:start;}
+  .tag-inline{display:inline-block; padding:1px 9px; border-radius:10px; font-size:13px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;
+    background:var(--space-l); color:#fff; margin-left:6px;}
+  .tag-inline.exp{background:var(--star);}
+  @media(max-width:900px){
+    .wrap{flex-direction:column;}
+    nav{position:static; width:100%; height:auto; flex-basis:auto;}
+    main{padding:0 18px 60px;}
+    .comp-grid,.two{grid-template-columns:1fr;}
+  }
+  footer{margin-top:40px; font-size:13px; color:var(--ink-soft);
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; text-align:center;}
+  .credits{background:var(--bone2); border:1px solid var(--line); border-radius:12px;
+    padding:16px 20px; margin-top:14px;}
+  .credits b{color:var(--space-d);}
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <h1>ORBIT</h1>
+  <div class="sub">星际游客轨道竞速（Orbital Race Between Interstellar Tourists）· 规则</div>
+  <div class="tag">2–4 人 &nbsp;|&nbsp; 30–60 分钟 &nbsp;|&nbsp; 10 岁以上</div>
+  <div class="cred">设计 Reiner Knizia &nbsp;·&nbsp; 美术 Vincent Dutrait &nbsp;·&nbsp; 编辑 Scott Darrington<br>3D 建模 Conor S. &nbsp;·&nbsp; 图形设计 Brigette Indelicato &nbsp;·&nbsp; 出版 Nick Murray &amp; Kyle Spackman<br>出版方 Bitewing Games</div>
+</header>
+
+<div class="wrap">
+  <nav>
+    <h2>目录</h2>
+    <ol>
+      <li><a href="#overview">概览与目标</a></li>
+      <li><a href="#components">组件</a></li>
+      <li><a href="#setup">准备</a></li>
+      <li><a href="#playerboard">你的玩家面板</a></li>
+      <li><a href="#play">如何游玩</a></li>
+      <li><a href="#cardfeatures">卡牌效果</a></li>
+      <li><a href="#missions">任务标记</a></li>
+      <li><a href="#board">棋盘要素</a></li>
+      <li><a href="#win">胜利条件</a></li>
+      <li><a href="#variants">变体</a></li>
+      <li class="sub"><a href="#prism">PRISM 变体</a></li>
+      <li class="sub"><a href="#partnership">四人合伙变体</a></li>
+      <li class="sub"><a href="#dual">双飞船变体（双人）</a></li>
+      <li><a href="#expansion">星云扩展</a></li>
+      <li><a href="#credits">致谢</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+  <section id="overview">
+    <h2 class="sec"><span class="num">1</span>概览与目标</h2>
+    <p class="lead">欢迎光临，欢迎光临西洛星系（Silo System）——我们银河系的跳动心脏，十年一度的竞速盛典就在此举办！我们召集了宇宙中技艺最精湛的游客——饱经旅途磨砺的探险家，他们将在这场终极较量中一较高下。</p>
+    <p>这些飞行员必须竞相游览西洛星系中的所有行星……沿着轨道路径冲浪、在超跳跃传送门之间瞬移、穿越超空间（hyperspace）。在我们奢华的行星或奢靡的太空站上享受梦幻假期，同时见证这场终极星际马拉松。全银河系的目光都将聚焦这场十年盛会——庆祝我们在西洛霸权（Silo Supremacy）下实现系统统一。比赛开始！</p>
+    <p><b>ORBIT</b>（星际游客轨道竞速）是一款 24 世纪的战术太空竞速游戏，回合简单却充满策略可能。玩家竞相<b>游览星系中的所有行星，然后率先返回自己的起始行星</b>。在你的回合，你将打出一张卡牌、按任意顺序激活其效果，然后将手牌补满至手牌上限。</p>
+    <p>卡牌能让你做一系列组合操作，包括驾驶飞船、收集能量以获得额外飞行、沿轨道推进行星，甚至反转行星的轨道方向！规划路线以利用轨道洋流、在行星间弹跳，是制胜关键。游览特定太空站与行星可提升你的手牌上限与能量上限。当你的飞船停泊在行星上时，行星会带着你沿轨道前进，助你更快横越棋盘！</p>
+    <p>但你那些不择手段的对手无疑会试图破坏你的计划、阻挠你的进度，甚至利用你停泊的行星把你带离其他目的地。要找到最快路线，需要巧妙思考与长远规划并重。<b>唯有一人能成为西洛星系最伟大的游客！</b></p>
+    <figure>
+      <img src="ORBIT_Rules_images/page_02.jpg" alt="概览页">
+      <figcaption>概览与背景文字（原书第 2 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="components">
+    <h2 class="sec"><span class="num">2</span>组件</h2>
+    <div class="comp-grid">
+      <div class="comp"><b>1 块双面游戏棋盘</b><br>正面（标准）与背面（异度空间）。</div>
+      <div class="comp"><b>8 个行星圆盘</b><br>每条彩色轨道各一个。</div>
+      <div class="comp"><b>30 个太空站</b><br>放在棋盘指定位置。</div>
+      <div class="comp"><b>4 艘飞船</b><br>每种玩家颜色各一艘。</div>
+      <div class="comp"><b>4 块玩家面板</b><br>记录任务、手牌、能量。</div>
+      <div class="comp"><b>28 个任务标记</b><br>七色 × 四名玩家。</div>
+      <div class="comp"><b>20 个能量方块</b><br>用于额外飞行步数。</div>
+      <div class="comp"><b>56 张卡牌</b><br>每张含若干效果，按任意顺序触发。</div>
+      <div class="comp"><b>6 个合伙标记</b><br>友谊标记与交换标记。</div>
+      <div class="comp"><b>1 个 PRISM 圆盘</b><br>PRISM 变体中的第九颗"行星"。</div>
+      <div class="comp"><b>4 个 PRISM 任务标记</b><br>白色，PRISM 变体每玩家一个。</div>
+      <div class="comp"><b>1 个布袋</b><br>用于随机抽出太空站。</div>
+    </div>
+    <figure>
+      <img src="ORBIT_Rules_images/page_03.jpg" alt="组件页">
+      <figcaption>组件与概览文字（原书第 3 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="setup">
+    <h2 class="sec"><span class="num">3</span>准备</h2>
+    <ol class="steps">
+      <li>决定使用棋盘哪一面，平铺于游戏区中央。初次游戏请使用棋盘正面。</li>
+      <li>棋盘显示八条不同颜色的轨道，轨道上的行星符号标出各行星沿轨道推进时的位置。将八个行星随机放在对应颜色的轨道上的行星符号处，每个箭头随机指向轨道线可能的方向之一。尽量将行星较均匀地散布在棋盘上。</li>
+      <li>将 30 个太空站混入布袋，随机抽出并正面朝上放在棋盘上指定的太空站位置各一个。</li>
+      <li>将所有能量方块放在棋盘旁。</li>
+      <li>最近当过游客的玩家为起始玩家（或随机指定）。然后以<b>逆序行动顺序</b>（从起始玩家右手边的玩家开始，逆时针进行），每位玩家选择一种颜色，取对应玩家面板，将同色飞船放在对应行星上，并在面板顶行放上其余各色的任务标记。PRISM 任务标记（白色）的位置留空；它随 PRISM 变体登场（见第 11 页）。</li>
+      <li>最后，洗匀所有卡牌，给每位玩家发 3 张起手牌（hand），剩余卡牌作为牌库正面朝下放在棋盘旁。</li>
+    </ol>
+    <div class="callout tip">
+      <b>提示：</b>起始玩家与较前选择的玩家有优势，因为他们比后面玩家领先一步。这一优势通过让后面玩家优先选择起始行星来补偿。靠近其他行星且被有用太空站环绕的行星能带来不错的开局优势。
+    </div>
+    <figure>
+      <img src="ORBIT_Rules_images/page_04.jpg" alt="准备页">
+      <figcaption>准备步骤与棋盘示意图（原书第 4 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="playerboard">
+    <h2 class="sec"><span class="num">4</span>你的玩家面板</h2>
+    <p>玩家面板帮助你在游戏中追踪进度。</p>
+    <div class="two">
+      <div class="req">
+        <div class="sym">任务标记（顶行）</div>
+        <p>七种颜色对应你需要游览的七颗行星（不含起始行星）。每次游览一颗行星，移除对应的任务标记——稍后详述……</p>
+      </div>
+      <div class="req">
+        <div class="sym">手牌上限（第二行）</div>
+        <p>你手牌中的卡牌数，始终是该行可见的最小数字。获得升级时，用相应的任务标记或太空站盖住可见最小数字。每次升级手牌上限 +1 张。</p>
+      </div>
+    </div>
+    <div class="req">
+      <div class="sym">能量上限（左下框）</div>
+      <p>存放能量方块的空间。第三行标出你最多能持有的能量方块数——始终是可见的最小数字。获得升级时盖住最小数字，能量上限每次 +1 个。</p>
+    </div>
+    <figure>
+      <img src="ORBIT_Rules_images/page_05.jpg" alt="玩家面板页">
+      <figcaption>你的玩家面板（原书第 5 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="play">
+    <h2 class="sec"><span class="num">5</span>如何游玩</h2>
+    <p>起始玩家先手，之后<b>顺时针</b>进行。在你的回合，<b>打出一张手牌</b>正面朝上，然后执行卡牌上的效果。</p>
+    <p>回合结束，将打出的卡牌放入棋盘旁的<b>弃牌堆</b>（正面朝上）。然后从<b>牌库</b>抽牌，将手牌补满至玩家面板所示的手牌上限。（若牌库抽空，将弃牌堆重新洗成新的牌库。）</p>
+    <div class="callout">
+      <b>效果顺序：</b>每张卡牌显示多种效果，可按<b>任意顺序</b>执行，但必须先完成一个效果再进行下一个。
+    </div>
+  </section>
+
+  <section id="cardfeatures">
+    <h2 class="sec"><span class="num">6</span>卡牌效果</h2>
+
+    <h3>推进行星 <span class="tag-inline">必选</span></h3>
+    <p>卡牌上每个行星符号，必须将对应颜色的行星沿其轨道线、朝箭头方向推进到轨道中下一个位置（行星符号）。部分效果可选，但此效果<b>必须执行</b>。</p>
+    <ul>
+      <li>若飞船停泊在行星上，随行星一起推进。若推进终点有飞船，则停泊在该行星上（飞船叠在行星上方）。</li>
+      <li>若打出将行星推进两个位置的卡牌、且第一位置有飞船，这些飞船<b>不会</b>停泊行星——它们被越过，仍留在棋盘上！</li>
+      <li>打出推进所有行星的卡牌时，建议按卡牌所示顺序处理行星。</li>
+      <li>推进后务必让箭头指向行星下一步将前往的位置。这在第二面棋盘尤为重要，那里可能有两条可选方向。若有选择，始终由行动玩家决定行星后续走向。</li>
+    </ul>
+    <div class="callout tip">
+      <b>灰色行星：</b>灰色行星离开棋盘时，会作半圈移动立即从另一侧重新进入。
+    </div>
+    <div class="callout">
+      <b>棋盘 #2（异度空间）：</b>行星轨道可能有两条可选方向——行动玩家始终决定。
+    </div>
+
+    <h3>万能行星符号</h3>
+    <p>部分卡牌显示万能行星符号，可推进<b>任选一颗行星</b>。</p>
+
+    <h3>获取能量方块</h3>
+    <p>取指示数量的能量方块放在玩家面板第三行开头的能量区。<b>能量上限：</b>持有数量不得超过能量上限所示。游戏开始时上限为 2 个，直到升级能量上限。</p>
+
+    <h3>获取最大数量能量方块</h3>
+    <p>取能量方块，将能量区的方块数提升至当前能量上限。</p>
+
+    <h3>驾驶飞船</h3>
+    <p>行星沿轨道从符号到符号推进，飞船则从一个线路交叉点以小步飞到另一个。可飞行至多指示的步数。可选择不执行此效果。</p>
+    <div class="callout">
+      <b>能量方块：</b>执行飞行效果时可归还玩家面板上的能量方块，每归还一个额外飞一步。注意：能量方块只能配合飞行效果使用，单独不能起飞。
+    </div>
+    <p>多个飞船可位于同一交叉点——直接叠放。含行星或太空站的交叉点同理。飞船飞行时分开，不会像行星载飞船那样互相搭载。</p>
+    <ul>
+      <li><b>行星：</b>飞行终点在从未游览的行星上时，立即从面板移除对应任务标记。该标记可能附带效果。</li>
+      <li><b>太空站：</b>飞行终点在太空站时，可激活该站。</li>
+    </ul>
+
+    <h3>反转行星箭头</h3>
+    <p>任选一颗行星，将其箭头从当前轨道位置指向任一可能的轨道线方向。可选择不执行此效果。</p>
+
+    <h3>星云 <span class="tag-inline exp">扩展</span></h3>
+    <p>部分卡牌显示星云。这些随<b>人造星云模块</b>（见第 16 页，含于星云扩展）登场。常规游戏可忽略。</p>
+
+    <figure>
+      <img src="ORBIT_Rules_images/page_06.jpg" alt="卡牌效果页 1">
+      <figcaption>卡牌效果——推进行星、万能符号（原书第 6 页）</figcaption>
+    </figure>
+    <figure>
+      <img src="ORBIT_Rules_images/page_07.jpg" alt="卡牌效果页 2">
+      <figcaption>卡牌效果——能量、飞行、反转箭头（原书第 7 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="missions">
+    <h2 class="sec"><span class="num">7</span>任务标记</h2>
+    <p>若飞行终点在从未游览的行星，或移动后停泊于一颗新行星，必须立即从面板移除对应颜色的任务标记。若标记带效果，立即执行：</p>
+
+    <div class="skill"><div class="name"><span class="ico">✋</span>手牌上限升级</div>
+      <p>用此标记盖住第二行可见最小数字，手牌上限 +1 张。</p></div>
+
+    <div class="skill"><div class="name"><span class="ico">⤴</span>超跳跃</div>
+      <p>将飞船放在任一显示超跳跃符号的交叉点（含太空站）。可选择不执行此效果。</p></div>
+
+    <div class="skill"><div class="name"><span class="ico">⚡</span>能量上限升级</div>
+      <p>用此标记盖住第三行可见最小数字，能量上限 +1 个。</p></div>
+
+    <div class="skill"><div class="name"><span class="ico">➹</span>超加速炮</div>
+      <p>将飞船直线飞到当前位置可达的任一交叉点。可选择不执行。若超加速落到另一行星或太空站，可立即执行其效果（若有）。</p></div>
+
+    <div class="callout">
+      <b>停泊在行星上：</b>回合开始，或解决超加速炮效果后，可能发现飞船停泊于未游览的行星。若是，立即如上处理。若任务标记在回合开始授予超跳跃或超加速，可先执行它，再正常打牌并执行所有效果。
+    </div>
+    <div class="callout tip">
+      <b>注意：</b>绝不可在其他玩家的回合从面板顶行移除任务标记！
+    </div>
+    <figure>
+      <img src="ORBIT_Rules_images/page_08.jpg" alt="任务标记页">
+      <figcaption>任务标记效果（原书第 8 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="board">
+    <h2 class="sec"><span class="num">8</span>棋盘要素</h2>
+
+    <h3>太空站</h3>
+    <p>飞行终点在太空站时，可激活该站。分两类：</p>
+    <div class="req">
+      <div class="sym">浅灰底——可收集</div>
+      <p>首位飞行终点落在其交叉点的玩家将其收集。两种：</p>
+      <ul>
+        <li><b>能量上限升级：</b>用太空站盖住第三行可见最小数字，能量上限 +1 个。</li>
+        <li><b>手牌上限升级：</b>用太空站盖住第二行可见最小数字，手牌上限 +1 张。</li>
+      </ul>
+    </div>
+    <div class="req">
+      <div class="sym">蓝或深灰底——常驻</div>
+      <p>整局留在棋盘上。飞行终点落在其交叉点时立即执行效果：</p>
+      <ul>
+        <li><b>超跳跃传送门</b>（同棋盘传送门）：将飞船放在任一其他显示超跳跃传送门的交叉点（含其他太空站）。</li>
+        <li><b>超加速炮</b>（同棋盘炮）：直线飞到可达的任一交叉点；若落到行星或太空站可立即执行其效果。</li>
+        <li><b>燃料库：</b>取能量方块，将能量区方块数提升至当前能量上限。</li>
+      </ul>
+    </div>
+
+    <h3>超跳跃传送门</h3>
+    <p>飞行终点在超跳跃传送门时，可将飞船放在任一其他显示超跳跃传送门的交叉点。</p>
+    <div class="callout">
+      必须先完成飞行效果才能使用传送门，且之后不能继续飞行。超跳跃效果在飞行结束前不可用。（若回合开始时飞船就在传送门上，可决定完全不飞，然后使用传送门。）
+    </div>
+
+    <h3>最大升级</h3>
+    <div class="callout adv">
+      <b>上限：</b>手牌上限最高（<b>6</b>）与能量上限最高（<b>5</b>）不可再盖。已达最高则不能再从棋盘收集升级用太空站（以免剥夺他人）。若收集到某类已达最高的任务标记，弃入盒中。
+    </div>
+
+    <h3>PRISM 圆盘</h3>
+    <p>这枚"太空站"代表第九颗行星，随 <b>PRISM 变体</b>登场（见第 11 页）。</p>
+    <figure>
+      <img src="ORBIT_Rules_images/page_09.jpg" alt="棋盘要素页 1">
+      <figcaption>棋盘要素——太空站、超跳跃传送门（原书第 9 页）</figcaption>
+    </figure>
+    <figure>
+      <img src="ORBIT_Rules_images/page_10.jpg" alt="棋盘要素页 2">
+      <figcaption>棋盘要素——常驻太空站、PRISM 圆盘（原书第 10 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="win">
+    <h2 class="sec"><span class="num">9</span>胜利条件</h2>
+    <p>首位从面板顶行<b>移除全部七个任务标记</b>、且<b>回合结束时飞船停泊在自己颜色行星上</b>的玩家获胜！</p>
+    <div class="callout tip">
+      <b>提示：</b>外侧行星（棕、灰）通常更难到达，宜尽早游览。棋盘上长距离最好借行星，或利用超跳跃传送门、超加速炮移动，而非逐交叉点飞行。
+    </div>
+  </section>
+
+  <section id="variants">
+    <h2 class="sec"><span class="num">10</span>变体</h2>
+
+    <h3 id="prism">PRISM 变体 <span class="tag-inline">更难</span></h3>
+    <p><b>PRISM：星系间静止巨型都市首创革命（PRIME REVOLUTIONARY INTERGALACTIC STATIONARY MEGALOPOLIS）</b>。可与任一面棋盘及其他变体同用，任意人数都更难，尤其推荐两人。</p>
+    <ul>
+      <li><b>准备：</b>放置太空站后，随机用一个 PRISM 圆盘替换一个太空站，被替换的太空站收回盒中。准备面板时，将一个 PRISM 任务标记加到面板顶行的对应位置。</li>
+      <li><b>游玩：</b>PRISM 圆盘作为额外、静止的"行星"，获胜前必须游览。</li>
+    </ul>
+
+    <h3 id="partnership">四人合伙变体</h3>
+    <p>四人对局可正常竞速，也可采用此合伙变体。规则同前，但有以下改动：</p>
+    <ul>
+      <li><b>合伙：</b>相对而坐的两人组成一队合伙。当两人均从各自面板移除全部任务标记<b>且</b>两艘飞船均位于各自母星时，该合伙获胜。</li>
+      <li><b>沟通：</b>未与合伙者商议前，玩家须先打出一张手牌正面朝上开启回合。之后两合伙者可自由沟通、商议行动玩家的操作。不可向合伙者展示手牌。无论沟通如何，行动玩家最终决定并采取行动。</li>
+      <li><b>能量方块：</b>自己回合也可使用合伙者玩家面板上的能量方块。注意：仍只为自己的面板获得方块，你的面板决定个人燃料上限。</li>
+    </ul>
+    <div class="two">
+      <div class="req"><div class="sym">友谊标记</div><p>每人一个，可在自己某回合将飞船飞到合伙者飞船的位置。可在回合任意时刻使用（飞行前后皆可，但不可在飞行与解决任务标记/太空站效果之间进行）。仅用一次后弃置。</p></div>
+      <div class="req"><div class="sym">交换标记</div><p>每对合伙一个，可交换两艘飞船的位置。可在任一玩家回合任意时刻使用（飞行前后皆可，同样不可在飞行与解决效果之间）。仅用一次后弃置。</p></div>
+    </div>
+
+    <h3 id="dual">进阶双人：双飞船变体 <span class="tag-inline">老手</span></h3>
+    <p>两名经验丰富的玩家可尝试这个更具挑战的变体。</p>
+    <ul>
+      <li><b>准备改动——第 5 步：</b>从玩家二开始，两人轮流一次选一种颜色（各选两色）。取对应颜色的玩家面板，飞船放在对应行星上，两块面板都放满任务标记。然后每人将一块面板叠在另一块之上，仅露出底下面板的顶行（任务标记）。</li>
+      <li>每人各得一个友谊标记与一个交换标记。</li>
+      <li><b>游玩改动：</b>仍每回合只打一张牌、飞一艘飞船，但可决定飞哪艘。从任一面板的手牌/能量上限升级（或太空站）始终升级<b>上方面板</b>——因此升级更快更易。</li>
+      <li>类似四人合伙变体，可在回合任意时刻用友谊或交换标记（飞行前后皆可，不可在飞行与解决任务标记/太空站效果之间）。友谊标记甚至可用于飞本回合未借卡牌飞行的那艘飞船。</li>
+      <li><b>胜利：</b>首位从两块面板均移除全部任务标记、且回合结束两艘飞船均停泊在对应行星的玩家获胜！</li>
+    </ul>
+    <figure>
+      <img src="ORBIT_Rules_images/page_11.jpg" alt="PRISM 变体页">
+      <figcaption>PRISM 变体（原书第 11 页）</figcaption>
+    </figure>
+    <figure>
+      <img src="ORBIT_Rules_images/page_12.jpg" alt="合伙变体页">
+      <figcaption>四人合伙变体（原书第 12 页）</figcaption>
+    </figure>
+    <figure>
+      <img src="ORBIT_Rules_images/page_13.jpg" alt="双飞船变体页">
+      <figcaption>进阶双人：双飞船变体（原书第 13 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="expansion">
+    <h2 class="sec"><span class="num">11</span>星云扩展</h2>
+    <p>以下模块可单独或任意组合加入游戏。购于 <b>www.BitewingGames.com</b>。</p>
+
+    <h3>导航标记模块</h3>
+    <p>可与任一面棋盘及其他变体同用。通过简化导航缩短游戏时长。</p>
+    <ul>
+      <li><b>准备：</b>每位玩家将三枚同色导航标记放在面板旁。（双飞船变体每玩家只取一种颜色的导航标记。）</li>
+      <li><b>游玩：</b>整局中，仅在你自己回合，可各执行一枚标记的效果一次，然后弃置。每回合可用多枚。</li>
+    </ul>
+    <div class="comp-grid">
+      <div class="comp"><b>获取最大数量能量方块</b><br>取能量方块将能量区方块数提升至当前能量上限。</div>
+      <div class="comp"><b>超跳跃</b><br>将飞船放在任一显示超跳跃传送门的交叉点（含太空站）。</div>
+      <div class="comp"><b>交换手牌</b><br>将手牌全部弃入弃牌堆，再从牌库抽新牌。</div>
+      <div class="comp"><b>组件</b><br>12 枚导航标记（4 色）、4 个超加速引擎、18 个星云片。</div>
+    </div>
+
+    <h3>超加速引擎模块</h3>
+    <p>可与任一面棋盘及其他变体同用。大幅改变游戏手感与策略可能。</p>
+    <ul>
+      <li><b>准备：</b>将超加速引擎放在可取处。</li>
+      <li><b>游玩：</b>在你将能量上限升级至最高（5）的那回合结束时，必须用超加速引擎升级飞船。升级永久。移除第三行所有能量方块、任务标记与太空站，放一个超加速引擎盖住所有数字。</li>
+      <li>此后不能再获取或使用能量方块。改为：当打出的卡牌允许你获取能量方块时，本回合可改用一次超加速引擎。视作卡牌效果（与其他效果任意顺序）。其他允许获取方块或升级能量上限的效果（如激活的太空站或任务标记）无效、也不触发引擎。可选择不执行此效果。</li>
+    </ul>
+
+    <h3>人造星云模块</h3>
+    <p>可与任一面棋盘及其他变体同用。对棋盘引入永久改变（人造星云），阻挡飞船通行并加快行星轨道速度。</p>
+    <ul>
+      <li><b>准备：</b>将星云片放在可取处。</li>
+      <li><b>游玩：</b>显示人造星云的卡牌效果登场。打出此类卡牌时，可将一枚人造星云片放在任一颗行星轨道的任一行星符号上，前提是该符号上无行星、无飞船（也无其他星云片）。该符号交叉点即被人造星云永久占据。</li>
+      <li>若行星推进至被人造星云占据的位置，立即沿轨道继续推进到下一个无人造星云的位置。</li>
+      <li>飞船不可飞入或飞越被人造星云占据的行星符号交叉点。超加速炮或超加速引擎同理。</li>
+      <li>若星云片用尽，不可再放置人造星云。</li>
+    </ul>
+    <figure>
+      <img src="ORBIT_Rules_images/page_14.jpg" alt="星云扩展页 1">
+      <figcaption>星云扩展——导航标记模块（原书第 14 页）</figcaption>
+    </figure>
+    <figure>
+      <img src="ORBIT_Rules_images/page_15.jpg" alt="超加速引擎页">
+      <figcaption>超加速引擎模块（原书第 15 页）</figcaption>
+    </figure>
+    <figure>
+      <img src="ORBIT_Rules_images/page_16.jpg" alt="人造星云页">
+      <figcaption>人造星云模块与致谢（原书第 16 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="credits">
+    <h2 class="sec">致谢</h2>
+    <div class="credits">
+      <p>Reiner Knizia 感谢所有参与本游戏开发的测试玩家，特别是 Sebastian Bleasdale、Chris Bowyer、John Christian、David Farquhar、Martin Higham、Ross Inglis、Kevin Jacklin、Chris Lawson、Dorette Peters、Daniel Steel、Stefan Willkofer。</p>
+      <p><b>保持联系：</b>订阅更新于 www.bitewinggames.com/subscribe</p>
+      <p><b>版权：</b>© Dr. Reiner Knizia, 2025。保留所有权利。 &nbsp;·&nbsp; © Bitewing Games LLC, 2025。保留所有权利。</p>
+    </div>
+  </section>
+
+  <footer>
+    本页为 <b>ORBIT</b> 规则书（Bitewing Games, 2025）的中文本地化重排版。版式、主题与导航为便于阅读而添加，规则按原文译出；游戏名、人名与公司名保留英文。原书页面插图已嵌入以保证内容完整。
+  </footer>
+  </main>
+</div>
+</body>
+</html>

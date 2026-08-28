@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>议事会（Mini Rogue 扩展）— 附加规则</title>
+<style>
+  :root{
+    --bg:#f5ecd7; --bg2:#e8d8a8; --ink:#1f2a1a; --ink-soft:#4a5a40;
+    --forest:#234d32; --forest-d:#15321e; --forest-l:#3a7d54;
+    --rust:#b04d2e; --rust-d:#7a3019; --rust-l:#cc7459;
+    --paper:#ddc78b; --paper-d:#a8956b;
+    --line:#c4b890; --card:#fdf6e3;
+    --gold:#c89c4e; --shadow:rgba(21,50,30,.2);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"Songti SC","Noto Serif SC","Source Han Serif SC",STSong,
+                "Iowan Old Style","Palatino Linotype",Georgia,serif;
+    line-height:1.85; font-size:16px;
+  }
+  .wrap{display:flex; align-items:flex-start; max-width:1180px; margin:0 auto;}
+  nav{
+    position:sticky; top:0; align-self:flex-start;
+    width:248px; flex:0 0 248px; height:100vh; overflow-y:auto;
+    background:linear-gradient(180deg,var(--forest-d),var(--forest));
+    color:var(--paper); padding:22px 16px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;
+  }
+  nav h2{font-size:13px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--rust-l); margin:0 0 12px;}
+  nav ol{list-style:none; margin:0; padding:0;}
+  nav a{display:block; color:var(--paper); text-decoration:none; font-size:14px;
+    padding:7px 10px; border-radius:7px;}
+  nav a:hover{background:var(--rust); color:var(--paper);}
+  main{flex:1 1 auto; min-width:0; padding:0 40px 80px;}
+  .cover{
+    background:linear-gradient(160deg,var(--forest-d),var(--forest) 50%,var(--rust));
+    color:var(--paper); padding:62px 40px; border-radius:0 0 18px 18px;
+    margin-bottom:36px; text-align:center;
+    box-shadow:0 10px 30px var(--shadow);
+  }
+  .cover h1{font-size:42px; margin:0 0 6px; letter-spacing:.04em;
+    font-family:"Iowan Old Style","Palatino Linotype",Georgia,serif;
+    text-shadow:2px 2px 0 var(--forest-d);}
+  .cover .sub{font-size:17px; opacity:.95;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .cover .tag{display:inline-block; margin-top:16px; padding:6px 16px;
+    border:1px solid rgba(255,255,255,.45); border-radius:20px; font-size:14px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  section{padding:14px 0 8px; border-bottom:1px solid var(--line); scroll-margin-top:18px;}
+  h2.sec{font-size:26px; color:var(--forest-d); margin:18px 0 6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  h2.sec .num{color:var(--rust-d); font-weight:700; margin-right:10px;}
+  h3{font-size:18px; color:var(--forest-d); margin:22px 0 6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  p{margin:10px 0;}
+  ul,ol{margin:10px 0 10px 4px; padding-left:22px;}
+  li{margin:5px 0;}
+  .lead{font-size:17px;}
+  .icon-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:14px 0;}
+  .icon-box{border:1px solid var(--line); border-radius:10px;
+    padding:12px 14px; background:var(--card);}
+  .icon-box .sym{display:inline-block; min-width:24px; padding:2px 8px;
+    background:var(--rust); color:#fff; border-radius:6px;
+    font-weight:700; font-family:Arial,sans-serif; margin-right:8px;
+    font-size:14px;}
+  .icon-box h4{margin:0 0 6px; color:var(--rust-d);}
+  .room-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:14px 0;}
+  .room{border:1px solid var(--line); border-radius:10px;
+    padding:14px 16px; background:var(--card);}
+  .room h4{margin:0 0 6px; color:var(--rust-d);
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;
+    letter-spacing:.04em;}
+  .room .type{display:inline-block; padding:2px 8px; border-radius:6px;
+    background:var(--forest); color:var(--paper); font-size:12px;
+    font-weight:700; font-family:Arial,sans-serif; margin-right:6px;}
+  .room .type.trap{background:var(--rust-d);}
+  .room .type.merchant{background:var(--gold); color:var(--ink);}
+  .room .type.item{background:var(--forest-l);}
+  ol.setup{counter-reset:setup; list-style:none; padding-left:0;}
+  ol.setup > li{position:relative; padding:8px 8px 8px 56px; margin:6px 0;
+    background:var(--card); border:1px solid var(--line); border-radius:8px;}
+  ol.setup > li::before{counter-increment:setup; content:counter(setup);
+    position:absolute; left:10px; top:8px;
+    width:30px; height:30px; background:var(--forest); color:var(--paper);
+    border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-weight:700; font-family:Arial,sans-serif;}
+  .bubble{border:1px dashed var(--rust); padding:14px 18px; border-radius:10px;
+    margin:14px 0; background:var(--card);}
+  .bubble b{color:var(--rust-d);}
+  .important{border:2px dashed var(--rust); padding:12px 18px; border-radius:10px;
+    margin:14px 0; background:var(--card);}
+  .important b{color:var(--rust-d);}
+  .note{border-left:3px solid var(--rust); padding:8px 14px; background:var(--bg2);
+    border-radius:0 8px 8px 0; margin:14px 0;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; font-size:14px;}
+  .ex{border:1px solid var(--paper-d); background:var(--paper);
+    padding:12px 18px; border-radius:10px; margin:14px 0;}
+  .ex .label{display:inline-block; background:var(--rust); color:var(--paper);
+    padding:2px 10px; border-radius:12px; font-weight:700; font-size:14px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; margin-right:8px;}
+  .phase-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:14px 0;}
+  .phase{border:1px solid var(--line); border-radius:10px;
+    padding:12px 16px; background:var(--card);}
+  .phase h4{margin:0 0 6px; color:var(--rust-d);}
+  figure{margin:18px 0; text-align:center;}
+  figure img{max-width:100%; border:1px solid var(--line); border-radius:12px;
+    box-shadow:0 4px 14px var(--shadow); background:#fff;}
+  figcaption{font-size:13px; color:var(--ink-soft); margin-top:6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .credits{background:var(--bg2); border:1px solid var(--line); border-radius:12px;
+    padding:16px 20px; margin-top:14px; font-size:15px;}
+  .credits b{color:var(--rust-d);}
+  footer{margin-top:40px; font-size:13px; color:var(--ink-soft);
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; text-align:center;}
+  @media(max-width:900px){
+    .wrap{flex-direction:column;}
+    nav{position:static; width:100%; height:auto; flex-basis:auto;}
+    main{padding:0 18px 60px;}
+    .icon-grid,.room-grid,.phase-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <h1>Mini Rogue: 议事会</h1>
+  <div class="sub">议事会 · 附加规则（中文版 / 英文版转中文）</div>
+  <div class="tag">扩展 &nbsp;|&nbsp; 1&ndash;4 人 &nbsp;|&nbsp; 视模式而定</div>
+</header>
+
+<div class="wrap">
+  <nav>
+    <h2>目录</h2>
+    <ol>
+      <li><a href="#overview">概览 &amp; 新图标</a></li>
+      <li><a href="#armor">敌人护甲</a></li>
+      <li><a href="#solo">单人 / 3 人合作 / 战斗生命值</a></li>
+      <li><a href="#rooms">房间卡（5 张）</a></li>
+      <li><a href="#combine">与基础游戏组合</a></li>
+      <li><a href="#overlord">霸主 模块</a></li>
+      <li><a href="#omen">预兆与力量</a></li>
+      <li><a href="#dungeon">地城骰</a></li>
+      <li><a href="#master">房间之主</a></li>
+      <li><a href="#reinforce">强化卡</a></li>
+      <li><a href="#avatar">化身</a></li>
+      <li><a href="#stats">冒险者起始属性</a></li>
+      <li><a href="#rookie">新手冒险者 / 自动模式</a></li>
+      <li><a href="#lore">传说卡</a></li>
+      <li><a href="#credits">制作信息</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+  <section id="overview">
+    <h2 class="sec"><span class="num">1</span>概览 &amp; 新图标</h2>
+    <p class="lead"><b>议事会</b>是 <b>Mini Rogue</b> 的独立扩展。你可以独自玩，也可以与朋友一起对抗 <b>霸主</b> 模块。如果你拥有基础游戏 <b>Mini Rogue</b>，还可以 3 人合作玩，最多 4 人（含 霸主）。</p>
+
+    <h3>新图标</h3>
+    <div class="icon-grid">
+      <div class="icon-box"><span class="sym">L</span><b>传说卡</b><br>抽 1 张传说卡并结算。结算后<b>面朝上弃掉</b>：本局不再抽取此卡。</div>
+      <div class="icon-box"><span class="sym">T</span><b>凶猛</b><br>敌人若掷出 5，附加 <b>-3 h</b> 攻击。</div>
+      <div class="icon-box"><span class="sym">S</span><b>蜂拥</b><br>你同时面对 <b>3 个</b>当前敌人，需杀死 3 次。每次只剩敌人攻击时掷 1 次地城骰。当 1 个敌人被杀，超额伤害传给下一个。用方块追踪剩余敌人数。</div>
+      <div class="icon-box"><span class="sym">A</span><b>魔法护盾</b><br>敌人不能被药水针对。即使本次攻击中你没有受伤，此效果也适用。</div>
+      <div class="icon-box"><span class="sym">&amp;</span><b>腐蚀</b><br>失去 1 f；若无 f 则失去 1 h。</div>
+      <div class="icon-box"><span class="sym">}</span><b>远程</b><br>战斗中，投骰后先结算敌人的攻击，再结算你的攻击。</div>
+      <div class="icon-box"><span class="sym">d</span><b>闪避</b><br>战斗中，敌人掷出 5 则闪避你的攻击（你的攻击未命中）。多颗角色骰时，只忽略最高值那一颗。</div>
+    </div>
+  </section>
+
+  <section id="armor">
+    <h2 class="sec"><span class="num">2</span>敌人护甲</h2>
+    <p>你会遇到拥有<b>护甲</b>（符号 <b>a</b>）的敌人。它会部分抵消你的攻击，正如你的护甲也能抵消敌人的攻击。<b>每 1 点敌人护甲</b>，你的攻击<b>减少 1 点</b>。<b>无论你的骰子怎么掷，都不能忽略</b>这层减免。</p>
+    <div class="important">
+      <b>药水</b>可以<b>无视</b>敌人护甲。<br>
+      例：你用角色骰没有造成伤害，但用了火焰/毒素药水，结算药水伤害时<b>不再扣减</b>敌人护甲。
+    </div>
+  </section>
+
+  <section id="solo">
+    <h2 class="sec"><span class="num">3</span>单人 / 3 人合作 / 战斗生命值</h2>
+
+    <h3>单人玩法</h3>
+    <p>议事会可作为独立游戏——你不需要基础 Mini Rogue 或其他扩展。<b>但是</b>，除了 霸主 模块外，<b>不能 2 人玩</b>。若拥有基础游戏，则可自由使用本扩展的卡牌进入合作模式。</p>
+
+    <h3>3 人合作模式</h3>
+    <p>若你拥有基础 Mini Rogue，可最多 3 人合作玩。</p>
+
+    <h3>战斗生命值计算</h3>
+    <p>敌人的<b>生命值</b>取<b>单人值 + 合作值</b>相加。例：敌人 8/16 生命值，3 人合作时为 <b>24 生命值</b>（16 + 8）。</p>
+    <div class="bubble">
+      <b>生命值超过 50 的追踪：</b>把红色方块放在 生命值轨道的 50 处，深红方块放在余数处。例：怪物 55 生命值 → 红方块在 50，深红方块在 5。
+    </div>
+  </section>
+
+  <section id="rooms">
+    <h2 class="sec"><span class="num">4</span>房间卡（5 张）</h2>
+
+    <div class="room-grid">
+      <div class="room">
+        <h4><span class="type trap">陷阱</span>警钟塔</h4>
+        <p>尽职的守卫在岗。被发现就完了。</p>
+        <p>这是普通陷阱，但多一个变化：<b>失败时必须拿取此卡</b>。如果你身上还有另一件物品，则必须丢弃它才能拿取警钟塔（除非另一件物品也要求你必须拿取，如《诅咒深渊》中的 <b>诅咒遗物（诅咒遗物</b>）。在那种特定情况下（且仅限那种情况），你可以携带多件物品。</p>
+        <p>警钟塔触发后，在<b>本层余下时间</b>，你必须将每张怪物卡<b>连续面对 2 次</b>。然后弃掉此卡。</p>
+      </div>
+      <div class="room">
+        <h4><span class="type trap">陷阱</span>沉睡守卫</h4>
+        <p>夜里，从一条小巷溜到另一条时，你可能会惊醒强大的敌人——无论人或兽。</p>
+        <p>玩法同普通陷阱，但若你掷出 5 或 6 失败技能检定，必须面对一张<b>随机大Boss 卡</b>。将所有未用过与已击败的 大Boss 卡 洗混，抽出 1 张战斗。如果你在 4 楼，把大Boss 视作 3 楼。胜利后陷阱结算。</p>
+      </div>
+      <div class="room">
+        <h4><span class="type merchant">商人</span>铁匠</h4>
+        <p>在老城区长大，她用创意的方式挥锤求生。</p>
+        <p>铁匠与普通商人相同，但交易完成后，若你有足够金币可买<b>投掷锤</b>（<b>3 金 → I</b>，物品）。买下后，铁匠卡<b>视作物品卡</b>，适用所有普通物品卡规则。</p>
+      </div>
+      <div class="room">
+        <h4><span class="type item">物品</span>药水束带</h4>
+        <p>破裂的皮革与磨损的搭扣显示这是常用装备。还剩最后一个小瓶……</p>
+        <p>拿取药水束带需要通过技能检定（<b>(s)</b>）。它允许你<b>多携带 1 个药水</b>。拿取时立即获得 1 个<b>圣水</b>，可放在角色板或束带上。随时可在角色板与束带之间移动药水。</p>
+        <p>束带上的药水被消耗时，<b>不要丢弃</b>束带。普通物品卡规则仍适用。</p>
+      </div>
+      <div class="room">
+        <h4><span class="type item">物品</span>暗黑法典</h4>
+        <p>隐约的呼啸声，像来自另一个维度的风透过书页的缝隙吹到这里……</p>
+        <p>拿取暗黑法典需要通过技能检定（<b>(s)</b>）。否则不能拿取，且损失 1 <b>诅咒</b>。</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="combine">
+    <h2 class="sec"><span class="num">5</span>与基础游戏组合</h2>
+    <p>议事会与所有 Mini Rogue 扩展完全兼容。<b>经验法则：</b>你可以把所有的房间卡、所有的大Boss 卡、所有的角色卡<b>混合在一起</b>使用。</p>
+    <p>若想要随机性更低的局，可以从所有房间卡中精选：<b>4 张怪物、4 张陷阱、4 张古墓、3 张物品、2 张宝物、2 张商人、1 张篝火、1 张神龛</b>。</p>
+    <p>可以从 <b>Og 的遗骸（Og 的遗骸）</b>与 <b>王之遗骸</b>中<b>任选</b>最终大Boss；可以随机抽 1 张制造悬念。</p>
+    <p>可以在 <b>鬼魂</b>与 <b>罪犯</b>参考卡中<b>任选</b>（准备时直接选 1 张，或在不同局交替使用）。参考卡的<b>奖励面</b>同理。</p>
+  </section>
+
+  <section id="overlord">
+    <h2 class="sec"><span class="num">6</span>霸主 模块</h2>
+    <p class="lead">霸主模块邀请你扮演<b>旧神的仆人</b>。你将对抗 1 位（或最多 3 位，使用基础游戏时）冒险者。冒险者进入城市，试图抵达中心击败最终大Boss：<b>霸主</b>。</p>
+    <p>霸主 是一切陷阱与黑暗小巷中试图杀害冒险者的事物的策划者。<b>霸主</b> 拥有个人板、<b>预兆</b>方块、<b>强化</b>方块、霸主 卡与强化卡。</p>
+
+    <h3>准备</h3>
+    <ol class="setup">
+      <li>选择 1 张 霸主 卡，面朝上放在 霸主 板上。<b>黑色方块</b>放在<b>预兆轨道</b>的<b>第 3 格（2 点）</b>——起始 2 点预兆。</li>
+      <li>洗混强化卡，面朝下放在你身旁。把<b>黑色方块</b>放在最上面那张卡的<b>强化轨道</b>的<b>第 1 格（0 点）</b>。</li>
+      <li>按常规设置游戏，但把<b>终局大Boss</b>替换为 <b>化身</b>（<b>化身</b>）。抵达 化身 卡时即面对 化身。</li>
+      <li>从未使用的房间牌堆中抽 <b>3 张房间</b>作为你的<b>手牌</b>。每层结束时弃掉它们，重新抽 3 张。</li>
+      <li>冒险者按常规选择角色，再额外选一张角色卡以获得其<b>技能 + 1 项起始属性</b>（详见 §12）。</li>
+    </ol>
+  </section>
+
+  <section id="omen">
+    <h2 class="sec"><span class="num">7</span>预兆与力量</h2>
+    <p>霸主 起始有 <b>2 点预兆</b>。用<b>黑色方块</b>在 霸主 板上追踪。霸主 可消耗这些点数来<b>激活力量</b>。力量出现在 霸主 卡、强化卡、以及 霸主 板本身。</p>
+    <p>霸主 每次冒险者 <b>深入</b>时获得 <b>3 点预兆</b>，每次战斗中<b>地城骰</b>掷出 <b>1</b> 时获得 1 点。<b>预兆最多 5 点</b>。</p>
+    <p>霸主 可随时使用力量（支付预兆并结算）。如果力量指定了使用时机，则只能在那个时机使用。</p>
+    <h3>基础力量</h3>
+    <ul>
+      <li><b>占卜：</b>一次/区域。准备阶段预览区域中 1 张房间卡（入口与出口除外），可选择与手牌交换。</li>
+    </ul>
+    <h3>霸主 卡上的力量</h3>
+    <ul>
+      <li><b>灾厄命定o：</b>重掷地城骰。每区只能用 1 次。</li>
+      <li><b>迷宫o：</b>查看区域中 3 张面朝下的房间，可交换其中 2 张。</li>
+      <li><b>魔魅之幕oo：</b>选 1 个房间：本次战斗不可用药水与技能；大Boss 房间不能选。</li>
+    </ul>
+  </section>
+
+  <section id="dungeon">
+    <h2 class="sec"><span class="num">8</span>地城骰（地城骰，符号 D）</h2>
+    <p>任何需要掷 <b>地城骰（符号 D）</b>的时候，都由 <b>霸主 掷</b>。对抗多位玩家时，霸主 必须<b>在掷之前宣布</b>为谁掷骰。</p>
+  </section>
+
+  <section id="master">
+    <h2 class="sec"><span class="num">9</span>房间之主</h2>
+    <p>霸主 起始抽 3 张房间作为手牌。利用一次/区域的 <b>占卜</b> 力量（准备阶段），可预览区域中的 1 张房间（入口与出口除外），并选择与手牌交换。这让 霸主 战略性地把难房间放到冒险者的路径上，或移除有利的房间。</p>
+    <p>每层结束时，霸主 弃掉所有手牌，重新抽 3 张。</p>
+  </section>
+
+  <section id="reinforce">
+    <h2 class="sec"><span class="num">10</span>强化卡</h2>
+    <p>霸主 每次使用带 <b>o</b> 或 <b>oo</b> 的力量时，把<b>强化方块</b>（黑色）向右移动 <b>1 格或 2 格</b>，对应符号数。当方块到达最后一格（<b>V</b>）时，霸主 翻开强化牌堆最上面一张卡，并把方块放到该卡<b>强化轨道第 1 格</b>。剩余点数可带到下一张卡。</p>
+    <p>翻开强化卡后，霸主 必须<b>立即使用</b>它，放在板下方（上/左/右/下），只露出选定细节。可用它：</p>
+    <ul>
+      <li>对特定房间卡施加效果（如 <b>腐臭吐息</b> 在探索阶段对下个房间所有玩家施加 -2 h）</li>
+      <li>获得额外力量（如 <b>命运之手</b>：把地城骰放在你选的面上，每区只能 1 次）</li>
+      <li>调整 化身 的属性（最终战两阶段）</li>
+      <li>为战斗中所有敌人增加效果（基于地城骰）</li>
+      <li>或对房间内敌人叠加效果（如 <b>毒气</b>、<b>执拗</b>）</li>
+    </ul>
+    <div class="important">
+      板每侧最多堆叠 <b>3 张</b>强化卡。
+    </div>
+    <p>地城骰的效果也作用于 霸主 的 化身（最终战两阶段）。若 霸主 用尽强化卡，则本局不能再抽。</p>
+  </section>
+
+  <section id="avatar">
+    <h2 class="sec"><span class="num">11</span>化身</h2>
+    <p>当冒险者抵达 <b>化身卡</b>开始最终战，与 霸主 的战斗开始。加上强化卡带来的奖励（生命值、护甲、伤害）。</p>
+    <p>战斗从<b>第一阶段</b>开始（类似 <b>王之遗骸</b>）。霸主 的第二阶段生命值与第一阶段相同，当第一阶段生命值降到 0 时进入第二阶段。</p>
+    <div class="note">
+      <b>3 人 vs 霸主：</b>生命值取<b>单人 + 合作</b>的总和。
+    </div>
+    <p>霸主 可在最终战使用其 霸主 卡与强化卡的力量（但需支付预兆）。强化轨道上的进度在最终战<b>忽略</b>。</p>
+    <div class="important">
+      <b>胜负判定：</b>冒险者必须击败 化身 的<b>两阶段</b>才能获胜；否则 霸主 获胜（冒险者在见到 化身 前全灭也算 霸主 胜）。
+    </div>
+  </section>
+
+  <section id="stats">
+    <h2 class="sec"><span class="num">12</span>冒险者起始属性</h2>
+    <p>游戏开始时，冒险者获得一点小奖励：每位冒险者选择 1 张未被选走的角色卡，从中选<b>1 项属性</b>加到自己的起始属性上。它会<b>替换</b>你角色对应的那一项属性。药水也算起始属性。</p>
+    <div class="ex">
+      <p><span class="label">【示例】</span>你有 <b>疫医（疫医，2 金）</b>，选 <b>捕鼠人</b> 的 <b>5 金</b>加入起始属性。捕鼠人 的金币会替换疫医的金币。最终属性：<b>13 h, 5 金, 3 f, 9</b>。</p>
+    </div>
+
+    <h3>示例角色（疫医 / 捕鼠人）的技能</h3>
+    <ul>
+      <li><b>疫医</b>
+        <ul>
+          <li><b>配药（配药，战斗）：</b>你所在房间内一个中毒的敌人可失去 1 h 来获得 1 个毒素药水。</li>
+          <li><b>放血疗法（放血疗法，探索）：</b>你所在房间内一个敌人获得 5 h 并中毒。</li>
+        </ul>
+      </li>
+      <li><b>捕鼠人</b>
+        <ul>
+          <li><b>鼠饵（鼠饵，战斗）：</b>失去 1 f 以在本战斗序列中多掷 1 颗角色骰。</li>
+          <li><b>猎捕（猎捕，探索）：</b>结算下一房间内的怪物或陷阱后，额外获得 1 f 作为奖励。</li>
+        </ul>
+      </li>
+    </ul>
+
+    <p>将第二张角色卡<b>滑入</b>你的角色卡下方，只露出<b>技能</b>。今后可分别使用两套技能——每次用技能时，只把那张卡翻为面朝下。现在可以<b>用 2 个技能</b>再刷新。刷新时两张卡都翻回面朝上。</p>
+    <p class="note">额外的角色卡<b>不给你额外的 角色职业</b>（传说卡用途）。</p>
+  </section>
+
+  <section id="rookie">
+    <h2 class="sec"><span class="num">13</span>新手冒险者 / 自动模式</h2>
+
+    <h3>新手冒险者</h3>
+    <p>当 霸主 对抗<b>新手</b>冒险者时，建议给其中一位奖励：每次 大Boss 战后，让一位冒险者结算 <b>奖励</b>卡<b>两次</b>（霸主 重新掷地城骰）。获得额外奖励的冒险者每战可换。所有冒险者协商谁拿。</p>
+
+    <h3>自动模式</h3>
+    <p>这是一种<b>无人扮演 霸主</b>的自动玩法。按常规规则，但做以下调整：</p>
+    <ul>
+      <li>设置时，选 1 张 霸主 卡翻到其 <b>自动模式侧</b>（<b>A</b>）。</li>
+      <li>每位玩家选 1 张未用的角色卡，滑入自己的角色卡下方（同 §12 起始属性）。</li>
+      <li>霸主 <b>既不获得也不消耗</b>预兆，且<b>不持有手牌</b>。改为查阅 霸主 卡上的图标，决定是否触发力量（依据房间类型与当前阶段）。</li>
+      <li>例如玩 <b>先知</b> 霸主 时，每次遇到 怪物卡，霸主 触发 <b>魔魅之幕</b>：强化方块右移 2 格，再应用力量本身的效果。</li>
+      <li>若力量显示 <b>o</b> 或 <b>oo</b>，先按符号数右移强化方块，再结算力量效果。</li>
+      <li>若方块到最后一格（<b>V</b>），翻开强化卡，掷地城骰，按 霸主 卡右上角的骰面图标，决定放在 霸主 板的哪一侧（最多 3 张/侧 不适用）。剩余点数可带到下一张卡。</li>
+      <li>结算完强化卡后，应用对应房间卡的力量。</li>
+    </ul>
+  </section>
+
+  <section id="lore">
+    <h2 class="sec"><span class="num">14</span>传说卡</h2>
+    <p>传说卡是 Mini Rogue 叙事世界的小小插曲，常给玩家提供选择或独特情境。准备时洗混所有 传说卡，组成面朝下的 <b>传说牌堆</b>，放在房间牌堆旁边。</p>
+    <p>结算 传说卡：抽出最上面 1 张，阅读故事，然后从可选选项中选 1 个。<b>部分选项</b>会标注角色 token 符号——这意味着该选项只能由对应职业的角色执行。</p>
+    <ol>
+      <li><b>故事：</b>先读这段。</li>
+      <li><b>选项：</b>只能选 1 个。选定后，按右侧栏更新自己的属性。</li>
+      <li><b>职业限定：</b>只有角色符号对应的职业能选。</li>
+      <li><b>技能检定：</b>带检定的选项要投骰结算。成功 / 失败结果会在下方列出。</li>
+    </ol>
+    <div class="note">
+      <b>传说牌堆用完后：</b>每次需要抽 传说卡时，什么都不发生。<br>
+      更多 传说卡可在《诅咒深渊》扩展与各种 promo 包中找到；拥有的话可以全部洗混作 传说牌堆。
+    </div>
+  </section>
+
+  <section id="credits">
+    <h2 class="sec"><span class="num">15</span>制作信息</h2>
+    <div class="credits">
+      <p><b>游戏设计：</b>Paolo Di Stefano、Gabriel Gendron</p>
+      <p style="margin-top:10px;"><b>系列：</b>Mini Rogue（独立扩展 议事会）</p>
+      <p style="margin-top:10px;">本规则书以英文版 <b>Mini Rogue: 议事会 — 附加规则</b>（compressed 版）为权威源。<b>专有名词</b>（游戏名、扩展名、角色类、卡牌专名、能力名、设计师、出版商）首次出现时附中文括注；<b>普通术语</b>（生命值、骰子、药水、技能检定、强化、预兆等）直接译为中文。</p>
+    </div>
+    <figure>
+      <img src="MR_TC_Add_Rules_images/page_04.jpg" alt="规则书第 4 页（敌人护甲 + 单人 / 3 人合作 + 战斗生命值 表）">
+      <figcaption>原文第 4 页（敌人护甲、单人 / 3 人合作模式、战斗生命值计算 + 楼层表）</figcaption>
+    </figure>
+    <figure>
+      <img src="MR_TC_Add_Rules_images/page_05.jpg" alt="规则书第 5 页（房间卡 警钟塔 / 沉睡守卫 / 铁匠 / 药水束带）">
+      <figcaption>原文第 5 页（房间卡：警钟塔 / 沉睡守卫 / 铁匠 / 药水束带）</figcaption>
+    </figure>
+    <figure>
+      <img src="MR_TC_Add_Rules_images/page_07.jpg" alt="规则书第 7 页（霸主 模块 + 准备 + Omen 与力量）">
+      <figcaption>原文第 7 页（霸主 模块概览、准备 5 步、预兆与力量、化身 卡图示）</figcaption>
+    </figure>
+    <figure>
+      <img src="MR_TC_Add_Rules_images/page_09.jpg" alt="规则书第 9 页（Reinforcement + 化身 + 战斗效果 / 房间效果 / 力量）">
+      <figcaption>原文第 9 页（强化卡、化身、霸主 板 4 个区域说明 + 战斗 / 房间效果图标）</figcaption>
+    </figure>
+    <footer>
+      — Mini Rogue: 议事会 / 议事会 — 附加规则（中文版）&nbsp;·&nbsp; 译自英文 compressed 版 —
+    </footer>
+  </section>
+
+  </main>
+
+<p style="margin-top: 20px; font-size: 13px; color: #666;"><b>翻译说明：</b>保留英文的专名：Paolo Di Stefano、Gabriel Gendron（设计师人名）。其他专名（霸主 / 化身 / 房间卡 / 强化卡 / 存钱罐牌 / 传说卡 / 灾厄命定 / 魔魅之幕 等）全部译为中文。</p>
+
+</div>
+
+</body>
+</html>

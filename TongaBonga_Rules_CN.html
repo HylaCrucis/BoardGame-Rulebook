@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tonga Bonga（环岛营生）— 游戏规则</title>
+<style>
+  :root{
+    /* 雨林风：雨林翠 + 鸟羽绯红 + 香蕉黄 */
+    --bg:#f3ecd6; --bg2:#e6d8a8; --ink:#1f2a1c; --ink-soft:#506048;
+    --forest:#1f6b4a; --forest-d:#134a30; --forest-l:#3a9b6e;
+    --feather:#d63a3a; --feather-d:#a02525; --feather-l:#e66565;
+    --banana:#f0c948; --banana-d:#b88f1a; --banana-l:#f6dc7c;
+    --line:#c4b890; --card:#fbf6e6;
+    --sea:#3a7bb4;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"Songti SC","Noto Serif SC","Source Han Serif SC",STSong,
+                "Iowan Old Style","Palatino Linotype",Georgia,serif;
+    line-height:1.85; font-size:16px;
+  }
+  .wrap{display:flex; align-items:flex-start; max-width:1180px; margin:0 auto;}
+  nav{
+    position:sticky; top:0; align-self:flex-start;
+    width:248px; flex:0 0 248px; height:100vh; overflow-y:auto;
+    background:linear-gradient(180deg,var(--forest-d),var(--forest));
+    color:#eef2e8; padding:22px 16px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;
+  }
+  nav h2{font-size:13px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--banana); margin:0 0 12px;}
+  nav ol{list-style:none; margin:0; padding:0;}
+  nav a{display:block; color:#eef2e8; text-decoration:none; font-size:14px;
+    padding:7px 10px; border-radius:7px;}
+  nav a:hover{background:var(--banana); color:var(--forest-d);}
+  main{flex:1 1 auto; min-width:0; padding:0 40px 80px;}
+  .cover{
+    background:linear-gradient(160deg,var(--forest-d),var(--forest) 50%,var(--banana));
+    color:#fbf6e6; padding:62px 40px; border-radius:0 0 18px 18px;
+    margin-bottom:36px; text-align:center;
+    box-shadow:0 10px 30px rgba(19,74,48,.28);
+  }
+  .cover h1{font-size:42px; margin:0 0 6px; letter-spacing:.02em;
+    font-family:"Iowan Old Style","Palatino Linotype",Georgia,serif;}
+  .cover .sub{font-size:17px; opacity:.95;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .cover .tag{display:inline-block; margin-top:16px; padding:6px 16px;
+    border:1px solid rgba(255,255,255,.45); border-radius:20px; font-size:14px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  section{padding:14px 0 8px; border-bottom:1px solid var(--line); scroll-margin-top:18px;}
+  h2.sec{font-size:26px; color:var(--forest-d); margin:18px 0 6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  h2.sec .num{color:var(--feather-d); font-weight:700; margin-right:10px;}
+  h3{font-size:18px; color:var(--forest-d); margin:22px 0 6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  p{margin:10px 0;}
+  ul,ol{margin:10px 0 10px 4px; padding-left:22px;}
+  li{margin:5px 0;}
+  .lead{font-size:17px;}
+  .comp-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:16px 0;}
+  .comp{border:1px solid var(--line); background:var(--card); border-radius:12px;
+    padding:14px 16px; box-shadow:0 2px 6px rgba(0,0,0,.06);}
+  .comp b{color:var(--forest-d);}
+  ol.setup{counter-reset:setup; list-style:none; padding-left:0;}
+  ol.setup > li{position:relative; padding:8px 8px 8px 56px; margin:6px 0;
+    background:var(--card); border:1px solid var(--line); border-radius:8px;}
+  ol.setup > li::before{counter-increment:setup; content:counter(setup);
+    position:absolute; left:10px; top:8px;
+    width:30px; height:30px; background:var(--forest); color:#fff;
+    border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-weight:700; font-family:Arial,sans-serif;}
+  .phase-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:16px 0;}
+  .phase{border:1px solid var(--line); border-radius:12px;
+    padding:14px 18px; background:var(--card); box-shadow:0 2px 6px rgba(0,0,0,.06);}
+  .phase h4{margin:0 0 6px; color:var(--forest-d);
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .phase .num{display:inline-block; min-width:28px; padding:2px 8px;
+    background:var(--feather); color:#fff; border-radius:6px;
+    font-weight:700; font-family:Arial,sans-serif; margin-right:6px;}
+  .phase.phase3{grid-column:1/-1;}
+  .tile-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:14px 0;}
+  .tile{border:1px solid var(--line); border-radius:12px;
+    padding:12px 16px; background:var(--card); box-shadow:0 2px 6px rgba(0,0,0,.06);}
+  .tile h4{margin:0 0 6px; color:var(--feather-d);
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .tile .ico{display:inline-block; padding:2px 10px; background:var(--banana);
+    color:var(--forest-d); border-radius:6px; font-weight:700;
+    font-family:Arial,sans-serif; font-size:13px; margin-right:6px;}
+  .ex{border:1px dashed var(--banana-d); background:#fdf3c5;
+    padding:12px 18px; border-radius:10px; margin:14px 0;}
+  .ex .label{display:inline-block; background:var(--forest); color:var(--banana);
+    padding:2px 10px; border-radius:12px; font-weight:700; font-size:14px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; margin-right:8px;}
+  .note{border-left:3px solid var(--banana-d); padding:8px 14px; background:var(--bg2);
+    border-radius:0 8px 8px 0; margin:14px 0;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; font-size:14px;}
+  figure{margin:18px 0; text-align:center;}
+  figure img{max-width:100%; border:1px solid var(--line); border-radius:12px;
+    box-shadow:0 4px 14px rgba(0,0,0,.08); background:#fff;}
+  figcaption{font-size:13px; color:var(--ink-soft); margin-top:6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .credits{background:var(--bg2); border:1px solid var(--line); border-radius:12px;
+    padding:16px 20px; margin-top:14px; font-size:15px;}
+  .credits b{color:var(--forest-d);}
+  footer{margin-top:40px; font-size:13px; color:var(--ink-soft);
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; text-align:center;}
+  @media(max-width:900px){
+    .wrap{flex-direction:column;}
+    nav{position:static; width:100%; height:auto; flex-basis:auto;}
+    main{padding:0 18px 60px;}
+    .comp-grid,.phase-grid,.tile-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <h1>Tonga Bonga</h1>
+  <div class="sub">环岛营生 · 游戏规则（中文版 / 繁体版转简体）</div>
+  <div class="tag">8 岁以上 &nbsp;|&nbsp; 2&ndash;4 人 &nbsp;|&nbsp; 约 30 分钟</div>
+</header>
+
+<div class="wrap">
+  <nav>
+    <h2>目录</h2>
+    <ol>
+      <li><a href="#intro">简介</a></li>
+      <li><a href="#components">配件</a></li>
+      <li><a href="#setup">准备</a></li>
+      <li><a href="#play">玩法总述</a></li>
+      <li><a href="#phase1">阶段 1：决定工资</a></li>
+      <li><a href="#phase2">阶段 2：配置水手</a></li>
+      <li><a href="#phase3">阶段 3：航行</a></li>
+      <li><a href="#phase4">阶段 4：支付工资</a></li>
+      <li><a href="#tiles">特殊板块</a></li>
+      <li><a href="#end">游戏结束</a></li>
+      <li><a href="#credits">制作信息</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+  <section id="intro">
+    <h2 class="sec"><span class="num">1</span>简介</h2>
+    <p class="lead">在 Tonga Bonga 游戏中，玩家们化身野心勃勃的船长，为了发大财而经营自己的船。借助雇佣能干的船员，比其他人更早一步抵达周围的岛屿；越早抵达岛屿，就能赚越多的钱。但别忘了，若想雇佣最厉害的船员，就必须付出相对高额的工资。借助均衡的投资，成为最强的船长吧！</p>
+  </section>
+
+  <section id="components">
+    <h2 class="sec"><span class="num">2</span>配件</h2>
+    <div class="comp-grid">
+      <div class="comp"><b>游戏板 ×1</b><br>含 Tonga Bonga 岛与 4 个周边岛屿</div>
+      <div class="comp"><b>4 艘船</b><br>每位玩家一艘</div>
+      <div class="comp"><b>16 个营地</b><br>每色 4 个</div>
+      <div class="comp"><b>12 个水手骰子</b><br>每色 3 个</div>
+      <div class="comp"><b>4 个雇用板</b><br>每位玩家一块</div>
+      <div class="comp"><b>8 个特殊板块</b><br>风 / 沉默的宝物 / 宝物地图 / 幽灵船</div>
+      <div class="comp" style="grid-column:1/-1;"><b>硬币一组</b><br>1 元 ×33、5 元 ×39、25 元 ×16</div>
+    </div>
+  </section>
+
+  <section id="setup">
+    <h2 class="sec"><span class="num">3</span>准备</h2>
+    <ol class="setup">
+      <li>在桌上摊开游戏板。</li>
+      <li>决定自己的颜色，拿对应颜色的 <b>4 个营地</b>与 <b>3 个水手骰子</b>放到自己面前，并将自己的船放在 <b>Tonga Bonga 岛</b>上布满波浪图案的格子里。</li>
+      <li>将 <b>8 个特殊板块</b>翻面后洗牌，取 <b>7 个</b>将其面朝下，不要看到正面，置于画有鲸鱼图案的格子中。剩下的 1 块放回盒子。再将放好的 7 块全部翻为正面公开。</li>
+      <li>由<b>最近造访过彼岸岛屿</b>的人作为起始玩家。</li>
+      <li>把各玩家的 <b>4 个雇用板</b>排在游戏板的下方。起始玩家的雇用板放在最左边，其余玩家按顺时针方向排列。</li>
+      <li>各玩家领取 <b>20 硬币</b>（5 元 ×3、1 元 ×5）作为起始资金。</li>
+    </ol>
+    <p class="note">至此完成 Tonga Bonga 岛的出航准备！</p>
+  </section>
+
+  <section id="play">
+    <h2 class="sec"><span class="num">4</span>玩法总述</h2>
+    <p>游戏以<b>多轮</b>方式进行，每一轮依下列 4 个阶段按顺序进行：</p>
+    <div class="phase-grid">
+      <div class="phase"><h4><span class="num">1</span>决定工资</h4><p>每位玩家决定雇用水手的工资。</p></div>
+      <div class="phase"><h4><span class="num">2</span>配置水手</h4><p>玩家掷水手骰子，将骰子配置到其他玩家的船上。</p></div>
+      <div class="phase phase3"><h4><span class="num">3</span>航行</h4><p>利用雇用板上的水手点数合计作为航行力，移动自己的船。</p></div>
+      <div class="phase phase3" style="background:var(--card);"><h4><span class="num">4</span>支付工资</h4><p>各玩家收回放在自己颜色骰子格内的工资。</p></div>
+    </div>
+    <p>每个阶段均由<b>最左边雇用板</b>的玩家开始，按<b>顺时针</b>方向每位玩家轮流进行。</p>
+  </section>
+
+  <section id="phase1">
+    <h2 class="sec"><span class="num">5</span>阶段 1：决定工资</h2>
+    <p>轮到自己时，决定这一回合想要雇佣的水手的工资。把想要付的<b>钱</b>放在自己的雇用板中画有<b>船长</b>及<b>舵手</b>图案的位置上。每人至少要放 <b>1 元</b> 以上。所有人都把工资放上雇用板后，进入下一阶段。</p>
+  </section>
+
+  <section id="phase2">
+    <h2 class="sec"><span class="num">6</span>阶段 2：配置水手</h2>
+    <p>轮到自己时，掷出自己<b>的 3 个水手骰子</b>，将他们配置到想要的其他玩家的船上。这些骰子是受雇于其他玩家、在船上工作并赚取工资的水手。</p>
+
+    <h3>重新掷骰子</h3>
+    <p>玩家如果想要重新掷骰，需要先付钱。支付 <b>2 元</b> 给银行后可以重新掷一次；<b>3 元</b> 又可投一次；<b>4 元</b> 再投一次……<b>每次重新投掷费用递增 1 元</b>。</p>
+    <div class="note">
+      <b>晕船：</b>万一骰到「靠在栏杆上晕船」这一面，这颗水手骰子在本回合<b>就不能受雇</b>于船上。
+    </div>
+    <div class="note">
+      <b>放置限制：</b>骰子必须各放 1 个在<b>除本人以外的其他玩家</b>的船上；若为 <b>3 人游戏</b>，则可以放置 1 个或 2 个。
+    </div>
+
+    <h3>放置规则</h3>
+    <p>决定好要配置的骰子后，按以下方式确认骰子放置的格子：</p>
+    <ul>
+      <li>船上还没有骰子：将骰子放在<b>最左边那一格（船长格）</b>。</li>
+      <li>船上已经有骰子：将包含新骰子的全部骰子，按<b>点数大小从左边开始依序排列</b>；如果点数相同，则<b>新得到的骰子放在最左边</b>。</li>
+    </ul>
+
+    <div class="ex">
+      <p><span class="label">【骰子排放示例】</span>真熙将黄色骰子（4）放在橘色的船上，这颗骰子被安排在船长格（最左边）。</p>
+      <p style="margin-top:6px;">东雨将红色骰子（3）放在橘色的船上，因为数字比 4 小，因此将其放置在舵手位置。</p>
+      <p style="margin-top:6px;">完真将白色骰子（3）放在橘色的船上，由于数字和已经放置的红色骰子（3）相同，因此将红色骰子（3）移至最右边，白色骰子则放在舵手的格子里。</p>
+    </div>
+  </section>
+
+  <section id="phase3">
+    <h2 class="sec"><span class="num">7</span>阶段 3：航行</h2>
+    <p>轮到自己时，利用雇用板上的所有水手骰子的点数合计作为<b>航行力</b>。玩家可使用该力来移动船只。移动时须遵守下列规定：</p>
+    <ul>
+      <li>船只只能移动到<b>相邻的格子</b>，且只能在<b>画有海洋的格子及波浪的格子</b>移动。<b>不能移动或通过陆地</b>。</li>
+      <li><b>小格子</b>（六角形 1 个）只能容纳 <b>1 艘船</b>。</li>
+      <li><b>大格子</b>（波浪图案的六角形 2 个以上相连）可以同时容纳多艘船。</li>
+      <li>想要移动到<b>没有其他船只</b>的小格时，需花费 <b>1 移动力</b>。移动到大格子时，无论有没有其他船只存在，都需要使用 <b>1 移动力</b>。</li>
+      <li>虽然无法移动到<b>已经停有其他船只</b>的小格，但<b>可以经过</b>它。此时，为了要避开其他船只绕道经过，<b>需要追加使用 1 移动力</b>。</li>
+    </ul>
+
+    <h3>特殊板块的触发</h3>
+    <ul>
+      <li>船只进入放置<b>特殊板块</b>的格子，或幽灵船<b>相邻的格子</b>时，则启动该效果。各特殊板块的效果请参阅 §9。</li>
+      <li>船只抵达<b>波浪格子</b>时，可在该岛上<b>建立营地</b>。建立营地不需要花费移动力，在完成后可以继续移动。也就是说，船只移动并建立完营地后，可以再利用剩下的移动力继续航行。</li>
+      <li>建立完营地后，可立即向银行<b>领取 25 硬币</b>作为收入。此外，若岛上还有其他玩家建立的营地，玩家必须支付给营地主人<b>各 5 硬币</b>。<br>
+      <span class="note" style="display:inline-block; margin:4px 0;">注：玩家不得在<b>已经建立营地</b>的岛上再次建立营地。</span></li>
+    </ul>
+
+    <div class="ex">
+      <p><span class="label">【抵岛示例】</span></p>
+      <ol>
+        <li>使用 <b>3 移动力</b> 后抵达岛屿。</li>
+        <li>取得 <b>25 硬币</b> 后建立营地。由于岛上已经有<b>橘色</b>营地，故须支付 <b>5 硬币</b> 给橘色玩家。</li>
+        <li>之后用剩余的 <b>2 移动力</b> 移动 2 格。</li>
+      </ol>
+    </div>
+
+    <div class="ex">
+      <p><span class="label">【船只经过示例】</span></p>
+      <ol>
+        <li>ⓐ 因为移动小格子 2 格，使用了 <b>2 移动力</b>。</li>
+        <li>ⓑ 因为经过了停有其他船只的小格子，因此使用 <b>3 移动力</b>。自起点到最终位置的移动上，总共使用了 <b>5 移动力</b>。</li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="phase4">
+    <h2 class="sec"><span class="num">8</span>阶段 4：支付工资</h2>
+    <p>所有玩家都可以领到支付给自己水手骰子的工资。玩家只能收取<b>放在自己颜色骰子格内的钱</b>。<b>船长</b>可取回<b>没有放置水手骰子的那一格</b>的钱。</p>
+    <p>之后把原本在最左边的雇用板<b>移至最右边</b>，重新开始新的一轮。</p>
+  </section>
+
+  <section id="tiles">
+    <h2 class="sec"><span class="num">9</span>特殊板块</h2>
+    <div class="tile-grid">
+      <div class="tile">
+        <h4><span class="ico">风</span>风</h4>
+        <p>进入<b>风砖</b>那一格时，根据标记的数字获得对应的<b>追加移动力</b>。</p>
+      </div>
+      <div class="tile">
+        <h4><span class="ico">宝物</span>沉默的宝物</h4>
+        <p>若船只<b>停在</b>宝物砖那一格时（若只是经过就无法获得硬币），可获取标记在特殊板块上的硬币数量。然后将宝物砖<b>从游戏中移除</b>。</p>
+      </div>
+      <div class="tile">
+        <h4><span class="ico">地图</span>宝物地图</h4>
+        <p>进入<b>宝物地图</b>砖那一格时，即可获得特殊板块。取得特殊板块的玩家，在船只抵达岛屿时，即可获得特殊板块上标记的硬币数量，然后将特殊板块从游戏中移除。</p>
+      </div>
+      <div class="tile">
+        <h4><span class="ico">幽灵</span>幽灵船</h4>
+        <p>进入<b>幽灵船</b>那一格的船只则<b>无法移动或经过</b>。除此之外，若船只经过幽灵船周边，则需要多支付 <b>3 硬币</b> 给船上设置的每个水手骰子。</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="end">
+    <h2 class="sec"><span class="num">10</span>游戏结束</h2>
+    <p>当有一位玩家将自己的 <b>4 个营地</b>全部建立完成，并<b>回到 Tonga Bonga 岛</b>时，该局游戏结束。</p>
+    <p>游戏结束时，<b>抵达 Tonga Bonga 岛</b>的船上的<b>每位玩家</b>皆可以获得 <b>10 硬币</b>。<b>钱最多的玩家获胜</b>！</p>
+    <figure>
+      <img src="TongaBonga_Rules_images/page_01.jpg" alt="规则书第 1 页（封面 + 简介 + 配件 + 准备 + 玩法 + 阶段 1/2 + 骰子排放示例）">
+      <figcaption>原文第 1 页（封面故事、配件、准备、玩法总述、阶段 1 决定工资、阶段 2 配置水手、骰子排放示例）</figcaption>
+    </figure>
+    <figure>
+      <img src="TongaBonga_Rules_images/page_02.jpg" alt="规则书第 2 页（阶段 3 航行 + 阶段 4 支付工资 + 特殊板块 + 抵岛 / 经过示例 + 制作信息）">
+      <figcaption>原文第 2 页（阶段 3 航行、阶段 4 支付工资、特殊板块、抵岛示例、船只经过示例、游戏结束、制作信息）</figcaption>
+    </figure>
+  </section>
+
+  <section id="credits">
+    <h2 class="sec"><span class="num">11</span>制作信息</h2>
+    <div class="credits">
+      <p><b>插画（插画）：</b>Shin Jonghun、Wanjin Gill</p>
+      <p><b>出版（出版）：</b>Gameology Inc. &nbsp;|&nbsp; playte &nbsp;|&nbsp; <span style="color:var(--forest-d);">www.playte.com</span></p>
+      <p><b>繁体中文翻译（翻译）：</b>WRH</p>
+      <p style="margin-top:10px;">ⓒ 2024. Gameology, Inc. All rights reserved.</p>
+    </div>
+    <p class="note" style="margin-top:14px;">本规则书的简体中文版以 Gameology 2024 年繁体中文版（<b>Tonga Bonga / 譯：WRH</b>）为权威源，正文采用简繁转换（繁体「雇/僱」→「<b>雇</b>」、「營」→「<b>营</b>」、「錢」→「<b>钱</b>」、「們」→「<b>们</b>」、「個」→「<b>个</b>」、「數」→「<b>数</b>」、「點」→「<b>点</b>」、「時」→「<b>时</b>」、「從」→「<b>从</b>」、「過」→「<b>过</b>」等）；专有名词（游戏名「Tonga Bonga」、人名、岛屿名、出版商）保留原文。</p>
+    <footer>
+      — Tonga Bonga / 环岛营生 — 中文版规则书 &nbsp;·&nbsp; 简体化自 Gameology 2024 繁体中文版 —
+    </footer>
+  </section>
+
+  </main>
+
+<p style="margin-top: 20px; font-size: 13px; color: #666;"><b>翻译说明：</b>保留英文的专名：Tonga Bonga、Shin Jonghun、Wanjin Gill、WRH（人名/游戏名）。其他专名（船长 / 营生 / 雇佣板 / 水手骰子 / 幽灵船 等）全部译为中文。</p>
+
+</div>
+
+</body>
+</html>

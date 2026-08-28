@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hercules and the 12 Labors（大力神十二试炼）— 规则书（中文）</title>
+<style>
+  :root{
+    --bone:#f5f0e3; --bone2:#ece4d2; --ink:#2b2620; --ink-soft:#6b6258;
+    --bronze:#3f6354; --bronze-d:#294539; --bronze-l:#6f9b8a;
+    --gold:#b8862f; --gold-d:#946a1e;
+    --sea:#2e6b87; --sea-l:#5a93a8;
+    --green:#3f7d52; --green-l:#e4f0e7;
+    --red:#a8392f; --red-l:#f6e3e0;
+    --line:#ddd2bd; --card:#fffdf7;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bone); color:var(--ink);
+    font-family:"Songti SC","Noto Serif SC","Source Han Serif SC",STSong,
+                "Palatino Linotype",Georgia,serif;
+    line-height:1.9; font-size:17px;
+  }
+  .wrap{display:flex; align-items:flex-start; max-width:1180px; margin:0 auto;}
+  nav{
+    position:sticky; top:0; align-self:flex-start;
+    width:248px; flex:0 0 248px; height:100vh; overflow-y:auto;
+    background:var(--bronze-d); color:#efe9da; padding:22px 16px;
+    font-family:"PingFang SC","Microsoft YaHei","Trebuchet MS",Arial,sans-serif;
+  }
+  nav h2{font-size:13px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--bronze-l); margin:0 0 12px;}
+  nav ol{list-style:none; margin:0; padding:0;}
+  nav a{display:block; color:#efe9da; text-decoration:none; font-size:14px;
+    padding:7px 10px; border-radius:7px;}
+  nav a:hover{background:var(--bronze);}
+  main{flex:1 1 auto; min-width:0; padding:0 40px 80px;}
+  .cover{
+    background:linear-gradient(160deg,var(--bronze-d),var(--bronze) 55%,var(--gold));
+    color:#f5f0e3; padding:60px 40px; border-radius:0 0 18px 18px;
+    margin-bottom:36px; text-align:center;
+    box-shadow:0 10px 30px rgba(41,69,57,.25);
+  }
+  .cover h1{font-size:38px; margin:0 0 8px; letter-spacing:.01em;}
+  .cover .sub{font-size:16px; opacity:.92; font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .cover .tag{display:inline-block; margin-top:16px; padding:6px 16px;
+    border:1px solid rgba(255,255,255,.4); border-radius:20px; font-size:14px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; letter-spacing:.02em;}
+  section{padding:14px 0 8px; border-bottom:1px solid var(--line); scroll-margin-top:18px;}
+  h2.sec{font-size:28px; color:var(--bronze-d); margin:18px 0 6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  h2.sec .num{color:var(--gold); font-weight:700; margin-right:10px;}
+  h3{font-size:20px; color:var(--bronze); margin:24px 0 6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  p{margin:10px 0;}
+  ul,ol{margin:10px 0 10px 4px; padding-left:22px;}
+  li{margin:5px 0;}
+  .lead{font-size:18px;}
+  .comp-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:16px 0;}
+  .comp{border:1px solid var(--line); background:var(--card); border-radius:12px;
+    padding:14px 16px; box-shadow:0 2px 6px rgba(0,0,0,.04);}
+  .comp b{color:var(--bronze-d);}
+  .comp .q{float:right; font-weight:700; color:var(--gold-d);
+    font-family:"Trebuchet MS",Arial,sans-serif;}
+  .callout{border-left:5px solid var(--gold); background:var(--bone2);
+    padding:12px 18px; margin:16px 0; border-radius:0 10px 10px 0;}
+  .callout.tip{border-color:var(--green); background:var(--green-l);}
+  .callout.tip b{color:var(--green);}
+  .callout.warn{border-color:var(--red); background:var(--red-l);}
+  .callout.warn b{color:var(--red);}
+  .steps{counter-reset:step; list-style:none; padding-left:0; margin:14px 0;}
+  .steps li{position:relative; padding:10px 14px 10px 52px; margin:8px 0;
+    background:var(--card); border:1px solid var(--line); border-radius:10px;}
+  .steps li::before{counter-increment:step; content:counter(step);
+    position:absolute; left:12px; top:50%; transform:translateY(-50%);
+    width:28px; height:28px; background:var(--bronze); color:#fff;
+    border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-weight:700; font-family:Arial,sans-serif;}
+  .ability{border:1px solid var(--line); background:var(--card); border-radius:10px;
+    padding:11px 15px; margin:8px 0; box-shadow:0 2px 6px rgba(0,0,0,.04);}
+  .ability .name{font-weight:700; color:var(--bronze-d);
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .ability .cost{color:var(--gold-d); font-weight:700;}
+  .icons{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:14px 0;}
+  .ico-item{border:1px solid var(--line); background:var(--card); border-radius:10px;
+    padding:10px 13px; font-size:15px; box-shadow:0 2px 6px rgba(0,0,0,.04);}
+  .ico-item b{color:var(--bronze-d);}
+  .ico-item.neg{border-left:4px solid var(--red);}
+  .ico-item.pos{border-left:4px solid var(--green);}
+  figure{margin:18px 0; text-align:center;}
+  figure img{max-width:100%; border:1px solid var(--line); border-radius:12px;
+    box-shadow:0 4px 14px rgba(0,0,0,.08); background:#fff;}
+  figcaption{font-size:13px; color:var(--ink-soft); margin-top:6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .two{display:grid; grid-template-columns:1fr 1fr; gap:16px; align-items:start;}
+  table.diff{width:100%; border-collapse:collapse; margin:14px 0; font-size:15px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  table.diff th,table.diff td{border:1px solid var(--line); padding:8px 12px; text-align:left;}
+  table.diff th{background:var(--bone2); color:var(--bronze-d);}
+  table.diff td:first-child{color:var(--gold-d); font-weight:700; white-space:nowrap;}
+  @media(max-width:900px){
+    .wrap{flex-direction:column;}
+    nav{position:static; width:100%; height:auto; flex-basis:auto;}
+    main{padding:0 18px 60px;}
+    .comp-grid,.two,.icons{grid-template-columns:1fr;}
+  }
+  footer{margin-top:40px; font-size:13px; color:var(--ink-soft);
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; text-align:center;
+    line-height:1.7;}
+  .credits{background:var(--bone2); border:1px solid var(--line); border-radius:12px;
+    padding:16px 20px; margin-top:14px;}
+  .credits b{color:var(--bronze-d);}
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <h1>Hercules and the 12 Labors</h1>
+  <div class="sub">单人骰子游戏 · 神话与赎罪</div>
+  <div class="tag">1 人 &nbsp;|&nbsp; 14 岁以上 &nbsp;|&nbsp; 30–60 分钟</div>
+</header>
+
+<div class="wrap">
+  <nav>
+    <h2>目录</h2>
+    <ol>
+      <li><a href="#overview">1 · 概览</a></li>
+      <li><a href="#components">2 · 组件</a></li>
+      <li><a href="#setup">3 · 准备</a></li>
+      <li><a href="#cards">4 · 卡牌解剖</a></li>
+      <li><a href="#gameplay">5 · 游戏流程</a></li>
+      <li><a href="#dice">6 · 骰子能力</a></li>
+      <li><a href="#attack">7 · 攻击系统</a></li>
+      <li><a href="#impacts">8 · 试炼影响与奖励</a></li>
+      <li><a href="#clarifications">9 · 规则澄清</a></li>
+      <li><a href="#endgame">10 · 终局</a></li>
+      <li><a href="#designer">11 · 设计者笔记</a></li>
+      <li><a href="#credits">12 · 制作人员</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+  <section id="overview">
+    <h2 class="sec"><span class="num">1</span>概览</h2>
+    <p class="lead">歌唱吧，缪斯，歌唱阿尔刻德斯（Alcides）——一个被罪疚缠绕的半神，为往昔之罪所折磨。因赫拉（Hera）的嫉妒降下诅咒，又被女神逼至疯狂，他杀死了妻子墨伽拉（Megara）与三个孩子。从暴行中惊醒，他自我放逐，前往德尔斐神谕（Oracle of Delphi）寻求新家与赎罪之路。</p>
+    <p>神谕赐他新名——<b>赫拉克勒斯（Hercules）</b>，"赫拉之荣耀"，命他前去侍奉叔父欧律斯透斯王（King Eurystheus），完成加诸其身的试炼。唯有功成，方能获赦、得安，并于奥林匹斯众神之中不朽。</p>
+    <div class="callout tip">
+      <b>目标。</b>穿上赫拉克勒斯的凉鞋，迎战传奇的<b>十二试炼（12 Labors）</b>！每一道试炼都将你逼至极限——掷骰、操纵、指派，击败神话巨兽，完成不可能的壮举。仔细追踪你的<b>精神（Spirit）</b>与<b>神性（Divinity）</b>：一旦失败，旅程便毁于一旦。但若你征服每一道试炼、登顶神性轨道，便能于奥林匹斯众神之间赢得应得的一席！
+    </div>
+    <figure>
+      <img src="Hercules_Rules_images/page_02.jpg" alt="开场插画页">
+      <figcaption>开场插画页（原书第 2 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="components">
+    <h2 class="sec"><span class="num">2</span>组件</h2>
+    <div class="comp-grid">
+      <div class="comp"><b>56 张牌</b><span class="q">56</span><br>含试炼卡、传说卡、情绪卡与奖励卡（详见"卡牌解剖"）。</div>
+      <div class="comp"><b>精神 / 神性追踪板</b><br>追踪你的精神，以及你在神性轨道上的进度。</div>
+      <div class="comp"><b>赫拉克勒斯的弓</b><br>承载你每次掷骰可使用的蓝格骰子能力。</div>
+      <div class="comp"><b>传说卡（Lore Cards）</b><span class="q">14</span><br>引入每一道试炼及其故事。</div>
+      <div class="comp"><b>情绪卡（Mood Cards）</b><span class="q">13</span><br>9 张常规 + 4 张特殊（3 张群鬼系列 + 阿特拉斯之重），会改变每道试炼的胜负天平。</div>
+      <div class="comp"><b>试炼卡（Labor Cards）</b><span class="q">27</span><br>每道试炼的攻击系统、生命与影响（正面）；奖励（背面）。</div>
+      <div class="comp"><b>15 颗骰子</b><span class="q">15</span><br>11 颗赫拉克勒斯骰子（绿）+ 4 颗试炼骰子（金）。</div>
+      <div class="comp"><b>1 个精神标记 &amp; 1 个神性标记</b><br>用于精神 / 神性追踪板。</div>
+    </div>
+    <figure>
+      <img src="Hercules_Rules_images/page_03.jpg" alt="组件与概览">
+      <figcaption>组件与概览（原书第 3 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="setup">
+    <h2 class="sec"><span class="num">3</span>准备</h2>
+    <p>按以下方式分牌：</p>
+    <ol class="steps">
+      <li><b>试炼牌堆（The Labor Deck）</b> —— 传说卡与试炼卡共同组成试炼牌堆，已预先排好顺序（卡牌左下角编号 1–41）。</li>
+      <li><b>情绪牌堆（The Mood Deck）</b> —— 挑出 4 张特殊情绪卡（Weight of Atlas、Ghost of Hippolyta、Ghost of Pholus、Ghost of Abderus）放在一旁，游戏中逐步加入；其余 9 张洗匀置于一旁。</li>
+      <li><b>赫拉克勒斯卡牌</b> —— 将"赫拉克勒斯的弓"与"精神 / 神性追踪板"置于面前；将精神与神性标记放在各自的起始格（标 X）。</li>
+      <li>起手 <b>4 颗绿色赫拉克勒斯骰子</b>。其余赫拉克勒斯骰子与 4 颗金色试炼骰子放入供应区。</li>
+      <li>阅读<b>涅墨亚雄狮（Nemean Lion）</b>传说卡，将涅墨亚雄狮试炼卡置于面前；从供应区取 1 颗金色试炼骰子放在卡上的骰子格，点数与所示一致（涅墨亚雄狮为 <b>6</b>）。</li>
+    </ol>
+    <h3>难度</h3>
+    <table class="diff">
+      <tr><th>模式</th><th>起手骰子数</th></tr>
+      <tr><td>人类（Human）</td><td>5 颗</td></tr>
+      <tr><td>英雄（Hero）</td><td>4 颗</td></tr>
+      <tr><td>神（God）</td><td>3 颗</td></tr>
+    </table>
+    <div class="callout warn">
+      <b>警告：</b>神级（God）难度极度困难。若你胆敢挑战此模式，请移除 <b>Battered</b> 情绪卡。我们不推荐此难度。已经警告过你了。
+    </div>
+    <figure>
+      <img src="Hercules_Rules_images/page_04.jpg" alt="准备与难度">
+      <figcaption>准备与难度（原书第 4 页）</figcaption>
+    </figure>
+    <figure>
+      <img src="Hercules_Rules_images/page_05.jpg" alt="首道试炼的准备">
+      <figcaption>起始准备状态（原书第 5 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="cards">
+    <h2 class="sec"><span class="num">4</span>卡牌解剖</h2>
+    <h3>试炼卡（正面）</h3>
+    <div class="comp-grid">
+      <div class="comp"><b>1 · 卡名</b><br>赫拉克勒斯须完成的试炼编号与名称。</div>
+      <div class="comp"><b>2 · 攻击系统</b><br>击败该试炼所需的具体骰子点数或组合（白色显示；部分试炼有多个攻击系统）。</div>
+      <div class="comp"><b>3 · 试炼初始生命</b><br>试炼的初始生命值，放一颗相同点数的骰子于此（部分试炼需放置多颗）。</div>
+      <div class="comp"><b>4 · 卡牌编号</b><br>重开游戏时维持正确卡序。</div>
+      <div class="comp"><b>5 · 失败条件</b><br>试炼骰子到达骷髅图标，则试炼失败、游戏结束。</div>
+      <div class="comp"><b>6 · 试炼影响</b><br>代表试炼如何影响你（赫拉克勒斯）的图标（见第 13 页）。</div>
+    </div>
+    <h3>奖励卡（试炼卡背面）</h3>
+    <div class="comp-grid">
+      <div class="comp"><b>1 · 卡名</b><br>从试炼获得的奖励名称。</div>
+      <div class="comp"><b>2 · 奖励加成</b><br>获得奖励立即享有的好处。</div>
+      <div class="comp"><b>3 · 蓝格能力</b><br>操纵骰子点数。每次掷骰可用一次，先于任何金格能力。</div>
+      <div class="comp"><b>4 · 金格能力</b><br>锁定骰子并触发各种效果。每次掷骰一次，在蓝格能力之后。</div>
+      <div class="comp"><b>5 · 精神消耗</b><br>重开游戏时使用该奖励的代价（见第 11 页）。</div>
+    </div>
+    <div class="two">
+      <figure>
+        <img src="Hercules_Rules_images/page_06.jpg" alt="试炼卡解剖">
+        <figcaption>试炼卡（原书第 6 页）</figcaption>
+      </figure>
+      <figure>
+        <img src="Hercules_Rules_images/page_07.jpg" alt="奖励卡解剖">
+        <figcaption>奖励卡（试炼卡背面，原书第 7 页）</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="gameplay">
+    <h2 class="sec"><span class="num">5</span>游戏流程</h2>
+    <p>在《赫拉克勒斯与十二试炼》中，你将迎战 12 道试炼，一道比一道更难。每完成一道试炼，你便获得一份奖励，助你完成后续试炼。</p>
+    <div class="callout">
+      <b>情绪卡。</b>每道试炼前，抽并结算一张情绪卡；该试炼结束时将其洗回情绪牌堆。情绪卡效果有正有负，只影响你正面对的这道试炼，且不叠加。若某张情绪卡让你增减骰子，该变化仅限当前试炼——下一道试炼你将恢复正常的骰子数。
+    </div>
+    <p><b>试炼骰子。</b>每道试炼有骰子格，容纳 1 颗或多颗试炼骰子。要完成试炼，必须在它们抵达骷髅之前，将每颗都减至 0。你须用赫拉克勒斯骰子掷出特定结果（<b>攻击系统</b>，白色显示于试炼卡上）来削减；每达成一次，试炼生命 -1。</p>
+    <p>每道试炼按以下步骤进行：</p>
+    <ol class="steps">
+      <li><b>情绪卡</b> —— 抽并结算一张情绪卡（见上）。</li>
+      <li><b>掷出你可用的赫拉克勒斯骰子。</b></li>
+      <li><b>操纵骰子</b> —— 可将赫拉克勒斯骰子放在任意蓝格，触发赫拉克勒斯的弓及 / 或已解锁奖励卡上的能力（见第 14–15 页）。</li>
+      <li><b>放置骰子</b> —— 将赫拉克勒斯骰子放在金格（触发能力）或试炼卡上（造成伤害）。金格上的骰子不能用于造成伤害；试炼卡上的骰子对该试炼造成伤害（见第 16 页）。</li>
+      <li><b>若试炼骰子减至 0</b> —— 试炼被击败。翻面试炼卡，从翻出的奖励卡中选 1 张，弃掉其余；将新奖励与既有奖励并列，并获得奖励加成（见第 13 页），随后进入下一道试炼。</li>
+      <li><b>若试炼骰子未减至 0</b> —— 将试炼骰子推进至下一格。所经格上的图标（试炼影响）立即结算（见第 13 页）。</li>
+      <li><b>若精神尚存</b> —— 收起你可用的赫拉克勒斯骰子，回到步骤 2。</li>
+      <li><b>若精神减至 0</b> —— 旅程结束。你已失败，不被众神接纳。</li>
+    </ol>
+    <div class="callout warn">
+      <b>破损骰子。</b>部分试炼影响会损坏赫拉克勒斯骰子。骰子一旦损坏，本试炼剩余时间里不可再用——但下一道试炼开始时恢复。
+    </div>
+    <div class="two">
+      <figure>
+        <img src="Hercules_Rules_images/page_08.jpg" alt="游戏流程概览">
+        <figcaption>游戏流程概览（原书第 8 页）</figcaption>
+      </figure>
+      <figure>
+        <img src="Hercules_Rules_images/page_09.jpg" alt="游戏流程步骤">
+        <figcaption>步骤 2–8（原书第 9 页）</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="dice">
+    <h2 class="sec"><span class="num">6</span>骰子能力</h2>
+    <p><b>蓝格能力</b>让你在掷骰后操纵骰子。将一颗骰子放在蓝格以改变其点数。每个蓝格每次掷骰可用一次；一旦某颗骰子被放入蓝格，便不能再用于其他蓝格能力。你必须先使用蓝格能力，再使用金格能力。</p>
+    <p><b>金格能力</b>在蓝格之后：用你刚调整过的骰子以及任意未使用的骰子触发金格效果（格挡伤害、获得神性或恢复赫拉克勒斯的精神）。每次掷骰只能用一次。用于金格能力的骰子被锁定，无法对试炼造成伤害。结算完蓝、金格后，将剩余未用的骰子放在试炼形象上以造成伤害。</p>
+
+    <h3>蓝格能力</h3>
+    <div class="ability"><span class="name">增减 1（耗精神）</span> —— 将骰子点数上下调 1，消耗 <span class="cost">1 点精神</span>。（6 可变 1，1 也可变 6。）</div>
+    <div class="ability"><span class="name">六 ⇄ 三</span> —— 将 6 变 3，或将 3 变 6。</div>
+    <div class="ability"><span class="name">重掷</span> —— 在此重掷一颗骰子。</div>
+    <div class="ability"><span class="name">翻倍（耗 2 精神）</span> —— 放此骰子按其点数计为 2 颗，消耗 <span class="cost">2 点精神</span>。</div>
+    <div class="ability"><span class="name">重掷任意</span> —— 放一颗骰子于此以重掷任意骰子。</div>
+    <div class="ability"><span class="name">献祭并设定</span> —— 放一颗骰子于此（本掷丢失），将另 1 颗改为任意值。</div>
+    <div class="ability"><span class="name">自由设定</span> —— 将放于此的骰子改为任意值。</div>
+    <div class="ability"><span class="name">加 1</span> —— 骰子点数 +1。</div>
+    <div class="ability"><span class="name">奇偶互换</span> —— 奇数变偶数，偶数变奇数。</div>
+    <div class="ability"><span class="name">增减 1（变体）</span> —— 将骰子点数上下调 1。</div>
+    <div class="ability"><span class="name">翻面</span> —— 将骰子翻到对面。</div>
+    <div class="ability"><span class="name">翻倍（无消耗）</span> —— 放此骰子按其点数计为 2 颗。</div>
+
+    <h3>金格能力</h3>
+    <p>金格提供三类效果。将一颗与图标匹配的骰子放入金格以获得所示效果；该骰子在本掷中被锁定。</p>
+    <div class="comp-grid">
+      <div class="comp"><b>格挡伤害</b><br>每 <span style="color:var(--red);font-weight:700">盾</span> 图标防止赫拉克勒斯失去 1 点精神。</div>
+      <div class="comp"><b>获得精神</b><br>每 <span style="color:var(--green);font-weight:700">心</span> 图标为赫拉克勒斯恢复 1 点精神。</div>
+      <div class="comp"><b>获得神性</b><br>每 <span style="color:var(--gold-d);font-weight:700">焰</span> 图标为赫拉克勒斯获得 1 点神性。</div>
+    </div>
+    <div class="two">
+      <figure>
+        <img src="Hercules_Rules_images/page_10.jpg" alt="蓝格与金格概览">
+        <figcaption>蓝格与金格能力（原书第 10 页）</figcaption>
+      </figure>
+      <figure>
+        <img src="Hercules_Rules_images/page_16.jpg" alt="金格能力">
+        <figcaption>金格能力（原书第 16 页）</figcaption>
+      </figure>
+    </div>
+    <div class="two">
+      <figure>
+        <img src="Hercules_Rules_images/page_14.jpg" alt="蓝格能力 1">
+        <figcaption>蓝格能力（原书第 14 页）</figcaption>
+      </figure>
+      <figure>
+        <img src="Hercules_Rules_images/page_15.jpg" alt="蓝格能力 2">
+        <figcaption>蓝格能力（原书第 15 页）</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="attack">
+    <h2 class="sec"><span class="num">7</span>攻击系统</h2>
+    <p>掷出试炼卡上所示的具体结果以造成伤害。每张试炼卡上的白色符号表示它接受哪些结果：</p>
+    <div class="icons">
+      <div class="ico-item"><b>双骰斜杠</b> —— 两骰带斜杠：匹配<b>任一颗</b>所示。</div>
+      <div class="ico-item"><b>任意对子</b> —— 任意 2 颗相同。</div>
+      <div class="ico-item"><b>求和相等</b> —— 2 颗相加须等于另一颗。</div>
+      <div class="ico-item"><b>三与比较</b> —— 3 加一骰之和须 ≤ 第三颗。</div>
+      <div class="ico-item"><b>顺子 1-2-3</b> —— 1、2、3 三连。</div>
+      <div class="ico-item"><b>乘积</b> —— 一骰乘一骰须等于 1 颗或多颗之和。</div>
+      <div class="ico-item"><b>顺子（任意起点）</b> —— 任意起点的三连（如 3、4、5）。</div>
+      <div class="ico-item"><b>任意三同</b> —— 任意 3 颗相同。</div>
+      <div class="ico-item"><b>四连</b> —— 任意起点的四连（如 2、3、4、5）。</div>
+      <div class="ico-item"><b>匹配单骰</b> —— 单骰：匹配所示。</div>
+      <div class="ico-item"><b>精确求和</b> —— 若干骰子之和恰为所示数字。</div>
+    </div>
+    <figure>
+      <img src="Hercules_Rules_images/page_12.jpg" alt="攻击系统参考">
+      <figcaption>攻击系统参考（原书第 12 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="impacts">
+    <h2 class="sec"><span class="num">8</span>试炼影响与奖励加成</h2>
+    <h3>试炼影响</h3>
+    <p>这些图标出现在试炼卡上，当试炼骰子移动至其所在格时结算。</p>
+    <div class="icons">
+      <div class="ico-item neg"><b>推进</b> —— 所有其他试炼骰子前进 1 格。</div>
+      <div class="ico-item neg"><b>骷髅</b> —— 你失败了，游戏结束。</div>
+      <div class="ico-item neg"><b>不可格挡</b> —— 试炼骰子在此图标上时无法格挡。</div>
+      <div class="ico-item neg"><b>焰</b> —— 每焰图标失去 1 点神性。</div>
+      <div class="ico-item neg"><b>碎心</b> —— 每碎心图标失去 1 点精神。</div>
+      <div class="ico-item neg"><b>治疗上限</b> —— 每图标为试炼骰子 +1，至多其初始值。</div>
+      <div class="ico-item neg"><b>损坏骰子</b> —— 每图标失去 1 颗赫拉克勒斯骰子，该骰损坏至下道试炼。</div>
+      <div class="ico-item neg"><b>多重</b> —— 多图标全部结算。</div>
+    </div>
+    <h3>奖励加成</h3>
+    <div class="icons">
+      <div class="ico-item pos"><b>心</b> —— 每心图标获得 1 点精神。</div>
+      <div class="ico-item pos"><b>焰</b> —— 每焰图标获得 1 点神性。</div>
+      <div class="ico-item pos"><b>骰</b> —— 为你的骰子池 +1 颗赫拉克勒斯骰子。</div>
+    </div>
+    <figure>
+      <img src="Hercules_Rules_images/page_13.jpg" alt="试炼影响与奖励加成">
+      <figcaption>试炼影响与奖励加成（原书第 13 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="clarifications">
+    <h2 class="sec"><span class="num">9</span>规则澄清</h2>
+    <ul>
+      <li>有时某张卡会指示你移除一张先前的奖励卡或某张指定情绪卡（永久）。卡牌也可能指示你向情绪牌堆加入一张特殊情绪卡。情绪牌堆中的卡数永远不会超过 9 张。</li>
+      <li>试炼卡上有闪电引导试炼骰子推进。骰子始终沿闪电路径由粗到细前进。部分试炼提供多条路线——到达分支点时，自行选择试炼骰子下一步落向哪一格。</li>
+      <li>若试炼骰子触发试炼治疗效果，不会超过其初始生命值。<i>例（×2）：克里特公牛（Cretan Bull）初始值为 12——在起始处叠放 2 颗点数为 6 的骰子。</i></li>
+      <li>若你有多个试炼骰子要击败，且掷出多颗可造成伤害的骰子，伤害可任意分配。</li>
+      <li><b>厄律曼托斯野猪（Erymanthian Boar）</b>、<b>斯廷法利斯湖怪鸟（Stymphalian Birds）</b> 与 <b>革律翁的牛群（Cattle of Geryon）</b> 较为特殊：各需 2 种以上不同的攻击系统结果才能击败，且必须按其各自试炼轨道上每一步使用指定结果。</li>
+      <li><b>忧郁（Melancholic）</b>情绪卡：每次掷骰时所有骰子 -1（最低 1）。重掷效果不 -1。</li>
+      <li><b>暴怒（Enraged）</b>情绪卡：每次掷骰时所有骰子 +1（最高 6）。重掷效果不 +1。</li>
+      <li><b>被福罗斯之鬼（Ghost of Pholus）缠身</b>：选 1 张你的奖励卡，将本情绪卡覆于其上以封锁其使用。该情绪卡在试炼结束时移除并洗回情绪牌堆。</li>
+      <li><b>被希波吕忒之鬼（Ghost of Hippolyta）缠身</b>：每当你掷出 1，立即将其移开，当前掷不可使用——即便重掷后仍掷出 1 也如此。</li>
+    </ul>
+    <div class="two">
+      <figure>
+        <img src="Hercules_Rules_images/page_17.jpg" alt="规则澄清（一）">
+        <figcaption>规则澄清（原书第 17 页）</figcaption>
+      </figure>
+      <figure>
+        <img src="Hercules_Rules_images/page_18.jpg" alt="规则澄清（二）">
+        <figcaption>规则澄清（续，原书第 18 页）</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="endgame">
+    <h2 class="sec"><span class="num">10</span>终局</h2>
+    <div class="callout tip">
+      <b>胜利条件：</b>你必须完成全部 12 道试炼<b>并且</b>登顶神性轨道。赫拉克勒斯升入奥林匹斯，于众神之间赢得一席。若未登顶神性轨道，你便失败。
+    </div>
+    <h3>从任意试炼开始</h3>
+    <p>若你某道试炼失败但仍想继续，或想暂停后不从头重来，可按以下方式：</p>
+    <ul>
+      <li>照常设置游戏。</li>
+      <li>取试炼卡，并收集你想开始的试炼之前的所有奖励卡（例如从第 8 试炼开始，则收集第 1–7 试炼的全部奖励卡）。</li>
+      <li>选择你想保留的奖励卡，同时从其精神轨道减去每卡右下角所示的精神消耗。每道试炼你至多只能保留 1 张奖励。</li>
+      <li>获得所选奖励卡的赫拉克勒斯骰子与奖励加成，但忽略任何精神加成。</li>
+      <li>按所选奖励卡指示加入必要的情绪卡。忽略任何会令你"移除：一张先前奖励"的效果。</li>
+    </ul>
+    <div class="callout">
+      <b>示例。</b>选择这张 <i>Athena's Rattle</i> 将消耗你 1 点精神，并获得 +1 神性与 +1 赫拉克勒斯骰子。
+    </div>
+    <figure>
+      <img src="Hercules_Rules_images/page_11.jpg" alt="终局与从任意试炼开始">
+      <figcaption>终局与从任意试炼开始（原书第 11 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="designer">
+    <h2 class="sec"><span class="num">11</span>设计者笔记</h2>
+    <h3>Hercules、Heracles，还是 Herakles？</h3>
+    <p>许多人知道 Hercules，但有多少人知道他本名 Heracles 或 Herakles？我们钟爱这位强大而受折磨的半神的希腊神话与传说。尽管我们更偏好希腊拼写与读音 Hera-kles（"赫拉之荣耀"），以及这名号所承载的赫拉对他的恨意，我们仍选择使用罗马化拼写 "Hercules"，以触及尽可能广泛的读者。</p>
+    <h3>推荐阅读</h3>
+    <p>这款游戏灵感来自无数关于赫拉克勒斯生平、试炼与挣扎的素材与重述：</p>
+    <ul>
+      <li>阿波罗多洛斯（Apollodorus）著《希腊神话文库》（The Library of Greek Mythology）</li>
+      <li>斯蒂芬·弗莱（Stephen Fry）著《英雄：重述的希腊神话》（Heroes: The Greek Myths Reimagined）</li>
+      <li>爱德华·库尔（Edouard Cour）著《赫拉克勒斯》</li>
+    </ul>
+    <h3>特别致谢</h3>
+    <p>设计者感谢他挚爱的妻子 Francesca 持续的的支持与试玩，也感谢其余家人与两只猫儿子 Zazu、Prufrock。同时特别感谢 Alan Gerding、Delton Brack、Dominick Duhamel、Paul Marchbanks 与 Luke Otfinowski 以各种方式的持续支持。</p>
+    <figure>
+      <img src="Hercules_Rules_images/page_19.jpg" alt="设计者笔记">
+      <figcaption>设计者笔记（原书第 19 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="credits">
+    <h2 class="sec"><span class="num">12</span>制作人员</h2>
+    <div class="credits">
+      <p><b>游戏设计：</b>Tyler J. Brown</p>
+      <p><b>插画：</b>David Schneider</p>
+      <p><b>平面设计：</b>Ammon Anderson</p>
+      <p><b>规则书：</b>Ammon Anderson &amp; Mathue Ryann</p>
+      <p><b>规则书编辑：</b>Dan Varrette</p>
+      <p><b>© 2025 Envy Born Games, LLC.</b> 保留所有权利。</p>
+    </div>
+    <figure>
+      <img src="Hercules_Rules_images/page_20.jpg" alt="制作人员">
+      <figcaption>制作人员（原书第 20 页）</figcaption>
+    </figure>
+  </section>
+
+  <footer>
+    本页由《Hercules and the 12 Labors》规则书（© 2025 Envy Born Games, LLC）本地化重排而成。
+    内容译自原版；版式、配色与导航为便于阅读而添加。专有名词（游戏名、特殊情绪卡、奖励卡示例等）保留英文。
+    与出版方无隶属关系。
+  </footer>
+  </main>
+</div>
+</body>
+</html>

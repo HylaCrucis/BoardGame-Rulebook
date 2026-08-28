@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>《Believe in Me!（请相信我！）》中文规则书</title>
+<style>
+  :root{
+    --bg:#fbf8f1;
+    --paper:#ffffff;
+    --ink:#2b2620;
+    --muted:#6b6358;
+    --line:#e7ded0;
+    --gold:#b8860b;
+    --gold-soft:#f3e6c4;
+    --accent:#7a4fb5;
+    --green:#2e8b57;
+    --red:#c0392b;
+    --blue:#2c6fb5;
+    --callout-bg:#fdf3e3;
+    --callout-bd:#e0b873;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"PingFang SC","Microsoft YaHei","Noto Sans SC","Hiragino Sans GB",sans-serif;
+    line-height:1.85;
+    font-size:16.5px;
+  }
+  .wrap{
+    max-width:960px;
+    margin:0 auto;
+    padding:0 22px 80px;
+  }
+  header.cover{
+    background:linear-gradient(160deg,#3a2c52,#6b4a8f);
+    color:#fff;
+    padding:54px 22px 46px;
+    text-align:center;
+    border-bottom:6px solid var(--gold);
+  }
+  header.cover h1{
+    margin:0;
+    font-size:34px;
+    letter-spacing:1px;
+    font-weight:800;
+  }
+  header.cover .sub{
+    margin:10px 0 0;
+    font-size:17px;
+    opacity:.92;
+  }
+  header.cover .meta{
+    margin-top:18px;
+    font-size:13.5px;
+    opacity:.8;
+  }
+  .toc{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:18px 22px;
+    margin:28px 0 36px;
+    box-shadow:0 2px 10px rgba(0,0,0,.04);
+  }
+  .toc h2{
+    margin:0 0 10px;
+    font-size:18px;
+    color:var(--gold);
+    border-bottom:2px solid var(--gold-soft);
+    padding-bottom:8px;
+  }
+  .toc ol{
+    margin:0;
+    padding-left:22px;
+    columns:2;
+    column-gap:36px;
+  }
+  .toc li{margin:4px 0;break-inside:avoid;}
+  .toc a{color:var(--ink);text-decoration:none;}
+  .toc a:hover{color:var(--accent);text-decoration:underline;}
+  section{
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:26px 30px;
+    margin-bottom:26px;
+    box-shadow:0 2px 10px rgba(0,0,0,.04);
+  }
+  h2.sec{
+    margin:0 0 6px;
+    font-size:24px;
+    color:#3a2c52;
+    border-left:6px solid var(--gold);
+    padding-left:12px;
+  }
+  h3{
+    margin:26px 0 8px;
+    font-size:19px;
+    color:var(--accent);
+  }
+  h4{
+    margin:18px 0 6px;
+    font-size:16.5px;
+    color:var(--ink);
+  }
+  p{margin:10px 0;}
+  ul,ol{padding-left:24px;}
+  li{margin:5px 0;}
+  strong{color:#5a4a2a;}
+  em{color:var(--muted);font-style:normal;}
+  .lead{font-size:17px;color:var(--muted);}
+  .callout{
+    background:var(--callout-bg);
+    border:1px solid var(--callout-bd);
+    border-left:5px solid var(--callout-bd);
+    border-radius:8px;
+    padding:12px 16px;
+    margin:16px 0;
+  }
+  .callout .tag{
+    display:inline-block;
+    font-weight:700;
+    color:var(--gold);
+    margin-right:6px;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin:16px 0;
+    font-size:15px;
+  }
+  th,td{
+    border:1px solid var(--line);
+    padding:9px 11px;
+    text-align:left;
+    vertical-align:top;
+  }
+  thead th{
+    background:var(--gold-soft);
+    color:#5a4a2a;
+    font-weight:700;
+  }
+  tbody tr:nth-child(even){background:#fcfaf4;}
+  .legend{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+    margin:14px 0;
+  }
+  .legend .item{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    background:#fcfaf4;
+    border:1px solid var(--line);
+    border-radius:30px;
+    padding:6px 14px;
+    font-size:14.5px;
+  }
+  .badge{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:22px;height:22px;
+    border-radius:50%;
+    color:#fff;
+    font-size:13px;
+    font-weight:700;
+  }
+  .badge.g{background:var(--green);}
+  .badge.r{background:var(--red);}
+  .badge.b{background:var(--blue);}
+  .badge.gold{background:var(--gold);}
+  .slots{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:8px 18px;
+    margin:12px 0;
+  }
+  .slots .slot{
+    display:flex;
+    gap:8px;
+    align-items:baseline;
+    border-bottom:1px dashed var(--line);
+    padding:5px 0;
+    font-size:15px;
+  }
+  .slots .slot b{color:var(--accent);min-width:30px;}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  @media(max-width:680px){.two,.slots,.toc ol{grid-template-columns:1fr;columns:1;}}
+  .pill{
+    display:inline-block;
+    background:var(--gold-soft);
+    color:#5a4a2a;
+    border-radius:20px;
+    padding:1px 10px;
+    font-size:13.5px;
+    font-weight:600;
+    margin:0 2px;
+  }
+  footer{
+    text-align:center;
+    color:var(--muted);
+    font-size:13px;
+    margin-top:40px;
+    line-height:1.7;
+  }
+  .term{color:var(--accent);font-weight:600;}
+  @media print{
+    body{background:#fff;font-size:12.5px;}
+    .toc,.callout{break-inside:avoid;}
+    section{break-inside:avoid;box-shadow:none;border:1px solid #ccc;}
+    header.cover{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  }
+
+.pagefig{margin:20px 0;text-align:center;}
+.pagefig img{max-width:100%;height:auto;border:1px solid #e3d9c4;border-radius:10px;box-shadow:0 3px 12px rgba(80,60,20,.12);background:#fff;}
+.pagefig figcaption{font-size:12px;color:#8a7d5e;margin-top:7px;letter-spacing:.02em;}
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <h1>Believe in Me!</h1>
+  <p class="sub">请相信我！—— 桌游完整中文规则书</p>
+  <p class="meta">Wyrmgold 出版 · 规则书版本 1.0 · 译自 BIM_Rulebook_ENG.pdf（共 20 页）</p>
+</header>
+
+<div class="wrap">
+
+  <nav class="toc">
+    <h2>目录</h2>
+    <ol>
+      <li><a href="#s1">简介</a></li>
+      <li><a href="#s2">游戏组件</a></li>
+      <li><a href="#s3">游戏准备</a></li>
+      <li><a href="#s4">回合总览：神之轮回</a></li>
+      <li><a href="#s5">神之行动</a></li>
+      <li><a href="#s6">现象争夺（Contest）</a></li>
+      <li><a href="#s7">假先知与诫命</a></li>
+      <li><a href="#s8">神之体魄与阵营</a></li>
+      <li><a href="#s9">终局</a></li>
+      <li><a href="#s10">对局示例</a></li>
+      <li><a href="#s11">术语表</a></li>
+      <li><a href="#s12">神之速查表</a></li>
+      <li><a href="#s13">制作人员</a></li>
+    </ol>
+  </nav>
+
+  <div class="callout">
+    <span class="tag">术语说明</span>
+    本规则书统一译名：<span class="term">神（god）</span> 指玩家；<span class="term">邻神（fellow god）</span> 指其他玩家（特指左手边下一位时用「左手边邻神」）；<span class="term">感召 / 牺牲 / 转化</span> 为三种信徒移动方式；<span class="term">真理值（Truth）</span> 为争夺战中的计分；<span class="term">阵营（Alignment）</span> 为温和 / 暴怒 / 混乱 / 深不可测。
+  </div>
+
+  <!-- ============ 1 ============ -->
+  <section id="s1">
+<figure class="pagefig"><img src="BIM_Rulebook_images/page_01.jpg" alt="原书第 01 页"><figcaption>原书第 01 页 · 原始排版参考</figcaption></figure>
+<figure class="pagefig"><img src="BIM_Rulebook_images/page_02.jpg" alt="原书第 02 页"><figcaption>原书第 02 页 · 原始排版参考</figcaption></figure>
+    <h2 class="sec">1 · 简介</h2>
+    <p class="lead">在《Believe in Me!（请相信我！）》中，你扮演一位自封的神明，用尽浑身解数让那些懵懂的凡人膜拜你。</p>
+    <p>你的神圣使命：让凡人相信，龙卷风、日食、火山喷发等自然现象全是你搞出来的——尽管严格来说你跟它们毫无关系。相信你的迷失灵魂越多，你这出不起眼的小把戏就越快成长为一场货真价实的大邪教（cult）。</p>
+    <p>你的<span class="term">阵营</span>决定了你的玩法。但无论你成为暴怒、混乱还是温和之神，胜利都属于在游戏结束时聚集了<span class="strong">最多信徒</span>、并完整显现出<b>三位一体</b>（头、躯干、腿皆已显现）的那位神——从而享受永恒的荣耀，更重要的是，可观的税收减免。</p>
+    <div class="callout">
+      <span class="tag">目标</span>
+      一旦有神显现了「头、躯干、腿」三部分，终局（诸神黄昏）便拉开序幕。完全显现且信徒最多的神获胜。
+    </div>
+  </section>
+
+  <!-- ============ 2 ============ -->
+  <section id="s2">
+<figure class="pagefig"><img src="BIM_Rulebook_images/page_05.jpg" alt="原书第 05 页"><figcaption>原书第 05 页 · 原始排版参考</figcaption></figure>
+    <h2 class="sec">2 · 游戏组件</h2>
+    <p> 拆出、整理并温柔呵护游戏配件，是任何一位神最高的美德。永远不要把假先知和启蒙者混在一起，永远以应有敬意对待真理牌，无论如何都别把圣手榴弹掉地上——否则你可能会在诸神黄昏之前就先一步上了天堂。阿门。</p>
+
+    <h3>2.1 棋子、标记与骰子</h3>
+    <table>
+      <thead><tr><th>数量</th><th>名称</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td>4×</td><td>假先知标记（False Prophet Tokens）</td><td>标记哪位神正被假先知缠身</td></tr>
+        <tr><td>4×</td><td>修女殿（Nun Temples）</td><td>—</td></tr>
+        <tr><td>16×</td><td>阵营标记（Alignment Tokens）</td><td>温和×4、暴怒×4、混乱×4、深不可测×4</td></tr>
+        <tr><td>140×</td><td>信徒（Believers）</td><td>小型米宝，虔诚满满</td></tr>
+        <tr><td>25×</td><td>诫命标记（Commandment Tokens）</td><td>标记针对你的诫命</td></tr>
+        <tr><td>1×</td><td>混乱骰（Cube of Chaos）</td><td>混乱之神结算时投掷</td></tr>
+        <tr><td>1×</td><td>起始松鼠（Start Squirrel）</td><td>决定起始玩家</td></tr>
+        <tr><td>1×</td><td>假先知（False Prophet 模型）</td><td>后期登场</td></tr>
+      </tbody>
+    </table>
+
+    <h3>2.2 面板与卡牌</h3>
+    <table>
+      <thead><tr><th>数量</th><th>名称</th></tr></thead>
+      <tbody>
+        <tr><td>1×</td><td>主面板（Main Board，3 片拼合）</td></tr>
+        <tr><td>4×</td><td>神之面板（God Tableaus）</td></tr>
+        <tr><td>25×</td><td>诫命（Commandments）</td></tr>
+        <tr><td>69×</td><td>天界牌（Heavenly Realm Cards）：14 启蒙者 + 16 圣军 + 18 圣物 + 21 神恩</td></tr>
+        <tr><td>18×</td><td>现象牌（Phenomena）</td></tr>
+        <tr><td>18×</td><td>纪念碑牌（Monuments）</td></tr>
+        <tr><td>9×</td><td>圣手榴弹（Holy Hand Grenades）</td></tr>
+        <tr><td>4×</td><td>速查表（Cheat Sheets）</td></tr>
+        <tr><td>40×</td><td>真理牌（Truth Cards）：每神 9 张（2,2,2,3,3,4,5,6,7）+ 4 张共用的无眼标「6」（备用）</td></tr>
+        <tr><td>27×</td><td>三位一体牌（Trinity Cards）：3 叠 ×9（温和 / 暴怒 / 混乱各 3 头 3 躯干 3 腿）</td></tr>
+      </tbody>
+    </table>
+
+    <h3>2.3 神之面板（God Tableau）</h3>
+    <p>每位神的个人棋盘，用来结算神务。各槽位如下：</p>
+    <div class="slots">
+      <div class="slot"><b>🅐</b><span>假先知槽（False Prophet）</span></div>
+      <div class="slot"><b>🅑</b><span>诸神黄昏 / 修女殿标记</span></div>
+      <div class="slot"><b>🅒</b><span>启蒙者槽（Enlightener）</span></div>
+      <div class="slot"><b>🅓</b><span>圣手榴弹槽（Holy Hand Grenade）</span></div>
+      <div class="slot"><b>🅔</b><span>阵营（Alignment）</span></div>
+      <div class="slot"><b>🅕</b><span>头（Head）</span></div>
+      <div class="slot"><b>🅖</b><span>躯干（Torso）</span></div>
+      <div class="slot"><b>🅗</b><span>腿（Legs）</span></div>
+      <div class="slot"><b>🅘</b><span>纪念碑槽（Monument）</span></div>
+      <div class="slot"><b>🅙</b><span>圣物槽（Relic）</span></div>
+      <div class="slot"><b>🅚</b><span>现象槽（Phenomenon）</span></div>
+      <div class="slot"><b>🅛</b><span>个人抽牌堆（Personal draw pile）</span></div>
+      <div class="slot"><b>🅜</b><span>个人弃牌堆（Personal discard）</span></div>
+      <div class="slot"><b>🅝</b><span>手牌（Cards in hand）</span></div>
+      <div class="slot"><b>🅞</b><span>信徒供应区（Believer supply）</span></div>
+    </div>
+
+    <h3>2.4 信徒与异教堆（Pagan Pile）</h3>
+    <p>把所有信徒放在桌面中央，这就是<span class="term">异教堆</span> <span class="pill">⓭</span>。从异教堆中拿 10 名信徒放入你的供应区 <span class="pill">🅞</span>。</p>
+    <div class="legend">
+      <div class="item"><span class="badge g">☀</span><span><b>感召</b>：从异教堆移到某神的供应区</span></div>
+      <div class="item"><span class="badge r">✚</span><span><b>牺牲</b>：从供应区移回异教堆</span></div>
+      <div class="item"><span class="badge b">⇄</span><span><b>转化</b>：从一位神移到另一位神</span></div>
+    </div>
+  </section>
+
+  <!-- ============ 3 ============ -->
+  <section id="s3">
+    <h2 class="sec">3 · 游戏准备</h2>
+    <h3>3.1 准备游戏素材</h3>
+    <ul>
+      <li>把主面板放在桌面中央随手可及处。</li>
+      <li>洗匀所有<span class="term">现象牌</span>，背面朝上放在 <span class="pill">❶</span>（现象抽牌堆）。</li>
+      <li>把所有<span class="term">天界牌</span>（神恩、启蒙者、圣军、圣物）洗匀成公共抽牌堆，背面朝上放在 <span class="pill">❹</span>。</li>
+      <li>把<span class="term">纪念碑牌</span>按名称分成若干副。随机抽取「神的数量 +1」副洗匀成堆，放在主面板 <span class="pill">❻</span>。
+        <div class="callout" style="margin:8px 0"><span class="tag">纪念碑堆规模</span>2 神 = 9 张 · 3 神 = 12 张 · 4 神 = 15 张（每副同名纪念碑 3 张）。</div></li>
+      <li>洗匀所有<span class="term">诫命</span>，背面朝上放在主面板 <span class="pill">❼</span>。</li>
+      <li>把<span class="term">假先知</span>模型放在其旁 <span class="pill">⓫</span>，稍后登场。</li>
+      <li>摆好<span class="term">诫命山</span>（Mountain of Commandments）<span class="pill">❾</span>：开局时没有诫命，把诫命标记叠放在前方。</li>
+      <li>把<span class="term">三位一体牌</span>按阵营（温和 / 暴怒 / 混乱）分开，各叠洗匀背面朝上放在 <span class="pill">⓬</span>。</li>
+      <li>把<span class="term">阵营标记</span>（温和 / 暴怒 / 混乱 / 深不可测）放在三位一体牌旁 <span class="pill">⓮</span>。</li>
+    </ul>
+
+    <h3>3.2 每位神获得</h3>
+    <ul>
+      <li>1 块神之面板。</li>
+      <li>9 张个人真理牌：数值为 2,2,2,3,3,4,5,6,7（右上角有眼标以便区分），组成个人抽牌堆 <span class="pill">🅛</span> 背面朝上放在面板上。另有 <b>4 张无眼标的「6」</b> 单独放一边，游戏中会用到。</li>
+      <li>1 枚<span class="term">深不可测</span>阵营标记 <span class="pill">🅔</span>（开局默认阵营）。</li>
+      <li>2 张随机圣手榴弹。选 1 张背面朝上放入圣手榴弹槽 <span class="pill">🅓</span>，另 1 张放回盒中。随时可查看。</li>
+      <li>起手 6 张手牌：从个人抽牌堆 <span class="pill">🅛</span> 选 2 张真理牌，再从公共抽牌堆 <span class="pill">❹</span> 随机抽 4 张天界牌。</li>
+      <li>1 张速查表 <span class="pill">🅟</span>。</li>
+    </ul>
+
+    <h3>3.3 确定起始神</h3>
+    <p>每位玩家用一种没人听得懂的语言喃喃念一段短祷。最近进入过神圣场所的人获得<span class="term">起始松鼠</span>。若有争议，像文明的神一样解决——火球不在选项之内！</p>
+  </section>
+
+  <!-- ============ 4 ============ -->
+  <section id="s4">
+<figure class="pagefig"><img src="BIM_Rulebook_images/page_06.jpg" alt="原书第 06 页"><figcaption>原书第 06 页 · 原始排版参考</figcaption></figure>
+    <h2 class="sec">4 · 回合总览：神之轮回（The Divine Cycle）</h2>
+    <p>即便是神也需要结构，否则就只剩降罚、唱歌，以及和松鼠的尴尬闲聊。</p>
+    <p><b>一轮（神之轮回 / The Divine Cycle）由三个阶段依次构成</b>，循环往复，直到某神集齐三体触发终局：</p>
+    <ul>
+      <li><b>阶段一 · 神之回合</b>：所有神按顺时针顺序，<b>依次</b>各走一个完整回合。</li>
+      <li><b>阶段二 · 争夺现象</b>：翻出一张现象，众神争夺，胜者认领。</li>
+      <li><b>阶段三 · 传递起始松鼠</b>：把起始松鼠交给左手边邻神，随即开始下一轮。</li>
+    </ul>
+
+    <h3>阶段一：神之回合（God Turns）</h3>
+    <p><b>所有神按顺时针顺序，依次各完成一个完整回合</b>——持有<span class="term">起始松鼠</span>的神先开始，其余跟在其后。每位神的回合都包含下面 3 步：</p>
+    <ul>
+      <li><b>第 1 步 · 结算神之面板</b>：你神之面板上及此前解锁的所有效果，按固定顺序触发（见下）。</li>
+      <li><b>第 2 步 · 神之行动</b>：通常 2 个行动（部分效果会改变数量），同一行动可重复选择。</li>
+      <li><b>第 3 步 · 抽牌</b>：抽至当前手牌上限（开局 6 张）。</li>
+    </ul>
+    <div class="callout">
+      <span class="tag">结算顺序</span>
+      1 假先知 → 2 启蒙者 → 3 启蒙者 → 4 阵营 → 5 僧侣殿 → 6 传教士殿 → 7 圣物 → 8 圣物。
+    </div>
+    <div class="callout">
+      <span class="tag">阶段流向</span>
+      所有神依次走完各自的阶段一回合后，才进入<b>阶段二（争夺现象）</b>；阶段二结束后，在<b>阶段三</b>把起始松鼠传给左手边邻神，随即开始下一轮。
+    </div>
+
+    <h3>第 2 步可用行动</h3>
+    <ul>
+      <li>打出天界牌</li>
+      <li>神殿服务（Temple Service）</li>
+      <li>建造纪念碑</li>
+      <li>为圣手榴弹充能（并可视情况引爆）</li>
+      <li>触发现象</li>
+      <li>驱逐假先知</li>
+    </ul>
+
+    <h3>第 3 步 · 抽牌规则</h3>
+    <table>
+      <thead><tr><th>卡牌类型</th><th>抽取规则</th></tr></thead>
+      <tbody>
+        <tr><td>真理牌</td><td>最多 2 张，从个人抽牌堆中自行挑选。</td></tr>
+        <tr><td>天界牌</td><td>从公共抽牌堆任意抽，直到手牌上限。</td></tr>
+      </tbody>
+    </table>
+    <ul>
+      <li>手牌可以保留，超过上限不必弃牌——上限只在「抽牌时」才生效。</li>
+      <li>若某抽牌堆为空，其弃牌堆立即洗匀作为新抽牌堆。</li>
+    </ul>
+
+    <h3>阶段二：争夺现象（Claiming a Phenomenon）</h3>
+    <p>众神为一张翻出的现象竞争，胜者获得奖励。若此导致某神首次完整显现，则触发诸神黄昏（见第 9 节），游戏进入终局。</p>
+
+    <h3>阶段三：传递起始松鼠</h3>
+    <p>把起始松鼠传给左手边邻神。</p>
+  </section>
+
+  <!-- ============ 5 ============ -->
+  <section id="s5">
+<figure class="pagefig"><img src="BIM_Rulebook_images/page_07.jpg" alt="原书第 07 页"><figcaption>原书第 07 页 · 原始排版参考</figcaption></figure>
+<figure class="pagefig"><img src="BIM_Rulebook_images/page_08.jpg" alt="原书第 08 页"><figcaption>原书第 08 页 · 原始排版参考</figcaption></figure>
+    <h2 class="sec">5 · 神之行动（Divine Actions）</h2>
+
+    <h3>5.1 打出天界牌（Playing Heavenly Realm Cards）</h3>
+    <p>要把一张天界牌作为行动打出，从手牌中取 1 张正面朝上放在身前，触发其效果：</p>
+    <ul>
+      <li><b>神恩 / 圣军</b>：效果触发后放入公共弃牌堆。</li>
+      <li><b>启蒙者 / 圣物</b>：放在神之面板对应的专用槽位上。</li>
+    </ul>
+    <div class="callout">
+      <span class="tag">天界牌四类</span>
+      <b>神恩（Blessing）</b>：带有效期的天界助力，一次性效果，打出后入公共弃牌堆。部分在拥有匹配阵营时给予阵营加成。<br>
+      <b>圣物（Relic）</b>：常驻神器，支付牺牲消耗后放在神之面板的<span class="term">圣物槽</span>上（左右各一，右手初始锁定，显现躯干后解锁）。可再付一次牺牲消耗替换圣物，旧圣物入公共弃牌堆。<br>
+      <b>圣军（Holy Host）</b>：可清除你面板上的启蒙者。在腿未显现前计为 3 真理值，之后仅计 1。除非圣军与偏好的启蒙者类型匹配，否则必须支付牺牲消耗；且只能在以启蒙者为目标时作为行动打出。<br>
+      <b>启蒙者（Enlightener）</b>：给其他神使绊子。支付牺牲消耗后放在其他神的面板上，其效果在结算该神面板时触发。每块面板最多放 2 个启蒙者，只能被圣军牌清除（入公共弃牌堆）。
+    </div>
+
+    <h4>牺牲消耗（Sacrifice Costs）</h4>
+    <p>用<span class="term">信徒</span>支付：从你的供应区或面板上的某处牺牲信徒，使其回到异教堆。若付不起某牌的牺牲消耗，则不能打出该牌。若由邻神造成的牺牲消耗（如启蒙者、神恩、混乱骰等）付不起，则忽略。</p>
+
+    <h3>5.2 神殿服务（Temple Service）</h3>
+    <p>你的面板上可摆放三类神殿，用<b>行动</b>把来自个人供应区的信徒放入其中，在结算面板时提供持续效果。修女殿还能在争夺现象时增强你。</p>
+
+    <h4>1 · 僧侣殿（Monk Temple）</h4>
+    <ul>
+      <li>作为行动，把 1 名信徒放入空槽位成为<span class="term">僧侣</span>（仍计入信徒）。</li>
+      <li>结算面板时，每位僧侣从异教堆感召 1 名信徒。</li>
+      <li>温和之神最多 4 名僧侣（其他阵营最多 3 名）；若阵营改变不再温和，多出的僧侣移回供应区。</li>
+    </ul>
+
+    <h4>2 · 传教士殿（Missionary Temple）</h4>
+    <ul>
+      <li>作为<b>一次行动</b>，同时将 <b>2 名信徒</b>放入传教士殿的两个空槽，成为<span class="term">传教士</span>（仍计入信徒）。</li>
+      <li>只有<b>填满</b>（2 槽满）的传教士殿才会在结算时激活。</li>
+      <li>结算面板时，这 <b>2 名传教士成对</b>把<b>1 名</b>邻神的信徒拉入你的供应区。</li>
+    </ul>
+    <div class="callout">
+      <span class="tag">关键</span>
+      传教士总是<b>成对</b>行动（师父 + 学徒）：传教士殿必须一次行动填满 <b>2 名</b>，每轮才能转化 <b>1 名</b>邻神信徒。只放 1 名不会激活，本回合不转化（见第 10 节示例 ⑥）。
+    </div>
+
+    <h4>3 · 修女殿（Nun Temple）</h4>
+    <ul>
+      <li>作为行动，放 1 名信徒成为<span class="term">修女</span>（仍计入信徒）。</li>
+      <li>在争夺中，可牺牲 1 名修女使<b>最低的一张真理牌翻倍</b>（仅真理牌，不含天界牌）。每场争夺最多牺牲 1 名修女，即使两槽都满。</li>
+      <li>只有<span class="term">深不可测</span>之神能一次行动填满两个修女槽；若阵营改变不再深不可测，第 2 名修女立即回供应区。</li>
+      <li><b>仅在诸神黄昏开始后</b>才可启用修女殿。</li>
+    </ul>
+    <div class="callout">
+      <span class="tag">注意</span>
+      若异教堆的信徒耗尽，用足够数量的替代物顶替。僧侣、传教士、修女均不可触碰——邻神不得转化或牺牲他们（明确写明此效果的卡牌除外）。他们可用于支付你自己的牺牲消耗，并在终局计分中计入你的信徒。
+    </div>
+
+    <h3>5.3 建造纪念碑（Build Monuments）</h3>
+    <p>纪念碑是三部分结构，放上面板即改善你的个人抽牌堆，集齐三张同名牌后获得独特加成。</p>
+    <ul>
+      <li>作为行动，抽 3 张（混乱之神抽 4 张）纪念碑牌，放 1 张到面板 <span class="pill">🅘</span>（纪念碑槽）。</li>
+      <li>第一块放最低槽位，之后每块向上叠放；若面板上已有纪念碑，新块必须<b>同名</b>。可以开始建造邻神已建过的同名纪念碑。</li>
+      <li>集齐 3 张同名即「完成」，获得其独特加成。不可替换或移除已建纪念碑。</li>
+      <li>余牌洗回纪念碑抽牌堆。</li>
+    </ul>
+    <table>
+      <thead><tr><th>纪念碑位置</th><th>效果</th></tr></thead>
+      <tbody>
+        <tr><td>第 1 块</td><td>从任意一名神处移除 1 张真理 2 牌 *</td></tr>
+        <tr><td>第 2 块</td><td>再移除 1 张真理 2 牌 *</td></tr>
+        <tr><td>第 3 块</td><td>获得 1 张真理 6 牌 **</td></tr>
+      </tbody>
+    </table>
+    <p><em>* 将其从手牌 / 弃牌堆 / 个人抽牌堆移出游戏（放回盒中）。<br>** 直接取一张「无眼标的备用 6」进手牌。</em></p>
+
+    <h3>5.4 触发现象（Trigger a Phenomenon）</h3>
+    <p>把你面板上的某张现象作为行动打出，触发其效果，随后该现象牌放入现象弃牌堆。</p>
+
+    <h3>5.5 圣手榴弹（Holy Hand Grenade）</h3>
+    <ul>
+      <li>可充能的特殊牌，带一次性爆炸效果。开局选 1 张保密，背面朝上放在面板右上角，随时可看。</li>
+      <li>游戏中作为行动，在圣手榴弹槽 <span class="pill">🅓</span> 放 1 名信徒充能，每次可决定是否引爆。</li>
+      <li>放到第 3 名信徒时，<b>必须引爆</b>。</li>
+      <li>威力取决于投入信徒数；引爆后不可再充能，留在面板上。用掉的信徒仍留在面板上（终局计分计入），但<b>不可用于支付牺牲消耗</b>。</li>
+    </ul>
+    <div class="callout">
+      <span class="tag">示例 · 邪恶之笑 #3</span>
+      投入 3 名信徒：摧毁任意 2 名邻神各 1 张已存放现象；2 名：摧毁任意 1 名邻神 2 张已存放现象；1 名：摧毁任意 1 名邻神 1 张已存放现象。
+    </div>
+
+    <h3>5.6 驱逐假先知（Banish the False Prophet）</h3>
+    <p>作为行动打出假先知，把他「驱逐」给一名邻神，并在诫命山上刻下一条诫命（详见第 7 节）。</p>
+  </section>
+
+  <!-- ============ 6 ============ -->
+  <section id="s6">
+<figure class="pagefig"><img src="BIM_Rulebook_images/page_10.jpg" alt="原书第 10 页"><figcaption>原书第 10 页 · 原始排版参考</figcaption></figure>
+    <h2 class="sec">6 · 现象争夺（Contest / Claiming a Phenomenon）</h2>
+    <p>现象是你想要据为己有的世界事件，是游戏的核心机制。每轮阶段二翻出一张，通过争夺战认领。</p>
+    <ul>
+      <li>现象在神之轮回的<b>阶段二</b>翻出。</li>
+      <li>认领现象时可显现一个肢体，并把现象放入面板的现象槽。</li>
+      <li>按你的阵营感召新信徒；之后可作为一次行动触发，随后入现象弃牌堆。</li>
+    </ul>
+
+    <h3>6.1 争夺流程</h3>
+    <ol>
+      <li><b>翻出现象</b>：起始神翻开顶张现象牌并大声读出。</li>
+      <li><b>宣示真理（出牌 + Amen）</b>：只有面板上有空现象槽的神可参加。从起始神开始，每位神轮流放 1 张牌正面朝下在身前并喊「Amen！」。起始神<b>必须</b>出牌；若其不能参加，则由下一位补上。不愿或无法再出牌者选择过牌（pass），过牌后不得再参加。轮流进行，直到除 1 人外全部过牌（pass）；剩下者不可再加牌。</li>
+      <li><b>部署修女（可选）</b>：进入诸神黄昏后，翻牌前每位神可按顺序牺牲 1 名修女，使其最低的一张已出真理牌翻倍。</li>
+      <li><b>亮牌与计真理</b>：所有牌同时亮开，把已出牌的真理值相加（含诫命、圣物、启蒙者、修女带来的加成）。腿未显现前圣军计 3 真理；躯干未显现前有 +3 真理加成。真理值最高者认领该现象。</li>
+    </ol>
+    <div class="callout">
+      <span class="tag">细节</span>
+      2 神对局中，双方都至少出 1 张；若只有 1 神参加则自动获胜；若无神能参加，该现象弃置。亮牌后，各神把手中的真理牌放入个人弃牌堆、天界牌放入中央公共弃牌堆。
+    </div>
+
+    <h3>6.2 真理牌（Truth Cards）</h3>
+    <ul>
+      <li>组成你认领现象用的个人抽牌堆，数值 2–7，右上角有眼标。</li>
+      <li>只能在争夺中使用；手牌可多于 2 张。</li>
+      <li>当个人抽牌堆最后一张被抽完，立即用个人弃牌堆重组成新的背面朝上抽牌堆。</li>
+      <li>每轮结束，可从个人抽牌堆最多抽 2 张真理牌。</li>
+    </ul>
+    <table>
+      <thead><tr><th>卡牌类型</th><th>真理值</th></tr></thead>
+      <tbody>
+        <tr><td>真理牌</td><td>印刷数值（2–7）</td></tr>
+        <tr><td>圣军</td><td>腿未显现 = 3；之后 = 1</td></tr>
+        <tr><td>天界牌（其他）</td><td>1</td></tr>
+      </tbody>
+    </table>
+
+    <h3>6.3 胜负与奖励</h3>
+    <p><b>平局</b>：信徒（供应区 + 面板上）较少者胜；仍平则最后出牌者胜。</p>
+    <p>胜者：① 按阵营感召信徒；② 把现象存入空现象槽；③ 可显现该现象阵营的一个肢体（见第 8 节）；④ <b>首次认领现象时，假先知登场！</b></p>
+
+    <h3>6.4 按阵营的感召奖励</h3>
+    <table>
+      <thead><tr><th>你的阵营</th><th>感召信徒数</th></tr></thead>
+      <tbody>
+        <tr><td>与现象阵营<b>不同</b></td><td>8</td></tr>
+        <tr><td>与现象阵营<b>相同</b></td><td>5</td></tr>
+        <tr><td>深不可测（默认）</td><td>3</td></tr>
+        <tr><td>纯粹深不可测（三体三阵营）</td><td>10</td></tr>
+      </tbody>
+    </table>
+    <div class="callout">
+      <span class="tag">现象槽上限</span>
+      能存放的现象数 = 空槽位数。暴怒之神可多用 1 个槽。若槽位全满，<b>不能参加争夺</b>。已集齐三体的神若有空槽仍可参加，但获胜时不再获得三位一体牌，仅感召信徒并存下现象。
+    </div>
+  </section>
+
+  <!-- ============ 7 ============ -->
+  <section id="s7">
+<figure class="pagefig"><img src="BIM_Rulebook_images/page_04.jpg" alt="原书第 04 页"><figcaption>原书第 04 页 · 原始排版参考</figcaption></figure>
+    <h2 class="sec">7 · 假先知与诫命（The False Prophet & Commandments）</h2>
+    <p>假先知四处游荡，宣讲据他说是神亲口颁布的严格诫命（当时只有他一人，且无人能证伪）。他还带着浓烈的神秘草药与未知蘑菇味——但既然刻在石板上，那必定是真的……</p>
+    <h3>何时登场</h3>
+    <ul>
+      <li>首次有现象被认领时，所有神同时翻转面板上的假先知标记。</li>
+      <li>把假先知模型放在赢得该场争夺的神之假先知标记上。</li>
+    </ul>
+    <h3>场上效果</h3>
+    <ul>
+      <li>持有假先知的神，结算面板时必须牺牲 1 名信徒。</li>
+      <li>可作为行动使用假先知：指名另一名神，把假先知送去他那里。被指名者立即把假先知放在自己的<b>假先知标记</b>上，并牺牲 3 名信徒。</li>
+      <li>随后，驱逐者从诫命堆抽 3 张，选 1 张用雷鸣般的声音朗读，并「铭刻」在诫命山上。</li>
+      <li>未选中的诫命放入诫命弃牌堆。</li>
+    </ul>
+    <h3>诫命（Commandments）</h3>
+    <ul>
+      <li>最多可铭刻 <b>5 条</b>，对所有神生效，必须遵守。</li>
+      <li>铭刻后不可替换（但某些效果可击碎诫命，使其入诫命弃牌堆）。</li>
+      <li>常针对特定属性或阵营；可用诫命标记来标记针对你的诫命。</li>
+      <li>若诫命堆耗尽，把弃牌堆洗匀作新堆。</li>
+      <li>若 5 条诫命都已刻满，假先知停在现任神处「休息」：其标记不结算、也不能作为行动打出，直到出现空槽位才重新激活。</li>
+    </ul>
+  </section>
+
+  <!-- ============ 8 ============ -->
+  <section id="s8">
+<figure class="pagefig"><img src="BIM_Rulebook_images/page_13.jpg" alt="原书第 13 页"><figcaption>原书第 13 页 · 原始排版参考</figcaption></figure>
+<figure class="pagefig"><img src="BIM_Rulebook_images/page_14.jpg" alt="原书第 14 页"><figcaption>原书第 14 页 · 原始排版参考</figcaption></figure>
+    <h2 class="sec">8 · 神之体魄与阵营（Anatomy of a God）</h2>
+    <p>一位神不能没有星体身躯。激光眼？千层面肋骨？鱼袜？你需要全部——毕竟神性全看脸。但注意：身躯越完整，你的意图就越透明。</p>
+
+    <h3>8.1 肢体槽位的默认加成</h3>
+    <table>
+      <thead><tr><th>槽位</th><th>显现前（默认加成）</th><th>显现后</th></tr></thead>
+      <tbody>
+        <tr><td>头（Head）</td><td>个人抽牌堆中有一张「真理 7」</td><td>「真理 7」移出游戏；手牌上限升至 7</td></tr>
+        <tr><td>躯干（Torso）</td><td>争夺中 +3 真理</td><td>解锁第二只圣物手</td></tr>
+        <tr><td>腿（Legs）</td><td>圣军牌在争夺中计 3 真理</td><td>圣军牌计 1 真理；牺牲消耗减少 2 名信徒</td></tr>
+      </tbody>
+    </table>
+    <p><em>显现肢体 = 用三位一体牌盖住该槽：失去默认加成，解锁牌面右侧的新常驻效果（以符号标记）。每位神每个肢体只能显现一次。</em></p>
+
+    <h3>8.2 显现肢体仪式（Body Part Ritual）</h3>
+    <ol>
+      <li>选择要显现的肢体：头 / 躯干 / 腿。</li>
+      <li>从对应阵营的三位一体堆抽牌，直到抽到第一张匹配该肢体者。</li>
+      <li>把该肢体正面朝上放在面板对应槽位。</li>
+      <li>检查阵营是否需要改变（见下）。</li>
+      <li>不匹配的牌洗回原堆。</li>
+    </ol>
+
+    <h3>8.3 阵营（Alignment）与三位一体</h3>
+    <p>阵营分为 <span class="term">深不可测 / 温和 / 暴怒 / 混乱</span> 四种。它<b>由你已显现肢体（头 / 躯干 / 腿）的"多数阵营"决定</b>，并会随你显现新肢体而变动。原规则书将这一判定画成图示，此处转写为文字流程：</p>
+    <ol>
+      <li><b>开局</b>：尚未显现任何肢体 → 无多数 → 阵营固定为 <b>深不可测</b>（游戏的默认初始状态）。</li>
+      <li><b>拿到第 1 块肢体</b>：该肢体即唯一阵营 → 成为 温和 / 暴怒 / 混乱 之一。</li>
+      <li><b>显现更多肢体</b>：看你已显现肢体里<b>哪一种阵营占多数</b>，多数者即为你的阵营。</li>
+      <li><b>若已显现肢体出现 2 种不同阵营且任一都不过半</b>（如 1 温和 + 1 暴怒）→ 回到 <b>深不可测</b>。</li>
+      <li><b>若 3 块肢体分属 3 种不同阵营</b>（温和 + 暴怒 + 混乱 各一）→ 仍无多数 → 阵营为 <b>深不可测</b>，但三体俱全，即进入 <b>纯粹深不可测</b>（见 8.3.3）。</li>
+    </ol>
+    <div class="callout">
+      <span class="tag">要点</span>
+      <b>深不可测 = "无可归类的多数"。</b>它并非一种主动选择的阵营，而是<b>无多数</b>时的状态——开局零肢体是它，凑不齐多数也是它。拿到第 1 块肢体才"脱离"默认；之后若阵营被打散成无多数，又会落回它。
+    </div>
+
+    <h4>8.3.1 阵营判定示例（图示转文字）</h4>
+    <table>
+      <thead><tr><th>已显现肢体及其阵营</th><th>多数</th><th>结果阵营</th></tr></thead>
+      <tbody>
+        <tr><td>（无任何肢体）</td><td>—</td><td>深不可测（默认）</td></tr>
+        <tr><td>温和 ×1</td><td>温和</td><td>温和</td></tr>
+        <tr><td>温和 ×2</td><td>温和</td><td>温和</td></tr>
+        <tr><td>温和 ×1 + 暴怒 ×1</td><td>无多数</td><td>深不可测</td></tr>
+        <tr><td>温和 ×2 + 暴怒 ×1</td><td>温和</td><td>温和</td></tr>
+        <tr><td>温和 ×1 + 暴怒 ×1 + 混乱 ×1</td><td>无多数</td><td>深不可测（三体三阵营 → 纯粹深不可测）</td></tr>
+        <tr><td>温和 ×3（三体同阵营）</td><td>温和</td><td>纯粹温和</td></tr>
+      </tbody>
+    </table>
+
+    <table>
+      <thead><tr><th>阵营</th><th>结算面板时的效果</th></tr></thead>
+      <tbody>
+        <tr><td>暴怒（Wrathful）</td><td>牺牲 1 名邻神的信徒</td></tr>
+        <tr><td>温和（Gentle）</td><td>感召 1 名信徒</td></tr>
+        <tr><td>混乱（Chaotic）</td><td>投掷混乱骰</td></tr>
+        <tr><td>深不可测（Unfathomable）</td><td>—（无加成，但有特殊优势）</td></tr>
+      </tbody>
+    </table>
+
+    <h4>8.3.2 纯粹神（3 体同阵营）</h4>
+    <p>三体同为某阵营即成为<b>纯粹神</b>，翻转阵营标记获得强力新效果：</p>
+    <table>
+      <thead><tr><th>纯粹阵营</th><th>新效果</th></tr></thead>
+      <tbody>
+        <tr><td>纯粹暴怒</td><td>所有争夺牌打出后，强制每位邻神（若其出了 ≥2 张）放 1 张背面朝上牌入弃牌堆</td></tr>
+        <tr><td>纯粹温和</td><td>免疫转化（传教士）与诫命的负面效果</td></tr>
+        <tr><td>纯粹混乱</td><td>你的回合 +1 个行动</td></tr>
+      </tbody>
+    </table>
+
+    <h4>8.3.3 纯粹深不可测（Pure Unfathomable）</h4>
+    <p>这是与上面"三体同阵营"恰好<b>相反</b>的特殊纯粹态。术语书原文：<em>"Pure unfathomable consists of three different Alignments from three body parts."</em></p>
+    <p><b>如何达成</b>：让三块肢体分别属于<b>三种不同</b>阵营（温和、暴怒、混乱各一）。三体俱全 + 无多数 → 既是"深不可测"，又因三体完整而被定义为"纯粹深不可测"。</p>
+    <ul>
+      <li><b>实操</b>：三位一体牌按阵营分三堆（温和 / 暴怒 / 混乱）各自洗混，你争得现象拿到的牌阵营固定。要凑成纯粹深不可测，得在三次拿牌中恰好各抽到一种阵营——含运气成分，无法完全掌控。</li>
+      <li><b>战略提醒</b>：完成三一（拿到第 3 块肢体）本身即<b>触发终局</b>。所以纯粹深不可测几乎只能在终局开启时或之后凑齐，留给"调整阵营凑三种"的窗口极短；需在前两块肢体阶段就规划阵营搭配，并赌最后一张牌的阵营。</li>
+    </ul>
+    <div class="callout">
+      <span class="tag">纯粹深不可测的回报</span>
+      认领现象时共感召 <b>10 名</b>信徒（普通深不可测仅 3 名，为各状态最高）；并享受深不可测全部特殊优势——一次行动填满修女殿两槽、终局修女殿多一槽等（见 8.5 / 9.1）。
+    </div>
+    <p>阵营改变时立即更换阵营标记。</p>
+
+    <h3>8.4 神之属性（Godly Attributes）</h3>
+    <p>每个肢体带有特定属性，诫命常针对这些属性：</p>
+    <table>
+      <thead><tr><th>头</th><th>躯干</th><th>腿</th></tr></thead>
+      <tbody>
+        <tr><td>胡须（Beard）</td><td>胸毛（Chest hair）</td><td>脚趾（Toes）</td></tr>
+        <tr><td>头饰（Headwear）</td><td>华服（Finery）</td><td>袜子（Socks）</td></tr>
+        <tr><td>犄角（Horns）</td><td>武器（Weapon）</td><td>尾巴（Tail）</td></tr>
+      </tbody>
+    </table>
+
+    <h3>8.5 混乱骰（Cube of Chaos）</h3>
+    <p>混乱之神结算阵营时，把混乱骰抛入诫命山，按结果执行：</p>
+    <table>
+      <thead><tr><th>结果</th><th>效果</th></tr></thead>
+      <tbody>
+        <tr><td>①</td><td>无事发生</td></tr>
+        <tr><td>②</td><td>牺牲 1 名你自己的信徒</td></tr>
+        <tr><td>③</td><td>感召 1 名信徒</td></tr>
+        <tr><td>④</td><td>牺牲 1 名邻神的信徒</td></tr>
+        <tr><td>⑤</td><td>转化 1 名信徒</td></tr>
+        <tr><td>⑥</td><td>感召 2 名信徒</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ============ 9 ============ -->
+  <section id="s9">
+<figure class="pagefig"><img src="BIM_Rulebook_images/page_15.jpg" alt="原书第 15 页"><figcaption>原书第 15 页 · 原始排版参考</figcaption></figure>
+    <h2 class="sec">9 · 终局（Game End）</h2>
+    <h3>9.1 诸神黄昏（The Twilight of the Gods）</h3>
+    <p>一旦有神完成三位一体（头、躯干、腿皆已显现），终局阶段开始。</p>
+    <p>首位集齐三体的神必须：① 起立；② 用全部神衔宣告真名：</p>
+    <div class="callout">
+      <span class="tag">显圣词</span>
+      「看哪！是我！[头]，[躯干]，[腿]！唯一真神 / 真女神！」——若念得充满热忱与神性尊严（<b>可选</b>），可立即感召 3 名信徒。
+    </div>
+    <p>诸神黄昏期间另有两件事：</p>
+    <ul>
+      <li><b>修女殿解锁</b>：所有玩家翻转修女殿标记，此后可作为行动放入修女，在争夺中翻倍真理牌。</li>
+      <li><b>准备终局现象</b>：依神数抽 3（2–3 神）或 4（4 神）张现象，背面朝上放在主面板的诸神黄昏槽；其余放回盒中。最后一张现象（含其奖励与显圣）被认领后，游戏结束。</li>
+    </ul>
+    <div class="callout">
+      <span class="tag">终局修女战</span>
+      深不可测之神在修女殿多一个槽，可放两名修女，一次行动翻倍最低真理牌；若阵营改变，第 2 名修女立即回供应区。每位有修女的神可在显圣前按顺序决定是否牺牲她。每场争夺最多牺牲 1 名修女。
+    </div>
+
+    <h3>9.2 胜利与计分</h3>
+    <p>当诸神黄昏中最后一张现象被认领，游戏立即结束。</p>
+    <p><b>获胜条件</b>：① 完整显现三位一体（头、躯干、腿）；② 信徒最多。</p>
+    <p>计入：供应区信徒 + 神殿中信徒（僧侣 / 传教士 / 修女）+ 圣手榴弹槽上的信徒。</p>
+
+    <h3>9.3 圣物对决（Relic Rumble）</h3>
+    <p>若平局，双方进行类似石头剪刀布的迷你对决，胜者为唯一真神。五者相克如下：</p>
+    <table>
+      <thead><tr><th>出招</th><th>击败</th><th>也击败</th></tr></thead>
+      <tbody>
+        <tr><td>石（Stone）</td><td>法拉费（Falafel）</td><td>羽毛（Feather）</td></tr>
+        <tr><td>枪（Lance）</td><td>石（Stone）</td><td>羽毛（Feather）</td></tr>
+        <tr><td>羽毛（Feather）</td><td>法拉费（Falafel）</td><td>包皮（Foreskin）</td></tr>
+        <tr><td>法拉费（Falafel）</td><td>包皮（Foreskin）</td><td>枪（Lance）</td></tr>
+        <tr><td>包皮（Foreskin）</td><td>石（Stone）</td><td>枪（Lance）</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ============ 10 ============ -->
+  <section id="s10">
+<figure class="pagefig"><img src="BIM_Rulebook_images/page_17.jpg" alt="原书第 17 页"><figcaption>原书第 17 页 · 原始排版参考</figcaption></figure>
+    <h2 class="sec">10 · 对局示例（Example of Play）</h2>
+    <p class="lead">以 Hilga（混乱女神）对 Ralphi（暴怒之神）的两人对局片段为例。</p>
+    <h3>阶段一 · Hilga 的神之回合</h3>
+    <p><b>第 1 步 结算面板</b>：① 假先知在面板上，先牺牲 1 名信徒回异教堆。② 有个启蒙者，左手边邻神 Ralphi 转化了 Hilga 的 2 名信徒到自己供应区。③ 此处无启蒙者，跳过。④ 混乱阵营，投掷混乱骰，结果可转化 1 名邻神信徒——Ralphi 的 1 名信徒直接回到 Hilga 供应区。⑤ 僧侣殿有信徒，从异教堆感召 1 名。⑥ 传教士殿只有 1 名，未填满，本回合不转化。⑦ 圣物「Selma 的弹弓」迫使 Ralphi 弃 1 张天界牌或让 Hilga 感召 2 名信徒；Ralphi 嘟囔着弃了张神恩。⑧ 此处无圣物，跳过。</p>
+    <p><b>第 2 步 神之行动</b>：➒ 先把假先知赶去 Ralphi，Ralphi 立即牺牲 3 名信徒；Hilga 从诫命堆抽 3 张，选「Beep（倒车请鸣笛）」刻上诫命山，暴怒的 Ralphi 受影响，拿起对应诫命标记。➓ 打出圣军「Henry the High Priest」到启蒙者「Wilma the Wise」上，牺牲 4 名信徒（供应区不够，从传教士殿取最后 1 名支付）。</p>
+    <p><b>第 3 步 抽牌</b>：⓫ 已显现头，手牌上限 7；从个人堆抽 2 张真理牌（上限），再抽 2 张天界牌补到 7 张。</p>
+    <h3>阶段二 · 争夺现象</h3>
+    <p>❶ Hilga 翻出（暴怒）现象「火山喷发」。❷ 作为起始神，Hilga 放 1 张牌喊 Amen；两神对局 Ralphi 也须出至少 1 张。几轮加注后 Ralphi 过牌（pass），Hilga 不可再加。❸ 亮牌：Hilga 共 3+3+5+4+1=16（两张圣军各 3、1 神恩、5 与 4 真理）；Ralphi 3+3+5+1+1+3=16（含未显现的 +3）。❹ Hilga 信徒更少，赢得争夺。❺ 因迄今为混乱（头躯干皆混乱），感召 8 名信徒。❻ 该现象为暴怒，须显现暴怒的腿「Of Inane Giggling」，放入面板并检查阵营——多数仍为混乱，故保持混乱，把现象放进空槽。❼ 起立宣告：「看哪！是我！Clembert，健忘的守护者，荒诞痴笑之主！唯一真女神！」立即感召 3 名信徒。❽ 诸神黄昏开始，所有玩家翻转修女殿。❾ 最后 3 张现象备好（2–3 神），终局三轮开启。</p>
+    <p>阶段三：Ralphi 接过起始松鼠，谋划复仇。Hilga 胜！</p>
+  </section>
+
+  <!-- ============ 11 ============ -->
+  <section id="s11">
+<figure class="pagefig"><img src="BIM_Rulebook_images/page_18.jpg" alt="原书第 18 页"><figcaption>原书第 18 页 · 原始排版参考</figcaption></figure>
+    <h2 class="sec">11 · 术语表（Glossary）</h2>
+    <table>
+      <thead><tr><th>术语</th><th>释义</th></tr></thead>
+      <tbody>
+        <tr><td>行动（Action）</td><td>打出牌、填充神殿或建纪念碑等。每位神通常每回合 2 个行动。</td></tr>
+        <tr><td>Amen</td><td>向争夺出牌时必须大声说「Amen！」，忘了会招来白眼。</td></tr>
+        <tr><td>阵营（Alignment）</td><td>温和 / 暴怒 / 混乱 / 深不可测。决定现象奖励、特殊牌效、神殿与现象槽及纪念碑建造。深不可测为开局默认；纯粹阵营解锁特殊能力。</td></tr>
+        <tr><td>感召（Illuminate）</td><td>把信徒从异教堆移入你的供应区。</td></tr>
+        <tr><td>信徒（Believers）</td><td>你的追随者，既是胜利点数也是打牌的资源。状态分：异教堆 / 供应区 / 面板上。</td></tr>
+        <tr><td>神之面板（God tableau）</td><td>你的个人棋盘，结算神务之处，含肢体、圣手榴弹、神殿、抽牌堆、圣物、纪念碑、启蒙者、现象、阵营等槽位。</td></tr>
+        <tr><td>手牌上限（Hand limit）</td><td>默认 6；可被肢体改变（如头 = 7）。超上限不弃牌，仅抽牌时生效。</td></tr>
+        <tr><td>争夺 / 认领现象（Claiming / Contest）</td><td>用背面朝下牌争夺现象的机制，真理值最高者获胜，感召信徒并显现一肢体。</td></tr>
+        <tr><td>诫命（Commandment）</td><td>对所有神生效的常驻规则，由假先知引入，最多同时 5 条。</td></tr>
+        <tr><td>混乱骰（Cube of Chaos）</td><td>混乱之神结算面板时投掷的特殊骰，产生随机好坏效果。</td></tr>
+        <tr><td>启蒙者（Enlightener）</td><td>放在邻神面板上的捣蛋鬼，封锁加成与效果，直至被圣军清除。</td></tr>
+        <tr><td>异教堆（Pagan pile）</td><td>所有（尚未感召的）信徒中央堆，众神从中感召新信徒。</td></tr>
+        <tr><td>弃牌堆（Discard pile）</td><td>已打出/耗费牌的堆（神恩、启蒙者等）。有个人弃牌堆（真理牌）与公共弃牌堆（天界牌）。</td></tr>
+        <tr><td>假先知（False Prophet）</td><td>游走传教者，牺牲信徒并引入诫命；持有其模型者掌控他。</td></tr>
+        <tr><td>圣手榴弹（Holy Hand Grenade）</td><td>可充能的特殊牌，延迟爆炸；用信徒充能，第 3 名信徒加入时自动引爆。</td></tr>
+        <tr><td>圣军（Holy Host）</td><td>双重功能牌：清除启蒙者，并为争夺带来高真理值。只能以启蒙者为目标作为行动打出。</td></tr>
+        <tr><td>僧侣（Monk）</td><td>放入神殿的信徒，每轮感召 1 名信徒。</td></tr>
+        <tr><td>纪念碑（Monument）</td><td>三部分结构，集齐后解锁强力效果，每部分改善个人抽牌堆。</td></tr>
+        <tr><td>修女（Nun）</td><td>诸神黄昏期间用于翻倍争夺中最低真理牌。</td></tr>
+        <tr><td>现象（Phenomenon）</td><td>核心游戏元素，每轮翻出一张经争夺认领，奖励为感召信徒、获得肢体及「触发现象」行动。</td></tr>
+        <tr><td>纯粹神（Pure god）</td><td>三体同阵营之神（温和 / 暴怒 / 混乱），翻转阵营标记获得强力新效果（见 8.3.2）。</td></tr>
+        <tr><td>纯粹深不可测（Pure Unfathomable）</td><td>三体俱全且分属三种不同阵营（温和 + 暴怒 + 混乱），无多数 → 深不可测但三体完整；认领现象感召 10 名信徒（见 8.3.3）。</td></tr>
+        <tr><td>圣物（Relic）</td><td>放在神之<span class="term">圣物槽</span>上的常驻装备，右手开局锁定。</td></tr>
+        <tr><td>结算面板（Resolving the God tableau）</td><td>回合开始时按顺序触发所有常驻效果：假先知 → 启蒙者 → 阵营 → 僧侣 → 传教士 → 圣物。</td></tr>
+        <tr><td>牺牲消耗（Sacrifice costs）</td><td>用信徒支付（来自供应区或面板），随后回异教堆。</td></tr>
+        <tr><td>转化（Convert）</td><td>传教士把邻神的一名信徒拉拢过来。</td></tr>
+        <tr><td>三位一体（Trinity）</td><td>由头、躯干、腿组成的神之身躯，每部分有属性与阵营；显现不同部分会改变阵营与能力。</td></tr>
+        <tr><td>真理牌（Truth card）</td><td>数值 2–7 的牌，组成个人抽牌堆，是争夺现象的主要手段，可被纪念碑改善。</td></tr>
+        <tr><td>诸神黄昏（Twilight of the Gods）</td><td>终局阶段，某神完成三位一体时开始，最后几张现象被争夺，修女可登场。</td></tr>
+        <tr><td>深不可测（Unfathomable）</td><td>无多数阵营的状态，无阵营加成，但有特殊优势（如一次行动放两名修女、受益于某些诫命）。</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ============ 12 ============ -->
+  <section id="s12">
+<figure class="pagefig"><img src="BIM_Rulebook_images/page_20.jpg" alt="原书第 20 页"><figcaption>原书第 20 页 · 原始排版参考</figcaption></figure>
+    <h2 class="sec">12 · 神之速查表（Divine Cheat Sheet）</h2>
+    <h3>神之轮回</h3>
+    <p><b>阶段一 神之回合</b>　所有神按顺时针依次各走一回合：每位神 第1步 结算面板（假先知→启蒙者→阵营→僧侣殿→传教士殿→圣物）→ 第2步 神之行动（每回合 2 个）→ 第3步 抽牌；所有人都走完才进阶段二。</p>
+    <p><b>阶段二 争夺现象</b>　① 翻出现象 → ② 宣示真理（轮流放 1 张背面朝下或 pass）→ ③ 部署修女（可选）→ ④ 亮牌计真理（注意修正）→ ⑤ 胜者奖励（感召信徒、存现象、按现象阵营显现一肢体；必要时改阵营）。</p>
+    <p><b>阶段三 传递起始松鼠</b>　给左手边邻神。</p>
+    <h3>显圣词</h3>
+    <p>「看哪！是我！[头]，[躯干]，[腿]！唯一真神 / 真女神！」</p>
+    <h3>行动与效果</h3>
+    <table>
+      <thead><tr><th>行动</th><th>效果</th></tr></thead>
+      <tbody>
+        <tr><td>打出天界牌</td><td>神恩、启蒙者、圣物、圣军</td></tr>
+        <tr><td>神殿服务</td><td>僧侣 / 传教士 /（后期）修女</td></tr>
+        <tr><td>建造纪念碑</td><td>抽 3 张（混乱神抽 4），附上 1 张同名</td></tr>
+        <tr><td>触发现象</td><td>若面板上有存放的现象</td></tr>
+        <tr><td>驱逐假先知</td><td>送给邻神并刻下一条诫命</td></tr>
+        <tr><td>使用圣手榴弹</td><td>放信徒充能，可视情况引爆</td></tr>
+      </tbody>
+    </table>
+    <h3>阵营效果</h3>
+    <table>
+      <thead><tr><th>阵营</th><th>效果</th></tr></thead>
+      <tbody>
+        <tr><td>暴怒</td><td>牺牲 1 名邻神信徒</td></tr>
+        <tr><td>温和</td><td>感召 1 名信徒</td></tr>
+        <tr><td>混乱</td><td>投掷混乱骰</td></tr>
+        <tr><td>深不可测</td><td>—</td></tr>
+      </tbody>
+    </table>
+    <h3>符号含义</h3>
+    <div class="legend">
+      <div class="item"><span class="badge g">☀</span><span>感召：异教堆 → 供应区</span></div>
+      <div class="item"><span class="badge r">✚</span><span>牺牲：供应区 → 异教堆</span></div>
+      <div class="item"><span class="badge b">⇄</span><span>转化：一神 → 另一神</span></div>
+    </div>
+    <h3>抽牌规则</h3>
+    <table>
+      <thead><tr><th>卡牌类型</th><th>规则</th></tr></thead>
+      <tbody>
+        <tr><td>真理牌</td><td>最多 2 张，从个人抽牌堆自选</td></tr>
+        <tr><td>天界牌</td><td>从公共抽牌堆任意抽至手牌上限</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ============ 13 ============ -->
+  <section id="s13">
+    <h2 class="sec">13 · 制作人员（Credits）</h2>
+    <p>游戏设计：Cornel Krizsan、Erik Haffner、Henneke Holst<br>
+    美术与概念：Maren Gutt · 排版：Lisa Forsch、Maren Gutt<br>
+    CEO：Alexander Tanaka · 编辑与授权：Alexander Tanaka<br>
+    销售与发行：Pottgamer<br>
+    翻译：Ross Coghanour、Alexander Tanaka、Henneke Holst</p>
+    <p>© 2026 Wyrmgold GmbH, Meine, Germany · www.wyrmgold.com　规则书版本 1.0</p>
+    <p class="lead">本中文版由规则书原文译排整理，仅供个人阅读学习使用。</p>
+  </section>
+
+  <footer>
+    《Believe in Me!（请相信我！）》中文规则书 · 译排自 BIM_Rulebook_ENG.pdf<br>
+    生成于 WorkBuddy · 可在浏览器直接阅读，或「打印 → 另存为 PDF」保存
+  </footer>
+
+</div>
+</body>
+</html>

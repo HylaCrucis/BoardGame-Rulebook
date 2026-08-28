@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>议事会（Mini Rogue 基础游戏）— 游戏规则</title>
+<style>
+:root {
+  --lamp: #d76b2a;
+  --brick: #923a26;
+  --oil: #f0c05a;
+  --paper: #fbf2db;
+  --cream: #f7e8c1;
+  --ink: #2a1810;
+  --glow: #e89432;
+  --shadow: rgba(146, 58, 38, 0.2);
+  --serif: "Iowan Old Style", "Palatino Linotype", "Source Han Serif SC", "Songti SC", "Noto Serif CJK SC", Georgia, serif;
+  --sans: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: linear-gradient(180deg, #1a0e08 0%, #2a1410 100%);
+  color: var(--ink);
+  font-family: var(--serif);
+  line-height: 1.7;
+  font-size: 15px;
+  padding: 0 0 80px;
+}
+.intro {
+  background: radial-gradient(ellipse at center, var(--glow) 0%, var(--brick) 50%, #1a0e08 100%);
+  color: var(--cream);
+  padding: 50px 36px;
+  text-align: center;
+  border-bottom: 6px double var(--oil);
+}
+.intro h1 {
+  margin: 0;
+  font-size: 56px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-shadow: 2px 2px 0 rgba(0,0,0,0.4), 0 0 16px var(--glow);
+}
+.intro h2 {
+  margin: 14px 0 0;
+  font-size: 22px;
+  font-weight: 400;
+  opacity: 0.92;
+  font-style: italic;
+  color: var(--oil);
+}
+.intro .quote {
+  margin: 30px auto;
+  max-width: 720px;
+  font-size: 14px;
+  opacity: 0.95;
+  line-height: 1.7;
+  font-style: italic;
+}
+.intro .sign { font-style: italic; opacity: 0.85; margin-top: 12px; }
+.container {
+  max-width: 1080px;
+  margin: 40px auto;
+  background: var(--paper);
+  padding: 0 0 80px;
+  box-shadow: 0 0 40px rgba(215, 107, 42, 0.15), 0 8px 24px var(--shadow);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px solid var(--lamp);
+}
+nav.toc {
+  background: linear-gradient(180deg, var(--paper) 0%, #f0dba0 100%);
+  padding: 24px 36px;
+  border-bottom: 2px solid var(--lamp);
+}
+nav.toc h3 {
+  margin: 0 0 12px;
+  font-size: 16px;
+  color: var(--brick);
+  letter-spacing: 0.15em;
+  border-left: 4px solid var(--lamp);
+  padding-left: 10px;
+}
+nav.toc ol {
+  margin: 0;
+  padding-left: 22px;
+  columns: 2;
+  font-size: 14px;
+}
+nav.toc ol li { margin: 4px 0; }
+nav.toc ol li a {
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--lamp);
+}
+nav.toc ol li a:hover { color: var(--brick); border-bottom-color: var(--brick); }
+section {
+  padding: 50px 36px 30px;
+  border-bottom: 1px dashed var(--lamp);
+  position: relative;
+}
+section:last-child { border-bottom: none; }
+.sec {
+  margin: 0 0 24px;
+  font-size: 28px;
+  color: var(--brick);
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.sec .num {
+  background: var(--lamp);
+  color: var(--cream);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 700;
+  flex-shrink: 0;
+  border: 2px solid var(--brick);
+  box-shadow: 0 0 12px rgba(232, 148, 50, 0.4);
+}
+h3 {
+  margin: 28px 0 12px;
+  color: var(--brick);
+  font-size: 19px;
+  letter-spacing: 0.05em;
+  border-left: 4px solid var(--lamp);
+  padding-left: 12px;
+}
+h4 {
+  margin: 18px 0 8px;
+  color: var(--brick);
+  font-size: 16px;
+}
+p { margin: 10px 0; }
+strong { color: var(--brick); font-weight: 700; }
+em { color: var(--lamp); }
+.tip {
+  background: #fef5d8;
+  border-left: 4px solid var(--oil);
+  padding: 14px 18px;
+  margin: 14px 0;
+  font-size: 14px;
+  border-radius: 0 8px 8px 0;
+  border: 1px dashed var(--lamp);
+}
+.tip b { color: var(--brick); font-style: italic; }
+.callout {
+  background: #fbe9d4;
+  border: 2px solid var(--lamp);
+  border-radius: 8px;
+  padding: 16px 22px;
+  margin: 16px 0;
+  border-left: 6px solid var(--brick);
+}
+.callout b { color: var(--brick); }
+.callout.adv { background: #f9e3c5; border-color: var(--brick); }
+ul, ol { padding-left: 24px; margin: 10px 0; }
+li { margin: 4px 0; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  background: var(--cream);
+}
+table th, table td {
+  border: 1px solid var(--lamp);
+  padding: 8px 12px;
+  text-align: center;
+  font-size: 14px;
+}
+table th {
+  background: var(--brick);
+  color: var(--cream);
+  font-weight: 700;
+}
+table td { background: var(--paper); }
+.ex {
+  background: #f8e1c0;
+  border: 1px dashed var(--lamp);
+  border-radius: 8px;
+  padding: 14px 20px;
+  margin: 14px 0;
+  font-size: 14px;
+}
+.ex .label { font-weight: 700; color: var(--brick); }
+.figure {
+  margin: 20px 0;
+  text-align: center;
+}
+.figure img {
+  max-width: 100%;
+  border: 4px solid var(--cream);
+  box-shadow: 0 4px 12px var(--shadow);
+  background: #f0dba0;
+}
+.figure figcaption {
+  font-size: 13px;
+  color: #6b3216;
+  margin-top: 8px;
+  font-style: italic;
+}
+.three-col {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin: 16px 0;
+}
+@media (max-width: 720px) { .three-col { grid-template-columns: repeat(2, 1fr); } }
+.comp-card {
+  background: var(--cream);
+  border: 2px solid var(--lamp);
+  border-radius: 8px;
+  padding: 14px;
+  text-align: center;
+}
+.comp-card .num { font-size: 22px; font-weight: 700; color: var(--brick); }
+.comp-card .name { color: var(--brick); margin-top: 6px; font-weight: 700; font-size: 13px; }
+.die-card {
+  background: var(--cream);
+  border: 2px solid var(--lamp);
+  border-radius: 8px;
+  padding: 14px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--brick);
+}
+.die-card.d { border-color: #1a1a1a; background: #2a1810; color: var(--cream); }
+.die-card.w { border-color: #f0f0f0; background: #fafafa; color: var(--ink); }
+.die-card.p { border-color: var(--brick); background: #f5d8c5; }
+.die-card.g { border-color: #5a8a4a; background: #d8e6c5; }
+.die-card small { display: block; font-size: 11px; font-weight: 400; margin-top: 4px; }
+.phase-flow {
+  background: #fef5d8;
+  padding: 18px 22px;
+  border-radius: 8px;
+  margin: 14px 0;
+  border: 1px solid var(--oil);
+}
+.phase-flow b { color: var(--brick); }
+.flow-chart {
+  background: var(--paper);
+  padding: 24px;
+  border-radius: 12px;
+  margin: 16px 0;
+  border: 2px solid var(--lamp);
+}
+.flow-step {
+  background: var(--cream);
+  border: 2px solid var(--lamp);
+  border-radius: 6px;
+  padding: 10px 16px;
+  margin: 8px 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.flow-step .n {
+  background: var(--brick);
+  color: var(--cream);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.flow-arrow {
+  text-align: center;
+  color: var(--brick);
+  font-size: 20px;
+  margin: 4px 0;
+}
+.action-list {
+  background: #fbe9d4;
+  border: 2px solid var(--lamp);
+  border-radius: 8px;
+  padding: 18px 22px;
+  margin: 14px 0;
+}
+.action-list b { color: var(--brick); }
+.term-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin: 16px 0;
+}
+@media (max-width: 720px) { .term-grid { grid-template-columns: 1fr; } }
+.term {
+  background: var(--cream);
+  border: 2px solid var(--lamp);
+  border-radius: 8px;
+  padding: 12px 16px;
+}
+.term h4 {
+  margin: 0 0 6px;
+  color: var(--brick);
+  font-size: 15px;
+  border-left: 3px solid var(--lamp);
+  padding-left: 8px;
+}
+.term p { margin: 0; font-size: 13px; }
+.credits {
+  background: linear-gradient(180deg, var(--paper) 0%, #f0dba0 100%);
+  padding: 30px 36px;
+  border-top: 4px solid var(--lamp);
+}
+.credits h3 { color: var(--brick); border-left-color: var(--oil); }
+</style>
+</head>
+<body>
+
+<div class="intro">
+  <h1>议事会（基础游戏）</h1>
+  <h2>议事会（基础游戏）</h2>
+  <p class="quote">
+    欢迎来到 Mini Rogue：议事会！我们在这个"桌游版类 Rogue"想法上已经快 <b>10 年</b>了。自从 Mini Rogue 的想法诞生以来，我们的生活发生了很大变化，但我们仍然希望把你沉浸在我们创造的黑暗奇幻世界中。我们认为《议事会》的战役将真正传达我们想与所有玩家分享的基调与传说。为了获得最佳体验，<b>关掉灯，放些阴森或诡异的音乐，关掉你的电子设备</b>。
+  </p>
+  <p class="sign">— Paolo Di Stefano &amp; Gabriel Gendron</p>
+</div>
+
+<header>
+  <h1>议事会</h1>
+  <h2>Mini Rogue: The Council · 基础游戏</h2>
+  <div class="meta">
+    <span>1-4 人</span>
+    <span>10 岁以上</span>
+    <span>60-120 分钟</span>
+  </div>
+</header>
+
+<nav class="toc">
+  <h3>目录</h3>
+  <ol>
+    <li><a href="#goal">游戏目标</a></li>
+    <li><a href="#components">配件</a></li>
+    <li><a href="#setup">设置</a></li>
+    <li><a href="#city">城市与角色板块</a></li>
+    <li><a href="#dice">骰子概述</a></li>
+    <li><a href="#turn">回合顺序</a></li>
+    <li><a href="#skill">技能检定</a></li>
+    <li><a href="#combat">战斗</a></li>
+    <li><a href="#feats">战功</a></li>
+    <li><a href="#effects">效果</a></li>
+    <li><a href="#potions">药水</a></li>
+    <li><a href="#items">物品</a></li>
+    <li><a href="#xp">经验值与等级</a></li>
+    <li><a href="#classes">角色职业与技能</a></li>
+    <li><a href="#difficulty">难度</a></li>
+    <li><a href="#rooms">房间卡</a></li>
+    <li><a href="#room-resolution">房间卡结算</a></li>
+    <li><a href="#turn-example">回合示例</a></li>
+    <li><a href="#end">游戏结束</a></li>
+    <li><a href="#2p">2 人合作规则</a></li>
+    <li><a href="#stance">战斗姿态卡变体</a></li>
+    <li><a href="#credits">制作信息</a></li>
+    <li><a href="#icons">图标</a></li>
+    <li><a href="#room-anatomy">房间卡构成</a></li>
+  </ol>
+</nav>
+
+<div class="container">
+
+  <section id="goal">
+    <h2 class="sec"><span class="num">1</span>游戏目标</h2>
+    <p>在这款<b>单人</b>或<b>独立对抗</b>扩展中，你扮演一位<b>冒险者</b>，寻找已被腐化至极的国王劫持的<b>Og 之血</b>——这件被诅咒的神器。</p>
+    <p>你也可以扮演<b>旧神</b>的仆从，操作城市的布局，把冒险者们引向他们注定的毁灭。</p>
+    <p>如果你拥有 Mini Rogue 基础游戏，你甚至可以体验<b>最多 3 人的合作模式</b>，或<b>最多 4 人的霸主模式</b>。</p>
+  </section>
+
+  <section id="components">
+    <h2 class="sec"><span class="num">2</span>配件</h2>
+    <div class="three-col">
+      <div class="comp-card"><div class="num">1</div><div class="name">本规则书</div></div>
+      <div class="comp-card"><div class="num">1</div><div class="name">议事会附加规则书</div></div>
+      <div class="comp-card"><div class="num">1</div><div class="name">战役书</div></div>
+      <div class="comp-card"><div class="num">5</div><div class="name">大Boss 卡</div></div>
+      <div class="comp-card"><div class="num">4</div><div class="name">角色卡</div></div>
+      <div class="comp-card"><div class="num">1</div><div class="name">战斗姿态卡</div></div>
+      <div class="comp-card"><div class="num">20</div><div class="name">房间卡</div></div>
+      <div class="comp-card"><div class="num">4</div><div class="name">传说卡</div></div>
+      <div class="comp-card"><div class="num">6</div><div class="name">强化卡</div></div>
+      <div class="comp-card"><div class="num">3</div><div class="name">霸主卡</div></div>
+      <div class="comp-card"><div class="num">1</div><div class="name">霸主化身卡</div></div>
+      <div class="comp-card"><div class="num">1</div><div class="name">奖励/罪犯卡</div></div>
+      <div class="comp-card"><div class="num">2</div><div class="name">玩家辅助单</div></div>
+      <div class="comp-card"><div class="num">2</div><div class="name">木制角色</div></div>
+      <div class="comp-card"><div class="num">4</div><div class="name">角色标记</div></div>
+      <div class="comp-card"><div class="num">1</div><div class="name">黑色（地城）骰</div></div>
+      <div class="comp-card"><div class="num">3</div><div class="name">白色（角色）骰</div></div>
+      <div class="comp-card"><div class="num">1</div><div class="name">紫色（诅咒）骰</div></div>
+      <div class="comp-card"><div class="num">1</div><div class="name">绿色（毒素）骰</div></div>
+      <div class="comp-card"><div class="num">1</div><div class="name">城市板块</div></div>
+      <div class="comp-card"><div class="num">1</div><div class="name">角色板块</div></div>
+      <div class="comp-card"><div class="num">1</div><div class="name">霸主板块</div></div>
+      <div class="comp-card"><div class="num">14</div><div class="name">木制方块<br><small>3 黑、1 蓝、1 黄、1 棕、2 红、3 灰、2 紫、1 暗红</small></div></div>
+    </div>
+  </section>
+
+  <section id="setup">
+    <h2 class="sec"><span class="num">3</span>设置</h2>
+    <ol>
+      <li>选择一张角色卡，面朝上放在角色板块左侧。</li>
+      <li>根据角色卡右上角的数值设定角色起始属性。如果属性未列出，设为 0。用<b>木制方块</b>在各属性轨道上记录。</li>
+      <li>把<b>奖励/罪犯</b>参考卡放在角色板块右侧。</li>
+      <li>拿一颗<b>地城骰</b>和一颗<b>角色骰</b>放在手边。游戏开始时你只有 1 颗角色骰，用来结算遭遇。随着获得经验，你会有更多角色骰（见经验值与等级）。其他骰子放在手边。</li>
+      <li>把<b>黑色方块</b>放在城市板块标"1"的第一区域格上。这个方块是<b>冒险者方块</b>，代表角色在城市中的位置。要追踪怪物的生命值，把红色方块放在骷髅图标上。想换种体验可以用城市板块的另一面"大教堂"。</li>
+      <li>设置该区域：洗混所有房间卡，按图示把前 8 张面朝下摆放。</li>
+      <li>其余房间卡面朝下放在区域左上卡（起始卡）的左侧。</li>
+      <li>把<b>国王遗骸</b>大Boss 卡面朝下放在区域右下角。洗混其余大Boss（不含化身），从中抽 3 张放在国王遗骸上，全部面朝下。</li>
+      <li>最后，翻开区域左上卡，把你对应的<b>角色标记</b>（或你选的木制角色）放在该卡上。这是第一区域的入口。</li>
+    </ol>
+    <div class="callout adv">
+      <b>难度提升建议：</b>
+      <ul>
+        <li><b>困难：</b>起始 -1 食物、-1 生命值</li>
+        <li><b>更难：</b>起始 -1 食物、-2 生命值</li>
+        <li><b>类 Rogue：</b>起始 -1 食物、-2 生命值、-3 金币</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="city">
+    <h2 class="sec"><span class="num">4</span>城市与角色板块</h2>
+    <p>城市板块和角色板块记录着你的<b>生命值</b>、<b>金币</b>、<b>食物</b>、<b>护甲</b>、<b>药水</b>、<b>经验值</b>和<b>等级</b>。木制方块在每个轨道上滑动以追踪数值。</p>
+    <div class="figure">
+      <img src="MR_TC_Base_Rules_images/page_06.jpg" alt="规则书第 6 页（城市与角色板块）">
+      <figcaption>城市与角色板块轨道</figcaption>
+    </div>
+  </section>
+
+  <section id="dice">
+    <h2 class="sec"><span class="num">5</span>骰子概述</h2>
+    <div class="three-col">
+      <div class="die-card d">黑色（地城）骰<small>用于大Boss 和怪物攻击</small></div>
+      <div class="die-card w">白色（角色）骰<small>用于技能检定和角色攻击</small></div>
+      <div class="die-card p">紫色（诅咒）骰<small>诅咒骰：增加更多诅咒</small></div>
+      <div class="die-card g">绿色（毒素）骰<small>毒素骰：增加更多毒素</small></div>
+    </div>
+  </section>
+
+  <section id="turn">
+    <h2 class="sec"><span class="num">6</span>回合顺序</h2>
+    <p>每个回合按以下顺序执行：</p>
+    <div class="flow-chart">
+      <div class="flow-step"><span class="n">1</span><span><b>掷地城骰</b></span></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step"><span class="n">2</span><span><b>激活房间卡</b></span></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step"><span class="n">3</span><span><b>激活技能</b></span></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step"><span class="n">4</span><span><b>自动效果</b></span></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step"><span class="n">5</span><span><b>移动冒险者方块</b></span></div>
+    </div>
+  </section>
+
+  <section id="skill">
+    <h2 class="sec"><span class="num">7</span>技能检定</h2>
+    <p>当你面对需要技能检定的卡时，使用你的<b>角色骰</b>进行投掷：</p>
+    <ol>
+      <li>掷你手边的角色骰。</li>
+      <li>任意一颗骰结果等于或超过所需值即成功。</li>
+      <li>可消耗<b>金币</b>重新掷骰（每花费 1 金币重掷 1 颗）。</li>
+      <li>可使用具有<b>感知</b>技能的骰子（重投未达成的骰子）。</li>
+    </ol>
+    <div class="tip">
+      <b>小贴士：</b>随着升级，你会获得更多角色骰，让你有更多达成技能检定的机会。
+    </div>
+  </section>
+
+  <section id="combat">
+    <h2 class="sec"><span class="num">8</span>战斗</h2>
+    <p>战斗按以下顺序进行：</p>
+    <ol>
+      <li>掷角色骰、地城骰、诅咒骰、毒素骰（按需）。</li>
+      <li>所有角色骰与地城骰<b>两两对比</b>：高值获胜。</li>
+      <li>每损失一胜，怪物失去 1 生命值（红色方块移到骷髅图标）。</li>
+      <li>当怪物生命值归零，战胜它。</li>
+      <li>诅咒骰和毒素骰：每次出现 +1 诅咒或毒素。</li>
+    </ol>
+    <div class="callout">
+      <b>药水使用：</b>战斗中可使用药水。圣水治疗诅咒；绿色药水治愈毒素。<b>不可</b>用骰子替代药水。
+    </div>
+  </section>
+
+  <section id="feats">
+    <h2 class="sec"><span class="num">9</span>战功</h2>
+    <p>战功是<b>永久</b>效果，每次满足条件即触发：</p>
+    <ul>
+      <li><b>-2 生命值：</b>每次战斗后失去 2 生命值。</li>
+      <li><b>-1 经验值：</b>每次获得经验值时少 1。</li>
+    </ul>
+    <p>战功在角色卡上以红字显示。新手冒险者会让一名冒险者多抽一张奖励卡（首次游戏建议）。</p>
+  </section>
+
+  <section id="effects">
+    <h2 class="sec"><span class="num">10</span>效果</h2>
+    <p>效果分三类：</p>
+    <div class="three-col">
+      <div class="action-card">立即效果</div>
+      <div class="action-card">延迟效果</div>
+      <div class="action-card">持续效果</div>
+    </div>
+    <p>立即效果在使用后即结算；延迟效果在指定时刻结算；持续效果在整个游戏过程中持续生效。</p>
+  </section>
+
+  <section id="potions">
+    <h2 class="sec"><span class="num">11</span>药水</h2>
+    <p>药水可在战斗中使用：</p>
+    <ul>
+      <li><b>火焰药水：</b>对一个怪物造成 2 伤害</li>
+      <li><b>冰霜药水：</b>冻结一个怪物一回合</li>
+      <li><b>治疗药水：</b>恢复 2 生命值</li>
+      <li><b>圣水：</b>治疗一个诅咒</li>
+      <li><b>毒素：</b>对一个怪物施毒，1 伤害/回合</li>
+      <li><b>感知：</b>看下一张房间卡</li>
+    </ul>
+    <div class="figure">
+      <img src="MR_TC_Base_Rules_images/page_14.jpg" alt="规则书第 14 页（药水）">
+      <figcaption>药水类型与效果</figcaption>
+    </div>
+  </section>
+
+  <section id="items">
+    <h2 class="sec"><span class="num">12</span>物品</h2>
+    <p>物品从房间卡中获取，提供<b>被动效果</b>。</p>
+    <ul>
+      <li>物品占据角色板块上的"物品"位</li>
+      <li>每张物品卡只能持有一张</li>
+      <li>部分物品卡提供永久的被动效果</li>
+    </ul>
+  </section>
+
+  <section id="xp">
+    <h2 class="sec"><span class="num">13</span>经验值与等级</h2>
+    <p>经验值通过击败怪物、翻房间卡获得。每次获得 1 点经验值，等级提升：</p>
+    <table>
+      <thead><tr><th>等级</th><th>经验值要求</th><th>奖励</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>0 XP</td><td>1 角色骰</td></tr>
+        <tr><td>2</td><td>3 XP</td><td>+1 角色骰 + 升级奖励卡</td></tr>
+        <tr><td>3</td><td>6 XP</td><td>+1 角色骰 + 终极奖励</td></tr>
+      </tbody>
+    </table>
+    <div class="tip">
+      <b>小贴士：</b>升级奖励可包括额外的药水、生命值、感知技能等。
+    </div>
+  </section>
+
+  <section id="classes">
+    <h2 class="sec"><span class="num">14</span>角色职业与技能</h2>
+    <p>每位冒险者从 4 个角色职业中选择 1 张角色卡：</p>
+    <ul>
+      <li><b>Plague Doc（疫医）：</b>治疗与毒素专家</li>
+      <li><b>Rat Catcher（捕鼠人）：</b>敏捷与金币专家</li>
+      <li><b>Berserker（狂战士）：</b>近战伤害专家</li>
+      <li><b>Mage（法师）：</b>魔法与控制专家</li>
+    </ul>
+    <p>每位职业有独特的<b>技能</b>和<b>战斗姿态</b>。</p>
+  </section>
+
+  <section id="difficulty">
+    <h2 class="sec"><span class="num">15</span>难度</h2>
+    <p>如果你想增加挑战，可以选择：</p>
+    <ul>
+      <li><b>困难：</b>起始 -1 食物、-1 生命值</li>
+      <li><b>更难：</b>起始 -1 食物、-2 生命值</li>
+      <li><b>类 Rogue：</b>起始 -1 食物、-2 生命值、-3 金币</li>
+    </ul>
+    <div class="tip">
+      <b>新手冒险者：</b>首次玩或与新手一起玩，让一位冒险者多抽一张奖励卡。
+    </div>
+  </section>
+
+  <section id="rooms">
+    <h2 class="sec"><span class="num">16</span>房间卡</h2>
+    <p>房间卡代表城市中的地点。每张房间卡有：</p>
+    <ul>
+      <li><b>类型：</b>怪物、陷阱、宝物、商人、古墓、篝火、神龛、房间</li>
+      <li><b>效果：</b>技能检定、奖励、危险</li>
+      <li><b>战利品：</b>金币、物品、药水</li>
+    </ul>
+    <div class="term-grid">
+      <div class="term">
+        <h4>怪物</h4>
+        <p>面对敌人，需要掷骰战斗。</p>
+      </div>
+      <div class="term">
+        <h4>陷阱</h4>
+        <p>需要通过技能检定才能安全通过。</p>
+      </div>
+      <div class="term">
+        <h4>宝物</h4>
+        <p>获得金币或物品。</p>
+      </div>
+      <div class="term">
+        <h4>商人</h4>
+        <p>用金币购买药水或物品。</p>
+      </div>
+      <div class="term">
+        <h4>古墓</h4>
+        <p>可能发现物品或触发诅咒。</p>
+      </div>
+      <div class="term">
+        <h4>篝火</h4>
+        <p>休息与恢复生命值。</p>
+      </div>
+      <div class="term">
+        <h4>神龛</h4>
+        <p>祈祷与祝福。</p>
+      </div>
+    </div>
+    <div class="figure">
+      <img src="MR_TC_Base_Rules_images/page_17.jpg" alt="规则书第 17 页（房间卡类型）">
+      <figcaption>房间卡类型与构成</figcaption>
+    </div>
+  </section>
+
+  <section id="room-resolution">
+    <h2 class="sec"><span class="num">17</span>房间卡结算</h2>
+    <p>当你移动到一张面朝下的房间卡时，按以下顺序结算：</p>
+    <ol>
+      <li>翻开该卡</li>
+      <li>按卡的类型结算（怪物/陷阱/宝物等）</li>
+      <li>获得奖励（如果有）</li>
+      <li>记录状态变化（生命值、物品等）</li>
+      <li>翻下一张卡或继续移动</li>
+    </ol>
+    <div class="callout">
+      <b>重要：</b>击败大Boss 卡可获得额外奖励，但要小心——大Boss 卡的实力远胜普通怪物。
+    </div>
+  </section>
+
+  <section id="turn-example">
+    <h2 class="sec"><span class="num">18</span>回合示例</h2>
+    <p>假设你作为<b>疫医</b>在第二区域：</p>
+    <ol>
+      <li>掷<b>地城骰</b>，得到"攻击 4"</li>
+      <li>激活当前房间卡"陷阱"：技能检定"感知 5+"，掷<b>角色骰</b>得到 3、4、6，6 成功</li>
+      <li>激活技能"<b>配药</b>"：消耗 1 生命值，将 1 个毒素标记转化为 1 个毒素药水</li>
+      <li>自动效果：毒素药水 -1 生命值（已使用）</li>
+      <li>移动<b>冒险者方块</b> 1 格：进入下一房间</li>
+    </ol>
+    <div class="ex">
+      <p><span class="label">【示例】</span>疫医通过配药技能，可以在战斗中使用额外的毒素药水，对怪物造成额外伤害。这个策略在面对高生命值的大Boss 时特别有用。</p>
+    </div>
+  </section>
+
+  <section id="end">
+    <h2 class="sec"><span class="num">19</span>游戏结束</h2>
+    <p>游戏在以下情况结束：</p>
+    <ul>
+      <li><b>胜利：</b>击败<b>国王遗骸</b>大Boss（第一战役）或<b>化身</b>（第二战役）</li>
+      <li><b>失败：</b>生命值归零；或触发特定战役失败条件</li>
+    </ul>
+    <p>游戏结束后根据战役书结算得分与奖励。</p>
+  </section>
+
+  <section id="2p">
+    <h2 class="sec"><span class="num">20</span>2 人合作规则</h2>
+    <p>如果你拥有 Mini Rogue 基础游戏，可以玩<b>2 人合作模式</b>：</p>
+    <ol>
+      <li>2 位玩家各选 1 张角色卡</li>
+      <li>使用合作版角色骰组（每玩家 1 颗角色骰）</li>
+      <li>按顺序结算每位玩家的回合</li>
+      <li>生命值、物品等玩家各自独立追踪</li>
+      <li>共同击败大Boss 即获胜</li>
+    </ol>
+    <div class="tip">
+      <b>小贴士：</b>合作模式下建议选<b>互补职业</b>（如疫医 + 法师）。
+    </div>
+  </section>
+
+  <section id="stance">
+    <h2 class="sec"><span class="num">21</span>战斗姿态卡变体</h2>
+    <p>本变体引入<b>战斗姿态卡</b>，每位玩家可选择：</p>
+    <ul>
+      <li><b>攻击姿态：</b>+2 攻击伤害，但失去 1 护甲</li>
+      <li><b>防御姿态：</b>+1 护甲，但每回合 -1 攻击伤害</li>
+      <li><b>平衡姿态：</b>无加成无惩罚</li>
+    </ul>
+    <p>战斗前可切换姿态，每个战斗只能选一种。</p>
+    <div class="figure">
+      <img src="MR_TC_Base_Rules_images/page_26.jpg" alt="规则书第 26 页（战斗姿态卡变体）">
+      <figcaption>战斗姿态卡变体</figcaption>
+    </div>
+  </section>
+
+  <section id="credits" class="credits">
+    <h2 class="sec"><span class="num">22</span>制作信息</h2>
+
+    <h3>设计团队</h3>
+    <ul>
+      <li><b>游戏设计：</b>Paolo Di Stefano、Gabriel Gendron</li>
+    </ul>
+
+    <h3>特别鸣谢</h3>
+    <p>感谢所有测试者、玩家和家人朋友的支持。特别感谢 基础游戏团队。</p>
+
+    <h3>联系方式</h3>
+    <p>欢迎到 <strong>minirogue.com</strong> 了解更多。</p>
+    <div class="figure">
+      <img src="MR_TC_Base_Rules_images/page_27.jpg" alt="规则书第 27 页（制作信息）">
+      <figcaption>制作信息</figcaption>
+    </div>
+  </section>
+
+  <section id="icons">
+    <h2 class="sec"><span class="num">23</span>图标</h2>
+    <div class="term-grid">
+      <div class="term"><h4>生命值（HP）</h4><p>骷髅图标。归零则死亡。</p></div>
+      <div class="term"><h4>金币</h4><p>购买药水、物品、重新掷骰。</p></div>
+      <div class="term"><h4>食物</h4><p>每回合自动消耗 1；归零则每回合失 1 生命值。</p></div>
+      <div class="term"><h4>护甲</h4><p>抵消伤害。</p></div>
+      <div class="term"><h4>经验值</h4><p>3 XP 升 1 级，6 XP 升 2 级。</p></div>
+      <div class="term"><h4>药水</h4><p>火焰/冰霜/治疗/圣水/毒素/感知。</p></div>
+      <div class="term"><h4>角色骰</h4><p>白色。技能检定与角色攻击。</p></div>
+      <div class="term"><h4>地城骰</h4><p>黑色。大Boss 和怪物攻击。</p></div>
+      <div class="term"><h4>诅咒骰</h4><p>紫色。每出现 +1 诅咒。</p></div>
+      <div class="term"><h4>毒素骰</h4><p>绿色。每出现 +1 毒素。</p></div>
+    </div>
+    <div class="figure">
+      <img src="MR_TC_Base_Rules_images/page_28.jpg" alt="规则书第 28 页（图标 + 房间卡构成）">
+      <figcaption>游戏图标 + 房间卡构成</figcaption>
+    </div>
+  </section>
+
+  <section id="room-anatomy">
+    <h2 class="sec"><span class="num">24</span>房间卡构成</h2>
+    <p>每张房间卡的构成要素：</p>
+    <ul>
+      <li><b>类型标签：</b>怪物/陷阱/宝物/商人/古墓/篝火/神龛/房间</li>
+      <li><b>名称：</b>房间名称</li>
+      <li><b>技能检定：</b>所需值（如有）</li>
+      <li><b>效果：</b>成功/失败后果</li>
+      <li><b>战利品：</b>金币、物品或药水</li>
+      <li><b>特殊规则：</b>该卡的独特机制</li>
+    </ul>
+  </section>
+
+</div>
+
+<div class="credits" style="background: var(--cream); padding: 30px 36px; border-top: 4px solid var(--lamp);">
+  <h3 style="color: var(--brick); border-left-color: var(--oil);">议事会（基础游戏）/ Mini Rogue: The Council · 中文本地化版本</h3>
+  <p>翻译规则严格遵循"专名 vs 普通术语"桌游本地化准则：人名 / 地名 / 公司名保留英文；其他专名（卡牌名 / 能力名 / 大佬 名 / 章节标题 / 制作标签 / 普通术语）全部译为中文。</p>
+  <p>保留英文的专名：Paolo Di Stefano、Gabriel Gendron、Mini Rogue（系列名）。其他专名全部译为中文：化身、国王、Og 之血、疫医、捕鼠人、狂战士、法师、议事会（The Council）等。</p>
+</div>
+
+</body>
+</html>

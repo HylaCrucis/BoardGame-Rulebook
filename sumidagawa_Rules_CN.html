@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>隅田川之争（Sumidagawa）— 游戏规则</title>
+<style>
+:root {
+  --edo: #1f4d7f;
+  --shu: #c84a3a;
+  --washi: #f3ead7;
+  --sumi: #1a1a1a;
+  --gold: #b89343;
+  --paper: #f8f4ec;
+  --grid: #e3d8c2;
+  --ink: #2a2825;
+  --shadow: rgba(31, 77, 127, 0.15);
+  --serif: "Noto Serif SC", "Songti SC", "Source Han Serif", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --sans: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--washi);
+  background-image: linear-gradient(90deg, rgba(184, 147, 67, 0.04) 0%, transparent 30%, transparent 70%, rgba(184, 147, 67, 0.04) 100%);
+  font-family: var(--serif);
+  color: var(--ink);
+  line-height: 1.7;
+  font-size: 15px;
+  padding: 0 0 80px;
+}
+header {
+  background: linear-gradient(135deg, var(--edo) 0%, #2a5f99 50%, var(--shu) 100%);
+  color: var(--washi);
+  padding: 50px 36px 60px;
+  text-align: center;
+  border-bottom: 6px double var(--gold);
+  box-shadow: 0 6px 0 rgba(0,0,0,0.1);
+}
+header h1 {
+  margin: 0;
+  font-size: 56px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-shadow: 2px 2px 0 rgba(0,0,0,0.2);
+}
+header h2 {
+  margin: 16px 0 0;
+  font-size: 22px;
+  font-weight: 400;
+  opacity: 0.9;
+  letter-spacing: 0.1em;
+}
+header .meta {
+  margin-top: 24px;
+  font-size: 14px;
+  opacity: 0.85;
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+header .meta span {
+  background: rgba(255,255,255,0.1);
+  padding: 6px 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.3);
+}
+.container {
+  max-width: 1080px;
+  margin: 40px auto;
+  background: var(--paper);
+  padding: 0 0 80px;
+  box-shadow: 0 8px 24px var(--shadow);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.cover-img {
+  width: 100%;
+  display: block;
+  border-bottom: 4px solid var(--gold);
+}
+nav.toc {
+  background: linear-gradient(180deg, var(--paper) 0%, #efe9d9 100%);
+  padding: 24px 36px;
+  border-bottom: 1px solid var(--grid);
+}
+nav.toc h3 {
+  margin: 0 0 12px;
+  font-size: 16px;
+  color: var(--edo);
+  letter-spacing: 0.15em;
+  border-left: 4px solid var(--shu);
+  padding-left: 10px;
+}
+nav.toc ol {
+  margin: 0;
+  padding-left: 22px;
+  columns: 2;
+  font-size: 14px;
+}
+nav.toc ol li { margin: 4px 0; }
+nav.toc ol li a {
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--grid);
+}
+nav.toc ol li a:hover { color: var(--shu); border-bottom-color: var(--shu); }
+section {
+  padding: 50px 36px 30px;
+  border-bottom: 1px dashed var(--grid);
+  position: relative;
+}
+section:last-child { border-bottom: none; }
+.sec {
+  margin: 0 0 24px;
+  font-size: 28px;
+  color: var(--edo);
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.sec .num {
+  background: var(--shu);
+  color: var(--washi);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+h3 {
+  margin: 28px 0 12px;
+  color: var(--shu);
+  font-size: 19px;
+  letter-spacing: 0.05em;
+  border-left: 4px solid var(--shu);
+  padding-left: 12px;
+}
+h4 {
+  margin: 18px 0 8px;
+  color: var(--edo);
+  font-size: 16px;
+}
+p { margin: 10px 0; }
+strong { color: var(--shu); font-weight: 700; }
+.note {
+  background: #fff8e8;
+  border-left: 4px solid var(--gold);
+  padding: 12px 18px;
+  margin: 14px 0;
+  font-size: 14px;
+  border-radius: 0 6px 6px 0;
+}
+.callout {
+  background: #fbeae7;
+  border: 2px solid var(--shu);
+  border-radius: 8px;
+  padding: 14px 20px;
+  margin: 16px 0;
+}
+.callout.adv { background: #e9f1f8; border-color: var(--edo); }
+.callout b { color: var(--shu); }
+.callout.adv b { color: var(--edo); }
+ul, ol { padding-left: 24px; margin: 10px 0; }
+li { margin: 4px 0; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  background: var(--washi);
+}
+table th, table td {
+  border: 1px solid var(--grid);
+  padding: 8px 12px;
+  text-align: center;
+  font-size: 14px;
+}
+table th {
+  background: var(--edo);
+  color: var(--washi);
+  font-weight: 700;
+}
+table td { background: var(--paper); }
+table tr:hover td { background: #f0e8d3; }
+.ex {
+  background: #f3eedd;
+  border: 1px dashed var(--gold);
+  border-radius: 8px;
+  padding: 14px 20px;
+  margin: 14px 0;
+  font-size: 14px;
+}
+.ex .label { font-weight: 700; color: var(--gold); }
+.figure {
+  margin: 20px 0;
+  text-align: center;
+}
+.figure img {
+  max-width: 100%;
+  border: 4px solid var(--washi);
+  box-shadow: 0 4px 12px var(--shadow);
+  background: #f0e8d3;
+}
+.figure figcaption {
+  font-size: 13px;
+  color: #666;
+  margin-top: 8px;
+  font-style: italic;
+}
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin: 18px 0;
+}
+@media (max-width: 720px) { .two-col { grid-template-columns: 1fr; } }
+.kw { color: var(--shu); font-weight: 700; }
+.loc-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 16px 0;
+}
+@media (max-width: 720px) { .loc-grid { grid-template-columns: repeat(2, 1fr); } }
+.loc-card {
+  background: var(--paper);
+  border: 2px solid var(--edo);
+  border-radius: 8px;
+  padding: 12px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 700;
+}
+.loc-card .rule { color: var(--shu); margin-top: 6px; font-size: 12px; }
+.loc-card.b { border-color: #1a1a1a; background: #2a2825; color: var(--washi); }
+.loc-card.r { border-color: var(--shu); background: #fbeae7; }
+.phase-flow {
+  background: #fff8e8;
+  padding: 18px 22px;
+  border-radius: 8px;
+  margin: 14px 0;
+  border: 1px solid var(--gold);
+}
+.phase-flow b { color: var(--edo); }
+.setup-table { font-size: 14px; }
+.choice-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 16px 0;
+}
+@media (max-width: 720px) { .choice-2 { grid-template-columns: 1fr; } }
+.choice {
+  background: var(--paper);
+  border: 2px solid var(--grid);
+  border-radius: 8px;
+  padding: 14px;
+  text-align: center;
+}
+.choice.fist { border-color: var(--shu); background: #fbeae7; }
+.choice.car { border-color: var(--edo); background: #e9f1f8; }
+.choice h4 { margin: 0 0 8px; color: var(--edo); }
+.choice.fist h4 { color: var(--shu); }
+.score-card {
+  background: linear-gradient(180deg, #fff8e8 0%, #f3eedd 100%);
+  padding: 18px 22px;
+  border-radius: 8px;
+  border-left: 6px solid var(--gold);
+  margin: 14px 0;
+}
+.flow-chart {
+  background: var(--paper);
+  padding: 24px;
+  border-radius: 12px;
+  margin: 16px 0;
+  border: 2px solid var(--edo);
+}
+.flow-step {
+  background: var(--washi);
+  border: 2px solid var(--grid);
+  border-radius: 6px;
+  padding: 10px 16px;
+  margin: 8px 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.flow-step .n {
+  background: var(--shu);
+  color: var(--washi);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.flow-arrow {
+  text-align: center;
+  color: var(--edo);
+  font-size: 20px;
+  margin: 4px 0;
+}
+section.two { background: linear-gradient(180deg, var(--paper) 0%, #efe9d9 100%); }
+.credits {
+  background: linear-gradient(180deg, var(--paper) 0%, #efe9d9 100%);
+  padding: 30px 36px;
+  font-size: 13px;
+  color: #555;
+  border-top: 4px solid var(--gold);
+}
+.credits h3 { color: var(--edo); border-left-color: var(--gold); }
+</style>
+</head>
+<body>
+
+<header class>
+  <h1>隅田川之争</h1>
+  <h2>Sumidagawa</h2>
+  <div class="meta">
+    <span>8 岁以上</span>
+    <span>2-5 人</span>
+    <span>30 分钟</span>
+  </div>
+</header>
+
+<nav class="toc">
+  <h3>目录</h3>
+  <ol>
+    <li><a href="#story">故事</a></li>
+    <li><a href="#components">配件</a></li>
+    <li><a href="#setup">游戏设置</a></li>
+    <li><a href="#flow">游戏流程</a></li>
+    <li><a href="#prep">手牌准备</a></li>
+    <li><a href="#choice">选择决策板块</a></li>
+    <li><a href="#check">检查决策选择</a></li>
+    <li><a href="#war">地盘争夺</a></li>
+    <li><a href="#locations">地点板块</a></li>
+    <li><a href="#strength">卡牌强度声明</a></li>
+    <li><a href="#hitman">杀手牌</a></li>
+    <li><a href="#pass">跳过</a></li>
+    <li><a href="#cleanup">清理</a></li>
+    <li><a href="#end">游戏结束</a></li>
+    <li><a href="#two">2 人规则</a></li>
+    <li><a href="#short">短游戏</a></li>
+    <li><a href="#credits">制作信息</a></li>
+  </ol>
+</nav>
+
+<div class="container">
+
+  <section id="story">
+    <h2 class="sec"><span class="num">1</span>故事</h2>
+    <p>地盘之争即将打响。</p>
+    <p>凭你现在的阵容是赢不了的。你没法和弱者合作；光靠好看的外表也活不下来。在这场生意里，要么快，要么死。</p>
+    <p>这一次，笑到最后的会是我们……</p>
+    <p>你将率领一支帮派团队投入地盘之争，尽可能快地让他们占据空置的地点。如果你不满意发到的牌，可以把强大的<b>杀手牌</b>加入手牌。然而，雇杀手可能意味着要和其他玩家交换牌。每个地点都有自己的出牌规则，你不能和别人出同样的牌。如果你没法把手里的牌全部出完，就会失去 1 枚<b>大佬标记</b>。失去两枚大佬标记，你就输了。你的团队能活到最后吗？</p>
+  </section>
+
+  <section id="components">
+    <h2 class="sec"><span class="num">2</span>配件</h2>
+
+    <h3>游戏牌 63 张（数字 3-11）</h3>
+    <table class="setup-table">
+      <thead><tr><th>颜色</th><th>数字</th><th>数量</th></tr></thead>
+      <tbody>
+        <tr><td><b>黑（子弹）</b></td><td>3 / 4</td><td>各 2 张</td></tr>
+        <tr><td><b>黑（子弹）</b></td><td>5 / 6</td><td>各 3 张</td></tr>
+        <tr><td><b>黑（子弹）</b></td><td>7 / 8</td><td>各 4 张</td></tr>
+        <tr><td><b>黑（子弹）</b></td><td>9 / 10</td><td>各 5 张</td></tr>
+        <tr><td><b>黑（子弹）</b></td><td>11</td><td>6 张</td></tr>
+        <tr><td><b>红（玫瑰）</b></td><td>3</td><td>1 张</td></tr>
+        <tr><td><b>红（玫瑰）</b></td><td>4 / 5</td><td>各 2 张</td></tr>
+        <tr><td><b>红（玫瑰）</b></td><td>6 / 7</td><td>各 3 张</td></tr>
+        <tr><td><b>红（玫瑰）</b></td><td>8 / 9</td><td>各 4 张</td></tr>
+        <tr><td><b>红（玫瑰）</b></td><td>10 / 11</td><td>各 5 张</td></tr>
+      </tbody>
+    </table>
+
+    <h3>其他配件</h3>
+    <ul>
+      <li>地点板块 × 8</li>
+      <li>快速参考卡 × 5</li>
+      <li>决策板块 × 5（双面：表面<b>车</b> / 背面<b>拳</b>）</li>
+      <li>大佬标记 × 10</li>
+      <li>杀手牌 × 20（5 套，每套含 2 张黑（子弹）和 2 张红（玫瑰））</li>
+      <li>规则书 × 1</li>
+    </ul>
+  </section>
+
+  <section id="setup">
+    <h2 class="sec"><span class="num">3</span>游戏设置</h2>
+    <ol>
+      <li>如图所示，把 8 块地点板块放在桌子中央。每块地点板块旁边都留出空间用来放牌。桌边还要留出空间放置弃牌堆。</li>
+      <li>每位玩家拿取 4 张同类型的杀手牌、2 枚大佬标记、1 块决策板块、1 张快速参考卡。将你的杀手牌<b>面朝下</b>放在自己面前。</li>
+      <li>根据玩家人数决定本局使用的牌数：
+        <ul>
+          <li><b>3-4 人局：</b>使用编号 3-10 的 52 张牌（11 号牌放回盒中）</li>
+          <li><b>5 人局：</b>使用编号 3-11 的全部 63 张牌</li>
+        </ul>
+      </li>
+    </ol>
+    <div class="note">注意：若仍有剩余牌，本轮不使用，将其面朝下放到一旁。</div>
+    <div class="figure">
+      <img src="sumidagawa_Rules_images/page_03.jpg" alt="规则书第 3 页（游戏设置 + 流程图）">
+      <figcaption>游戏设置示意</figcaption>
+    </div>
+  </section>
+
+  <section id="flow">
+    <h2 class="sec"><span class="num">4</span>游戏流程</h2>
+    <p>每局游戏由以下三个阶段按顺序循环组成：</p>
+    <div class="flow-chart">
+      <div class="flow-step"><span class="n">1</span><span><b>手牌准备</b></span></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step"><span class="n">2</span><span><b>地盘争夺</b></span></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step"><span class="n">3</span><span><b>清理</b></span></div>
+    </div>
+    <div class="note">以下是 3-5 人局的标准规则。2 人规则的变化稍后说明。</div>
+  </section>
+
+  <section id="prep">
+    <h2 class="sec"><span class="num">5</span>手牌准备</h2>
+    <h3>a) 发牌</h3>
+    <p>洗牌后按下方数量将牌面朝下发给每位玩家：</p>
+    <table class="setup-table">
+      <thead><tr><th>玩家数</th><th>使用的牌</th><th>手牌数</th><th>剩余牌</th></tr></thead>
+      <tbody>
+        <tr><td>3 人</td><td>3-10</td><td>13 张</td><td>13 张</td></tr>
+        <tr><td>4 人</td><td>3-10</td><td>13 张</td><td>0 张</td></tr>
+        <tr><td>5 人</td><td>3-11</td><td>12 张</td><td>3 张</td></tr>
+      </tbody>
+    </table>
+    <div class="note">玩家不应将自己手牌展示给其他玩家。</div>
+    <div class="note">注意：若仍有剩余牌，本轮不使用，将其面朝下放到一旁。</div>
+  </section>
+
+  <section id="choice">
+    <h2 class="sec"><span class="num">6</span>选择决策板块</h2>
+    <p>每位玩家审视自己发到的牌，同时选择以下两种决策之一：</p>
+    <div class="choice-2">
+      <div class="choice fist">
+        <h4>确认手牌</h4>
+        <p>如果你满意当前手牌。</p>
+        <p><b>→</b> 把决策板块翻到<b>拳</b>面。</p>
+      </div>
+      <div class="choice car">
+        <h4>添加杀手</h4>
+        <p>如果你不满意手牌，希望加杀手。</p>
+        <p><b>→</b> 把决策板块翻到<b>车</b>面。</p>
+      </div>
+    </div>
+    <p>每位玩家选择一面，藏在手中；准备就绪后，<b>同时翻开</b>。</p>
+    <div class="note">没有杀手牌剩余的玩家<b>必须</b>用<b>拳</b>面确认手牌。</div>
+    <div class="note">已确认手牌的玩家将决策板块保持面朝下，本轮不再选择。</div>
+    <div class="figure">
+      <img src="sumidagawa_Rules_images/page_04.jpg" alt="规则书第 4 页（手牌准备步骤）">
+      <figcaption>手牌准备步骤示意</figcaption>
+    </div>
+  </section>
+
+  <section id="check">
+    <h2 class="sec"><span class="num">7</span>检查决策选择</h2>
+
+    <h3>两名及以上选择添加杀手</h3>
+    <p>所有选择添加杀手的玩家<b>同时</b>从各自手牌中选 1 张杀手牌加入手牌。然后这些玩家把各自的<b>全部手牌</b>顺时针传递给下一位选择添加杀手的玩家。之后回到 §6 b)，仅<b>尚未确认手牌</b>的玩家可继续选择决策面。</p>
+
+    <h3>仅一名选择添加杀手</h3>
+    <p>该玩家可将自己拥有的任意张数的杀手牌加入手牌。然后进入 §8 地盘争夺。</p>
+
+    <h3>无人选择添加杀手</h3>
+    <p>直接进入 §8 地盘争夺。</p>
+
+    <h3>杀手牌的加入方式</h3>
+    <p>杀手牌以<b>面朝上</b>的方式加入手牌（详见 §11）。</p>
+
+    <div class="ex">
+      <p><span class="label">【示例】</span>Noah 的决策板块面朝上，Emma 同样面朝上，Lucas 面朝下，Sofia 面朝上。Lucas 把他的决策板块保持面朝下，等待其他玩家完成添加。Noah、Emma 和 Sofia 同时从自己的杀手牌中各选 1 张加入手牌：Noah 选了红杀手，Emma 选了红杀手，Sofia 选了黑杀手。同时，Noah 把他的全部手牌（含刚加的杀手）传给 Emma，Emma 把她的全部手牌传给 Sofia，Sofia 把她的全部手牌传给 Noah。</p>
+      <p>然后 Noah、Emma、Sofia 再次<b>同时</b>隐藏并翻开决策板块。Noah 的面朝上，Emma 和 Sofia 的面朝下。Noah 可把任意张杀手牌加入手牌（图中他加了 1 张黑 + 1 张红）。</p>
+    </div>
+    <div class="figure">
+      <img src="sumidagawa_Rules_images/page_05.jpg" alt="规则书第 5 页（决策选择 + 示例图）">
+      <figcaption>决策选择示例</figcaption>
+    </div>
+  </section>
+
+  <section id="war">
+    <h2 class="sec"><span class="num">8</span>地盘争夺</h2>
+    <p>任何手中有<b>红 3</b>的玩家必须将其翻开并立即收回手牌。该玩家成为本局<b>起始玩家</b>。</p>
+    <div class="note">起始玩家<b>第一回合</b>不一定必须出红 3。</div>
+    <div class="note">3 人或 5 人局中，可能无人有红 3。这种情况下，手中<b>大佬标记最少</b>的玩家成为起始玩家；若仍并列，用任意方式随机决定。</div>
+    <p>起始玩家先出牌，之后玩家按<b>顺时针</b>轮流行动，选择<b>出牌</b>或<b>跳过</b>。直到除 1 人外的所有玩家都选择跳过，这一轮出牌即结束，称为一轮<b>地盘争夺</b>。</p>
+    <p>地盘争夺持续进行，直到除 1 人外的所有玩家都把手牌出完。</p>
+    <p><b>出牌方式：</b>选择一块<b>空置</b>的地点板块，把牌出在该板块旁边。地点板块决定可出的牌的颜色和组合规则。</p>
+  </section>
+
+  <section id="locations">
+    <h2 class="sec"><span class="num">9</span>地点板块</h2>
+    <p>每块地点板块有自己的颜色和出牌规则，必须按规则出牌。部分地点板块还有特殊效果。</p>
+
+    <div class="loc-grid">
+      <div class="loc-card b">1 张黑牌<br><span class="rule">单张黑牌</span></div>
+      <div class="loc-card r">1 张红牌<br><span class="rule">单张红牌</span></div>
+      <div class="loc-card r">2 张红牌（连续）<br><span class="rule">连号</span></div>
+      <div class="loc-card b">2 张黑牌（相同数字）<br><span class="rule">相同数字</span></div>
+      <div class="loc-card b">3 张黑牌（连续）<br><span class="rule">连号；可 2 黑 + 1 红替代</span></div>
+      <div class="loc-card r">3 张红牌（连续）<br><span class="rule">连号；可 2 红 + 1 黑替代</span></div>
+      <div class="loc-card r">4 张红牌（连续）<br><span class="rule">连号</span></div>
+      <div class="loc-card b">4 张黑牌（相同数字）<br><span class="rule">相同数字</span></div>
+    </div>
+
+    <div class="figure">
+      <img src="sumidagawa_Rules_images/page_07.jpg" alt="规则书第 7 页（地点板块规则图）">
+      <figcaption>地点板块规则与卡牌组合</figcaption>
+    </div>
+  </section>
+
+  <section id="strength">
+    <h2 class="sec"><span class="num">10</span>卡牌强度声明</h2>
+    <p>出牌时声明牌力数字。声明的数字是你所出牌中<b>最小的数字</b>。</p>
+    <div class="ex">
+      <p><span class="label">【示例】</span>Emma 决定出 3 张连续的黑牌：4、5、6。她把牌出在地点板块旁边时声明数字 <b>4</b>。</p>
+    </div>
+    <div class="note">在地点板块旁出 4 张牌<b>不一定</b>比出 1 张牌更强。别忘了，你能出的牌由声明的牌力数字决定！</div>
+    <p>回合结束时，若你手牌中还有 ≥ 2 张牌，可弃掉手中任意 1 张牌。</p>
+    <p>你也可以<b>结束当前地盘争夺</b>，弃掉所有地点板块旁的牌。这样，最后出牌到这个地点的玩家成为新起始玩家，并开始新一轮地盘争夺。</p>
+    <div class="figure">
+      <img src="sumidagawa_Rules_images/page_08.jpg" alt="规则书第 8 页（玩家回合 + 杀手牌）">
+      <figcaption>玩家回合与杀手牌规则</figcaption>
+    </div>
+  </section>
+
+  <section id="hitman">
+    <h2 class="sec"><span class="num">11</span>杀手牌</h2>
+    <p>杀手牌是<b>万能牌</b>，可视为该颜色的任意数字。若与其他牌一起出，玩家声明其他牌中<b>最小数字</b>。若杀手牌<b>单独出</b>，声明的数字等于<b>上一玩家声明的数字</b>。若杀手牌作为本轮<b>第一张牌</b>单独出且之前无声明，声明数字为 <b>3</b>。</p>
+    <div class="ex">
+      <p><span class="label">【示例 1】</span>上家声明 8。Noah 在"1 张黑牌"地点旁出了一张黑杀手牌。Noah 声明数字 <b>8</b>。</p>
+      <p><span class="label">【示例 2】</span>一名玩家在"3 张黑牌（连续）"地点旁出了黑 10、黑 11、黑杀手。声明数字为 <b>10</b>。</p>
+      <p><span class="label">【示例 3】</span>一名玩家在地盘争夺首轮出了 2 张红杀手牌。这两张牌被视为红 3 和红 4，声明数字为 <b>3</b>。</p>
+    </div>
+    <div class="note">即使你出了最高的 10（5 人局为 11），其他玩家也未必会跳过。别忘了，其他玩家可以声明与你相同的数字！不要松懈……</div>
+  </section>
+
+  <section id="pass">
+    <h2 class="sec"><span class="num">12</span>跳过</h2>
+    <p>起始玩家在<b>第一回合</b>不能选择跳过。</p>
+    <p>玩家若无法或不想出牌，可选择跳过。一旦跳过，本轮内不再行动，直到除 1 人外的所有玩家都跳过。</p>
+    <p>当除 1 人外的所有玩家都跳过后，弃掉所有地点板块旁的牌。最后出牌的玩家成为新起始玩家，出牌到任意地点板块旁，开始新一轮地盘争夺。若最后出牌的玩家已出完手牌，则按顺时针方向下一位仍有手牌的玩家成为起始玩家。</p>
+  </section>
+
+  <section id="cleanup">
+    <h2 class="sec"><span class="num">13</span>清理</h2>
+    <p>当除 1 人外的所有玩家都出完手牌时，当前地盘争夺立即结束。未出完手牌的玩家将 1 枚<b>大佬标记</b>放回盒中。</p>
+    <p>然后检查每位玩家剩余的大佬标记。若有人标记为 0，进入 §14 游戏结束。</p>
+    <p>否则，每位玩家弃掉手中的剩余牌和地点板块旁的全部牌到<b>弃牌堆</b>。将弃牌堆中的<b>杀手牌</b>全部放回盒中（本局不再使用）。</p>
+    <p>之后把弃牌堆和（若有）剩余的牌混在一起，回到 §5 手牌准备，开始新一局。若你面前还有面朝下的杀手牌，保留原样。</p>
+  </section>
+
+  <section id="end">
+    <h2 class="sec"><span class="num">14</span>游戏结束</h2>
+    <p>没有大佬标记剩余的玩家<b>输掉</b>游戏。所有剩余玩家<b>获胜</b>。</p>
+    <div class="score-card">
+      <p>城市的城市的和平终于回来了。但没人知道这份和平能维持多久……</p>
+    </div>
+  </section>
+
+  <section id="two" class="two">
+    <h2 class="sec"><span class="num">15</span>2 人规则</h2>
+    <p>3-5 人局的标准规则保持不变，仅做如下调整：</p>
+
+    <h3>游戏设置</h3>
+    <ul>
+      <li>使用编号 3-10 的 52 张牌。</li>
+      <li>此时<b>不发</b>杀手牌。</li>
+    </ul>
+
+    <h3>手牌准备</h3>
+    <ol>
+      <li>每位玩家在面前面朝下放 1 张黑色和 1 张红色任意类型的杀手牌。洗牌后给每位玩家发<b>两套</b>各 13 张的牌。</li>
+      <li>每位玩家选其中一套，看牌面。然后同时，每人从刚看过的那套里选 1 张杀手牌加入这套。将剩下的杀手牌加到面朝下的那套。</li>
+      <li>每位玩家同时从自己两套中选一套交给对手。收到的套现在属于对方玩家。</li>
+      <div class="note">此时不要看任何牌面（包括对手给的新牌或你未看的那套）。</div>
+      <li>每位玩家同时从自己的两套中选一套成为<b>手牌</b>。</li>
+    </ol>
+    <p>手中有<b>红 3</b>的玩家成为起始玩家。若都无红 3，手中<b>大佬标记最少</b>的玩家成为起始玩家；并列则随机。</p>
+    <div class="note">有红 3 的玩家不会因为该红 3 在未选的那套中而自动成为起始玩家。</div>
+
+    <h3>地盘争夺</h3>
+    <p>如果牌用完了，立即拿起另一套牌继续。你只有在两套都出完时才算真正用完。</p>
+
+    <h3>清理</h3>
+    <p>若任一玩家已出完两套的全部牌，当前轮立即结束。仍有剩余牌的玩家将 1 枚大佬标记放回盒中。弃牌堆中的杀手牌<b>不放回</b>盒中，而是放回玩家手中，进入下一轮手牌准备。</p>
+    <div class="figure">
+      <img src="sumidagawa_Rules_images/page_11.jpg" alt="规则书第 11 页（2 人规则示意）">
+      <figcaption>2 人规则示意</figcaption>
+    </div>
+  </section>
+
+  <section id="short">
+    <h2 class="sec"><span class="num">16</span>短游戏</h2>
+    <p>在标准规则基础上做如下调整：</p>
+
+    <h3>游戏设置</h3>
+    <ul>
+      <li>每位玩家拿 1 张黑色和 1 张红色任意类型的杀手牌、1 张快速参考卡。将 2 张杀手牌面朝下放在每位玩家面前。</li>
+    </ul>
+
+    <h3>手牌准备</h3>
+    <p>每位玩家审视自己发到的牌，然后所有玩家<b>同时</b>选 1 张杀手牌加入手牌。</p>
+    <p>然后进入地盘争夺阶段。</p>
+    <div class="note">此变体中<b>不进行</b>牌的交换。</div>
+
+    <h3>游戏结束</h3>
+    <p>当除 1 人外的所有玩家都出完手牌时，游戏立即结束。<b>最先</b>出完手牌的玩家获第一名，<b>其次</b>第二名，依此类推。</p>
+  </section>
+
+  <section id="credits">
+    <h2 class="sec"><span class="num">17</span>制作信息</h2>
+    <div class="two-col">
+      <div>
+        <p><b>设计：</b>Masikamaru</p>
+        <p><b>插画：</b>Tomohiro Tsugawa</p>
+        <p><b>校对：</b>Yoshihiko Koriyama（为 Games）</p>
+        <p><b>桌面出版：</b>Sai Beppu、Hakkutsu</p>
+      </div>
+      <div>
+        <p><b>英文规则：</b>Daryl Chow</p>
+        <p><b>编辑：</b>Kota Taira</p>
+        <p><b>出版：</b>SUNNY BIRD Co., Ltd.</p>
+        <p>1315-1 Mikawa-cho, Nagasaki City, Nagasaki Prefecture, 852-8121</p>
+        <p>info@sunny-bird.com</p>
+        <p>https://sunny-bird.com/</p>
+      </div>
+    </div>
+    <div class="figure">
+      <img src="sumidagawa_Rules_images/page_12.jpg" alt="规则书第 12 页（短游戏变体 + 制作信息）">
+      <figcaption>短游戏变体 + 制作信息</figcaption>
+    </div>
+  </section>
+
+</div>
+
+<div class="credits">
+  <h3>隅田川之争 / Sumidagawa · 中文本地化版本</h3>
+  <p>翻译规则严格遵循"专名 vs 普通术语"桌游本地化准则：人名 / 地名 / 公司名保留英文；其他专名（卡牌名 / 能力名 / 大佬 名 / 章节标题 / 制作标签 / 普通术语）全部译为中文。</p>
+  <p>保留英文的专名：SUNNY BIRD Co., Ltd.、Nagasaki City、Nagasaki Prefecture、Mikawa-cho、Masikamaru、Tomohiro Tsugawa、Yoshihiko Koriyama、Daryl Chow、Kota Taira、Sai Beppu、Hakkutsu。</p>
+</div>
+
+</body>
+</html>

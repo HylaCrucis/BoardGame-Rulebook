@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Big 2（锄大弟）— 游戏规则</title>
+<style>
+  :root{
+    /* 中国风：中国红 + 墨黑 + 牌面粉 */
+    --bg:#f5e9c5; --bg2:#e8d9a8; --ink:#1c1c1c; --ink-soft:#4a4a4a;
+    --red:#c8362a; --red-d:#8a2018; --red-l:#dc6655;
+    --ink-black:#1c1c1c; --ink-black-d:#0a0a0a;
+    --ivory:#fdf6e3; --line:#c4b890; --card:#fffae6;
+    --shadow:rgba(26,26,26,.18);
+    --jade-green:#3a8a3a; --yellow-gold:#d99a4d;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"Songti SC","Noto Serif SC","Source Han Serif SC",STSong,
+                "Iowan Old Style","Palatino Linotype",Georgia,serif;
+    line-height:1.85; font-size:16px;
+  }
+  .wrap{display:flex; align-items:flex-start; max-width:1180px; margin:0 auto;}
+  nav{
+    position:sticky; top:0; align-self:flex-start;
+    width:248px; flex:0 0 248px; height:100vh; overflow-y:auto;
+    background:linear-gradient(180deg,var(--ink-black-d),var(--ink-black));
+    color:var(--ivory); padding:22px 16px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;
+  }
+  nav h2{font-size:13px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--red-l); margin:0 0 12px;}
+  nav ol{list-style:none; margin:0; padding:0;}
+  nav a{display:block; color:var(--ivory); text-decoration:none; font-size:14px;
+    padding:7px 10px; border-radius:7px;}
+  nav a:hover{background:var(--red); color:var(--ivory);}
+  main{flex:1 1 auto; min-width:0; padding:0 40px 80px;}
+  .cover{
+    background:linear-gradient(160deg,var(--ink-black),var(--red-d) 50%,var(--red));
+    color:var(--ivory); padding:62px 40px; border-radius:0 0 18px 18px;
+    margin-bottom:36px; text-align:center;
+    box-shadow:0 10px 30px var(--shadow);
+  }
+  .cover h1{font-size:48px; margin:0 0 6px; letter-spacing:.06em;
+    font-family:"Iowan Old Style","Palatino Linotype",Georgia,serif;
+    color:var(--ivory); text-shadow:2px 2px 0 var(--ink-black);}
+  .cover .sub{font-size:17px; opacity:.95;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .cover .tag{display:inline-block; margin-top:16px; padding:6px 16px;
+    border:1px solid rgba(255,255,255,.45); border-radius:20px; font-size:14px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  section{padding:14px 0 8px; border-bottom:1px solid var(--line); scroll-margin-top:18px;}
+  h2.sec{font-size:26px; color:var(--ink-black); margin:18px 0 6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  h2.sec .num{color:var(--red); font-weight:700; margin-right:10px;}
+  h3{font-size:18px; color:var(--ink-black); margin:22px 0 6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  p{margin:10px 0;}
+  ul,ol{margin:10px 0 10px 4px; padding-left:22px;}
+  li{margin:5px 0;}
+  .lead{font-size:17px;}
+  .comp-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:16px 0;}
+  .comp{border:1px solid var(--line); background:var(--card); border-radius:12px;
+    padding:14px 16px; box-shadow:0 2px 6px var(--shadow);}
+  .comp b{color:var(--red-d);}
+  ol.setup{counter-reset:setup; list-style:none; padding-left:0;}
+  ol.setup > li{position:relative; padding:8px 8px 8px 56px; margin:6px 0;
+    background:var(--card); border:1px solid var(--line); border-radius:8px;}
+  ol.setup > li::before{counter-increment:setup; content:counter(setup);
+    position:absolute; left:10px; top:8px;
+    width:30px; height:30px; background:var(--red); color:#fff;
+    border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-weight:700; font-family:Arial,sans-serif;}
+  .rank-flow{display:grid; grid-template-columns:1fr; gap:8px; margin:14px 0;
+    padding:14px 16px; background:var(--card); border:1px solid var(--line);
+    border-radius:10px; font-family:Arial,sans-serif; font-size:15px;
+    text-align:center; letter-spacing:.05em;}
+  .rank-flow b{color:var(--red);}
+  .suit-rank{display:grid; grid-template-columns:repeat(4, 1fr); gap:8px;
+    margin:14px 0; font-family:Arial,sans-serif;}
+  .suit-rank .s{display:block; padding:10px; border:2px solid var(--line); border-radius:8px;
+    background:var(--card); text-align:center; font-size:16px; font-weight:700;}
+  .suit-rank .s .lvl{font-size:11px; color:var(--ink-soft); display:block; margin-top:4px;}
+  .suit-rank .s.g{color:var(--jade-green); border-color:var(--jade-green);}
+  .suit-rank .s.y{color:var(--yellow-gold); border-color:var(--yellow-gold);}
+  .suit-rank .s.r{color:var(--red); border-color:var(--red);}
+  .suit-rank .s.p{color:var(--purple); border-color:var(--purple);}
+  .combo-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:14px 0;}
+  .combo{border:1px solid var(--line); border-radius:10px;
+    padding:10px 14px; background:var(--card);}
+  .combo b{color:var(--red-d);}
+  .combo .cn{display:inline-block; padding:2px 10px; background:var(--ink-black);
+    color:var(--ivory); border-radius:6px; font-weight:700;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; font-size:13px;
+    margin-right:8px;}
+  .five-strength{display:flex; justify-content:space-between; align-items:center;
+    margin:14px 0; padding:12px 14px; background:var(--card); border:1px solid var(--line);
+    border-radius:10px; font-family:Arial,sans-serif; font-size:14px; flex-wrap:wrap;}
+  .five-strength .lvl{padding:6px 12px; border-radius:8px; background:var(--bg2);
+    font-weight:700; color:var(--ink-black);}
+  .five-strength .lvl b{color:var(--red);}
+  .bubble{border:1px dashed var(--red); padding:14px 18px; border-radius:10px;
+    margin:14px 0; background:var(--card);}
+  .bubble b{color:var(--red-d);}
+  .score-table{width:100%; border-collapse:collapse; margin:14px 0;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; font-size:14px;}
+  .score-table th, .score-table td{border:1px solid var(--line); padding:8px 12px;
+    text-align:center;}
+  .score-table th{background:var(--red); color:#fff; font-weight:700;}
+  .score-table tr:nth-child(even) td{background:var(--bg2);}
+  .expert-stage{border:2px solid var(--ink-black); border-radius:12px;
+    padding:14px 18px; margin:14px 0; background:var(--card);}
+  .expert-stage h3{margin-top:0; color:var(--red);}
+  .expert-stage .stage-num{display:inline-block; padding:2px 10px;
+    background:var(--ink-black); color:var(--ivory); border-radius:6px;
+    font-weight:700; font-family:Arial,sans-serif; font-size:13px; margin-right:6px;}
+  .important{border:2px dashed var(--red); padding:12px 18px; border-radius:10px;
+    margin:14px 0; background:var(--card);}
+  .important b{color:var(--red-d);}
+  .note{border-left:3px solid var(--red); padding:8px 14px; background:var(--bg2);
+    border-radius:0 8px 8px 0; margin:14px 0;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; font-size:14px;}
+  figure{margin:18px 0; text-align:center;}
+  figure img{max-width:100%; border:1px solid var(--line); border-radius:12px;
+    box-shadow:0 4px 14px var(--shadow); background:#fff;}
+  figcaption{font-size:13px; color:var(--ink-soft); margin-top:6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .credits{background:var(--bg2); border:1px solid var(--line); border-radius:12px;
+    padding:16px 20px; margin-top:14px; font-size:15px;}
+  .credits b{color:var(--red-d);}
+  footer{margin-top:40px; font-size:13px; color:var(--ink-soft);
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; text-align:center;}
+  @media(max-width:900px){
+    .wrap{flex-direction:column;}
+    nav{position:static; width:100%; height:auto; flex-basis:auto;}
+    main{padding:0 18px 60px;}
+    .comp-grid,.combo-grid,.suit-rank{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <h1>BIG 2</h1>
+  <div class="sub">锄大弟 · 游戏规则（中文版 / 繁体版转简体）</div>
+  <div class="tag">4 人 &nbsp;|&nbsp; 3 人可玩 &nbsp;|&nbsp; 视牌局而定</div>
+</header>
+
+<div class="wrap">
+  <nav>
+    <h2>目录</h2>
+    <ol>
+      <li><a href="#intro">简介</a></li>
+      <li><a href="#components">配件</a></li>
+      <li><a href="#setup">准备</a></li>
+      <li><a href="#rank">卡牌强弱</a></li>
+      <li><a href="#objective">游戏目标</a></li>
+      <li><a href="#play">游戏进行</a></li>
+      <li><a href="#combos">卡牌组合</a></li>
+      <li><a href="#five">5 张组合详解</a></li>
+      <li><a href="#scoring">计分</a></li>
+      <li><a href="#end">游戏结束</a></li>
+      <li><a href="#expert">专家规则</a></li>
+      <li><a href="#team">团战规则</a></li>
+      <li><a href="#credits">制作信息</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+  <section id="intro">
+    <h2 class="sec"><span class="num">1</span>简介</h2>
+    <p class="lead">BIG 2 是起始于东亚的传统<b>升级类</b>的卡牌游戏，<b>顾名思义</b>，数字 <b>2</b> 被视为最强的卡牌。请使出比前一位<b>更强大</b>的组合，并成为<b>最先出光</b>手中牌的玩家！否则剩下的牌将会变成<b>扣分</b>。</p>
+  </section>
+
+  <section id="components">
+    <h2 class="sec"><span class="num">2</span>配件</h2>
+    <div class="comp-grid">
+      <div class="comp"><b>基本卡 52 张</b><br>2&ndash;10、J、Q、K、A 各 4 种花色</div>
+      <div class="comp"><b>龙卡 2 张</b><br>彩色、黑白各 1 张（专家规则使用）</div>
+      <div class="comp"><b>参考卡 4 张</b><br>每位玩家 1 张</div>
+      <div class="comp" style="grid-column:1/-1;"><b>追加卡 3 张</b><br>专家规则使用</div>
+    </div>
+  </section>
+
+  <section id="setup">
+    <h2 class="sec"><span class="num">3</span>准备</h2>
+    <ol class="setup">
+      <li>玩家们各取 <b>1 张参考卡</b>。</li>
+      <li>将<b>基本卡 52 张</b>洗牌后，根据玩家数，依照下列规则发牌：
+        <ul>
+          <li><b>3 人：</b>每人 17 张</li>
+          <li><b>4 人：</b>每人 13 张</li>
+        </ul>
+      </li>
+      <li>若发牌后还有剩余的卡牌，将其面朝下放置一旁。<b>龙卡</b>和<b>追加卡</b>在基本规则中不使用。</li>
+      <li>将取得的卡牌握在手中，不要让对手看到。</li>
+    </ol>
+    <p class="note">现在就可以开始游戏了！</p>
+  </section>
+
+  <section id="rank">
+    <h2 class="sec"><span class="num">4</span>卡牌强弱</h2>
+    <p>在 BIG 2 中使用的卡牌，彼此存在着可以相互比较的强弱。基本上根据卡牌的字母决定，其强弱顺序如下：</p>
+    <div class="rank-flow">
+（弱）&nbsp; <b>3</b> &lt; <b>4</b> &lt; <b>5</b> &lt; <b>6</b> &lt; <b>7</b> &lt; <b>8</b> &lt; <b>9</b> &lt; <b>10</b> &lt; <b>J</b> &lt; <b>Q</b> &lt; <b>K</b> &lt; <b>A</b> &lt; <b>2</b> &nbsp;（强）
+    </div>
+    <p>如果字母相同，则以花色判别强弱，顺序如下：</p>
+    <div class="suit-rank">
+      <span class="s g">绿<span class="lvl">弱</span></span>
+      <span class="s y">黄<span class="lvl">&nbsp;</span></span>
+      <span class="s r">红<span class="lvl">&nbsp;</span></span>
+      <span class="s p">紫<span class="lvl">强</span></span>
+    </div>
+    <p>由此可知，<b>最强卡牌为「紫 2」</b>，<b>最弱卡牌为「绿 3」</b>。</p>
+  </section>
+
+  <section id="objective">
+    <h2 class="sec"><span class="num">5</span>游戏目标</h2>
+    <p class="lead">BIG 2 进行多轮比赛，玩家于每一局<b>获得或损失</b>积分。<b>出光手中卡牌</b>的玩家获得分数，其余玩家则会<b>损失分数</b>。要赢，则需要得到<b>最多分数</b>！</p>
+  </section>
+
+  <section id="play">
+    <h2 class="sec"><span class="num">6</span>游戏进行</h2>
+    <p>手中有<b>最弱卡牌</b>（一般而言是绿 3）的玩家，将含有该卡牌的<b>组合</b>面朝上打到牌桌中央，开启新的一局。出牌顺序以<b>逆时针方向</b>进行。</p>
+    <p>下一顺位玩家须打出<b>更强的相同张数</b>的组合。若是无法或不想出牌时可以喊 <b>跳过</b> 跳过。（卡牌组合说明请参阅 §7）</p>
+    <p>以相同的方式逆时针方向重复进行。喊 跳过 跳过的玩家也可以于下一轮出牌。当一玩家出牌后，其余玩家连续喊出 跳过 时，则<b>此回合游戏结束</b>。当一回合结束时，将出过的卡牌另外放置一旁。</p>
+    <p>最后出牌的玩家打出新的组合，<b>开始新的一回合</b>！</p>
+    <div class="important">
+      <b>游戏进行中：</b>不可以隐瞒手中剩余的卡牌数。无论何时都可以询问其他玩家手中的剩余牌数！
+    </div>
+
+    <h3>完整回合示例（对子回合）</h3>
+    <p>起手时东雨手牌中最弱的是绿色 3，因此他用绿色 3 开启新一局。</p>
+    <ul>
+      <li><b>东雨：</b>打出绿色 3 + 黄色 3，组成「3 对子」</li>
+      <li><b>完真：</b>打出红色 4 + 黄色 4，组成「4 对子」</li>
+      <li><b>芝妍：</b>打出紫色 4 + 绿色 4，组成更强的「4 对子」</li>
+      <li><b>真熙：</b>虽想出 K 对子，但为等待更好机会，喊 <b>跳过</b></li>
+      <li>芝妍、东雨、真熙此后都跳过 → <b>本回合结束</b>。用过的牌放一旁，由完真重新出牌，开始新一回合。</li>
+    </ul>
+
+    <h3>完整回合示例（5 张回合）</h3>
+    <p>新一回合由完真用顺子开始：</p>
+    <ul>
+      <li><b>完真：</b>打出顺子 <b>4-5-6-7-8</b></li>
+      <li><b>芝妍：</b>打出更强的顺子 <b>10-J-Q-K-A</b></li>
+      <li><b>真熙：</b>虽无更强顺子，但有比顺子强的同花，打出 <b>黄色 3-5-8-J-A</b></li>
+      <li><b>东雨：</b>打出更强的葫芦 <b>3-3-3-9-9</b></li>
+      <li>完真、芝妍、真熙此后都跳过 → <b>本回合结束</b>。用过的牌放一旁，由东雨开始新一回合。</li>
+    </ul>
+    <p>若有玩家出完手中最后一张牌，则<b>该玩家即为本局获胜者</b>，本回合立即结束，进入计分。</p>
+  </section>
+
+  <section id="combos">
+    <h2 class="sec"><span class="num">7</span>卡牌组合</h2>
+    <p>在 BIG 2 中出牌时，可以使用 <b>1 张、2 张、3 张或 5 张</b>的组合，称之为「<b>卡牌组合</b>」。组合种类如下：</p>
+    <div class="combo-grid">
+      <div class="combo"><span class="cn">单张</span><b>任 1 张卡牌</b></div>
+      <div class="combo"><span class="cn">对子</span><b>同字母的卡牌 2 张</b></div>
+      <div class="combo"><span class="cn">三条</span><b>同字母的卡牌 3 张</b></div>
+      <div class="combo"><span class="cn">顺子</span><b>连续字母卡牌 5 张</b></div>
+      <div class="combo"><span class="cn">同花</span><b>同色卡牌 5 张</b></div>
+      <div class="combo"><span class="cn">葫芦</span><b>葫芦：一对 + 三条</b></div>
+      <div class="combo"><span class="cn">四条+单张</span><b>同字母的卡牌 4 张 + 任 1 单张</b></div>
+      <div class="combo"><span class="cn">同花顺</span><b>同花色连续字母之卡牌 5 张</b></div>
+    </div>
+    <p>玩家们使用<b>张数相同</b>的组合，<b>比较组合的强弱</b>。此时，比较组合中<b>最强卡牌的字母</b>；若字母相同，则比较第二顺位、第三顺位的字母；若所有的字母都相同时，则比较<b>卡牌的颜色</b>。</p>
+    <div class="bubble">
+      <b>示例：</b>紫色 K 与绿色 K 对子，以及红色 K 与黄色 K 对子，字母相同，则<b>持有紫色 K</b> 的一方为较强的对子。
+    </div>
+
+    <h3>5 张组合的强弱</h3>
+    <p>5 张卡牌的使用组合有下列 5 种方式，<b>越往下的组合越强</b>：</p>
+    <div class="five-strength">
+      <span class="lvl">顺子</span> &lt; <span class="lvl">同花</span> &lt; <span class="lvl">葫芦</span> &lt; <span class="lvl"><b>四条+单张</b></span> &lt; <span class="lvl"><b>同花顺</b></span>
+    </div>
+  </section>
+
+  <section id="five">
+    <h2 class="sec"><span class="num">8</span>5 张组合详解</h2>
+
+    <h3>顺子</h3>
+    <div class="bubble">
+      <b>示例：</b>2-3-4-5-6、8-9-10-J-Q、10-J-Q-K-A<br>
+      字母顺序：A-2-3-…-9-10-J-Q-K-A
+    </div>
+    <div class="important">
+      字母 <b>A</b> 可以当成顺子中的<b>开始或结束</b>。<br>
+      因此含 A 的顺子只有 <b>A-2-3-4-5</b> 和 <b>10-J-Q-K-A</b> 两种。
+    </div>
+    <p>顺子是比较最强的字母，因此：</p>
+    <ul>
+      <li><b>最强顺子：</b>包含最强 <b>2</b> 和次强 <b>A</b> 的 <b>A-2-3-4-5</b></li>
+      <li><b>第二强：</b><b>2-3-4-5-6</b></li>
+      <li><b>第三强：</b><b>10-J-Q-K-A</b></li>
+      <li><b>最弱：</b><b>3-4-5-6-7</b></li>
+    </ul>
+    <p>若字母皆相同，取卡牌颜色强者胜。</p>
+
+    <h3>同花</h3>
+    <div class="bubble">
+      <b>示例：</b>2-5-J-Q-A（绿色）、4-6-8-9-10（红色）<br>
+      同花由最强字母依序比较；若字母皆相同，取卡牌颜色强者胜。
+    </div>
+
+    <h3>葫芦</h3>
+    <div class="bubble">
+      <b>示例：</b>3-3-3-4-4、K-K-K-2-2<br>
+      葫芦中，比较构成<b>三条</b>的字母；若字母皆相同，取卡牌颜色强者胜。<br>
+      例：比较 K-K-K-5-5 与 7-7-7-2-2 时，<b>K-K-K-5-5</b> 为较强一方。
+    </div>
+
+    <h3>四条 + 单张</h3>
+    <div class="bubble">
+      <b>示例：</b>6-6-6-6-K、A-A-A-A-Q<br>
+      比较时<b>只比较构成四条</b>的字母（相同字母 4 张）。
+    </div>
+
+    <h3>同花顺</h3>
+    <div class="bubble">
+      <b>示例：</b>A-2-3-4-5（红色）、9-10-J-Q-K（黄色）<br>
+      比较方式与比较顺子相同。因此最强同花顺组合为<b>紫色 A-2-3-4-5</b>。
+    </div>
+  </section>
+
+  <section id="scoring">
+    <h2 class="sec"><span class="num">9</span>计分</h2>
+    <p>若有玩家出完手中最后一张牌，则该玩家即为<b>本局的获胜者</b>。立即结束回合，开始进行<b>积分计算</b>。</p>
+    <p>其余玩家将手中剩余的牌，<b>根据下列方式计算扣分</b>。各玩家损失的分将成为获胜者的积分。</p>
+
+    <table class="score-table">
+      <thead>
+        <tr>
+          <th>4 人局剩余牌数</th>
+          <th>3 人局剩余牌数</th>
+          <th>扣分</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1 ~ 8 张</td><td>1 ~ 11 张</td><td>剩余牌数</td></tr>
+        <tr><td>9 ~ 12 张</td><td>12 ~ 16 张</td><td>剩余牌数 × 2</td></tr>
+        <tr><td>13 张</td><td>17 张</td><td>剩余牌数 × 3</td></tr>
+      </tbody>
+    </table>
+
+    <div class="bubble">
+      <b>【计分示例】</b><br>
+      牌局中，芝妍打出手中最后一张牌结束了这局。除了获胜者芝妍之外的其余玩家，根据手中的剩余牌数计算扣分：东雨剩 3 张，完真剩 10 张，真熙剩 13 张。因此可计算出：东雨扣 <b>3 分</b>、完真扣 <b>10 分</b>、真熙扣 <b>39 分</b>（13 × 3）。芝妍则可获得这些分数共 <b>62 分</b>。
+    </div>
+
+    <p>计分完成后，将所有基本卡重新洗牌，开始新一轮。</p>
+  </section>
+
+  <section id="end">
+    <h2 class="sec"><span class="num">10</span>游戏结束</h2>
+    <p>当任一玩家的积分<b>低于 -100 分</b>时，游戏即结束。得分最多的玩家获胜。</p>
+    <div class="note">
+      <b>专家规则：</b>使用专家规则时，因分数变动较大，建议您将游戏结束分数设定为 <b>-200 分</b>。
+    </div>
+  </section>
+
+  <section id="expert">
+    <h2 class="sec"><span class="num">11</span>专家规则</h2>
+    <p>BIG 2 有许多变形规则。如果您已经完全熟悉基本规则，推荐您适用下列各等级的专家规则进行游玩！</p>
+
+    <div class="expert-stage">
+      <h3><span class="stage-num">1 阶段</span>强大却危险的 2</h3>
+      <p>基本规则中的计分规则变动如下：</p>
+      <ul>
+        <li><b>华丽的结束：</b>万一获胜者最后一张牌为「<b>单张 2</b>」时，剩余玩家的扣分以 <b>2 倍</b> 计算。</li>
+        <li><b>过度忍耐：</b>剩余玩家手中有「<b>2</b>」的卡牌时，该玩家的扣分以 <b>2 倍</b> 计算。即使手上有多张「2」卡牌，还是只以 2 倍计算。</li>
+      </ul>
+      <p>上述 2 个规则可以<b>叠加</b>使用。</p>
+      <div class="bubble">
+        <b>【华丽结束 + 过度忍耐 示例】</b><br>
+        完真打出手中最后的「单张 2」卡牌，以「华丽的结束」结束本局。剩余玩家牌数为：东雨 5 张、真熙 9 张、芝妍 13 张。其中真熙的 9 张之中包含 2 张 2 号卡牌，视为「过度忍耐」。因此东雨扣 <b>10 分</b>、真熙扣 <b>72 分</b>、芝妍扣 <b>78 分</b>，完真总共可得 <b>160 分</b>。
+      </div>
+    </div>
+
+    <div class="expert-stage">
+      <h3><span class="stage-num">2 阶段</span>龙</h3>
+      <p>将 <b>2 张龙卡</b>加入游戏中。</p>
+      <ul>
+        <li>龙卡在<b>单张组合</b>中视为<b>最强卡牌</b>。<b>彩色龙</b>比<b>黑白龙</b> 强大。</li>
+        <li>在 <b>2 张以上</b>的组合中使用龙卡时，可将其视为<b>想要的任何颜色或字母</b>。使用龙卡时，偶尔会出现 2 组相同字母的三条，此时比较除了龙卡之外的 2 张卡牌的颜色。</li>
+      </ul>
+      <p>龙卡在计算分数时，与「2」卡牌同样适用「华丽的结束」与「过度忍耐」规则。因此，若获胜者打出的最后一张为「<b>单张龙卡</b>」时，则其余玩家的扣分都要乘以 2 计算；此外，手中握有龙卡的玩家，扣分也要乘以 2 计算。</p>
+    </div>
+
+    <div class="expert-stage">
+      <h3><span class="stage-num">3 阶段</span>炸弹</h3>
+      <p>组合中的「<b>四条+单张</b>」与「<b>同花顺</b>」被视为<b>炸弹组合</b>。</p>
+      <ul>
+        <li>出手炸弹组合时，即使上一家不是出 5 张组合也可以。也就是说，单张、对子、三条的回合中也可以打出炸弹组合。</li>
+        <li>只有打出<b>更强大的炸弹组合</b>才能获胜。</li>
+      </ul>
+      <p>计算炸弹组合的分数时，与「2」卡牌同样适用「华丽的结束」与「过度忍耐」规则。因此若获胜者打出的最后组合为「炸弹组合」时，则其余玩家的扣分都要乘以 2 计算；此外，手中握有炸弹组合的玩家，扣分也要乘以 2 计算。</p>
+    </div>
+
+    <div class="expert-stage">
+      <h3><span class="stage-num">4 阶段</span>公平的開始</h3>
+      <p>开局之前，先看看自己手上的卡牌，按下列方式计算手牌分数：</p>
+      <ul>
+        <li>确认起始手牌中，除了 3 ~ 10 之外的卡牌。</li>
+        <li>每 <b>1 张 J 计 1 分</b>，每 <b>1 张 Q 计 2 分</b>，每 <b>1 张 K 计 3 分</b>，每 <b>1 张 A 计 4 分</b>，每 <b>1 张 2 计 5 分</b>。</li>
+      </ul>
+      <p>万一本人手中的卡牌低于 <b>3 分</b> 时，可要求全部卡牌重洗重发。</p>
+    </div>
+
+    <div class="expert-stage">
+      <h3><span class="stage-num">5 阶段</span>变形龙</h3>
+      <p>改变 2 阶段中以单张龙卡出牌的规则。在单张组合中，可随时打出龙卡，但<b>每一张牌都比龙卡强</b>。</p>
+      <p>其他规则与 4 阶段规则相同。</p>
+    </div>
+  </section>
+
+  <section id="team">
+    <h2 class="sec"><span class="num">12</span>团战规则</h2>
+    <p>4 人游戏可以以 <b>2 : 2</b> 的方式进行团战。<b>同队的玩家须安排不得坐在彼此旁边</b>。</p>
+    <p>游戏方式与个人战规则相同，分数计算方式差别如下：</p>
+    <ul>
+      <li>牌局结束时，计算各队的<b>总扣分</b>。<b>获胜者</b>的那一队计算 <b>1 位队员</b>的扣分，另一队则加总<b>两位队员</b>的扣分。</li>
+      <li>扣分<b>少</b>的队伍获胜，从失败队伍的扣分获得分数。</li>
+      <li>（专家规则）万一获胜者以「<b>华丽的结束</b>」获胜时，其余 3 名玩家需要将所有扣分以 <b>2 倍</b> 计算。</li>
+    </ul>
+    <div class="bubble">
+      <b>【团战 + 专家规则 示例】</b><br>
+      完真与芝妍为 A 队，东雨与真熙为 B 队。完真打出手里最后的牌结束游戏，剩余牌数为：芝妍 9 张、东雨 3 张、真熙 8 张。各队的扣分为：A 队 <b>18 分</b>（9 × 2）、B 队 <b>11 分</b>（3 + 8）。因此获胜队伍为 B 队，A 队要给 B 队 <b>7 分</b>。<br>
+      假设完真以「华丽的结束」结束本局时，所有玩家的扣分以 2 倍计算，因此 A 队要给 B 队 <b>14 分</b>。
+    </div>
+    <p>其中 <b>1 队</b> 分数超过 <b>200 分</b> 时，该队伍获胜，游戏结束。</p>
+    <figure>
+      <img src="Big2_Rules_images/page_01.jpg" alt="规则书第 1 页（封面 + 配件 + 准备 + 卡牌强弱 + 目标 + 游戏进行 + 卡牌组合）">
+      <figcaption>原文第 1 页（封面、所需物件、准备、卡牌强弱、游戏目标、游戏进行、卡牌组合表）</figcaption>
+    </figure>
+    <figure>
+      <img src="Big2_Rules_images/page_02.jpg" alt="规则书第 2 页（5 张组合详解 + 计分表 + 计分示例）">
+      <figcaption>原文第 2 页（顺子 / 同花 / 葫芦 / 四条+单张 / 同花顺详解、计分规则、计分示例）</figcaption>
+    </figure>
+    <figure>
+      <img src="Big2_Rules_images/page_03.jpg" alt="规则书第 3 页（专家规则 1~2 阶段）">
+      <figcaption>原文第 3 页（游戏结束、专家规则 1 阶段「强大却危险的 2」、2 阶段「龙」）</figcaption>
+    </figure>
+    <figure>
+      <img src="Big2_Rules_images/page_04.jpg" alt="规则书第 4 页（专家规则 3~5 阶段 + 团战规则）">
+      <figcaption>原文第 4 页（专家规则 3 阶段「炸弹」、4 阶段「公平的開始」、5 阶段「变形龙」、团战规则）</figcaption>
+    </figure>
+    <figure>
+      <img src="Big2_Rules_images/page_05.jpg" alt="规则书第 5 页（团战示例 + 制作信息）">
+      <figcaption>原文第 5 页（团战 + 专家规则示例、制作信息）</figcaption>
+    </figure>
+  </section>
+
+  <section id="credits">
+    <h2 class="sec"><span class="num">13</span>制作信息</h2>
+    <div class="credits">
+      <p><b>插画（插画）：</b>Wanjin Gill</p>
+      <p><b>繁体中文翻译（翻译）：</b>WRH</p>
+      <p><b>出版（出版）：</b>Gameology Inc. &nbsp;|&nbsp; playte &nbsp;|&nbsp; <span style="color:var(--red-d);">www.playte.com</span></p>
+      <p style="margin-top:8px;"><b>韩国发行：</b>#7205, 140 Beolmal-ro, Dongan-gu, Anyang-si, Gyeonggi-do, Korea</p>
+      <p><b>欧洲代理：</b>Oliphante snc. · Via dell'Artigianato, 40, 20083 Vigano Certosino-Gaggiano(Mi), Italy · <span style="color:var(--red-d);">www.oliphante.it</span></p>
+      <p style="margin-top:10px;">ⓒ 2024. Gameology, Inc. All rights reserved.</p>
+    </div>
+    <p class="note" style="margin-top:14px;">本规则书的简体中文版以 Gameology 2024 年繁体中文版（<b>Big 2 / 譯：WRH</b>）为权威源，正文已做简繁转换（繁体「雇」→「雇」、「營」→「营」、「錢」→「钱」、「們」→「们」、「個」→「个」、「數」→「数」、「點」→「点」、「時→「时」、「從」→「从」、「過」→「过」、「畫」→「画」、「飽」→「饱」、「畫」→「画」、「還」→「还」、「會」→「会」、「種」→「种」、「幣」→「币」、「飯」→「饭」、「顯」→「显」、「應」→「应」、「頭」→「头」、「變」→「变」、「條」→「条」、「複」→「复」、「歐」→「欧」、「東→「东」、「點」→「点」、「聲」→「声」、「輸」→「输」、「軟」→「软」、「兒→「儿」、「韓」→「韩」、「隻」→「只」、「長」→「长」、「塊」→「块」、「製」→「制」、「讀」→「读」、「擊」→「击」、「雙」→「双」、「臉」→「脸」、「語」→「语」、「誰」→「谁」、「樣→「样」、「處→「处」、「螢」→「萤」、「齡」→「龄」、「術」→「术」、「樣」→「样」等）；专有名词（游戏名「Big 2 / 锄大弟」、花色「绿 / 黄 / 红 / 紫」、龙卡「彩色 / 黑白」、人名、地名、公司）保留原文。</p>
+    <footer>
+      — Big 2 / 锄大弟 — 中文版规则书 &nbsp;·&nbsp; 简体化自 Gameology 2024 繁体中文版 —
+    </footer>
+  </section>
+
+  </main>
+
+<p style="margin-top: 20px; font-size: 13px; color: #666;"><b>翻译说明：</b>保留英文的专名：Big 2、锄大弟（游戏名+港澳台通用译名）。其他专名（顺子 / 同花 / 葫芦 / 四条+单张 / 同花顺 / 华丽的结束 / 过度忍耐 / 炸弹 等）全部译为中文。</p>
+
+</div>
+
+</body>
+</html>

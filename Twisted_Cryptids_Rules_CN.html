@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Twisted Cryptids（扭曲传说）— 中文规则</title>
+<style>
+  :root{
+    --bone:#f1f5f5; --bone2:#e5eded; --ink:#1b2533; --ink-soft:#4a5568;
+    --navy:#1a2f3d; --navy-d:#12222e; --navy-l:#3d6a7a;
+    --teal:#3a8a8a; --teal-l:#e4f3f3;
+    --accent:#d77a45; --accent-d:#a85a26;
+    --green:#3f7d52; --green-l:#e4f0e7;
+    --red:#a8392f; --red-l:#f6e3e0;
+    --line:#c8d4d3; --card:#fffdf9;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bone); color:var(--ink);
+    font-family:"Noto Serif SC","Source Han Serif SC","Songti SC",STSong,
+                "Iowan Old Style","Palatino Linotype",Georgia,serif;
+    line-height:1.85; font-size:17px;
+  }
+  .wrap{display:flex; align-items:flex-start; max-width:1220px; margin:0 auto;}
+  nav{
+    position:sticky; top:0; align-self:flex-start;
+    width:260px; flex:0 0 260px; height:100vh; overflow-y:auto;
+    background:linear-gradient(180deg,var(--navy-d),var(--navy));
+    color:#e8f0f0; padding:24px 18px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;
+    box-shadow:4px 0 18px rgba(18,34,46,.25);
+  }
+  nav h2{font-size:13px; letter-spacing:.14em; text-transform:uppercase;
+    color:#8ec9c9; margin:0 0 14px;}
+  nav ol{list-style:none; margin:0; padding:0;}
+  nav li{margin:2px 0;}
+  nav a{display:block; color:#e8f0f0; text-decoration:none; font-size:14px;
+    padding:7px 10px; border-radius:7px; transition:background .15s;}
+  nav a:hover{background:var(--navy-l);}
+  nav .sub{font-size:12px; opacity:.75; margin-left:8px;}
+  main{flex:1 1 auto; min-width:0; padding:0 44px 90px;}
+  .cover{
+    background:linear-gradient(160deg,var(--navy-d),var(--navy) 55%,var(--navy-l));
+    color:#f0f6f6; padding:72px 40px 58px; border-radius:0 0 22px 22px;
+    margin-bottom:42px; text-align:center;
+    box-shadow:0 14px 40px rgba(18,34,46,.32);
+    position:relative; overflow:hidden;
+  }
+  .cover::before{
+    content:""; position:absolute; inset:0;
+    background:radial-gradient(circle at 80% 20%, rgba(58,138,138,.22), transparent 40%);
+    pointer-events:none;
+  }
+  .cover h1{font-size:44px; margin:0 0 10px; letter-spacing:.02em; position:relative;}
+  .cover .sub{font-size:17px; opacity:.92; font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; position:relative;}
+  .cover .tag{display:inline-block; margin-top:20px; padding:7px 18px;
+    border:1px solid rgba(255,255,255,.35); border-radius:22px; font-size:14px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; position:relative;}
+  section{padding:18px 0 10px; border-bottom:1px solid var(--line); scroll-margin-top:22px;}
+  h2.sec{font-size:30px; color:var(--navy-d); margin:22px 0 10px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  h2.sec .num{color:var(--accent); font-weight:700; margin-right:10px;}
+  h3{font-size:21px; color:var(--navy-l); margin:26px 0 8px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  h4{font-size:17px; color:var(--ink); margin:18px 0 6px; font-weight:700;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  p{margin:12px 0;}
+  ul,ol{margin:12px 0 12px 6px; padding-left:24px;}
+  li{margin:7px 0;}
+  .lead{font-size:18px; color:var(--ink-soft);}
+  .comp-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:18px 0;}
+  .comp{border:1px solid var(--line); background:var(--card); border-radius:12px;
+    padding:14px 16px; box-shadow:0 2px 6px rgba(0,0,0,.04);}
+  .comp b{color:var(--navy-d);}
+  .callout{border-left:5px solid var(--accent); background:var(--bone2);
+    padding:14px 20px; margin:18px 0; border-radius:0 12px 12px 0;}
+  .callout.tip{border-color:var(--green); background:var(--green-l);}
+  .callout.tip b{color:var(--green);}
+  .callout.adv{border-color:var(--red); background:var(--red-l);}
+  .callout.adv b{color:var(--red);}
+  .steps{counter-reset:step; list-style:none; padding-left:0; margin:16px 0;}
+  .steps li{position:relative; padding:12px 16px 12px 54px; margin:10px 0;
+    background:var(--card); border:1px solid var(--line); border-radius:11px;}
+  .steps li::before{counter-increment:step; content:counter(step);
+    position:absolute; left:12px; top:50%; transform:translateY(-50%);
+    width:30px; height:30px; background:var(--navy-l); color:#fff;
+    border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-weight:700; font-family:Arial,sans-serif;}
+  .phase-card{border:1px solid var(--line); background:var(--card); border-radius:14px;
+    padding:18px 20px; margin:16px 0; box-shadow:0 3px 10px rgba(0,0,0,.05);}
+  .phase-card h3{margin-top:0; color:var(--navy-d);}
+  .phase-card h3 .ph{color:var(--accent); font-weight:700; margin-right:8px;}
+  .skill{border:1px solid var(--line); background:var(--card); border-radius:12px;
+    padding:14px 18px; margin:12px 0; box-shadow:0 2px 6px rgba(0,0,0,.04);}
+  .skill .name{font-weight:700; color:var(--navy-d); font-size:18px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .skill .name .ico{display:inline-block; min-width:22px; color:var(--accent);}
+  .req{border:1px solid var(--line); background:var(--card); border-radius:10px;
+    padding:12px 16px; margin:10px 0;}
+  .req .sym{font-weight:700; color:var(--navy-d);}
+  .ex{font-size:15px; color:var(--ink-soft); border-top:1px dashed var(--line);
+    margin-top:8px; padding-top:8px;}
+  .ex.ok::before{content:"✓ 得分示例 — "; color:var(--green); font-weight:700;}
+  .ex.no::before{content:"✗ 不得分示例 — "; color:var(--red); font-weight:700;}
+  figure{margin:22px 0; text-align:center;}
+  figure img{max-width:100%; border:1px solid var(--line); border-radius:12px;
+    box-shadow:0 5px 18px rgba(0,0,0,.12); background:#fff;}
+  figcaption{font-size:13px; color:var(--ink-soft); margin-top:8px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .two{display:grid; grid-template-columns:1fr 1fr; gap:18px; align-items:start;}
+  .token{color:#fff; display:inline-block; padding:2px 8px; border-radius:6px; font-size:.92em;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; font-weight:600;}
+  .hiker{background:var(--green);}
+  .hunter{background:var(--accent);}
+  .researcher{background:var(--navy-l);}
+  @media(max-width:900px){
+    .wrap{flex-direction:column;}
+    nav{position:static; width:100%; height:auto; flex-basis:auto;}
+    main{padding:0 20px 70px;}
+    .comp-grid,.two{grid-template-columns:1fr;}
+  }
+  footer{margin-top:48px; font-size:13px; color:var(--ink-soft);
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; text-align:center;}
+  .credits{background:var(--bone2); border:1px solid var(--line); border-radius:12px;
+    padding:16px 20px; margin-top:14px;}
+  .credits b{color:var(--navy-d);}
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <h1>Twisted Cryptids</h1>
+  <div class="sub">扭曲传说 · 中文规则</div>
+  <div class="tag">2–4 人 &nbsp;|&nbsp; 30–45 分钟 &nbsp;|&nbsp; 8 岁以上</div>
+</header>
+
+<div class="wrap">
+  <nav>
+    <h2>目录</h2>
+    <ol>
+      <li><a href="#overview">概览</a></li>
+      <li><a href="#components">组件清单</a></li>
+      <li><a href="#details">组件详解</a></li>
+      <li><a href="#setup">游戏准备</a></li>
+      <li><a href="#play">游戏流程</a></li>
+      <li><a href="#scoring">终局计分</a></li>
+      <li><a href="#ref">快速参考</a></li>
+      <li><a href="#credits">资源与版权</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+  <section id="overview">
+    <h2 class="sec"><span class="num">1</span>概览</h2>
+    <p class="lead">如今，作为一名神秘生物（Cryptid），想要被“看见”实在太难了。在这款易上手的策略游戏中，你将周旋于与人类之间又爱又恨的关系，并智胜其他神秘生物，以赢得<strong>真正传奇（True Legend）</strong>的称号。</p>
+    <p>当徒步者、猎人和研究员散布在荒野各处，希望能瞥见你一眼时，你可以精心策划骗局、布置完美的诱饵，或悄然潜伏于阴影中以积累<strong>神话值（Myth）</strong>。偶尔你也可以展露真身——但请注意：脆弱有时是要付出代价的。</p>
+
+    <figure>
+      <img src="Twisted_Cryptids_Rules_images/page_02.jpg" alt="游戏介绍与盒内组件一览">
+      <figcaption>游戏介绍与盒内组件一览（原书第 2 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="components">
+    <h2 class="sec"><span class="num">2</span>组件清单</h2>
+    <div class="comp-grid">
+      <div class="comp"><b>4 张</b> 塔罗牌尺寸神秘生物卡（Cryptid cards）</div>
+      <div class="comp"><b>52 张</b> 行动卡（Action cards）</div>
+      <div class="comp"><b>12 张</b> 事件卡（Event cards）</div>
+      <div class="comp"><b>36 张</b> 目击卡（Sighting cards）</div>
+      <div class="comp"><b>10 张</b> 隐藏特质卡（Hidden Trait cards）</div>
+      <div class="comp"><b>12 个</b> 藏匿点标记（Hiding Spot tokens）</div>
+      <div class="comp"><b>30 个</b> 人类标记（Human tokens）</div>
+      <div class="comp"><b>12 个</b> 双面神话标记（Myth tokens）</div>
+      <div class="comp"><b>1 个</b> 起始玩家标记（First Player token）</div>
+      <div class="comp"><b>1 个</b> 陷坑标记（Sinkhole token）</div>
+      <div class="comp"><b>4 个</b> 神秘生物米宝（Cryptid meeples）</div>
+      <div class="comp"><b>1 块</b> 荒野版图（The Wilderness board）</div>
+    </div>
+  </section>
+
+  <section id="details">
+    <h2 class="sec"><span class="num">3</span>组件详解</h2>
+
+    <h3>神秘生物卡（Cryptid cards）</h3>
+    <p>每位玩家扮演一种神秘生物，并拥有独特的<strong>神秘生物能力（Cryptid Power）</strong>，可在白昼阶段弃掉一张手牌来发动。每轮只能发动一次。</p>
+    <p class="callout tip"><b>提示：</b>若能力说明中包含以 <strong>并（and）</strong> 连接的两个效果，请分别结算这两个效果。你可以从同一个藏匿点结算，也可以从不同的藏匿点结算。</p>
+
+    <h3>隐藏特质卡（Hidden Trait cards）</h3>
+    <p>隐藏特质会给你一个终局目标，完成后可获得额外神话值。每张卡有三个完成等级；完成度越高，获得的神话值越多！你可以随时查看自己的隐藏特质，但在游戏结束前需对其他玩家保密。</p>
+
+    <h3>目击卡（Sighting cards）</h3>
+    <p>目击卡以面朝下的方式组成牌叠（Stacks），对其他玩家保密；你可以随时查看自己的牌叠。黄昏阶段，你将从牌叠顶翻开目击卡。每张目击卡会根据遭遇地点（Encounter Site）上的人类分布，让你获得或失去神话值，随后结算卡上的效果。</p>
+    <p>目击卡共有四种类型：</p>
+    <div class="skill"><div class="name"><span class="ico">🪵</span>诱饵（Decoy）</div>
+      <p>诱饵是布置成你模样的物品，用来戏耍猎人并赚取神话值。（哈！那不过是一堆树枝，笨蛋们。）</p></div>
+    <div class="skill"><div class="name"><span class="ico">🦝</span>骗局（Hoax）</div>
+      <p>召集森林小动物帮忙制造骗局，把人类引开。向徒步者揭露骗局可提升神话值。（他们真以为你是三只穿着风衣的浣熊？）</p></div>
+    <div class="skill"><div class="name"><span class="ico">🌑</span>剪影（Silhouette）</div>
+      <p>少即是多！让人类瞥见他们错过的身影。这些轮廓会让研究员兴奋不已，每次遭遇都能为你带来神话值。（科学期刊会想来采访你的！）</p></div>
+    <div class="skill"><div class="name"><span class="ico">👁</span>真身（Real Deal）</div>
+      <p>做神秘生物不容易。有时你想揭开面纱，让世界看看真正的你……即便要承担后果。真身目击就是真正的你！向合适的人类暴露自己攻击、睡觉或做着最爱的事，你的勇敢会得到神话值回报。但要小心！若遭遇地点上的人类不对，你可能会失去大量神话值。（你并不坏，只是被误解了……也许还有一点点坏。）</p></div>
+    <p class="callout tip"><b>策略提示：</b>真身目击卡风险高、回报也高；虽然翻开时可能获得大量神话值，但若遭遇地点上的人类类型不利，你也会损失惨重。不过，每张未揭露的真身都会在游戏结束时额外为你带来 7 点神话值！准备阶段安排牌叠时，请慎重决定把真身放在顶层还是深埋到底层。</p>
+
+    <h3>行动卡（Action cards）</h3>
+    <p>行动卡组成你的手牌，在白昼阶段打出。每张行动卡会指定人类数量、人类类型与一项具体<strong>功能（Function）</strong>，用以改变荒野中的人类分布。打出后结算效果，然后置入弃牌堆。部分卡以 <strong>或（OR）</strong> 连接两个效果，打出时选择其中一个结算。</p>
+    <p class="callout tip"><b>提示：</b>只有当无法完全结算时，才可以部分结算行动卡效果。例如，你打出一张需要“引诱 2 名研究员”的卡，而相邻地点上恰好有 2 名研究员，则必须引诱这 2 名；若相邻地点只有 1 名研究员，你仍然可以打出该卡，并只引诱 1 名。</p>
+
+    <h3>事件卡（Event cards）</h3>
+    <p>每轮黎明阶段都会发生一个新事件，导致人类在荒野中移动。</p>
+    <p>某些效果可能要求你把人类“移动到（to）”或“朝……移动（toward）”某个地点：</p>
+    <ul>
+      <li><b>移动到（To）：</b>直接将人类移到该地点。</li>
+      <li><b>朝……移动（Toward）：</b>将人类朝该地点方向移动到一个相邻地点。结果可能是直接移入该地点，也可能是靠近一步。若两个相邻地点距离相等，由你决定移到哪一个。</li>
+    </ul>
+    <p class="callout tip"><b>提示：</b>结算事件效果时，若有多个地点符合条件，任选其中一个并结算该效果。若要求选择人类最少的地点，则可以选择人类为 0 的地点。</p>
+    <p>某些效果可能要求你“分配人类”到相邻地点：将指定地点上所有指定人类取走，并尽可能平均地放置到相邻地点上；若无法均分，由你决定哪些地点多放 1 个人类。</p>
+
+    <h3>藏匿点标记（Hiding Spot tokens）</h3>
+    <p>准备阶段把藏匿点标记放到荒野的地点上；夜晚阶段，你每轮有机会移动其中一个藏匿点。每个藏匿点对应你的一个牌叠。</p>
+
+    <h3>神话标记（Myth tokens）</h3>
+    <p>神话轨（Myth Track）与神话标记共同记录你当前的神话值。</p>
+    <p>任何时候，若获得神话值时你的神秘生物米宝会移过神话轨上的 9，则拿取 1 个神话标记，并从 0 继续计算。同理，若失去神话值时会移过 0，则归还 1 个神话标记（若有），并从 9 继续倒退。你的神话值不会低于 0。</p>
+    <p>每个神话标记双面分别表示 10 神话值与 30 神话值。当你有 3 个“10 面”的神话标记时，归还其中 2 个，并将剩余 1 个翻至 30 面。</p>
+
+    <h3>荒野版图（The Wilderness board）</h3>
+    <p>荒野包含 6 个不同地点（Sites），是你整局游戏的藏身之所。版图上还有神话轨，用于记录神话值。</p>
+
+    <h3>人类标记（Human tokens）</h3>
+    <p>人类是《Twisted Cryptids》的核心“食材”。（真美味！）每轮你会把他们引诱到特定地点以增加神话值，或把他们赶走以避免被发现。人类共有三种类型：</p>
+    <ul>
+      <li><span class="token hiker">徒步者（Hikers）</span>：最普通的人类，他们并非专门找你，但若是偶遇可能会好奇。黎明时他们会在荒野中漫步观光。他们容易被骗局欺骗；若撞见你在睡觉，通常会自行离开。</li>
+      <li><span class="token hunter">猎人（Hunters）</span>：狡猾的人类，正在追踪你。黎明时他们往往成群移动，速度颇快。但你可以用精心制作的诱饵破坏他们的计划；当他们看到你准备扑击攻击时，往往会感到害怕。</li>
+      <li><span class="token researcher">研究员（Researchers）</span>：最有学识的人类，想要证明你的存在并研究你。黎明时他们可能在各地点间缓慢移动，专挑人少的地方找你。他们通常只要看到你的剪影就会兴奋，但当你被他们撞见做一些傻事或日常琐事时，他们会欣喜若狂。</li>
+    </ul>
+    <p class="callout tip"><b>提示：</b>某些效果没有指定人类类型，而是用通用符号代替。结算这类效果时，你可以任选一种人类。</p>
+
+    <h3>其他标记</h3>
+    <ul>
+      <li><b>起始玩家标记（First Player token）：</b>标识当前起始玩家。每轮夜晚结束时，起始玩家标记按顺时针传给下一位玩家；玩家顺序始终从起始玩家开始，按顺时针进行。</li>
+      <li><b>陷坑标记（Sinkhole token）——仅双人游戏：</b>准备阶段开始时，将陷坑标记放在风景沼泽（Scenic Swamp）地点上。任何人类或藏匿点都不可放置或移入该地点。</li>
+      <li><b>神秘生物米宝（Cryptid meeples）：</b>用于在神话轨上记录你的分数。获得或失去神话值时，沿神话轨移动相应格数。</li>
+    </ul>
+
+    <figure>
+      <img src="Twisted_Cryptids_Rules_images/page_07.jpg" alt="神秘生物卡与目击卡类型">
+      <figcaption>神秘生物卡与四种目击卡类型（原书第 7 页）</figcaption>
+    </figure>
+    <figure>
+      <img src="Twisted_Cryptids_Rules_images/page_08.jpg" alt="行动卡、事件卡与功能说明">
+      <figcaption>行动卡、事件卡与功能说明（原书第 8 页）</figcaption>
+    </figure>
+    <figure>
+      <img src="Twisted_Cryptids_Rules_images/page_09.jpg" alt="荒野版图、人类标记与神话轨示例">
+      <figcaption>荒野版图、人类标记与神话轨示例（原书第 9 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="setup">
+    <h2 class="sec"><span class="num">4</span>游戏准备</h2>
+
+    <ol class="steps">
+      <li>每位玩家选择一种神秘生物，拿取对应组件：<b>1 张神秘生物卡、1 个神秘生物米宝、9 张目击卡、3 个藏匿点标记</b>。</li>
+      <li>将荒野版图从盒中取出、展开，放在所有玩家都触手可及的中心区域。版图由<strong>神话轨</strong>与包含 6 个地点的<strong>荒野</strong>组成。将神话标记放在神话轨旁。神话值就是你的分数，整局游戏都靠神话轨与神话标记来记录。</li>
+      <li>将人类标记按类型分别放到 3 个<strong>休整区（Rest Areas）</strong>，然后把徒步者、猎人、研究员标记放到版图上带有对应符号的每个地点上。</li>
+      <li>洗匀行动牌堆，面朝下放在顺手处，旁边留出弃牌堆位置。再洗匀事件牌堆，面朝下放在顺手处，旁边留出<strong>当前事件堆（Current Event pile）</strong>位置。</li>
+      <li>选择神秘生物后，将神秘生物卡面朝上放在自己面前，并把米宝放到神话轨的 5 上（即起始分数）。未使用的神秘生物及其组件放回游戏盒。</li>
+      <li>洗匀隐藏特质卡，给每位玩家发 2 张。每位玩家选择其中 1 张，面朝下放在神秘生物卡上方，其余隐藏特质卡放回游戏盒。</li>
+      <li>现在组建你的 <strong>3 个牌叠（Stacks）</strong>。秘密选择 3 张目击卡，按你想要的顺序面朝下叠成一叠；用剩下的目击卡重复此步骤，直到你拥有 3 个牌叠（每个牌叠 3 张）。注意：每个牌叠最上面那张面朝下的目击卡，将是该牌叠最先被翻开的一张。</li>
+      <li>组好牌叠后，将它们排成一行放在神秘生物卡右侧。从左到右分别对应编号为 1、2、3 的藏匿点标记：最左边的牌叠对应藏匿点 1，中间对应 2，最右边对应 3。</li>
+      <li>将起始玩家标记交给最近去过公园的玩家，该玩家即为起始玩家。</li>
+    </ol>
+
+    <h3>放置藏匿点标记</h3>
+    <p>按玩家顺序（从起始玩家开始，顺时针进行），每位玩家将自己的 1 个藏匿点标记放到荒野中的一个地点上。所有玩家放置完第 1 个后，起始玩家标记传给左手玩家；再从新的起始玩家开始，按玩家顺序放置第 2 个藏匿点。重复此流程，直到每位玩家都放完 3 个藏匿点标记。</p>
+    <p class="callout adv"><b>放置限制：</b>
+      <br>· 你不能把藏匿点标记放到已经拥有你藏匿点的地点上。
+      <br>· 4 人游戏时，任何一个地点上至多只能有 3 位玩家的藏匿点标记。
+    </p>
+
+    <h3>发手牌</h3>
+    <p>最后，从行动牌堆给每位玩家发 5 张手牌。游戏从起始玩家开始，按顺时针方向进行。</p>
+
+    <figure>
+      <img src="Twisted_Cryptids_Rules_images/page_03.jpg" alt="初始设置步骤">
+      <figcaption>初始设置步骤（原书第 3 页）</figcaption>
+    </figure>
+    <figure>
+      <img src="Twisted_Cryptids_Rules_images/page_04.jpg" alt="藏匿点放置与完成设置后的示例">
+      <figcaption>藏匿点放置限制与完成设置后的版图示例（原书第 4 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="play">
+    <h2 class="sec"><span class="num">5</span>游戏流程</h2>
+    <p>《Twisted Cryptids》共进行 <strong>5 轮</strong>，每轮分为 4 个阶段：<strong>黎明（Dawn）、白昼（Day）、黄昏（Dusk）、夜晚（Night）</strong>。</p>
+
+    <div class="phase-card">
+      <h3><span class="ph">Ⅰ</span>黎明阶段（Dawn Phase）</h3>
+      <p>黎明时，人类会自行离开、抵达并在荒野中移动。</p>
+      <p>回合开始时，起始玩家翻开事件牌堆顶 1 张卡，面朝上放到当前事件堆，并按卡上列出的效果从上到下依次结算（详见“事件卡”说明）。</p>
+      <p class="callout tip"><b>部分结算原则：</b>若你无法完整执行某张卡的效果——例如荒野中没有研究员可供撤离，休整区只有 1 名猎人可供吸引，或地点上只有 2 名徒步者而效果要求移动 3 名——请尽可能执行该效果。此原则同样适用于白昼阶段打出的行动卡，以及黄昏阶段翻开的目击卡。</p>
+      <p>黎明结算完毕后，进入白昼。</p>
+    </div>
+
+    <div class="phase-card">
+      <h3><span class="ph">Ⅱ</span>白昼阶段（Day Phase）</h3>
+      <p>白昼时，你将施展神秘生物的魅力，在荒野中调动人类，以提升神话值。</p>
+      <p>按玩家顺序，在你的回合中执行下列行动之一：</p>
+      <ul>
+        <li>从手牌中打出 1 张行动卡（详见“行动卡”说明）。</li>
+        <li>弃掉 1 张手牌以发动你的神秘生物能力。每轮只能如此做一次（详见“神秘生物卡”说明）。</li>
+        <li>跳过本回合（将行动权交给下一位玩家）。</li>
+      </ul>
+      <p>玩家以此方式轮流行动，每人共进行 3 个回合。所有玩家都完成 3 个回合后，进入黄昏。</p>
+    </div>
+
+    <div class="phase-card">
+      <h3><span class="ph">Ⅲ</span>黄昏阶段（Dusk Phase）</h3>
+      <p>黄昏时，荒野中的某个地点会发生一次<strong>遭遇（Encounter）</strong>，揭示每位神秘生物在该地点正在（或没有）做什么。</p>
+      <p>确定遭遇地点：找到人类最多且至少有 1 个藏匿点的地点。若多个地点并列最多，由起始玩家选择其中之一。</p>
+      <p>按玩家顺序，若你在遭遇地点有藏匿点，则翻开对应牌叠顶的 1 张目击卡：</p>
+      <ol>
+        <li>根据遭遇地点上的人类分布，按目击卡说明获得或失去神话值。</li>
+        <li>结算该目击卡的效果。</li>
+        <li>将该目击卡面朝上置于一旁。</li>
+        <li>将你的藏匿点从遭遇地点取回，放到对应的牌叠上。</li>
+        <li>下一位在遭遇地点有藏匿点的玩家继续翻开自己的目击卡。</li>
+      </ol>
+      <p>若你在黄昏翻开某个牌叠的最后一张目击卡，导致该牌叠被清空，则将对应的藏匿点标记放回游戏盒。本局游戏剩余时间你不再使用这个藏匿点。</p>
+      <p>所有在遭遇地点有藏匿点的玩家都翻开目击卡后，进入夜晚。</p>
+    </div>
+
+    <div class="phase-card">
+      <h3><span class="ph">Ⅳ</span>夜晚阶段（Night Phase）</h3>
+      <p>夜晚时，你开始为第二天谋划。</p>
+      <p>按玩家顺序执行以下步骤：</p>
+      <ul>
+        <li>若你的所有牌叠上都没有藏匿点标记（即所有藏匿点仍在荒野中），你可以将其中 1 个藏匿点移动到一个新地点。</li>
+        <li>若你因黄昏阶段将藏匿点放到了牌叠上，则将该藏匿点放到一个与遭遇地点不同的地点上。</li>
+        <li>你可以弃掉任意数量的手牌，然后从行动牌堆抽取卡牌，直到手牌补满 5 张。（若已是第 5 轮，则跳过抽牌，改为弃掉所有剩余手牌。）</li>
+      </ul>
+      <p class="callout tip"><b>牌堆重洗：</b>若行动牌堆不足以让你补满 5 张手牌，先抽完牌堆中剩余卡牌，再将弃牌堆洗匀，面朝下形成新的行动牌堆，继续抽取直到手牌为 5 张。</p>
+      <p>所有玩家都补满手牌后，起始玩家标记传给左手玩家，该玩家成为下一轮的起始玩家。</p>
+    </div>
+
+    <figure>
+      <img src="Twisted_Cryptids_Rules_images/page_05.jpg" alt="游戏流程与神话值示例">
+      <figcaption>游戏流程与神话值获得示例（原书第 5 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="scoring">
+    <h2 class="sec"><span class="num">6</span>终局计分</h2>
+    <p>完成 5 轮后，先翻开你各牌叠中剩余的目击卡以及你的隐藏特质卡，再决定胜者。</p>
+    <ul>
+      <li>每有 1 张<strong>真身（Real Deal）</strong>目击卡在本局游戏中未被揭露，获得 7 神话值。</li>
+      <li>根据隐藏特质卡上目标的完成等级，获得相应的额外神话值。</li>
+    </ul>
+    <p>总神话值最高的玩家赢得游戏，成为<strong>真正传奇（True Legend）</strong>；其余玩家则在人类抓住他们之前溜回家。</p>
+    <p class="callout tip"><b>平手判定：</b>若出现平手，统计每位平手玩家藏匿点所在地点上的人类总数，人类最多者获胜。若仍平手，那就击个掌——这次你们都是传奇（不过你们大概会再开一局决出真正的传奇）。</p>
+
+    <figure>
+      <img src="Twisted_Cryptids_Rules_images/page_06.jpg" alt="终局计分示例">
+      <figcaption>终局计分示例：神话轨、神话标记、未揭露真身与隐藏特质奖励（原书第 6 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="ref">
+    <h2 class="sec"><span class="num">7</span>快速参考</h2>
+
+    <div class="two">
+      <div class="skill">
+        <div class="name">玩家顺序</div>
+        <p>从起始玩家开始，按顺时针进行。</p>
+      </div>
+      <div class="skill">
+        <div class="name">黎明（Dawn）</div>
+        <p>起始玩家翻开 1 张新事件卡，从上到下结算。找“人类最少”的地点时，包括 0 人类。</p>
+      </div>
+      <div class="skill">
+        <div class="name">白昼（Day）</div>
+        <p>每人 3 个回合。回合中可：打出手牌 / 弃牌发动神秘生物能力（每轮限 1 次）/ 跳过本回合。</p>
+      </div>
+      <div class="skill">
+        <div class="name">黄昏（Dusk）</div>
+        <p>遭遇发生在人类最多且至少有 1 个藏匿点的地点。按玩家顺序，在该地点有藏匿点的玩家翻开牌叠顶目击卡、结算效果、将藏匿点放回牌叠。</p>
+      </div>
+      <div class="skill">
+        <div class="name">夜晚（Night）</div>
+        <p>按玩家顺序：牌叠无藏匿点可移动 1 个荒野藏匿点 / 牌叠有藏匿点则将其放到非遭遇地点 / 弃任意牌并补满 5 张（第 5 轮跳过抽牌）。最后将起始玩家标记顺时针传递。</p>
+      </div>
+      <div class="skill">
+        <div class="name">游戏结束</div>
+        <p>5 轮后进入终局计分（见第 6 节）。</p>
+      </div>
+    </div>
+
+    <h3>效果结算</h3>
+    <p>若无法完整执行某卡效果，请尽可能部分执行。若有多个地点符合条件，任选其一并结算。</p>
+
+    <h3>移动人类关键词</h3>
+    <ul>
+      <li><b>移动到（To）：</b>直接移到目标地点。</li>
+      <li><b>朝……移动（Toward）：</b>向目标地点靠近一个地点。</li>
+    </ul>
+
+    <h3>四大功能（Functions）</h3>
+    <ul>
+      <li><b>引诱（Lure）：</b>从相邻地点移动到你有藏匿点的地点。</li>
+      <li><b>惊吓（Scare）：</b>从你有藏匿点的地点移动到相邻地点。</li>
+      <li><b>吸引（Attract）：</b>从对应休整区移动到你有藏匿点的地点。</li>
+      <li><b>撤离（Extract）：</b>从你有藏匿点的地点或其相邻地点移回对应休整区。</li>
+    </ul>
+
+    <h3>藏匿点移动限制</h3>
+    <ul>
+      <li>不能放到已有你藏匿点的地点。</li>
+      <li>4 人游戏时，任一地点上至多只能有 3 位玩家的藏匿点。</li>
+    </ul>
+
+    <h3>行动牌堆重洗</h3>
+    <p>任何时候行动牌堆抽空，立即将弃牌堆洗匀，面朝下形成新的行动牌堆。</p>
+
+    <figure>
+      <img src="Twisted_Cryptids_Rules_images/page_10.jpg" alt="快速参考页">
+      <figcaption>快速参考页（原书第 10 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="credits">
+    <h2 class="sec"><span class="num">8</span>资源与版权</h2>
+    <div class="credits">
+      <p><b>游戏名称：</b>Twisted Cryptids（扭曲传说）</p>
+      <p><b>设计师 / 出版商：</b>Unstable Games</p>
+      <p><b>额外资源：</b>访问 unstablegames.com/twistedcryptids 可找到视频教程、常见问题（FAQ）、最新扩展与周边商品（merch）。</p>
+      <p><b>本网页规则书说明：</b>内容译自/整理自 Twisted Cryptids 零售版规则书 PDF（Twisted_Cryptids_Retail_Rules_V4.pdf）；版式、导航与中文翻译为便于阅读而重新编排，原书页面图片保留用于辅助说明。</p>
+    </div>
+  </section>
+
+  <footer>
+    Twisted Cryptids 中文网页规则书 · 基于原版规则书重排
+  </footer>
+
+  </main>
+</div>
+</body>
+</html>

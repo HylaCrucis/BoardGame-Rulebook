@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>桌游规则书总览</title>
+<style>
+  :root{
+    --bg:#f5f6f8; --panel:#ffffff; --ink:#222; --muted:#6b7280;
+    --accent:#2b6cb0; --accent-soft:#e8f0fb; --border:#e3e6ea; --hover:#f0f4f8;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;height:100%;font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;color:var(--ink);background:var(--bg);}
+  .app{display:flex;height:100vh;overflow:hidden;}
+  .sidebar{width:300px;min-width:280px;background:var(--panel);border-right:1px solid var(--border);display:flex;flex-direction:column;}
+  .sb-head{padding:18px 18px 12px;border-bottom:1px solid var(--border);}
+  .sb-head h1{margin:0 0 4px;font-size:18px;font-weight:700;}
+  .sb-head .sub{font-size:12px;color:var(--muted);}
+  .search{padding:12px 18px;border-bottom:1px solid var(--border);}
+  .search input{width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-size:14px;background:#fafbfc;color:var(--ink);outline:none;}
+  .search input:focus{border-color:var(--accent);background:#fff;}
+  .list{flex:1;overflow-y:auto;padding:8px;}
+  .item{padding:10px 12px;border-radius:8px;cursor:pointer;margin-bottom:2px;border:1px solid transparent;}
+  .item:hover{background:var(--hover);}
+  .item.active{background:var(--accent-soft);border-color:var(--accent);}
+  .item .zh{font-size:14px;font-weight:600;}
+  .item .en{font-size:11px;color:var(--muted);margin-top:2px;letter-spacing:.3px;}
+  .empty{color:var(--muted);font-size:13px;padding:16px;text-align:center;}
+  .main{flex:1;display:flex;flex-direction:column;background:var(--bg);}
+  .bar{height:48px;border-bottom:1px solid var(--border);background:var(--panel);display:flex;align-items:center;justify-content:space-between;padding:0 16px;}
+  .bar .cur{font-weight:600;font-size:15px;}
+  .bar a{font-size:13px;color:var(--accent);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;}
+  .bar a:hover{background:var(--hover);}
+  .frame{flex:1;padding:0;}
+  iframe{width:100%;height:100%;border:0;background:#fff;display:block;}
+  .welcome{display:flex;align-items:center;justify-content:center;height:100%;color:var(--muted);font-size:15px;}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="sb-head">
+      <h1>桌游规则书总览</h1>
+      <div class="sub" id="count">共 0 本</div>
+    </div>
+    <div class="search">
+      <input id="q" type="text" placeholder="搜索中文名 / 英文名…" autofocus>
+    </div>
+    <div class="list" id="list"></div>
+  </aside>
+  <main class="main">
+    <div class="bar">
+      <span class="cur" id="cur">未选择</span>
+      <a id="openLink" href="#" target="_blank" style="display:none">↗ 新标签打开</a>
+    </div>
+    <div class="frame">
+      <iframe id="viewer" style="display:none"></iframe>
+      <div class="welcome" id="welcome">← 从左侧选择一本规则书</div>
+    </div>
+  </main>
+</div>
+<script>
+  const books=[
+    {file:"Archipels_Rulebook_CN.html", zh:"群岛", en:"Archipels"},
+    {file:"BBLL_Rules_CN.html", zh:"熊孩子巫妖领主", en:"Bad Baby Lich Lords"},
+    {file:"CYA_Rules_CN.html", zh:"盖住你的资产", en:"Cover Your Assets"},
+    {file:"Biddle_Rules_CN.html", zh:"估算挑战", en:"Biddle"},
+    {file:"Big2_Rules_CN.html", zh:"锄大弟", en:"Big 2"},
+    {file:"BIM_Rulebook_CN.html", zh:"请相信我！", en:"Believe in Me!"},
+    {file:"DiceyDevices_Rules_CN.html", zh:"骰子装置", en:"Dicey Devices"},
+    {file:"Dirt_and_dust_Rules_CN.html", zh:"泥土与尘埃", en:"Dirt & Dust"},
+    {file:"EGO_Rules_CN.html", zh:"外星问候组织", en:"EGO"},
+    {file:"Taxiover_Rules_CN.html", zh:"疯狂出租车", en:"Taxi Over"},
+    {file:"Stubbornmules_Rules_CN.html", zh:"顽固的驴", en:"Stubborn Mules"},
+    {file:"sumidagawa_Rules_CN.html", zh:"隅田川之争", en:"Sumidagawa"},
+    {file:"Gardling_Rules_CN.html", zh:"园艺精灵", en:"Gardling"},
+    {file:"Greenwood_Rules_CN.html", zh:"格林伍德", en:"Greenwood"},
+    {file:"Hercules_Rules_CN.html", zh:"大力神十二试炼", en:"Hercules and the 12 Labors"},
+    {file:"ICE_Rules_CN.html", zh:"冰封远征", en:"I C E"},
+    {file:"Iliad_Rules_CN.html", zh:"伊利亚特", en:"Iliad"},
+    {file:"La_Fleur_CN.html", zh:"繁花", en:"La Fleur"},
+    {file:"Mahe_Rules_CN.html", zh:"马埃", en:"Mahe"},
+    {file:"Medicus_Rules_CN.html", zh:"医者", en:"Medicus"},
+    {file:"Moonlight_Rules_CN.html", zh:"月光", en:"Moonlight"},
+    {file:"MR_TC_Base_Rules_CN.html", zh:"议事会（基础游戏）", en:"Mini Rogue: The Council"},
+    {file:"MR_TC_Add_Rules_CN.html", zh:"议事会（扩展）", en:"Mini Rogue: The Council"},
+    {file:"ORBIT_Rules_CN.html", zh:"星际游客轨道竞速", en:"ORBIT"},
+    {file:"Ritual_Rules_CN.html", zh:"仪式", en:"Ritual"},
+    {file:"Through_the_Desert_Rules_CN.html", zh:"穿越沙漠", en:"Through the Desert"},
+    {file:"TowerUp_Rules_CN.html", zh:"楼起", en:"Tower Up"},
+    {file:"TongaBonga_Rules_CN.html", zh:"环岛营生", en:"Tonga Bonga"},
+    {file:"Twisted_Cryptids_Rules_CN.html", zh:"扭曲传说", en:"Twisted Cryptids"},
+    {file:"Verso_Rules_CN.html", zh:"双面景观", en:"Verso"}
+  ];
+  const listEl=document.getElementById('list');
+  const qEl=document.getElementById('q');
+  const frame=document.getElementById('viewer');
+  const welcome=document.getElementById('welcome');
+  const curEl=document.getElementById('cur');
+  const openLink=document.getElementById('openLink');
+  document.getElementById('count').textContent='共 '+books.length+' 本';
+
+  function render(filter){
+    listEl.innerHTML='';
+    const f=(filter||'').trim().toLowerCase();
+    const matched=books.filter(b=>!f || b.zh.toLowerCase().includes(f) || b.en.toLowerCase().includes(f));
+    if(!matched.length){
+      listEl.innerHTML='<div class="empty">没有匹配的规则书</div>';
+      return;
+    }
+    matched.forEach(b=>{
+      const d=document.createElement('div');
+      d.className='item';
+      d.dataset.file=b.file;
+      d.innerHTML='<div class="zh">'+b.zh+'</div><div class="en">'+b.en+'</div>';
+      d.onclick=()=>select(b,d);
+      listEl.appendChild(d);
+    });
+  }
+  function select(b,elm){
+    document.querySelectorAll('.item').forEach(x=>x.classList.remove('active'));
+    if(elm) elm.classList.add('active');
+    curEl.textContent=b.zh+' · '+b.en;
+    openLink.href=b.file;
+    openLink.style.display='inline-block';
+    welcome.style.display='none';
+    frame.style.display='block';
+    frame.src=b.file;
+  }
+  qEl.addEventListener('input',()=>render(qEl.value));
+  render('');
+</script>
+</body>
+</html>

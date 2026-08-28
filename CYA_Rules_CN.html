@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>盖住你的资产（Cover Your Assets）— 游戏规则</title>
+<style>
+:root {
+  --brass: #b8893a;
+  --copper: #6d4a2a;
+  --steam: #9ba0a3;
+  --cream: #f4ecdc;
+  --paper: #faf3e3;
+  --ink: #2a2018;
+  --gold-deep: #8a6322;
+  --shadow: rgba(109, 74, 42, 0.18);
+  --serif: "Iowan Old Style", "Palatino Linotype", "Source Han Serif SC", "Songti SC", "Noto Serif CJK SC", Georgia, serif;
+  --sans: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--cream);
+  background-image: linear-gradient(0deg, transparent 50%, rgba(184, 137, 58, 0.05) 50%);
+  background-size: 100% 28px;
+  font-family: var(--serif);
+  color: var(--ink);
+  line-height: 1.75;
+  font-size: 15px;
+  padding: 0 0 80px;
+}
+header {
+  background: linear-gradient(135deg, var(--copper) 0%, #8a5a30 40%, var(--brass) 100%);
+  color: var(--cream);
+  padding: 60px 36px;
+  text-align: center;
+  border-bottom: 8px double var(--brass);
+  box-shadow: 0 6px 0 var(--shadow);
+}
+header h1 {
+  margin: 0;
+  font-size: 60px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-shadow: 2px 2px 0 rgba(0,0,0,0.3);
+}
+header h2 {
+  margin: 14px 0 0;
+  font-size: 22px;
+  font-weight: 400;
+  opacity: 0.92;
+  letter-spacing: 0.1em;
+  font-style: italic;
+}
+header .meta {
+  margin-top: 24px;
+  font-size: 14px;
+  opacity: 0.9;
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+header .meta span {
+  background: rgba(255,255,255,0.15);
+  padding: 6px 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.35);
+}
+.container {
+  max-width: 1080px;
+  margin: 40px auto;
+  background: var(--paper);
+  padding: 0 0 80px;
+  box-shadow: 0 8px 24px var(--shadow), inset 0 0 80px rgba(184, 137, 58, 0.06);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px solid var(--brass);
+}
+nav.toc {
+  background: linear-gradient(180deg, var(--paper) 0%, #efe2c5 100%);
+  padding: 24px 36px;
+  border-bottom: 2px solid var(--brass);
+}
+nav.toc h3 {
+  margin: 0 0 12px;
+  font-size: 16px;
+  color: var(--copper);
+  letter-spacing: 0.15em;
+  border-left: 4px solid var(--brass);
+  padding-left: 10px;
+}
+nav.toc ol {
+  margin: 0;
+  padding-left: 22px;
+  columns: 2;
+  font-size: 14px;
+}
+nav.toc ol li { margin: 4px 0; }
+nav.toc ol li a {
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--brass);
+}
+nav.toc ol li a:hover { color: var(--copper); border-bottom-color: var(--copper); }
+section {
+  padding: 50px 36px 30px;
+  border-bottom: 1px dashed var(--brass);
+  position: relative;
+}
+section:last-child { border-bottom: none; }
+.sec {
+  margin: 0 0 24px;
+  font-size: 28px;
+  color: var(--copper);
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.sec .num {
+  background: var(--brass);
+  color: var(--cream);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 700;
+  flex-shrink: 0;
+  border: 2px solid var(--copper);
+}
+h3 {
+  margin: 28px 0 12px;
+  color: var(--copper);
+  font-size: 19px;
+  letter-spacing: 0.05em;
+  border-left: 4px solid var(--brass);
+  padding-left: 12px;
+}
+h4 {
+  margin: 18px 0 8px;
+  color: var(--gold-deep);
+  font-size: 16px;
+}
+p { margin: 10px 0; }
+strong { color: var(--copper); font-weight: 700; }
+em { color: var(--gold-deep); }
+.tip {
+  background: #fff7e0;
+  border-left: 4px solid var(--brass);
+  padding: 14px 18px;
+  margin: 14px 0;
+  font-size: 14px;
+  border-radius: 0 8px 8px 0;
+  border: 1px dashed var(--brass);
+}
+.tip b { color: var(--copper); font-style: italic; }
+.callout {
+  background: #fdf3d8;
+  border: 2px solid var(--brass);
+  border-radius: 8px;
+  padding: 16px 22px;
+  margin: 16px 0;
+  border-left: 6px solid var(--copper);
+}
+.callout b { color: var(--copper); }
+ul, ol { padding-left: 24px; margin: 10px 0; }
+li { margin: 4px 0; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  background: var(--cream);
+}
+table th, table td {
+  border: 1px solid var(--brass);
+  padding: 8px 12px;
+  text-align: center;
+  font-size: 14px;
+}
+table th {
+  background: var(--copper);
+  color: var(--cream);
+  font-weight: 700;
+}
+table td { background: var(--paper); }
+table tr:hover td { background: #f0e2bf; }
+.ex {
+  background: #fbeccd;
+  border: 1px dashed var(--brass);
+  border-radius: 8px;
+  padding: 14px 20px;
+  margin: 14px 0;
+  font-size: 14px;
+}
+.ex .label { font-weight: 700; color: var(--copper); }
+.figure {
+  margin: 20px 0;
+  text-align: center;
+}
+.figure img {
+  max-width: 100%;
+  border: 4px solid var(--cream);
+  box-shadow: 0 4px 12px var(--shadow);
+  background: #efe2c5;
+}
+.figure figcaption {
+  font-size: 13px;
+  color: #6d5238;
+  margin-top: 8px;
+  font-style: italic;
+}
+.three-col {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin: 16px 0;
+}
+@media (max-width: 720px) { .three-col { grid-template-columns: repeat(2, 1fr); } }
+.action-card {
+  background: var(--paper);
+  border: 2px solid var(--brass);
+  border-radius: 8px;
+  padding: 14px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--copper);
+}
+.action-card .rule { color: var(--ink); margin-top: 6px; font-size: 12px; font-weight: 400; }
+.action-card.swap { border-color: var(--copper); background: #fdf3d8; }
+.action-card.move { border-color: var(--brass); background: #fbeccd; }
+.action-card.penny { border-color: var(--gold-deep); background: #fff7e0; }
+.term-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin: 16px 0;
+}
+@media (max-width: 720px) { .term-grid { grid-template-columns: 1fr; } }
+.term {
+  background: var(--cream);
+  border: 2px solid var(--brass);
+  border-radius: 8px;
+  padding: 12px 16px;
+}
+.term h4 {
+  margin: 0 0 6px;
+  color: var(--copper);
+  font-size: 15px;
+  border-left: 3px solid var(--brass);
+  padding-left: 8px;
+}
+.term p { margin: 0; font-size: 13px; }
+.asset-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin: 14px 0;
+}
+@media (max-width: 720px) { .asset-grid { grid-template-columns: repeat(2, 1fr); } }
+.asset {
+  background: var(--cream);
+  border: 2px solid var(--brass);
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+  color: var(--copper);
+}
+.asset small { display: block; font-size: 11px; color: var(--ink); font-weight: 400; margin-top: 2px; }
+.score-card {
+  background: linear-gradient(180deg, #fff7e0 0%, #fbeccd 100%);
+  padding: 18px 22px;
+  border-radius: 8px;
+  border: 2px solid var(--brass);
+  margin: 14px 0;
+}
+.score-card b { color: var(--copper); }
+.action-list {
+  background: #fbeccd;
+  border: 2px solid var(--brass);
+  border-radius: 8px;
+  padding: 18px 22px;
+  margin: 14px 0;
+}
+.action-list ol { padding-left: 22px; margin: 8px 0; }
+.action-list ol li { margin: 6px 0; }
+.action-list b { color: var(--copper); }
+section.credits {
+  background: linear-gradient(180deg, var(--paper) 0%, #efe2c5 100%);
+  border-top: 4px solid var(--brass);
+}
+.thanks {
+  background: linear-gradient(180deg, var(--copper) 0%, #8a5a30 100%);
+  color: var(--cream);
+  padding: 40px 36px;
+  text-align: center;
+}
+.thanks h2 {
+  margin: 0 0 16px;
+  font-size: 28px;
+  color: var(--brass);
+}
+.thanks p {
+  margin: 12px auto;
+  max-width: 600px;
+  font-style: italic;
+  font-size: 16px;
+  opacity: 0.95;
+}
+.thanks .sign {
+  margin-top: 16px;
+  font-style: italic;
+  opacity: 0.85;
+}
+</style>
+</head>
+<body>
+
+<div class="thanks">
+  <h2>感谢游玩</h2>
+  <p>"致所有玩我们游戏的玩家，谢谢！我们最珍贵的资产是与家人朋友共度的时光。能成为你们生活的一部分是我们的荣幸。我们很高兴得知，世界各地的人们正在游戏过程中放松与欢笑。"</p>
+  <p class="sign">— Grandpa Beck 一家</p>
+</div>
+
+<header>
+  <h1>盖住你的资产</h1>
+  <h2>Cover Your Assets®</h2>
+  <div class="meta">
+    <span>3-6 人</span>
+    <span>8 岁以上</span>
+    <span>30 分钟</span>
+  </div>
+</header>
+
+<nav class="toc">
+  <h3>目录</h3>
+  <ol>
+    <li><a href="#overview">概览</a></li>
+    <li><a href="#components">配件</a></li>
+    <li><a href="#setup">游戏设置</a></li>
+    <li><a href="#terms">关键术语</a></li>
+    <li><a href="#turn">你的回合</a></li>
+    <li><a href="#form">组合套牌</a></li>
+    <li><a href="#discard">弃牌</a></li>
+    <li><a href="#challenge">挑战</a></li>
+    <li><a href="#end-turn">结束回合</a></li>
+    <li><a href="#round-end">回合结束</a></li>
+    <li><a href="#scoring">计分</a></li>
+    <li><a href="#game-end">游戏结束</a></li>
+    <li><a href="#advanced">高级规则</a></li>
+    <li><a href="#wild">存钱罐牌</a></li>
+    <li><a href="#action-cards">行动牌</a></li>
+    <li><a href="#2p">2 人规则</a></li>
+    <li><a href="#draft">选牌组</a></li>
+    <li><a href="#3p">3 人规则</a></li>
+    <li><a href="#advanced-23">2-3 人高级变更</a></li>
+    <li><a href="#credits">制作信息</a></li>
+  </ol>
+</nav>
+
+<div class="container">
+
+  <section id="overview">
+    <h2 class="sec"><span class="num">1</span>概览</h2>
+    <p>通过收集成套<b>资产</b>，争夺成为第一位百万富翁。收集套牌时，你将它们以交替方式堆叠在自己面前。注意：套牌最顶端那张暴露在外，可被对方用匹配资产或<b>百搭牌</b>偷走。偷牌成功时，那张匹配牌会加入套牌。因此，每当套牌被偷时，它都会变得更有价值。想要守住你的套牌？那就 <b>盖住你的资产®</b>！</p>
+    <p>本规则书分为经典规则与高级规则。建议从经典规则开始。如果你想体验更多刺激与策略，请尝试高级规则！2 人和 3 人的人数变化在末尾说明。</p>
+    <div class="callout">
+      <b>观看玩法视频：</b>www.gbecks.com/cya-vid
+    </div>
+  </section>
+
+  <section id="components">
+    <h2 class="sec"><span class="num">2</span>配件</h2>
+
+    <h3>资产卡</h3>
+    <div class="asset-grid">
+      <div class="asset">漫画书<small>× 10</small></div>
+      <div class="asset">钢琴<small>× 10</small></div>
+      <div class="asset">玩具火车<small>× 10</small></div>
+      <div class="asset">珠宝<small>× 9</small></div>
+      <div class="asset">床垫下的现金<small>× 9</small></div>
+      <div class="asset">存钱罐<small>× 9</small></div>
+      <div class="asset">摩托车<small>× 9</small></div>
+      <div class="asset">运动型飞机<small>× 9</small></div>
+      <div class="asset">经典老爷车<small>× 9</small></div>
+      <div class="asset">小屋<small>× 8</small></div>
+    </div>
+
+    <h3>百搭牌</h3>
+    <div class="asset-grid">
+      <div class="asset" style="background:#dfd2b6">银<small>× 8</small></div>
+      <div class="asset" style="background:#c8a85c">金<small>× 4</small></div>
+    </div>
+
+    <h3>高级版 — 行动牌</h3>
+    <div class="asset-grid">
+      <div class="asset swap">交换<small>× 2</small></div>
+      <div class="asset move">移动<small>× 2</small></div>
+    </div>
+
+    <h3>高级版 — 百搭牌</h3>
+    <div class="asset-grid">
+      <div class="asset penny">存钱罐牌<small>× 2</small></div>
+    </div>
+  </section>
+
+  <section id="setup">
+    <h2 class="sec"><span class="num">3</span>游戏设置（经典规则）</h2>
+    <div class="note tip">
+      <b>提示：</b>这些规则在 4-6 人局时最佳。人数较少时，先读经典规则，再看 §16-19 页。
+    </div>
+    <ul>
+      <li>选择一位玩家做<b>庄家</b>。</li>
+      <li>从牌组中移除<b>交换</b>、<b>移动</b>和<b>存钱罐牌</b>。这些牌只在高级规则中使用。</li>
+      <li>洗牌。</li>
+      <li>给每位玩家发一手<b>5 张</b>牌。</li>
+      <li>牌组放在桌面中央（<b>抽牌堆</b>）。</li>
+      <li>翻出牌组顶 1 张牌作为<b>弃牌堆</b>。</li>
+      <li>庄家左手边的玩家<b>先手</b>。</li>
+      <li>在自己面前留出空间堆放<b>套牌堆</b>。</li>
+    </ul>
+    <div class="figure">
+      <img src="CYA_Rules_images/page_04.jpg" alt="规则书第 4 页（游戏设置 + 示例图）">
+      <figcaption>游戏进行中的示例</figcaption>
+    </div>
+  </section>
+
+  <section id="terms">
+    <h2 class="sec"><span class="num">4</span>关键术语</h2>
+    <div class="term-grid">
+      <div class="term">
+        <h4>资产</h4>
+        <p>你正在收集的单个物品。</p>
+      </div>
+      <div class="term">
+        <h4>百搭牌</h4>
+        <p>银和金是高价值牌，可匹配任何资产。</p>
+      </div>
+      <div class="term">
+        <h4>套牌</h4>
+        <p>起初为一对资产（或 1 张资产 + 1 张百搭牌），但随时间可能增长。</p>
+      </div>
+      <div class="term">
+        <h4>套牌堆</h4>
+        <p>由多个套牌堆叠组成的<b>堆</b>。</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="turn">
+    <h2 class="sec"><span class="num">5</span>你的回合</h2>
+    <p>在你的回合中，必须执行以下动作之一：</p>
+    <div class="three-col">
+      <div class="action-card">① 组合套牌</div>
+      <div class="action-card">② 弃牌</div>
+      <div class="action-card">③ 挑战（试图偷牌）</div>
+    </div>
+  </section>
+
+  <section id="form">
+    <h2 class="sec"><span class="num">6</span>组合套牌</h2>
+    <p>你必须通过以下三种方式之一组合一个套牌：</p>
+    <ul>
+      <li>从手中将<b>两张相同的牌</b>配成一对。</li>
+      <li>从手中出一张牌，与弃牌堆顶上的<b>相同牌</b>配对。</li>
+      <li>用以上任一方式组合，但其中一张为<b>百搭牌</b>。注意：堆叠套牌时，百搭牌必须放在资产<b>下方</b>！</li>
+    </ul>
+    <div class="callout">
+      <b>说明：</b>一对可以是两张相同的资产，也可以是一张资产加一张百搭牌（银或金）。但你不能用两张百搭牌或超过两张牌组成套牌——必须恰好一对。最后，套牌堆里的套牌不会与之前打出的同种资产合并。
+    </div>
+    <h3>堆叠套牌</h3>
+    <p>为保持各套牌分开，每次你向套牌堆添加新套牌时，将它放在前一套牌<b>上方</b>，<b>水平与竖直方向交替</b>摆置（即使与之前的套牌资产相同）。</p>
+  </section>
+
+  <section id="discard">
+    <h2 class="sec"><span class="num">7</span>弃牌</h2>
+    <p>从手中将一张牌<b>面朝上</b>弃到弃牌堆。选择这个动作可能蕴含很多策略。</p>
+  </section>
+
+  <section id="challenge">
+    <h2 class="sec"><span class="num">8</span>挑战（试图偷牌）</h2>
+    <p>每位玩家套牌堆的最顶端一张都是<b>脆弱的</b>，可能被对手偷走。要挑战另一位玩家的顶端套牌，可将一张<b>匹配资产</b>或<b>百搭牌</b>放在你要挑战的玩家面前。<b>注意：</b>资产与百搭牌在偷牌时威力相同，即使它们在终局计分时价值不同。</p>
+    <p><b>防守方</b>可以出一张匹配资产或百搭牌来保护自己的套牌。双方可任意轮流出牌挑战或防守，只要还想或还能继续。</p>
+    <p>如果你不能再出或选择不出，你就输掉了这次挑战。<b>挑战方赢</b>则获得该套牌；<b>防守方赢</b>则保住套牌。胜者还可保留所有参与战斗的牌。<b>提醒：</b>百搭牌必须放在资产<b>下方</b>。</p>
+    <div class="note tip">
+      <b>爷爷提示：</b>套牌可能变得越来越有价值诱人。<b>尽快用另一套牌盖住它们以保护！</b>
+    </div>
+
+    <h3>挑战的两条额外规则</h3>
+    <ul>
+      <li>每位玩家套牌堆中<b>第一套</b>（最底部）是安全的，不能被偷。</li>
+      <li>在偷别人的套牌前，你必须先自己组合<b>至少一个套牌</b>。</li>
+    </ul>
+
+    <div class="ex">
+      <p><span class="label">【示例】</span>Ezra 试图偷 Cathy 的<b>经典老爷车</b>套牌。他用一张<b>经典老爷车</b>发起挑战。Cathy 用一张<b>金</b>（百搭牌）回击。Ezra 再出一张<b>经典老爷车</b>。Cathy 无法回击，丢失套牌。Ezra 把这 3 张打出的牌作为新套牌保留。</p>
+    </div>
+  </section>
+
+  <section id="end-turn">
+    <h2 class="sec"><span class="num">9</span>结束回合</h2>
+    <p>完成三种动作之一（组合套牌 / 弃牌 / 挑战）后，从牌组补回到<b>5 张手牌</b>。你补完牌后，如果另一位玩家在你的回合中用过牌来防守，他们的牌数也要补回到 5 张。<b>左手边的玩家</b>接着行动。</p>
+    <div class="note tip">
+      <b>爷爷提示：</b>你可能比别人先出完手牌，但你的套牌仍可能被偷——所以出完每一张牌时都要三思。
+    </div>
+  </section>
+
+  <section id="round-end">
+    <h2 class="sec"><span class="num">10</span>回合结束</h2>
+    <p>当抽牌堆用完时，继续游戏直到所有玩家都出完手中的剩余牌。<b>跳过</b>在你的回合中仍不是可选项——如果你不想组合套牌或挑战，就必须<b>弃牌</b>。</p>
+    <div class="figure">
+      <img src="CYA_Rules_images/page_09.jpg" alt="规则书第 9 页（回合结束 + 计分 + 游戏结束）">
+      <figcaption>回合结束 + 计分 + 游戏结束</figcaption>
+    </div>
+  </section>
+
+  <section id="scoring">
+    <h2 class="sec"><span class="num">11</span>计分</h2>
+    <p>在本回合结束时，把套牌堆里每张牌的值加起来。</p>
+    <div class="score-card">
+      <p><b>小贴士：</b>按每 $100k 一摞地加起来会更容易一些。</p>
+    </div>
+  </section>
+
+  <section id="game-end">
+    <h2 class="sec"><span class="num">12</span>游戏结束</h2>
+    <p>你可以选择以下任一方式结束游戏：</p>
+    <ul>
+      <li><b>经典游戏：</b>玩若干回合，直到有玩家总分突破 <b>$1,000,000</b>。该玩家获胜！</li>
+      <li><b>快速游戏：</b>一回合结束时，得分最高的玩家获胜。恭喜！</li>
+      <li><b>3 回合后最高分：</b>每回合记录得分。3 回合后，最高分玩家获胜！</li>
+      <li><b>先赢 2 回合：</b>只记录每回合的最高分玩家。先赢 2 回合的玩家获胜！</li>
+    </ul>
+  </section>
+
+  <section id="advanced">
+    <h2 class="sec"><span class="num">13</span>高级规则</h2>
+    <div class="note tip">
+      <b>爷爷提示：</b>掌握经典规则后，可以加入以下可选规则，为游戏增加深度与策略！
+    </div>
+
+    <h3>规则修改</h3>
+    <ol>
+      <li>发牌，手牌数改为 <b>6 张</b>。</li>
+      <li>玩家每回合可执行<b>两个动作</b>。
+        <ul>
+          <li>执行第二个动作是可选的。如果不想执行第二个动作，喊一声"我的回合结束"。</li>
+          <li>你可以执行两个不同的动作，或执行相同的动作两次。</li>
+          <li>如果你挑战失败，在你下一回合前不能再次挑战同一位玩家。</li>
+          <li>如果你的第一个动作是弃牌，立刻补回到 6 张。然后你可以执行第二个动作。</li>
+        </ul>
+      </li>
+      <li>你多了<b>两个新动作</b>可用。
+        <ul>
+          <li><b>强化套牌：</b>在顶端套牌上增加一张资产，必须匹配现有套牌，不能是百搭牌。</li>
+          <li><b>打出行动牌：</b>打出交换或移动牌。</li>
+        </ul>
+      </li>
+      <li>顶端向下的<b>第二套</b>也可被挑战。
+        <ul>
+          <li>要挑战第二套，必须亮出<b>两张</b>匹配资产、两张百搭牌、一张资产加一张百搭牌，或单张<b>存钱罐牌</b>。</li>
+          <li>挑战开始后，防守或继续挑战只用一张牌。</li>
+        </ul>
+      </li>
+    </ol>
+  </section>
+
+  <section id="wild">
+    <h2 class="sec"><span class="num">14</span>存钱罐牌（百搭牌）</h2>
+    <p><b>存钱罐牌：</b>这张百搭牌值 <b>$1k</b>，但份量很重。<b>存钱罐牌</b>组成套牌的方式与其他百搭牌一样，但在挑战或防守时算作<b>两张</b>百搭牌。要应对它，必须出：两张资产、两张百搭牌、资产+百搭牌各一张，或另一张<b>存钱罐牌</b>。若可能，按常规用单张牌继续挑战流程。</p>
+    <div class="figure">
+      <img src="CYA_Rules_images/page_11.jpg" alt="规则书第 11 页（存钱罐牌 + 行动牌）">
+      <figcaption>存钱罐牌与行动牌</figcaption>
+    </div>
+  </section>
+
+  <section id="action-cards">
+    <h2 class="sec"><span class="num">15</span>行动牌</h2>
+    <p>这些牌使用后即移出游戏。放到与经典弃牌堆相反一侧的弃牌堆。你不能用其他牌抵消这些牌。</p>
+
+    <div class="three-col">
+      <div class="action-card swap">
+        交换
+        <p class="rule">将你套牌堆的最顶端套牌与任何其他玩家套牌堆的最顶端套牌交换。</p>
+      </div>
+      <div class="action-card move">
+        移动
+        <p class="rule">将任何玩家套牌堆（含你自己）的最顶端套牌移到底部，或将最底端套牌移到顶部。</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="2p">
+    <h2 class="sec"><span class="num">16</span>2 人规则</h2>
+    <ul>
+      <li>从牌组中移除以下牌：所有 <b>8 张小屋</b>、<b>2 张银</b>、<b>1 张金</b>。</li>
+      <li>选择庄家，洗牌并发成 <b>3 摞各 10 张</b>牌，面朝下。这是<b>选牌堆</b>。</li>
+      <li>翻开每摞选牌堆顶 1 张牌，面朝上。</li>
+      <li>最后给每位玩家发一手 <b>6 张牌</b>。</li>
+    </ul>
+
+    <h3>新动作！</h3>
+    <p>在 2 人局中，你有额外的动作可用：<b>选牌组</b>。</p>
+    <p>你可以通过将手中一张牌与选牌堆顶 1 张或多张牌组合来组成套牌。你可以拿走能与手中那张牌匹配的所有牌，组成一个套牌。</p>
+  </section>
+
+  <section id="draft">
+    <h2 class="sec"><span class="num">17</span>选牌组</h2>
+    <ol>
+      <li>从手中出一张资产（或百搭牌），能与选牌堆顶的 1 张或多张牌组成套牌。</li>
+      <li>把这些牌收起来组成一个套牌。</li>
+      <li>对手可以用手中匹配的资产或百搭牌来挑战你的新套牌。</li>
+      <li>挑战继续，规则同经典规则。</li>
+      <li>如果没有挑战，或你赢得挑战，你拿走套牌。如果你输，对手拿走。</li>
+      <li>在用过的牌摞上翻开下一张牌。</li>
+    </ol>
+
+    <div class="ex">
+      <p><span class="label">【示例 1】</span>两辆摩托车和一辆玩具火车在选牌堆顶。Phil 从手中出一张摩托车，把两张可见的摩托车一起拿走。Carla 不挑战，Phil 把套牌加入自己的套牌堆。</p>
+    </div>
+
+    <div class="ex">
+      <p><span class="label">【示例 2】</span>选牌堆顶有运动型飞机、金、银。David 从手中出一张珠宝卡，与 2 张百搭牌组成套牌。Apryl 用一张珠宝卡挑战。David 无法防守，Apryl 赢走套牌。</p>
+    </div>
+    <div class="figure">
+      <img src="CYA_Rules_images/page_13.jpg" alt="规则书第 13 页（选牌组示例）">
+      <figcaption>选牌组示例</figcaption>
+    </div>
+  </section>
+
+  <section id="3p">
+    <h2 class="sec"><span class="num">18</span>3 人规则</h2>
+    <p>3 人规则与 2 人规则类似，但有两点小变化：</p>
+    <ul>
+      <li>首先，使用完整牌组和<b>每手 5 张牌</b>。</li>
+      <li>三摞选牌堆的摆放位置不同——每位玩家<b>左右</b>各一摞。</li>
+    </ul>
+    <p>你一次只能从<b>一摞</b>选牌，且只能从你<b>左边或右边</b>那摞选。中间那摞（其他 2 位玩家之间的）不能选。当你从一摞选牌时，坐在它旁边的对手可以选择挑战。另一位对手则不能。</p>
+    <div class="figure">
+      <img src="CYA_Rules_images/page_14.jpg" alt="规则书第 14 页（3 人规则示意）">
+      <figcaption>3 人规则示意</figcaption>
+    </div>
+  </section>
+
+  <section id="advanced-23">
+    <h2 class="sec"><span class="num">19</span>2-3 人高级变更</h2>
+    <h3>选牌堆中揭示行动牌时</h3>
+    <ul>
+      <li><b>回合开始前</b>揭示的行动牌：面朝下随机放到该选牌堆中间，然后翻开下一张。</li>
+      <li>游戏中揭示的行动牌：立即生效。<b>2 人局</b>中影响双方；<b>3 人局</b>中影响行动牌所在两摞之间的两位玩家。</li>
+    </ul>
+
+    <h3>行动牌效果</h3>
+    <ul>
+      <li><b>移动：</b>被影响的双方玩家各自决定是否要对方把顶端套牌移到底部，或把底部套牌移到顶部。</li>
+      <li><b>交换：</b>被影响的双方玩家<b>互相交换</b>顶端套牌。若任一方没有套牌，把行动牌面朝下放回牌摞中间并翻开另一张。</li>
+    </ul>
+
+    <p>行动牌结算后<b>移出游戏</b>。选牌堆中揭示的行动牌不算作玩家的动作。从手中打出的行动牌仍按 §15 页的规则执行。</p>
+    <div class="note tip">
+      <b>爷爷提示：</b>你喜欢高级规则、想玩更多吗？那一定要试试我们的衍生作品：<b>Cover Your Kingdom</b>。
+    </div>
+  </section>
+
+  <section id="credits" class="credits">
+    <h2 class="sec"><span class="num">20</span>制作信息</h2>
+
+    <h3>有问题？</h3>
+    <p>Grandpa 期待你的来信：</p>
+    <ul>
+      <li>邮箱：Grandpa@grandpabecksgames.com</li>
+      <li>电话：<b>206.498.1959</b></li>
+      <li>常见问题：gbecks.com/cya-FAQ</li>
+    </ul>
+
+    <h3>关注我们</h3>
+    <ul>
+      <li>Instagram：<b>@grandpa.becks.games</b></li>
+      <li>Facebook：<b>www.facebook.com/GrandpaBecksGames</b></li>
+    </ul>
+
+    <h3>制作团队</h3>
+    <ul>
+      <li><b>设计师：</b>Brent & Tauni Beck、Jeff Beck</li>
+      <li><b>插画：</b>Andrew Bosley（bosleyart.com）</li>
+      <li><b>平面设计与插画：</b>David Bock（thegamebocks.com）</li>
+      <li><b>文案：</b>Jeff Beck、David Bock</li>
+    </ul>
+
+    <div class="figure">
+      <img src="CYA_Rules_images/page_16.jpg" alt="规则书第 16 页（Credits + 联系方式）">
+      <figcaption>制作信息与联系方式</figcaption>
+    </div>
+
+    <p style="margin-top: 30px; font-size: 13px; color: #6d5238;">
+"><><b>Cover Your Assets™</b><br>
+<b>Grandpa Beck's Games®</b><br>
+保留所有权利 2011, 2021<br>
+www.grandpabecksgames.com</p>
+  </section>
+
+</div>
+
+<div class="credits" style="background: var(--cream); padding: 30px 36px; border-top: 4px solid var(--brass);">
+  <h3 style="color: var(--copper); border-left-color: var(--brass);">盖住你的资产 / Cover Your Assets · 中文本地化版本</h3>
+  <p>翻译规则严格遵循"专名 vs 普通术语"桌游本地化准则：人名 / 地名 / 公司名保留英文；其他专名（卡牌名 / 能力名 / 大佬 名 / 章节标题 / 制作标签 / 普通术语）全部译为中文。</p>
+  <p>保留英文的专名：Grandpa Beck's Games®、Brent & Tauni Beck、Jeff Beck、Andrew Bosley、David Bock、bosleyart.com、thegamebocks.com、Cover Your Assets®、Grandpa Beck's、Grandpa@grandpabecksgames.com、Instagram、Facebook。</p>
+</div>
+
+</body>
+</html>

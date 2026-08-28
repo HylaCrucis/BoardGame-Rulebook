@@ -1,0 +1,15 @@
+# ===== 排除：备份 / 临时脚本 / 中间原料（不进仓库） =====
+
+# 各类就地备份（Medicus / Dirt 等的 .bak_*）
+*.bak
+*.bak_*
+
+# 临时质检 / 整理脚本（_medicus_*.py、_dirt_*.py …）
+_*.py
+
+# 临时导出文本与 OCR 原文（_dirt_pages.txt、_medicus_body.txt、*_src.txt …）
+_*.txt
+*_src.txt
+
+# 旧渲染归档（零填充旧图、临时归档目录）
+**/_archive/

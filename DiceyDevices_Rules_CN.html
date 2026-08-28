@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dicey Devices（骰子装置）— 游戏规则</title>
+<style>
+  :root{
+    --bone:#f5f2ea; --bone2:#ebe5d6; --ink:#2b2533; --ink-soft:#5d5568;
+    --purple:#4a3b6b; --purple-d:#2d1f45; --purple-l:#7a6aa0;
+    --teal:#3d8a8a; --teal-d:#245a5a; --teal-l:#6bb0b0;
+    --accent:#d96b4e; --accent-d:#a84d34;
+    --green:#3f7d52; --green-l:#e4f0e7;
+    --red:#a8392f; --red-l:#f6e3e0;
+    --line:#d8d0c0; --card:#fffdf7;
+    --blue:#3e7cb1; --pink:#c85a8e; --yellow:#e0b53d;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bone); color:var(--ink);
+    font-family:"Songti SC","Noto Serif SC","Source Han Serif SC",STSong,
+                "Iowan Old Style","Palatino Linotype",Georgia,serif;
+    line-height:1.8; font-size:17px;
+  }
+  .wrap{display:flex; align-items:flex-start; max-width:1180px; margin:0 auto;}
+  nav{
+    position:sticky; top:0; align-self:flex-start;
+    width:260px; flex:0 0 260px; height:100vh; overflow-y:auto;
+    background:var(--purple-d); color:#efe9f6; padding:22px 16px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;
+  }
+  nav h2{font-size:13px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--teal-l); margin:0 0 12px;}
+  nav ol{list-style:none; margin:0; padding:0;}
+  nav li ul{list-style:none; padding-left:12px; margin:2px 0 6px;}
+  nav a{display:block; color:#efe9f6; text-decoration:none; font-size:14px;
+    padding:6px 10px; border-radius:7px;}
+  nav a:hover{background:var(--purple);}
+  main{flex:1 1 auto; min-width:0; padding:0 40px 80px;}
+  .cover{
+    background:linear-gradient(160deg,var(--purple-d),var(--purple) 55%,var(--teal));
+    color:#f6f1e7; padding:60px 40px; border-radius:0 0 18px 18px;
+    margin-bottom:36px; text-align:center;
+    box-shadow:0 10px 30px rgba(45,31,69,.28);
+  }
+  .cover h1{font-size:42px; margin:0 0 8px; letter-spacing:.04em;}
+  .cover .sub{font-size:18px; opacity:.92; font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .cover .tag{display:inline-block; margin-top:16px; padding:6px 16px;
+    border:1px solid rgba(255,255,255,.4); border-radius:20px; font-size:14px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  section{padding:14px 0 8px; border-bottom:1px solid var(--line); scroll-margin-top:18px;}
+  h2.sec{font-size:28px; color:var(--purple-d); margin:18px 0 6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  h2.sec .num{color:var(--teal); font-weight:700; margin-right:10px;}
+  h3{font-size:20px; color:var(--purple); margin:24px 0 6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  h4{font-size:17px; color:var(--teal-d); margin:18px 0 4px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  p{margin:10px 0;}
+  ul,ol{margin:10px 0 10px 4px; padding-left:22px;}
+  li{margin:5px 0;}
+  .lead{font-size:18px;}
+  .comp-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:16px 0;}
+  .comp{border:1px solid var(--line); background:var(--card); border-radius:12px;
+    padding:14px 16px; box-shadow:0 2px 6px rgba(0,0,0,.04);}
+  .comp b{color:var(--purple-d);}
+  .callout{border-left:5px solid var(--accent); background:var(--bone2);
+    padding:12px 18px; margin:16px 0; border-radius:0 10px 10px 0;}
+  .callout.tip{border-color:var(--green); background:var(--green-l);}
+  .callout.tip b{color:var(--green);}
+  .callout.adv{border-color:var(--red); background:var(--red-l);}
+  .callout.adv b{color:var(--red);}
+  .steps{counter-reset:step; list-style:none; padding-left:0; margin:14px 0;}
+  .steps li{position:relative; padding:10px 14px 10px 52px; margin:8px 0;
+    background:var(--card); border:1px solid var(--line); border-radius:10px;}
+  .steps li::before{counter-increment:step; content:counter(step);
+    position:absolute; left:12px; top:50%; transform:translateY(-50%);
+    width:28px; height:28px; background:var(--purple); color:#fff;
+    border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-weight:700; font-family:Arial,sans-serif;}
+  .skill{border:1px solid var(--line); background:var(--card); border-radius:12px;
+    padding:14px 18px; margin:12px 0; box-shadow:0 2px 6px rgba(0,0,0,.04);}
+  .skill .name{font-weight:700; color:var(--purple-d); font-size:18px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .skill .name .ico{display:inline-block; min-width:22px; color:var(--accent);}
+  .req{border:1px solid var(--line); background:var(--card); border-radius:10px;
+    padding:12px 16px; margin:10px 0;}
+  .req .sym{font-weight:700; color:var(--purple-d);}
+  .ex{font-size:15px; color:var(--ink-soft); border-top:1px dashed var(--line);
+    margin-top:8px; padding-top:8px;}
+  .ex.ok::before{content:"✓ 示例 — "; color:var(--green); font-weight:700;}
+  figure{margin:18px 0; text-align:center;}
+  figure img{max-width:100%; border:1px solid var(--line); border-radius:12px;
+    box-shadow:0 4px 14px rgba(0,0,0,.08); background:#fff;}
+  figcaption{font-size:13px; color:var(--ink-soft); margin-top:6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .two{display:grid; grid-template-columns:1fr 1fr; gap:16px; align-items:start;}
+  .icon-list{display:grid; grid-template-columns:1fr 1fr; gap:8px 24px; margin:12px 0;}
+  .icon-list li{list-style:none; padding-left:0;}
+  @media(max-width:900px){
+    .wrap{flex-direction:column;}
+    nav{position:static; width:100%; height:auto; flex-basis:auto;}
+    main{padding:0 18px 60px;}
+    .comp-grid,.two,.icon-list{grid-template-columns:1fr;}
+  }
+  footer{margin-top:40px; font-size:13px; color:var(--ink-soft);
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; text-align:center;}
+  .credits{background:var(--bone2); border:1px solid var(--line); border-radius:12px;
+    padding:16px 20px; margin-top:14px;}
+  .credits b{color:var(--purple-d);}
+  .term dt{font-weight:700; color:var(--purple-d); margin-top:10px;}
+  .term dd{margin-left:0; color:var(--ink-soft);}
+  .small{font-size:15px; color:var(--ink-soft);}
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <h1>Dicey Devices</h1>
+  <div class="sub">骰子装置 · 游戏规则</div>
+  <div class="tag">2–4 人</div>
+</header>
+
+<div class="wrap">
+  <nav>
+    <h2>目录</h2>
+    <ol>
+      <li><a href="#overview">概览</a></li>
+      <li><a href="#components">组件</a></li>
+      <li><a href="#boards">版图详解</a></li>
+      <li><a href="#setup">游戏准备</a></li>
+      <li><a href="#phases">回合阶段</a>
+        <ul>
+          <li><a href="#revive">复活阶段</a></li>
+          <li><a href="#blast">轰击阶段</a></li>
+          <li><a href="#lab">实验室阶段</a></li>
+          <li><a href="#collection">收集阶段</a></li>
+          <li><a href="#deployment">部署阶段</a></li>
+          <li><a href="#cleanup">整理阶段</a></li>
+          <li><a href="#game-end">游戏结束</a></li>
+          <li><a href="#additional-rules">附加规则</a></li>
+        </ul>
+      </li>
+      <li><a href="#upgrades">死亡射线升级</a></li>
+      <li><a href="#cards">卡牌类型</a></li>
+      <li><a href="#blueprints">Igor 蓝图</a></li>
+      <li><a href="#terms">术语与符号</a></li>
+      <li><a href="#faq">常见问题</a></li>
+      <li><a href="#variants">提示与变体</a></li>
+      <li><a href="#credits">制作人员</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+  <section id="overview">
+    <h2 class="sec"><span class="num">1</span>概览</h2>
+    <p class="lead">在 <b>Dicey Devices（骰子装置）</b>中，你将指挥机器人、经营实验室，并依靠忠实助手 <b>Igor（伊戈尔）</b>来建造并升级你的死亡射线，把对手一个个轰到失能。不过要小心——失能的玩家仍可恢复健康，并用他们自己的死亡射线向你复仇！</p>
+    <p>本游戏<strong>没有玩家淘汰</strong>：失能时你只会失去回合中的部分环节，甚至还有机会复活。从起始玩家开始顺时针进行，每位玩家依次完成六个阶段。当除一名科学家外的所有人都失能时，游戏结束；最后站立的疯狂科学家获胜！</p>
+    <div class="callout tip">
+      <b>主要目标：</b>没有能运作的死亡射线，可统治不了世界！你必须在实验室中凑齐各色套装，为攻击其他科学家提供能量。当除你以外的所有科学家都失能时，你便是胜者。
+    </div>
+    <figure>
+      <img src="DiceyDevices_Rules_images/cover.jpg" alt="封面">
+      <figcaption>游戏封面（封面）</figcaption>
+    </figure>
+    <h3>回合六阶段</h3>
+    <ol>
+      <li><b>复活阶段（Revive）：</b>若已失能，可尝试复活角色。</li>
+      <li><b>轰击阶段（Blast）：</b>若死亡射线已激活且未失能，可向目标开火。</li>
+      <li><b>实验室阶段（Lab）：</b>激活你的实验室，获取资源与卡牌效果。</li>
+      <li><b>收集阶段（Collection）：</b>所有符合条件的玩家从已激活的废料场区域中收集。</li>
+      <li><b>部署阶段（Deployment）：</b>将可部署机器人送入废料场。</li>
+      <li><b>整理阶段（Cleanup）：</b>补充空缺的区域卡牌，并可重新整理实验室。</li>
+    </ol>
+    <figure>
+      <img src="DiceyDevices_Rules_images/p03.jpg" alt="引言页">
+      <figcaption>引言与背景故事（印刷页 3）</figcaption>
+    </figure>
+    <figure>
+      <img src="DiceyDevices_Rules_images/p12.jpg" alt="游戏概览">
+      <figcaption>游戏概览与回合六阶段（印刷页 12）</figcaption>
+    </figure>
+  </section>
+
+  <section id="components">
+    <h2 class="sec"><span class="num">2</span>组件</h2>
+    <div class="comp-grid">
+      <div class="comp"><b>4 块实验室版图</b><br>玩家个人板，含废料轨、未激活/可部署机器人区、角色位、Igor 栖木、蓝图位、银行槽、装置区 1–9、机械区 10–12 与充能格。</div>
+      <div class="comp"><b>1 块废料场版图</b><br>中央公共版图，含 6 个区域、区域卡牌槽、废料选项与废料顶点。</div>
+      <div class="comp"><b>4 块武器板</b><br>放置死亡射线、记录套装数量与模块，并查看轰击说明。</div>
+      <div class="comp"><b>骰子</b><br>2 颗实验室骰子（D6，粉色/蓝色）、2 颗轰击骰子（D6，红色/黄色）、1 颗核弹骰子（D12，白色）。</div>
+      <div class="comp"><b>40 个机器人标记</b><br>四色，每色 10 个（蓝色、粉色、红色、黄色）。</div>
+      <div class="comp"><b>4 个 Igor 米宝</b><br>每色 1 个。</div>
+      <div class="comp"><b>4 个便携电池</b><br>每色 1 个，可翻转选择产出资源。</div>
+      <div class="comp"><b>4 个死亡射线模型</b><br>每色 1 个，建造后竖立。</div>
+      <div class="comp"><b>4 个废料计数器</b><br>每色 1 个，在废料轨上记录废料数量。</div>
+      <div class="comp"><b>25 个充能方块</b><br>绿色小方块，用于触发机械区能力。</div>
+      <div class="comp"><b>20 个套装方块</b><br>白色小方块，标记已完成的套装。</div>
+      <div class="comp"><b>9 个区域修正板块</b><br>抽到双数时放置在废料场区域上。</div>
+      <div class="comp"><b>卡牌</b><br>6 角色卡、10 原型装置卡、7 特殊装置卡、7 事件卡、12 起始装置卡、51 基础装置卡、5 独特装置卡、15 进阶装置卡、3 万能装置卡、15 增强卡、15 死亡射线模块卡。</div>
+      <div class="comp"><b>辅助配件</b><br>4 张玩家辅助卡、3 个模块指示物、1 个玩家起始标记。</div>
+      <div class="comp"><b>单人模式组件</b><br>18 张单人卡、7 个角色剧本、1 块双面敌方实验室版图、8 个角色指示物。（本规则书仅含多人模式）</div>
+    </div>
+    <figure>
+      <img src="DiceyDevices_Rules_images/p04.jpg" alt="组件页">
+      <figcaption>游戏组件总览（印刷页 4）</figcaption>
+    </figure>
+    <figure>
+      <img src="DiceyDevices_Rules_images/p05.jpg" alt="卡牌组件">
+      <figcaption>卡牌与其他组件（印刷页 5）</figcaption>
+    </figure>
+  </section>
+
+  <section id="boards">
+    <h2 class="sec"><span class="num">3</span>版图详解</h2>
+    <h3>实验室版图（玩家板）</h3>
+    <ol>
+      <li><b>废料轨：</b>记录你囤积的废料数量。</li>
+      <li><b>未激活机器人区：</b>被回收或摧毁的机器人通常回到这里。</li>
+      <li><b>角色位：</b>放置角色卡，正面朝上；失能时翻面。</li>
+      <li><b>Igor 蓝图位：</b>游戏中获得蓝图后放置于此。</li>
+      <li><b>Igor 栖木：</b>Igor 在此时，你可在实验室阶段重掷一颗或两颗骰子。</li>
+      <li><b>可部署机器人区：</b>生产后的机器人通常到这里。</li>
+      <li><b>银行槽：</b>放置骰子与机器人以“储备”数值，供后续掷骰使用。</li>
+      <li><b>实验室区域指示：</b>标明区域编号及其产出的资源。</li>
+      <li><b>装置区 1–9：</b>放置装置卡（不含增强卡）。</li>
+      <li><b>机械区 10–12：</b>放置增强卡，类型需与区域对应。</li>
+      <li><b>充能格：</b>获得充能方块后放在这些格子里。</li>
+    </ol>
+    <figure>
+      <img src="DiceyDevices_Rules_images/p06.jpg" alt="玩家板">
+      <figcaption>实验室版图说明（印刷页 6）</figcaption>
+    </figure>
+
+    <h3>武器板</h3>
+    <ol>
+      <li><b>死亡射线垫：</b>将死亡射线侧放于此，表示尚未建造；建造后竖立。</li>
+      <li><b>套装追踪区：</b>每当你凑成一种颜色套装时，放一个套装方块于此。</li>
+    </ol>
+
+    <h3>废料场版图</h3>
+    <ol>
+      <li><b>区域指示：</b>标明区域编号 1–6。</li>
+      <li><b>区域空间：</b>放置机器人与 Igor，以收集废料或卡牌。</li>
+      <li><b>区域卡牌槽：</b>放置可用废料购买的卡牌。</li>
+      <li><b>区域废料选项：</b>表示玩家可改为获得 1 废料。</li>
+      <li><b>废料顶点：</b>玩家可将 Igor 置于此获得 1 废料。</li>
+    </ol>
+    <figure>
+      <img src="DiceyDevices_Rules_images/p07.jpg" alt="武器板与废料场">
+      <figcaption>武器板与废料场版图说明（印刷页 7）</figcaption>
+    </figure>
+  </section>
+
+  <section id="setup">
+    <h2 class="sec"><span class="num">4</span>游戏准备</h2>
+    <h3>个人准备</h3>
+    <ol class="steps">
+      <li>每位玩家选择一种颜色，拿取该色的实验室版图、10 个机器人、Igor 米宝、便携电池、废料计数器与死亡射线。</li>
+      <li>选择任意角色卡，正面朝上放在角色位。角色无特殊能力；你的特殊起始能力由原型卡决定。</li>
+      <li>将 Igor 米宝放到 Igor 栖木上。</li>
+      <li>将便携电池放在区域 1 的指示物上，齿轮面朝上，盖住当前资源。可在实验室阶段开始时移动/更换。</li>
+      <li>从 10 个机器人中拿 7 个放入未激活区，3 个放入可部署区。</li>
+      <li>将废料计数器放到废料轨的 “4” 上。废料即你的货币。</li>
+      <li>洗匀所有原型卡，每人发 2 张；选择 1 张保留，弃除另 1 张。将选定的卡以 1.0 面朝上放在实验室区域 1。</li>
+      <li>将起始卡按背面分成 4 叠，每叠 3 张。每位玩家选择一叠，将其卡片放到任意一行最左侧的空区域中。首次游戏建议放在区域 2、4、5。<br><span class="small">2 人游戏：只使用标有 “2/3/4” 的两张起始卡，移除该叠的第三张。</span></li>
+      <li>每人拿 3 个绿色充能方块，分别放在区域 10、11、12 的底部充能格中。<br><span class="small">2 人游戏：双方开始时都在区域 11 放 2 个护盾充能。</span></li>
+      <li>每人发 1 块武器板，放在个人版图左侧或上方显眼处。</li>
+      <li>将你颜色的死亡射线侧放在武器板左侧，表示武器尚未激活。</li>
+    </ol>
+    <figure>
+      <img src="DiceyDevices_Rules_images/p08.jpg" alt="个人准备">
+      <figcaption>个人准备步骤（印刷页 8）</figcaption>
+    </figure>
+    <figure>
+      <img src="DiceyDevices_Rules_images/p09.jpg" alt="个人准备图例">
+      <figcaption>个人版图设置示例（印刷页 9）</figcaption>
+    </figure>
+
+    <h3>公共准备</h3>
+    <ol class="steps">
+      <li>决定起始玩家：每人掷 1 颗 D6，点数最高者获胜；平局重掷。</li>
+      <li>将玩家起始标记与实验室骰子交给起始玩家。</li>
+      <li>将轰击骰子与核弹骰子放在大家都能拿到的地方。</li>
+      <li>将除原型卡外的所有装置卡、增强卡、事件卡洗成一副公共牌库（即"游戏牌库"）。
+        <div class="callout adv" style="margin-top:6px;">
+          <b>进阶玩法：</b>若使用进阶装置卡，将其全部混入游戏牌库。进阶卡两侧有星号标记。
+        </div>
+      </li>
+      <li>将废料场放在桌面中央。</li>
+      <li>从洗好的游戏牌库中，在每个废料场区域的卡牌槽放 1 张卡。若抽到“抽到即触发（when drawn）”的事件卡，先放一边，重新抽一张；所有区域补充完毕后，将这些事件卡洗回牌库。</li>
+      <li>从起始玩家开始，每位玩家按自己的玩家顺位从未激活区部署相应数量的机器人到废料场。<br><span class="small">例如：起始玩家放 1 个，第二位放 2 个，依此类推。部署必须遵循部署规则。</span></li>
+      <li>将充能方块供应区与套装方块供应区放在大家都能拿到的地方。</li>
+      <li>洗匀区域修正板块，面朝下放置。
+        <div class="callout adv" style="margin-top:6px;">
+          <b>进阶玩法：</b>将 Igor 蓝图放在大家都能拿到的地方。
+        </div>
+      </li>
+      <li>洗匀死亡射线模块卡，面朝下放在套装方块旁。</li>
+    </ol>
+    <figure>
+      <img src="DiceyDevices_Rules_images/p10.jpg" alt="公共准备">
+      <figcaption>公共准备步骤（印刷页 10）</figcaption>
+    </figure>
+    <div class="callout tip">
+      <b>首次游戏建议：</b>若第一次游玩，建议先略过标有 <b>[advanced play]</b> 的规则部分（如进阶装置卡、Igor 蓝图等）。
+    </div>
+  </section>
+
+  <section id="phases">
+    <h2 class="sec"><span class="num">5</span>回合阶段</h2>
+    <p>从起始玩家开始顺时针进行，每位玩家按顺序完成以下六个阶段。</p>
+
+    <h3 id="revive">5.1 复活阶段（Revive Phase）</h3>
+    <div class="callout">
+      <b>若你未失能，跳过本阶段。</b>
+    </div>
+    <p>失能时，你无法部署 Igor 或操作死亡射线，但仍可执行阶段 3–6 中的其他行动。</p>
+    <p>Igor 会尝试从失能科学家一侧的“手术圈（Operating Circle）”将你复活。你有两种方式：</p>
+    <ol>
+      <li><b>掷 2 颗实验室骰子：</b>出现对子（两颗点数相同）即复活。
+        <ul>
+          <li>成功：Igor 把你电醒！继续进入轰击阶段。</li>
+          <li>失败：你仍可支付 6 废料复活；否则直接进入实验室阶段。</li>
+        </ul>
+      </li>
+      <li><b>支付 6 废料复活：</b>可以先用骰子尝试对子。
+        <ul>
+          <li>支付 6 废料：Igor 给你造了一颗废料心脏！继续进入轰击阶段。</li>
+          <li>不支付：保持失能，直接进入实验室阶段。</li>
+        </ul>
+      </li>
+    </ol>
+    <figure>
+      <img src="DiceyDevices_Rules_images/p13.jpg" alt="复活阶段">
+      <figcaption>复活阶段说明（印刷页 13）</figcaption>
+    </figure>
+
+    <h3 id="blast">5.2 轰击阶段（Blast Phase）</h3>
+    <div class="callout">
+      <b>若你失能，或尚未建造死亡射线，跳过本阶段。</b>
+    </div>
+    <p>在轰击阶段，你有机会用死亡射线令其他疯狂科学家失能。死亡射线的轰击威力和模块数量，取决于你实验室中当前拥有的颜色套装数量。</p>
+    <h4>轰击步骤</h4>
+    <ol class="steps">
+      <li>指定一名玩家为目标，将死亡射线转向他们。</li>
+      <li>根据你拥有的套装数量，掷对应数量和类型的骰子。目标玩家掷 1 颗 D6 进行防御掷骰。
+        <ul>
+          <li><b>A. 你掷出更高，且目标无护盾：</b>命中，目标失能。失能玩家翻面角色卡，并将自己的 Igor 放到手术圈（失能科学家一侧）。<br><span class="small">2 人游戏：被击中的玩家可立即尝试复活；若复活失败，游戏结束。</span></li>
+          <li><b>B. 你掷出更高，且目标有护盾：</b>目标从护盾充能格（区域 11）失去 1 个充能方块。</li>
+          <li><b>C. 平局：</b>重掷。</li>
+          <li><b>D. 你掷出更低：</b>未命中目标。</li>
+        </ul>
+      </li>
+      <li>你可在轰击阶段任意时刻使用死亡射线模块。</li>
+      <li>准备好剩余的轰击次数后，从步骤 1 开始重复。（可指定新目标。）</li>
+    </ol>
+    <figure>
+      <img src="DiceyDevices_Rules_images/p14.jpg" alt="轰击阶段">
+      <figcaption>轰击阶段步骤（印刷页 14）</figcaption>
+    </figure>
+
+    <div class="callout">
+      <b>规则补遗：狂怒方块（Madness Cubes）</b><br>
+      本补遗衔接轰击阶段步骤 1 与 2D。
+      <ul>
+        <li><b>献祭狂怒方块：</b>在攻击或防御掷骰前，你可以献祭任意数量的狂怒方块，每献祭 1 个为本次掷骰结果 +1。新结果不能超过 6，即使是在核弹骰上；超出部分浪费。</li>
+        <li><b>获得狂怒方块：</b>每次你轰击另一名玩家但未命中时，获得 1 个狂怒方块。命中护盾仍算命中，不获得狂怒方块。</li>
+        <li>狂怒方块可在轰击阶段通过死亡射线模块的使用而获得或使用。</li>
+        <li>本回合后续轰击中即可使用刚获得的狂怒方块。</li>
+      </ul>
+    </div>
+    <figure>
+      <img src="DiceyDevices_Rules_images/addendum.jpg" alt="狂怒方块补遗">
+      <figcaption>规则补遗：狂怒方块（补遗页）</figcaption>
+    </figure>
+
+    <h3 id="lab">5.3 实验室阶段（Lab Phase）</h3>
+    <p>拉下操纵杆，让你的机器实现你的疯狂计划！</p>
+    <h4>步骤</h4>
+    <ol class="steps">
+      <li>将便携电池翻到你选择的资源面，然后把它放到任意装置区 1–9 中。</li>
+      <li>掷 2 颗实验室骰子，并将它们分配到合适的实验室区域和/或银行槽中。这将激活掷出区域以及其左侧所有区域中的卡牌与资源。</li>
+      <li>你可在实验室阶段任意时刻使用区域 10 与区域 12 中的充能方块。</li>
+    </ol>
+
+    <h4>便携电池</h4>
+    <p>把电池翻到你想产出的资源面，然后放到所选装置区下方的资源图标上（1–9）。<b>电池不能放在机械区 10、11、12。</b></p>
+    <p>在实验室阶段，电池所在区域无论是否被骰子掷中都会被激活：(A) 提供其朝上面的资源，代替该区域通常产出的资源，并激活该区域的卡牌（若有）；(B) 若你的实验室掷骰也激活了该区域，不会再次激活。</p>
+    <figure>
+      <img src="DiceyDevices_Rules_images/p17.jpg" alt="实验室阶段">
+      <figcaption>实验室阶段与便携电池（印刷页 17）</figcaption>
+    </figure>
+
+    <h4>分配实验室骰子</h4>
+    <p>若 Igor 在栖木上，你在分配骰子时可重掷一颗或两颗骰子一次。</p>
+    <p>将掷出的骰子分配到<b>银行槽</b>和/或<b>实验室区域</b>，数值需对应。</p>
+    <p>分配方式包括：</p>
+    <ul>
+      <li>1 颗骰子到一个实验室区域，另 1 颗到另一个不同的实验室区域；</li>
+      <li>1 颗骰子到一个银行槽，另 1 颗到一个实验室区域；</li>
+      <li>1 颗骰子到一个银行槽，另 1 颗到另一个不同的银行槽；</li>
+      <li>2 颗骰子到同一个实验室区域（点数相加）。</li>
+    </ul>
+    <p>分配骰子时，可以拆分或相加：</p>
+    <ul>
+      <li><b>拆分：</b>每颗骰子分别放到与面值相同的实验室区域或银行槽。</li>
+      <li><b>相加：</b>两颗骰子点数相加，放到总和对应的实验室区域。</li>
+    </ul>
+    <p>每颗骰子可独立分配到实验室或银行。分配到实验室的骰子要么以组合值激活，要么以拆分值激活；分配到银行的骰子不激活实验室，而是把一颗<b>未激活或可部署</b>机器人放到与骰子面值相同的银行槽中"持有"该数值，直到使用。</p>
+    <figure>
+      <img src="DiceyDevices_Rules_images/p18.jpg" alt="分配骰子">
+      <figcaption>分配实验室骰子（印刷页 18）</figcaption>
+    </figure>
+
+    <h4>分配到实验室区域</h4>
+    <p>将骰子放到实验室区域会激活该区域及其左侧所有区域的卡牌与资源。<b>增强卡不会被骰子激活。</b></p>
+    <p>在已激活区域中收集资源：</p>
+    <ul>
+      <li><b>机器人（区域 1–5）：</b>将 1 个机器人从未激活区移到可部署区。</li>
+      <li><b>废料（区域 6–9）：</b>将废料计数器在废料轨上向上移 1 格。</li>
+      <li><b>充能方块（区域 10–12）：</b>将 1 个充能方块放到该区域右侧的充能格中。你在同一实验室阶段即可使用它。</li>
+    </ul>
+    <p>使用已激活区域的卡牌时，顺序任意，也可以选择不使用。</p>
+    <figure>
+      <img src="DiceyDevices_Rules_images/p19.jpg" alt="分配到区域">
+      <figcaption>分配到实验室区域示例（印刷页 19）</figcaption>
+    </figure>
+
+    <h4>分配到银行槽</h4>
+    <p>将骰子和机器人分配到银行槽会储存该骰子的数值。之后你可以用它替换某次掷骰的骰面（用于战斗、废料场区域激活或实验室掷骰），或加到实验室掷骰的总值中。</p>
+    <div class="callout">
+      <b>银行规则：</b>不能储存一个当前已被储存的数值。储存的数值没有保留时间限制。若总值超过 12，可选择从区域 10、11 或 12 开始激活任意一行，这称为“超载（overcharge）”！
+    </div>
+    <h4>充能方块</h4>
+    <p>实验室阶段可使用区域 10 与 12 中的充能方块。移除 1 个充能方块以使用该区域的特殊能力：</p>
+    <ul>
+      <li><b>区域 12 — 狂野射击（Wild Shot）：</b>射击对手的实验室，掷 2D6 命中对应编号区域；若有卡，将其摧毁并弃除。不需要激活的死亡射线。</li>
+      <li><b>区域 11 — 护盾（Shield）：</b>被轰击命中时移除 1 个护盾充能以抵消失能。</li>
+      <li><b>区域 10 — 电池（Battery）：</b>使用实验室中任意一张本阶段尚未使用过的卡牌。</li>
+    </ul>
+    <figure>
+      <img src="DiceyDevices_Rules_images/p20.jpg" alt="银行槽">
+      <figcaption>银行槽与银行值用法（印刷页 20）</figcaption>
+    </figure>
+    <figure>
+      <img src="DiceyDevices_Rules_images/p21.jpg" alt="充能方块">
+      <figcaption>充能方块能力与收集阶段开端（印刷页 21）</figcaption>
+    </figure>
+
+    <h3 id="collection">5.4 收集阶段（Collection Phase）</h3>
+    <p>机器人已经派出，布局已经设好，是时候收获回报了。</p>
+    <h4>步骤</h4>
+    <ol class="steps">
+      <li>拿取你在实验室阶段掷出的两颗骰子，将它们放到废料场上与点数对应的区域。这些区域被激活！
+        <ul>
+          <li>若掷出对子（只激活一个区域），在该区域放置 1 个区域修正板块。修正板块在玩家收集前生效，且始终在该区域生效。</li>
+          <li>若对子区域已有修正板块，则替换它。</li>
+        </ul>
+      </li>
+      <li>从编号较小的区域开始收集。
+        <ul>
+          <li>每个已激活区域中，最主导的玩家可先选择拿取卡牌 <b>或</b> 获得 1 废料；第二主导的玩家拿取前者没拿的另一项。</li>
+          <li>每位收集的玩家必须从该区域召回 1 个机器人或 Igor 回到自己的实验室。<b>机器人回到未激活机器人区；Igor 回到 Igor 栖木。</b></li>
+        </ul>
+      </li>
+    </ol>
+    <h4>区域主导权</h4>
+    <p>某区域中机器人最多的玩家为最主导玩家；Igor 在计算主导权时相当于 0.5 个机器人。若平局，从当前行动玩家开始顺时针，每位平局的玩家掷 1D6，点数高者视为更主导。</p>
+    <div class="callout">
+      <b>注意：</b>只有最主导和第二主导的两名玩家可以从已激活区域收集。
+    </div>
+    <div class="callout">
+      <b>多人参与顺序：</b>当多个玩家需要结算同一事件（包括平局与事件卡）时，从当前行动玩家开始顺时针结算。若涉及多个区域，优先结算编号较小的区域，除非卡牌允许玩家自行选择。
+    </div>
+    <h4>收集卡牌</h4>
+    <p>拿卡牌需要废料！按卡牌右上角标注的价格降低你的废料计数器，然后从该区域召回 1 个机器人或 Igor。</p>
+    <p>装置卡进入实验室任意一行最左侧的空装置区。增强卡则放到对应的机械区 10、11 或 12，并获得 1 个该区域的充能方块。</p>
+    <h4>收集废料</h4>
+    <p>选择收集废料时，从该区域召回 1 个机器人或 Igor，并将废料计数器向上移 1 格。</p>
+    <figure>
+      <img src="DiceyDevices_Rules_images/p22.jpg" alt="收集阶段">
+      <figcaption>区域激活与收集（印刷页 22）</figcaption>
+    </figure>
+    <figure>
+      <img src="DiceyDevices_Rules_images/p23.jpg" alt="收集卡牌与部署">
+      <figcaption>收集卡牌/废料与部署阶段开端（印刷页 23）</figcaption>
+    </figure>
+
+    <h3 id="deployment">5.5 部署阶段（Deployment Phase）</h3>
+    <p>“去吧，我的机器人仆从！去执行主人的命令！”</p>
+    <h4>步骤</h4>
+    <ol class="steps">
+      <li>将你的机器人从可部署区部署到废料场的任意区域，遵循部署规则。
+        <ul>
+          <li>你不必部署固定数量，也可以让部分机器人留在可部署区（除非场景需要，否则不推荐）。</li>
+        </ul>
+      </li>
+      <li>将 Igor 部署到废料场区域、废料顶点或 Igor 栖木。
+        <ul>
+          <li>Igor 可部署到与上次部署阶段相同的位置，也可部署到新位置。</li>
+        </ul>
+      </li>
+    </ol>
+    <h4>部署规则</h4>
+    <p>你只能在部署后能成为该区域<b>主导</b>（机器人数量最高）的区域部署机器人。Igor 在主导权中计为 0.5 个机器人，但 Igor 本身不受部署规则限制。</p>
+    <div class="callout">
+      <b>移动、骇入、放置、交换及其他卡牌效果导致的机器人移动，须遵循卡牌上的要求，而不是部署规则。</b>
+    </div>
+    <h4>部署 Igor</h4>
+    <ul>
+      <li><b>Igor 栖木：</b>你的下一次实验室阶段可重掷一颗或两颗骰子。</li>
+      <li><b>废料顶点：</b>立即将废料计数器向上移 1 格。Igor 会留在顶点直到你的下一个部署阶段；若再次部署到顶点，再次获得 1 废料。</li>
+      <li><b>废料场区域：</b>Igor 可放到任意区域，不受部署规则限制。Igor 在区域中算 0.5 个机器人的主导权，并可以像机器人一样收集。若从区域（非顶点）收集，Igor 回到 Igor 栖木。</li>
+    </ul>
+    <p>Igor 免疫所有影响机器人的效果。</p>
+    <figure>
+      <img src="DiceyDevices_Rules_images/p24.jpg" alt="部署规则">
+      <figcaption>部署规则与 Igor 部署（印刷页 24）</figcaption>
+    </figure>
+
+    <h3 id="cleanup">5.6 整理阶段（Cleanup Phase）</h3>
+    <p>“一天结束时：捏脚趾一百次、刷牙，然后为新一天的统治做好准备。”</p>
+    <ol class="steps">
+      <li>从编号最低到最高的区域，用游戏牌库补充废料场中所有空的区域卡牌槽。
+        <ul>
+          <li>若抽到“抽到即触发”的事件卡，立即结算，然后继续补充空槽。</li>
+          <li>补充完毕后，玩家起始标记传给左手玩家，由其开始下一回合。</li>
+        </ul>
+      </li>
+      <li>你可以交换实验室装置区中任意两张卡的位置一次。</li>
+      <li>检查你的原型卡是否满足升级条件。</li>
+    </ol>
+
+    <h3 id="game-end">游戏结束</h3>
+    <p>当除一名科学家外，其他所有科学家都失能时，游戏结束。最后站立的疯狂科学家获胜！</p>
+
+    <h3 id="additional-rules">附加规则</h3>
+    <h4>多人参与顺序（Multiple Involvements）</h4>
+    <p>当多于一名玩家需要结算同一事件（包括平局与事件卡）时，从当前行动玩家开始顺时针结算。请注意，一回合要到整理阶段结束后才算结束。</p>
+    <p>如果多个废料场区域卷入同一事件，优先结算编号较小的区域，除非卡牌指定由玩家自行选择。</p>
+    <figure>
+      <img src="DiceyDevices_Rules_images/p25.jpg" alt="整理阶段与游戏结束">
+      <figcaption>整理阶段、游戏结束与附加规则（印刷页 25）</figcaption>
+    </figure>
+  </section>
+
+  <section id="upgrades">
+    <h2 class="sec"><span class="num">6</span>死亡射线升级</h2>
+    <h3>颜色套装类型</h3>
+    <p>可凑成的套装类型有：</p>
+    <ul>
+      <li><b>3 张同色</b></li>
+      <li><b>4 张同色</b></li>
+      <li><b>4 张不同色</b></li>
+      <li><b>5 张不同色</b></li>
+    </ul>
+    <p>同一张卡可以作为不同类型套装的一部分，但不能在同一类型中重复计算。<b>特殊卡、事件卡、原型卡不计入颜色。</b>颜色显示在卡牌的左上角。</p>
+    <h3>获得与失去套装</h3>
+    <div class="callout">
+      <b>卡牌无需按特定顺序：</b>套装内的卡牌在实验室中无需按特定顺序排列即可计为已收集；所有可组成的套装都标在武器板上。
+    </div>
+    <p><b>获得新套装时：</b></p>
+    <ol>
+      <li>在武器板对应的套装图标上放 1 个套装方块。只要该套装的卡仍在实验室中，方块就保留。</li>
+      <li>抽 1 张死亡射线模块卡，放到武器板右侧。</li>
+    </ol>
+    <p><b>失去套装中的卡时</b>（除非实验室中另一张卡补全了该套装）：</p>
+    <ol>
+      <li>从武器板对应套装图标上移除套装方块。</li>
+      <li>选择 1 个死亡射线模块，洗回模块牌库。</li>
+    </ol>
+    <div class="callout">
+      <b>注意：</b>其他玩家或事件会影响你的套装数量。若所有套装都被消除，你的死亡射线将离线！
+    </div>
+
+    <h3>轰击威力</h3>
+    <p>死亡射线威力随套装增加而提升，增加骰子、重掷次数，并最终使用更强大的核弹骰。</p>
+    <ul>
+      <li><b>简单轰击：</b>拥有 1 个套装时，每次轰击掷 1 颗 D6。</li>
+      <li><b>超级轰击：</b>拥有 2 个套装时，每次轰击可分别进行两次轰击，每次掷 2D6，只取较高值作为攻击值。</li>
+      <li><b>核弹轰击：</b>拥有 3 个或更多套装时，所有轰击都使用核弹骰（D12）。原子符号计为 2 次不可阻挡的命中！</li>
+    </ul>
+    <p><b>轰击次数：</b>你的轰击阶段可以进行与武器板上套装方块数量相同的轰击次数。每次轰击的目标可以与上次相同或不同。</p>
+    <p><b>模块数量：</b>你拥有的模块数量等于你的套装数量。模块可在轰击阶段任意时刻使用，同一次轰击阶段中每个模块不能使用超过一次。模块使用后保留；只有失去完整套装时才会失去模块。</p>
+    <figure>
+      <img src="DiceyDevices_Rules_images/p15.jpg" alt="套装">
+      <figcaption>获得/失去套装与死亡射线升级（印刷页 15）</figcaption>
+    </figure>
+    <figure>
+      <img src="DiceyDevices_Rules_images/p16.jpg" alt="轰击威力">
+      <figcaption>轰击威力与模块示例（印刷页 16）</figcaption>
+    </figure>
+  </section>
+
+  <section id="cards">
+    <h2 class="sec"><span class="num">7</span>卡牌类型</h2>
+    <h3>基础装置卡（Basic Device Cards）</h3>
+    <p>在实验室阶段被激活时可使用。某些卡带有<b>连击（Combo）</b>效果：当第二张<b>同色</b>卡牌正交相邻（非对角）于带有连击能力的卡时，可触发额外效果。</p>
+
+    <h3>独特装置卡（Unique Device Cards）</h3>
+    <p>带有“获得即触发（when acquired）”效果的装置卡。效果结算后，该卡不会在实验室中激活，但仍可作为套装颜色使用。每种颜色在牌库中只有 1 张！</p>
+
+    <h3>增强卡（Augment Cards）</h3>
+    <p>增强你的电池（区域 10）、护盾（区域 11）或狂野射击（区域 12）。获得时放到对应机械区，并获得 1 个该区域的充能方块。增强卡会改变该区域充能方块的能力；你仍可使用充能方块的基础能力，但<b>不能在同一充能方块上同时使用基础和增强能力</b>。</p>
+
+    <h3>进阶装置卡（Advanced Device Cards）</h3>
+    <p>进阶卡能增加玩家互动和策略深度。<b>进阶卡无需激活即可使用！</b>每张卡会写明使用时间；若未指定时间，则在实验室阶段使用。许多进阶卡需要<b>横置（Tip）</b>（将卡旋转 90°）来触发能力；再次使用前必须先<b>恢复（Untip）</b>（旋转回正）。<b>横置的卡可通过「用骰子激活」或「用便携电池激活」来恢复。</b><b>横置和恢复的当回合不能再次使用同一张卡。</b>进阶卡两侧有星号标记。</p>
+    <div class="callout adv">
+      <b>进阶玩法：</b>首次游戏建议不使用进阶装置卡。
+    </div>
+
+    <h3>万能装置卡（Wild Device Cards）</h3>
+    <p>被激活时没有任何效果，但可以帮助你组成颜色套装。获得时宣言其颜色；你也可以在你的回合开始时重新宣言其颜色以组成不同套装。</p>
+    <div class="callout">
+      <b>注意：</b>若改色导致套装变化，记得调整套装方块。
+    </div>
+
+    <h3>起始装置卡（Starter Device Cards）</h3>
+    <p>分为 4 叠，每叠 3 张，背面图案不同。设置时玩家选择一叠。3 人以上游戏使用整叠；2 人游戏只使用标有 “2/3/4” 的两张。四类起始叠分别为：Barraging（破坏）、Rushing（机动）、Producing（生产）、Controlling（控制）。</p>
+
+    <h3>事件卡（Event Cards）</h3>
+    <p>分为“抽到即触发（when DRAWN）”和“获得即触发（when ACQUIRED）”两种，在指定时机立即结算。事件卡<b>不计入颜色套装</b>。</p>
+
+    <h3>特殊装置卡（Special Device Cards）</h3>
+    <p>每张都有独特的一次性效果；使用后离开你的实验室。它们<b>不计入颜色套装</b>。</p>
+
+    <h3>原型卡（Prototype Card）</h3>
+    <p>游戏开始时就在你实验室中的卡，从 1.0 面开始，可通过使用升级。每次激活后，在卡上放 1 个充能方块以记录进度。激活并添加充能方块后，你可以选择不使用该装置。达到指定次数后翻面升级。原型卡<b>不计入颜色套装</b>。</p>
+
+    <h3>死亡射线模块卡（Death Ray Module Cards）</h3>
+    <p>大多数模块提供在轰击阶段获得额外轰击的可选方式；少数会指定特定玩家为目标，使用时将对应的模块指示物放在目标玩家的版图上方。标有“Before First Blast”的两个模块必须在进行任何轰击前使用。</p>
+    <p><b>不喜欢当前模块？</b>在轰击阶段前，支付 2 废料抽 2 张模块并选择 1 张替换当前模块；只要负担得起，可重复多次。</p>
+    <figure>
+      <img src="DiceyDevices_Rules_images/p26.jpg" alt="基础与独特卡">
+      <figcaption>基础装置卡与独特装置卡（印刷页 26）</figcaption>
+    </figure>
+    <figure>
+      <img src="DiceyDevices_Rules_images/p27.jpg" alt="增强与进阶卡">
+      <figcaption>增强卡与进阶装置卡（印刷页 27）</figcaption>
+    </figure>
+    <figure>
+      <img src="DiceyDevices_Rules_images/p28.jpg" alt="万能起始事件卡">
+      <figcaption>万能装置卡、起始装置卡与事件卡（印刷页 28）</figcaption>
+    </figure>
+    <figure>
+      <img src="DiceyDevices_Rules_images/p29.jpg" alt="特殊原型模块卡">
+      <figcaption>特殊装置卡、原型卡与死亡射线模块卡（印刷页 29）</figcaption>
+    </figure>
+  </section>
+
+  <section id="blueprints">
+    <h2 class="sec"><span class="num">8</span>Igor 蓝图</h2>
+    <div class="callout adv">
+      <b>进阶玩法：</b>Igor 蓝图属于进阶内容，首次游戏可跳过。
+    </div>
+    <p>当你在自己的实验室中，将<b>任意 3 张同色卡牌</b>在同一行或同一列排成一线（横或竖，不能对角）时，你可以选择是否拿取该颜色的 Igor 蓝图。</p>
+    <p>选择蓝图的一面，放到疯狂科学家角色卡上方的 Igor 蓝图位。你现在可以使用该能力。</p>
+    <div class="callout">
+      <b>限制：</b>每种颜色的蓝图只能由一名玩家拥有；每位玩家只能拥有 1 张 Igor 蓝图，且不可交换。
+    </div>
+    <figure>
+      <img src="DiceyDevices_Rules_images/p26.jpg" alt="Igor 蓝图">
+      <figcaption>Igor 蓝图规则（印刷页 26）</figcaption>
+    </figure>
+  </section>
+
+  <section id="terms">
+    <h2 class="sec"><span class="num">9</span>术语与符号</h2>
+    <dl class="term">
+      <dt>激活的（Active）</dt><dd>在废料场中或在玩家版可部署区里的机器人。</dd>
+      <dt>激活（Activate）</dt><dd>按卡牌说明结算装置或区域的效果。</dd>
+      <dt>相邻（Adjacent）</dt><dd>实验室区域或废料场区域共享完整边（非仅角接触）。</dd>
+      <dt>任意时刻（At any time）</dt><dd>任何阶段均可，即使不是你的回合。</dd>
+      <dt>攻击（Attack）</dt><dd>用死亡射线射击。</dd>
+      <dt>攻击者（Attacker）</dt><dd>用死亡射线射击你的科学家。</dd>
+      <dt>充能（Charge [to full]）</dt><dd>在指定区域（10、11 或 12）获得充能直到满；超出部分弃除。</dd>
+      <dt>收集（Collecting）</dt><dd>从废料场拿取废料或购买装置。</dd>
+      <dt>连击（Combo）</dt><dd>与一张同色装置卡相邻时触发的额外效果。</dd>
+      <dt>部署规则（Deployment Rule）</dt><dd>向废料场区域放机器人时，你必须比该区域任何其他玩家放得多。</dd>
+      <dt>摧毁（Destroy）</dt><dd>将一个激活的机器人移回其拥有者玩家版的未激活区。</dd>
+      <dt>主导（Dominant）</dt><dd>废料场某区域中机器人最多的玩家。</dd>
+      <dt>获得（Gain）</dt><dd>获得指定的资源、装置等。</dd>
+      <dt>未激活的（Inactive）</dt><dd>在玩家版未激活区里的机器人。</dd>
+      <dt>占据（Inhabit）</dt><dd>占据一个实验室区域或废料场区域。</dd>
+      <dt>执行（Perform）</dt><dd>执行指定行动。</dd>
+      <dt>永久摧毁（Permanently Destroy）</dt><dd>将目标机器人从游戏中移除，不移回玩家版。</dd>
+      <dt>生产（Produce）</dt><dd>将玩家版未激活区的 1 个机器人放到可部署区。</dd>
+      <dt>放置（Place）</dt><dd>将物件放到指定空间。若机器人进入废料场区域，不视为移动或部署；若是事件，不弃除其下方的装置。</dd>
+      <dt>重排（Rearrange）</dt><dd>改变装置区卡牌的位置；每行仍需从左到右填满。</dd>
+      <dt>区域（Sector）</dt><dd>废料场版图上标有 1–6 的空间。</dd>
+      <dt>共享（Shared）</dt><dd>有多个玩家机器人占据的区域。</dd>
+      <dt>交换（Switch）</dt><dd>让两个不同废料场区域的机器人互换位置。</dd>
+    </dl>
+    <h3>符号说明</h3>
+    <ul class="icon-list">
+      <li>⚙ 废料：获得 1 废料</li>
+      <li>🤖 机器人：获得 1 个机器人</li>
+      <li>🚀 狂野射击：获得 1 个狂野射击充能</li>
+      <li>🛡 护盾：获得 1 个护盾充能</li>
+      <li>🔋 电池：获得 1 个电池充能</li>
+      <li>♥ 复活：提醒你可以花 6 废料复活</li>
+      <li>↕ 对子符号：当该区域被对子激活时，可选择激活上下装置区而非左侧所有区域</li>
+      <li>💡 控制型起始叠</li>
+      <li>👥 机动型起始叠</li>
+      <li>⚙❓ 生产型起始叠</li>
+      <li>💥 破坏型起始叠</li>
+      <li>🔍 原型卡</li>
+      <li>⁉ 抽到即触发事件卡</li>
+      <li>★ 进阶卡</li>
+      <li>⚡ 获得时获得狂野射击充能</li>
+      <li>⚡🛡 获得时获得护盾充能</li>
+      <li>⚡🔋 获得时获得电池充能</li>
+    </ul>
+    <figure>
+      <img src="DiceyDevices_Rules_images/p30.jpg" alt="术语">
+      <figcaption>术语表（印刷页 30）</figcaption>
+    </figure>
+    <figure>
+      <img src="DiceyDevices_Rules_images/p31.jpg" alt="符号">
+      <figcaption>符号说明（印刷页 31）</figcaption>
+    </figure>
+  </section>
+
+  <section id="faq">
+    <h2 class="sec"><span class="num">10</span>常见问题</h2>
+    <dl class="term">
+      <dt>当对手摧毁或移除我的机器人时，它去哪？</dt><dd>未激活机器人区。</dd>
+      <dt>卡牌或资源能否被双重激活？</dt><dd>除非卡牌明确允许，否则不能。</dd>
+      <dt>能否在同一回合用电池恢复一张刚被激活过的卡？能否使用刚用电池恢复的卡？</dt><dd>都不行。横置或恢复一张卡视为激活该区域，且该动作算作使用了装置。</dd>
+      <dt>掷出对子时，废料场区域会激活两次吗？</dt><dd>不会。</dd>
+      <dt>能否替换机械区 10–12 的增强卡？</dt><dd>可以，用新购买的增强卡替换旧的并弃除旧卡。</dd>
+      <dt>装置区 1–9 满了怎么办？</dt><dd>购买卡牌时，选择实验室中的一张卡弃除以腾出空间。</dd>
+      <dt>购买的卡必须立即放置吗？</dt><dd>是的，决定购买就必须立即放置。</dd>
+      <dt>没有卡牌的已激活实验室区域也要收集资源吗？</dt><dd>是的。</dd>
+      <dt>必须部署 Igor 吗？何时收回？</dt><dd>不必。部署阶段你可以让 Igor 留在原地，并在下次部署阶段再次获得该位置的好处。</dd>
+      <dt>战斗中可以多次改变骰面吗？</dt><dd>可以。</dd>
+      <dt>能否把可部署机器人当作未激活机器人使用？</dt><dd>可以。若没有未激活机器人可用于某个行动，你可以改用可部署机器人。</dd>
+      <dt>实验室阶段获得的装置能在同一实验室阶段激活吗？</dt><dd>可以，只要放置它的区域本回合尚未被激活。每个区域每回合只能激活一次。但若某装置是用已激活区域的资源获得的，只要该区域内本阶段没有装置被使用过，你仍可使用放入该区域的装置。</dd>
+      <dt>掷两颗骰子时储存一颗，能立即加到另一颗上吗？</dt><dd>不能。但实验室阶段通过装置获得的银行值，仍可在尚未用骰子激活任何区域之前，用于替换或加到实验室骰子上。</dd>
+    </dl>
+    <h3>卡牌澄清</h3>
+    <dl class="term">
+      <dt>Amp Clamp</dt><dd>该装置不能把掷出骰子的点数翻倍超过 6，但可以把银行值加入累计实验室掷骰时翻倍（例如把银行中的 5 加到实验室掷骰中变为 +10）。</dd>
+      <dt>Bomb Buddies</dt><dd>任何人都可以把任意数量自己的机器人从该卡所在区域移到这张卡上，无视主导权。</dd>
+      <dt>Crazy Diamonds</dt><dd>每张 Crazy Diamonds 每回合可指定一种颜色，但整回合保持该颜色。例如，若你在轰击阶段用它凑成 3 张蓝色套装，实验室阶段它也必须保持蓝色。</dd>
+      <dt>Dud Dudley</dt><dd>“交换位置”指被移除的装置进入 Dud Dudley 所在的区域，而 Dud Dudley 进入该装置原来所在的区域。</dd>
+      <dt>Electromagnet</dt><dd>以此方式交换机器人算作移动。</dd>
+      <dt>Hack</dt><dd>被骇入的机器人不视为被摧毁或移动；它只是从废料场移除并回到拥有者的未激活区。</dd>
+      <dt>Impersonation</dt><dd>相当于你进行两个轰击阶段：一次用对手的死亡射线，一次用你自己的（若你的已激活）。</dd>
+      <dt>Power Disruptor</dt><dd>该效果可在任意时刻使用，每次使用消耗 1 个充能。</dd>
+      <dt>Radioactive Berry</dt><dd>最后一人失能后你仍可激活该浆果。</dd>
+      <dt>Working Remote</dt><dd>可用于激活你在实验室阶段获得并放入已激活区域的卡牌。</dd>
+      <dt>Kawamiri log</dt><dd>部署 3 个机器人前不需要召回机器人。</dd>
+    </dl>
+    <figure>
+      <img src="DiceyDevices_Rules_images/p32.jpg" alt="卡牌澄清">
+      <figcaption>卡牌澄清（印刷页 32）</figcaption>
+    </figure>
+    <figure>
+      <img src="DiceyDevices_Rules_images/p33.jpg" alt="一般问题">
+      <figcaption>一般问题（印刷页 33）</figcaption>
+    </figure>
+    <figure>
+      <img src="DiceyDevices_Rules_images/p32.jpg" alt="常见问题">
+      <figcaption>卡牌澄清与常见问题（印刷页 32）</figcaption>
+    </figure>
+  </section>
+
+  <section id="variants">
+    <h2 class="sec"><span class="num">11</span>提示与变体</h2>
+    <h3>有用提示</h3>
+    <ul>
+      <li>若用银行骰子将累计实验室掷骰提升到 12 以上，你可以激活任意一行！（第 20 页）</li>
+      <li>不喜欢当前死亡射线模块可支付 2 废料更换，次数不限。（第 29 页）</li>
+      <li>获得增强卡时会获得对应区域的 1 个充能方块！（第 27 页）</li>
+      <li>合理使用银行非常强大。（第 20 页）</li>
+    </ul>
+    <h3>变体模式</h3>
+    <ul>
+      <li><b>伟大机器人战争：</b>不用起始叠与 1 张原型卡，改为开始时拥有 2 张原型卡且无起始叠。</li>
+      <li><b>放射性模式（区域修改变体）：</b>放置区域修正板块时，同时在该区域左右两侧两个区域也放置修正板块。</li>
+      <li><b>战术公爵：</b>判定主导权时，若多个玩家在某区域机器人数量并列最多，则这些玩家都无法收集；由机器人数量次高的玩家收集。若全部并列，则该区域无人收集。</li>
+    </ul>
+    <figure>
+      <img src="DiceyDevices_Rules_images/back.jpg" alt="提示与变体">
+      <figcaption>提示、变体与制作人员（封底）</figcaption>
+    </figure>
+  </section>
+
+  <section id="credits">
+    <h2 class="sec"><span class="num">12</span>制作人员</h2>
+    <div class="credits">
+      <p><b>游戏设计：</b>Daniel Kim</p>
+      <p><b>插画：</b>Adin Milo</p>
+      <p><b>开发：</b>Elliott Moshell</p>
+      <p><b>编辑：</b>Jon Healey</p>
+      <p><b>发行：</b>Origami Whale, LLC</p>
+      <p><b>更多信息：</b><a href="https://www.origamiwhalegames.com" target="_blank">www.origamiwhalegames.com</a></p>
+      <p class="small">© 2025 Origami Whale, LLC. 游戏与标志均为 Origami Whale LLC 商标。实际组件可能与图示不同。未经明确许可，不得复制本产品任何部分。</p>
+    </div>
+  </section>
+
+  <footer>
+    本中文版网页基于 Dicey Devices 的 Kickstarter 众筹草稿版规则书整理与翻译，仅供阅读参考；游戏名称、人名与专有名词保留英文，并以中文括号对照。版式与导航为便于查阅而添加。
+  </footer>
+
+  </main>
+</div>
+</body>
+</html>

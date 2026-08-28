@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>疯狂出租车（Taxi Over）— 游戏规则</title>
+<style>
+  :root{
+    --bg:#fffaef; --bg2:#fbf3df; --ink:#2c2a25; --ink-soft:#6b6358;
+    --yellow:#f5c518; --yellow-d:#b8941a;
+    --orange:#e15a3a; --orange-d:#b84327;
+    --blue:#2b6cb0; --blue-d:#1c4e80;
+    --gray:#5c6275; --road:#3b4356;
+    --line:#e7dfc7; --card:#fffdf7;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"Songti SC","Noto Serif SC","Source Han Serif SC",STSong,
+                "Iowan Old Style","Palatino Linotype",Georgia,serif;
+    line-height:1.85; font-size:16px;
+  }
+  .wrap{display:flex; align-items:flex-start; max-width:1180px; margin:0 auto;}
+  nav{
+    position:sticky; top:0; align-self:flex-start;
+    width:248px; flex:0 0 248px; height:100vh; overflow-y:auto;
+    background:linear-gradient(180deg,var(--road),var(--gray));
+    color:#f6f3e7; padding:22px 16px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;
+  }
+  nav h2{font-size:13px; letter-spacing:.12em; text-transform:uppercase;
+    color:#f5c518; margin:0 0 12px;}
+  nav ol{list-style:none; margin:0; padding:0;}
+  nav a{display:block; color:#f6f3e7; text-decoration:none; font-size:14px;
+    padding:7px 10px; border-radius:7px;}
+  nav a:hover{background:var(--yellow); color:var(--road);}
+  main{flex:1 1 auto; min-width:0; padding:0 40px 80px;}
+  .cover{
+    background:linear-gradient(160deg,var(--road),var(--gray) 60%,var(--yellow));
+    color:#fffaef; padding:62px 40px; border-radius:0 0 18px 18px;
+    margin-bottom:36px; text-align:center;
+    box-shadow:0 10px 30px rgba(59,67,86,.28);
+  }
+  .cover h1{font-size:42px; margin:0 0 6px; letter-spacing:.02em;}
+  .cover .sub{font-size:17px; opacity:.95; font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .cover .tag{display:inline-block; margin-top:16px; padding:6px 16px;
+    border:1px solid rgba(255,255,255,.45); border-radius:20px; font-size:14px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  section{padding:14px 0 8px; border-bottom:1px solid var(--line); scroll-margin-top:18px;}
+  h2.sec{font-size:28px; color:var(--blue-d); margin:18px 0 6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  h2.sec .num{color:var(--orange); font-weight:700; margin-right:10px;}
+  h3{font-size:20px; color:var(--road); margin:24px 0 6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  p{margin:10px 0;}
+  ul,ol{margin:10px 0 10px 4px; padding-left:22px;}
+  li{margin:5px 0;}
+  .lead{font-size:18px;}
+  .comp-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:16px 0;}
+  .comp{border:1px solid var(--line); background:var(--card); border-radius:12px;
+    padding:14px 16px; box-shadow:0 2px 6px rgba(0,0,0,.04);}
+  .comp b{color:var(--blue-d);}
+  ol.setup{counter-reset:setup; list-style:none; padding-left:0;}
+  ol.setup > li{position:relative; padding:8px 8px 8px 56px; margin:6px 0;
+    background:var(--card); border:1px solid var(--line); border-radius:8px;}
+  ol.setup > li::before{counter-increment:setup; content:counter(setup);
+    position:absolute; left:10px; top:8px;
+    width:30px; height:30px; background:var(--blue); color:#fff;
+    border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-weight:700; font-family:Arial,sans-serif;}
+  .ex{border:1px solid var(--yellow); background:#fffae0;
+    padding:12px 18px; border-radius:10px; margin:14px 0;}
+  .ex .label{display:inline-block; background:var(--yellow); color:var(--road);
+    padding:2px 10px; border-radius:12px; font-weight:700; font-size:14px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; margin-right:8px;}
+  .die{display:inline-block; min-width:34px; padding:3px 8px; background:var(--yellow);
+    color:var(--road); border-radius:6px; font-weight:700; font-family:Arial,sans-serif;
+    border:2px solid var(--road);}
+  .math{display:inline-block; font-family:Arial,sans-serif; font-weight:700;
+    color:var(--orange); padding:0 4px;}
+  figure{margin:18px 0; text-align:center;}
+  figure img{max-width:100%; border:1px solid var(--line); border-radius:12px;
+    box-shadow:0 4px 14px rgba(0,0,0,.08); background:#fff;}
+  figcaption{font-size:13px; color:var(--ink-soft); margin-top:6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .credits{background:var(--bg2); border:1px solid var(--line); border-radius:12px;
+    padding:16px 20px; margin-top:14px; font-size:15px;}
+  .credits b{color:var(--blue-d);}
+  footer{margin-top:40px; font-size:13px; color:var(--ink-soft);
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; text-align:center;}
+  .note{border-left:3px solid var(--yellow); padding:8px 14px; background:var(--bg2);
+    border-radius:0 8px 8px 0; margin:14px 0;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; font-size:14px;}
+  @media(max-width:900px){
+    .wrap{flex-direction:column;}
+    nav{position:static; width:100%; height:auto; flex-basis:auto;}
+    main{padding:0 18px 60px;}
+    .comp-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <h1>疯狂出租车</h1>
+  <div class="sub">疯狂出租车 · 游戏规则（中文版）</div>
+  <div class="tag">14 岁以上 &nbsp;|&nbsp; 2&ndash;4 人 &nbsp;|&nbsp; 约 15&ndash;30 分钟</div>
+</header>
+
+<div class="wrap">
+  <nav>
+    <h2>目录</h2>
+    <ol>
+      <li><a href="#intro">简介</a></li>
+      <li><a href="#components">配件</a></li>
+      <li><a href="#setup">准备</a></li>
+      <li><a href="#objective">目标</a></li>
+      <li><a href="#gameplay">游戏流程</a></li>
+      <li><a href="#step1">步骤 1：掷骰</a></li>
+      <li><a href="#step2">步骤 2：移动</a></li>
+      <li><a href="#pushing">推挤对手</a></li>
+      <li><a href="#speeding">超速违规</a></li>
+      <li><a href="#step3">步骤 3：收钱</a></li>
+      <li><a href="#end">游戏结束</a></li>
+      <li><a href="#special">特殊情形</a></li>
+      <li><a href="#carryover">上回合遗留的处理</a></li>
+      <li><a href="#credits">制作信息</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+  <section id="intro">
+    <h2 class="sec"><span class="num">1</span>简介</h2>
+    <p class="lead">尽可能快地开你的出租车！每多掷一次骰子，你的出租车移动速度就会成倍增加。最先跑完一圈的玩家可以拿走所有累计的车资，但要小心被身后的出租车撞上——或者自己掷出太大的点数，掉进城市里的天坑！</p>
+    <p class="note">原文：「驾驶 your taxi as fast as you can! 每位 additional roll of the dice makes your taxi move exponentially faster. The first player to complete a lap collects the accumulated fare, but beware of other taxis ramming into you from behind or rolling a number that's too high, causing you to fall into a sinkhole in the city!」</p>
+  </section>
+
+  <section id="components">
+    <h2 class="sec"><span class="num">2</span>配件</h2>
+    <div class="comp-grid">
+      <div class="comp"><b>游戏 board / 游戏板</b><br>游戏板。</div>
+      <div class="comp"><b>等候出租盒 / 等候出租盒</b><br>等候出租盒（位于游戏外盒内）。</div>
+      <div class="comp"><b>3 dice / 骰子</b><br>3 颗骰子。</div>
+      <div class="comp"><b>4 taxis / 出租车</b><br>4 辆出租车。</div>
+      <div class="comp"><b>4 drivers / 司机</b><br>4 名司机，颜色分别为红、蓝、白、紫。</div>
+      <div class="comp"><b>4 driver tokens / 司机标记</b><br>4 个司机标记，颜色分别为红、蓝、白、紫。</div>
+      <div class="comp" style="grid-column:1/-1;"><b>36 money tokens / 钱币标记</b><br>36 枚钱币标记。</div>
+    </div>
+  </section>
+
+  <section id="setup">
+    <h2 class="sec"><span class="num">3</span>准备</h2>
+    <ol class="setup">
+      <li>展开游戏板，平放在桌子中央。</li>
+      <li>把等候出租盒放在游戏板旁边，向盒内放 1 枚钱币标记。把其余钱币收集到桌子一侧，做成「供应区」。</li>
+      <li>每位玩家拿取同一颜色的 1 辆出租车、1 名司机、1 个司机标记。</li>
+      <li>所有玩家把司机放到自己的出租车上，并将它们并排放在游戏板外、靠近 <strong>起点</strong> 标记的位置。这一排位置即为「起点」。</li>
+      <li>最近坐过出租车（的士）的玩家成为起始玩家。</li>
+    </ol>
+    <figure>
+      <img src="Taxiover_Rules_images/page_01.jpg" alt="规则书第 1 页（封面 + 配件 + 准备 + 特殊情形 + 制作信息）">
+      <figcaption>原文第 1 页（封面、配件、四人 准备 配图与说明、步骤 3、结束 of the 游戏、特殊情形、制作信息）</figcaption>
+    </figure>
+    <p class="note">原书 准备 配图示意「&lt;游戏 preparation for 4 people&gt;」，并用序号 ①②③④ 标注关键位置：① 起点 标识、②For 雇佣 box、③ 起点、④ 棋子初始摆放。</p>
+  </section>
+
+  <section id="objective">
+    <h2 class="sec"><span class="num">4</span>目标</h2>
+    <p class="lead">掷骰子开动你的出租车，赚到最多的钱币。</p>
+  </section>
+
+  <section id="gameplay">
+    <h2 class="sec"><span class="num">5</span>游戏流程</h2>
+    <p>游戏按<strong>顺时针方向</strong>轮流进行，自起始玩家开始。每位玩家的回合包含以下三个步骤：</p>
+    <ol>
+      <li>掷 the 骰子 / 掷骰</li>
+      <li>移动 / 移动</li>
+      <li>收钱 / 收钱</li>
+    </ol>
+  </section>
+
+  <section id="step1">
+    <h2 class="sec"><span class="num">6</span>步骤 1：掷骰</h2>
+    <p>在你回合中，你可以一次掷 <strong>最多 3 颗骰子</strong>，每掷一颗停下决定是否继续。</p>
+    <p>掷完第一颗骰子后，决定是否掷第二颗。如果不再掷，则进入步骤 2。</p>
+    <p>如果掷了第二颗，检查两颗<strong>点数之和是否超过「4」</strong>：</p>
+    <ul>
+      <li>如果超过，立即进入步骤 2，并处理 <a href="#speeding">§9 超速违规</a>。</li>
+      <li>如果没超过，决定是否掷第三颗。如果不再掷，则进入步骤 2。</li>
+    </ul>
+    <p>掷完第三颗后，同样检查点数之和是否超过「4」：</p>
+    <ul>
+      <li>如果超过，立即进入步骤 2，并处理 <a href="#speeding">§9 超速违规</a>。</li>
+      <li>如果没超过，进入步骤 2。</li>
+    </ul>
+  </section>
+
+  <section id="step2">
+    <h2 class="sec"><span class="num">7</span>步骤 2：移动</h2>
+    <p>把载有司机的出租车向前移动，移动距离等于「<strong>点数之和 × 掷出的骰子数量</strong>」。</p>
+    <div class="ex">
+      <p><span class="label">【示例】</span>Wanjin 第一颗骰子掷出 <span class="die">3</span>，决定掷第二颗。第二颗显示 <span class="die">1</span>，总和不超过 4，于是他停止掷骰。Wanjin 的出租车向前移动 <span class="math">8</span> 个格（<span class="math">4 × 2</span>）。</p>
+      <p style="margin:6px 0 0;"><b>原书示例公式图：</b></p>
+      <table style="border-collapse:collapse; margin:6px auto; font-family:Arial,sans-serif;">
+        <tr>
+          <td style="padding:6px 12px; background:var(--yellow); color:var(--road); font-weight:700; border:2px solid var(--road); border-radius:6px; font-size:18px;">3</td>
+          <td style="padding:6px 6px; font-size:18px; font-weight:700;">+</td>
+          <td style="padding:6px 12px; background:var(--yellow); color:var(--road); font-weight:700; border:2px solid var(--road); border-radius:6px; font-size:18px;">1</td>
+          <td style="padding:6px 6px; font-size:18px; font-weight:700;">=</td>
+          <td style="padding:6px 12px; font-weight:700; font-size:18px; color:var(--orange);">4</td>
+        </tr>
+        <tr><td colspan="3" style="text-align:center; font-size:12px; color:var(--ink-soft); padding-top:4px;">first die　second die</td><td></td><td style="font-size:12px; color:var(--ink-soft);">the sum of the dice results</td></tr>
+        <tr>
+          <td style="padding:6px 12px; font-weight:700; font-size:18px; color:var(--orange);">4</td>
+          <td style="padding:6px 6px; font-size:18px; font-weight:700;">×</td>
+          <td style="padding:6px 12px; background:var(--yellow); color:var(--road); font-weight:700; border:2px solid var(--road); border-radius:6px; font-size:18px;">2</td>
+          <td style="padding:6px 6px; font-size:18px; font-weight:700;">=</td>
+          <td style="padding:6px 12px; font-weight:700; font-size:18px; color:var(--orange);">8</td>
+        </tr>
+        <tr><td colspan="3" style="text-align:center; font-size:12px; color:var(--ink-soft);">the sum of the dice results　the number of dice rolled</td><td></td><td></td></tr>
+      </table>
+    </div>
+    <figure>
+      <img src="Taxiover_Rules_images/page_02.jpg" alt="规则书第 2 页（游戏流程 + 步骤 1/2 + Pushing + 超速违规）">
+      <figcaption>原文第 2 页（准备 续、目标、游戏流程、步骤 1、步骤 2 与示例、推挤对手、超速违规）</figcaption>
+    </figure>
+  </section>
+
+  <section id="pushing">
+    <h2 class="sec"><span class="num">8</span>推挤对手</h2>
+    <p>由于道路狭窄，每个格子上同时只能有<strong>一辆</strong>出租车。如果前方有另一辆出租车挡住了去路，就把前方的出租车<strong>向前推一格并继续移动</strong>。此规则对空车和有司机的出租车同样适用，<strong>多辆车可以同时被推</strong>。若一辆出租车被推入天坑，则把它移回 <strong>起点</strong>。</p>
+  </section>
+
+  <section id="speeding">
+    <h2 class="sec"><span class="num">9</span>超速违规</h2>
+    <p>如果在步骤 1 中骰子点数之和超过「4」，司机必须<strong>下出租车</strong>。</p>
+    <p>原文以「处理 the following steps:」一句引导，但在本规则书的可见版面内未列出后续具体步骤；其实际的处理动作分别见：</p>
+    <ul>
+      <li><a href="#carryover">§13 上回合遗留的处理</a>（超速后该玩家下一回合如何重新上车）</li>
+      <li><a href="#special">§12 特殊情形第 2 条</a>（超速后空出租车移到招呼站）</li>
+    </ul>
+  </section>
+
+  <section id="step3">
+    <h2 class="sec"><span class="num">10</span>步骤 3：收钱</h2>
+    <p>如果司机的出租车<strong>到达或经过</strong>一个 <strong>招呼站</strong>（招呼站），玩家从等候出租盒中拿走所有钱币标记。之后从供应区中向等候出租盒内放入 1 枚新的钱币标记。</p>
+  </section>
+
+  <section id="end">
+    <h2 class="sec"><span class="num">11</span>游戏结束</h2>
+    <p>当一位玩家集齐 <strong>10 枚或更多钱币标记</strong> 时，游戏立即结束，该玩家获胜。</p>
+    <p>如果是 <strong>2 人局</strong>，则首先集齐 <strong>8 枚或更多</strong> 钱币标记的玩家获胜。</p>
+  </section>
+
+  <section id="special">
+    <h2 class="sec"><span class="num">12</span>特殊情形</h2>
+    <ol>
+      <li><b>1.</b> 如果<strong>所有</strong>玩家都获得超速违规且<strong>没有</strong>司机在游戏板上，则立即把全部空出租车移回到 <strong>起点</strong>。</li>
+      <li><b>2.</b> 如果一辆出租车获得超速违规时尚未到达招呼站，把这辆空出租车移动到最近的一个招呼站上。</li>
+    </ol>
+  </section>
+
+  <section id="carryover">
+    <h2 class="sec"><span class="num">13</span>上回合遗留的处理</h2>
+    <p>当一位玩家的回合到来时，如果他<strong>上一回合获得过超速违规</strong>，他必须先检查起点处是否有<strong>空出租车</strong>。</p>
+    <ul>
+      <li>如果有空出租车，他可以让司机上车，并从「步骤 1」开始本回合。</li>
+      <li>如果没有空出租车，则本回合结束，等到下一轮再处理。</li>
+    </ul>
+  </section>
+
+  <section id="credits">
+    <h2 class="sec"><span class="num">14</span>制作信息</h2>
+    <div class="credits">
+      <p><b>游戏设计（设计）：</b>Alex Randolph</p>
+      <p><b>插画（插画）：</b>Wanjin Gill</p>
+      <p><b>出版（出版）：</b>Gameology, Inc. &nbsp;|&nbsp; playte &nbsp;|&nbsp; <span style="color:var(--blue);">www.playte.com</span></p>
+      <p style="margin-top:10px;">ⓒ 2024. Gameology. 保留所有权利.</p>
+    </div>
+    <footer>
+      — 疯狂出租车（Taxi Over）— 中文版规则书 &nbsp;·&nbsp; 译自 Gameology 2024 英文原版 —
+    </footer>
+  </section>
+
+  </main>
+
+<p style="margin-top: 20px; font-size: 13px; color: #666;"><b>翻译说明：</b>保留英文的专名：Taxi Over、Alex Randolph、Wanjin Gill、Hartmut Kommerell（人名/游戏名）。其他专名（招呼站 / 等候出租盒 / 超速违规 / 推挤对手 / 速度上限 等）全部译为中文。</p>
+
+</div>
+
+</body>
+</html>

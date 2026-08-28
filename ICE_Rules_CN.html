@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I C E（冰封远征）— 游戏规则</title>
+<style>
+  :root{
+    --bone:#eef3f8; --bone2:#e1ebf2; --ink:#1d2e37; --ink-soft:#566a74;
+    --purple:#2d6a8c; --purple-d:#163f56; --purple-l:#5fa6c6;
+    --accent:#2a9d8f; --accent-d:#1f7a6f;
+    --green:#3f7d52; --green-l:#e4f0e7;
+    --red:#a8392f; --red-l:#f6e3e0;
+    --line:#cdd9e2; --card:#ffffff;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bone); color:var(--ink);
+    font-family:"Songti SC","Noto Serif SC","Source Han Serif SC",STSong,
+                "Iowan Old Style","Palatino Linotype",Georgia,serif;
+    line-height:1.8; font-size:17px;
+  }
+  .wrap{display:flex; align-items:flex-start; max-width:1200px; margin:0 auto;}
+  nav{
+    position:sticky; top:0; align-self:flex-start;
+    width:260px; flex:0 0 260px; height:100vh; overflow-y:auto;
+    background:var(--purple-d); color:#eaf3f8; padding:22px 16px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;
+  }
+  nav h2{font-size:13px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--purple-l); margin:0 0 12px;}
+  nav ol{list-style:none; margin:0; padding:0;}
+  nav a{display:block; color:#eaf3f8; text-decoration:none; font-size:14px;
+    padding:6px 10px; border-radius:7px;}
+  nav a:hover{background:var(--purple);}
+  main{flex:1 1 auto; min-width:0; padding:0 40px 80px;}
+  .cover{
+    background:linear-gradient(160deg,var(--purple-d),var(--purple) 70%,var(--accent));
+    color:#f3f8fb; padding:60px 40px; border-radius:0 0 18px 18px;
+    margin-bottom:36px; text-align:center;
+    box-shadow:0 10px 30px rgba(22,63,86,.25);
+  }
+  .cover h1{font-size:40px; margin:0 0 8px; letter-spacing:.18em;}
+  .cover .sub{font-size:16px; opacity:.92; font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .cover .tag{display:inline-block; margin-top:16px; padding:6px 16px;
+    border:1px solid rgba(255,255,255,.4); border-radius:20px; font-size:14px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  section{padding:14px 0 8px; border-bottom:1px solid var(--line); scroll-margin-top:18px;}
+  h2.sec{font-size:27px; color:var(--purple-d); margin:18px 0 6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  h2.sec .num{color:var(--accent); font-weight:700; margin-right:10px;}
+  h3{font-size:20px; color:var(--purple); margin:22px 0 6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  h4{font-size:16px; color:var(--ink-soft); margin:14px 0 4px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  p{margin:10px 0;}
+  ul,ol{margin:10px 0 10px 4px; padding-left:22px;}
+  li{margin:5px 0;}
+  .lead{font-size:18px;}
+  .comp-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:16px 0;}
+  .comp{border:1px solid var(--line); background:var(--card); border-radius:12px;
+    padding:12px 16px; box-shadow:0 2px 6px rgba(0,0,0,.04);}
+  .comp b{color:var(--purple-d);}
+  .comp .ct{float:right; color:var(--accent-d); font-weight:700;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .callout{border-left:5px solid var(--accent); background:var(--bone2);
+    padding:12px 18px; margin:16px 0; border-radius:0 10px 10px 0;}
+  .callout .lab{font-weight:700; font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .callout.tip{border-color:var(--green); background:var(--green-l);}
+  .callout.tip .lab{color:var(--green);}
+  .callout.adv{border-color:var(--red); background:var(--red-l);}
+  .callout.adv .lab{color:var(--red);}
+  .steps{counter-reset:step; list-style:none; padding-left:0; margin:14px 0;}
+  .steps li{position:relative; padding:10px 14px 10px 52px; margin:8px 0;
+    background:var(--card); border:1px solid var(--line); border-radius:10px;}
+  .steps li::before{counter-increment:step; content:counter(step);
+    position:absolute; left:12px; top:50%; transform:translateY(-50%);
+    width:28px; height:28px; background:var(--purple); color:#fff;
+    border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-weight:700; font-family:Arial,sans-serif;}
+  .skill{border:1px solid var(--line); background:var(--card); border-radius:12px;
+    padding:14px 18px; margin:12px 0; box-shadow:0 2px 6px rgba(0,0,0,.04);}
+  .skill .name{font-weight:700; color:var(--purple-d); font-size:18px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .skill .name .rp{display:inline-block; min-width:24px; color:var(--accent-d);
+    font-family:Arial,sans-serif;}
+  .req{border:1px solid var(--line); background:var(--card); border-radius:10px;
+    padding:12px 16px; margin:10px 0;}
+  .req .sym{font-weight:700; color:var(--purple-d);}
+  .ex{font-size:15px; color:var(--ink-soft); border-top:1px dashed var(--line);
+    margin-top:8px; padding-top:8px;}
+  .ex.ok::before{content:"✓ 得分示例 — "; color:var(--green); font-weight:700;}
+  .ex.no::before{content:"✗ 不得分示例 — "; color:var(--red); font-weight:700;}
+  figure{margin:18px 0; text-align:center;}
+  figure img{max-width:100%; border:1px solid var(--line); border-radius:12px;
+    box-shadow:0 4px 14px rgba(0,0,0,.08); background:#fff;}
+  figcaption{font-size:13px; color:var(--ink-soft); margin-top:6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .two{display:grid; grid-template-columns:1fr 1fr; gap:16px; align-items:start;}
+  .note-key{display:flex; flex-wrap:wrap; gap:10px; margin:12px 0;}
+  .note-key span{font-size:13px; font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;
+    padding:4px 10px; border-radius:8px; background:var(--card); border:1px solid var(--line);}
+  .note-key .c-folk{color:#7a5230;}
+  .note-key .c-step{color:var(--accent-d);}
+  .note-key .c-code{color:var(--purple-d);}
+  .note-key .c-ex{color:var(--green);}
+  .note-key .c-auth{color:#a85a26;}
+  @media(max-width:900px){
+    .wrap{flex-direction:column;}
+    nav{position:static; width:100%; height:auto; flex-basis:auto;}
+    main{padding:0 18px 60px;}
+    .comp-grid,.two{grid-template-columns:1fr;}
+  }
+  footer{margin-top:40px; font-size:13px; color:var(--ink-soft);
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; text-align:center;}
+  .credits{background:var(--bone2); border:1px solid var(--line); border-radius:12px;
+    padding:16px 20px; margin-top:14px;}
+  .credits b{color:var(--purple-d);}
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <h1>I C E</h1>
+  <div class="sub">冰封远征 · 游戏规则（中文整理版）</div>
+  <div class="tag">1–5 人 &nbsp;|&nbsp; 约 90 分钟 &nbsp;|&nbsp; 14 岁以上</div>
+</header>
+
+<div class="wrap">
+  <nav>
+    <h2>目录</h2>
+    <ol>
+      <li><a href="#overview">1　概览与目标</a></li>
+      <li><a href="#components">2　组件</a></li>
+      <li><a href="#setup">3　准备</a></li>
+      <li><a href="#flow">4　游戏流程</a></li>
+      <li><a href="#actions">5　行动</a></li>
+      <li><a href="#artifacts">6　文物</a></li>
+      <li><a href="#cards">7　声望点与卡牌</a></li>
+      <li><a href="#endgame">8　终局与计分</a></li>
+      <li><a href="#variants">9　变体</a></li>
+      <li><a href="#guilds">10　公会</a></li>
+      <li><a href="#snow">11　雪块</a></li>
+      <li><a href="#annex">12　附录：牌组与文物分布</a></li>
+      <li><a href="#glossary">13　术语表</a></li>
+      <li><a href="#faq">14　常见问题</a></li>
+      <li><a href="#ks">15　众筹版本（Kickstarter）</a></li>
+      <li><a href="#credits">16　制作人员</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+  <div class="note-key">
+    <span class="c-folk">背景传说 Folk-lore</span>
+    <span class="c-step">新手提示 First Steps</span>
+    <span class="c-code">探索准则 Exploration Code</span>
+    <span class="c-ex">示例 Example</span>
+    <span class="c-auth">作者注 Authors' Note</span>
+  </div>
+
+  <section id="overview">
+    <h2 class="sec"><span class="num">1</span>概览与目标</h2>
+    <p class="lead">目之所及，尽是白雪……在这片被狂风席卷的冰封天地里，一座城市顽强地存续着。每年「阳季」期间，城中的各大公会都会组织远征，目的地是<strong>长者之谷（Valley of the Elders）</strong>——那里可能埋藏着远古文明的遗迹。为了答案、声望或财富，每个公会都有自己的动机。</p>
+    <p>你扮演一位<strong>远征队长（Expedition Leader）</strong>，代表所属公会。一边逐步移除棋盘上的板块，一边揭开 I C E 隐藏的秘密：器物、动物、文物（Artifact）与巨构（Edifice）。记住——带着最多发现的公会才能赢得荣耀与名声，赢得游戏！</p>
+    <div class="callout tip">
+      <span class="lab">目标：</span>带领远征、进行考古挖掘、寻找文物；最终以<strong>声望点（Renown Points，RP）</strong>最多者获胜。RP 即本游戏的胜利分。
+    </div>
+    <figure>
+      <img src="ICE_Rules_images/page_02.jpg" alt="概览页">
+      <figcaption>概览与游戏目标（原书第 2 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="components">
+    <h2 class="sec"><span class="num">2</span>组件</h2>
+    <p>下列为游戏全部组件（含备用区与保留板块）。众筹「珍藏版（Collector box）」在数量与材质上有所不同，详见<a href="#ks">第 15 节</a>。</p>
+    <div class="comp-grid">
+      <div class="comp"><span class="ct">1</span><b>游戏棋盘</b><br>由 4 块拼成。</div>
+      <div class="comp"><span class="ct">5</span><b>公会板（Guild Board）</b><br>每位玩家一块。</div>
+      <div class="comp"><span class="ct">5</span><b>远征队长</b><br>各公会对应颜色。</div>
+      <div class="comp"><span class="ct">50</span><b>考古学家（Archaeologist）</b><br>中立资源，所有玩家共用。</div>
+      <div class="comp"><span class="ct">5</span><b>营地（Camp）</b><br>中立。</div>
+      <div class="comp"><span class="ct">1</span><b>先手标记（First Player token）</b></div>
+      <div class="comp"><span class="ct">35 / 20</span><b>声望点标记</b><br>「1 RP」35 枚、 「5 RP」20 枚。</div>
+      <div class="comp"><span class="ct">5</span><b>计划标记（Planning token）</b></div>
+      <div class="comp"><span class="ct">1</span><b>激活标记（Activation token）</b><br>仅炽光公会（Incandescents）使用。</div>
+      <div class="comp"><span class="ct">1</span><b>蠕虫棋子（Wurm pawn）</b></div>
+      <div class="comp"><span class="ct">5</span><b>北境剑齿虎棋子（Boreal Smilodon）</b></div>
+      <div class="comp"><span class="ct">1</span><b>弃牌袋（Discard cloth bag）</b></div>
+      <div class="comp"><span class="ct">5</span><b>探索辅助卡（Exploration Aids）</b></div>
+      <div class="comp"><span class="ct">1</span><b>计分簿（Scorebook）</b></div>
+      <div class="comp"><span class="ct">1</span><b>巨构手册（Edifice booklet）</b></div>
+      <div class="comp"><span class="ct">153</span><b>板块（Tiles）</b><br>含文物、雪块、巨构等，见下。</div>
+      <div class="comp"><span class="ct">74</span><b>卡牌（Cards）</b><br>含日志、法令、求索等，见下。</div>
+      <div class="comp"><span class="ct">7</span><b>游戏辅助卡（Game Aid）</b></div>
+    </div>
+    <h3>板块明细</h3>
+    <div class="comp-grid">
+      <div class="comp"><span class="ct">37</span><b>表层文物板块（Surface Artifact）</b></div>
+      <div class="comp"><span class="ct">27</span><b>中层文物板块（Intermediate Artifact）</b></div>
+      <div class="comp"><span class="ct">19</span><b>深层文物板块（Deep Artifact）</b></div>
+      <div class="comp"><span class="ct">12</span><b>巨构板块（Edifice）</b></div>
+      <div class="comp"><span class="ct">1</span><b>营地板块（Encampment）</b></div>
+      <div class="comp"><span class="ct">12</span><b>隧道板块（Tunnel）</b></div>
+      <div class="comp"><span class="ct">12</span><b>冰原孤岛板块（Nunatak）</b></div>
+      <div class="comp"><span class="ct">12</span><b>裂隙板块（Rift）</b></div>
+      <div class="comp"><span class="ct">11</span><b>空旷板块（Clear）</b></div>
+      <div class="comp"><span class="ct">48</span><b>雪块（Snow tile）</b><br>铺设棋盘表层；与下方 10 块雪片合计 58 块。</div>
+      <div class="comp"><span class="ct">10</span><b>雪片板块（Snowflake tile）</b><br>备用区，游戏中偶尔使用。</div>
+    </div>
+    <h3>卡牌明细</h3>
+    <div class="comp-grid">
+      <div class="comp"><span class="ct">6</span><b>远征日志牌（Logbook）</b><br>基础版 6 张；众筹/珍藏版共 9 张。</div>
+      <div class="comp"><span class="ct">11</span><b>法令牌（Decree）</b></div>
+      <div class="comp"><span class="ct">50</span><b>求索牌（Request）</b><br>其中 42 种各不相同，分 7 类。</div>
+      <div class="comp"><span class="ct">1</span><b>远征手册（Expedition booklet）</b></div>
+    </div>
+    <figure>
+      <img src="ICE_Rules_images/page_03.jpg" alt="组件页">
+      <figcaption>组件总览（原书第 3 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="setup">
+    <h2 class="sec"><span class="num">3</span>准备</h2>
+    <p>游戏分<strong>棋盘与板块</strong>、<strong>共享元素</strong>、<strong>每位玩家</strong>三部分布置。新手请遵循每张「新手提示（First Steps）」卡上的说明。</p>
+
+    <h3>棋盘与板块（A–E）</h3>
+    <ol class="steps">
+      <li>拼好 4 块棋盘后，先将 <b>12 块巨构板块</b> 图面向下放入棋盘最底层（I C E 的最深处）。</li>
+      <li>其上放 <b>19 块深层文物板块</b>（图面向下）。</li>
+      <li>再其上放 <b>27 块中层文物板块</b>（图面向下）。</li>
+      <li>再其上放 <b>37 块表层文物板块</b>（图面向下）。</li>
+      <li>最上层放 <b>48 块雪块</b>（图面向下），构成游戏的表面。</li>
+    </ol>
+    <div class="callout">
+      <span class="lab">作者注：</span>一局结束后，收游戏时顺手再把各类板块洗混，省得下局开局再洗。若上一局曾翻出某块巨构板块，它代表上一支远征发现的巨构，其效果在本局生效（见<a href="#endgame">第 8 节</a>）。
+    </div>
+    <div class="callout tip">
+      <span class="lab">新手提示：</span>至少在前几局，<strong>不</strong>使用巨构板块的效果。
+    </div>
+
+    <h3>共享元素（F–L）</h3>
+    <ol class="steps">
+      <li>每块<strong>隧道板块</strong>上放 1 名考古学家。</li>
+      <li><strong>营地板块</strong>上放 1 个营地与 1 名考古学家。</li>
+      <li>将剩余考古学家、营地、剑齿虎、计划标记、1 RP / 5 RP 标记、雪片板块组成公共备用池。</li>
+      <li>把弃牌袋放在棋盘旁，游戏中玩家把弃除的板块放入其中。</li>
+      <li>洗混<strong>法令牌</strong>，旁边翻开 3 张；其余不用。</li>
+      <li>洗混<strong>求索牌</strong>成牌库，旁边放弃牌堆。</li>
+      <li>洗混 <strong>6 张远征日志牌</strong>成日志牌库。</li>
+    </ol>
+    <div class="callout tip">
+      <span class="lab">新手提示：</span>首局使用 3 张「新手步骤」法令牌（见第 7 节）。首局日志牌库按编号 1–6 升序排列，编号 1 在最上方。
+    </div>
+
+    <h3>每位玩家（M–R）</h3>
+    <ol class="steps">
+      <li>选一块<strong>公会板</strong>放在面前。选<strong>炽光公会</strong>者同时拿取激活标记。</li>
+      <li>拿取对应的<strong>远征队长</strong>。</li>
+      <li>拿取对应颜色的<strong>计分标记</strong>，放在公会板上探索点轨道的第 5 格。</li>
+      <li>拿取本公会的<strong>起始声望点</strong>。</li>
+      <li>洗混求索牌，每人发 4 张，弃 2 留 2（暗置）。这些求索牌为个人所有，仅由持有者于终局验证。</li>
+      <li>最近碰过冰的人拿<strong>先手标记</strong>。</li>
+    </ol>
+    <div class="callout tip">
+      <span class="lab">新手提示：</span>首局每人只发 <strong>2 张</strong> 求索牌；并每人拿一张<strong>探索辅助卡</strong>，上面汇总了游戏阶段、各行动与文物效果。
+    </div>
+
+    <div class="two">
+      <div>
+        <h4>公会板布局</h4>
+        <ul>
+          <li>公会名称与插画</li>
+          <li>起始声望点数</li>
+          <li>探索点（EP）轨道与计分标记</li>
+          <li>公会特殊能力</li>
+          <li>放置游戏中发现的文物的槽位</li>
+          <li>板旁「送往城市」的自由区</li>
+        </ul>
+      </div>
+      <div>
+        <h4>本书术语约定</h4>
+        <ul>
+          <li><strong>探索点（EP）</strong>：用于执行行动，相当于行动点。</li>
+          <li><strong>声望点（RP）</strong>：相当于胜利点。</li>
+          <li><strong>探索者（Explorers）</strong>：含远征队长与考古学家。</li>
+        </ul>
+      </div>
+    </div>
+    <figure>
+      <img src="ICE_Rules_images/page_05.jpg" alt="准备与公会板">
+      <figcaption>准备（个人部分）与公会板说明（原书第 5 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="flow">
+    <h2 class="sec"><span class="num">4</span>游戏流程</h2>
+    <p>一局最多进行 <strong>7 天（Days）</strong>，每天含 2 个阶段：</p>
+    <div class="two">
+      <div class="skill">
+        <div class="name">A. 准备阶段（Preparation Phase）</div>
+        <p>所有玩家<strong>同时</strong>进行，含 3 步：</p>
+        <ol>
+          <li><strong>重置 EP</strong>：每人把自己的 EP 重置为 5，外加计划标记带来的加成（若使用则弃掉该标记）。</li>
+          <li><strong>文物翻面</strong>：把公会板上所有暗置文物翻成明置；如有棱光文物可移动到任意槽位。</li>
+          <li><strong>新事件</strong>：上一天先手者左侧的玩家拿先手标记，新先手翻开日志牌库第一张并结算其效果，然后进入探索阶段。</li>
+        </ol>
+        <div class="callout tip"><span class="lab">注意：</span>第一天不执行第 2、3 步，直接进入探索阶段；且第一天<strong>不</strong>翻日志牌。</div>
+      </div>
+      <div class="skill">
+        <div class="name">B. 探索阶段（Exploration Phase）</div>
+        <p>探索阶段由若干<strong>回合</strong>组成，每位玩家轮流行动。每回合玩家从自己的 EP 储备中花费 EP 来执行行动，直到所有人都结束当天。</p>
+        <ol>
+          <li><strong>执行行动</strong>：顺时针轮流，每次花费 1–2 EP（每花 1 EP 把 EP 标记下移一格）。</li>
+          <li><strong>结束当天</strong>：当某玩家 EP 储备耗尽、并完成任意免费行动后，其当天结束，最多可向城市送 3 件文物。</li>
+        </ol>
+      </div>
+    </div>
+    <div class="callout">
+      <span class="lab">探索准则：</span>日志牌库耗尽是终局触发条件之一（见<a href="#endgame">第 8 节</a>）。
+    </div>
+    <figure>
+      <img src="ICE_Rules_images/page_06.jpg" alt="游戏流程">
+      <figcaption>天数与阶段（原书第 6 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="actions">
+    <h2 class="sec"><span class="num">5</span>行动</h2>
+    <p>以下行动在探索阶段你的回合中执行。考古学家与营地无颜色，为所有玩家共用。</p>
+
+    <h3>基础行动</h3>
+    <div class="skill"><div class="name">建立营地（Build a Camp）　花费 1 EP</div>
+      <p>从备用区拿一块新营地，放到一块<strong>未被覆盖</strong>的板块上（其上不能有别的板块重叠）；同时把你的远征队长放到该板块上。</p></div>
+    <div class="skill"><div class="name">召集（Call）　花费 1 EP</div>
+      <p>在带营地的板块上放置一名探索者：从备用区拿 1 名考古学家放到有营地的板块；或把你的远征队长从某板块（或备用区）移到有营地的板块。召集行动时考古学家<strong>不</strong>随队长移动。</p></div>
+    <div class="skill"><div class="name">计划（Plan）　花费 1 EP</div>
+      <p>拿取一个计划标记。该标记须在下一天准备阶段用来把你的 EP 储备 +1。每人最多持有 1 个计划标记，且不能在拿取的当天使用。</p></div>
+    <div class="skill"><div class="name">加班（Overwork）　花费 1 RP（非 EP）</div>
+      <p>你的回合中可花费 <strong>3 EP</strong>（而非通常的 1–2）。此行动本身消耗 RP，不获得 EP，仍需从储备中支出。</p></div>
+    <div class="skill"><div class="name">移动（Move）　每板块 1 EP</div>
+      <p>把远征队长移到相邻板块（见邻接规则）。队长移动时可<strong>免费</strong>带上同板块上的 1–3 名考古学家（仅限与队长同板块者）。不能只移动考古学家而不带队长；不能带队长跨越<strong>裂隙（Rift）</strong>。棋盘边缘视为板块，可在其上行走（表层边缘除外）。</p>
+      <div class="callout"><span class="lab">邻接规则：</span>两板块在同一冰层上沿一边相接；或在不同层上一方部分覆盖另一方，即视为相邻。仅顶点相接不算相邻。</div>
+    </div>
+
+    <h3>挖掘（Excavate）　基础花费 3 EP</h3>
+    <p>移除你的远征队长所在的板块。可挖<strong>完全裸露</strong>的板块，或被<strong>恰好 1 块</strong>板块部分覆盖的板块。</p>
+    <ol class="steps">
+      <li><b>① 算费并判断能否执行</b>：先按下方「挖掘花费规则」调整基础 3 EP，确认 EP 足够且符合限制。不能挖：被 2 块及以上板块覆盖的板块；或被「本身又被另一块部分覆盖的板块」所覆盖的板块（间接覆盖）。</li>
+      <li><b>② 移除板块</b>：移除队长所在的这块板块。若它恰好被 1 块板块部分覆盖，则覆盖它的那块也随之一并移除（放入弃牌袋）。</li>
+      <li><b>③ 移动探索者</b>：把被挖板块上的探索者按「放置规则」分到其下 3 块板块。</li>
+      <li><b>④ 收取板块</b>：若是雪块，秘密拿入手牌；若是文物板块，明置（插图面向上）放到公会板对应文物槽位。</li>
+    </ol>
+    <div class="callout"><span class="lab">挖掘花费规则：</span>基础费用 3 EP，按以下三步计算：
+      <ol>
+        <li><b>修正基础费用</b>：下列情形使基础费用变为 4 EP（即在 3 EP 上 +1）：
+          <ul>
+            <li>板块含<strong>营地</strong>或<strong>冰原孤岛（Nunatak）</strong>；</li>
+            <li>板块被<strong>恰好 1 块</strong>板块部分覆盖。</li>
+          </ul>
+        </li>
+        <li><b>因探索者减少费用</b>：板块上每有 1 名探索者，费用 −1 EP。探索者含你的远征队长、对手队长（若有）、考古学家。</li>
+        <li><b>支付剩余费用</b>：调整后若为 0 EP，则免费挖掘；否则支付调整后的 EP。</li>
+      </ol>
+      <p><b>上限：</b>无论修正多少重（含多重 +1 EP 叠加），调整后的挖掘费用<b>永不超过 4 EP</b>。</p>
+    </div>
+    <div class="callout"><span class="lab">放置规则：</span>挖掉顶板块后，探索者尽量平均分配到下方板块。棋盘边缘视为板块；下方若已有探索者须一并计入。若被挖板块上有营地，把它放到下方任意一块（不能放在已有营地的板块，也不能放棋盘边缘）。</div>
+    <div class="callout"><span class="lab">坍塌规则（Collapse）：</span>一旦某板块在同一层上只剩 1 个（或 0 个）相邻板块，即坍塌并放入弃牌袋；其上的所有棋子回到各自备用区或对应玩家。</div>
+    <div class="callout"><span class="lab">作者注：</span>即使回合已花了 2 EP，仍可继续做花费 0 EP 的行动（如：3 名及以上探索者挖掘、或打出雪块）。</div>
+    <figure>
+      <img src="ICE_Rules_images/page_10.jpg" alt="挖掘">
+      <figcaption>挖掘与放置规则（原书第 10 页）</figcaption>
+    </figure>
+
+    <h3>其他行动</h3>
+    <div class="skill"><div class="name">查阅登记册（Consult the Register）　花费 1 EP</div>
+      <p>抽 3 张求索牌，选 1 张保留，其余 2 张弃掉。终局未验证的每张求索牌让你 <strong>−2 RP</strong>。</p></div>
+    <div class="skill"><div class="name">再送（Resend）　花费 1 EP</div>
+      <p>直接进入探索阶段第 2 步：向城市送最多 <strong>4 件</strong>文物（而非 3），并结束当天。</p></div>
+    <div class="skill"><div class="name">发动效果或能力（Playing Effects or Abilities）　免费</div>
+      <ul>
+        <li>回合中任何时刻，可免费从手牌打出 1 张雪块并结算其效果（含刚挖出的），打出的雪块随后放入弃牌袋。</li>
+        <li>解锁某类文物效果后，每天可免费触发 1 次（见<a href="#artifacts">第 6 节</a>）。<strong>前提是该文物仍在你的公会板上</strong>——已送往城市的文物不触发能力。</li>
+        <li>各公会的独特能力，部分可作为行动使用（见<a href="#guilds">第 10 节</a>）。</li>
+      </ul>
+    </div>
+
+    <div class="callout"><span class="lab">送往城市规则（Send to the City）：</span>玩家送文物到城市时，将其暗置放在公会板旁的城市区。若是灵力 1（Anima 1）文物得 1 RP；灵力 2（Anima 2）得 2 RP。游戏中获得的 RP 以 1 RP / 5 RP 标记表示。</div>
+    <div class="callout tip"><span class="lab">作者注：</span>终局时仍留在公会板上的文物将被弃除，计分时不产生 RP。</div>
+  </section>
+
+  <section id="artifacts">
+    <h2 class="sec"><span class="num">6</span>文物</h2>
+    <p>文物板块分 3 个深度层级，颜色随埋藏深度逐渐变深：<strong>表层（Surface）</strong>、<strong>中层（Intermediate）</strong>、<strong>深层（Deep）</strong>。板块背面（图面向下）透过冰可见对应<strong>类型</strong>的象形图；正面是插画，下方标注<strong>形状（Shape）</strong>、<strong>类型（Type）</strong>与<strong>灵力（Anima）</strong>。</p>
+
+    <h3>类型与灵力</h3>
+    <p>文物共有 5 种基本类型，外加可作百搭的<strong>棱光（Prismatic）</strong>文物：</p>
+    <div class="comp-grid">
+      <div class="comp"><b>成就（Achievement）</b></div>
+      <div class="comp"><b>崇高（Exalted）</b></div>
+      <div class="comp"><b>和谐（Harmony）</b></div>
+      <div class="comp"><b>湮灭（Obliteration）</b></div>
+      <div class="comp"><b>哲思（Philosophical）</b></div>
+      <div class="comp"><b>棱光（Prismatic）</b><br>百搭，可放在任意槽位。</div>
+    </div>
+    <p>每种类型有 3 种<strong>形状（Shape 1/2/3）</strong>（棱光无形状），形状用于部分求索牌与法令牌。每类文物下可放多件。文物的<strong>灵力</strong>代表其强度，每件文物只有灵力 1 或灵力 2 两种强度。</p>
+
+    <div class="callout adv"><span class="lab">文物的两条去路：</span>
+      <ul>
+        <li><b>留在公会板（Guild board）：</b>当某槽位灵力合计 ≥ 2 时，可在<strong>你的回合内作为免费行动</strong>触发该类型的灵力效果（每类每天 1 次）。这是文物<strong>唯一</strong>能触发能力的场合。</li>
+        <li><b>送往城市（City）：</b>文物一旦离开公会板便<strong>不再触发能力</strong>，但<strong>送出的当场</strong>按灵力得 1 RP（灵力 1）或 2 RP（灵力 2）；这些城市文物是终局<strong>唯一</strong>计入法令牌与求索牌计分的文物（留在公会板的文物终局直接弃除、不得分）。</li>
+      </ul>
+    </div>
+
+    <h3>5 类文物的效果（仅公会板文物可触发）</h3>
+    <div class="callout"><span class="lab">触发条件：</span>当某槽位中文物灵力合计 ≥2 时，可在<strong>你的回合内</strong>将该类效果作为免费行动触发。每类每天只能触发 1 次，且文物须仍在公会板上——<strong>已送往城市的文物不提供效果</strong>。触发时把该槽位最上方文物翻成图标面向上，表示当天已用过；当天再挖出的同类文物也明置（图标向上）。</div>
+    <div class="skill"><div class="name">成就（Achievement）</div><p>在你的探索轨道上 +1 EP。</p></div>
+    <div class="skill"><div class="name">崇高（Exalted）</div><p>支付 1 EP，把每块相邻板块上的 1 名考古学家移到你的远征队长所在板块。</p></div>
+    <div class="skill"><div class="name">和谐（Harmony）</div><p>挖掘并分配完考古学家后，从备用区拿 1 名考古学家放到你的远征队长板块上。</p></div>
+    <div class="skill"><div class="name">湮灭（Obliteration）</div><p>弃除你的远征队长所在板块旁一块完全裸露的板块，放入弃牌袋。其上的棋子回到备用区或对应玩家。</p></div>
+    <div class="skill"><div class="name">哲思（Philosophical）</div><p>在你的回合中，于某板块正被弃除的瞬间收取该板块（雪块板块或文物板块均可）。可收取坍塌板块，或通过文物/雪块能力从棋盘弃除的板块。</p></div>
+    <div class="skill"><div class="name">棱光（Prismatic）</div><p>棱光文物可当作任意类型文物，放到任意槽位。仅在准备阶段可把每件棱光文物移到新槽位。终局计分时必须确定每件棱光文物的最终类型。<strong>棱光文物没有形状。</strong></p></div>
+
+    <div class="callout"><span class="lab">送往城市：</span>送文物到城市时<strong>立即</strong>得 RP（灵力 1 得 1 RP、灵力 2 得 2 RP）。注意：送出的文物已离开公会板，<strong>不再触发其灵力能力</strong>。城市中的文物用于终局验证求索牌、并通过法令牌得分。</div>
+    <figure>
+      <img src="ICE_Rules_images/page_12.jpg" alt="文物">
+      <figcaption>文物类型、形状与灵力（原书第 12 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="cards">
+    <h2 class="sec"><span class="num">7</span>声望点与卡牌</h2>
+    <p>城市由长老议会治理，常向各公会提出请求。声望（RP）决定公会的名望，也即终局得分。</p>
+
+    <h3>三种卡牌</h3>
+    <div class="two">
+      <div class="skill"><div class="name">远征日志牌（Logbook）</div>
+        <p>远征日志牌每天（首天除外）准备阶段翻开。每张触发一次性事件，或在当天持续生效。游戏中获得的 RP 以 1 RP / 5 RP 标记表示，放在公会板旁。</p></div>
+      <div class="skill"><div class="name">求索牌（Request）</div>
+        <p>求索牌个人所有。每人起始 2 张，可通过「查阅登记册」获得更多。终局以文物支付其费用来验证（详见第 12 节）。</p></div>
+    </div>
+    <div class="skill"><div class="name">法令牌（Decree）</div>
+      <p>公开。共 <strong>11 张</strong>，约 6 种类型。开局在棋盘旁翻开 <strong>3 张</strong>。与求索牌不同，法令牌<strong>没有费用，只有条件</strong>，因此可<strong>多次验证</strong>。玩家根据游戏中送往城市的文物获得 RP。</p>
+      <div class="callout tip"><span class="lab">新手提示：</span>首局使用 3 张「新手步骤」法令牌（卡底有白色符号）。</div>
+    </div>
+
+    <h3>法令计分方式（公开，可重复累计）</h3>
+    <p>法令牌共有 11 张、约 6 种类型；新手局从标有白色符号的「新手步骤（First Steps）」3 张开始。开局翻开 3 张，下列为各类型描述。</p>
+    <div class="req"><span class="sym">灵力 1 法令</span>：每个灵力 1 文物得 1 RP。</div>
+    <div class="req"><span class="sym">棱光法令</span>：每个棱光文物得 2 RP。</div>
+    <div class="req"><span class="sym">已验证求索法令</span>：每张已验证求索牌得 2 RP。</div>
+    <div class="req"><span class="sym">灵力 2 法令</span>：每个灵力 2 文物得 2 RP。</div>
+    <div class="req"><span class="sym">类型法令</span>：每个对应类型的文物按其灵力值每个得 1 RP（<strong>棱光不通过此类法令计分</strong>）。</div>
+    <div class="req"><span class="sym">独特类型+形状法令</span>：每件「类型与形状都不同」的独特文物得 1 RP。同类只要形状不同即可计分；不区分灵力高低；<strong>棱光不通过此法令计分</strong>。</div>
+    <div class="req"><span class="sym">形状组合法令</span>：同类型「2 种不同形状」组合得 2 RP；同类型「3 种不同形状」组合得 4 RP。</div>
+    <div class="ex ok">同类型 3 件不同形状 → 4 RP；同类型 2 件不同形状 → 2 RP。</div>
+    <div class="ex no">同类型 2 件相同形状 → 0 RP（形状未凑齐组合）。</div>
+    <figure>
+      <img src="ICE_Rules_images/page_25.jpg" alt="法令牌">
+      <figcaption>法令牌与计分示例（原书第 25 页）</figcaption>
+    </figure>
+
+    <h3>求索牌示例（个人，终局支付文物验证）</h3>
+    <div class="req"><span class="sym">示例 A</span>费用：任意棱光文物提供 2 灵力（可来自 1–2 件）。获得：5 RP。</div>
+    <div class="req"><span class="sym">示例 B</span>费用：1 件成就 + 1 件崇高 + 1 件和谐文物。获得：7 RP。</div>
+    <div class="req"><span class="sym">示例 C</span>费用：来自湮灭和/或哲思的 3 灵力（可来自 2–3 件）。获得：5 RP。</div>
+    <div class="req"><span class="sym">示例 D</span>费用：1 件和谐 + 1 件哲思。获得：4 RP。</div>
+    <div class="req"><span class="sym">示例 E</span>费用：来自任意湮灭文物的 3 灵力（2–3 件）。获得：6 RP。</div>
+    <div class="req"><span class="sym">示例 F</span>费用：任意类型的 3 灵力（可跨多类型、2–3 件）。获得：4 RP。</div>
+    <div class="req"><span class="sym">示例 G</span>费用：1 / 2 / 3 件成就文物，且形状各不相同。获得：1 / 4 / 8 RP（随不同形状数变化）。</div>
+    <figure>
+      <img src="ICE_Rules_images/page_26.jpg" alt="求索牌">
+      <figcaption>求索牌示例（原书第 26 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="endgame">
+    <h2 class="sec"><span class="num">8</span>终局与计分</h2>
+    <h3>终局触发条件</h3>
+    <div class="callout adv"><span class="lab">条件 1：</span>当一块巨构板块被完全挖出，立即翻面（无需挖掘）。挖出者得 2 RP，随后包括挖出者在内的所有玩家各进行一次最终回合，游戏结束并结算。</div>
+    <div class="callout adv"><span class="lab">条件 2：</span>准备阶段翻开最后一张日志牌。玩家再完成最后一个白天，游戏结束并结算。</div>
+
+    <h3>计分步骤</h3>
+    <ol class="steps">
+      <li><strong>处理法令</strong>：把你<strong>送往城市的文物</strong>经 3 张公开法令带来的 RP 相加（公会板上残留的文物已在计分前弃除、不计入）。同一法令条件满足多次，每次都得分。</li>
+      <li><strong>验证求索</strong>：每位玩家验证自己能支付的求索牌，以送往城市的文物支付费用（同一文物不能支付多张求索）。可验证的求索各加对应 RP，<strong>每张未验证求索 −2 RP</strong>。</li>
+      <li><strong>声望点标记</strong>：把游戏中获得的 RP 标记相加。</li>
+    </ol>
+    <p><strong>RP 最高者获胜；平局则共享胜利。</strong></p>
+    <div class="callout tip"><span class="lab">新手提示：</span>计分遵循「返回城市」辅助卡的指引。弃除公会板上剩余文物，把送往城市的文物翻面，并确定每件棱光文物的最终类型，再按上述步骤计分。</div>
+    <div class="ex ok">Daniele 经法令得 17 RP（4+6+7），求索验证得 14 附加 RP（7+4+5−2），加上游戏中的 RP 标记（含送城市所得）共 8 RP，总分 39 RP。<strong>她的求索验证还能进一步优化——你能找出更佳方案吗？</strong></div>
+    <figure>
+      <img src="ICE_Rules_images/page_15.jpg" alt="终局计分">
+      <figcaption>终局触发条件与计分示例（原书第 15 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="variants">
+    <h2 class="sec"><span class="num">9</span>变体</h2>
+    <div class="skill"><div class="name">双人模式</div>
+      <p>调整：移动行动允许用 1 EP 移动 1–2 块板块，但每回合只能用一次。</p></div>
+    <div class="skill"><div class="name">单人模式（与时间赛跑）</div>
+      <p>10 天内完成 3 个目标：向城市送至少 19 件文物；验证至少 7 张求索牌；完全挖出一块巨构板块。调整：不再使用计划行动；日志牌库耗尽时洗混弃牌堆重组成新牌库。</p></div>
+    <div class="skill"><div class="name">合作模式</div>
+      <p>合作模式须在限定时间内挖出巨构并完成目标（2–3 人：5 天内挖出、每人送 10 件、验证 25 分；4 人：4 天内、每人 9 件、20 分；5 人：4 天内、每人 8 件、20 分）。调整：召集考古学家行动花费 2 EP（而非 1）。双人合作模式同时适用双人规则与合作规则。</p>
+      <div class="callout adv"><span class="lab">注意：</span>合作模式中，提前完全挖出巨构<strong>仍会结束游戏</strong>——但若在达成目标前发生，你们将输掉游戏！</div>
+    </div>
+    <div class="skill"><div class="name">起始求索牌抽签（Draft）</div>
+      <p>每人发 4 张求索牌，各选 1 张，剩余传给左侧玩家；再选第 2 张，弃掉剩余 2 张。</p></div>
+    <div class="skill"><div class="name">巨构（Edifices / Legacy 成分）</div>
+      <p>I C E 的每一局会互相影响。长者之谷藏着许多秘密——每次远征可能带来新巨构与新变体，下一局可自由选择使用。巨构手册周期性揭示 12 块巨构的功能。<strong>单人/合作模式中，玩家可随时弃除以下 3 张雪块之一来获得 1 EP + 1 RP：北境剑齿虎、魅力石、风暴号角。</strong></p>
+      <div class="callout"><span class="lab">作者注：</span>可随机选巨构，也可同时玩多个巨构（后果自负）。变体最新资讯见 https://thiswayeditions.com/variants</div>
+    </div>
+    <figure>
+      <img src="ICE_Rules_images/page_16.jpg" alt="变体">
+      <figcaption>5 种变体（双人/单人/合作/抽签/巨构）（原书第 16 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="guilds">
+    <h2 class="sec"><span class="num">10</span>公会</h2>
+    <p>每位玩家依公会板获得<strong>起始 RP</strong>与<strong>独特能力</strong>（仅在你回合使用）。</p>
+    <div class="callout tip"><span class="lab">新手提示：</span>首局暂不使用这些能力与起始 RP。</div>
+
+    <h3>基础 5 公会</h3>
+    <div class="skill"><div class="name">寒筑公会（The CryoArchitects）　<span class="rp">1 RP</span></div>
+      <p>每回合一次：挖掘含营地的板块时，视同额外有 1 名考古学家与你同在。挖完后照常把营地放到下方任意板块。注意：营地仍会使挖掘基础花费 +1 EP。</p></div>
+    <div class="skill"><div class="name">炽光公会（The Incandescents）　<span class="rp">3 RP</span></div>
+      <p>每天一次：若你的远征队长在文物板块上，可把激活标记放在公会板对应文物槽位，当天获得该类文物效果。使用后把标记翻到灰色面。炽光公会是唯一能在一天内两次触发同一类文物效果的公会（靠能力与公会板文物）。每天结束移除激活标记。若队长在棱光文物板块上，则不能使用此能力。</p></div>
+    <div class="skill"><div class="name">踏冰公会（The Icewalkers）　<span class="rp">0 RP</span></div>
+      <p>每回合一次：挖掘时，在按放置规则安置完所有考古学家与他人队长后，可不受限制地把你的远征队长放到下方 3 块中的任意一块。</p></div>
+    <div class="skill"><div class="name">领航公会（The Navigators）　<span class="rp">2 RP</span></div>
+      <p>每回合一次：1–3 名考古学家可在你通过<strong>召集、建立营地、或使用雪块</strong>移动时跟随你的远征队长。</p></div>
+    <div class="skill"><div class="name">炼金公会（The Alchemists）　<span class="rp">2 RP</span></div>
+      <p>每天一次：从弃牌袋随机取最多 3 块板块，选 1 块、其余 2 块放回。若是雪块则入手牌；若是文物则放公会板。</p></div>
+
+    <h3>众筹新增 2 公会（见<a href="#ks">第 15 节</a>）</h3>
+    <div class="skill"><div class="name">滋养公会（The Nourishers）　<span class="rp">1 RP</span></div>
+      <p>每回合一次：使用召集行动时，可从备用区直接把 1 名考古学家放到你的远征队长板块上（而非营地）。</p></div>
+    <div class="skill"><div class="name">启明公会（The Enlightened）　<span class="rp">1 RP</span></div>
+      <p>挖掘板块、在翻面之前，可先对其做预测：雪块猜类型（动物 / 远征 / 长者），猜中则翻面并得 1 EP；文物猜形状（1/2/3），猜中则翻面并得 2 RP。<strong>不能对棱光文物做预测。</strong></p></div>
+    <figure>
+      <img src="ICE_Rules_images/page_18.jpg" alt="公会板">
+      <figcaption>公会板与能力（原书第 18 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="snow">
+    <h2 class="sec"><span class="num">11</span>雪块</h2>
+    <p>棋盘含 48 块雪块，备用区另有 10 块雪片（Snowflake）。雪块有正反两面：<strong>背面</strong>是场上地貌（留在棋盘上时生效）；<strong>正面</strong>是手牌效果（挖出后组入手牌，回合中免费打出）。手牌最多 4 张，超出则弃除多余的；打出后雪块放入弃牌袋。</p>
+
+    <h3>背面·地貌（场上时生效，5 种）</h3>
+    <p>雪块在棋盘上时正面朝下、显露背面插画，标出该板块的地貌特性；该板块离开棋盘前一直生效。</p>
+    <div class="comp-grid">
+      <div class="comp"><b>营地（Encampment）</b><br>准备时在此放 1 个营地与 1 名考古学家。</div>
+      <div class="comp"><b>隧道（Tunnel）</b><br>准备时在此放 1 名考古学家。</div>
+      <div class="comp"><b>裂隙（Rift）</b><br>两侧有裂隙插画，探索者不能跨越这两侧（雪块、公会能力、文物效果亦同）。</div>
+      <div class="comp"><b>冰原孤岛（Nunatak）</b><br>挖掘花费 +1 EP。</div>
+      <div class="comp"><b>空旷（Clear）</b><br>无特殊效果。</div>
+    </div>
+
+    <h3>正面·效果（手牌打出，12 种 / 3 大类）</h3>
+    <p>雪块挖出后正面朝上、加入手牌，回合中任何时刻可免费打出结算效果（打出后放入弃牌袋）。正面按大类分 3 类（启明公会预测用），共 12 种：</p>
+
+    <h4>动物类（Animal Tiles，4 种）</h4>
+    <div class="comp-grid">
+      <div class="comp"><b>白蛛（White Spiders）</b><br>把所有考古学家从一块板块移到相邻板块。</div>
+      <div class="comp"><b>极地白蚁群（Polar Termite Swarm）</b><br>若队长在其上，免费挖一块雪块；可挖仅被 1 块覆盖的板块。</div>
+      <div class="comp"><b>冰魟（Ice Manta Ray）</b><br>免费把远征队长移到棋盘任意板块；同板块考古学家不跟随。</div>
+      <div class="comp"><b>北境剑齿虎（Boreal Smilodon）</b><br>放剑齿虎棋子于板块；下回合开始归还备用区。带剑齿虎的板块「不可进入」。</div>
+    </div>
+    <div class="callout adv"><span class="lab">不可进入板块：</span>带剑齿虎的板块不能被挖掘（仍可坍塌）；探索者不能移入；本应放在其上的探索者改为回备用区。</div>
+
+    <h4>远征类（Expedition Tiles，4 种）</h4>
+    <div class="comp-grid">
+      <div class="comp"><b>冰帆船（Ice Sailboat）</b><br>从备用区在你的队长板块放 1 名考古学家，并在另一名玩家的队长板块放 1 名；得 1 RP。</div>
+      <div class="comp"><b>速降绳（Abseiling Rope）</b><br>挖掘时忽略放置规则，自行分配下方探索者。可立即用于揭示它的那次挖掘。</div>
+      <div class="comp"><b>残骸（Wreck）</b><br>得 1 EP 与 1 RP，并选另一名玩家得 1 EP（若其已结束当天，则下一天起始 +1 EP）。</div>
+      <div class="comp"><b>远征幸存者（Expedition Survivors）</b><br>挖掘时从备用区多拿 2 名考古学家，随其他探索者按放置规则安置。可立即使用。</div>
+    </div>
+
+    <h4>长者类（Elders tiles，4 种）</h4>
+    <div class="comp-grid">
+      <div class="comp"><b>护符（Talisman，指定文物类型）</b><br>若队长在其上，免费挖该类型文物板块；可挖仅被 1 块覆盖者。不能用于棱光文物。</div>
+      <div class="comp"><b>魅力石（Charisma Stone）</b><br>花 1 RP 打出：本回合可把任意远征队长当自己的用（考古学家可跟随，可挖并收取挖出板块），所用行动照常从你 EP 储备扣除。</div>
+      <div class="comp"><b>爆破符文（Explosive Rune）</b><br>秘密弃除棋盘上任意完全裸露的板块（不能弃含营地的），其棋子回备用区或对应玩家。</div>
+      <div class="comp"><b>风暴号角（Whistle of Storms）</b><br>在棋盘任意处放 1 块雪片：须直接盖在 3 块板块上（或沿边缘），下方无空隙，且与同层至少 2 块相接。被完全覆盖板块上的探索者尽量均匀移到相邻板块。不能盖含营地或剑齿虎的板块。</div>
+    </div>
+
+    <figure>
+      <img src="ICE_Rules_images/page_20.jpg" alt="雪块">
+      <figcaption>雪块背面地貌与正面动物类（原书第 20 页）</figcaption>
+    </figure>
+    <figure>
+      <img src="ICE_Rules_images/page_21.jpg" alt="雪块远征与长者类">
+      <figcaption>雪块远征类与长者类（原书第 21 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="annex">
+    <h2 class="sec"><span class="num">12</span>附录：牌组与文物分布</h2>
+    <h3>文物板块分布</h3>
+    <ul>
+      <li><strong>表层（37 块）</strong>：30 件灵力 1，7 件棱光（灵力 1）。</li>
+      <li><strong>中层（27 块）</strong>：15 件灵力 1，10 件灵力 2，2 件棱光（灵力 1）。</li>
+      <li><strong>深层（19 块）</strong>：15 件灵力 2，4 件棱光（灵力 2）。</li>
+    </ul>
+    <h3>远征日志牌（基础版 6 张；众筹/珍藏版 9 张）</h3>
+    <p>除首天外，每天准备阶段翻开一张，指示需完成的事件（如按顺时针放置考古学家、在有剑齿虎的板块放棋子、从弃牌袋随机取雪片等）。不能弃除巨构板块；若你的远征队长不在棋盘上，则该事件占用一名考古学家的位置（该考古学家回备用区）。</p>
+    <h3>法令牌（11 张）</h3>
+    <p>开局翻开 3 张，公开、可多次验证（计分方式见<a href="#cards">第 7 节</a>）。</p>
+    <h3>求索牌（50 张，42 种，7 类）</h3>
+    <p>个人所有，终局以送往城市的文物支付费用验证；费用中的「灵力」可来自多件文物，未验证每张 −2 RP。示例见第 7 节。</p>
+    <figure>
+      <img src="ICE_Rules_images/page_22.jpg" alt="文物分布">
+      <figcaption>文物板块分布（原书第 22–23 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="glossary">
+    <h2 class="sec"><span class="num">13</span>术语表</h2>
+    <div class="comp-grid">
+      <div class="comp"><b>动作（Action）</b><br>探索阶段执行，可付费（EP/RP）或免费。</div>
+      <div class="comp"><b>邻接规则 / 相邻板块（Adjacency）</b><br>同层一边相接，或异层部分覆盖，即相邻。</div>
+      <div class="comp"><b>灵力（Anima）</b><br>文物的强度（1 或 2）。</div>
+      <div class="comp"><b>考古学家（Archaeologist）</b><br>代表所有玩家共用的中立资源的小米宝。</div>
+      <div class="comp"><b>文物（Artifact）</b><br>具类型、形状与灵力的板块，挖出后放公会板，当天结束可送城市。</div>
+      <div class="comp"><b>文物形状 / 槽位 / 类型</b><br>每类 3 种形状（棱光除外）；每块公会板有 5 个六边形槽位对应 5 类型。</div>
+      <div class="comp"><b>建立营地 / 召集 / 城市</b><br>见第 5 节；城市即每天结束送文物的区域。</div>
+      <div class="comp"><b>坍塌 / 坍塌规则（Collapse）</b><br>同层只剩 ≤1 相邻板块即弃除，其上棋子回备用区。</div>
+      <div class="comp"><b>法令（Decree）</b><br>公开牌，终局赢 RP，无费用、可重复。</div>
+      <div class="comp"><b>天数（Day）</b><br>游戏分段，每天含准备与探索两阶段。</div>
+      <div class="comp"><b>弃牌（Discard）</b><br>卡牌放对应弃牌堆；板块移入弃牌袋（其上棋子回备用区）。</div>
+      <div class="comp"><b>巨构（Edifices）</b><br>棋盘最深层板块，定义游戏变体；翻出即触发终局。</div>
+      <div class="comp"><b>探索点（EP）</b><br>回合行动点，每天重置。</div>
+      <div class="comp"><b>挖掘（Excavate）</b><br>取走队长所在（未覆盖或仅被 1 块覆盖）的板块；每有 1 探索者 −1 EP。</div>
+      <div class="comp"><b>远征队长（Expedition Leader）</b><br>隶属公会、代表玩家的彩色米宝。</div>
+      <div class="comp"><b>探索阶段 / 探索者 / 公会板</b><br>见第 4、10 节。</div>
+      <div class="comp"><b>不可进入板块（Inaccessible）</b><br>带剑齿虎的板块（见第 11 节）。</div>
+      <div class="comp"><b>日志（Logbook）</b><br>每天（首天除外）翻开，指示事件。</div>
+      <div class="comp"><b>移动 / 冰原孤岛 / 加班 / 计划 / 再送 / 求索 / RP / 送往城市 / 雪片 / 雪块 / 未覆盖板块</b><br>分别见对应章节。</div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <h2 class="sec"><span class="num">14</span>常见问题</h2>
+    <ul>
+      <li><strong>含冰原孤岛且含营地的板块要 5 EP 吗？</strong>不，挖掘基础花费永不超过 4 EP，多重修正亦然。</li>
+      <li><strong>每天最多向城市送几件文物？</strong>通常 3 件；用「再送」行动最多 4 件。</li>
+      <li><strong>一天 EP 储备最高多少？</strong>储备可在当天增加，但<strong>不能超过 7 EP</strong>。</li>
+      <li><strong>能在已有营地的板块上再放营地吗？</strong>不能；若挖出含营地的板块后无处可放，营地回备用区。</li>
+      <li><strong>备用区没有考古学家了怎么办？</strong>不能使用召集考古学家行动。</li>
+      <li><strong>想查阅登记册但求索牌库空了？</strong>洗混弃牌堆重组成新牌库。</li>
+      <li><strong>没有 RP 标记可取了？</strong>RP 标记是游戏中唯一不会耗尽的元素，可用替代物。</li>
+      <li><strong>能受益于送往城市的文物效果吗？</strong>不能——它们已不在公会板，不计入效果解锁。</li>
+      <li><strong>要取雪片但备用池空了？</strong>从弃牌袋随机取一块；若取到文物则放回重取。</li>
+      <li><strong>能用风暴号角把板块盖在雪层之上吗？</strong>不能，板块不能放在雪层之上。</li>
+      <li><strong>能用 2 件灵力 2 文物验证需 3 灵力的求索吗？</strong>可以——可用多于所需灵力的文物验证。</li>
+      <li><strong>合作模式中提前翻出巨构会结束游戏吗？</strong>会！但若未达成人数对应目标就发生，你们将输掉。</li>
+      <li><strong>板块/卡牌上有些图形好像没用到？</strong>那是 I C E 的 Legacy 成分（巨构带来的变体），部分图形供某些巨构使用。</li>
+    </ul>
+  </section>
+
+  <section id="ks">
+    <h2 class="sec"><span class="num">15</span>众筹版本（Kickstarter）</h2>
+    <p>近几次远征给城市带来诸多变化，上次长老议会接纳了两个新公会。下表对比<strong>核心版（Core box）</strong>与<strong>珍藏版（Collector box）</strong>的组件差异（珍藏版以豪华配件替换核心版对应物）。</p>
+    <div class="two">
+      <div class="comp-grid">
+        <div class="comp"><b>核心版</b>
+          <ul>
+            <li>2 块公会板</li>
+            <li>35 枚金属「1 RP」标记</li>
+            <li>20 枚金属「5 RP」标记</li>
+            <li>2 名远征队长</li>
+            <li>50 名考古学家</li>
+            <li>5 个计划标记</li>
+            <li>1 个先手标记</li>
+            <li>5 个营地</li>
+            <li>2 个计分标记</li>
+            <li>5 只丝绸印制北境剑齿虎</li>
+            <li>1 个蠕虫棋子</li>
+            <li>1 个沙色弃牌袋</li>
+            <li>1 个拨片（guitar pick）</li>
+          </ul>
+        </div>
+        <div class="comp"><b>珍藏版</b>
+          <ul>
+            <li>7 块双层公会板</li>
+            <li>35 枚金属「1 RP」标记（同上）</li>
+            <li>20 枚金属「5 RP」标记（同上）</li>
+            <li>7 名独特丝印造型远征队长</li>
+            <li>50 名个性化丝印考古学家</li>
+            <li>5 个计划标记（同上）</li>
+            <li>1 个金属先手标记</li>
+            <li>5 个定制丝印营地</li>
+            <li>2 个计分标记（同上）</li>
+            <li>5 只丝印北境剑齿虎（同上）</li>
+            <li>1 个丝印蠕虫棋子</li>
+            <li>1 个沙色弃牌袋（同上）</li>
+            <li>— （无拨片）</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <h4>珍藏版说明</h4>
+        <ul>
+          <li>考古学家有自己专属的沙色袋子，既是备用区也是弃牌堆。</li>
+          <li>日志牌：珍藏版共 9 张，洗混后随机取 6 张组成本局日志牌库；首局取编号 1–6 按升序组库（基础版为 6 张）。</li>
+          <li>新增 2 个公会（见第 10 节）：滋养公会、启明公会。</li>
+        </ul>
+      </div>
+    </div>
+    <figure>
+      <img src="ICE_Rules_images/ks_page_01.jpg" alt="众筹版本组件">
+      <figcaption>众筹版本组件对比（KS 一页纸第 1 页）</figcaption>
+    </figure>
+    <figure>
+      <img src="ICE_Rules_images/ks_page_02.jpg" alt="众筹新增公会">
+      <figcaption>新增公会：滋养公会、启明公会（KS 一页纸第 2 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="credits">
+    <h2 class="sec"><span class="num">16</span>制作人员</h2>
+    <div class="credits">
+      <p><b>作者：</b>Hugo Freyermuth、Samson F. Perret</p>
+      <p><b>艺术指导与插画：</b>Léonard Dupond</p>
+      <p><b>平面设计：</b>Alexis Vanmeerbeeck</p>
+      <p><b>规则校对：</b>Pauline Lelievre、Anton Kawasaki、Stefen Gueguen、Florent Reymond-Gaudry、François Alligier、Kyle Lukacoivc</p>
+      <p><b>翻译：</b>Torsten Sammet、Jurgen Degryse、Bruce Fletcher</p>
+      <p><b>制造：</b>Panda Game Manufacturing</p>
+      <p><b>内衬设计（Insert Design）：</b>Matt Healey</p>
+      <p><b>众筹视频：</b>Noémi Gruner、Antoine Delabarre、Hadrien Kobylarz</p>
+      <p><b>测试：</b>Tabletop Simulator 上提供宝贵反馈的所有玩家</p>
+      <p><b>致谢：</b>Basara、Druss、Mustang mvp、Nixx（支持与反馈）；Tyler Lipchen（Panda Games）；Nicolas Smeers（Azao Games，原型支持）；Romain Libersa（文物图标图形）；Collin Spanberger（玩家社群）；Anton Kawasaki（This Way! 网站）。最后，特别感谢 Faustine、Noémi、Chris、Da 三年来的无条件支持与耐心。</p>
+      <p><b>众筹：</b>2021 年 5 月首次 Kickstarter，共 3937 名支持者。</p>
+      <p><b>版权：</b>© 2022 This Way!　www.thiswayeditions.com</p>
+      <p>社区：Facebook / Discord / @thiswayice；可在 Steam 的 Tabletop Simulator 上体验数字版；规则多语言下载见 thiswayeditions.com。</p>
+    </div>
+  </section>
+
+  <footer>
+    本页基于《I C E》英文规则书（This Way! Editions, 2022）与 Kickstarter 一页纸整理翻译而成；版式与导航为便于阅读而添加。
+    「冰封远征」为中文暂译，游戏原名 I C E 保留。
+  </footer>
+  </main>
+</div>
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Medicus（医者）术语填表</title>
+<style>
+  :root{
+    --crimson:#7a2230; --crimson-deep:#5e1822; --brass:#a87d2e; --gold:#b8893a;
+    --paper:#f7f0e0; --ink:#2b2118; --line:#d8c7a0;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:"Songti SC","STSong","SimSun",Georgia,serif;
+    background:var(--paper);color:var(--ink);line-height:1.6;}
+  header{background:linear-gradient(135deg,var(--crimson),var(--crimson-deep));
+    color:var(--paper);padding:22px 28px;}
+  header h1{margin:0;font-size:24px;letter-spacing:1px;}
+  header p{margin:6px 0 0;font-size:13px;opacity:.9;}
+  .wrap{max-width:920px;margin:0 auto;padding:20px 24px 90px;}
+  .grp{margin:26px 0 8px;padding:8px 14px;border-left:5px solid var(--brass);
+    background:#fff7e6;border-radius:4px;}
+  .grp h2{margin:0;font-size:18px;color:var(--crimson-deep);}
+  .grp .hint{font-size:12px;color:#8a7a55;margin:2px 0 0;}
+  table{width:100%;border-collapse:collapse;margin-top:10px;background:#fffdf7;}
+  th,td{border:1px solid var(--line);padding:7px 10px;font-size:14px;vertical-align:middle;}
+  th{background:#efe2c2;color:var(--crimson-deep);text-align:left;font-weight:700;}
+  td.en{color:#5a4a2e;font-style:italic;width:46%;word-break:break-word;}
+  td.cn input{width:100%;border:1px solid #cbb98c;border-radius:4px;padding:6px 8px;
+    font-family:inherit;font-size:14px;color:var(--ink);background:#fff;}
+  td.cn input:focus{outline:none;border-color:var(--brass);box-shadow:0 0 0 2px #e8d39a;}
+  tr.keep td{background:#f2ead2;}
+  .keep td.en{font-style:normal;}
+  .badge{display:inline-block;font-size:11px;padding:1px 7px;border-radius:10px;
+    background:var(--crimson);color:#fff;margin-left:6px;vertical-align:middle;}
+  .bar{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:2px solid var(--brass);
+    padding:10px 24px;display:flex;gap:12px;align-items:center;box-shadow:0 -2px 10px rgba(0,0,0,.12);}
+  .bar button{background:var(--crimson);color:#fff;border:none;padding:9px 18px;border-radius:5px;
+    font-size:14px;cursor:pointer;font-family:inherit;}
+  .bar button.ghost{background:#fff;color:var(--crimson);border:1px solid var(--crimson);}
+  .bar span{font-size:12px;color:#7a6a45;}
+  #out{margin-top:14px;}
+  #out textarea{width:100%;height:220px;font-family:"Courier New",monospace;font-size:13px;
+    border:1px solid var(--line);border-radius:5px;padding:10px;color:var(--ink);background:#fbf7ec;}
+  .copied{color:var(--crimson);font-weight:700;}
+</style>
+</head>
+<body>
+<header>
+  <h1>Medicus（医者）· 术语填表</h1>
+  <p>英文列只读；中文列已预填草拟值，直接覆盖或改写即可。重点审「恩惠卡 19 张」与「知识标记 11 类」。填完点底部「导出填表结果」复制回我。</p>
+</header>
+<div class="wrap" id="root">
+
+  <div class="grp"><h2>① 组件与基础名词</h2><div class="hint">游戏配件与基础名词</div></div>
+  <table data-grp="组件与基础名词">
+    <tr><th>英文</th><th>中文（填写/覆盖）</th></tr>
+    <tr><td class="en">Instruments</td><td class="cn"><input value="器械"></td></tr>
+    <tr><td class="en">Rods of Asclepius</td><td class="cn"><input value="医神之杖"></td></tr>
+    <tr><td class="en">Letters</td><td class="cn"><input value="信件"></td></tr>
+    <tr><td class="en">Favor cards</td><td class="cn"><input value="恩惠卡"></td></tr>
+    <tr><td class="en">Starting favor cards</td><td class="cn"><input value="起始恩惠卡"></td></tr>
+    <tr><td class="en">Location cards</td><td class="cn"><input value="地点卡"></td></tr>
+    <tr><td class="en">Overview cards</td><td class="cn"><input value="概览卡"></td></tr>
+    <tr><td class="en">neutral Apprentices</td><td class="cn"><input value="中立学徒"></td></tr>
+    <tr><td class="en">50/100 markers</td><td class="cn"><input value="50/100 标记"></td></tr>
+    <tr><td class="en">Player boards</td><td class="cn"><input value="玩家面板"></td></tr>
+    <tr><td class="en">Selection dials</td><td class="cn"><input value="选择盘"></td></tr>
+    <tr><td class="en">Extra bags</td><td class="cn"><input value="额外袋子"></td></tr>
+    <tr><td class="en">Apprentices</td><td class="cn"><input value="学徒"></td></tr>
+    <tr><td class="en">Score marker</td><td class="cn"><input value="计分标记"></td></tr>
+    <tr><td class="en">Prestige marker</td><td class="cn"><input value="声望标记"></td></tr>
+    <tr><td class="en">Modular game board</td><td class="cn"><input value="模块化游戏板"></td></tr>
+    <tr><td class="en">Scoring board</td><td class="cn"><input value="计分板"></td></tr>
+    <tr><td class="en">Recipe books</td><td class="cn"><input value="配方书"></td></tr>
+    <tr><td class="en">Market stalls</td><td class="cn"><input value="摊位"></td></tr>
+    <tr><td class="en">Starting stalls</td><td class="cn"><input value="起始摊位"></td></tr>
+    <tr><td class="en">Medicus figure</td><td class="cn"><input value="医者棋子"></td></tr>
+    <tr><td class="en">Knowledge markers</td><td class="cn"><input value="知识标记"></td></tr>
+    <tr><td class="en">Coins</td><td class="cn"><input value="钱币"></td></tr>
+    <tr><td class="en">Remedies</td><td class="cn"><input value="药剂"></td></tr>
+    <tr><td class="en">Barbers</td><td class="cn"><input value="理发师"></td></tr>
+  </table>
+
+  <div class="grp"><h2>② 流程与机制</h2><div class="hint">回合/轮次/行动框架等</div></div>
+  <table data-grp="流程与机制">
+    <tr><th>英文</th><th>中文（填写/覆盖）</th></tr>
+    <tr><td class="en">Round</td><td class="cn"><input value="轮次"></td></tr>
+    <tr><td class="en">Turn</td><td class="cn"><input value="回合"></td></tr>
+    <tr><td class="en">Main action</td><td class="cn"><input value="主要行动"></td></tr>
+    <tr><td class="en">Secondary action</td><td class="cn"><input value="次要行动"></td></tr>
+    <tr><td class="en">Prestige duel</td><td class="cn"><input value="声望对决"></td></tr>
+    <tr><td class="en">Destination</td><td class="cn"><input value="目的地"></td></tr>
+    <tr><td class="en">Starting location</td><td class="cn"><input value="起始地点"></td></tr>
+    <tr><td class="en">Pass starting player</td><td class="cn"><input value="传递起始玩家"></td></tr>
+    <tr><td class="en">Collect remedies</td><td class="cn"><input value="收集药剂"></td></tr>
+    <tr><td class="en">Sell remedy</td><td class="cn"><input value="出售药剂"></td></tr>
+    <tr><td class="en">Deliver letter</td><td class="cn"><input value="投递信件"></td></tr>
+    <tr><td class="en">Train apprentice</td><td class="cn"><input value="训练学徒"></td></tr>
+    <tr><td class="en">Buy instrument</td><td class="cn"><input value="购买器械"></td></tr>
+    <tr><td class="en">Take money</td><td class="cn"><input value="取钱"></td></tr>
+    <tr><td class="en">Take favor</td><td class="cn"><input value="取恩惠卡"></td></tr>
+    <tr><td class="en">End of round</td><td class="cn"><input value="回合结束"></td></tr>
+    <tr><td class="en">Final scoring</td><td class="cn"><input value="终局计分"></td></tr>
+    <tr><td class="en">Supply</td><td class="cn"><input value="供应区"></td></tr>
+    <tr><td class="en">Display</td><td class="cn"><input value="展示区"></td></tr>
+    <tr><td class="en">Bag</td><td class="cn"><input value="袋子"></td></tr>
+  </table>
+
+  <div class="grp"><h2>③ 主要 / 次要行动（7 项）</h2><div class="hint">每回合可选的行动</div></div>
+  <table data-grp="主要次要行动">
+    <tr><th>英文</th><th>中文（填写/覆盖）</th></tr>
+    <tr><td class="en">Take money</td><td class="cn"><input value="取钱"></td></tr>
+    <tr><td class="en">Take favor card</td><td class="cn"><input value="取恩惠卡"></td></tr>
+    <tr><td class="en">Train apprentice</td><td class="cn"><input value="训练学徒"></td></tr>
+    <tr><td class="en">Buy instrument</td><td class="cn"><input value="购买器械"></td></tr>
+    <tr><td class="en">End turn</td><td class="cn"><input value="回合结束"></td></tr>
+    <tr><td class="en">Resolve letter / market</td><td class="cn"><input value="处理信件/摊位"></td></tr>
+    <tr><td class="en">Move barber</td><td class="cn"><input value="移动理发师"></td></tr>
+  </table>
+
+  <div class="grp"><h2>④ 恩惠卡 19 张 <span class="badge">重点审</span></h2><div class="hint">创意译名，最该你把关</div></div>
+  <table data-grp="恩惠卡19张">
+    <tr><th>英文</th><th>中文（填写/覆盖）</th></tr>
+    <tr><td class="en">Favor of the Individual Path</td><td class="cn"><input value="独立之路之恩惠"></td></tr>
+    <tr><td class="en">Favor of the Early Bird</td><td class="cn"><input value="早起鸟之恩惠"></td></tr>
+    <tr><td class="en">Favor of Optimal Conditions</td><td class="cn"><input value="最佳条件之恩惠"></td></tr>
+    <tr><td class="en">Favor of the Friendly Gift</td><td class="cn"><input value="友好馈赠之恩惠"></td></tr>
+    <tr><td class="en">Favor of the Sticky Fingers</td><td class="cn"><input value="顺手牵羊之恩惠"></td></tr>
+    <tr><td class="en">Favor of High Demand</td><td class="cn"><input value="高需求之恩惠"></td></tr>
+    <tr><td class="en">Favor of the Rich Find</td><td class="cn"><input value="丰厚发现之恩惠"></td></tr>
+    <tr><td class="en">Favor of Free Choice</td><td class="cn"><input value="自由选择之恩惠"></td></tr>
+    <tr><td class="en">Favor of the Hard Cash</td><td class="cn"><input value="硬通货之恩惠"></td></tr>
+    <tr><td class="en">Favor of the Happy Stay</td><td class="cn"><input value="愉快停留之恩惠"></td></tr>
+    <tr><td class="en">Favor of the Glorious Deed</td><td class="cn"><input value="光辉事迹之恩惠"></td></tr>
+    <tr><td class="en">Favor of the Private Lesson</td><td class="cn"><input value="私人授课之恩惠"></td></tr>
+    <tr><td class="en">Favor of the Privileged Trade</td><td class="cn"><input value="特权交易之恩惠"></td></tr>
+    <tr><td class="en">Favor of Good Friendship</td><td class="cn"><input value="友好情谊之恩惠"></td></tr>
+    <tr><td class="en">Favor of Wise Foresight</td><td class="cn"><input value="明智远见之恩惠"></td></tr>
+    <tr><td class="en">Favor of Mutual Exchange</td><td class="cn"><input value="相互交换之恩惠"></td></tr>
+    <tr><td class="en">Favor of the Free Bonus</td><td class="cn"><input value="免费奖励之恩惠"></td></tr>
+    <tr><td class="en">Favor of the Generous Gift</td><td class="cn"><input value="慷慨馈赠之恩惠"></td></tr>
+    <tr><td class="en">Favor of High Return</td><td class="cn"><input value="高回报之恩惠"></td></tr>
+  </table>
+
+  <div class="grp"><h2>⑤ 知识标记 11 类 <span class="badge">重点审</span></h2><div class="hint">创意译名，最该你把关</div></div>
+  <table data-grp="知识标记11类">
+    <tr><th>英文</th><th>中文（填写/覆盖）</th></tr>
+    <tr><td class="en">Haggling</td><td class="cn"><input value="讨价还价"></td></tr>
+    <tr><td class="en">Luminary</td><td class="cn"><input value="名家"></td></tr>
+    <tr><td class="en">Obolus</td><td class="cn"><input value="奥波勒斯"></td></tr>
+    <tr><td class="en">Messenger's Fee</td><td class="cn"><input value="信使费"></td></tr>
+    <tr><td class="en">Jack of all Trades</td><td class="cn"><input value="多面手"></td></tr>
+    <tr><td class="en">Privilege</td><td class="cn"><input value="特权"></td></tr>
+    <tr><td class="en">Boredom</td><td class="cn"><input value="无聊"></td></tr>
+    <tr><td class="en">Specialist</td><td class="cn"><input value="专家"></td></tr>
+    <tr><td class="en">Courier</td><td class="cn"><input value="信使"></td></tr>
+    <tr><td class="en">Extra bag</td><td class="cn"><input value="额外袋子"></td></tr>
+    <tr><td class="en">Rods of Asclepius</td><td class="cn"><input value="医神之杖"></td></tr>
+  </table>
+
+  <div class="grp"><h2>⑥ 保留英文专名（不译，确认即可）</h2><div class="hint">按严格规则：人名/公司/游戏名/希腊专名保留</div></div>
+  <table data-grp="保留英文专名">
+    <tr><th>英文</th><th>类别 / 处理</th></tr>
+    <tr class="keep"><td class="en">Medicus</td><td>游戏名 · 保留</td></tr>
+    <tr class="keep"><td class="en">Stefan Feld</td><td>设计师人名 · 保留</td></tr>
+    <tr class="keep"><td class="en">Dennis Lohausen</td><td>设计师人名 · 保留</td></tr>
+    <tr class="keep"><td class="en">Ralph Bruhn</td><td>设计师人名 · 保留</td></tr>
+    <tr class="keep"><td class="en">Georg Wild</td><td>美术 · 保留</td></tr>
+    <tr class="keep"><td class="en">Tim Schleimer</td><td>文案 · 保留</td></tr>
+    <tr class="keep"><td class="en">Pegasus Spiele GmbH</td><td>出版公司 · 保留</td></tr>
+    <tr class="keep"><td class="en">Hall Games</td><td>出版公司 · 保留</td></tr>
+    <tr class="keep"><td class="en">Asclepius</td><td>希腊医神 · 保留（配「医神」）</td></tr>
+    <tr class="keep"><td class="en">Obolus</td><td>古希腊钱币 · 保留（配「奥波勒斯」）</td></tr>
+  </table>
+
+  <div id="out"></div>
+</div>
+
+<div class="bar">
+  <button onclick="doExport()">导出填表结果</button>
+  <button class="ghost" onclick="copyOut()">复制到剪贴板</button>
+  <span id="msg"></span>
+</div>
+
+<script>
+function doExport(){
+  let txt = "Medicus（医者）术语填表结果\n" + "=".repeat(40) + "\n";
+  document.querySelectorAll("table[data-grp]").forEach(t=>{
+    const g = t.getAttribute("data-grp");
+    txt += "\n【"+g+"】\n";
+    t.querySelectorAll("tr").forEach(tr=>{
+      const en = tr.querySelector("td.en");
+      const inp = tr.querySelector("td.cn input");
+      if(en && inp){
+        txt += en.textContent.trim() + " = " + inp.value.trim() + "\n";
+      }
+    });
+  });
+  const box = document.createElement("textarea");
+  box.value = txt;
+  document.getElementById("out").innerHTML = "";
+  document.getElementById("out").appendChild(box);
+  document.getElementById("msg").textContent = "已生成，可复制上方文本框内容回传。";
+  document.getElementById("msg").className = "copied";
+}
+function copyOut(){
+  const box = document.querySelector("#out textarea");
+  if(!box){ doExport(); }
+  const b = document.querySelector("#out textarea");
+  b.select();
+  try{ document.execCommand("copy");
+    document.getElementById("msg").textContent = "已复制到剪贴板，粘回对话即可。";
+    document.getElementById("msg").className = "copied";
+  }catch(e){
+    document.getElementById("msg").textContent = "复制失败，请手动选中文本框复制。";
+  }
+}
+</script>
+</body>
+</html>
