@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prague Unseen — Rulebook</title>
+<style>
+  :root{
+    /* Prague Unseen palette — 19th-century Bohemian stone + verdigris copper */
+    --stone:#f4eee2;          /* page bone, warmer than default */
+    --stone2:#ebe3ce;
+    --ink:#2a261f;            /* warm near-black */
+    --ink-soft:#5e564a;
+    --copper:#b8693a;         /* accented edges, callouts */
+    --copper-d:#8a4a23;
+    --verdigris:#3d6b6a;      /* primary nav / heading — oxidized copper blue */
+    --verdigris-d:#2a4d4c;
+    --verdigris-l:#6f9d99;
+    --moss:#5b6f4a;           /* secondary accent (advanced rules) */
+    --red:#a8392f; --red-l:#f6e3e0;
+    --line:#d8cfb6;
+    --card:#fffdf6;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--stone); color:var(--ink);
+    font-family:"Iowan Old Style","Palatino Linotype","Source Serif Pro",Georgia,serif;
+    line-height:1.75; font-size:17px;
+  }
+  .wrap{display:flex; align-items:flex-start; max-width:1200px; margin:0 auto;}
+  nav{
+    position:sticky; top:0; align-self:flex-start;
+    width:260px; flex:0 0 260px; height:100vh; overflow-y:auto;
+    background:linear-gradient(165deg,var(--verdigris-d),var(--verdigris) 70%,var(--copper));
+    color:#f6efe2;
+    padding:22px 16px;
+    font-family:"PingFang SC","Segoe UI",Arial,sans-serif;
+  }
+  nav h2{font-size:13px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--verdigris-l); margin:0 0 14px;}
+  nav ol{list-style:none; margin:0; padding:0;}
+  nav li{margin:2px 0;}
+  nav a{display:block; color:#f6efe2; text-decoration:none; font-size:14px;
+    padding:7px 10px; border-radius:7px; line-height:1.4;}
+  nav a:hover{background:rgba(0,0,0,.18);}
+  nav .grp{font-size:11px; text-transform:uppercase; color:var(--copper);
+    letter-spacing:.12em; padding:14px 10px 4px; opacity:.9;}
+  main{flex:1 1 auto; min-width:0; padding:0 44px 80px;}
+  .cover{
+    background:linear-gradient(155deg,var(--verdigris-d) 0%,var(--verdigris) 55%,var(--copper) 100%);
+    color:#f6efe2; padding:62px 44px; border-radius:0 0 22px 22px;
+    margin-bottom:36px; text-align:center;
+    box-shadow:0 12px 32px rgba(42,77,76,.25);
+  }
+  .cover h1{font-size:42px; margin:0 0 8px; font-family:"Iowan Old Style",Georgia,serif;}
+  .cover .sub{font-size:16px; opacity:.92;
+    font-family:"PingFang SC","Segoe UI",Arial,sans-serif;}
+  .cover .tag{display:inline-block; margin-top:18px; padding:7px 18px;
+    border:1px solid rgba(255,255,255,.4); border-radius:22px; font-size:14px;
+    font-family:"PingFang SC","Segoe UI",Arial,sans-serif;}
+  section{padding:14px 0 8px; border-bottom:1px solid var(--line); scroll-margin-top:18px;}
+  h2.sec{font-size:28px; color:var(--verdigris-d); margin:18px 0 6px;
+    font-family:"PingFang SC","Segoe UI",Arial,sans-serif;}
+  h2.sec .num{color:var(--copper); font-weight:700; margin-right:10px;}
+  h3{font-size:20px; color:var(--verdigris); margin:24px 0 6px;
+    font-family:"PingFang SC","Segoe UI",Arial,sans-serif;}
+  h4{font-size:17px; color:var(--copper-d); margin:18px 0 4px;
+    font-family:"PingFang SC","Segoe UI",Arial,sans-serif;}
+  p{margin:10px 0;}
+  ul,ol{margin:10px 0 10px 4px; padding-left:22px;}
+  li{margin:5px 0;}
+  .lead{font-size:18px; color:var(--ink);}
+  .comp-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:16px 0;}
+  .comp{border:1px solid var(--line); background:var(--card); border-radius:12px;
+    padding:14px 16px; box-shadow:0 2px 6px rgba(0,0,0,.04);}
+  .comp b{color:var(--verdigris-d);}
+  .callout{border-left:5px solid var(--copper); background:var(--stone2);
+    padding:12px 18px; margin:16px 0; border-radius:0 10px 10px 0;}
+  .callout.tip{border-color:var(--moss); background:#eef1e8;}
+  .callout.tip b{color:var(--moss);}
+  .callout.adv{border-color:var(--red); background:var(--red-l);}
+  .callout.adv b{color:var(--red);}
+  .steps{counter-reset:step; list-style:none; padding-left:0; margin:14px 0;}
+  .steps li{position:relative; padding:10px 14px 10px 52px; margin:8px 0;
+    background:var(--card); border:1px solid var(--line); border-radius:10px;}
+  .steps li::before{counter-increment:step; content:counter(step);
+    position:absolute; left:12px; top:50%; transform:translateY(-50%);
+    width:28px; height:28px; background:var(--verdigris); color:#fff;
+    border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-weight:700; font-family:Arial,sans-serif;}
+  .steps li b{color:var(--verdigris-d);}
+  .minigame{border:1px solid var(--line); background:var(--card); border-radius:14px;
+    padding:18px 20px; margin:18px 0; box-shadow:0 3px 10px rgba(0,0,0,.05);
+    border-top:4px solid var(--verdigris);}
+  .minigame h3{margin-top:0;}
+  .minigame.golem{border-top-color:#3e7cb1;}      /* match guild-blue */
+  .minigame.vodnik{border-top-color:#5b8fa8;}     /* river blue */
+  .minigame.horned{border-top-color:#b8693a;}     /* copper */
+  .minigame.robots{border-top-color:#7a6a4a;}     /* brass */
+  .ex{font-size:15px; color:var(--ink-soft); border-top:1px dashed var(--line);
+    margin-top:10px; padding-top:10px;}
+  .ex b{color:var(--copper-d);}
+  .two{display:grid; grid-template-columns:1fr 1fr; gap:16px; align-items:start;}
+  figure{margin:18px 0; text-align:center;}
+  figure img{max-width:100%; border:1px solid var(--line); border-radius:12px;
+    box-shadow:0 4px 14px rgba(0,0,0,.08); background:#fff;}
+  figcaption{font-size:13px; color:var(--ink-soft); margin-top:6px;
+    font-family:"PingFang SC","Segoe UI",Arial,sans-serif;}
+  .sym-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+    gap:10px; margin:14px 0;}
+  .sym{border:1px solid var(--line); background:var(--card); border-radius:8px;
+    padding:8px 12px; font-size:14px;}
+  .sym b{color:var(--verdigris-d); display:block; font-size:13px;
+    text-transform:uppercase; letter-spacing:.06em;}
+  table{border-collapse:collapse; width:100%; margin:14px 0;
+    font-size:15px;}
+  th,td{border:1px solid var(--line); padding:8px 12px; text-align:left;}
+  th{background:var(--verdigris); color:#fff; font-weight:600;}
+  @media(max-width:900px){
+    .wrap{flex-direction:column;}
+    nav{position:static; width:100%; height:auto; flex-basis:auto;}
+    main{padding:0 18px 60px;}
+    .comp-grid,.two{grid-template-columns:1fr;}
+  }
+  footer{margin-top:40px; font-size:13px; color:var(--ink-soft);
+    font-family:"PingFang SC","Segoe UI",Arial,sans-serif; text-align:center;}
+  .credits{background:var(--stone2); border:1px solid var(--line); border-radius:12px;
+    padding:16px 20px; margin-top:14px;}
+  .credits b{color:var(--verdigris-d);}
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <h1>Prague Unseen</h1>
+  <div class="sub">Rulebook · Reformat Edition</div>
+  <div class="tag">1–4 Players &nbsp;|&nbsp; 120 min &nbsp;|&nbsp; Age 14+</div>
+</header>
+
+<div class="wrap">
+<nav>
+  <h2>Contents</h2>
+  <ol>
+    <li><a href="#intro">1. Introduction</a></li>
+    <li><a href="#components">2. Components</a></li>
+    <li><a href="#setup">3. Setup</a></li>
+    <li><a href="#overview">4. Gameplay Overview</a></li>
+    <li><a href="#actions">5. The Four Actions</a></li>
+    <li><a href="#minigames">6. The Four Minigames</a></li>
+    <li><a href="#milestones">7. Milestones &amp; End Game Bonuses</a></li>
+    <li><a href="#influence">8. Influence Tracks &amp; Era End</a></li>
+    <li><a href="#newera">9. New Era Setup</a></li>
+    <li><a href="#final">10. Final Endgame Scoring</a></li>
+    <li><a href="#solo">11. Solo Game — The Councillor</a></li>
+    <li><a href="#cards">12. Cards Overview</a></li>
+    <li><a href="#symbols">13. Symbol Legend</a></li>
+    <li><a href="#credits">14. Credits</a></li>
+  </ol>
+</nav>
+
+<main>
+
+<!-- 1. INTRODUCTION ================================================ -->
+<section id="intro">
+  <h2 class="sec"><span class="num">1</span>Introduction</h2>
+  <p class="lead">Various creatures wander around Old Prague. They are working to return the city to the state before the great flood, when all Neighborhoods flourished. Although they dedicated themselves fully to the interests of their kind for long centuries, now <b>Horned, Vodniks, Golems, and Robots</b> must unite and rebuild Prague anew from the foundations.</p>
+  <p>In the game Prague Unseen, you take on the role of a burgher who triggers Neighborhood and Building actions through various types of workers. Your goal will be to maximize the use of your helpers so that you have the most Victory Points at the end of the game. You will gain resources to open new businesses that add new actions to the game, utilize specific minigames of individual Neighborhoods, and much more.</p>
+  <figure>
+    <img src="PragueUnseen_Rules_images/page_02.jpg" alt="Introduction and component list">
+    <figcaption>Cover, flavor intro and components (original page 2)</figcaption>
+  </figure>
+</section>
+
+<!-- 2. COMPONENTS ================================================== -->
+<section id="components">
+  <h2 class="sec"><span class="num">2</span>Components</h2>
+  <div class="comp-grid">
+    <div class="comp"><b>Game board</b><br>Double-sided (1–2 players vs 3–4 players).</div>
+    <div class="comp"><b>65 Building cards</b><br>Divided into Level I, II, III (three Eras).</div>
+    <div class="comp"><b>32 Upgrade cards</b><br>8 for each of the four Neighborhoods.</div>
+    <div class="comp"><b>18 Mug cards</b><br>Discardable immediate-effect cards.</div>
+    <div class="comp"><b>Witch meeple</b><br>One figure that moves across Neighborhoods.</div>
+    <div class="comp"><b>Bench + Neighborhood scoring tile</b><br>Center of the board.</div>
+    <div class="comp"><b>Starting Bonus tile / virtual-player influence reference tile</b><br>Two-sided.</div>
+    <div class="comp"><b>4 Faction tokens</b><br>For the Popularity ranking.</div>
+    <div class="comp"><b>First player token</b><br>Passed each Era.</div>
+    <div class="comp"><b>10 Witch tokens</b><br>Split into Level I and Level II piles.</div>
+    <div class="comp"><b>15 River Variety Tokens (Vodnik Neighborhood)</b><br>Optional setup variability.</div>
+    <div class="comp"><b>Marketplace Variety tile (Golem Neighborhood)</b><br>Optional setup variability.</div>
+    <div class="comp"><b>75 wooden Resources</b><br>15 each: Beer, Cog, Fish, Book, Garnet.</div>
+    <div class="comp"><b>36 Building Price tokens</b><br>9 for each Neighborhood (Levels I / II / III).</div>
+    <div class="comp"><b>Score pad</b><br>For recording VP across Eras.</div>
+    <div class="comp"><b>33 Item tokens (Horned Neighborhood)</b><br>Plus a linen bag and Flame board.</div>
+    <div class="comp"><b>11 Crate tokens (Robot Neighborhood)</b><br>Plus a Clock wooden token.</div>
+    <div class="comp"><b>Golem meeple (Golem Neighborhood)</b><br>Plus 4 Priority tiles.</div>
+    <div class="comp"><b>5 Reward tokens + 12 River Milestone tokens (Vodnik Neighborhood)</b><br>For the Mill Wheel and River.</div>
+  </div>
+  <h3>Per-player components</h3>
+  <div class="comp-grid">
+    <div class="comp"><b>Player board</b><br>One of each color.</div>
+    <div class="comp"><b>4 workers</b><br>3 actions + 1 forced Bench pass each Era.</div>
+    <div class="comp"><b>1 Boat token</b><br>For the River track.</div>
+    <div class="comp"><b>12 marker tokens</b><br>For Rumor, Idea, Influence, Guild, End Game Scoring tables.</div>
+    <div class="comp"><b>8 Bridge tiles</b><br>Pre-built stacks of two tiles each.</div>
+    <div class="comp"><b>4 Gargoyle tokens</b><br>For the four Influence tracks.</div>
+  </div>
+  <figure>
+    <img src="PragueUnseen_Rules_images/page_03.jpg" alt="Component description">
+    <figcaption>Board and component description (original page 3)</figcaption>
+  </figure>
+</section>
+
+<!-- 3. SETUP ======================================================= -->
+<section id="setup">
+  <h2 class="sec"><span class="num">3</span>Setup</h2>
+  <ol class="steps">
+    <li><b>Place the game board</b> in the center of the table with the correct side face-up, depending on the number of players. This information can be found in the center of the board under the Popularity track.</li>
+    <li><b>Prepare the Popularity track.</b> Place the Bench and Neighborhood scoring tile in the middle of the board with the "I" side face-up. Shuffle the 4 Faction tiles and randomly place them next to it.</li>
+    <li><b>Place the Starting Bonus tile</b> (Resource side face-up) on top of the Bench and Neighborhood scoring tile.</li>
+    <li><b>Place the Witch figure</b> in the Neighborhood that is on the lowest position on the Popularity track.</li>
+    <li><b>Prepare the individual Neighborhoods sequentially:</b>
+      <ul>
+        <li><b>Horned:</b> place the Flame board on the Cauldron and randomly align the spaces. Place 1 random Item token into each of the four sections of the Cauldron. Leave the remaining tokens nearby in the bag.</li>
+        <li><b>Robots:</b> place the Clock token on the space with the Robot icon. In the inner circle, place two random Crate tokens face-up into each of its four sections. Put unused Crate tokens back into the box.</li>
+        <li><b>Vodniks:</b> shuffle the Mug cards and place them face-down in the appropriate spot. Randomly place all 5 Reward tokens into the Mill Wheel, ensuring that two tokens are in the Vodnik section, and one token in each of the remaining creature sections. Divide the River Milestone tokens into two piles according to the number of waves on their back (2 or 4 waves); place the first pile on the dedicated spot in the middle of the River and the second pile at the end.</li>
+        <li><b>Golems:</b> place the Golem figure in the center of the Marketplace. Shuffle the 4 Worker Priority tiles and randomly place them next to the Square.</li>
+      </ul>
+    </li>
+    <li><b>Prepare the Upgrade cards.</b> Each Neighborhood has 8; shuffle them separately and draw 4 from each stack. Place these face-down beneath the game board next to the corresponding Neighborhood. Return the remaining cards to the box.</li>
+    <li><b>Sort the Building Price tokens by Neighborhood.</b> In each Neighborhood, place a random Level III token on each of the three Building spaces first. Then place a Level II token on top of each, followed by a Level I token on top of that.</li>
+    <li><b>Prepare a pen and the scoring sheet</b> for recording Victory Points.</li>
+    <li><b>Prepare the Resource token supply</b> within reach: Beer, Cogs, Fish, Books, and Garnets.</li>
+    <li><b>Place three Building card decks</b> next to the game board, divided into Level I, II, and III. Shuffle each deck separately. Reveal the top four cards from the Level I deck face-up next to the game board to form the common Building offer. Building levels correspond to the three Eras of the game.</li>
+    <li><b>Create two piles from the Witch tokens, I and II,</b> and place them face-down near the game board.</li>
+    <li><b>Each player chooses a color</b> and takes all tokens of that color (1 Boat, 4 Workers, 4 Gargoyles, 8 Bridge tiles and 12 marker tokens). Place a player board of their color in front of them with the side without a symbol facing up.</li>
+    <li><b>Each player places 1 marker token</b> on position "0" on the Rumor track and one on the Idea track (Robots Neighborhood).</li>
+    <li><b>Place eight Bridge tiles</b> on the left side of the player board. Shuffle them and create four stacks of two tiles each, placing one tile on top of the other in each stack. Place all tiles with the Guild symbol side face-up.</li>
+    <li><b>Each player places one Gargoyle</b> on the starting space of each of the four Influence tracks.</li>
+    <li><b>Place each player's Boat token</b> at the start of the River track.</li>
+    <li><b>Shuffle the Level 0 Building cards</b> and deal two cards to each player.</li>
+    <li><b>The player who last sat on a broom</b> will be the starting player. If unsure, choose randomly. They take the First player token.</li>
+    <li><b>Counter-clockwise, starting from the last player,</b> each player chooses in which Neighborhood (that does not already have a Building card) they will build one of the two Level 0 Building cards for free. Take the chosen Level 0 Building card and place it face-up underneath the center Building Price token.</li>
+    <li><b>They gain their first influence</b> in that Neighborhood. Place their Gargoyle on space 1 of that Influence track.</li>
+    <li><b>After all players have placed a Building card,</b> each player takes the bonus from the Starting Bonus tile corresponding to their chosen Neighborhood.</li>
+    <li><b>In a game with fewer than four players,</b> place one random Level 0 Building card in the center slot in each Neighborhood that does not already have a Building card. Return all unused Level 0 Building cards to the box.</li>
+    <li><b>Remove the Starting Bonus tile</b> and return it to the box.</li>
+  </ol>
+
+  <div class="callout tip">
+    <b>Setup variability.</b> To make each game more variable and unique, you may use River Variety Tokens to cover the pre-printed meeples next to the River spaces. Take all bubble tokens with meeple icons and separate them by their backs. Shuffle each set and then start placing tokens over the pre-printed bubbles on the board. Make sure to place all 3 tokens from a set before taking tiles from another set. Instead of using the pre-printed Marketplace map in the Golem Neighborhood, you may cover it with a tile showing new Rewards. Place the tile randomly face-up.
+  </div>
+
+  <h3>Changes in setup for a 2-player game</h3>
+  <ul>
+    <li>Place the game board 1/2 player side up.</li>
+    <li>Randomly select only 2 Building Price tokens from each level of each Neighborhood and place them on Building spaces as usual.</li>
+    <li>Choose a color that doesn't belong to any player. It will represent a <b>virtual player</b>. Give this virtual player influence according to the Popularity track (from the top): 3 / 2 / 2 / 1 influence. Turn the starting bonus tile over to its reverse side as a reference. The virtual player does not score points during the game, but makes it harder for players to score.</li>
+  </ul>
+
+  <figure>
+    <img src="PragueUnseen_Rules_images/page_04.jpg" alt="Setup steps">
+    <figcaption>Setup steps 1–11 (original page 4)</figcaption>
+  </figure>
+  <figure>
+    <img src="PragueUnseen_Rules_images/page_05.jpg" alt="Setup continued">
+    <figcaption>Setup steps 12–23, 2-player changes and variability (original page 5)</figcaption>
+  </figure>
+</section>
+
+<!-- 4. GAMEPLAY OVERVIEW ========================================== -->
+<section id="overview">
+  <h2 class="sec"><span class="num">4</span>Gameplay Overview</h2>
+  <p class="lead">The game consists of <b>3 Eras</b>. Players take turns in clockwise order starting with the first player. Each player takes one of four actions during their turn — or, when they cannot or do not want to take any other action, they must take a Bench action (pass).</p>
+
+  <div class="callout">
+    <b>Each Era:</b> players may use only <b>3 of their 4 workers</b>. The fourth worker <b>must</b> be used for the Bench action (pass). Some actions require a worker to activate, and some can be activated without a worker.
+  </div>
+
+  <h3>The five options on your turn</h3>
+  <ol class="steps">
+    <li><b>Place a Worker</b> — drop a worker onto a Neighborhood Square and resolve that Neighborhood's minigame.</li>
+    <li><b>Enter a Building</b> — send a worker from a Square (or from a connected Bridge) onto a Building card in that Neighborhood.</li>
+    <li><b>Build a Building</b> — pay a Building Price token, place a new card from the offer onto the Building space, advance Influence by 1.</li>
+    <li><b>Build a Bridge</b> — spend two marked Guild symbols to place a Bridge tile on the game board.</li>
+    <li><b>Bench action — pass</b> — send your last (fourth) worker of the Era to the Bench; gain Rumor / a Mug card depending on the Era.</li>
+  </ol>
+
+  <h3>Resources</h3>
+  <p>There are four basic Resources in the game, tied to the individual Neighborhoods:</p>
+  <ul>
+    <li><b>Beer</b> — Horned</li>
+    <li><b>Cogs</b> — Robots</li>
+    <li><b>Fish</b> — Vodniks</li>
+    <li><b>Books</b> — Golems</li>
+  </ul>
+  <p>Besides basic Resources, the game uses the supplementary Resource <b>Rumor</b>, which is recorded on the track at the bottom of the player board. The maximum amount a player can have at once is 6 units of Rumor. If this amount is exceeded, all excess Rumor is lost.</p>
+  <p>The final Resource in the game is the <b>Garnet</b>. Store this rare commodity on your player board. It can be used instead of any basic Resource and Rumor.</p>
+
+  <h3>Workers</h3>
+  <p>There are four types of workers: <b>Robots, Vodniks, Horned</b> and <b>Golems</b>. Each worker type is associated with a specific Neighborhood on the game board and is considered a home worker. All workers can be sent to any Neighborhood and are capable of triggering specific actions. An action space with the universal worker symbol can be triggered by any worker. If an action space depicts a specific worker, only that worker can perform the action.</p>
+
+  <h3>Victory Points</h3>
+  <p>You gain Victory Points in the form of Keys. Some Victory Points are awarded during the game, after each Era, and recorded on the scoring sheet. At the end of the game, additional Victory Points are awarded (and also recorded on the scoring sheet) for your achievements in the End Game Scoring.</p>
+
+  <figure>
+    <img src="PragueUnseen_Rules_images/page_06.jpg" alt="Gameplay overview">
+    <figcaption>Gameplay overview, resources, workers (original page 6)</figcaption>
+  </figure>
+</section>
+
+<!-- 5. THE FOUR ACTIONS ============================================ -->
+<section id="actions">
+  <h2 class="sec"><span class="num">5</span>The Four Actions</h2>
+
+  <div class="minigame golem">
+    <h3>① Place a Worker</h3>
+    <p>Place a worker on the Square of any Neighborhood. If you send your worker to a Neighborhood where the Witch is located, move her to the Witch space in any other Neighborhood and gain the Reward of the place she was sent to. She can't stay in the same Neighborhood.</p>
+    <p>Depending on the worker type, gain either <b>3 Rumor</b> (for the home worker) or <b>1 Resource of that location</b> (for all other workers). Then resolve the minigame of the given Neighborhood.</p>
+    <div class="callout adv">
+      <b>Caution.</b> You cannot place another one of your workers onto a Square where you already have one!
+    </div>
+    <p class="ex"><b>Note:</b> You will also activate Neighborhood minigames fully or partially thanks to cards and other effects in the game. If a Neighborhood offers two Reward options for the Witch (because a Witch token has been placed there), you may choose which of the two bonuses to gain from her.</p>
+  </div>
+
+  <div class="minigame vodnik">
+    <h3>② Enter a Building</h3>
+    <p>If you have a worker on a Square, you may send it to any available Building card in that Neighborhood. If there is a completed Bridge (made of two Bridge tokens) connecting two Neighborhoods, you may also use your worker from the connected Neighborhood (even if you have a worker waiting there).</p>
+    <p>Some cards show the <b>"any worker"</b> symbol, allowing you to send any worker. Other cards show a specific worker type, and only that type may be placed there. Place the worker on the Building card and resolve the Building effect. There can be only one worker on each Building.</p>
+    <p class="ex"><b>Example:</b> Charles has a Robot worker in the Vodnik Neighborhood and a Golem worker in the Golem Neighborhood. These two Neighborhoods are connected by Bridges, so Charles may use the Golem to enter a Building in the Vodnik Neighborhood, and likewise, he could use the Robot to enter a Building in the Golem Neighborhood. For his action, he decides to use the Golem on a Building card in the Vodnik Neighborhood. There are two cards available: one requiring a Golem and the other showing the "any worker" symbol. Both are accessible, so he may choose either. He chooses the card requiring a Golem. He places his Golem, pays 2 Books, and gains 4 Fish.</p>
+  </div>
+
+  <div class="minigame horned">
+    <h3>③ Build a Building</h3>
+    <p>Select any Building space and pay the Resources indicated on the Building Price token. Take the token and place it near your player board with the Victory Point side up. Choose any of the 4 Building cards in the common Building offer and place it on the selected space (where you paid the price).</p>
+    <p>If there is a Building Price token on a space, you may rebuild an existing Building. If there is a worker on the Building, place it next to the Square in that Neighborhood. If there is no Building Price token, you may not build there.</p>
+    <p>After you built a Building, move your Gargoyle token along the Influence track in that Neighborhood by 1 space. The common Building offer is immediately refilled after each turn, so there are always four cards available to choose from.</p>
+    <p class="ex"><b>Example:</b> Jane decides to build over a Building that is occupied by Charles' Golem. She pays the price of 2 Fish and 2 Books. She takes the Building Price token and places it next to her player board. She chooses the new Building card from the offer and covers the previous card with it. As she does this, she moves the Golem worker next to the Square.</p>
+  </div>
+
+  <div class="minigame robots">
+    <h3>④ Build a Bridge</h3>
+    <p>There are 8 Bridge tiles on your player board, each representing a part of a Bridge you can build across the River. You may choose to build one of the visible Bridge tiles.</p>
+    <p>Each Bridge tile has two Guild symbols on it. To build a Bridge tile, you must have the corresponding Guild symbols marked on the bottom left of your player board. Remove these markers from your player board (they indicate your agreement with the two specific Guilds required to construct the Bridge). Place the chosen Bridge tile on any available Bridge space on the game board and increase your Influence in the Neighborhood where you placed it by 1. If there is no space on the board, place the Bridge tile on a designated spot next to your player board. It will not give you Influence, but it will score points.</p>
+    <p>A Bridge is considered complete if it is built of 2 Bridge tiles by either the same or different players. After the Bridge is completed, it may be used by all players.</p>
+    <p class="ex"><b>Example:</b> Jane wants to build a Bridge tile. She has previously marked the orange and blue Guild symbols, so she can build the Bridge tile she has in the second row. She removes the markers and places the Bridge token on any available space on the River. She chooses a space in the Robot Neighborhood to increase her Influence there.</p>
+  </div>
+
+  <div class="callout">
+    <h3 style="margin-top:0">⑤ Bench action — pass</h3>
+    <p style="margin-bottom:0">Each player only plays three of their four workers in one Era. As soon as you cannot or do not want to perform any of the above-mentioned actions, you pass. Place the remaining fourth worker on the Bench tile. If you are the first player in that Era who passes, place the worker in the top space and gain the First Player token. Each player that passes immediately gains the bonus depicted below (Rumor and/or Mug Card, depending on the Era).</p>
+    <p style="margin-bottom:0">If, at this moment, you have workers remaining on the game board which did not move from the Square to a Building, you receive <b>1 Rumor</b> for each such worker. The remaining players finish their remaining actions and after all players pass, the scoring at the end of the Era and the setup of a new Era occurs.</p>
+  </div>
+
+  <h3>Free actions</h3>
+  <p>You may perform any number of free actions at any time during your turn:</p>
+  <ul>
+    <li><b>Play a Mug card</b> — discard it from your hand and immediately perform its effect.</li>
+    <li>While paying the Resources, you may pay <b>3 Rumor instead of any basic Resource</b> (Beer, Cog, Fish, Book).</li>
+    <li>At the start of your turn, you may pay <b>3 Rumor and treat one of your workers as any other type</b> for the rest of this turn.</li>
+    <li>When paying Resources, you may exchange <b>2 identical basic Resources</b> (Beer, Cog, Fish, Book) for 1 Garnet.</li>
+    <li>A <b>Garnet</b> may supplement any basic Resource or Rumor.</li>
+  </ul>
+  <p class="ex"><b>Note:</b> Do not exchange Resource tokens or worker figures for others. Paying 3 Rumor is understood as paying for a basic Resource, just as 2 identical basic Resources are understood as 1 Garnet. The worker exchange is also virtual and is valid only for the current turn.</p>
+
+  <figure>
+    <img src="PragueUnseen_Rules_images/page_09.jpg" alt="Enter a Building, Build a Building, Influence Track">
+    <figcaption>Enter a Building · Build a Building · Influence Track (original page 9)</figcaption>
+  </figure>
+  <figure>
+    <img src="PragueUnseen_Rules_images/page_10.jpg" alt="Build a Bridge, Bench action, Influence scoring, End of Era">
+    <figcaption>Build a Bridge · Bench action · Influence scoring · End of Era (original page 10)</figcaption>
+  </figure>
+</section>
+
+<!-- 6. MINIGAMES =================================================== -->
+<section id="minigames">
+  <h2 class="sec"><span class="num">6</span>The Four Minigames</h2>
+  <p class="lead">Each Neighborhood runs its own minigame whenever a worker is placed there. Here is each one in full detail.</p>
+
+  <div class="minigame golem">
+    <h3>Golems — Marketplace</h3>
+    <p>Golems move across the Marketplace, where they conclude deals with various Guilds, enabling them to rebuild Prague bridges swept away by the water. Your goal is to collect <b>Guild contracts</b>, which will enable you to build Bridges and gain an advantage in various Neighborhoods.</p>
+    <p>The type of worker you placed determines how many steps you can move the Golem figure on the Marketplace, as shown by the Worker Priority tiles next to the Marketplace. After moving the Golem, place the corresponding Worker Priority tile at the bottom of the track. All other tiles are pushed up.</p>
+    <p>Move the Golem orthogonally (to an edge-adjacent space) for the allowed number of steps (you may return to spaces you have already passed through or started on) and gain the Reward from every space the Golem passed through or ends on. If the Reward is one of the four Guild symbols in the corners of the Marketplace, mark it on the bottom left of your player board with a marker token of your color. <b>You may have only one of each Guild symbol at a time.</b></p>
+    <p class="ex"><b>Example:</b> Ann enters the Golems Square with a Robot worker. Since the Witch is not here, she skips the Witch step. She gains a Book and then activates the minigame. She is granted 3 steps on the Marketplace with a Golem figure. From it she gains 1 Rumor and 2 Guild symbols which she marks on her player board. She then moves the Robots Priority tile to the last position.</p>
+  </div>
+
+  <div class="minigame vodnik">
+    <h3>Vodniks — River &amp; Mill Wheel</h3>
+    <p>Vodniks are tasked with taming the River. They sail upon it and calm it so that it flows peacefully through the city. Your goal is to move as far as possible along the River track, because the further you get, the more points you gain in the End Game Scoring.</p>
+    <p>The Vodnik minigame has two parts: moving on the River track and gaining the Reward from the Mill Wheel. Resolve these in the following order:</p>
+    <ol>
+      <li><b>River:</b> Move along the River track to the nearest space ahead of you with the symbol of the worker you used to activate the minigame. If you reach the end of the River, place your marker token on the 10-points space. If you were the first to sail the entire River, place your marker token on the 12-points space. Then move the Boat back to the start of the River; you may go a second time.</li>
+      <li><b>Mill Wheel:</b> Gain all Rewards on the Reward tokens in the section of the Mill Wheel corresponding to the worker you placed. Then move any one Reward token from this section one space clockwise. If there is no token in the section, you gain a Mug card.</li>
+    </ol>
+    <div class="callout adv">
+      <b>Important:</b> the printed Reward (Mug card) can be taken only if there is no Reward token. If there is a reward token, cover the printed reward with it.
+      </div>
+      <p class="ex"><b>Example:</b> Charles enters the Vodnik Square with a Golem worker. Since the Witch is not here, he skips the Witch step. He gains a Fish and moves his Boat along the River to the next space marked with a Golem. He crosses a weir on the River, so he may choose one of the Milestone River tokens. From the Mill Wheel, he gains a Cog and a Book. He then moves the Book token one space clockwise.</p>
+  </div>
+
+  <div class="minigame horned">
+    <h3>Horned — Cauldron &amp; Display Case</h3>
+    <p>Horned possess a whole range of magical Items. Your goal is to collect as many identical ones as possible and place them in your Display Case.</p>
+    <p>Depending on the type of worker you placed, take one of the adjacent Items from the outer circle of the Cauldron. Then gain the additional bonus shown on the Flame board (inner circle of the Cauldron). Draw a new Item from the bag and place it on the empty space and rotate the Flame board clockwise by 90°.</p>
+    <p>Place the gained Item on the first space from the left in any row in the Display Case on your player board. If you cover a Reward, you gain it immediately. <b>Only one type of Item can be placed in each row of the Display Case.</b> In a rare case when you cannot place an item, put it in the Repair slot.</p>
+    <p class="ex">You may consider this Item to be of any type. You can thus place it anywhere in your Display Case (following the rules of placing it on the leftmost space).</p>
+    <p>When gaining <b>Repair</b>, you might draw 1 random Item from the bag and place it in the Repair slot on your player board, or move an Item from the Repair slot into your Display Case following the regular rules. There is no limit to the amount of tiles in the Repair slot. <b>Items left in the Repair slot at the end of the game are worth 1 VP, but they do not count toward the End Game Scoring bonus.</b></p>
+    <p>You gain points for Items during the End Game Scoring. For each row of Items, you gain the point value shown above the rightmost token.</p>
+    <p class="ex"><b>Example:</b> Charles enters the Horned Square with a Robot worker. Since the Witch is not here, he skips the Witch step. He gains a Beer and then he resolves the minigame. Because Charles entered the Square with a Robot, he may choose either the question-mark Item or the bag from the outer circle of the Cauldron. From the Flame board, he gains 1 Rumor, which he marks on the Rumor track on his player board. Charles chooses the question-mark and places it in his Display Case on the leftmost space, covering the symbol of any Guild. He then takes a marker token of his color and marks the Guild of his choice on his player board. At the end Charles has to place a new Item from the bag into the Cauldron and rotate the Flame board.</p>
+  </div>
+
+  <div class="minigame robots">
+    <h3>Robots — Idea Track &amp; Crates</h3>
+    <p>Robots strive to be efficient and produce various goods that masterly imitate the work of others. Each time this minigame is used, time advances, and you either complete one good or deliver all products produced so far.</p>
+    <p>Move the Clock token clockwise to the section with the symbol of the worker you placed and choose one Reward from the Crate token in the corresponding section. Flip the selected Crate token to its reverse side. If you don't want to or cannot take a Reward from the Crate token, flip all face-down tokens back to their face-up side and gain 1 Rumor for each token flipped this way. Remember that the maximum amount of Rumor is 6.</p>
+    <p>Then, move forward on the Idea track by as many spaces as the number of sections marked with a Light Bulb passed by the Clock token. If you reach the end of the track, mark the Milestone with your marker token (see §7) and continue on the Idea track from the start with a new marker token.</p>
+    <p class="ex"><b>Example:</b> Jane enters the Robot Square with a Vodnik worker. Since the Witch is present, she does not skip the Witch step. She sends her to the Horned Neighborhood to gain 1 Beer. Then she gains 1 Cog on the Square. In the minigame, she moves the Clock token clockwise to the Vodnik icon. She can choose between the Boat movement bonus or 1 Beer. She chooses to take the Boat movement bonus and moves her Boat twice. She then moves her marker token along the Idea track by 3 spaces because of the 3 Light Bulbs the Clock token has passed. As she reaches the end of the track with her second movement, she marks one of the Milestones and gains its Reward. Then she takes a new marker token, places it on the "0" space, and continues moving, because she still has one movement left.</p>
+    <div class="callout adv">
+      <b>Note:</b> If you placed a worker that is already marked, the Clock token does not move at all and so you don't get any movement on the Idea track.
+    </div>
+  </div>
+
+  <figure>
+    <img src="PragueUnseen_Rules_images/page_07.jpg" alt="Four minigames detail">
+    <figcaption>Golems · Vodniks · Horned · Robots minigames (original page 7)</figcaption>
+  </figure>
+  <figure>
+    <img src="PragueUnseen_Rules_images/page_08.jpg" alt="Robots minigame, Milestones">
+    <figcaption>Robots minigame · Milestones (original page 8)</figcaption>
+  </figure>
+</section>
+
+<!-- 7. MILESTONES & END GAME BONUSES =============================== -->
+<section id="milestones">
+  <h2 class="sec"><span class="num">7</span>Milestones &amp; End Game Scoring Bonuses</h2>
+
+  <h3>Milestones</h3>
+  <p>Each of the four minigames allows players to gain Milestones at certain points. Each Milestone provides a one-time effect:</p>
+  <ul>
+    <li><b>Claim End Game Scoring Bonus.</b></li>
+    <li><b>Activate the whole effect</b> of any visible Building card (even already occupied) in any Neighborhood. Treat all effects as activated by any 1 worker.</li>
+    <li><b>Gain 1 Influence</b> in any Neighborhood.</li>
+    <li><b>Gain a Garnet.</b></li>
+  </ul>
+  <p>Each minigame allows Milestones to be gained in a different way. You gain each type of Milestone in each Neighborhood only once.</p>
+  <table>
+    <thead><tr><th>Neighborhood</th><th>How to gain Milestones</th></tr></thead>
+    <tbody>
+      <tr><td>Horned</td><td>The third position in each row of the Display Case allows you to gain one specific Milestone.</td></tr>
+      <tr><td>Robots</td><td>If you move to the last space on the Idea track, you immediately claim one of the Milestones that you haven't claimed yet.</td></tr>
+      <tr><td>Vodniks</td><td>Overcoming the weir on the River allows you to choose a Milestone from the token column; place the token on your player board. Each can be acquired only once.</td></tr>
+      <tr><td>Golems</td><td>Each pair of built Bridges allows you to gain the given Milestone.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>End Game Scoring Bonus</h3>
+  <p>When you choose an End Game Scoring bonus, place one of your marker tokens on any End Game Scoring table. The token is always placed on the leftmost available space. Each End Game Scoring table is tied to the minigame in its respective Neighborhood. Each player may place only one marker token on each End Game Scoring table.</p>
+  <p>The scoring conditions in each Neighborhood are:</p>
+  <ul>
+    <li><b>Horned</b> — Players gain points for placed Items in their Display Case.</li>
+    <li><b>Robots</b> — Players gain points for each token that reaches the last space on the Idea track.</li>
+    <li><b>Vodniks</b> — Players gain points for each passed Whirl on a River. If a player goes a second round, they count each passed Whirl again.</li>
+    <li><b>Golems</b> — Players gain points based on how many Bridge tiles they have built.</li>
+  </ul>
+
+  <div class="callout adv">
+    <b>Important:</b> This token (Witch upgrade space) is always placed next to the basic Witch yield, which remains available throughout the game.
+  </div>
+
+  <h4>Gain an Upgrade card</h4>
+  <p>Take all available Upgrade cards of the corresponding Neighborhood and choose one of them. Place it beneath your player board. From this moment, you can use the effect described on that Upgrade card. Return the remaining cards.</p>
+
+  <h4>Add a new Witch token</h4>
+  <p>If you are the first player to reach the Witch upgrade space, take 2 tokens from the top of the appropriate Witch token pile (Level 1 on the 3rd space, Level 2 on the 5th space), look at them and place one in a Neighborhood where you just increased your Influence (Level 2 tokens are placed over the Level 1 tokens). Return the other one to the bottom of the pile. You immediately gain the bonus of the placed Witch token. Every other player who advances onto the Witch upgrade space will get the same bonus of the appropriate level.</p>
+  <p>If you should get a bonus from the Level 1 Witch token that is already covered with the Level 2 Witch token, you still gain the bonus from the Level 1 token. Just take a look.</p>
+  <p>From now on, when any player moves a Witch into this Neighborhood, they may choose whether they gain a printed Resource OR the bonus of the Witch token.</p>
+
+  <h4>Last space on the Influence track</h4>
+  <p>If you were the first to reach the 6th Influence position, move your Gargoyle token to the position with the crown. No one can take this first place from you in this Neighborhood.</p>
+</section>
+
+<!-- 8. INFLUENCE & ERA END ========================================= -->
+<section id="influence">
+  <h2 class="sec"><span class="num">8</span>Influence Tracks &amp; Era End</h2>
+
+  <h3>Influence Track</h3>
+  <p>You advance your Gargoyle tokens along the Influence tracks in each Neighborhood for each Building card and for each Bridge token you build there, as well as for chosen Milestones and certain Building effects. Each track contains several Rewards that you gain when you move your Gargoyle token onto the corresponding space. Players who are highest on the Influence track will score points at the end of each Era.</p>
+
+  <h3>Influence scoring at the End of an Era</h3>
+  <p>At the end of each Era, scoring takes place, which evaluates the Influence of players in the individual Neighborhoods. This is related to the Faction's Popularity. The Popularity track is in the middle of the game board, and the Neighborhood Scoring tile determines the point value of Influence in the given Neighborhood.</p>
+  <p>Evaluate individual rows of the Popularity track from top to bottom. Assign the player with the highest Influence (farthest on the Influence track) in the given Neighborhood the higher number of points, and the player with the second-highest Influence the lower number of points. All other players gain no points.</p>
+  <p>If there is a tie for first place, add up the points for first and second place and divide the total equally (rounding down) among all tied players. The other players gain nothing. If there is a tie for second place, divide the points for second place equally (rounding down) among all tied players. Record all points from the Era evaluation in the corresponding column on the scoring sheet!</p>
+  <p class="ex"><b>Example:</b> In the Golem Neighborhood, Ann gets 4 VPs, because she has the most influence there. Jane and Charles share second place, they therefore get only 1 VP each. John gets no points.</p>
+</section>
+
+<!-- 9. NEW ERA SETUP ============================================== -->
+<section id="newera">
+  <h2 class="sec"><span class="num">9</span>New Era Setup</h2>
+  <ol class="steps">
+    <li><b>Flip the Neighborhood Scoring tile</b> to the other side marked with "II" after the first Era, and remove it after the second Era. After the third Era's evaluation, perform the End Game Scoring.</li>
+    <li><b>Sort Neighborhoods by Popularity.</b> Count the number of workers in each Neighborhood, including those on the Squares, on the Building cards, and those removed from rebuilt Buildings. Place the Faction token of the Neighborhood with the fewest workers at the top of the track and continue downwards until the Faction token of the most visited Neighborhood is last. In case of a tie, swap the positions of the tied Neighborhoods.</li>
+    <li><b>Take back all four worker figures</b> of your color onto your player board.</li>
+    <li><b>Discard all Building cards from the common offer</b> and reveal four cards of the following Era.</li>
+    <li><b>The player who took the 1st player bonus</b> on the Bench tile will start a new Era.</li>
+  </ol>
+  <p class="ex"><b>Example:</b> The least visited Neighborhood was Robots. They will be first in Popularity for the new Era. There is a tie between the Golems and Vodniks; they switch places. The most visited Neighborhood was Horned. Horned will therefore be last in Popularity for the new Era.</p>
+
+  <figure>
+    <img src="PragueUnseen_Rules_images/page_11.jpg" alt="Endgame Scoring, New Era setup">
+    <figcaption>Endgame Scoring · New Era setup · Influence scoring (original page 11)</figcaption>
+  </figure>
+</section>
+
+<!-- 10. FINAL ENDGAME SCORING ======================================== -->
+<section id="final">
+  <h2 class="sec"><span class="num">10</span>Final Endgame Scoring</h2>
+  <p>After the end of the third Era and the final distribution of points from the Influence tracks, each player counts points for the following achievements:</p>
+  <ul>
+    <li><b>Horned minigame</b> — Gain the number of points shown above the rightmost Item token in each row. Gain 1 additional point for each tile you still have in a Repair slot.</li>
+    <li><b>Robot minigame</b> — Gain corresponding points for your marker tokens that reached the last space on the Idea track: <b>1 → 3 pts; 2 → 8 pts; 3 → 14 pts; 4 → 20 pts.</b> Additionally, gain points for a marker token that hasn't reached the last space according to the passed green counting spaces.</li>
+    <li><b>Vodnik minigame</b> — Gain points for the last space with a green count that you passed with your Boat. Add 10 / 12 points if you travel the River a second time.</li>
+    <li><b>Golem minigame</b> — Each built Bridge tile scores points according to the building slot on the game board. Each Bridge tile that has been built but hasn't had an empty space on the board scores 1 point.</li>
+    <li><b>Victory Points</b> from gained Building Price tokens.</li>
+    <li><b>Scoring from the End Game Scoring bonus</b> in individual Neighborhoods (if you claimed any).</li>
+  </ul>
+  <p>The player who has the most points at the end of the game wins. Any tie is won by the player who built more Buildings (has more Building Price tokens). If still tied, the player with more remaining Resources wins. If still tied, all tied players are considered winners.</p>
+
+  <p class="ex"><b>Horned example:</b> John gains 8 + 1 + 3 = 12 VPs for the Display Case and 1 additional VP for a tile in his Repair slot.<br>
+  <b>Robots example:</b> Jane gains 14 + 3 = 17 VPs.<br>
+  <b>Vodnik example:</b> Charles gains 12 + 8 = 20 VPs.<br>
+  <b>Golems example:</b> Ann built seven Bridges, two of them Level II, one Level III. She gains 26 VPs. John built 5 Bridges, 2 on a 3-VP slot, 2 on a 2-VP slot and 1 on a 1-VP slot. In total, he gains 11 VPs.</p>
+</section>
+
+<!-- 11. SOLO GAME ================================================== -->
+<section id="solo">
+  <h2 class="sec"><span class="num">11</span>Solo Game — The Councillor</h2>
+  <p class="lead">The back side of each player board is for the automa player — <b>the Councillor</b>. Each board has a different level of difficulty. This information can be found in the bottom right corner.</p>
+
+  <div class="callout">
+    <p style="margin:0">Prague City Hall boasts a cutting-edge invention that's drawing attention from around the world. Roaming its corridors is a fully automated, battery-powered councillor, in every sense of the word. It never gets tired and never says no! Whether it will do a better job than a human remains to be seen.</p>
+  </div>
+
+  <p>In this solo variant, you play by yourself against an automated opponent — the Councillor. Your goal is to score more Victory Points than them! The Councillor tries to simulate the play of an actual human.</p>
+
+  <h3>Setup</h3>
+  <ol class="steps">
+    <li>Set up the game for 2 players as usual (including the setup for the virtual player), with the following changes.</li>
+    <li><b>Choose the difficulty level</b> for your game (start with the lowest). The board with the selected difficulty will be the Councillor's board. Take it and place solo-side face-up next to your player board.</li>
+    <li><b>Shuffle the 5 Councillor Reward tokens</b> and place them next to the Councillor's Rumor track. Place their marker token on the "0" spot of the Rumor track.</li>
+    <li><b>Shuffle all Aim cards</b> and deal 1 card next to the "A" slot left of the Councillor's board and 1 card next to the "B" slot. Put all remaining cards back into the box.</li>
+    <li><b>Shuffle the Solo action cards</b> and leave them face-down nearby.</li>
+    <li><b>Prepare 2 Solo help cards</b> nearby with the appropriate side up (depending on whether you are playing with a Witch solo card or not).</li>
+    <li><b>Flip all Bridge tiles on the Councillor's board</b> so that the Guild symbol side is face-down.</li>
+    <li><b>You will always be the first player,</b> so the Councillor gets the first Influence in the Neighborhood which is next to the "A" slot and the starting Reward for that Neighborhood. Place a random "0" Building card in that same Neighborhood.</li>
+  </ol>
+
+  <h3>Gameplay differences</h3>
+  <p>Most of the rules are the same as in a multi-player game, with these exceptions:</p>
+  <ul>
+    <li><b>Resources</b> — All basic Resources the Councillor gains are considered wild. They may pay a Beer instead of a Cog etc. They may use a Garnet instead of a basic Resource. When a Garnet is required, they must pay a Garnet.</li>
+    <li><b>Rumor track</b> — The Councillor can neither exchange Rumor for Resources nor change the worker type. When they fill up the Rumor track, they flip the top Reward token. Then they reset the Rumor track to 0.</li>
+    <li><b>Guild symbols</b> — The Councillor treats all Guild symbols as wild. When the Councillor builds a Bridge, pay any 2 Guild symbols and take the topmost Bridge tile.</li>
+    <li><b>Mug cards</b> — The Councillor doesn't get any Mug cards. Instead they advance on their Rumor track according to the number of cards they should draw.</li>
+    <li><b>Upgrades and Milestones</b> — The Councillor never gets Upgrade cards and Milestones. Instead they flip the top Reward token and get that Reward.</li>
+    <li><b>Items</b> — The Councillor doesn't distinguish between the types of Items. After getting the token, they put it face-down in the Display Case or in the Repair slot.</li>
+  </ul>
+
+  <h3>Aim cards</h3>
+  <p>Aim cards determine the strategy for the Councillor and show which Neighborhood they prefer and what symbols they are looking for when building or choosing Rewards. When a Solo action card or Councillor Reward token refers to "A", always check for a card next to the "A" slot. The same applies to "B".</p>
+
+  <div class="callout adv">
+    <b>Witch Aim card:</b> Don't use this card when playing for the first time. Use it only with difficulty level 3 or 4. When the Witch Aim card is next to "A", flip the Solo help card to its appropriate side. Some minigames will be determined differently.
+  </div>
+
+  <h3>Councillor's turn</h3>
+  <p>On their turn, the Councillor flips the top card from the Solo Action deck. It determines which action the Councillor will perform and where. The card shows several rows of actions, and they attempt to resolve them from top to bottom. If they cannot execute an action, they skip to the next row. When they successfully execute one action, their turn ends and the card is discarded. When the Councillor can't perform any of the actions from the card, they'll consider passing and try the last options from the Bench Help card. If they cannot even perform that, the Councillor passes. If the Councillor runs out of cards in their Solo Action deck, shuffle their discard pile to form a new Solo Action deck.</p>
+
+  <h4>Priority order per Neighborhood</h4>
+  <table>
+    <thead><tr><th>Neighborhood</th><th>Councillor strategy</th></tr></thead>
+    <tbody>
+      <tr><td><b>Golems</b></td><td>Choose the worker topmost on the Worker Priority track. Move the Golem on the Marketplace counterclockwise. If in the middle, start by going up. The Councillor gains all the Rewards from the market as normal. The Councillor treats all Guild symbols as wild.</td></tr>
+      <tr><td><b>Horned</b></td><td>Choose a worker according to the Flame board with this priority: Repair &gt; Any Resource &gt; Mug card &gt; Rumor. Pick an Item that is clockwise of the placed worker. The Councillor doesn't care for different types of Items, flip them back-side up and fill the Display Case from the top row. When getting a Repair icon, the Councillor alternates between getting a token and placing it in the Display Case.</td></tr>
+      <tr><td><b>Vodniks</b></td><td>Choose a worker that moves them farthest on the River. In case of a tie, choose a worker that gains more Rewards on the Mill. The Councillor always moves the rightmost one to the next segment.</td></tr>
+      <tr><td><b>Robots</b></td><td>Choose the worker that grants the most steps on the Idea track. When choosing a Crate token, prefer symbols from Aim cards (A being prioritized over B), otherwise choose the one on the left. When both Crate tokens are claimed, flip all back and take Rumor.</td></tr>
+      <tr><td><b>Witch</b></td><td>The Councillor prefers Rewards from Aim cards (A being prioritized over B). If there aren't any, move the Witch to the "A" Neighborhood and get a Resource. If already there, move her to the available Neighborhood with the most Popularity and get Resource. When the Councillor adds a new Witch token, add a top random token from the appropriate token pile.</td></tr>
+    </tbody>
+  </table>
+
+  <h4>Reward tokens</h4>
+  <p>When the Councillor gets a Councillor Reward token (from the Rumor track, Milestone or Upgrade card), they flip the top token from the Councillor Reward stack and immediately gain the Reward. It may be Influence in the most Popular Neighborhood, a Garnet, an End Game Scoring bonus or a Reward from Aim cards. After gaining the Reward, put the token near the Councillor's board to the discard pile. Once the Councillor Reward stack is empty, shuffle all tokens from the discard pile and create a new Councillor Reward stack.</p>
+
+  <h4>Additional rules</h4>
+  <ul>
+    <li><b>Enter a Building.</b> The Councillor prefers a card with a Reward from Aim cards (A being prioritized over B). If there isn't any, prefer a higher-level card. In case of a tie, prefer the closest to the edge of the board. They may use Bridges and always consider them when picking a card. They must respect the worker requirement of the card. If a card requires paying with Mugs or Upgrades, they pay with Rumors instead. If they can't pay to use the card, they must choose a different one.</li>
+    <li><b>Build a Building.</b> The Councillor treats all basic Resources as wild; they may pay with any (in the correct quantity). The Councillor never builds a card that worker couldn't use. The Councillor prefers to build the Building with a Reward symbol from Aim cards (A being prioritized over B). If there isn't any, they pick the leftmost Building from the offer. When choosing where to build, they prefer an empty slot, then a cheaper slot, then the slot closer to the edge of the board. Then they gain influence in that Neighborhood.</li>
+    <li><b>Build a Bridge.</b> The Councillor treats all Guild symbols as wild. When building a Bridge, pay 2 Guild symbols and take the topmost Bridge. Place it in the Neighborhood topmost on the Popularity track and in the spot that awards the most Victory Points. Then they gain influence in that Neighborhood.</li>
+    <li><b>Consider passing.</b> Before passing, check the Bench Help card to determine whether the Councillor can build a Bridge or a Building. If they can, they must perform the action. If they can do both, they choose the first option. Then they end their turn. On their next turn, they continue normally with the next Action card. If they cannot perform either action, they pass.</li>
+    <li><b>End Game Scoring Bonus.</b> Aim for the first position in "A" or "B". Then aim for second position in "A" or "B" if not already there. For third or fourth scoring bonus, choose the minigame that promises most progress.</li>
+    <li><b>Influence.</b> Always prefer the most Popular Neighborhood.</li>
+    <li><b>Any Cauldron.</b> Pick an Item that's clockwise of the last used worker type.</li>
+    <li><b>Any Box.</b> Choose a Reward according to Aim cards, otherwise choose the box on the left. When both boxes are claimed, flip all back and take Rumor.</li>
+  </ul>
+
+  <figure>
+    <img src="PragueUnseen_Rules_images/page_12.jpg" alt="Solo game overview">
+    <figcaption>Solo game overview (original page 12)</figcaption>
+  </figure>
+  <figure>
+    <img src="PragueUnseen_Rules_images/page_13.jpg" alt="Solo Councillor's turn">
+    <figcaption>Councillor's turn and Aim cards (original page 13)</figcaption>
+  </figure>
+  <figure>
+    <img src="PragueUnseen_Rules_images/page_14.jpg" alt="Solo additional rules, Credits">
+    <figcaption>Solo additional rules &amp; Credits (original page 14)</figcaption>
+  </figure>
+</section>
+
+<!-- 12. CARDS OVERVIEW ============================================ -->
+<section id="cards">
+  <h2 class="sec"><span class="num">12</span>Cards Overview</h2>
+  <p>The deck contains Mug cards (immediate-effect discards) and Upgrade cards (persistent effects that stay beneath your player board). Some Upgrade cards may be used only once per turn. <b>We recommend rotating these cards for better tracking of which ones have been used during the turn. Immediately after your turn ends, rotate all Upgrade cards back.</b></p>
+
+  <h3>Mug card effects (selection)</h3>
+  <table>
+    <thead><tr><th>Card</th><th>Effect</th></tr></thead>
+    <tbody>
+      <tr><td><b>m10 / m14</b></td><td>Discard to change 1 basic Resource to any one other (m10 up to 2 times; m14 to gain 3 Rumors).</td></tr>
+      <tr><td><b>m11</b></td><td>Discard to pay 1 Garnet and gain 2 basic Resources of your choice.</td></tr>
+      <tr><td><b>m13</b></td><td>Discard to change 1 basic Resource to 3 Rumors.</td></tr>
+      <tr><td><b>m16</b></td><td>Discard to move one of your waiting workers (on the Square) to any other Neighborhood. That Neighborhood cannot be occupied by any of your other workers; no bonuses or activations.</td></tr>
+      <tr><td><b>m6</b></td><td>Discard to move the Witch figure from its current space to any other Neighborhood. You do not get any Reward from this movement.</td></tr>
+      <tr><td><b>m2</b></td><td>Discard before the action to treat your worker as any other type for this action / turn only.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Upgrade card effects (selection)</h3>
+  <table>
+    <thead><tr><th>Card</th><th>Effect</th></tr></thead>
+    <tbody>
+      <tr><td><b>q15</b></td><td>Before moving on the Marketplace, choose any space as your starting position. You do not get any Reward from the new starting position.</td></tr>
+      <tr><td><b>q29</b></td><td>Before choosing a Reward from the Cauldron, you may rotate the Flame board to any position.</td></tr>
+      <tr><td><b>q3 / q4</b></td><td>Once per turn, when moving along the River track, gain 1 Rumor (q3) or pay 1 Rumor to move 1 extra space (q4).</td></tr>
+      <tr><td><b>q11</b></td><td>Once per turn, when moving on the Marketplace, pay 1 Rumor to move 1 extra space.</td></tr>
+      <tr><td><b>q22</b></td><td>Once per turn, move backwards on the Idea track by 1 to gain 2 Rumors.</td></tr>
+      <tr><td><b>q2 / q10 / q18 / q26</b></td><td>When placing a specific worker type in any Neighborhood, gain a free Resource bonus (Fish+Mug card / Book+Marketplace step / Cog+Idea step / Beer+Rumor).</td></tr>
+      <tr><td><b>q8 / q16 / q24 / q32</b></td><td>In a specific Neighborhood (Vodniks / Golems / Robots / Horned), treat your worker as any type during Place-a-Worker and Enter-a-Building actions.</td></tr>
+    </tbody>
+  </table>
+
+  <p class="ex"><b>Tip on q26:</b> You will gain the bonus even when you change the worker type using an Upgrade card you own. For example, if you have q26 and place a Robot worker in any Neighborhood, then change it to a Horned worker, you still gain the Beer and Rumor bonuses.</p>
+
+  <figure>
+    <img src="PragueUnseen_Rules_images/page_15.jpg" alt="Cards overview">
+    <figcaption>Mug &amp; Upgrade card overview (original page 15)</figcaption>
+  </figure>
+</section>
+
+<!-- 13. SYMBOL LEGEND ============================================== -->
+<section id="symbols">
+  <h2 class="sec"><span class="num">13</span>Symbol Legend</h2>
+  <div class="sym-grid">
+    <div class="sym"><b>One worker per player</b>Pick any Item token from the outer Cauldron circle in the Horned minigame.</div>
+    <div class="sym"><b>Once per turn</b>Pick an Item token from the outer Cauldron circle in the Horned minigame from the segment next to the worker you used.</div>
+    <div class="sym"><b>Basic exchange</b>Pay X to gain Y.</div>
+    <div class="sym"><b>Item bag</b>Draw and take an Item token from the Item bag.</div>
+    <div class="sym"><b>Specific worker type</b>Draw X Item tokens from the Item bag and keep Y of them.</div>
+    <div class="sym"><b>Any worker type</b>Draw an Item from the bag to the Repair slot OR move an Item up from the Repair slot into your Display Case.</div>
+    <div class="sym"><b>The Witch</b>Gain the Reward of the Witch space she is currently on.</div>
+    <div class="sym"><b>Flame Board</b>Get a Reward from the Flame Board marked by a worker type you used. Then rotate the Flame Board clockwise.</div>
+    <div class="sym"><b>Witch token</b>If 1st to reach, draw 2 Witch tiles and choose 1 to place here and gain that Reward immediately. Otherwise, only gain the Reward.</div>
+    <div class="sym"><b>Boat movement</b>Move your Boat the indicated number of spaces along the River.</div>
+    <div class="sym"><b>Boat to worker symbol</b>Move your Boat to the next space showing the worker you used.</div>
+    <div class="sym"><b>Any basic Resource</b>Get all Rewards on your worker's place in the Vodnik minigame and move 1 token from that space one space clockwise.</div>
+    <div class="sym"><b>Same-type Resources</b>Said number of the same basic Resources.</div>
+    <div class="sym"><b>Whirl</b>Whirl on the River.</div>
+    <div class="sym"><b>Rumor</b>Rumor (you cannot store more than 6).</div>
+    <div class="sym"><b>Mug card</b>Mug card.</div>
+    <div class="sym"><b>Garnet</b>You can spend it instead of basic Resources and Rumors.</div>
+    <div class="sym"><b>Building card effect</b>Activate the whole effect of any visible Building card in any Neighborhood. Treat all effects as activated by any 1 worker.</div>
+    <div class="sym"><b>Guild symbol</b>Mark a specific Guild symbol on your player board.</div>
+    <div class="sym"><b>Build a Building card</b>Build a Building card.</div>
+    <div class="sym"><b>Any Guild symbol</b>Mark any 1 Guild symbol on your player board.</div>
+    <div class="sym"><b>+1 Influence</b>Get 1 Influence in a Neighborhood.</div>
+    <div class="sym"><b>Marketplace movement</b>Move said number of spaces orthogonally in the Marketplace (Golem minigame), get all the Rewards you step on.</div>
+    <div class="sym"><b>Upgrade card</b>Take all available Upgrade cards from this Neighborhood, keep one and return the rest face-down.</div>
+    <div class="sym"><b>Build a Bridge</b>Build a Bridge tile (remove 2 Guild symbols shown on that Bridge tile).</div>
+    <div class="sym"><b>Bench (pass)</b>When passing, place your 4th worker on the Bench tile, gain the shown Reward (not in the third Era). Your turn is skipped till the end of this Era.</div>
+    <div class="sym"><b>Idea track movement</b>Move along the Idea track in the Robot minigame for the indicated number of spaces.</div>
+    <div class="sym"><b>Crown</b>Indicates the most advantageous or highest space on a given track, which can only be marked by one player.</div>
+    <div class="sym"><b>Robot Milestone</b>Move the Clock token in the Robot minigame according to the used worker type. Gain 1 Rumor for each section you cross.</div>
+    <div class="sym"><b>Most popular Neighborhood</b>Prioritize the most popular Neighborhood.</div>
+    <div class="sym"><b>Flip a Crate</b>Flip a Crate token in any segment in the Robot minigame and get that reward OR flip all Rumor Crate tokens and get that many Rumors.</div>
+    <div class="sym"><b>Councillor Reward</b>Councillor Reward token.</div>
+    <div class="sym"><b>Consider passing</b>Consider passing.</div>
+    <div class="sym"><b>End Game Scoring table</b>Mark any End Game Scoring table in the first empty space from the left. You can have only 1 marker on each End Game Scoring table.</div>
+    <div class="sym"><b>Crate with Time token</b>Flip a Crate token in a segment with a Time token in the Robot minigame and get that Reward OR flip all Rumor Crate tokens and get that many Rumors.</div>
+    <div class="sym"><b>Aim card reward</b>Take a Reward from the Aim card, according to the level of difficulty of your game.</div>
+    <div class="sym"><b>Place a worker</b>Place a worker in a Neighborhood.</div>
+    <div class="sym"><b>Victory Points</b>The number of Victory Points given at the end of the game.</div>
+    <div class="sym"><b>Waiting worker</b>Worker waiting in a Neighborhood.</div>
+    <div class="sym"><b>Draw Solo Action</b>Draw another Solo Action card.</div>
+    <div class="sym"><b>A / B Aim card</b>Refers to the Aim Card in slot A or slot B.</div>
+    <div class="sym"><b>Worker → Building</b>Move a waiting worker from a Neighborhood to a Building card and activate it.</div>
+  </div>
+
+  <figure>
+    <img src="PragueUnseen_Rules_images/page_16.jpg" alt="Symbol overview">
+    <figcaption>Symbol overview (original page 16)</figcaption>
+  </figure>
+</section>
+
+<!-- 14. CREDITS =============================================== -->
+<section id="credits">
+  <h2 class="sec"><span class="num">14</span>Credits</h2>
+  <div class="credits">
+    <p><b>Designers:</b> Petr Vojtěch, Michal Peichl, Jindřich Pavlásek</p>
+    <p><b>Illustrations:</b> Jindřich Pavlásek, Andy Dvořáček</p>
+    <p><b>DTP and Graphics:</b> Anežka Bělohoubková</p>
+    <p><b>Development:</b> Michal Šmíd</p>
+    <p><b>Production Manager:</b> Jan Cízner</p>
+    <p><b>Rules Editing:</b> Barbora Šulcová, Tomáš Benda</p>
+    <p><b>Proofreading:</b> Corinna Spellerberg (Textguru)</p>
+    <p><b>Thanks to all testers, especially to:</b> BB&amp;B (Douglas, Miro), CoolnaDeskovky, Vojtěch Kolář, Jana Šafránková, Vít Kadlec, Hynek Palatin, Šimon Volný, Dominique Černý, Jindrich Volak, Tereza Zmatlíková, Matyáš Volf, Agáta Coufová, Michal Řezba, Filip Kadlec, Michal Langr, Alica Maďarová, Petra Machalová, Pavlína Prejsková, Jakub Siobos, Jáchym Langr, Nela Fraňková.</p>
+    <p><b>Special thanks to our wives</b> — Niky, Marie, Zdeňka — for their endless support.</p>
+  </div>
+</section>
+
+<footer>
+  Reformat edition — content reorganized from the official Prague Unseen rulebook for an easier reading flow. Original text © Albi, s.r.o. Layout, formatting and tables added for readability; no rules added, removed or altered.
+</footer>
+</main>
+</div>
+</body>
+</html>
