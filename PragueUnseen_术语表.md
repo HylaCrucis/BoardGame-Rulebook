@@ -117,7 +117,9 @@
 | Bridge / Bridge tile | 桥 / 桥段 | tile=半桥组件；Bridge=2 桥段拼接完成的桥 |
 | Building card | 建筑卡 | 65 张卡，分 3 阶（Era I/II/III） |
 | Level 0 Building card | 零阶建筑卡 | 起手免费发的 4 张（4 人局全用，少人局余下） |
-| Building Price token | 建筑价格标记 | 36 张（每街区 9 张：L1/L2/L3 各 3 张） |
+| Building Price token | 建筑价格标记 | 36 张（每街区 9 张：L1/L2/L3 各 3 张）；L1 放最上层、L2 中间、L3 最底层（视觉堆叠）；每个街区 3 个 Building space 横排并列，"center"指中间那个空间（vision 2026-09-09 核验） |
+| Building space | 建筑位 | 每街区 3 个，横排一字并列；中心位称 "center"（4 人局免费零阶建筑卡放在此处） |
+| Level 0 Building card | 零阶建筑卡 | 起手免费发的 4 张；4 人局全用，2-3 人局余下随机放入未占用的"中间 Building 空间" |
 | Upgrade card | 升级卡 | 4 街区各 8 张，每游戏随机出 4 张 |
 | Mug card | 酒杯卡 | 18 张一次性效果卡 |
 | Influence track | 影响力轨道 | 每街区 1 条，长度 6（含加冕格） |
