@@ -165,8 +165,9 @@
 
 ## 8. 半猜/待确认项
 
-- **「Robot Milestone」symbol 数值**：OCR 缺失"Gain ___ for each section you cross"中的数值，HTML 已补"1 Rumor"（待实物核对）。
-- **「Basic Resource」独立 symbol**：疑似与「Boat to worker symbol」合并，待实物核对。
+- ~~**「Robot Milestone」symbol 数值**：OCR 缺失"Gain ___ for each section you cross"中的数值，HTML 已补"1 Rumor"（待实物核对）。~~ **2026-09-09 minimax-vision 读图核验**：空格为紫色灯泡（Idea track 移动）图标，含义为「在灵感轨道上前进 1 格」。已修正。
+- ~~**「Basic Resource」独立 symbol**：疑似与「Boat to worker symbol」合并，待实物核对。~~ **2026-09-09 minimax-vision 读图核验**：Basic Resource 是独立条目，已在 §13 补充。
+- **Idea track 移动机制**：Clock 每跨过一段（灯泡段）→ Idea track 前进 1 格（=1 灯泡移动）— 这条机制与 §6 机器人 minigame 描述一致，原 OCR 在 PAGE 8 也有解释）。
 
 ---
 
