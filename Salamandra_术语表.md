@@ -99,6 +99,11 @@
 | Night | **暗夜** | 黑夜 | (同 night 项) |
 | Salamander cards | **蝾螈卡牌** | 萨曼德拉卡 | (见 Black/White Salamander cards) |
 
+| Solo Mode | **单人模式** | 独战模式 / 孤独模式 | 桌游圈通用译;Salamandra Solo 为 1 人对 NPC Rudolph |
+| Rudolph(灰袍学者,NPC) | **鲁道夫** | 保留英文 Rudolph | 单人模式 NPC 对手,音译;首现「灰袍学者鲁道夫」,后续「鲁道夫」 |
+| Labour card | **劳作卡牌** | 难度卡 / 任务卡 | 选难度(level 1-3),决定 Rudolph VP / 信仰值;直译「劳作」 |
+| Placement card | **放置卡牌** | 部署卡 / 调度卡 | 16 张,Rudolph 学徒放置指示;「放置」与游戏机制对齐 |
+
 ---
 
 ## 3. 量词规范(本项目)
@@ -139,9 +144,16 @@
 
 ---
 
+## 5. 术语修订(已生效)
+
+- **v1.6 → v1.7** Solo 模式术语(SOLO PDF `GG015_RULES_SOLO_240x200_EN02.pdf` 拍板):
+  - `Solo Mode` → **单人模式**(柴 2026-09-16 拍板)
+  - `Rudolph`(灰袍学者 NPC)→ **鲁道夫**(音译+身份;首现「灰袍学者鲁道夫」)
+  - `Labour card` → **劳作卡牌**(直译)
+  - `Placement card` → **放置卡牌**(直译)
+
 ## 5. 待办(术语相关)
 
 - [ ] Solo 模式 PDF 翻译时,是否沿用本表(预计 95% 沿用,5% 可能有 Solo 特有术语)
-- [ ] Yellow vs White Salamander:主规则用"White",Game elements PDF 用"Yellow",待柴核(可能 EN02/EN01 印刷版本差异)
 - [ ] 本游戏 BGA 平台条目翻译时(若 BGA 后续上架),是否沿用本表
 - [x] ~~1 个 MEDIUM 建议(cover 玩家人数 1-4 → 4 人 + Solo 见独立 PDF 等三选一),柴拍板后回写并更新本表~~ — 2026-09-15 柴拍板:保留「1-4 人」+ footer 加注说明;已回写 HTML + 同步交付目录 + 更新 findings
