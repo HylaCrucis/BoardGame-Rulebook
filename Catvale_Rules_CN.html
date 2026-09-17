@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Catvale &mdash; 规则书（中文版）</title>
+<style>
+  
+:root{
+  --bone:#f5f1e4; --bone2:#ece4d2; --ink:#2c2a25; --ink-soft:#6b6358;
+  --leaf:#3f7d52; --leaf-d:#1f4d30; --leaf-l:#6fae82;
+  --soil:#7a5230; --soil-d:#543722; --fish:#cf7a3a; --fish-d:#a85a26;
+  --green:#3f7d52; --green-l:#e4f0e7;
+  --red:#a8392f; --red-l:#f6e3e0;
+  --line:#ddd3bd; --card:#fffdf8;
+}
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bone); color:var(--ink);
+    font-family:"Source Han Serif SC","Noto Serif CJK SC","Songti SC","SimSun",Georgia,serif;
+    line-height:1.85; font-size:17px;
+  }
+  .wrap{display:flex; align-items:flex-start; max-width:1180px; margin:0 auto;}
+  nav{
+    position:sticky; top:0; align-self:flex-start;
+    width:248px; flex:0 0 248px; height:100vh; overflow-y:auto;
+    background:var(--leaf-d); color:#e6f0e7; padding:22px 16px;
+    font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  }
+  nav h2{font-size:13px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--leaf-l); margin:0 0 12px;}
+  nav ol{list-style:none; margin:0; padding:0; counter-reset:n;}
+  nav ol li{counter-increment:n;}
+  nav a{display:block; color:#e6f0e7; text-decoration:none; font-size:13.5px;
+    padding:6px 10px 6px 32px; border-radius:6px; position:relative;
+    font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;}
+  nav a::before{content:counter(n); position:absolute; left:8px; top:6px;
+    font-size:11px; color:var(--fish); font-weight:700;}
+  nav a:hover{background:var(--leaf);}
+  main{flex:1 1 auto; min-width:0; padding:0 40px 80px;}
+  .cover{
+    background:linear-gradient(160deg,var(--leaf-d),var(--leaf) 60%,var(--fish));
+    color:#fbf6e7; padding:60px 40px; border-radius:0 0 18px 18px;
+    margin-bottom:36px; text-align:center;
+    box-shadow:0 10px 30px rgba(31,77,48,.30);
+  }
+  .cover h1{font-size:42px; margin:0 0 8px; letter-spacing:.02em;}
+  .cover .sub{font-size:17px; opacity:.92; font-family:Georgia,serif;}
+  .cover .tag{display:inline-block; margin-top:18px; padding:7px 18px;
+    border:1px solid rgba(255,255,255,.45); border-radius:22px; font-size:14px;
+    font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;}
+  section{padding:14px 0 8px; border-bottom:1px solid var(--line); scroll-margin-top:18px;}
+  h2.sec{font-size:28px; color:var(--leaf-d); margin:22px 0 8px;
+    font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    font-weight:600;}
+  h2.sec .num{color:var(--fish); font-weight:700; margin-right:10px;
+    font-family:"Helvetica Neue",Arial,sans-serif;}
+  h3{font-size:20px; color:var(--soil-d); margin:22px 0 6px;
+    font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    font-weight:600;}
+  p{margin:10px 0;}
+  ul,ol{margin:10px 0 10px 4px; padding-left:22px;}
+  li{margin:5px 0;}
+  .lead{font-size:18px;}
+  .comp-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:16px 0;}
+  .comp{border:1px solid var(--line); background:var(--card); border-radius:12px;
+    padding:12px 16px; box-shadow:0 2px 6px rgba(0,0,0,.04);}
+  .comp b{color:var(--leaf-d);}
+  .callout{border-left:5px solid var(--fish); background:var(--bone2);
+    padding:12px 18px; margin:16px 0; border-radius:0 10px 10px 0;}
+  .callout.tip{border-color:var(--green); background:var(--green-l);}
+  .callout.tip b{color:var(--green);}
+  .callout.adv{border-color:var(--red); background:var(--red-l);}
+  .steps{counter-reset:step; list-style:none; padding-left:0; margin:14px 0;}
+  .steps li{position:relative; padding:10px 14px 10px 52px; margin:8px 0;
+    background:var(--card); border:1px solid var(--line); border-radius:10px;}
+  .steps li::before{counter-increment:step; content:counter(step);
+    position:absolute; left:12px; top:50%; transform:translateY(-50%);
+    width:28px; height:28px; background:var(--leaf); color:#fff;
+    border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-weight:700; font-family:Arial,sans-serif;}
+  figure{margin:18px 0; text-align:center;}
+  figure img{max-width:100%; border:1px solid var(--line); border-radius:10px;
+    box-shadow:0 4px 14px rgba(0,0,0,.08); background:#fff;}
+  figcaption{font-size:13px; color:var(--ink-soft); margin-top:6px;
+    font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;}
+  @media(max-width:900px){
+    .wrap{flex-direction:column;}
+    nav{position:static; width:100%; height:auto; flex-basis:auto;}
+    main{padding:0 18px 60px;}
+    .comp-grid{grid-template-columns:1fr;}
+  }
+  footer{margin-top:40px; font-size:13px; color:var(--ink-soft);
+    font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif; text-align:center;}
+  .credits{background:var(--bone2); border:1px solid var(--line); border-radius:12px;
+    padding:16px 20px; margin-top:14px;}
+  .credits b{color:var(--leaf-d);}
+</style>
+</head>
+<body>
+
+
+<header class="cover">
+  <h1>Catvale</h1>
+  <div class="sub">猫之谷 &middot; 规则书</div>
+  <div class="tag">2&ndash;6 人 &nbsp;|&nbsp; 60&ndash;90 分钟 &nbsp;|&nbsp; 12 岁以上 &nbsp;|&nbsp; 3 季 &times; 2 轮</div>
+</header>
+
+
+<div class="wrap">
+  
+<nav>
+  <h2>目录</h2>
+  <ol>
+      <li><a href="#overview">1. 游戏目标</a></li>
+      <li><a href="#intro">2. 引言</a></li>
+      <li><a href="#components">3. 组件清单</a></li>
+      <li><a href="#setup">4. 游戏准备</a></li>
+      <li><a href="#world">5. 地块选择与放置</a></li>
+      <li><a href="#start">6. 开局</a></li>
+      <li><a href="#flow">7. 流程总览</a></li>
+      <li><a href="#growth">8. 成长阶段</a></li>
+      <li><a href="#territory">9. 领地阶段</a></li>
+      <li><a href="#cleanup">10. 整理阶段</a></li>
+      <li><a href="#breakfast">11. 早餐阶段</a></li>
+      <li><a href="#planning">12. 计划阶段</a></li>
+      <li><a href="#adventure">13. 冒险阶段</a></li>
+      <li><a href="#actions">14. 行动总览</a></li>
+      <li><a href="#explore">15. 探索</a></li>
+      <li><a href="#use">16. 使用</a></li>
+      <li><a href="#trade">17. 交易</a></li>
+      <li><a href="#recover">18. 恢复</a></li>
+      <li><a href="#construct">19. 建造</a></li>
+      <li><a href="#quest">20. 任务</a></li>
+      <li><a href="#mark">21. 标记领地</a></li>
+      <li><a href="#fish">22. 捕鱼</a></li>
+      <li><a href="#attack">23. 攻击</a></li>
+      <li><a href="#duel">24. 决斗（竞技场扩展）</a></li>
+      <li><a href="#dig">25. 挖掘（猫砂盆秘密扩展）</a></li>
+      <li><a href="#sift">26. 筛沙（猫砂盆秘密扩展）</a></li>
+      <li><a href="#gather">27. 采集</a></li>
+      <li><a href="#hunt">28. 狩猎</a></li>
+      <li><a href="#vale_mood">29. 谷地心情</a></li>
+      <li><a href="#vale_life">30. 谷地生活</a></li>
+      <li><a href="#encounters">31. 遭遇</a></li>
+      <li><a href="#rerolls">32. 重投</a></li>
+      <li><a href="#workers">33. 雇工</a></li>
+      <li><a href="#flea">34. 跳蚤市场</a></li>
+      <li><a href="#ambitions">35. 野心</a></li>
+      <li><a href="#endgame">36. 终局与胜负</a></li>
+      <li><a href="#anatomy">37. 组件详解</a></li>
+      <li><a href="#credits">制作名单</a></li>
+  </ol>
+</nav>
+
+  <main>
+
+<section id="overview">
+  <h2 class="sec" id="overview"><span class="num">1</span>游戏目标</h2>
+  
+<p class="lead">在寒冬到来之前尽可能多地赚取 <b>威望</b>，证明你配得上猫之谷统治者的称号。</p>
+<p>你的目标是先达到 <b>20 点威望</b>，或在第 <b>6 轮</b>结束时拥有全场最高威望。</p>
+<ul>
+  <li>当任何一只猫达到 20 点威望时，触发 <b>终局</b>。本轮剩余回合照常进行。</li>
+  <li>如果第 6 轮结束时没有猫达到 20 点威望，则由威望最高的猫获胜。</li>
+  <li><b>例外：</b>若触发终局的猫在终局进行中威望跌回 20 以下，且其他玩家也未达到 20 点威望，则终局取消，游戏继续进入下一轮。</li>
+</ul>
+<div class="callout tip"><b>提示：</b>提前触发终局也是一种策略——其他玩家还有一轮追赶的机会。</div>
+
+  
+  
+    <figure>
+      <img src="Catvale_Rules_images/page_03.jpg" alt="规则书第 3 页">
+      <figcaption>规则书 p.&nbsp;3</figcaption>
+    </figure>
+</section>
+<section id="intro">
+  <h2 class="sec" id="intro"><span class="num">2</span>引言</h2>
+  
+<p class="lead"><i>谨以此作纪念 Furia——她的顽皮灵魂启发了整个 Catvale 世界。</i></p>
+<p>随着春天的到来，你离开温暖的巢穴，第一次踏入外面的世界。你的目标是在寒冬到来之前赚取尽可能多的威望，证明你才是 Catvale 当之无愧的统治者。探索陌生之地，经历冒险，完成任务，在谷地的每一处都留下你的印记。但要小心！其他的猫也怀揣着同样的野心。</p>
+<p>Catvale 有它自己的规则。在这里，机敏加上一丝鲁莽能让你走得更远。今天你是猎手，明天就成了猎物；留在路上的每一缕气味，都可能成为你传奇的起点……也可能是别人的。</p>
+<p>通往胜利的路很长，每一个决定都打开一扇新机会之门。穿过繁花似锦的谷地走你自己的路吧——荣耀在前方等待，奖赏属于那些敢于伸手去拿……也足够狡黠去守住的人。</p>
+<div class="callout"><b>嘿……入戏一点！</b>您的每一个决定都在塑造这场冒险。抽到的每一张牌都藏着一段故事的片段，揭开你所穿越的世界的一角。不必害羞，大声念出来吧！</div>
+
+  
+  
+    <figure>
+      <img src="Catvale_Rules_images/page_03.jpg" alt="规则书第 3 页">
+      <figcaption>规则书 p.&nbsp;3</figcaption>
+    </figure>
+</section>
+<section id="components">
+  <h2 class="sec" id="components"><span class="num">3</span>组件清单</h2>
+  
+<p>基础版包含：</p>
+<div class="comp-grid">
+  <div class="comp"><b>1 块游戏图板</b> &mdash; 主六边形地图，含多条轨道（季节、心情、威望、收成、竞技场）。</div>
+  <div class="comp"><b>1 块跳蚤市场板</b> &mdash; 卡牌列 + 2 个任务槽。</div>
+  <div class="comp"><b>6 块玩家面板</b> &mdash; 每只猫各一，含成长树和刻度盘。</div>
+  <div class="comp"><b>资源指示物（174 枚）</b> &mdash; 废料 18&times;1 / 9&times;3 &middot; 木棍 18&times;1 / 9&times;3 &middot; 破布 18&times;1 / 9&times;3 &middot; 石子 18&times;1 / 9&times;3 &middot; 老鼠 30&times;1 / 18&times;3。</div>
+  <div class="comp"><b>强化指示物（48 枚）</b> &mdash; 重投、移动、攻击、防御、捕鱼。</div>
+  <div class="comp"><b>森林指示物（27 枚）</b> &mdash; 面朝下放置，离开森林地块时翻开。</div>
+  <div class="comp"><b>特殊指示物（8 枚）</b> &mdash; 遭遇、隧道、冒险、桥、猫仙子、蝴蝶结、先手玩家、捕猫。</div>
+  <div class="comp"><b>谷地生活板块（9 块）</b> &mdash; 每个任务对应一块，任务完成时翻开。</div>
+  <div class="comp"><b>技能指示物（36 枚）</b> &mdash; 覆盖玩家面板上的槽位，解锁后移除。</div>
+  <div class="comp"><b>地块板块（44 块）</b> &mdash; 森林 / 山 / 火焰 / 熔岩 / 传送门 / 港湾 / 渔场 / 基础资源（4 类）/ 后院（5 种，6 色）/ 跳蚤市场 / 黑市 / 冻湖 / 危险沼泽 / 青山。</div>
+  <div class="comp"><b>猫咪米宝（48 个）</b> &mdash; 每色大、小各 6 个，共 6 色。</div>
+  <div class="comp"><b>标记与指示物</b> &mdash; 12 枚红色 + 6 枚黑色傲气指示物，6 枚紫色 + 6 枚蓝色成长标记，2 枚通用标记。</div>
+  <div class="comp"><b>卡牌（246 张）</b> &mdash; 冒险 100、起始 25、跳蚤市场建筑 30、跳蚤市场奇珍 34、野心 9、杂物 15、猫咪 6、遭遇 18、任务 9、玩家助手 6。</div>
+  <div class="comp"><b>骰子（42 颗）</b> &mdash; 36 颗行动骰（D3）、1 颗采集骰（K12）、1 颗奖励骰（K12）、2 颗命运骰（D3）。</div>
+</div>
+
+<h3>地块与标记</h3>
+<p>共有 4 种主要的 <b>基础资源</b> 地块（每种资源对应一种），5 种 <b>后院</b> 地块，以及若干 <b>特殊</b> 地块。48 个猫咪米宝（6 色，每色大、小各 6 个）、12 枚红色 + 6 枚黑色傲气指示物、6 枚紫色 + 6 枚蓝色成长标记、2 枚通用标记用于记录游戏状态。</p>
+<h3>卡牌与骰子</h3>
+<p>游戏共含 246 张牌，分布于 10 个牌库，另有 42 颗骰子（36 颗行动骰 D3、1 颗采集骰 K12、1 颗奖励骰 K12、2 颗命运骰 D3）。卡牌结构详见 <a href="#anatomy">组件详解</a>。</p>
+
+<h3>扩展与众筹独占</h3>
+<p><b>猫砂盆秘密</b> 增加一块图板、1 张猫咪卡（含小、大米宝各 1，红色傲气 2 + 黑色傲气 1，紫色成长 1 + 蓝色成长 1，玩家标记 12）、2 块普通地块、1 块特殊地块，以及 1 个装有 108 枚收成指示物的袋子。</p>
+<p><b>竞技场</b> 增加一块图板、1 张猫咪卡（组件同上）、2 块普通地块、4 张冒险牌、1 张杂物牌、12 张竞技场牌、1 张市场牌。使用竞技场时，用竞技场地块替换 1 块森林地块；使用猫砂盆秘密时，则用大砂坑地块替换 1 块森林地块。</p>
+<div class="callout tip"><b>众筹独占：</b>额外 1 张猫咪卡、红色傲气 2 + 黑色傲气 1、紫色成长 1 + 蓝色成长 1、玩家标记 12、小猫咪米宝 1 + 大猫咪米宝 1。</div>
+
+  
+  
+    <figure>
+      <img src="Catvale_Rules_images/page_04.jpg" alt="规则书第 4 页">
+      <figcaption>规则书 p.&nbsp;4</figcaption>
+    </figure>
+</section>
+<section id="setup">
+  <h2 class="sec" id="setup"><span class="num">4</span>游戏准备</h2>
+  
+<p>在游戏开始前，按以下步骤准备。</p>
+<ol class="steps">
+  <li>洗混 <b>冒险</b> 和 <b>遭遇</b> 牌库，放在主图板上。</li>
+  <li>洗混两个 <b>跳蚤市场</b> 牌库和 <b>杂物</b> 牌库，放在跳蚤市场板上。</li>
+  <li>洗混 <b>野心</b> 和 <b>起始</b> 牌库，放在主图板旁边，待会儿要用。</li>
+  <li>洗混 <b>任务</b> 牌库，放在跳蚤市场板上。</li>
+  <li>把所有的 <b>资源</b>、<b>鱼</b>、<b>强化</b> 和 <b>森林*</b> 指示物放在图板旁边（*仅在使用冒险变体时）。</li>
+  <li>把所有的 <b>任务</b> 板块放在主图板的 <b>谷地生活</b> 区，任务标题朝上。</li>
+  <li>把 <b>先手玩家</b>、<b>蝴蝶结</b>、<b>捕猫</b>、<b>猫仙子</b>、<b>隧道</b> 和 <b>桥</b> 指示物放在主图板旁边。</li>
+  <li>把 <b>命运</b>、<b>采集</b> 和 <b>奖励</b> 骰子放在主图板旁边。</li>
+  <li>在季节轨道的起点和心情轨道的中央各放一枚 <b>通用标记</b>。</li>
+  <li>每位玩家在主图板 <b>威望</b> 轨道的空格上各放一枚 <b>玩家标记</b>。</li>
+  <li>根据所选 <b>世界类型</b> 和玩家人数放置起始 <b>地块板块</b>（见 <a href="#world">下一页</a>）。</li>
+  <li>把 <b>火焰</b>、<b>熔岩</b> 和 <b>青山</b> 地块放在主图板旁边。</li>
+  <li>根据玩家人数准备剩余地块，码成一摞或多摞放在主图板旁边。</li>
+</ol>
+<h3>每位玩家（玩家面板 + 扩展）</h3>
+<ol class="steps">
+  <li>把你的 <b>猫咪卡</b> 放在面板上，年幼面朝上。</li>
+  <li>把所有的 <b>收成指示物</b> 放进图板旁边的袋子里（猫砂盆秘密扩展）。</li>
+  <li>准备好 <b>5 颗行动骰</b> 待用。</li>
+  <li>在每块扩展图板上各放一枚你的 <b>玩家标记</b>。</li>
+  <li>把两个扩展的卡牌洗入对应的牌库。</li>
+  <li>把 <b>傲气指示物</b> 放在指定位置。</li>
+  <li>把 <b>竞技场牌库</b> 放在竞技场板上。</li>
+  <li>把两个扩展的地块加入准备好的地块堆。</li>
+  <li>把 <b>技能指示物</b> 放在指定位置，符号面朝上。</li>
+  <li>把 <b>混乱</b> 和 <b>和谐</b> 标记放在成长树上。</li>
+  <li>拿 1 枚 <b>重投</b> 和 1 枚 <b>基础资源</b> 指示物（按你的猫咪卡）。</li>
+  <li>把你的标记放在面板上或旁边。</li>
+  <li>把你的小、大 <b>猫咪米宝</b> 放在面板旁边。</li>
+  <li>设置你的 <b>移动</b>、<b>攻击</b> 和 <b>防御</b> 刻度（按你的猫咪卡）。</li>
+</ol>
+<div class="callout tip"><b>提示：</b>第一次玩时，可以参考单独的<i>首次游戏</i>说明页。</div>
+
+  
+  
+    <figure>
+      <img src="Catvale_Rules_images/page_07.jpg" alt="规则书第 7 页">
+      <figcaption>规则书 p.&nbsp;7</figcaption>
+    </figure>
+</section>
+<section id="world">
+  <h2 class="sec" id="world"><span class="num">5</span>地块选择与放置</h2>
+  
+<p>游戏开始前，选择以下两种 <b>地块布置变体</b> 之一。它会改变游戏的节奏与可预测性。</p>
+<ol>
+  <li><b>随机世界</b> &mdash; 默认。按起始布局（原文规则书第 10&ndash;13 页）放置地块，剩余地块面朝下随机分布在地图上。</li>
+  <li><b>混乱世界</b> &mdash; 进阶。非对称布局，最不可预测。所有玩家从跳蚤市场起步，后院需要在探索中发现。</li>
+</ol>
+<div class="callout">除跳蚤市场（中心）外，每块地块都随机面朝下放置。两种变体下，你都需要通过探索来发现关键位置；混乱变体还会因此获得奖励。</div>
+<h3>起始布局基础</h3>
+<ul>
+  <li>放置 <b>4 块渔场地块</b>、<b>4 块传送门地块</b> 和 <b>1 块跳蚤市场地块</b>。</li>
+  <li>加入 <b>森林</b>、<b>山</b> 和 <b>后院</b> 地块 &mdash; 数量视玩家人数而定。</li>
+  <li>把剩余地块码成面朝下的牌堆，用于暗抽。</li>
+  <li><b>含竞技场扩展时：</b>用竞技场地块替换 1 块森林地块。</li>
+  <li><b>含猫砂盆秘密扩展时：</b>用大砂坑地块替换 1 块森林地块。</li>
+  <li>把 <b>熔岩</b>、<b>火焰</b> 和 <b>青山</b> 地块先放一旁备用。</li>
+</ul>
+<div class="callout tip"><b>混乱世界被封堵的后院：</b>若随机放置的山地块挡住了通往某个后院的路径，受影响的玩家可以将 1 块山地块替换为任意森林地块来打通道路。其他被封堵区域是否打通由你决定——选择混乱世界变体意味着接受一个更难预测的世界，游戏可能因此变得相当困难。</div>
+
+  
+  
+    <figure>
+      <img src="Catvale_Rules_images/page_09.jpg" alt="规则书第 9 页">
+      <figcaption>规则书 p.&nbsp;9</figcaption>
+    </figure>
+</section>
+<section id="start">
+  <h2 class="sec" id="start"><span class="num">6</span>开局</h2>
+  
+<h3>选择你的猫</h3>
+<p>选择你要扮演的猫。猫与猫之间的差异非常细微，不应影响玩法风格，所有玩家从平等的位置开始。</p>
+<p>每只猫有两个阶段：</p>
+<ol class="steps">
+  <li><b>年幼的猫</b> &mdash; 开局获得 1 枚重投指示物和猫咪卡上指定的一种独特基础资源。移动力：3。</li>
+  <li><b>年长的猫</b> &mdash; 在成长树上推进到足够远时解锁。属性更强，采集特定基础资源时获得加成。移动力：4。</li>
+</ol>
+<h3>选择先手玩家</h3>
+<p>最近喂过猫的玩家获得先手玩家指示物。每轮开始时，按顺时针方向传递。</p>
+<p>把你的猫咪卡放在面板上，年幼面朝上。拿取指定的基础资源和 1 枚重投指示物放在面板上。</p>
+<h3>起始手牌（轮抽）</h3>
+<ul>
+  <li>从起始牌库抽 4 张牌。挑 1 张留下，其余 3 张传给左手边的玩家。</li>
+  <li>从收到的 3 张牌中挑 1 张留下，其余 2 张继续向左传。</li>
+  <li>从收到的 2 张牌中挑 1 张留下，最后 1 张弃掉。弃掉的牌不再回到游戏中。</li>
+</ul>
+<p>游戏开始时你手中有 3 张牌。</p>
+<h3>野心牌</h3>
+<ul>
+  <li>3&ndash;4 人：抽 2 张野心牌，留 1 张，弃 1 张。</li>
+  <li>5&ndash;6 人：抽 1 张野心牌，留着即可。</li>
+</ul>
+<h3>游戏变体</h3>
+<p>游戏开始前选择一种变体，所选变体在整个游戏中保持不变。</p>
+<div class="callout"><b>冒险变体</b> &mdash; 随机性更高。你需要更频繁地根据骰点和抽到的牌调整策略。</div>
+<div class="callout"><b>操控变体</b> &mdash; 随机性更低。你对行动骰有更大的掌控，抽到的冒险牌也更少。</div>
+<p>所选变体在计划和冒险阶段生效，详见各阶段说明。</p>
+<h3>森林指示物（仅冒险变体）</h3>
+<p>游戏开始时，把森林指示物洗混后放在图板旁边。新发现的森林地块上没有指示物——只有离开之后，才放 1 枚森林指示物。</p>
+<p>当你带着指示物进入森林地块时，立即翻开并结算其效果。你每轮只能翻开 1 枚森林指示物。效果可能有利，也可能不利。</p>
+
+  
+  
+    <figure>
+      <img src="Catvale_Rules_images/page_12.jpg" alt="规则书第 12 页">
+      <figcaption>规则书 p.&nbsp;12</figcaption>
+    </figure>
+</section>
+<section id="flow">
+  <h2 class="sec" id="flow"><span class="num">7</span>流程总览</h2>
+  
+<p>游戏共持续 3 个季节：<b>春、夏、秋</b>。每个季节持续 2 轮，全局最多 6 轮。每轮由所有玩家轮流执行回合组成。</p>
+<ul>
+  <li>每个季节开始时，执行 <a href="#growth">成长</a>。</li>
+  <li>每个季节结束时，执行 <a href="#territory">领地</a>。</li>
+  <li>夏季第二轮之后，执行 <a href="#dig">收成</a>。</li>
+</ul>
+<p>游戏在秋季最后一轮之后结束，或在任何玩家达到 20 点威望时提前结束。</p>
+<h3>轮的阶段</h3>
+<ol class="steps">
+  <li><a href="#growth">成长</a>（仅季节开始）</li>
+  <li>两轮行动</li>
+  <li><a href="#territory">领地</a>（仅季节结束）</li>
+  <li><a href="#cleanup">整理</a></li>
+  <li><a href="#breakfast">早餐</a></li>
+  <li><a href="#planning">计划</a></li>
+  <li><a href="#adventure">冒险</a></li>
+</ol>
+
+  
+  
+    <figure>
+      <img src="Catvale_Rules_images/page_13.jpg" alt="规则书第 13 页">
+      <figcaption>规则书 p.&nbsp;13</figcaption>
+    </figure>
+</section>
+<section id="growth">
+  <h2 class="sec" id="growth"><span class="num">8</span>成长阶段</h2>
+  
+<p>仅在每个季节开始时执行（全局共 3 次）。</p>
+<p>在每个季节开始时，消耗一定数量的 <b>成长点</b>，数量依玩家面板所示：</p>
+<ul>
+  <li>春季：<b>4 点</b></li>
+  <li>夏季：<b>6 点</b></li>
+  <li>秋季：<b>8 点</b></li>
+</ul>
+<ol class="steps">
+  <li>根据当前季节分配并消耗成长点。</li>
+  <li>恢复所有失去的傲气。</li>
+  <li>查看 <a href="#vale_mood">谷地心情</a>，依此获得或失去成长点。</li>
+</ol>
+<h3>成长树</h3>
+<p>通过移动你在成长树上的 <b>和谐</b> 或 <b>混乱</b> 标记来消耗成长点。你可以把点数分给两个标记，或全部投入其中一个。标记可以相互越过，但不可停留在同一格。你自行选择走哪条路径。在路径允许的情况下，和谐与混乱标记可以在上升过程中换边。</p>
+<p>成长树上包含两种槽位：</p>
+<ul>
+  <li><b>被动技能</b></li>
+  <li><b>一次性奖励</b></li>
+</ul>
+<p>树的最后一格让你的猫 <a href="#growingup">长大</a>。</p>
+<h3>谷地心情提供的成长点</h3>
+<p>心情轨道在游戏图板上可见。除春季外，每个季节开始时查看心情标记的位置，根据位置获得或失去对应于和谐或混乱的成长点。</p>
+<p>若标记位于混乱一侧，按轨道上所示的数值移动成长树上对应侧的标记。和谐一侧同理处理。</p>
+
+  
+  
+    <figure>
+      <img src="Catvale_Rules_images/page_14.jpg" alt="规则书第 14 页">
+      <figcaption>规则书 p.&nbsp;14</figcaption>
+    </figure>
+</section>
+<section id="territory">
+  <h2 class="sec" id="territory"><span class="num">9</span>领地阶段</h2>
+  
+<p>仅在每个季节结束时执行（全局共 3 次）。</p>
+<p>数一数你在游戏图板上 <b>标记</b> 的地块。每 <b>3 块标记地块</b> 获得 <b>1 点威望</b>。</p>
+<div class="callout tip"><b>提示：</b>标记在领地阶段之后不会被移除。若它们留在图板上，仍能在未来的领地阶段再次计分。</div>
+
+  
+  
+    <figure>
+      <img src="Catvale_Rules_images/page_15.jpg" alt="规则书第 15 页">
+      <figcaption>规则书 p.&nbsp;15</figcaption>
+    </figure>
+</section>
+<section id="cleanup">
+  <h2 class="sec" id="cleanup"><span class="num">10</span>整理阶段</h2>
+  
+<p>整理阶段为下一轮做好准备：</p>
+<ul>
+  <li>把日历标记推进到下一轮。</li>
+  <li>刷新 <b>跳蚤市场</b>（第一轮跳过）：
+    <ul>
+      <li>移除最右列的两张牌。</li>
+      <li>剩余的牌向右滑填补空位。</li>
+      <li>用 2 张新牌补满空出的那一列。</li>
+    </ul>
+  </li>
+  <li>弃掉上一轮结束时已过期的冒险牌。</li>
+  <li>重置 <b>森林指示物</b> &mdash; 仅冒险变体：
+    <ul>
+      <li>把用过的森林指示物翻回面朝下并洗混。</li>
+      <li>随机在空置的森林地块上放置所需数量。</li>
+      <li>未被拾起的森林指示物留在原地。</li>
+    </ul>
+  </li>
+  <li>重置面板上的 <b>移动</b>、<b>攻击</b> 和 <b>防御</b> 刻度盘。查看谷地生活和解锁的技能是否有加成。</li>
+</ul>
+<p>若解锁了相关技能，可能增加以上数值。</p>
+
+  
+  
+    <figure>
+      <img src="Catvale_Rules_images/page_15.jpg" alt="规则书第 15 页">
+      <figcaption>规则书 p.&nbsp;15</figcaption>
+    </figure>
+</section>
+<section id="breakfast">
+  <h2 class="sec" id="breakfast"><span class="num">11</span>早餐阶段</h2>
+  
+<p>早餐阶段对所有玩家同时进行。</p>
+<p>早餐阶段期间，每位玩家获得 <b>5 条鱼</b>。收取你的雇工提供的资源并刷新它们的能力。</p>
+<p>若解锁了相关技能，可能增加以上数值。</p>
+
+  
+  
+    <figure>
+      <img src="Catvale_Rules_images/page_15.jpg" alt="规则书第 15 页">
+      <figcaption>规则书 p.&nbsp;15</figcaption>
+    </figure>
+</section>
+<section id="planning">
+  <h2 class="sec" id="planning"><span class="num">12</span>计划阶段</h2>
+  
+<p>计划阶段对所有玩家同时进行。</p>
+<p>本阶段为下一轮准备你的 <b>行动骰</b>。所选的游戏变体在整个游戏中保持不变。</p>
+<h3>冒险变体</h3>
+<p>投掷 <b>5 颗行动骰</b>：</p>
+<ul>
+  <li>若投出 4 颗值为 1 的骰子，获得 1 只老鼠作为补偿。</li>
+  <li>若投出 4 颗值为 3 的骰子，所有其他玩家各获得 1 个自选的基础资源。</li>
+</ul>
+<ol class="steps">
+  <li>弃 1 颗骰子，放入跳蚤市场中的 <b>骰子商店</b>。</li>
+  <li>取 1 颗骰子作为你的 <b>防御修正</b>，其余 3 颗作为行动骰。把它们放在面板上对应的槽位。</li>
+</ol>
+<h3>操控变体</h3>
+<p>从 5 颗骰子中取出值为 1、2、3 的骰子，剩下的再投。</p>
+<ol class="steps">
+  <li>弃 1 颗骰子放入骰子商店，剩下的那颗加入刚才挑出的骰子。</li>
+  <li>按与冒险变体相同的方式，把这些骰子分配到行动骰与防御骰。</li>
+</ol>
+<div class="callout tip"><b>提示：</b>防御骰锁定至本轮结束，除非有卡牌效果允许，否则不可与其他骰子互换。</div>
+<p>操控变体减少了运气成分，因为只有 1 颗骰子保留随机性。</p>
+
+  
+  
+    <figure>
+      <img src="Catvale_Rules_images/page_16.jpg" alt="规则书第 16 页">
+      <figcaption>规则书 p.&nbsp;16</figcaption>
+    </figure>
+</section>
+<section id="adventure">
+  <h2 class="sec" id="adventure"><span class="num">13</span>冒险阶段</h2>
+  
+<p>抽取冒险牌，执行你的行动！</p>
+<h3>冒险变体 vs 操控变体</h3>
+<ul>
+  <li><b>冒险变体：</b>在你每个回合开始时抽 1 张冒险牌。</li>
+  <li><b>操控变体：</b>仅在你每轮的第一个回合开始时抽 1 张冒险牌。</li>
+</ul>
+<p>游戏变体决定了你抽冒险牌的频率。</p>
+<h3>卡牌激活与公开性</h3>
+<p>抽到冒险牌后，查看其激活符号与是否保密，若有需要则立即结算其效果。卡牌要么 <b>立即结算并大声朗读</b>，要么 <b>保密私下阅读</b>，要么 <b>在你的回合中打出</b>，要么 <b>在游戏任意时刻打出</b>。</p>
+
+  
+  
+    <figure>
+      <img src="Catvale_Rules_images/page_16.jpg" alt="规则书第 16 页">
+      <figcaption>规则书 p.&nbsp;16</figcaption>
+    </figure>
+</section>
+<section id="actions">
+  <h2 class="sec" id="actions"><span class="num">14</span>行动总览</h2>
+  
+<p>在你的回合内，你可以执行三种类型的行动：</p>
+<ul>
+  <li><b>基础行动</b> &mdash; 每回合可执行任意次数。</li>
+  <li><b>附带行动</b> &mdash; 每回合最多可执行 2 次。</li>
+  <li><b>主要行动</b> &mdash; 每回合必须执行 1 次。</li>
+</ul>
+<p>每只猫的移动力如卡牌所示：年幼的猫 3，年长的猫 4。</p>
+<p>在你的回合内，你可以打出任意数量的卡牌和指示物。雇佣雇工和升级建筑也算作使用卡牌。</p>
+<ul>
+  <li>行动可以按任意顺序执行。</li>
+  <li>基础行动和附带行动可以从图板上任意地块执行。</li>
+  <li>执行完主要行动后，把用过的行动骰放到一旁。</li>
+  <li>若你无法执行主要行动，则弃 1 颗行动骰。</li>
+</ul>
+<div class="callout"><b>例外：</b>主要行动 <i>挖掘</i> 不需要行动骰。</div>
+
+  
+  
+    <figure>
+      <img src="Catvale_Rules_images/page_17.jpg" alt="规则书第 17 页">
+      <figcaption>规则书 p.&nbsp;17</figcaption>
+    </figure>
+</section>
+<section id="explore">
+  <h2 class="sec" id="explore"><span class="num">15</span>探索</h2>
+  
+<p>探索让你在地图上移动。</p>
+<p>用面板上的移动刻度盘追踪移动点。</p>
+<ul>
+  <li>移动到相邻的地块消耗 1 点移动力。</li>
+  <li>你可以随时暂停移动以执行其他行动。</li>
+  <li>移动点会在每轮开始的整理阶段刷新。</li>
+  <li>用尽所有移动点后，你仍可每消耗 1 条鱼继续移动 1 格。</li>
+</ul>
+<h3>翻开地块</h3>
+<p>当你进入一块面朝下的地块时，立即翻开它。翻开山地块后，后退一格并恢复刚才消耗的移动点。一些地块翻开时立即获得奖励：</p>
+<ul>
+  <li><b>基础资源地块</b> &mdash; 获得该基础资源。</li>
+  <li><b>渔场地块</b> &mdash; 获得 2 条鱼。</li>
+  <li><b>鼠田</b> &mdash; 你可以消耗 1 颗值为 2 的骰子来捉 1 只老鼠。</li>
+  <li><b>黑市</b> &mdash; 获得价值 2 条鱼的折扣，立即可用。</li>
+  <li><b>竞技场</b> &mdash; 把你的标记移到竞技场轨道的首格。</li>
+  <li><b>港湾</b> &mdash; 获得价值 1 条鱼的折扣，立即可用。</li>
+  <li><b>大砂坑</b>（猫砂盆秘密）&mdash; 从收成袋里抽 1 枚指示物。</li>
+</ul>
+<div class="callout tip"><b>仅混乱世界：</b>已翻开的地块可以再次进入以获取更多奖励。</div>
+
+  
+  
+    <figure>
+      <img src="Catvale_Rules_images/page_17.jpg" alt="规则书第 17 页">
+      <figcaption>规则书 p.&nbsp;17</figcaption>
+    </figure>
+</section>
+<section id="use">
+  <h2 class="sec" id="use"><span class="num">16</span>使用</h2>
+  
+<p>手中的资产就是要打出来的！</p>
+<p>在你的回合内，你可以打出任意数量的卡牌和指示物。雇佣雇工和升级建筑也算作使用卡牌。</p>
+<p>使用是基础行动 &mdash; 你可以从图板上任意地块执行任意次数。</p>
+
+  
+  
+    <figure>
+      <img src="Catvale_Rules_images/page_17.jpg" alt="规则书第 17 页">
+      <figcaption>规则书 p.&nbsp;17</figcaption>
+    </figure>
+</section>
+<section id="trade">
+  <h2 class="sec" id="trade"><span class="num">17</span>交易</h2>
+  
+<p>一切皆有价，尤其是当鱼被牵涉进来的时候。</p>
+<p>你可以从图板上的任意位置执行交易行动。你可以在双方约定的条件下，用任意资源进行交易。交易双方的猫必须位于相同或相邻地块。</p>
+<h3>通过交易行动，你可以：</h3>
+<ul>
+  <li><b>购买：</b>卡牌、基础资源、成长点、行动骰、重投指示物、攻击与防御指示物。</li>
+  <li><b>出售：</b>卡牌。</li>
+  <li><b>交换：</b>基础资源。</li>
+</ul>
+<p>每次购买、出售或交换算作 1 次附带行动。每轮你最多购买 1 颗行动骰。</p>
+<h3>站在特定地块上可获得交易折扣：</h3>
+<ul>
+  <li><b>港湾：</b>卡牌和基础资源少花 1 条鱼。</li>
+  <li><b>黑市：</b>成长点和行动骰少花 2 条鱼。</li>
+  <li><b>黑市：</b>重投、攻击和防御指示物少花 2 条鱼。</li>
+</ul>
+<p>详见 <a href="#flea">跳蚤市场</a> 一节。</p>
+
+  
+  
+    <figure>
+      <img src="Catvale_Rules_images/page_19.jpg" alt="规则书第 19 页">
+      <figcaption>规则书 p.&nbsp;19</figcaption>
+    </figure>
+</section>
+<section id="recover">
+  <h2 class="sec" id="recover"><span class="num">18</span>恢复</h2>
+  
+<p>带着受挫的傲气四处走动是有风险的。</p>
+<p>1 条鱼恢复 1 点傲气。1 次恢复行动可以恢复任意数量的已失去傲气。你可以从游戏中的任意地块吃鱼来恢复傲气。把恢复后的傲气指示物重新放回面板上。</p>
+
+  
+  
+    <figure>
+      <img src="Catvale_Rules_images/page_20.jpg" alt="规则书第 20 页">
+      <figcaption>规则书 p.&nbsp;20</figcaption>
+    </figure>
+</section>
+<section id="construct">
+  <h2 class="sec" id="construct"><span class="num">19</span>建造</h2>
+  
+<p>建筑提供威望和额外效果。</p>
+<p>要建造一座建筑，你必须手中有对应的建筑牌。花费卡牌左侧所示的资源，并吃掉 1 条鱼。</p>
+<p>建造完成后，把建筑牌放在玩家面板旁边，构成你的 <b>后院</b>，然后结算卡牌效果：</p>
+<ul>
+  <li>获得卡牌右侧所示的威望。</li>
+  <li>按卡牌上的图标移动心情标记。</li>
+  <li>每座建筑都附赠一次性奖励。拿走相应的指示物、杂物牌或获得 1 点成长。</li>
+  <li>部分建筑允许你花 1 条鱼雇 1 名雇工，由锤子图标标示。</li>
+</ul>
+<p>一座建筑只能雇佣 1 名雇工，但可以拥有任意数量的升级。</p>
+
+  
+  
+    <figure>
+      <img src="Catvale_Rules_images/page_18.jpg" alt="规则书第 18 页">
+      <figcaption>规则书 p.&nbsp;18</figcaption>
+    </figure>
+</section>
+<section id="quest">
+  <h2 class="sec" id="quest"><span class="num">20</span>任务</h2>
+  
+<p>任务是影响谷地生活的共享猫活动。跳蚤市场板上始终有 2 张激活的任务牌。不同的玩家可以共同完成同一任务的不同要求。</p>
+<p>每张任务牌左侧有 3 项要求。要完成任务，必须由玩家满足全部 3 项要求。每次执行任务行动，可以满足 1 项要求。因此独自完成任务需要 3 次附带行动。</p>
+<p>当所有要求都满足后，任务完成。在你满足的那项要求旁放上你的标记。</p>
+<h3>完成任务后</h3>
+<ul>
+  <li>在主图板的谷地生活区翻开对应（同名）的板块，并结算其效果。</li>
+  <li>所有参与该任务的玩家：
+    <ul>
+      <li>获得卡牌上所示的威望。</li>
+      <li>按卡牌上的图标移动心情标记。</li>
+    </ul>
+  </li>
+  <li>若你独自满足该任务的所有要求，额外获得 1 点威望。</li>
+  <li>部分任务需要做出选择。如果你满足了最后一项要求，选择权归你。</li>
+</ul>
+<p>完成任务后，弃掉该任务牌并从任务牌库中抽 1 张新牌放到跳蚤市场板上。效果立即生效，影响所有玩家直至游戏结束。</p>
+<div class="callout tip"><b>任务</b> 是游戏中唯一可能带有合作色彩的元素。</div>
+
+  
+  
+    <figure>
+      <img src="Catvale_Rules_images/page_18.jpg" alt="规则书第 18 页">
+      <figcaption>规则书 p.&nbsp;18</figcaption>
+    </figure>
+</section>
+<section id="mark">
+  <h2 class="sec" id="mark"><span class="num">21</span>标记领地</h2>
+  
+<p>猫通过留下尿味来标记自己的领地。</p>
+<p>你可以标记除了后院和山以外的任意地块。标记 1 块地块算作 1 次附带行动。</p>
+<p>标记地块的方法：</p>
+<ol class="steps">
+  <li>移动到你想标记的地块上。</li>
+  <li>把你 1 颗行动骰的值减 1。如果该骰的值已经是 1，则视为已消耗。</li>
+  <li>把你的标记放在你猫所在的地块上。</li>
+</ol>
+<p>若该地块上已有其他玩家的标记，则将其替换为你的标记。一块地块上同时只能存在 1 个标记。在每个季节结束的领地阶段，每 3 块已标记地块获得 1 点威望。</p>
+<div class="callout tip"><b>领地优势：</b>若你的猫正站在你标记的地块上，每场战斗中你可以免费重投 1 次。</div>
+
+  
+  
+    <figure>
+      <img src="Catvale_Rules_images/page_19.jpg" alt="规则书第 19 页">
+      <figcaption>规则书 p.&nbsp;19</figcaption>
+    </figure>
+</section>
+<section id="fish">
+  <h2 class="sec" id="fish"><span class="num">22</span>捕鱼</h2>
+  
+<p>捕鱼可以获得鱼——谷地的主要货币。</p>
+<p>你可以在标有鱼图标的地块上捕鱼。</p>
+<p>鱼可以：</p>
+<ul>
+  <li>在交易时花掉。</li>
+  <li>吃掉以执行某些行动。</li>
+  <li>吃掉以获得额外移动力。</li>
+</ul>
+<p>聪明的猫总会确保自己的鱼仓永不枯竭。</p>
+<p>执行捕鱼行动的方法：</p>
+<ol class="steps">
+  <li>站在选定的渔场地块上。</li>
+  <li>投入 1 颗行动骰。</li>
+  <li>获得等于所投入骰值两倍的鱼。</li>
+</ol>
+<p>执行完行动后，把投入的行动骰放到一旁。</p>
+<div class="callout"><b>示例 1：</b>投入的骰值为 3，获得 6 条鱼。<br><b>示例 2：</b>投入的骰值为 1，获得 2 条鱼。</div>
+
+  
+  
+    <figure>
+      <img src="Catvale_Rules_images/page_21.jpg" alt="规则书第 21 页">
+      <figcaption>规则书 p.&nbsp;21</figcaption>
+    </figure>
+</section>
+<section id="attack">
+  <h2 class="sec" id="attack"><span class="num">23</span>攻击</h2>
+  
+<p>攻击让你比其他行动更快地获得威望，但也伴随着风险。成功的攻击会激怒对手，失败则可能损失傲气。</p>
+<p>有时通往威望最短的路，就踩在别人的皮毛上。</p>
+<p>仅是踏入其他猫占据的地块，并不会自动开始战斗。</p>
+<h3>攻击其他猫的方法：</h3>
+<ol class="steps">
+  <li>踏入其他猫占据的地块。</li>
+  <li>战斗前你可以谈判，例如以贿赂换取退让。协议不具约束力——撒谎是被允许的！</li>
+  <li>投入 1 颗行动骰作为你的攻击骰。它成为你的攻击修正。</li>
+  <li>吃掉 1 条鱼。</li>
+  <li>把心情标记向混乱方向移动 1 格。</li>
+</ol>
+<h3>战斗流程</h3>
+<ol class="steps">
+  <li>把你的攻击骰值加到面板的攻击刻度上。该刻度已经包含你的基础攻击力（来自猫咪卡和技能）。</li>
+  <li>双方各投 1 颗命运骰，把结果加到各自的总值上。</li>
+  <li>防御者把防御骰值加到防御刻度上。该刻度已经包含基础防御力。</li>
+  <li>从防御者开始，你们可以依次打出影响战斗的卡牌和指示物。打出一张牌或一个指示物后，对手可以打出他的。重复此过程直到双方都选择过牌。一旦过牌，你不能再打出任何额外的卡牌或指示物。</li>
+</ol>
+<p>战斗中，防御者使用计划阶段已选定的防御骰作为防御修正。</p>
+<p>未参与战斗的玩家可以随时从任意位置打出卡牌、指示物或重投，以支援任一方，也可以与正在战斗的玩家达成交易。</p>
+<h3>结算战斗</h3>
+<p>比较双方最终的攻、防总值。胜者投黄色奖励骰。</p>
+<ul>
+  <li><b>若攻击更高，攻击方获胜。</b>
+    <ul>
+      <li>威望 &mdash; 获得 1 点威望。</li>
+      <li>成长 &mdash; 获得并消耗 1 点成长点。</li>
+      <li>卡牌 &mdash; 从战败猫手中偷 1 张牌。若对手手中无牌则无法偷取。</li>
+      <li>获得 1 枚重投指示物。</li>
+    </ul>
+  </li>
+  <li><b>若防御更高，防御方获胜。</b>平局时防御方获胜。</li>
+  <li>若防御方获胜或平局，由防御方投奖励骰。</li>
+  <li>你可以消耗 1 枚重投指示物来重投胜利骰。</li>
+</ul>
+<p>失败者的傲气按双方总值之差减少。平局差值为 0，因此不损失傲气。</p>
+<div class="callout tip"><b>羞辱：</b>失去全部 3 点傲气的猫陷入羞辱状态。将其猫咪米宝放倒并送回自己的后院。在该猫的下一回合开始时，它恢复所有失去的傲气并重新站起猫咪米宝。若你的攻击或成功的防御令对手陷入羞辱，立即获得 1 点威望。</div>
+<h3>战斗示例</h3>
+<ul>
+  <li>蓝猫攻击绿猫。</li>
+  <li>基础：攻击方攻击 3，防御方防御 2。攻击方打出 +1 攻击指示物，防御方用 1 只老鼠当作 +1 防御。</li>
+  <li>骰子投入：攻击方行动骰 3，防御方防御骰 3。</li>
+  <li>命运：攻击方投 1，防御方投 2。第三位玩家为攻击方花费 1 枚重投（重投为 3）。</li>
+  <li>攻击方最终：3 + 1（指示物）+ 3（命运）+ 3（行动）= 10。防御方最终：2 + 1（老鼠）+ 2（命运）+ 3（防御）= 8。</li>
+  <li>攻击方以 3 点之差获胜。防御方失去 3 点傲气并陷入羞辱。攻击方投奖励骰。</li>
+</ul>
+
+  
+  
+    <figure>
+      <img src="Catvale_Rules_images/page_22.jpg" alt="规则书第 22 页">
+      <figcaption>规则书 p.&nbsp;22</figcaption>
+    </figure>
+</section>
+<section id="duel">
+  <h2 class="sec" id="duel"><span class="num">24</span>决斗（竞技场扩展）</h2>
+  
+<p>竞技场允许你与由游戏控制的对手机智对战。</p>
+<h3>参与决斗的方法：</h3>
+<ol class="steps">
+  <li>站在竞技场地块上。</li>
+  <li>投入 1 颗行动骰。根据抽到的对手，它可能成为你的攻击修正或被无效果地消耗掉。</li>
+  <li>吃掉 1 条鱼。</li>
+  <li>从竞技场牌库中抽 1 张对手卡并大声朗读。</li>
+</ol>
+<h3>对手类型</h3>
+<p>竞技场有 3 类对手：侵略型、谨慎型、非常规型。</p>
+<p>决斗未必以战斗收场。对手可能攻击你，或者你攻击对手——遵循对手卡上的说明。</p>
+<p>若你受到攻击，你投入的行动骰会被无效果地消耗掉，改用计划阶段选定的防御骰。若你主动攻击，你投入的行动骰成为你的攻击修正。</p>
+<h3>决斗结算</h3>
+<ol class="steps">
+  <li>根据对手情况，把攻击或防御修正的值加到面板对应的刻度上。该刻度已包含基础攻击或防御力（来自猫咪卡和技能）。</li>
+  <li>双方各投命运骰并把结果加到各自的总值上。由你左手边的玩家为对手投骰。</li>
+  <li>查看对手卡上标注的对手强度。</li>
+  <li>打出卡牌和指示物以改变结果。其他玩家可以支援任一方。</li>
+  <li>数值更高者获胜。平局时防御方获胜。</li>
+</ol>
+<p>按攻击行动的方式结算决斗。</p>
+<h3>决斗结束后</h3>
+<p>无论胜负，你可以把自己的标记在竞技场轨道上向右移动 1 格。若该格有奖励，立即获得。失败者可能陷入羞辱并失去傲气。<b>赢得决斗后不需要投奖励骰。</b></p>
+<p>玩家在竞技场轨道上独立获得奖励，互不影响。</p>
+<h3>赢得决斗</h3>
+<ul>
+  <li>若你获胜：从对手卡所示的奖励中选 1 项，然后把对手卡放到竞技场牌库底部。</li>
+  <li>若你羞辱了对手：获得 1 点威望，把对手卡作为战利品放进你的后院。</li>
+</ul>
+
+  
+  
+    <figure>
+      <img src="Catvale_Rules_images/page_23.jpg" alt="规则书第 23 页">
+      <figcaption>规则书 p.&nbsp;23</figcaption>
+    </figure>
+</section>
+<section id="dig">
+  <h2 class="sec" id="dig"><span class="num">25</span>挖掘（猫砂盆秘密扩展）</h2>
+  
+<p>猫可以花上数小时在沙堆里挖掘寻找宝藏。即使在收成之后，砂坑里也总有惊喜。</p>
+<p>挖掘推进你在猫砂盆秘密轨道上的位置，并为收成阶段做准备——奖励最勤勉的挖掘者。</p>
+<p>本行动只能在夏季第 1 轮结束之前使用。</p>
+<p>执行挖掘行动的方法：</p>
+<ol class="steps">
+  <li>站在大砂坑地块上。</li>
+  <li>投入 1 颗或多颗行动骰。</li>
+  <li>吃掉 3 条鱼。</li>
+  <li>在收成轨道上把标记向前移动，移动格数等于所投入行动骰的值之和。</li>
+</ol>
+<h3>收成</h3>
+<p>夏季第 1 轮结束时进行收成。查看你在轨道上的位置：</p>
+<ul>
+  <li>每位至少执行过 1 次挖掘的玩家从收成袋中抽取指示物。</li>
+  <li>抽取的指示物数量取决于轨道位置。</li>
+  <li>轨道上每经过 1 个指示物图标，收成阶段抽取的指示物数量 +1。</li>
+</ul>
+<p>若多名玩家的标记并列在同一格（先到者优先），按"先到先得"处理。</p>
+<div class="callout tip">收成 <b>结束后</b>，该轨道变为无效。此后挖掘行动被筛沙行动取代。</div>
+
+  
+  
+    <figure>
+      <img src="Catvale_Rules_images/page_24.jpg" alt="规则书第 24 页">
+      <figcaption>规则书 p.&nbsp;24</figcaption>
+    </figure>
+</section>
+<section id="sift">
+  <h2 class="sec" id="sift"><span class="num">26</span>筛沙（猫砂盆秘密扩展）</h2>
+  
+<p>筛沙仍能让你从收成袋里抽指示物。</p>
+<p>每轮只能执行 1 次筛沙！</p>
+<p>执行筛沙行动的方法：</p>
+<ol class="steps">
+  <li>站在大砂坑地块上。</li>
+  <li>从收成袋里抽 1 枚指示物。</li>
+</ol>
+<p>多个标记可以同时停留在同一格。</p>
+
+  
+  
+    <figure>
+      <img src="Catvale_Rules_images/page_24.jpg" alt="规则书第 24 页">
+      <figcaption>规则书 p.&nbsp;24</figcaption>
+    </figure>
+</section>
+<section id="gather">
+  <h2 class="sec" id="gather"><span class="num">27</span>采集</h2>
+  
+<p>采集让你获得谷地的基础资源。要建造，首先得有资源。</p>
+<p>你可以在标有对应资源图标的地块上采集：</p>
+<ul>
+  <li><b>木棍</b> &mdash; 浮木河</li>
+  <li><b>破布</b> &mdash; 阳光草甸</li>
+  <li><b>废料</b> &mdash; 废弃营地</li>
+  <li><b>石子</b> &mdash; 古老废墟</li>
+</ul>
+<p>执行采集行动的方法：</p>
+<ol class="steps">
+  <li>站在选定的资源地块上。</li>
+  <li>吃掉 1 条鱼。</li>
+  <li>投入 1 颗行动骰。</li>
+  <li>获得等于所投入骰值的基础资源。</li>
+</ol>
+<h3>采集骰</h3>
+<p>采集行动结束时，投绿色采集骰。可能的结果：</p>
+<ul>
+  <li><b>基础资源</b> &mdash; 再获得 1 个刚采集的基础资源。</li>
+  <li><b>杂物</b> &mdash; 从杂物牌库中抽 1 张牌留下。</li>
+  <li><b>遭遇</b> &mdash; 抽 1 张遭遇牌并结算。</li>
+  <li><b>冒险</b> &mdash; 抽 1 张冒险牌并结算。</li>
+  <li><b>无</b> &mdash; 没有额外效果。</li>
+</ul>
+
+  
+  
+    <figure>
+      <img src="Catvale_Rules_images/page_20.jpg" alt="规则书第 20 页">
+      <figcaption>规则书 p.&nbsp;20</figcaption>
+    </figure>
+</section>
+<section id="hunt">
+  <h2 class="sec" id="hunt"><span class="num">28</span>狩猎</h2>
+  
+<p>狩猎让你获得老鼠——谷地中稀有又美味的资源。精心筹划的狩猎总会有所回报。</p>
+<p>1 只老鼠可以当作：</p>
+<ul>
+  <li>任意一种基础资源。</li>
+  <li>+1 攻击点加成。</li>
+  <li>+1 防御点加成。</li>
+  <li>1 次重投。</li>
+</ul>
+<p>执行狩猎行动的方法：</p>
+<ol class="steps">
+  <li>站在鼠田地块上。</li>
+  <li>投入 1 颗值为 3 的行动骰。（只有值为 3 的骰子可以用于狩猎。）</li>
+  <li>获得 1 只老鼠。</li>
+</ol>
+<p>执行完行动后，把投入的行动骰放到一旁。</p>
+
+  
+  
+    <figure>
+      <img src="Catvale_Rules_images/page_20.jpg" alt="规则书第 20 页">
+      <figcaption>规则书 p.&nbsp;20</figcaption>
+    </figure>
+</section>
+<section id="vale_mood">
+  <h2 class="sec" id="vale_mood"><span class="num">29</span>谷地心情</h2>
+  
+<p>心情代表着谷地中和谐与混乱之间的平衡。你的行动会影响这种平衡。和平与善意偏向和谐，而冲突与混乱则偏向混乱。</p>
+<p>大多数卡牌在右上角或其效果区域标有心情图标。打出或结算后，按指示移动心情标记。</p>
+<p>发起攻击总会把心情标记向混乱方向移动 1 格。</p>
+<p>在每个季节开始时，于成长阶段查看心情标记的位置并结算其效果。</p>
+<p>接下来，把心情标记重置回中央的起始位置。</p>
+<p>详见 <a href="#growth">成长阶段</a> 一节中关于心情对成长影响的更多说明。</p>
+
+  
+  
+    <figure>
+      <img src="Catvale_Rules_images/page_25.jpg" alt="规则书第 25 页">
+      <figcaption>规则书 p.&nbsp;25</figcaption>
+    </figure>
+</section>
+<section id="vale_life">
+  <h2 class="sec" id="vale_life"><span class="num">30</span>谷地生活</h2>
+  
+<p>完成任务会影响谷地生活。</p>
+<p>完成任务后，在游戏图板的 <b>谷地生活</b> 区找到同名板块并翻至正面，展示其效果。效果立即生效，并影响所有玩家直至游戏结束。</p>
+<div class="callout tip"><b>提示：</b>翻开新的谷地生活板块不会取消先前已翻开的效果。</div>
+
+  
+  
+    <figure>
+      <img src="Catvale_Rules_images/page_25.jpg" alt="规则书第 25 页">
+      <figcaption>规则书 p.&nbsp;25</figcaption>
+    </figure>
+</section>
+<section id="encounters">
+  <h2 class="sec" id="encounters"><span class="num">31</span>遭遇</h2>
+  
+<p>冒险途中，你可能会遭遇谷地的其他居民。抽到遭遇牌后，大声朗读并结算。</p>
+<p>遭遇效果分为：</p>
+<ul>
+  <li>正面</li>
+  <li>中性</li>
+  <li>负面</li>
+</ul>
+<p>投命运骰决定适用哪种效果，然后按卡牌说明执行。</p>
+<p>大多数遭遇会影响心情。此时按指示移动心情标记。结算后，把卡牌放到遭遇牌库底部。</p>
+<h3>遭遇战斗</h3>
+<p>遭遇可能引发战斗。若你被攻击，按正常战斗结算，你作为防御方。战胜的奖励见卡牌说明。赢得遭遇后不需要投奖励骰。</p>
+<div class="callout">你的对手不会被羞辱——但你可能会！</div>
+
+  
+  
+    <figure>
+      <img src="Catvale_Rules_images/page_25.jpg" alt="规则书第 25 页">
+      <figcaption>规则书 p.&nbsp;25</figcaption>
+    </figure>
+</section>
+<section id="rerolls">
+  <h2 class="sec" id="rerolls"><span class="num">32</span>重投</h2>
+  
+<p>部分卡牌允许重投。除非另有说明，按以下规则执行。</p>
+<p>游戏开始时，每位玩家获得 1 枚重投指示物。1 只老鼠也可以当作重投使用。</p>
+<h3>使用重投</h3>
+<p>消耗 1 枚重投指示物、1 只老鼠或对应卡牌，可以重投游戏中的任意骰子，包括你自己的、其他玩家的、竞技场和遭遇中的对手骰。即使在他人战斗中也可以重投。</p>
+<p>重投指示物使用后弃掉。</p>
+<h3>限制</h3>
+<p>已投入的行动骰不能重投。一旦投入，行动骰视为已消耗，值不可改变。</p>
+<div class="callout tip">防御骰可以在任何时候重投。</div>
+<h3>适用于：</h3>
+<ul>
+  <li>行动骰（尚未投入的）</li>
+  <li>防御骰（即使已投入！）</li>
+  <li>命运骰</li>
+  <li>奖励骰</li>
+  <li>采集骰</li>
+</ul>
+<h3>获取额外重投的方式：</h3>
+<ul>
+  <li>抽到冒险牌</li>
+  <li>在跳蚤市场购买</li>
+</ul>
+
+  
+  
+    <figure>
+      <img src="Catvale_Rules_images/page_26.jpg" alt="规则书第 26 页">
+      <figcaption>规则书 p.&nbsp;26</figcaption>
+    </figure>
+</section>
+<section id="workers">
+  <h2 class="sec" id="workers"><span class="num">33</span>雇工</h2>
+  
+<p>雇工是被雇佣后提供特殊能力的卡牌，由锤子图标标识。</p>
+<p>可以通过两种方式获得：</p>
+<ul>
+  <li>建造特定的建筑</li>
+  <li>雇佣特定的雇工</li>
+</ul>
+<h3>雇佣雇工的方法：</h3>
+<ul>
+  <li>手中有该雇工的卡牌。</li>
+  <li>拥有一座带锤子图标的建筑。</li>
+  <li>支付 1 条鱼。</li>
+</ul>
+<h3>雇佣完成后</h3>
+<ul>
+  <li>把雇工卡放在选中的建筑旁边。</li>
+  <li>获得 1 点威望。</li>
+  <li>按雇工卡上的图标调整心情。</li>
+  <li>雇佣后可以立即开始使用雇工的能力。</li>
+  <li>使用能力后，把卡牌旋转 90&deg; 标记为已使用。</li>
+</ul>
+<h3>限制</h3>
+<ul>
+  <li>每座建筑只能雇佣 1 名雇工。</li>
+  <li>只要你还有空置的建筑，就可以拥有任意数量的雇工。</li>
+  <li>起始牌库中的建筑不能雇佣雇工。</li>
+  <li>你可以用新雇工替换已雇佣的雇工。弃掉旧雇工卡，按正常流程雇佣新雇工。替换时不获得威望。</li>
+</ul>
+<h3>获取额外重投的方式：</h3>
+<ul>
+  <li>陷入羞辱状态。</li>
+  <li>持有特定的起始、冒险或杂物牌。</li>
+  <li>在跳蚤市场购买。</li>
+</ul>
+
+  
+  
+    <figure>
+      <img src="Catvale_Rules_images/page_26.jpg" alt="规则书第 26 页">
+      <figcaption>规则书 p.&nbsp;26</figcaption>
+    </figure>
+</section>
+<section id="flea">
+  <h2 class="sec" id="flea"><span class="num">34</span>跳蚤市场</h2>
+  
+<p>跳蚤市场板展示了游戏中的交易选项。交易可以从地图上的任意位置进行。</p>
+<p>卡牌排成 4 列，每列价格不同。游戏中，你可以站在跳蚤市场、黑市或港湾上从两个牌库中买牌，并对所选交易获得折扣。</p>
+<p>两个跳蚤市场牌库（建筑与奇珍）的牌都放在第 1 列，可以盲买。</p>
+<h3>购买卡牌</h3>
+<ul>
+  <li>第 2 列的牌：5 条鱼。</li>
+  <li>第 3 列的牌：4 条鱼。</li>
+  <li>第 4 列的牌：3 条鱼。</li>
+  <li>其余列包含所有玩家可见的明牌。</li>
+  <li><b>盲买面朝下的牌：</b>花 3 条鱼从第 1 列任一跳蚤市场牌库中盲买 1 张面朝下的牌。</li>
+</ul>
+<p>站在跳蚤市场地块上可使用跳蚤市场折扣（-1 条鱼）。站在港湾地块上可使用港湾折扣（-2 条鱼）。站在黑市地块上可使用黑市折扣（-2 条鱼）。</p>
+<p>购买卡牌后，在你的回合结束时：</p>
+<ul>
+  <li>把卡牌向右滑动一列。</li>
+  <li>弃掉第 4 列的牌。</li>
+  <li>用对应牌库的牌补满空位。</li>
+</ul>
+<h3>刷新跳蚤市场</h3>
+<p>整理阶段期间：</p>
+<ul>
+  <li>剩余卡牌向右滑动一列。</li>
+  <li>用对应牌库的牌补满。</li>
+</ul>
+<h3>购买成长点</h3>
+<p>购买后立即使用，推进你在成长树上的位置。</p>
+<h3>购买强化指示物</h3>
+<p>你可以购买：</p>
+<ul>
+  <li>重投指示物</li>
+  <li>攻击与防御指示物</li>
+</ul>
+<p>购买后，从供应中抽一枚指示物，不让其他玩家看到。把它面朝下放在你的面板上，使用时才翻开。</p>
+<h3>购买行动骰</h3>
+<p>你可以从跳蚤市场板上购买额外的行动骰。每轮最多只能购买 1 颗行动骰。购买的骰子功能与普通行动骰相同，购买后放在面板上的对应槽位。</p>
+<p>价格依骰值而定：</p>
+<ul>
+  <li>值为 1 的行动骰：3 条鱼</li>
+  <li>值为 2 的行动骰：4 条鱼</li>
+  <li>值为 3 的行动骰：6 条鱼</li>
+</ul>
+<h3>通用交易</h3>
+<p>跳蚤市场板上的通用交易选项：</p>
+<ul>
+  <li>购买基础资源：花 3 条鱼获得 1 个自选基础资源。</li>
+  <li>交换基础资源：用 2 个其他基础资源换 1 个自选基础资源。</li>
+  <li>出售卡牌：每张牌卖 2 条鱼。1 次交易行动可以卖任意张牌。</li>
+</ul>
+<p>野心牌不能出售。出售卡牌和交换基础资源时不享受折扣。</p>
+
+  
+  
+    <figure>
+      <img src="Catvale_Rules_images/page_28.jpg" alt="规则书第 28 页">
+      <figcaption>规则书 p.&nbsp;28</figcaption>
+    </figure>
+</section>
+<section id="ambitions">
+  <h2 class="sec" id="ambitions"><span class="num">35</span>野心</h2>
+  
+<p>野心是可选的——你不必完成它们。</p>
+<p>游戏开始时你有 1 张野心牌。野心牌不能交易、出售或偷取。只有部分卡牌效果允许你查看其他玩家的野心。</p>
+<h3>追踪野心进度</h3>
+<p>如果某张野心需要追踪完成的动作数，你可以心算，或用你自己的指示物标记进度（例如放在卡牌背面）。</p>
+<h3>完成野心</h3>
+<ul>
+  <li>立即向所有玩家宣布。</li>
+  <li>获得奖励：1 点威望和 1 点成长。</li>
+  <li>把野心牌作为战利品放进你的后院。</li>
+</ul>
+<p>野心完成后不会补发新牌。</p>
+
+  
+  
+    <figure>
+      <img src="Catvale_Rules_images/page_27.jpg" alt="规则书第 27 页">
+      <figcaption>规则书 p.&nbsp;27</figcaption>
+    </figure>
+</section>
+<section id="endgame">
+  <h2 class="sec" id="endgame"><span class="num">36</span>终局与胜负</h2>
+  
+<h3>如何获得威望</h3>
+<p>你可以通过以下 12 种方式获得威望：</p>
+<ul>
+  <li>建造建筑。</li>
+  <li>完成任务。</li>
+  <li>实现野心。</li>
+  <li>羞辱其他玩家。</li>
+  <li>在竞技场决斗中羞辱对手。</li>
+  <li>走完竞技场轨道。</li>
+  <li>标记地块。</li>
+  <li>在成长树上达到特定里程碑。</li>
+  <li>雇佣雇工。</li>
+  <li>在与玩家战斗中获胜后投出奖励骰。</li>
+  <li>抽到授予威望的卡牌。</li>
+  <li>在收成或筛沙中抽到威望指示物。</li>
+</ul>
+<p>威望也会被扣减：</p>
+<ul>
+  <li><b>永久：</b>在战斗、竞技场或遭遇中被羞辱；失去雇工且没有替换为新雇工。</li>
+  <li><b>暂时：</b>其他玩家用"猫尿"卡喷你的建筑；其他玩家在你的后院建造负面建筑；你失去授予临时威望的卡牌。</li>
+</ul>
+<h3>终局</h3>
+<p>终局在以下条件触发时开始：</p>
+<ul>
+  <li>任意玩家达到 20 点威望，或</li>
+  <li>秋季的最后一轮开始。</li>
+</ul>
+<p>游戏继续进行直到当前轮结束，给其他玩家追赶或反超的机会。</p>
+<p>超过 20 的威望依然计分。如果你超过 20 点威望，把标记放到威望轨道的起点，从 21 开始继续计数。</p>
+<h3>获胜</h3>
+<p>威望最高的玩家获胜。</p>
+<h3>平局</h3>
+<p>按以下顺序打破平局：</p>
+<ol class="steps">
+  <li>后院威望最高的猫获胜：将平局玩家后院中所有卡牌的威望值相加。战利品和野心牌也算在内。</li>
+  <li>若仍平局，鱼最多的猫获胜。</li>
+</ol>
+<h3>取消终局</h3>
+<p>若你在触发终局后威望跌回 20 以下，且没有其他玩家达到 20 点威望，则终局取消，游戏按正常流程继续。</p>
+
+  
+  
+    <figure>
+      <img src="Catvale_Rules_images/page_29.jpg" alt="规则书第 29 页">
+      <figcaption>规则书 p.&nbsp;29</figcaption>
+    </figure>
+</section>
+<section id="anatomy">
+  <h2 class="sec" id="anatomy"><span class="num">37</span>组件详解</h2>
+  
+<h3>卡牌</h3>
+<p>游戏包含多个牌库：</p>
+<ul>
+  <li>猫咪牌库 &mdash; 你扮演的角色牌。</li>
+  <li>起始牌库 &mdash; 游戏开始时获得的卡牌。</li>
+  <li>冒险牌库 &mdash; 冒险阶段抽取的卡牌。</li>
+  <li>遭遇牌库 &mdash; 含有可遇见的随机猫咪卡牌。</li>
+  <li>任务牌库 &mdash; 待完成的任务卡牌。</li>
+  <li>野心牌库 &mdash; 待实现的野心。</li>
+  <li>跳蚤市场牌库 &mdash; 可购买的卡牌：
+    <ul>
+      <li>建筑牌库 &mdash; 建筑卡牌。</li>
+      <li>奇珍牌库 &mdash; 雇工、杂物、资源出售和建筑升级。</li>
+    </ul>
+  </li>
+  <li>杂物牌库 &mdash; 可获取或购买的卡牌。</li>
+  <li>竞技场牌库 &mdash; 在竞技场决斗的对手。</li>
+</ul>
+<h3>卡牌结构</h3>
+<p>每张牌包含以下信息（区域与原版一致）：</p>
+<ul>
+  <li><b>牌库类型</b> &mdash; 左上角图标。</li>
+  <li><b>公开性</b> &mdash; 卡牌是大声朗读还是保密。</li>
+  <li><b>名称</b></li>
+  <li><b>风味文本</b></li>
+  <li><b>卡牌激活</b> &mdash; 何时可以打出（立即 / 你的回合中 / 任意时刻）。</li>
+  <li><b>需求 / 费用</b> &mdash; 左侧：打出所需的基础资源或鱼。无图标表示无费用。</li>
+  <li><b>效果</b> &mdash; 底部区域。部分卡牌有多种效果，部分需要命运骰决定结算哪个效果。</li>
+  <li><b>奖励</b> &mdash; 右侧：威望、攻击或防御加成，通常带心情效果。</li>
+  <li><b>雇工槽</b> &mdash; 锤子图标 &mdash; 部分卡牌（杂物、雇工、起始和冒险）带有特殊激活图标。</li>
+  <li><b>心情</b> &mdash; 右上角图标，用于移动心情标记。</li>
+</ul>
+<p>同样的奖励信息也可能出现在卡牌效果中。</p>
+<h3>猫咪（玩家）卡</h3>
+<p>每位玩家拥有一张猫咪卡，代表其操控的猫。猫咪卡只在颜色、插画、起始基础资源和特定的采集加成（特殊能力）上有差异。</p>
+<p>卡牌分两面 &mdash; 年幼的猫与年长的猫 &mdash; 分别显示移动力、基础攻击力、基础防御力和猫的等级。</p>
+<h3>奇珍卡（示例）</h3>
+<p>奇珍牌库包含但不限于：</p>
+<ul>
+  <li><b>杂物盒</b> &mdash; 购买后立即弃掉，从杂物牌库抽 1 张牌，不要展示给任何人。</li>
+  <li><b>出售</b> &mdash; 购买出售卡后，立即用它换取所列的基础资源。</li>
+</ul>
+<h3>骰子</h3>
+<p>游戏包含 4 种骰子，用于不同的场景：</p>
+<ul>
+  <li><b>行动骰</b>（值 1&ndash;3）&mdash; 用于执行行动和决定防御修正。</li>
+  <li><b>采集骰</b>（K12）&mdash; 仅在采集行动后投掷，触发额外效果。</li>
+  <li><b>命运骰</b>（值 1&ndash;3）&mdash; 用于战斗及决定随机卡牌效果。</li>
+  <li><b>奖励骰</b>（K12）&mdash; 在战胜另一玩家后投出。授予威望、成长点或战败猫的战利品。</li>
+</ul>
+<h3>地块与指示物</h3>
+<p>游戏图板由六边形地块组成。它们允许在行走时执行不同活动或影响移动。</p>
+<p>普通地块：山、青山、火焰、熔岩、冻湖、渔场地块、基础资源地块、跳蚤市场 / 黑市 / 港湾、鼠田、竞技场、大砂坑、传送门、后院、森林、危险沼泽。</p>
+<p>普通指示物：老鼠指示物（面值为 1，可当作任意基础资源、重投或 +1 攻击/防御），鱼指示物（面值 1 和 3，用作货币，在交易和某些行动中消耗，或吃掉以获得额外移动），基础资源指示物（面值 1 和 3，用于建造）。</p>
+<p>特殊地块：</p>
+<ul>
+  <li><b>山</b> &mdash; 无法跨越。完成"挖掘隧道"任务后可被替换 &mdash; 替换后可跨越。</li>
+  <li><b>火焰</b> &mdash; 放在任意地块上（后院除外）。该地块在本季节结束前变为无效。</li>
+  <li><b>熔岩</b> &mdash; 放在与山相邻的地块上（后院除外）。该地块永久毁坏。离开时失去 1 点移动力。</li>
+  <li><b>渔场地块</b> &mdash; 可在此捕鱼。</li>
+  <li><b>基础资源地块</b> &mdash; 可在此采集。</li>
+  <li><b>港湾 / 黑市 / 跳蚤市场</b> &mdash; 在此获得交易折扣。</li>
+  <li><b>鼠田</b> &mdash; 可在此狩猎。</li>
+  <li><b>竞技场</b> &mdash; 可在此决斗。</li>
+  <li><b>大砂坑</b> &mdash; 可在此挖掘或筛沙。</li>
+  <li><b>传送门</b> &mdash; 可在传送门之间传送。传送不消耗移动力。</li>
+  <li><b>后院</b> &mdash; 你的地盘。除非有卡牌效果允许，否则不会被攻击。混乱世界变体下，游戏从这里开始。</li>
+  <li><b>森林</b> &mdash; 无效果，除非你在冒险变体下使用了森林指示物。</li>
+  <li><b>危险沼泽</b> &mdash; 进入时失去 1 点傲气。</li>
+</ul>
+<h3>森林指示物（冒险变体）</h3>
+<p>翻开时，指示物分为：正面、负面或未知。效果见任务卡和地块上的说明。</p>
+<h3>强化指示物</h3>
+<p>杂物、成长、重投、+2 移动、+1 攻击或防御加成。</p>
+<h3>特殊指示物</h3>
+<ul>
+  <li><b>隧道</b> &mdash; 抽到秘密隧道卡后，把此指示物放在两块选定的地块上。它们形成一条所有玩家都能使用的通道。其作用类似传送门，但仅在所选两块地块之间有效。</li>
+  <li><b>桥</b> &mdash; 完成任务"修桥"后，把此指示物放在两块选定的地块上。它们形成一条所有玩家都能使用的通道。其作用类似传送门，但仅在所选两块地块之间有效。</li>
+  <li><b>捕猫</b> &mdash; 抽到捕猫卡后，把此指示物放在所选玩家的米宝下方。</li>
+  <li><b>猫仙子</b> &mdash; 抽到猫仙子卡后，把此指示物放在所选的基础资源地块上。</li>
+  <li><b>蝴蝶结</b> &mdash; 抽到猫展蝴蝶结卡后，把此指示物放在所选玩家的米宝下方。</li>
+  <li><b>移动指示物</b> &mdash; 用来获得额外移动力。</li>
+  <li><b>攻击指示物</b> &mdash; 为自己或其他玩家提供 +1 攻击加成。</li>
+  <li><b>防御指示物</b> &mdash; 为自己或其他玩家提供 +1 防御加成。</li>
+</ul>
+<h3>技能（成长树）</h3>
+<p>随着你在成长树上的推进，可以解锁提供永久加成和一次性奖励的技能：</p>
+<ul>
+  <li>利爪 &mdash; 被动技能。永久获得 +1 攻击加成。</li>
+  <li>好奇的鼻子、装甲皮毛、迅捷之爪、胡须声纳、鹰眼 &mdash; 采集 / 防御加成。</li>
+  <li>河狸交易、蚕茧关怀、修桥、垃圾陷阱、建造木筏、挖掘隧道、雪崩!!!、种植猫薄荷、撕毁条约 &mdash; 翻开对应谷地生活板块的任务。</li>
+</ul>
+<p>每项被动技能只能解锁一次。一次性奖励可以领取两次（每个标记一次），长大除外。</p>
+<h3>长大</h3>
+<p>当标记到达"长大"槽位时，把猫咪卡翻到年长面。从此时起使用升级版。把你的小猫咪米宝换成大猫咪米宝。</p>
+<h3>收成指示物</h3>
+<p>在收成阶段或筛沙行动中抽取指示物。可能包括：</p>
+<ul>
+  <li>基础资源。面值 1、2 和 3。</li>
+  <li>威望。</li>
+  <li>老鼠。</li>
+  <li>强化指示物：杂物、成长、重投、+2 移动、+1 攻击或防御加成。</li>
+</ul>
+<p>所有收成指示物背面相同，因此你可以保密或虚张声势。</p>
+
+  
+  
+    <figure>
+      <img src="Catvale_Rules_images/page_30.jpg" alt="规则书第 30 页">
+      <figcaption>规则书 p.&nbsp;30</figcaption>
+    </figure>
+</section>
+<section id="credits">
+  <h2 class="sec" id="credits">制作名单</h2>
+  
+<div class="credits">
+<p><b>游戏设计：</b>Łukasz Berdowski</p>
+<p><b>插画：</b>Natalia Albecka-Eikmann</p>
+<p><b>美术与叙事：</b>Łukasz Berdowski</p>
+<p><b>编辑与校对：</b>Anna Żbikowska</p>
+<p><b>画师：</b>Izabela Berdowska 与 Kwadart 画廊学员</p>
+<p><b>出版方：</b>FUDICE.COM / CATVALEGAME.COM</p>
+<p><i>谨以此作纪念 Furia——她的顽皮灵魂启发了整个 Catvale 世界。</i></p>
+</div>
+<p style="text-align:center; font-size:14px; color:var(--ink-soft); margin-top:14px;">Catvale 玩得开心 :)</p>
+
+  
+  
+    <figure>
+      <img src="Catvale_Rules_images/page_03.jpg" alt="规则书第 3 页">
+      <figcaption>规则书 p.&nbsp;3</figcaption>
+    </figure>
+</section>
+    <footer>
+      中文本地化版基于 <i>Catvale</i> 英文规则书 v22（2026 年 6 月），并参考波兰文版 v23 校对。原作者 Łukasz Berdowski。
+    </footer>
+  </main>
+</div>
+</body>
+</html>
