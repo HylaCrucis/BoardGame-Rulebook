@@ -1,15 +1,33 @@
-# ===== 排除：备份 / 临时脚本 / 中间原料（不进仓库） =====
+# ===== 排除：网页显示必须的内容以外（本地保留参考） =====
 
-# 各类就地备份（Medicus / Dirt 等的 .bak_*）
+# 1. 各类就地备份（Medicus / Dirt / Stubbornmules 等的 .bak_*）
 *.bak
 *.bak_*
 
-# 临时质检 / 整理脚本（_medicus_*.py、_dirt_*.py …）
+# 2. 临时质检 / 整理脚本（_medicus_*.py、_dirt_*.py …）
 _*.py
+_list_*.txt
 
-# 临时导出文本与 OCR 原文（_dirt_pages.txt、_medicus_body.txt、*_src.txt …）
+# 3. 临时导出文本 / OCR 原文 / 源文本（_dirt_pages.txt、_medicus_body.txt、*_Rules_src.txt …）
 _*.txt
 *_src.txt
 
-# 旧渲染归档（零填充旧图、临时归档目录）
+# 4. 旧渲染归档（零填充旧图、临时归档目录）
 **/_archive/
+
+# 5. 逻辑校对发现 / 校验报告（已沉淀进 _CN.html 本身）
+*_logic_findings.md
+*_full_check.md
+*_logic_check.md
+small_pg3_logic_findings.md
+
+# 6. 临时 HTML 草稿
+*.html.tmp
+
+# 7. 英文原文版（仅同步中文成品，英文版不上）
+PragueUnseen_Rules.html
+
+# 8. 术语表（本地工作用，不上 github；保留在本文件夹作参考）
+Medicus_术语填表.html
+*术语表.md
+*_术语填表.html
