@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>《Baba Is You（巴巴是你）》中文规则书（Kickstarter v14）</title>
+<style>
+  :root{
+    --bone:#fbf4e7; --bone2:#f1e6cf; --ink:#2b2519; --ink-soft:#6b5a44;
+    --orange:#d9682a; --orange-d:#a14d18; --orange-l:#e88e54;
+    --accent:#e8b04c; --accent-d:#b88a30;
+    --green:#3f7d52; --green-l:#e4f0e7;
+    --red:#a8392f; --red-l:#f6e3e0;
+    --line:#e1d3b8; --card:#fffdf7;
+    --keke:#f29038; --baba:#ffffff; --flag:#5fb5d6; --rock:#8a7a55;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bone); color:var(--ink);
+    font-family:"PingFang SC","Microsoft YaHei","Noto Sans SC",
+                "Iowan Old Style","Palatino Linotype",Georgia,serif;
+    line-height:1.85; font-size:16.5px;
+  }
+  .wrap{display:flex; align-items:flex-start; max-width:1180px; margin:0 auto;}
+  nav{
+    position:sticky; top:0; align-self:flex-start;
+    width:260px; flex:0 0 260px; height:100vh; overflow-y:auto;
+    background:var(--orange-d); color:#fbf4e7; padding:22px 16px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;
+  }
+  nav h2{font-size:13px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--orange-l); margin:0 0 12px;}
+  nav ol{list-style:none; margin:0; padding:0;}
+  nav a{display:block; color:#fbf4e7; text-decoration:none; font-size:14px;
+    padding:7px 10px; border-radius:7px;}
+  nav a:hover{background:var(--orange);}
+  main{flex:1 1 auto; min-width:0; padding:0 40px 80px;}
+  .cover{
+    background:linear-gradient(160deg,var(--orange-d),var(--orange) 55%,var(--accent));
+    color:#fbf4e7; padding:60px 40px; border-radius:0 0 18px 18px;
+    margin-bottom:36px; text-align:center;
+    box-shadow:0 10px 30px rgba(161,77,24,.25);
+  }
+  .cover h1{font-size:38px; margin:0 0 8px;}
+  .cover .sub{font-size:16px; opacity:.92; font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .cover .tag{display:inline-block; margin-top:16px; padding:6px 16px;
+    border:1px solid rgba(255,255,255,.4); border-radius:20px; font-size:14px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; letter-spacing:.02em;}
+  .cover .meta{margin-top:10px; font-size:13px; opacity:.8;}
+
+  section{padding:14px 0 8px; border-bottom:1px solid var(--line); scroll-margin-top:18px;}
+  h2.sec{font-size:28px; color:var(--orange-d); margin:18px 0 6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  h2.sec .num{color:var(--accent-d); font-weight:700; margin-right:10px;}
+  h3{font-size:20px; color:var(--orange); margin:24px 0 6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  h4{font-size:17px; color:var(--ink); margin:18px 0 4px; font-weight:700;}
+  p{margin:10px 0;}
+  ul,ol{margin:10px 0 10px 4px; padding-left:22px;}
+  li{margin:5px 0;}
+  .lead{font-size:18px; color:var(--ink-soft);}
+  .comp-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:16px 0;}
+  .comp{border:1px solid var(--line); background:var(--card); border-radius:12px;
+    padding:14px 16px; box-shadow:0 2px 6px rgba(0,0,0,.04);}
+  .comp b{color:var(--orange-d);}
+  .comp .q{float:right; font-weight:700; color:var(--accent-d);
+    font-family:"Trebuchet MS",Arial,sans-serif;}
+  .callout{border-left:5px solid var(--accent); background:var(--bone2);
+    padding:12px 18px; margin:16px 0; border-radius:0 10px 10px 0;}
+  .callout.tip{border-color:var(--green); background:var(--green-l);}
+  .callout.tip b{color:var(--green);}
+  .callout.warn{border-color:var(--red); background:var(--red-l);}
+  .callout.warn b{color:var(--red);}
+  .steps{counter-reset:step; list-style:none; padding-left:0; margin:14px 0;}
+  .steps li{position:relative; padding:10px 14px 10px 52px; margin:8px 0;
+    background:var(--card); border:1px solid var(--line); border-radius:10px;}
+  .steps li::before{counter-increment:step; content:counter(step);
+    position:absolute; left:12px; top:50%; transform:translateY(-50%);
+    width:28px; height:28px; background:var(--orange); color:#fff;
+    border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-weight:700; font-family:Arial,sans-serif;}
+  .keyterm{font-weight:700; color:var(--orange-d);}
+  .ex{font-size:15px; color:var(--ink-soft); border-top:1px dashed var(--line);
+    margin-top:8px; padding-top:8px;}
+  .ex::before{content:"例："; color:var(--orange); font-weight:700;}
+
+  .iconrow{display:flex; gap:14px; align-items:center; flex-wrap:wrap;
+    background:var(--card); border:1px solid var(--line); border-radius:10px;
+    padding:10px 14px; margin:12px 0;}
+  .iconrow .chip{display:inline-flex; align-items:center; gap:6px;
+    background:#fff; padding:4px 10px; border-radius:16px;
+    border:1px solid var(--line); font-size:14px;}
+  .swatch{display:inline-block; width:18px; height:18px; border-radius:50%;
+    border:2px solid #fff; box-shadow:0 0 0 1px var(--line);}
+
+  table.terms{width:100%; border-collapse:collapse; margin:14px 0; font-size:14.5px;}
+  table.terms th, table.terms td{border:1px solid var(--line); padding:9px 12px;
+    vertical-align:top; text-align:left;}
+  table.terms th{background:var(--bone2); color:var(--orange-d); font-weight:700;}
+
+  figure{margin:18px 0; text-align:center;}
+  figure img{max-width:100%; border:1px solid var(--line); border-radius:12px;
+    box-shadow:0 4px 14px rgba(0,0,0,.08); background:#fff;}
+  figcaption{font-size:13px; color:var(--ink-soft); margin-top:6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .two{display:grid; grid-template-columns:1fr 1fr; gap:16px; align-items:start;}
+  @media(max-width:900px){
+    .wrap{flex-direction:column;}
+    nav{position:static; width:100%; height:auto; flex-basis:auto;}
+    main{padding:0 18px 60px;}
+    .comp-grid,.two{grid-template-columns:1fr;}
+  }
+  footer{margin-top:40px; font-size:13px; color:var(--ink-soft);
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; text-align:center;}
+  .credits{background:var(--bone2); border:1px solid var(--line); border-radius:12px;
+    padding:16px 20px; margin-top:14px; text-align:left;}
+  .credits b{color:var(--orange-d);}
+  .pill{display:inline-block; background:var(--bone2); color:var(--orange-d);
+    padding:1px 10px; border-radius:14px; font-size:12.5px; font-weight:600;
+    margin:0 3px; border:1px solid var(--line);}
+  @media print{
+    body{background:#fff; font-size:12.5px;}
+    nav{display:none;}
+    .wrap, main{display:block; max-width:none; padding:0 18px;}
+    section{break-inside:avoid;}
+    .cover{-webkit-print-color-adjust:exact; print-color-adjust:exact;}
+  }
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <h1>Baba Is You（巴巴是你）</h1>
+  <div class="sub">一款 Baba 对战 Keke 的策略游戏 · 规则书</div>
+  <div class="tag">2 人 &nbsp;|&nbsp; 45 分钟 &nbsp;|&nbsp; 12 岁以上</div>
+  <div class="meta">设计：Hempuli / Arvi Teikari &amp; Peter C. Hayward &nbsp;·&nbsp; 出版：Bitewing Games &nbsp;·&nbsp; Kickstarter 版本 v14</div>
+</header>
+
+<div class="wrap">
+  <nav>
+    <h2>目录</h2>
+    <ol>
+      <li><a href="#overview">概览与游戏概念</a></li>
+      <li><a href="#components">游戏组件</a></li>
+      <li><a href="#firsttime">第一次玩</a></li>
+      <li><a href="#setup">游戏准备</a></li>
+      <li><a href="#play">游戏玩法</a></li>
+      <li><a href="#rules">形成规则</a></li>
+      <li><a href="#win">胜利条件与提示</a></li>
+      <li><a href="#endgame">挑战与终局</a></li>
+      <li><a href="#scenarios">场景与世界</a></li>
+      <li><a href="#campaign">战役模式</a></li>
+      <li><a href="#glossary">词汇表（GLOSSARY）</a></li>
+      <li><a href="#credits">制作人员</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+  <section id="overview">
+    <h2 class="sec"><span class="num">1</span>概览与游戏概念</h2>
+    <p class="lead">Baba Is You: The Board Game 是一款双人正面对决的解谜对战——规则就在棋盘上，由你拼出。</p>
+    <p>每一局游戏由两个或更多<span class="keyterm">关卡（Level）</span>组合构成一个<span class="keyterm">场景（Scenario）</span>。关卡按"世界（World）"分组——我们建议你在同一局内打完一个完整的五场场景世界，但你也可以随时暂停。</p>
+    <p>游戏开始时，左侧玩家控制 <span class="keyterm">BABA</span>（棋盘上写着 "Baba is YOU"，箭头指向该玩家），右侧玩家控制 <span class="keyterm">KEKE</span>。要赢，你必须把一个<span class="keyterm">是 YOU</span>的东西移到一个<span class="keyterm">是 WIN</span>的东西上面（或反过来）。但游戏开始时，棋盘上没有任何东西是 WIN——你必须用行动来"造出"一个 WIN，再在对手之前抢先到达。</p>
+
+    <div class="callout tip">
+      <b>与 Baba Is You 电子版的差异</b>
+      <p>如果你没玩过电子版，建议先去玩一下；当然也可以跳过本节直接开局。本桌游版相对电子版做了以下调整：</p>
+      <ul>
+        <li>属性方块（如 IS YOU、IS WIN）已包含动词 "is"。</li>
+        <li>所有东西始终处于 <span class="pill">PUSH</span> 状态。</li>
+        <li>与 YOU 相邻的任意东西都可以选择性地被你 PULL。</li>
+        <li>每个回合只有一个"是 YOU"的东西可以移动。</li>
+        <li>"同时是 YOU 和 WIN" 不会自动获胜。</li>
+        <li>名词之间不会互相覆盖（如 ROCK 不会变成 FLAG）。</li>
+      </ul>
+    </div>
+
+    <h3>1.1 图例</h3>
+    <div class="iconrow">
+      <span class="chip"><span class="swatch" style="background:#fff"></span>BABA</span>
+      <span class="chip"><span class="swatch" style="background:var(--keke)"></span>KEKE</span>
+      <span class="chip"><span class="swatch" style="background:var(--flag)"></span>旗子</span>
+      <span class="chip"><span class="swatch" style="background:var(--rock)"></span>石头</span>
+      <span class="chip">○ 名词方块（圆形）</span>
+      <span class="chip">◇ 连接词方块（菱形）</span>
+      <span class="chip">□ 属性方块（方形）</span>
+    </div>
+
+    <figure>
+      <img src="BiY_Rules_images/page_05.jpg" alt="概念与玩法">
+      <figcaption>概念与移动/推/拉 · 原书第 5 页</figcaption>
+    </figure>
+  </section>
+
+  <section id="components">
+    <h2 class="sec"><span class="num">2</span>游戏组件</h2>
+    <p>棋盘采用 5×5 网格。每局游戏会用到以下部分组件，其余组件会随关卡卡逐渐引入。</p>
+
+    <h3>2.1 主要组件清单</h3>
+    <div class="comp-grid">
+      <div class="comp"><b>名词方块</b><span class="q">圆形</span><br>包含 BABA、KEKE、FLAG、ROCK 等所有"实体"词汇。</div>
+      <div class="comp"><b>属性方块</b><span class="q">方形</span><br>包含 IS YOU、IS WIN、IS PUSH、IS PULL、IS FAST 等行为定义。</div>
+      <div class="comp"><b>连接词方块</b><span class="q">菱形</span><br>包含 AND、OR 等连接规则子句。</div>
+      <div class="comp"><b>关卡卡与关卡方块</b><span class="q">A</span><br>每个关卡配一张关卡卡 + 对应关卡方块（绘制在关卡卡上）。</div>
+      <div class="comp"><b>世界信封</b><span class="q">B</span><br>每个世界一个信封，内含该世界的关卡卡。<em>为避免剧透，不要打开看里面。</em></div>
+      <div class="comp"><b>关卡规则书</b><span class="q">B</span><br>独立小册子，按关卡讲解规则。<em>为避免剧透，只打开当前用的关卡页。</em></div>
+      <div class="comp"><b>石头方块</b><span class="q">2 块</span><br>开始放在棋盘两角。</div>
+      <div class="comp"><b>旗子方块</b><span class="q">1 块</span><br>开始放在棋盘正中。</div>
+      <div class="comp"><b>时钟标记</b><span class="q">2 个</span><br>每位玩家一个，用于"打三局两胜"。</div>
+      <div class="comp"><b>BadBad 标记</b><span class="q">1 个</span><br>用于标记"挑战"流程的剩余步数。</div>
+      <div class="comp"><b>场景点标记</b><span class="q">5 个</span><br>获得一个场景胜利得 1 分。</div>
+      <div class="comp"><b>世界点标记</b><span class="q">7 个</span><br>打完一个世界后归属最多场景点的玩家。</div>
+      <div class="comp"><b>BABA 模型与替代方块</b><span class="q">c</span><br>模型与替代方块二选一使用，功能相同。</div>
+      <div class="comp"><b>KEKE 模型与替代方块</b><span class="q">d</span><br>同上。</div>
+      <div class="comp"><b>棋盘</b><span class="q">E</span><br>5×5 网格。</div>
+    </div>
+
+    <div class="callout warn">
+      <b>避免剧透</b>
+      <p>首次使用某关卡之前，不要从冲压板上把对应方块取下来，也不要看冲压板另一面；只在第一次玩到该关卡时再取出。</p>
+    </div>
+
+    <figure>
+      <img src="BiY_Rules_images/page_02.jpg" alt="组件页">
+      <figcaption>组件总览 · 原书第 2 页</figcaption>
+    </figure>
+  </section>
+
+  <section id="firsttime">
+    <h2 class="sec"><span class="num">3</span>第一次玩</h2>
+    <p>第一次玩之前，请完成以下准备工作：</p>
+    <ol class="steps">
+      <li>打开 <b>WORLD 1</b> 信封，取出名为 <b>DEFAULT</b> 和 <b>WORLD 1: LEVEL 1</b> 的两张关卡卡。</li>
+      <li>同步翻到<b>关卡规则书</b>的前两页（这两个关卡的说明就在那里）。</li>
+      <li>这就是你的第一局场景所要用到的全部关卡。强烈建议新手用此场景开局；未到对应关卡之前不要看其他关卡卡。</li>
+      <li>第一次玩过的话，从两张<b>黑色冲压板</b>上把<b>所有方块</b>都取下。无需看冲压板正面，从<b>蓝色冲压板</b>上把标有 <b>WORLD 1 LEVEL 1</b> 的方块取下，然后把蓝板放回盒中（剩下的方块等你玩到对应关卡再取）。</li>
+    </ol>
+
+    <div class="callout tip">
+      <b>看 How To Play 视频</b>
+      <p>动手之前先看一段官方教学视频能极大降低上手成本。</p>
+    </div>
+
+    <figure>
+      <img src="BiY_Rules_images/page_03.jpg" alt="第一次玩">
+      <figcaption>新手教程指引 · 原书第 3 页</figcaption>
+    </figure>
+  </section>
+
+  <section id="setup">
+    <h2 class="sec"><span class="num">4</span>游戏准备</h2>
+    <ol class="steps">
+      <li>将棋盘放在桌面中央。BABA 模型放左下角，KEKE 模型放右上角；其余两角各放一块石头。方块"中央格"放旗子方块。</li>
+      <li>两位玩家并肩而坐，棋盘在中间，每对箭头（"Is You"）指向一位玩家。每位玩家拿一个<span class="keyterm">时钟标记</span>。</li>
+      <li>把本场景的关卡卡和关卡方块（关卡卡上画有对应方块）摆在棋盘旁边。具体关卡规则见<b>关卡规则书</b>。</li>
+      <li>其余标记（场景点、世界点、BadBad 标记、BABA / KEKE 替代方块）放在盒子的中央置物区，<b>不要紧贴棋盘</b>——这些不能被"放置"上棋盘。</li>
+      <li>如不喜模型，可全程用 BABA / KEKE 替代方块代替。</li>
+      <li><b>DEFAULT 关卡</b>永远参与，无论你打哪个场景：它带来两块 "IS WIN" 属性方块、1 块 ROCK 名词方块、1 块 FLAG 名词方块。</li>
+      <li>其他关卡卡通常会再加方块（如 <b>WORLD 1: LEVEL 1</b> 额外加 1 块 ROCK 和 1 块 FLAG）。</li>
+    </ol>
+
+    <figure>
+      <img src="BiY_Rules_images/page_04.jpg" alt="准备">
+      <figcaption>棋盘初始布置 · 原书第 4 页</figcaption>
+    </figure>
+  </section>
+
+  <section id="play">
+    <h2 class="sec"><span class="num">5</span>游戏玩法</h2>
+    <p>第一局由 <b>BABA 玩家先手</b>。之后的每局由上一局<b>输家</b>决定谁先手。</p>
+    <p>先手玩家在自己首回合执行 <b>1 个行动</b>。从第二回合起，每位玩家在自己的每个回合执行 <b>2 个行动</b>。每个行动从下列两种中选一个：</p>
+
+    <h3>5.1 移动（MOVE）</h3>
+    <p>将<b>任何一个是 YOU 的东西</b>向上、下、左或右移动一格。不可斜向移动。移动过程中会触发<span class="pill">PUSH</span>，并可选择性地触发<span class="pill">PULL</span>：</p>
+    <ul>
+      <li><b>PUSH（推）</b>：当你移入一个被占据的格子时，把占据该格的所有东西沿同一方向推到下一格。如果下一格已被占据或到了棋盘边缘，整个移动不合法（你不能推一个东西到非空格；不能用被推的东西继续推下一个）。<em>例外</em>：任何是 YOU 的东西可以像空格一样进入任何是 WIN 的东西所在格（反之亦然）。</li>
+      <li><b>PULL（拉）</b>：当你向某方向移出（与该方向相反）时，可把与你相邻的、被占据的那一格里的所有东西（包括对你来说算空格的东西）一起拉到你离开的格子里。</li>
+    </ul>
+
+    <div class="callout">
+      <b>重要</b>
+      <p>你可以在同一次移动中同时推与拉。任何能推的东西，在它能移动的时候都会被推。</p>
+    </div>
+
+    <div class="ex">第一回合：BABA 玩家第一个行动向上移一格。第二个行动向右移一格（必须把旗子推走），并决定顺带把 "IS WIN" 一起拉过来。</div>
+
+    <h3>5.2 放置（PLACE）</h3>
+    <p>从棋盘旁边拿一个东西（名词方块、属性方块或物体，如石头、旗子等）放到与你任一 <b>是 YOU</b> 的东西相邻（不含斜向）的<b>空格</b>里。</p>
+
+    <div class="callout warn">
+      <b>关于可放置的东西</b>
+      <p>这就是为什么不在棋盘旁摆那些没在用的关卡方块 / 场景点 / 世界点 / BadBad 标记 / BABA / KEKE 替代方块——这些东西永远不能被放置上棋盘。只有<b>当前在用的关卡卡的方块</b>，或<b>原本在棋盘上、后来被销毁的东西</b>，才能放置。一个东西一旦被放到棋盘上，除非先被销毁，否则不能再次放置。</p>
+      <p>注：放置到棋盘上的东西视为"进入"该格。</p>
+    </div>
+
+    <p>有字的方块放置方向必须与棋盘上的文字对齐：名词方块要有一支箭头指向右、一支指向下。</p>
+
+    <div class="ex">第一回合：KEKE 玩家第一个行动，从棋盘旁拿 "IS WIN" 方块放到 KEKE 下方那格。第二个行动，从棋盘外拿 "ROCK" 方块放到 KEKE 右侧那格。</div>
+
+    <div class="callout warn">
+      <b>无改变 / 逆转约束</b>
+      <p>你回合结束时棋盘必须与回合开始时不同，且不能正好变回对手回合开始时的样子——你不能拿行动"啥都不做"或"完全撤销对手的回合"。</p>
+      <p>建议全程不悔棋（除非发现刚才那一步本来就是非法的）！游戏鼓励"先动手再说"，意外和搞笑场面都是这款桌游的乐趣所在。</p>
+    </div>
+
+    <figure>
+      <img src="BiY_Rules_images/page_06.jpg" alt="放置">
+      <figcaption>PLACE 行动 · 原书第 6 页</figcaption>
+    </figure>
+  </section>
+
+  <section id="rules">
+    <h2 class="sec"><span class="num">6</span>形成规则</h2>
+    <p>当一个名词方块上的箭头 <code>→</code> 指向相邻的属性方块（如 <code>FLAG IS WIN</code>）时，它们构成一条<span class="keyterm">规则（Rule）</span>。只要该规则存在，所有被该名词方块描述的物体就获得这条属性。</p>
+
+    <div class="ex">如果 <code>ROCK IS WIN</code>，你把任何"是 YOU"的东西移到任意一块石头上，就赢了！</div>
+
+    <h3>6.1 一条规则不成立的几种情况</h3>
+    <div class="ex">BABA ROCK 不构成规则——名词方块必须指向相邻的属性方块才形成规则。若 BABA 玩家想控制石头，必须把 ROCK 直接放在棋盘上 "IS YOU" 的正上方。</div>
+
+    <h3>6.2 与板印规则的交互</h3>
+    <div class="ex">这个名词方块与板印属性方块构成规则：<code>ROCK IS YOU</code>。于是 KEKE 玩家（坐在右边的人）现在有三样东西可以移动和放置：KEKE，以及任意一块石头。</div>
+
+    <h3>6.3 多重规则</h3>
+    <p>一个名词方块可以同时指向两个属性方块；一个属性方块可以同时被两个名词方块指向。</p>
+    <div class="ex">图一展示了两个规则：<code>KEKE IS YOU</code>（右玩家）和 <code>KEKE IS FAST</code>。图二展示了三条规则：<code>ROCK IS WIN</code>、<code>FLAG IS WIN</code> 和 <code>FLAG IS YOU</code>（右玩家）。</div>
+
+    <h3>6.4 规则的撤销</h3>
+    <p>如果一个方块被移动或移走，使它不再构成 <code>NOUN PROPERTY</code> 规则，则该名词方块所描述的物体也就不再拥有该属性。</p>
+    <div class="ex">BABA 玩家把 "IS WIN" 从 BABA 旁边拉走。规则 <code>BABA IS WIN</code> 已经被撤销。</div>
+
+    <h3>6.5 同时触发</h3>
+    <p>如果多个交互会同时触发，按"尽可能同时"的原则结算。如果实在无法同时结算，由<b>最近一个行动的玩家</b>选择顺序。</p>
+
+    <div class="callout">
+      <b>永久规则</b>
+      <p>有些关卡自带永远无法撤销的永久规则——它们在关卡卡上以"被墙围起"的样式呈现。只要该关卡卡在用，它的永久规则就生效。</p>
+    </div>
+
+    <figure>
+      <img src="BiY_Rules_images/page_07.jpg" alt="形成规则">
+      <figcaption>规则的构成 · 原书第 7 页</figcaption>
+    </figure>
+  </section>
+
+  <section id="win">
+    <h2 class="sec"><span class="num">7</span>胜利条件与提示</h2>
+
+    <h3>7.1 胜利条件</h3>
+    <p>当一个"是 YOU"的东西进入一个"是 WIN"的东西所在格（或反过来），把它当作空格处理（把两个东西叠放）。</p>
+    <p>如果一个"是 YOU"的东西和任何一个"是 WIN"的东西共占一格，你就赢了。</p>
+    <p>如果双方都和"是 WIN"的东西共占一格，由<b>最近一个行动的玩家</b>获胜。</p>
+
+    <div class="callout warn">
+      <b>YOU 与 WIN 同体不自动获胜</b>
+      <p>如果一个东西同时是 YOU 又是 WIN，并不会自动获胜。还需要另一个"是 YOU"的东西和它共占一格。</p>
+    </div>
+
+    <div class="ex">如果 <code>BABA IS YOU</code>, <code>ROCK IS YOU</code>, <code>ROCK IS WIN</code>，并不会自动获胜。必须让 BABA 和某块石头共占一格，或让两块石头共占一格，才算赢。</div>
+
+    <h3>7.2 提示与策略</h3>
+    <div class="callout tip">
+      <ul>
+        <li>控制多个东西（<code>FLAG IS YOU</code>）通常比只控制一个更占优势。</li>
+        <li>给"是 YOU"的东西加上强力属性（如 <code>BABA IS FAST</code>）也是优势。</li>
+        <li>拆解对手已建好的规则也很有效——比如当对手更靠近石头时，把他搭好的 <code>ROCK IS WIN</code> 推散或拉散。</li>
+      </ul>
+    </div>
+
+    <figure>
+      <img src="BiY_Rules_images/page_08.jpg" alt="胜利条件">
+      <figcaption>胜利条件与永久规则 · 原书第 8 页</figcaption>
+    </figure>
+  </section>
+
+  <section id="endgame">
+    <h2 class="sec"><span class="num">8</span>挑战与终局</h2>
+
+    <h3>8.1 挑战（CHALLENGE）</h3>
+    <p>如果一方认为当前局面已<b>无解</b>，可以跳过本回合（一个行动都不执行）来<b>挑战</b>对手。对手随后获得 <b>5 个不间断的回合（共 10 个行动）</b>，试图获胜。如果他能，你输；如果他不能，挑战方获胜。</p>
+    <p>挑战方把 <b>BadBad 标记</b>放在自己棋盘上印的 BABA 或 KEKE 名词圆圈上。对手每执行一个行动（MOVE 或 PLACE），就沿顺时针把标记挪到下一棵树上——一共 10 棵树正好对应 10 个行动。</p>
+
+    <h3>8.2 终局（GAME END）</h3>
+    <p>游戏以三种方式之一结束：</p>
+    <ol>
+      <li>当一个"是 YOU"的东西和一个"是 WIN"的东西共占一格。</li>
+      <li>当挑战被对手兑现或被对手拒兑现。</li>
+      <li>当一方在自己回合内凑不出 2 个行动（对方胜）。</li>
+    </ol>
+    <p>注：即使自己凑不出行动，仍可以选择挑战对手，希望对手在自己回合内也凑不出 2 个行动。</p>
+
+    <h3>8.3 场景胜利与世界点</h3>
+    <p>每个场景默认只打一局，除非有玩家决定<b>消耗自己的时钟标记</b>把该场景升级为"三局两胜"——每位玩家在一个世界里只能用一次。</p>
+    <p>场景胜者（无论一局还是三局两胜）获得 <b>1 个场景点</b>。</p>
+
+    <figure>
+      <img src="BiY_Rules_images/page_09.jpg" alt="挑战与终局">
+      <figcaption>挑战与终局 · 原书第 9 页</figcaption>
+    </figure>
+  </section>
+
+  <section id="scenarios">
+    <h2 class="sec"><span class="num">9</span>场景与世界</h2>
+    <p>打完第一局场景（<b>DEFAULT + MORE ROCK, MORE FLAG</b>）后，从 <b>WORLD 1</b> 信封里抽出下一关（<b>WORLD 1: LEVEL 2</b>），从冲压板上取出对应方块（不用看另一面），翻到关卡规则书的对应页。</p>
+    <p>按<b>准备（第 4 节）</b>重置棋盘，把这一关卡与 <b>DEFAULT + WORLD 1: LEVEL 1</b> 一起加入，本场景使用全部三张关卡卡。</p>
+    <p>（提示：现在由上一局的<b>输家</b>决定谁先手。）</p>
+    <p>每打完一个场景，<b>输家</b>从两个非 DEFAULT 关卡里选一个留下，另一个（连同对应方块）放回信封底部。然后从信封里抽出新关卡卡，准备下一场景。</p>
+
+    <figure>
+      <img src="BiY_Rules_images/page_10.jpg" alt="场景与世界">
+      <figcaption>七世界战役与单世界冒险 · 原书第 10 页</figcaption>
+    </figure>
+  </section>
+
+  <section id="campaign">
+    <h2 class="sec"><span class="num">10</span>战役模式</h2>
+
+    <h3>10.1 七世界战役（SEVEN-WORLD CAMPAIGN）</h3>
+    <p>关卡被划分为 <b>7 个世界</b>，每个世界里打 <b>5 个场景</b>（每个场景由若干关卡组合而成）。遇到新关卡时，<b>不要怕先演示</b>它的例子——这对新人内化新规则尤其有用。</p>
+    <p>你可以和同一个人打完所有 7 个世界，也可以每个世界和不同人玩。</p>
+    <p>每个世界结束时，<b>场景点最多</b>的玩家获得 <b>1 个世界点</b>。然后双方把所有场景点放回供应区，若有消耗的时钟标记也可领回。把场景点 / 世界点放在自己模型旁的置物区。</p>
+    <p>每个世界的<b>最后一局的关卡</b>会带入下一世界的<b>第一局</b>。跨会话时请把上一局关卡卡放在下一世界信封的<b>最前面</b>。</p>
+    <p>打完第七世界后，<b>世界点最多</b>的玩家获胜。</p>
+
+    <h3>10.2 单世界冒险（SINGLE-WORLD ADVENTURE）</h3>
+    <ul>
+      <li><b>如果某一方是首次玩</b>：先打新手教学场景（DEFAULT + WORLD 1: LEVEL 1，不计分）。然后加你所选世界的第一关卡开始第一局正式场景。2~5 场景按常规替换关卡。</li>
+      <li><b>如果双方都玩过</b>：任选一个关卡与所选世界第一关、DEFAULT 关卡组合开局，然后按常规替换关卡打 2~5 场景。</li>
+    </ul>
+    <p>打完该世界后，<b>场景点最多</b>的玩家获胜该世界。</p>
+
+    <h3>10.3 自创场景（BABA MAKE SCENARIO）</h3>
+    <p>打完所有 7 个世界后，你可以自由挑两个关卡（再加 DEFAULT）打一个独立场景，或者把全部关卡卡洗混后随机抽两个关卡。</p>
+    <p>注：如果关卡卡写 "+1 Level"，按同样方式再加一张关卡卡（自选或随机）。</p>
+    <p>你也可以自创一个世界：选 5 个关卡卡排成 5 个场景，然后开打！<b>怎么玩都行——BABA IS YOU！</b></p>
+
+    <div class="callout tip">
+      <b>新手提示</b>
+      <p>WORLD 6 和 WORLD 7 比较复杂，不建议新玩家一上来就挑战。</p>
+    </div>
+  </section>
+
+  <section id="glossary">
+    <h2 class="sec"><span class="num">11</span>词汇表（GLOSSARY）</h2>
+    <table class="terms">
+      <thead><tr><th style="width:24%">术语</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td><b>BABA</b></td><td>白色四脚角色。</td></tr>
+        <tr><td><b>KEKE</b></td><td>橙色双脚角色。</td></tr>
+        <tr><td><b>FLAG</b></td><td>旗子方块，初始放在棋盘中央。</td></tr>
+        <tr><td><b>ROCK</b></td><td>两块石头方块，初始放在棋盘两角。</td></tr>
+        <tr><td><b>相邻（ADJACENT）</b></td><td>在四个正方向（左 / 右 / 上 / 下）之一相邻。不含斜向（除非另作说明）。</td></tr>
+        <tr><td><b>销毁（DESTROY）</b></td><td>当某物被销毁，把它移到棋盘旁边。它稍后可用 PLACE 行动重新放回。</td></tr>
+        <tr><td><b>进入（ENTER）</b></td><td>任何被放入或移入（即使其移动还会继续）的东西都视为进入该格。</td></tr>
+        <tr><td><b>最终行动 vs 回合结束</b></td><td>先结算你的最终行动及其效果，再结算任何"回合结束"效果。这是两步，不是同时。</td></tr>
+        <tr><td><b>PUSH（推）</b></td><td>当你移入一个被占据的格时，把占据该格的所有东西沿同一方向推到下一格。若下一格已被占据或到了棋盘边缘，整个移动不合法。是 YOU 的东西永远不能推对你而言算空格的东西——你们共享该格。</td></tr>
+        <tr><td><b>PULL（拉）</b></td><td>当你向某方向移出时，把与该方向相反方向的相邻格里的所有东西（包括对你而言算空格的东西）一起拉到你刚离开的格子里。</td></tr>
+      </tbody>
+    </table>
+
+    <figure>
+      <img src="BiY_Rules_images/page_11.jpg" alt="词汇表">
+      <figcaption>词汇表 · 原书第 11 页</figcaption>
+    </figure>
+  </section>
+
+  <section id="credits">
+    <h2 class="sec">制作人员</h2>
+    <figure>
+      <img src="BiY_Rules_images/page_01.jpg" alt="原书封面">
+      <figcaption>原书封面 · 原书第 1 页</figcaption>
+    </figure>
+    <div class="credits">
+      <p><b>游戏设计：</b>Hempuli &amp; Peter C. Hayward</p>
+      <p><b>美术：</b>Hempuli</p>
+      <p><b>平面设计：</b>Anca Gavril</p>
+      <p><b>编辑：</b>Scott Darrington</p>
+      <p><b>出版：</b>Nick Murray &amp; Kyle Spackman</p>
+      <p><b>特别致谢：</b>Taylor Castaneda, Rocco Privitera, Alyssa Totaro, Haleigh Mooney，以及所有测试玩家！</p>
+      <p style="margin-top:14px;">© Hempuli, 2027. All rights reserved.<br>
+        © Peter C. Hayward, 2027. All rights reserved.<br>
+        © Bitewing Games, 2027. All rights reserved.</p>
+      <p><b>订阅更新：</b>bitewinggames.com/subscribe</p>
+      <p><b>客服支持：</b>help.allplay.com</p>
+      <p><b>基于电子游戏 Baba Is You，详情见：</b>hempuli.com/baba</p>
+    </div>
+
+    <div class="callout">
+      <b>场景玩法有疑问？</b>
+      <ul>
+        <li>查看当前场景所用关卡的关卡规则书；</li>
+        <li>查看本规则书的词汇表（上节）；</li>
+        <li>查看本规则书的规则正文（上节）。</li>
+      </ul>
+      <p>若仍有疑问，请访问官方 FAQ 论坛。</p>
+    </div>
+
+    <figure>
+      <img src="BiY_Rules_images/page_12.jpg" alt="制作人员">
+      <figcaption>Credits · 原书第 12 页</figcaption>
+    </figure>
+  </section>
+
+  <footer>
+    <p>《Baba Is You（巴巴是你）》中文规则书 · 重排/译自 BiY Kickstarter Rulebook v14（12 页）</p>
+    <p>基于 Wyrmgold 的现有模板 · 生成于 WorkBuddy · 可在浏览器直接阅读，或"打印 → 另存为 PDF"保存</p>
+  </footer>
+  </main>
+</div>
+</body>
+</html>
