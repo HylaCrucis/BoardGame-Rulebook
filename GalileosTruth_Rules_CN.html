@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Galileo's Truth — 伽利略的真理 · 游戏规则</title>
+<style>
+  /* =========================================================
+     Galileo 主题色（A 版）
+     星空深蓝紫 #1a1535 / #2d2452 + 学术金 #d4a849 +
+     宗教裁判暗红 #8b2c2c + 羊皮纸米白 #f5f0e1
+     与 B 版「蜂蜜金 + 灰蓝」形成明显冷暖对比，便于交叉比对。
+  ========================================================= */
+  :root{
+    --bone:#f5f0e1;          /* 羊皮纸米白底 */
+    --bone2:#ebe5d2;         /* 次级底 */
+    --ink:#1a1d2e;           /* 星空深蓝紫黑 */
+    --ink-soft:#5a5d7e;
+    --purple:#2d2452;        /* 星空深蓝紫 */
+    --purple-d:#1a1535;      /* 更深，导航/封面 */
+    --purple-l:#5d4d8a;      /* 浅蓝紫 */
+    --accent:#d4a849;        /* 学术金 */
+    --accent-d:#a87f2c;      /* 深金 */
+    --green:#3f7d52;         /* tip 绿 */
+    --green-l:#e4f0e7;
+    --red:#8b2c2c;           /* 宗教裁判暗红 */
+    --red-l:#f5e0e0;
+    --line:#d8cfbd;
+    --card:#fffdf8;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bone); color:var(--ink);
+    font-family:"Songti SC","Noto Serif SC","Source Han Serif SC",STSong,
+                "Iowan Old Style","Palatino Linotype",Georgia,serif;
+    line-height:1.8; font-size:17px;
+  }
+  .wrap{display:flex; align-items:flex-start; max-width:1180px; margin:0 auto;}
+  nav{
+    position:sticky; top:0; align-self:flex-start;
+    width:248px; flex:0 0 248px; height:100vh; overflow-y:auto;
+    background:linear-gradient(180deg,var(--purple-d),var(--purple) 80%);
+    color:#e8e6f0; padding:22px 16px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;
+    border-right:2px solid var(--accent);
+  }
+  nav h2{font-size:13px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--accent); margin:0 0 12px;}
+  nav ol{list-style:none; margin:0; padding:0; counter-reset:navc;}
+  nav li{counter-increment:navc;}
+  nav a{display:block; color:#e8e6f0; text-decoration:none; font-size:14px;
+    padding:7px 10px; border-radius:7px; border-left:3px solid transparent;}
+  nav a:hover{background:var(--purple-l); border-left-color:var(--accent);}
+  nav a::before{content:counter(navc) ". "; color:var(--accent); font-weight:700;}
+  main{flex:1 1 auto; min-width:0; padding:0 40px 80px;}
+  .cover{
+    background:linear-gradient(160deg,var(--purple-d) 0%,var(--purple) 60%,#3d3270 100%);
+    color:#f5f0e1; padding:60px 40px; border-radius:0 0 18px 18px;
+    margin-bottom:36px; text-align:center;
+    box-shadow:0 10px 30px rgba(26,21,53,.35);
+    border-bottom:4px solid var(--accent);
+  }
+  .cover h1{font-size:42px; margin:0 0 8px; letter-spacing:.02em;
+    text-shadow:0 2px 6px rgba(0,0,0,.3);}
+  .cover .sub{font-size:17px; opacity:.92;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; color:var(--accent);}
+  .cover .tag{display:inline-block; margin-top:16px; padding:6px 16px;
+    border:1px solid rgba(212,168,73,.5); border-radius:20px; font-size:14px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; color:#f5f0e1;}
+  .cover .badge{display:inline-block; margin:18px 8px 0; padding:4px 12px;
+    background:rgba(212,168,73,.18); color:var(--accent); border:1px solid var(--accent);
+    border-radius:16px; font-size:12px; letter-spacing:.06em;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  section{padding:14px 0 8px; border-bottom:1px solid var(--line); scroll-margin-top:18px;}
+  h2.sec{font-size:28px; color:var(--purple-d); margin:18px 0 6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;
+    border-left:6px solid var(--accent); padding-left:14px;
+    background:linear-gradient(90deg,var(--bone2) 0%,transparent 70%);
+    border-radius:0 8px 8px 0;}
+  h2.sec .num{color:var(--accent-d); font-weight:700; margin-right:10px;
+    font-family:Arial,sans-serif;}
+  h3{font-size:20px; color:var(--purple); margin:24px 0 6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;
+    border-bottom:1px dashed var(--line); padding-bottom:4px;}
+  h4{font-size:17px; color:var(--purple-d); margin:18px 0 4px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  p{margin:10px 0;}
+  ul,ol{margin:10px 0 10px 4px; padding-left:22px;}
+  li{margin:5px 0;}
+  .lead{font-size:18px; color:var(--ink);}
+  .comp-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:16px 0;}
+  .comp{border:1px solid var(--line); background:var(--card); border-radius:12px;
+    padding:14px 16px; box-shadow:0 2px 6px rgba(0,0,0,.04);}
+  .comp b{color:var(--purple-d);}
+  .callout{border-left:5px solid var(--accent); background:var(--bone2);
+    padding:12px 18px; margin:16px 0; border-radius:0 10px 10px 0;}
+  .callout.tip{border-color:var(--green); background:var(--green-l);}
+  .callout.tip b{color:var(--green);}
+  .callout.adv{border-color:var(--red); background:var(--red-l);}
+  .callout.adv b{color:var(--red);}
+  .callout.warn{border-color:var(--red); background:var(--red-l);}
+  .callout.warn b{color:var(--red);}
+  .steps{counter-reset:step; list-style:none; padding-left:0; margin:14px 0;}
+  .steps li{position:relative; padding:10px 14px 10px 52px; margin:8px 0;
+    background:var(--card); border:1px solid var(--line); border-radius:10px;}
+  .steps li::before{counter-increment:step; content:counter(step);
+    position:absolute; left:12px; top:50%; transform:translateY(-50%);
+    width:28px; height:28px; background:var(--purple); color:#f5f0e1;
+    border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-weight:700; font-family:Arial,sans-serif;}
+  .skill{border:1px solid var(--line); background:var(--card); border-radius:12px;
+    padding:14px 18px; margin:12px 0; box-shadow:0 2px 6px rgba(0,0,0,.04);}
+  .skill .name{font-weight:700; color:var(--purple-d); font-size:18px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .skill .name .ico{display:inline-block; min-width:22px; color:var(--accent);}
+  .req{border:1px solid var(--line); background:var(--card); border-radius:10px;
+    padding:12px 16px; margin:10px 0;}
+  .req .sym{font-weight:700; color:var(--purple-d);}
+  .ex{font-size:15px; color:var(--ink-soft); border-top:1px dashed var(--line);
+    margin-top:8px; padding-top:8px;}
+  .ex.ok::before{content:"✓ 得分示例 — "; color:var(--green); font-weight:700;}
+  .ex.no::before{content:"✗ 不得分示例 — "; color:var(--red); font-weight:700;}
+  figure{margin:18px 0; text-align:center;}
+  figure img{max-width:100%; border:1px solid var(--line); border-radius:12px;
+    box-shadow:0 4px 14px rgba(0,0,0,.08); background:#fff;}
+  figcaption{font-size:13px; color:var(--ink-soft); margin-top:6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .two{display:grid; grid-template-columns:1fr 1fr; gap:16px; align-items:start;}
+  table.tab{border-collapse:collapse; width:100%; margin:14px 0; font-size:15px;
+    background:var(--card); border:1px solid var(--line); border-radius:8px; overflow:hidden;}
+  table.tab th,table.tab td{padding:8px 12px; text-align:left; border-bottom:1px solid var(--line);}
+  table.tab th{background:var(--bone2); color:var(--purple-d);}
+  @media(max-width:900px){
+    .wrap{flex-direction:column;}
+    nav{position:static; width:100%; height:auto; flex-basis:auto;}
+    main{padding:0 18px 60px;}
+    .comp-grid,.two{grid-template-columns:1fr;}
+  }
+  footer{margin-top:40px; font-size:13px; color:var(--ink-soft);
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; text-align:center;}
+  .credits{background:var(--bone2); border:1px solid var(--line); border-radius:12px;
+    padding:16px 20px; margin-top:14px;}
+  .credits b{color:var(--purple-d);}
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <h1>Galileo's Truth</h1>
+  <div class="sub">伽利略的真理 · 游戏规则</div>
+  <div class="tag">1–4 人 &nbsp;|&nbsp; 90–120 分钟 &nbsp;|&nbsp; 15 岁以上 &nbsp;|&nbsp; 复杂度 3.7 / 5</div>
+  <div>
+    <span class="badge">ThunderGryph Games · 2026</span>
+    <span class="badge">设计师 Flaminia Brasini &amp; Virginio Gigli</span>
+    <span class="badge">美术 Giada Princi &amp; Paolo Voto</span>
+  </div>
+</header>
+
+<div class="wrap">
+<nav>
+  <h2>目录</h2>
+  <ol>
+    <li><a href="#bg">背景</a></li>
+    <li><a href="#overview">概览</a></li>
+    <li><a href="#components">组件</a></li>
+    <li><a href="#concepts">关键概念</a></li>
+    <li><a href="#setup">准备</a></li>
+    <li><a href="#flow">游戏流程</a></li>
+    <li><a href="#main-actions">主要行动</a></li>
+    <li><a href="#sub-actions">次要行动</a></li>
+    <li><a href="#effects">效果</a></li>
+    <li><a href="#end-cycle">循环结束阶段</a></li>
+    <li><a href="#end-game">终局与计分</a></li>
+  </ol>
+</nav>
+
+<main>
+
+<!-- ============== 1. 背景 ============== -->
+<section id="bg">
+  <h2 class="sec"><span class="num">1</span>背景</h2>
+  <p class="lead">公元 1610 年。世界站在变革的临界点——古老教条与新生的理性之间，平衡极其脆弱。新真理的耳语在学术圣殿与喧闹集市中回响。</p>
+  <p>尼古拉·哥白尼的激进学说曾只是边缘异说，如今却找到了强大的拥护者——伽利略·伽利雷。他对宇宙的革命性观测正在撼动公认知识的根基。</p>
+  <p>你是一位学者，正处在思想激荡的危险年代，被卷入对真理的追寻。你将撰写突破性的论文、创造精巧的发明，并通过自制的望远镜仰望星空；然而宗教裁判所的阴影笼罩一切，监视着你的每一项发现、每一个低声议论的学说。一次失足、一句过于大胆的宣告，都可能招致逮捕、著作被禁，甚至火刑。</p>
+  <div class="callout">
+    <p><b>你会追寻真理，还是在恐惧的紧握下被迫放弃？</b>知识——或许还有你的生命——的归宿，握在你手中。</p>
+  </div>
+  <figure>
+    <img src="GalileosTruth_Rules_images/page_01.jpg" alt="封面：双拱门星空下的伽利略肖像">
+    <figcaption>封面（原书第 1 页）</figcaption>
+  </figure>
+</section>
+
+<!-- ============== 2. 概览 ============== -->
+<section id="overview">
+  <h2 class="sec"><span class="num">2</span>概览</h2>
+  <p>游戏在 <b>3 个时期</b> 内进行，共分为 <b>5 个循环</b>。每个循环再分为 <b>3 个阶段</b>。每个时期结束时，宗教裁判所将以怀疑审视玩家的工作，并对违规者施以惩罚。游戏结束时，胜利点最高的玩家胜出。</p>
+  <div class="callout">
+    <p><b>胜负</b>：游戏结束时，胜利点最多的玩家获胜；若平局，则回合顺序最靠前的玩家获胜。</p>
+  </div>
+  <table class="tab">
+    <thead><tr><th>时期</th><th>循环数</th></tr></thead>
+    <tbody>
+      <tr><td>第一时期</td><td>2 个循环</td></tr>
+      <tr><td>第二时期</td><td>2 个循环</td></tr>
+      <tr><td>第三时期</td><td>1 个循环</td></tr>
+    </tbody>
+  </table>
+  <h3>循环的三阶段</h3>
+  <ol class="steps">
+    <li>收入阶段（循环 1 跳过）</li>
+    <li>行动阶段</li>
+    <li>循环结束阶段</li>
+  </ol>
+  <figure>
+    <img src="GalileosTruth_Rules_images/page_02.jpg" alt="概览 + 通用组件">
+    <figcaption>概览与通用组件（原书第 2 页）</figcaption>
+  </figure>
+</section>
+
+<!-- ============== 3. 组件 ============== -->
+<section id="components">
+  <h2 class="sec"><span class="num">3</span>组件</h2>
+  <h3>通用组件</h3>
+  <div class="comp-grid">
+    <div class="comp"><b>1 张主版图</b><br>中央放置的版图，包含行动格、循环轨、回合顺序轨、宗教裁判标记位、循环标记位、工坊、毕业板块位、禁令板块位、大教堂、分数轨、怀疑轨。</div>
+    <div class="comp"><b>4 张著作版图</b><br>堆叠成金字塔形：Level I 在底，Level IV 在顶。承载所有可撰写的著作牌。</div>
+    <div class="comp"><b>怀疑板块</b><br>标有「2」的面朝上，放置在分数轨上对应的怀疑格。</div>
+    <div class="comp"><b>旅途板块</b><br>按背面分成数叠，分别洗混后各抽出 3 张，按字母对应位置面朝上放入分数轨。</div>
+    <div class="comp"><b>宗教裁判标记</b><br>面朝下放入回合顺序轨的指定位。</div>
+    <div class="comp"><b>循环标记</b><br>放在循环轨第一步上。</div>
+    <div class="comp"><b>发明牌 ×3 牌组</b><br>按时期（I/II/III）背面分开，分别洗混。时期 I 牌组抽 4 张面朝上放入工坊（主版图左上方位，从上到下）。</div>
+    <div class="comp"><b>观察板块</b><br>按背面的星数分成三堆，放入对应布袋。</div>
+    <div class="comp"><b>4 枚精通标记</b><br>随机面朝上放入主版图上 4 个专用位。</div>
+    <div class="comp"><b>毕业板块</b><br>按背面分堆洗混，每堆抽 1 张面朝上放入主版图上对应毕业板块位。</div>
+    <div class="comp"><b>禁令板块</b><br>按背面分堆洗混，每堆抽 1 张面朝上放入主版图上对应禁令板块位。</div>
+    <div class="comp"><b>著作牌 + 随机卡</b><br>按 Level（I/II/III/IV）分成四堆。Level I 全数面朝上放底层（紫色牌保持原位，其余按数字升序）。Level II/III/IV 洗混后抽 4/3/2 张面朝上放对应排（紫色牌保持原位）。每堆最终需 1 张随机卡 + 玩家数量张著作牌叠好。</div>
+    <div class="comp"><b>设置卡（Setup Cards）</b><br>2 人局：抽 2 张；3 人局：抽 1 张；用于在缺少玩家颜色组件时调整。</div>
+  </div>
+  <div class="callout adv">
+    <p><b>冲突处理</b>：毕业板块与禁令板块若带相同的红色数字，则两者不能同时在场。发生冲突时，弃掉该禁令板块并从堆中补抽一张。</p>
+  </div>
+  <h3>玩家组件（每位玩家各一份）</h3>
+  <div class="comp-grid">
+    <div class="comp"><b>1 张个人版图</b><br>含书架、窗、书桌三区。</div>
+    <div class="comp"><b>1 枚学者木质米宝</b><br>自然哲学家指示物。</div>
+    <div class="comp"><b>1 枚双面信条标记</b><br>正面哥白尼（Copernican）面，背面托勒密（Ptolemaic）面。</div>
+    <div class="comp"><b>10 枚硬币 + 10 枚研究标记</b><br>放在个人版图书桌区。</div>
+    <div class="comp"><b>3 张导师牌</b><br>2 张标准导师牌 + 1 张计分导师牌（首次游戏为预组套装，后续游戏洗混抽取）。</div>
+    <div class="comp"><b>蜡封</b><br>用于解锁导师牌、放置在著作版图与主版图精通轨。</div>
+    <div class="comp"><b>3 张赎罪牌</b><br>对应 Level I/II/III，玩家颜色的蜡封对应。</div>
+    <div class="comp"><b>1 张分数标记 + 1 张怀疑标记</b><br>分数标记放分数轨「0」位；怀疑标记放怀疑轨第 2 格（标「1」）。</div>
+    <div class="comp"><b>4 张学科标记</b><br>天文学/物理学/数学/哲学。</div>
+    <div class="comp"><b>1 张回合顺序标记</b><br>放在当前回合顺序轨对应位置。</div>
+    <div class="comp"><b>玩家著作牌</b><br>天文学/物理学/数学/哲学/万能各色，配该玩家蜡封。</div>
+    <div class="comp"><b>1 张玩家辅助卡</b></div>
+  </div>
+  <figure>
+    <img src="GalileosTruth_Rules_images/page_03.jpg" alt="玩家组件">
+    <figcaption>玩家组件（原书第 3 页）</figcaption>
+  </figure>
+</section>
+
+<!-- ============== 4. 关键概念 ============== -->
+<section id="concepts">
+  <h2 class="sec"><span class="num">4</span>关键概念</h2>
+
+  <h3>双面信条标记</h3>
+  <p>游戏开始时，你是<b>日心说主义者（Copernican）</b>，但可以变为<b>地心说主义者（Ptolemaic）</b>。通过翻转与移动信条标记在个人版图上追踪你当前信条。</p>
+
+  <h3>信条图标</h3>
+  <p>部分行动带此图标 <span class="req"><span class="sym">📜</span></span>。你必须根据双面信条标记当前显示面，执行对应版本（日心说或地心说）。</p>
+  <div class="callout">
+    <p><b>受信条影响的元素</b>：观察星空、打出著作牌、打出发明、以及禁令。</p>
+    <p>信条标记也会影响终局计分。</p>
+  </div>
+
+  <h3>行动图标与效果</h3>
+  <p>执行主要行动后，你将获得若干图标以激活。这些图标分为两类：</p>
+  <ul>
+    <li><b>次要行动</b>：带圆形外框的图标，是<b>可选的</b>。</li>
+    <li><b>效果</b>：无圆形外框的图标，是<b>强制的</b>。</li>
+  </ul>
+
+  <h3>怀疑轨与赎罪</h3>
+  <p>游戏中，怀疑可能因你的行动、获得胜利点以及循环结束时而增减。他人回合中也可能增加你的怀疑。这代表宗教裁判的监视之眼。</p>
+
+  <h4>怀疑增减</h4>
+  <ul>
+    <li><b>增加</b>图标：将怀疑标记在怀疑轨上前进指定格数。</li>
+    <li><b>减少</b>图标：将怀疑标记在怀疑轨上后退指定格数。标记永远不会低于「0」格。</li>
+  </ul>
+
+  <h4>赎罪 / 牢房 / 火刑架</h4>
+  <p>赎罪、牢房、火刑架三个图标仅作指示符，<b>不是</b>怀疑轨上的格子。</p>
+
+  <h4>获得赎罪牌</h4>
+  <p>每当你的怀疑标记<b>首次</b>经过怀疑轨上的赎罪图标时，你必须拿取对应的赎罪牌：</p>
+  <ul>
+    <li>从你场地区中拿取对应的赎罪牌，将其<b>面朝下</b>放在你的牌库顶部。</li>
+    <li>同一回合中你可能获得多张赎罪牌。</li>
+    <li>若你的牌库为空，新获得的赎罪牌就成为牌库的顶。</li>
+  </ul>
+  <div class="callout">
+    <p><b>首次原则</b>：仅当你怀疑标记<b>首次</b>经过某个特定图标时获得赎罪牌。标记若后退再经过同一图标，<b>不再</b>获得。</p>
+    <p><b>本循环必须打出</b>：若你抽到赎罪牌进入手牌，你必须在本循环的某个回合中打出。手牌中的赎罪牌<b>永远不能弃置</b>。</p>
+  </div>
+
+  <h4>牢房（逮捕与监禁）</h4>
+  <p>若怀疑标记经过怀疑轨上的<b>牢房</b>图标，你的学者立即被捕：</p>
+  <ul>
+    <li>将学者指示物移至主版图的<b>牢房格</b>。</li>
+    <li>监禁期间你无法使用学者。</li>
+    <li>若学者是从行动格被移入牢房，则放倒学者指示物表示本循环已用，直至循环结束阶段才重置。</li>
+    <li>学者离开后，原行动格立即空出。</li>
+  </ul>
+
+  <h4>释放</h4>
+  <p>若怀疑标记在怀疑轨上后退经过牢房图标，你立即取回学者。这可在同一回合内发生。</p>
+  <ul>
+    <li>若取回时学者是<b>站立</b>（说明本循环尚未使用），你可以在本循环稍后用它执行行动。</li>
+    <li>若取回时学者是<b>放倒</b>，保持原状直至循环结束阶段。</li>
+    <li>学者可被捕与释放多次。</li>
+  </ul>
+
+  <h4>火刑架</h4>
+  <p>怀疑标记一旦经过<b>火刑架</b>图标，宗教裁判已经判处你的异端行径：</p>
+  <ul>
+    <li>将学者移至主版图的<b>火刑架格</b>。</li>
+    <li>本游戏中你<b>再也不能使用</b>该学者。</li>
+    <li>将你的怀疑标记放回怀疑轨的<b>「0」</b>格。</li>
+    <li>继续按常规则追踪怀疑，但<b>赎罪、牢房、火刑架图标不再影响你</b>。</li>
+    <li>本游戏剩余时间内，你在怀疑轨上每前进 1 格，终局计分时计为 <b>-2 胜利点</b>。</li>
+  </ul>
+
+  <figure>
+    <img src="GalileosTruth_Rules_images/page_07.jpg" alt="怀疑轨与牢房 / 火刑架概念图">
+    <figcaption>怀疑轨与牢房/火刑架（原书第 7 页）</figcaption>
+  </figure>
+
+  <h3>分数轨</h3>
+  <p>分数标记沿分数轨前进，使你获得旅途板块使用权，但也会增加怀疑。</p>
+
+  <h4>旅途格</h4>
+  <p>分数标记到达分数轨上的交叉路口 <b>A</b> 时，你可以选择走哪条路继续追踪胜利点。</p>
+  <ul>
+    <li><b>长路径</b>：胜利点增长更慢，但到达或经过旅途格 <b>B</b> 时，你可以使用该旅途板块上的图标。</li>
+    <li>这些图标必须在回合结束前以任意顺序激活；若图标被分隔线 <b>C</b> 分隔，你必须选择激活其中一组。</li>
+    <li>回合外或行动阶段外获得图标使用权时，必须立即激活。</li>
+  </ul>
+
+  <h4>怀疑格</h4>
+  <p>分数标记到达或经过分数轨上的怀疑板块 <b>D</b> 时，你必须将怀疑标记在怀疑轨上前进指定步数。怀疑板块按玩家人数翻面或移除：</p>
+  <table class="tab">
+    <thead><tr><th>玩家人数</th><th>处理规则</th></tr></thead>
+    <tbody>
+      <tr><td>2 人局</td><td>首位到达或经过的玩家翻面怀疑板块。</td></tr>
+      <tr><td>3 人局</td><td>首位到达者翻面；第二位到达或经过者移除。</td></tr>
+      <tr><td>4 人局</td><td>首位到达者翻面；第三位到达或经过者移除。</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <p><b>超过 100 胜利点</b>：若玩家胜利点超过 100，则不再因怀疑板块增加怀疑，也不能选长路径抵达旅途格。终局计分也适用此规则。</p>
+  </div>
+
+  <h3>个人版图</h3>
+  <p>个人版图代表你的<b>工作室</b>，分为三区：</p>
+
+  <h4>书架</h4>
+  <p>书架由 4 个学科轨组成，用于追踪书籍：天文学、物理学、数学、哲学。每条学科轨分为 4 个等级：</p>
+  <ul>
+    <li>Level I 与 Level II：各 3 格。</li>
+    <li>Level III：4 格。</li>
+    <li>Level IV：5 格。</li>
+  </ul>
+
+  <h4>获得书籍</h4>
+  <p>每获得一本书籍 <span class="req"><span class="sym">📕</span></span>：</p>
+  <ul>
+    <li>将该学科标记在对应学科轨上向右前进对应格数。</li>
+    <li>通用书籍 <span class="req"><span class="sym">📕*</span></span>（任意学科）：可任选一条学科轨前进。</li>
+  </ul>
+
+  <h4>精通奖励</h4>
+  <p>当你的某个学科标记<b>首次</b>到达某学科轨的最后一格时，你获得一次<b>免费行动</b>：</p>
+  <ol class="steps">
+    <li>从任意一张你的导师牌上移除任意一个蜡封。</li>
+    <li>将该蜡封放在主版图上对应学科<b>精通轨</b>的最左空位。</li>
+    <li>获得该空格所示的胜利点。</li>
+  </ol>
+  <ul>
+    <li>即使同一回合你的学科标记后退，也仍获得这次免费行动。</li>
+    <li>当标记位于某轨最后一格时，再获得该学科书籍会<b>被弃掉</b>。</li>
+    <li>每条精通轨上你只能放置 1 个蜡封。</li>
+  </ul>
+
+  <h4>消耗书籍</h4>
+  <p>消耗一本或多本书籍，按顺序执行：</p>
+  <ol class="steps">
+    <li>满足单次费用要求：在对应学科轨上，标记所在等级显示的书籍数<b>至少</b>等于费用。减免<b>不降低</b>等级要求，只减少实际支付数。</li>
+    <li>支付指定数量的书籍：将该学科标记向左前进对应格数。若已在最左格，则<b>不能</b>消耗该学科书籍。</li>
+  </ol>
+
+  <h4>窗</h4>
+  <p>窗是你窥视星空的位置。放置观察板块并覆盖后激活图示图标（需支付相应费用）。</p>
+
+  <h4>书桌</h4>
+  <p>书桌存放硬币 <span class="req"><span class="sym">🪙</span></span> 与研究标记 <span class="req"><span class="sym">🔬</span></span>。每位玩家最多持有 <b>10 枚硬币</b> 与 <b>10 枚研究标记</b>。获得时移到书桌；支付时放入你场地区的储备池。<b>不能多于 10，不能少于 0</b>。双面信条标记也放在书桌上。</p>
+
+  <figure>
+    <img src="GalileosTruth_Rules_images/page_08.jpg" alt="个人版图各分区">
+    <figcaption>个人版图与各分区（原书第 8 页）</figcaption>
+  </figure>
+
+  <h4>导师牌与蜡封</h4>
+  <p>准备时，你获得一组导师牌，并在每张牌的「亮起的蜡烛」位上放置指定数量的蜡封。下图中左侧第一张为<b>计分导师牌</b>，其余三张为<b>标准导师牌</b>。</p>
+
+  <h4>移除蜡封</h4>
+  <p>游戏中部分行动允许你从导师牌上移除一个或多个蜡封：可以弃置到场地区，也可以放到主版图或著作版图上。你可自由选择从哪张导师牌上移除哪个蜡封。</p>
+
+  <h4>解锁导师牌</h4>
+  <p>当一张导师牌上所有蜡封均被移除，该牌解锁，关联图标或计分生效。若同一时间解锁多张，逐张完整结算。你必须在回合结束前以任意顺序激活解锁的图标。解锁的<b>计分导师牌</b>上的胜利点在<b>终局时</b>才发放。</p>
+
+  <h4>蜡封池</h4>
+  <p>若你被要求在主版图或著作版图上放置蜡封，但你的导师牌上没有可用蜡封，可以从场地区的储备池中拿取一个。你<b>永远不能</b>从主版图或著作版图上移除蜡封，蜡封一旦放置就保留到游戏结束。</p>
+
+  <figure>
+    <img src="GalileosTruth_Rules_images/page_09.jpg" alt="窗 / 书桌 / 导师牌">
+    <figcaption>窗 / 书桌 / 导师牌与蜡封（原书第 9 页）</figcaption>
+  </figure>
+</section>
+
+<!-- ============== 5. 准备 ============== -->
+<section id="setup">
+  <h2 class="sec"><span class="num">5</span>准备</h2>
+  <p>本节详述首次游戏与后续游戏的准备。建议首次游戏使用「首次游戏」准备，之后所有局使用「后续游戏」准备。</p>
+
+  <h3>通用准备（所有局通用）</h3>
+  <div class="callout tip">
+    <p><b>使用 Card Holder Book？</b>请按第 XX 页的指示操作。</p>
+  </div>
+  <ol class="steps">
+    <li>将主版图置于游戏区中央。旁边按图示将四张著作版图堆成金字塔，Level I 在底部，Level IV 在顶部。</li>
+    <li>将怀疑板块的「2」面朝上，放置在分数轨上对应的怀疑格。</li>
+    <li>将旅途板块按背面分成数堆，分别洗混。每堆抽 3 张面朝上放入分数轨上对应位置，按字母对齐。</li>
+    <li>将宗教裁判标记面朝下放入回合顺序轨的指定位。</li>
+    <li>将循环标记放在循环轨的第一步上。</li>
+    <li>将发明牌按时期编号（I、II、III）背面分成三堆，分别洗混。将三堆面朝下放在主版图旁。从时期 I 牌组抽 4 张面朝上放入工坊（主版图左上方位），从上到下排列。</li>
+    <li>将观察板块按背面星数分成三堆，分别放入对应布袋。将布袋放在主版图旁。</li>
+    <li>将 4 枚精通标记随机面朝上放入 4 个专用位。</li>
+    <li>将毕业板块按背面分堆洗混，每堆抽 1 张放入主版图对应毕业板块位。</li>
+    <li>将禁令板块按背面分堆洗混，每堆抽 1 张放入主版图对应禁令板块位。</li>
+    <li>准备著作牌：按 Level（I、II、III、IV）将著作牌与随机卡分成四堆。Level I：全数面朝上放底层（紫色牌保持原位，其余按数字升序从左到右排列）。Level II/III/IV：洗混后抽 4/3/2 张面朝上放入对应排（紫色牌保持原位），其余按数字升序从左到右排列。<b>最终检查</b>：每堆应有 1 张随机卡 + 玩家数量张著作牌。</li>
+    <li>若少于 4 人游戏，使用未使用颜色的组件进行以下调整：<br>
+      <b>2 人局</b>：抽 2 张设置卡。<br>
+      <b>3 人局</b>：抽 1 张设置卡。<br>
+      将设置卡所示的蜡封放在每张指示著作牌与精通轨最左胜利点空格 <b>A</b> 上方。然后将学者米宝放入主版图顶部大教堂 <b>B</b> 的指示空格。</li>
+  </ol>
+  <div class="callout adv">
+    <p><b>冲突处理</b>：毕业板块与禁令板块若带相同的红色数字，则两者不能同时在场。发生冲突时，弃掉该禁令板块并从堆中补抽一张。</p>
+  </div>
+
+  <figure>
+    <img src="GalileosTruth_Rules_images/page_04.jpg" alt="通用准备">
+    <figcaption>通用准备（原书第 4 页）</figcaption>
+  </figure>
+  <figure>
+    <img src="GalileosTruth_Rules_images/page_05.jpg" alt="通用准备续：Level IV/III/II/I 著作版图与设置卡">
+    <figcaption>通用准备续（原书第 5 页）</figcaption>
+  </figure>
+
+  <h3>玩家准备</h3>
+  <p>拿起你所选颜色的组件，依次执行：</p>
+  <ol class="steps">
+    <li>将个人版图置于面前。</li>
+    <li>将学者米宝竖立放在个人版图旁。</li>
+    <li>将双面信条标记放在个人版图的指定位上，<b>哥白尼面朝上</b>。</li>
+    <li>将 10 枚硬币与 10 枚研究标记放在场地区。</li>
+    <li>拿取显示你颜色蜡封的赎罪牌（Level I、II、III），放入场地区。</li>
+    <li>将分数标记放在分数轨的「0」格。</li>
+    <li>随机决定先手玩家。将回合顺序标记从左到右放入当前回合顺序轨，从先手玩家开始按顺时针进行。</li>
+    <li>将怀疑标记放在怀疑轨的第 2 格（标「1」）。</li>
+    <li>准备导师牌与起始著作牌：<br>
+      <b>首次游戏</b>：按字母将导师牌分组，每组含 3 张标准导师牌 + 1 张计分导师牌。拿取起始著作牌，每组配对应字母的起始著作牌。根据回合顺序分配：先手玩家 = A 组，第二位 = B 组，第三位 = C 组，第四位 = D 组。<br>
+      <b>后续游戏</b>：将标准导师牌与计分导师牌分成两堆洗混。亮出与玩家数量相等的计分导师牌。洗混起始著作牌，与亮出的计分导师牌一一面朝上随机配对。最后给每位玩家发 4 张面朝下的标准导师牌。
+    </li>
+    <li>每位玩家查看自己的标准导师牌，选 1 张留下，其余传给左手玩家；从收到的牌中再选 1 张留下、其余传走。重复直到各玩家选出 4 张。最终留下 3 张，多余 1 张移出游戏。每位玩家应有 3 张标准导师牌。</li>
+    <li>按回合逆序，每位玩家从剩余配对中选择 1 张计分导师牌及其配对的起始著作牌。</li>
+    <li>将所有导师牌面朝上放在场地区。在每张牌的「亮起蜡烛」位上各放置 1 个蜡封。</li>
+    <li>在主版图的学术等级 Level I 位上放置 1 个蜡封。剩余的蜡封放入场地储备池。</li>
+    <li><b>首次游戏</b>：在个人版图上将每个学科标记放在对应学科轨的第 2 格。<br>
+      <b>后续游戏</b>：在个人版图上将每个学科标记放在对应学科轨的<b>第 1 格（最左）</b>。</li>
+    <li>获得 2 本书籍：将与你刚获得的起始著作牌学科对应的学科标记，在学科轨上前进 2 格。</li>
+    <li>拿取显示你颜色蜡封的玩家著作牌（天文学、物理学、数学、哲学、万能）。洗混这些牌组成一个面朝下的牌库放在个人版图旁，抽取 3 张作为手牌。</li>
+    <li>将起始著作牌放在该牌库底部。</li>
+    <li>拿取一张玩家辅助卡。</li>
+  </ol>
+  <p>最后，将所有未使用的组件放回游戏盒。</p>
+  <figure>
+    <img src="GalileosTruth_Rules_images/page_06.jpg" alt="玩家准备">
+    <figcaption>玩家准备（原书第 6 页）</figcaption>
+  </figure>
+</section>
+
+<!-- ============== 6. 游戏流程 ============== -->
+<section id="flow">
+  <h2 class="sec"><span class="num">6</span>游戏流程</h2>
+  <p>游戏在 3 个时期进行，每个时期包含不同数量的循环：</p>
+  <table class="tab">
+    <thead><tr><th>时期</th><th>循环数</th></tr></thead>
+    <tbody>
+      <tr><td>第一时期</td><td>2 个循环</td></tr>
+      <tr><td>第二时期</td><td>2 个循环</td></tr>
+      <tr><td>第三时期</td><td>1 个循环</td></tr>
+    </tbody>
+  </table>
+  <p>每个循环进一步分为三个阶段：</p>
+  <ol class="steps">
+    <li><b>收入阶段</b>（循环 1 跳过）</li>
+    <li><b>行动阶段</b></li>
+    <li><b>循环结束阶段</b></li>
+  </ol>
+
+  <h3>阶段 1：收入阶段（循环 1 跳过）</h3>
+  <p>本阶段中，玩家激活图标以结算来自两个来源（<b>发明</b>与<b>书架</b>）的行动与效果。玩家可以同时结算收入；若时序相关，按回合顺序处理。</p>
+  <p>按顺序执行：</p>
+  <ol class="steps">
+    <li><b>发明</b>：你必须激活场地中所有<b>收入型发明</b> <span class="req"><span class="sym">⚙️</span></span> 的图标。若有多个图标，你可以决定结算顺序。若发明牌显示此图标 <span class="req"><span class="sym">📜</span></span>，则根据双面信条标记当前显示面，执行哥白尼或托勒密部分。</li>
+    <li><b>书架</b>：书架中学科提供的收入由对应学科标记所在等级决定。按从上到下顺序结算：
+      <ul>
+        <li><b>天文学</b> <span class="req"><span class="sym">🌌</span></span>：提供所示胜利点，沿分数轨追踪。</li>
+        <li><b>物理学</b> <span class="req"><span class="sym">⚛️</span></span>：提供所示硬币，置于书桌。</li>
+        <li><b>数学</b> <span class="req"><span class="sym">🧮</span></span>：提供所示研究标记，置于书桌。</li>
+        <li><b>哲学</b> <span class="req"><span class="sym">📚</span></span>：决定你需要从牌库抽取的牌数。若牌库为空，洗混弃牌堆形成新牌库；若仍不足，抽尽可能多。</li>
+      </ul>
+    </li>
+  </ol>
+
+  <h3>阶段 2：行动阶段</h3>
+  <p>本阶段中，玩家将进行若干<b>行动轮次</b>。每轮中，每位玩家执行一个主要行动，从先手玩家开始按当前回合顺序轨顺序进行。</p>
+
+  <h4>解析行动</h4>
+  <p>当你选择一个主要行动时，你将获得若干图标。激活这些图标可以执行次要行动和/或效果。</p>
+  <ul>
+    <li>你可以决定激活图标的顺序。</li>
+    <li><b>次要行动</b>：带圆形外框的图标，<b>总是可选</b>。</li>
+    <li><b>效果</b>：无圆形外框的图标，<b>总是强制</b>。</li>
+    <li><b>减免</b>：若行动提供减免，<b>必须</b>应用。</li>
+    <li>注意<b>箭头</b>与<b>括号</b>：
+      <ul>
+        <li><b>箭头</b>：若执行箭头起始的行动，则也执行箭头指向的行动。</li>
+        <li><b>括号</b>：括号内带冒号的图标表示对当前次要行动的修改。</li>
+      </ul>
+    </li>
+  </ul>
+  <div class="callout">
+    <p><b>空牌库抽牌</b>：若需抽牌而牌库为空，先抽尽手牌可抽的数量，洗混弃牌堆形成新牌库，再抽剩余牌数。若仍不足，抽尽可能多。</p>
+    <p>本循环中打出的牌保持面朝上在你的场地区，直到循环结束阶段。</p>
+  </div>
+
+  <h4>行动阶段结束</h4>
+  <p>当所有玩家都跳过时，行动阶段结束。</p>
+
+  <h3>阶段 3：循环结束阶段</h3>
+  <p>所有玩家跳过后，行动阶段结束。按顺序执行：</p>
+  <ol class="steps">
+    <li>将所有回合顺序标记移回当前回合顺序轨，保持其相对位置。</li>
+    <li>若宗教裁判标记面朝上，将其翻为面朝下。</li>
+    <li>将循环标记在循环轨上前进 1 格，并按顺序结算所经过的所有转折点。</li>
+    <li><b>清理</b>（循环 5 跳过）：为下一循环做准备。
+      <ul>
+        <li>从主版图取回你的学者米宝，竖立放在场地区。若学者在火刑架，必须留在原位。若在牢房，留在原位但确保是竖立。</li>
+        <li>将所有<b>每循环一次</b>发明牌转回竖立方向，可以再次使用。</li>
+        <li>将场地区和手牌中的所有牌移入弃牌堆。</li>
+      </ul>
+    </li>
+  </ol>
+
+  <h4>转折点</h4>
+  <p>循环标记经过转折点时按序结算：</p>
+  <div class="req">
+    <p><b>更新工坊</b>：循环 1 和 3：从游戏中移除工坊最底部的发明牌，将剩余牌下移，从当前牌组亮 1 张新牌。若牌组为空，<b>不亮新牌</b>。</p>
+  </div>
+  <div class="req">
+    <p><b>切换发明牌组</b>：循环 2 和 4：从游戏中移除当前发明牌组与工坊中所有剩余牌（玩家保留已获得的发明），从新时期的牌组亮 4 张新牌放入工坊。</p>
+  </div>
+  <div class="req">
+    <p><b>解析当前禁令</b>：在循环 2、3、5 检查你是否遵守当前禁令的限制。</p>
+  </div>
+  <figure>
+    <img src="GalileosTruth_Rules_images/page_10.jpg" alt="游戏流程总览">
+    <figcaption>游戏流程总览（原书第 10 页）</figcaption>
+  </figure>
+</section>
+
+<!-- ============== 7. 主要行动 ============== -->
+<section id="main-actions">
+  <h2 class="sec"><span class="num">7</span>主要行动</h2>
+  <p>在你的回合中，你必须执行以下主要行动之一：</p>
+  <ul>
+    <li>跳过（Pass）</li>
+    <li>弃绝（Abjure）</li>
+    <li>打出论文牌（Play Treatise Cards）</li>
+    <li>打出赎罪牌（Play a Penance Card）</li>
+    <li>使用发明（Use an Invention）</li>
+    <li>提升学术等级（Upgrade your Academic Level）</li>
+    <li>派遣学者（Assign your Natural Philosopher）</li>
+  </ul>
+
+  <h3>跳过（Pass）</h3>
+  <div class="skill">
+    <div class="name"><span class="ico">⏭</span>跳过</div>
+    <p>跳过行动会影响其他玩家的行动。在你的回合中，如果你无法或不想执行更多行动，你必须跳过。</p>
+  </div>
+  <h4>当你跳过时</h4>
+  <ul>
+    <li>将你的回合顺序标记从<b>当前回合顺序轨</b>向下移入<b>跳过区</b>。</li>
+    <li>你将不再执行任何后续行动，直到下一个循环之前你的回合被完全跳过。</li>
+  </ul>
+  <div class="callout">
+    <p><b>限制</b>：在手中没有打出所有赎罪牌之前，你不能选择跳过。</p>
+  </div>
+
+  <h4>同一行动轮次中跳过</h4>
+  <p>如果其他玩家在同一行动轮次的后续回合中跳过，将他们的回合顺序标记移入跳过区，放在任何已存在标记的<b>左侧</b>。</p>
+
+  <h4>行动轮次结束</h4>
+  <p>一旦当前回合顺序中的最后一位玩家完成他的回合，立即结算以下之一：</p>
+  <ul>
+    <li><b>无人跳过</b>：进入下一个行动轮次。</li>
+    <li><b>部分玩家跳过，仍有玩家可继续行动</b>：
+      <ul>
+        <li>若宗教裁判标记是面朝下的，将其翻为面朝上。现在进入<b>「宗教裁判开始怀疑」</b>机制（见下文）。</li>
+        <li>若已经是面朝上的，保持原样。</li>
+        <li>无论哪种情况，将跳过区中的所有标记向下移入<b>未来回合顺序轨</b>，保持它们的相对从左到右顺序。<b>不要</b>移动已经在未来回合顺序轨上的标记。</li>
+        <li>进入下一个行动轮次。</li>
+      </ul>
+    </li>
+    <li><b>所有玩家都已跳过</b>：将跳过区中的所有标记移入未来回合顺序轨，保持它们的相对从左到右顺序。<b>不要</b>移动已经在未来回合顺序轨上的标记。<b>本行动阶段结束</b>。</li>
+  </ul>
+
+  <h4>宗教裁判开始怀疑</h4>
+  <div class="callout adv">
+    <p><b>触发后</b>：从此刻起，每当玩家执行主要行动（非跳过）时，必须在回合开始时将怀疑值增加 <b>1</b>。</p>
+    <p>跳过<b>不会</b>导致怀疑增加。</p>
+  </div>
+
+  <h3>弃绝（Abjure）</h3>
+  <div class="skill">
+    <div class="name"><span class="ico">🕊</span>弃绝</div>
+    <p>部分次要行动与效果会受你当前信条影响（见第 6 页）。</p>
+  </div>
+  <div class="callout warn">
+    <p><b>第三时期（即循环 5）期间你不能执行弃绝行动。</b></p>
+  </div>
+  <h4>抉择</h4>
+  <p>游戏开始时，你是<b>日心说主义者</b>。</p>
+  <p>作为回合中的主要行动，你可以翻转你的双面信条标记，将其放入个人版图右侧的格子，从而变为<b>地心说主义者</b>。</p>
+  <p><b>此选择最终且不可逆。</b></p>
+
+  <h4>宗教裁判的连锁反应</h4>
+  <p>选择弃绝会带来即时后果：</p>
+  <ul>
+    <li><b>对你</b>：立即将怀疑值降低 <b>5</b>。</li>
+    <li><b>对他人</b>：所有其他日心说主义玩家必须立即将怀疑值提升 <b>1</b>。</li>
+  </ul>
+  <figure>
+    <img src="GalileosTruth_Rules_images/page_11.jpg" alt="Pass 续 / Inquisition Suspects / Abjure">
+    <figcaption>跳过续 / 宗教裁判开始怀疑 / 弃绝（原书第 11 页）</figcaption>
+  </figure>
+
+  <h3>打出论文牌（Play Treatise Cards）</h3>
+  <div class="skill">
+    <div class="name"><span class="ico">📜</span>打出论文牌</div>
+    <p>著作牌代表你撰写的论文与文档，将永远改变我们所知与所信。</p>
+    <p>作为回合中的主要行动，你可以从手牌打出著作牌到你的场地区。具体著作牌详情见第 XX 页。</p>
+  </div>
+
+  <h4>著作牌结构</h4>
+  <p>著作牌分为两部分：</p>
+  <ul>
+    <li><b>A. 著作牌书脊（左侧）</b>：颜色、纹理与最上方图标决定学科：
+      <ol>
+        <li>天文学 <span class="req"><span class="sym">🌌</span></span></li>
+        <li>物理学 <span class="req"><span class="sym">⚛️</span></span></li>
+        <li>数学 <span class="req"><span class="sym">🧮</span></span></li>
+        <li>哲学 <span class="req"><span class="sym">📚</span></span></li>
+        <li>任意学科（万能） <span class="req"><span class="sym">🃏</span></span></li>
+      </ol>
+      书脊上的图标表示打出此牌时你获得的书籍。
+    </li>
+    <li><b>B. 翻开著作（右侧）</b>：显示次要行动与效果图标。</li>
+  </ul>
+
+  <h4>如何打出著作牌</h4>
+  <p>打出一张或多张著作牌，按步骤：</p>
+  <ol class="steps">
+    <li><b>选择并堆叠</b>：从手牌中选择一张或多张著作牌面朝上放在场地区。多张同时打出时堆叠，让所有牌的书脊可见。最顶上的牌为「激活牌」。<br>
+      <b>同学科</b>：堆叠中所有牌必须共享同一学科（皆物理学，或皆天文学）。<br>
+      <b>紫色牌</b>：若单独打出（或仅与其他紫色牌一起），它代表你所选的任何学科；若与特定学科牌一起打出，则匹配该学科。</li>
+    <li><b>获得书籍</b>：必须获得堆叠中所有牌书脊上可见的书籍。<br>
+      <b>紫色牌</b>：若与特定学科牌一起打出，书籍视为该学科（例：天文学）。若单独打出，你为所有书籍选择一个学科。</li>
+    <li><b>激活图标</b>：激活激活牌上的图标。
+      <ul>
+        <li>效果 <b>1</b> 强制；次要行动 <b>2</b> 可选。</li>
+        <li><b>分组 <b>3</b></b>：图标可由<b>分隔线</b>分隔：
+          <ul>
+            <li><b>简单分隔线</b>：必须选择激活其中一组。</li>
+            <li><b>怀疑图标</b> <span class="req"><span class="sym">👁</span></span>：可以免费激活一组；或通过在激活第二组前将怀疑值增加 1 来激活两组。</li>
+            <li><b>信条图标</b> <span class="req"><span class="sym">📜</span></span>：必须激活与双面信条标记当前面（哥白尼或托勒密）匹配的那一组。</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+  <p>之前回合中打出的著作牌在本行动中忽略。</p>
+
+  <h3>打出赎罪牌（Play a Penance Card）</h3>
+  <div class="skill">
+    <div class="name"><span class="ico">⛪</span>打出赎罪牌</div>
+    <p>每当你的怀疑标记<b>首次</b>经过怀疑轨上的赎罪图标 <span class="req"><span class="sym">⛪</span></span>，你获得对应的赎罪牌。获得时将其面朝下放在牌库顶部。</p>
+    <p>当你抽到赎罪牌进入手牌，必须作为主要行动在本循环的某个后续回合中打出。</p>
+  </div>
+  <div class="callout warn">
+    <p><b>禁止弃置</b>：手牌中的赎罪牌永远不能弃置，也不能选择跳过，直到所有赎罪牌都已打出。</p>
+  </div>
+  <h4>打出步骤</h4>
+  <ol class="steps">
+    <li>将该牌面朝上放在场地区。</li>
+    <li>若宗教裁判标记面朝下 <span class="req"><span class="sym">⛪</span></span>，立即将你的怀疑值减少 <b>1</b>。</li>
+    <li>无论是否减少了怀疑，你可以支付牌面所示硬币数 <b>2</b>，将该赎罪牌从游戏中移除。</li>
+  </ol>
+  <p>若你无法或不愿支付硬币，该牌保持面朝上在场地区。</p>
+  <figure>
+    <img src="GalileosTruth_Rules_images/page_12.jpg" alt="打出著作牌 / 打出赎罪牌">
+    <figcaption>打出著作牌 / 打出赎罪牌（原书第 12 页）</figcaption>
+  </figure>
+
+  <h3>使用发明（Use an Invention）</h3>
+  <div class="skill">
+    <div class="name"><span class="ico">⚙️</span>使用发明</div>
+    <p>发明牌代表你研究中的突破与创造。</p>
+  </div>
+  <h4>激活发明</h4>
+  <p>作为回合中的主要行动，你可以使用场地区中带此图标 <span class="req"><span class="sym">1</span></span> 的<b>每循环一次</b>发明牌。方法是：</p>
+  <ol class="steps">
+    <li>将该牌旋转 90°向右表示已用。本循环内不能再用。</li>
+    <li>激活牌中央所示的所有图标 <b>2</b>。</li>
+    <li>循环结束阶段时这些发明牌会转回竖立，恢复可用。</li>
+  </ol>
+  <p>其他类型发明（被动或收入型）不需要行动即可激活。具体发明牌详情见第 XX 页。</p>
+
+  <h3>提升学术等级（Upgrade your Academic Level）</h3>
+  <div class="skill">
+    <div class="name"><span class="ico">🎓</span>提升学术等级</div>
+    <p>作为回合中的主要行动，你可以提升你的学术等级。</p>
+    <p>游戏开始时你在<b>学术等级 Level I</b> <b>1</b>。要升到下一等级，必须满足对应毕业板块 <b>2</b> 所示的要求。</p>
+  </div>
+  <h4>如何升级</h4>
+  <p>若你满足要求：</p>
+  <ol class="steps">
+    <li>从任意一张你的导师牌上拿取一个蜡封，放在主版图上下一个学术等级最左的可用蜡空格上。</li>
+    <li>立即获得该空格所示的胜利点。</li>
+  </ol>
+  <h4>进阶规则</h4>
+  <ul>
+    <li>你必须<b>按顺序</b>升级学术等级（I → II → III → IV），<b>不能跳过</b>。</li>
+    <li>每个行动只能升级一次学术等级，即使满足多级要求。</li>
+    <li>提升学术等级让你可以使用学者在更强大的行动格上。</li>
+  </ul>
+
+  <h3>派遣学者（Assign your Natural Philosopher）</h3>
+  <div class="skill">
+    <div class="name"><span class="ico">🧑‍🔬</span>派遣学者</div>
+    <p>作为主要行动，你可以将可用的学者派遣到主版图上你学术等级范围内的某个行动格。</p>
+    <p>学者仅在个人版图旁竖立时可用。若学者已<b>放倒</b>或已在某个行动格、牢房、火刑架，则<b>不可</b>用。</p>
+  </div>
+  <p>一旦派遣，你必须激活所有相关效果，并可选择是否激活次要行动。若图标被分隔线分组，你必须选择激活其中一组。</p>
+
+  <h4>行动格类型</h4>
+  <ul>
+    <li><b>独占行动格</b>：本循环内只能容纳一名学者。若已被占用则不可放置。</li>
+    <li><b>共享行动格</b>：同一循环内可被多名学者同时占据。</li>
+  </ul>
+  <figure>
+    <img src="GalileosTruth_Rules_images/page_13.jpg" alt="使用发明 / 提升等级 / 派遣学者">
+    <figcaption>使用发明 / 提升等级 / 派遣学者（原书第 13 页）</figcaption>
+  </figure>
+</section>
+
+<!-- ============== 8. 次要行动 ============== -->
+<section id="sub-actions">
+  <h2 class="sec"><span class="num">8</span>次要行动</h2>
+  <p>次要行动可以在著作牌、主版图行动格和发明牌上找到。你作为主要行动的结果执行这些行动。</p>
+
+  <h3>撰写著作（Write a Treatise）</h3>
+  <p>撰写著作按以下顺序：</p>
+  <ol class="steps">
+    <li><b>选择</b>著作版图上任意一张你不已有同色蜡封关联的著作牌。每张著作你最多只能有 1 张。</li>
+    <li><b>支付书籍</b>：支付著作版图上该牌旁边所示的书籍（参考「消耗书籍」规则，第 X 页）。</li>
+    <li><b>支付研究标记</b>：支付所选牌下方所示的研究标记。花费按行决定：
+      <ul>
+        <li><b>底层</b>：支付 3 个研究标记。</li>
+        <li><b>其他行</b>：支付牌下方所示的两个研究标记费用，可应用以下减免：
+          <ul>
+            <li><b>部分减免</b> <span class="req"><span class="sym">🔻</span></span>：若你已有同色蜡封关联其下方直接相连的两张著作牌之一，可忽略一个研究标记费用。</li>
+            <li><b>完全减免</b> <span class="req"><span class="sym">⛔</span></span>：若两张直接相连的著作牌都有关联蜡封，则不支付研究标记。</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><b>放置蜡封</b>：从一张导师牌上拿取一个蜡封，放在所选著作牌上方最左的可用蜡空格上。获得你刚刚覆盖的空格所示的胜利点。</li>
+    <li><b>取牌</b>：从著作版图上拿取所选著作牌，选择：
+      <ul>
+        <li>放在牌库顶部（若牌库为空则成为第一张）。</li>
+        <li>加入手牌。若如此做，必须立即从手牌弃一张不同的著作牌到弃牌堆。<b>注意：你永远不能弃置赎罪牌。</b></li>
+      </ul>
+    </li>
+  </ol>
+
+  <h3>誊抄著作（Copy a Treatise Card）</h3>
+  <p>你可以从著作版图上拿取一张著作牌（不超过行动 <b>1</b> 所示的等级），但必须满足：</p>
+  <ul>
+    <li>你尚未拥有该著作。</li>
+    <li>该牌上至少已有一名其他玩家的蜡封关联。</li>
+  </ul>
+  <p>誊抄著作按步骤：</p>
+  <ol class="steps">
+    <li>支付所需硬币数 <b>2</b>。</li>
+    <li>从一张导师牌上拿取一个蜡封，放在所选著作牌上方<b>最右</b>的可用蜡空格上 <b>3</b>。<b>不</b>获得胜利点。</li>
+    <li>占据该著作牌最左蜡空格的那位玩家，立即获得行动 <b>4</b> 所示的胜利点。</li>
+    <li>从著作版图上取著作牌，选择放到牌库顶部或加入手牌（若加入手牌，必须先弃不同的著作牌）。</li>
+  </ol>
+
+  <h3>阅读著作（Read a Treatise Card）</h3>
+  <p>你可以直接从著作版图上激活一张著作牌的图标（不超过行动 <b>1</b> 所示的等级），但必须满足：</p>
+  <ul>
+    <li>该牌至少已有一个蜡封（你的或其他玩家的）关联。</li>
+  </ul>
+  <p>阅读著作按步骤：</p>
+  <ol class="steps">
+    <li>支付所需硬币数 <b>2</b>。</li>
+    <li>选择一张著作版图上、学术等级允许范围内、且至少有一个任意玩家蜡封关联的著作牌 <b>3</b>。</li>
+    <li>激活该牌上所有图标，如同执行「打出论文牌」行动 <b>4</b>。<b>不</b>从著作版图上拿走该牌。</li>
+    <li>占据该著作牌最左蜡空格的那位玩家，立即获得行动 <b>5</b> 所示的胜利点。若你本人占据最左空格，你不会获得这些额外胜利点。</li>
+  </ol>
+  <p>由于你直接从版图上打出著作牌，不能与你手中的牌组合。</p>
+  <figure>
+    <img src="GalileosTruth_Rules_images/page_14.jpg" alt="次要行动：撰写 / 誊抄 / 阅读著作">
+    <figcaption>撰写 / 誊抄 / 阅读著作（原书第 14 页）</figcaption>
+  </figure>
+
+  <h3>创造发明（Create an Invention）</h3>
+  <p>创造发明按步骤：</p>
+  <ol class="steps">
+    <li>选择主版图工坊中任意一张发明牌，支付：
+      <ul>
+        <li>所选牌旁边空位上所示的硬币 <b>1</b>。</li>
+        <li>牌本身右上角所示的费用 <b>2</b>。</li>
+      </ul>
+    </li>
+    <li>激活牌右下角所示的所有图标 <b>3</b>。次要行动是可选的。</li>
+    <li>将该发明牌面朝上放在你的场地区。</li>
+    <li>回合结束时，将工坊中剩余牌下移填补空位（如需要）。从当前时期的发明牌组抽 1 张新牌放入顶上空位。若牌组为空，<b>不亮新牌</b>。</li>
+  </ol>
+
+  <h4>发明牌类型</h4>
+  <p>发明牌共有四种类型，由牌底图标标识：</p>
+  <ul>
+    <li><b>收入型</b>：必须在收入阶段激活。</li>
+    <li><b>持续型</b>：始终激活。每当所示条件满足时必须触发。</li>
+    <li><b>每循环一次</b>：可作为主要行动在你的回合中激活。</li>
+    <li><b>终局计分型</b>：终局计分时提供满足特定条件的额外胜利点。</li>
+  </ul>
+  <p>具体发明牌详情见第 XX 页。</p>
+
+  <h3>观察星空（Observe the Sky）</h3>
+  <p>通过「观察星空」行动，你透过窗格凝视夜空，拿取一张观察板块放在个人版图的窗区。</p>
+
+  <h4>通用规则</h4>
+  <ul>
+    <li><b>信条标记</b>：本行动的具体效果取决于双面信条标记当前面（个人版图上也有指示）。</li>
+    <li><b>瓦片等级</b>：观察板块有三个等级。每级必须放在窗区对应的行 <b>1</b>。</li>
+    <li><b>重洗</b>：若抽牌堆为空，洗混对应的弃牌堆形成新堆。</li>
+    <li><b>放置规则</b>：观察板块必须放在个人版图窗区的一个可用空格：
+      <ul>
+        <li>你的第一张观察板块必须是 Level I，放在起始位 <span class="req"><span class="sym">🪟</span></span>（左下角）<b>2</b>。</li>
+        <li>之后所有瓦片，空格仅在「空」且与窗区中已放瓦片「正交相邻」时可用。</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h4>观察星空步骤</h4>
+  <ol class="steps">
+    <li>选择要拿的观察板块等级，确保你有可用空格。</li>
+    <li>根据双面信条标记，从牌堆抽瓦片：
+      <ul>
+        <li><span class="req"><span class="sym">🌞</span></span> 哥白尼面：亮 2 张瓦片，选 1 张拿走，弃另一张。</li>
+        <li><span class="req"><span class="sym">🌍</span></span> 托勒密面：亮 1 张瓦片并拿走。</li>
+      </ul>
+    </li>
+    <li>选择窗区的一个可用空格，支付空格左侧所示的研究标记与天文学书籍费用。</li>
+    <li>以任意顺序激活空格上的图标与观察板块上的图标。</li>
+    <li>将该观察板块面朝下放在该空格。</li>
+    <li>根据双面信条标记，获得即时奖励：
+      <ul>
+        <li><span class="req"><span class="sym">🌞</span></span> 哥白尼面：获得 <b>2 胜利点</b>。</li>
+        <li><span class="req"><span class="sym">🌍</span></span> 托勒密面：获得 <b>1 硬币</b>。</li>
+      </ul>
+    </li>
+  </ol>
+  <figure>
+    <img src="GalileosTruth_Rules_images/page_15.jpg" alt="创造发明 / 观察星空">
+    <figcaption>创造发明 / 观察星空（原书第 15 页）</figcaption>
+  </figure>
+</section>
+
+<!-- ============== 9. 效果 ============== -->
+<section id="effects">
+  <h2 class="sec"><span class="num">9</span>效果</h2>
+  <p>效果为你提供硬币、研究标记、书籍、胜利点，以及增减怀疑。<b>所有效果都是强制的</b>。</p>
+  <div class="comp-grid">
+    <div class="comp"><b>获得硬币</b><br>获得所示数量的硬币。</div>
+    <div class="comp"><b>支付硬币</b><br>支付所示数量的硬币。</div>
+    <div class="comp"><b>获得研究标记</b><br>获得所示数量的研究标记。</div>
+    <div class="comp"><b>支付研究标记</b><br>支付所示数量的研究标记。</div>
+    <div class="comp"><b>获得胜利点</b><br>获得所示数量的胜利点。</div>
+    <div class="comp"><b>额外胜利点</b><br>除本行动已有胜利点外，另获得所示数量的胜利点。</div>
+    <div class="comp"><b>终局失去胜利点</b><br>游戏结束时失去所示数量的胜利点。</div>
+    <div class="comp"><b>学术等级胜利点</b><br>每升 1 级学术等级，获得 2 胜利点。</div>
+    <div class="comp"><b>胜利点翻倍</b><br>获得的胜利点翻倍。</div>
+    <div class="comp"><b>著作牌拥有者得分</b><br>占据该著作牌最左蜡空格的玩家获得所示数量的胜利点。</div>
+    <div class="comp"><b>特定条件胜利点</b><br>根据某些特定条件获得或失去胜利点。</div>
+    <div class="comp"><b>特定等级胜利点</b><br>基于特定等级获得胜利点。</div>
+    <div class="comp"><b>怀疑减少（书籍条件）</b><br>对每张不同学科著作牌（最多 4 张）减少怀疑 1。紫色著作牌忽略。</div>
+    <div class="comp"><b>怀疑减少（指定数）</b><br>将怀疑减少所示数量。</div>
+    <div class="comp"><b>怀疑增加（指定数）</b><br>将怀疑增加所示数量。</div>
+    <div class="comp"><b>所有其他玩家怀疑增加</b><br>所有其他玩家增加怀疑所示数量。</div>
+    <div class="comp"><b>所有哥白尼玩家怀疑增加</b><br>所有当前信条为哥白尼的玩家增加怀疑所示数量。</div>
+    <div class="comp"><b>获得同学科书籍</b><br>获得等同于你场地区不同学科著作牌数（最多 4 张）的同学科书籍。紫色牌忽略。</div>
+    <div class="comp"><b>提升学科标记</b><br>将任选学科标记移至下一等级的第 1 格。若已在 Level IV 则不能再用此效果。</div>
+    <div class="comp"><b>获得指定学科书籍</b><br>获得所示数量的指定学科书籍。</div>
+    <div class="comp"><b>支付指定学科书籍</b><br>满足要求（第 XX 页）并支付所示数量的指定学科书籍。</div>
+    <div class="comp"><b>精通轨得分</b><br>将一个蜡封放在指定精通轨的最左可用空格，并获得所示数量的胜利点。</div>
+    <div class="comp"><b>获得同学科书籍组</b><br>获得所示数量的同学科书籍。</div>
+    <div class="comp"><b>任意 1 本书</b><br>获得任意 1 学科的 1 本书籍。</div>
+    <div class="comp"><b>移除导师蜡封</b><br>从一张导师牌上移除一个蜡封，放在个人版图旁。</div>
+    <div class="comp"><b>取回学者</b><br>从主版图任一行动格取回学者放在个人版图旁。若学者在牢房或火刑架则不能取回。</div>
+    <div class="comp"><b>物理学收入</b><br>如同在收入阶段般，从物理学轨获得硬币。</div>
+    <div class="comp"><b>数学收入</b><br>如同在收入阶段般，从数学轨获得研究标记。</div>
+  </div>
+
+  <h3>抽取一张牌（Draw a Card）</h3>
+  <p>从你的牌库抽一张牌。若牌库为空，洗混弃牌堆形成新牌库后继续抽。若你的所有牌都在手牌或场地区，则不能再抽牌。</p>
+
+  <h3>从游戏中移除一张著作牌（Remove a Treatise Card from the Game）</h3>
+  <p>你可以通过选择以下任一位置的著作牌将其从游戏中移除：</p>
+  <ul>
+    <li>你的手牌。</li>
+    <li>你的弃牌堆。</li>
+    <li>你的场地区（已经打出的牌）。</li>
+  </ul>
+  <p>立即获得该牌书脊上所示的书籍 <b>1</b>。</p>
+  <p>此行动<b>不能</b>移除赎罪牌。</p>
+
+  <div class="callout tip">
+    <p><b>小贴士</b>：将弃牌堆、打出的牌、移除的牌分堆放好，避免混淆。记住：</p>
+    <ul>
+      <li>你可以随时查看弃牌堆与已移除的牌。</li>
+      <li>你永远不能翻看牌库里的牌。</li>
+    </ul>
+  </div>
+  <figure>
+    <img src="GalileosTruth_Rules_images/page_16.jpg" alt="效果图例">
+    <figcaption>效果（原书第 16 页）</figcaption>
+  </figure>
+</section>
+
+<!-- ============== 10. 循环结束阶段 ============== -->
+<section id="end-cycle">
+  <h2 class="sec"><span class="num">10</span>循环结束阶段</h2>
+  <p>所有玩家跳过后，行动阶段结束。按顺序执行：</p>
+  <ol class="steps">
+    <li>将所有回合顺序标记移回当前回合顺序轨，保持其相对位置。</li>
+    <li>若宗教裁判标记面朝上，将其翻为面朝下。</li>
+    <li>将循环标记在循环轨上前进 1 格，并按顺序结算所经过的所有转折点。</li>
+    <li><b>清理</b>（循环 5 跳过）：
+      <ul>
+        <li>从主版图取回学者米宝，竖立放在场地区。若学者在火刑架，留在原位。若在牢房，留在原位但确保竖立。</li>
+        <li>将所有<b>每循环一次</b>发明牌转回竖立，可再次使用。</li>
+        <li>将场地区和手牌中的所有牌移入弃牌堆。</li>
+      </ul>
+    </li>
+  </ol>
+
+  <h3>转折点</h3>
+  <div class="req">
+    <p><b>更新工坊</b>：循环 1 和 3 — 从游戏中移除工坊最底部的发明牌，将剩余牌下移，从当前牌组亮 1 张新牌。若牌组为空，<b>不亮新牌</b>。</p>
+  </div>
+  <div class="req">
+    <p><b>切换发明牌组</b>：循环 2 和 4 — 从游戏中移除当前发明牌组与工坊中所有剩余牌（玩家保留已获得的发明），从新时期的牌组亮 4 张新牌放入工坊。</p>
+  </div>
+  <div class="req">
+    <p><b>解析当前禁令</b>：在循环 2、3、5 检查你是否遵守当前禁令的限制。</p>
+  </div>
+  <p>只要你所拥有的相关元素数量<b>少于</b>禁令板块 <b>3</b> 上所示的限制，你就遵守了限制。</p>
+  <ul>
+    <li><b>成功</b>：若遵守禁令，什么也不会发生。</li>
+    <li><b>失败</b>：若未遵守，必须将怀疑值增加。增加量取决于当前循环与双面信条标记当前面。</li>
+  </ul>
+  <p>所有禁令的描述见第 XX 页。</p>
+  <figure>
+    <img src="GalileosTruth_Rules_images/page_17.jpg" alt="循环结束 / 转折点">
+    <figcaption>循环结束阶段 / 转折点（原书第 17 页上半部分）</figcaption>
+  </figure>
+</section>
+
+<!-- ============== 11. 终局与计分 ============== -->
+<section id="end-game">
+  <h2 class="sec"><span class="num">11</span>终局与计分</h2>
+  <p>游戏在循环 5 的循环结束阶段后结束。然后进行终局计分。</p>
+  <p>终局计分时，<b>移动分数标记不会增加怀疑</b>。此外，玩家不激活任何旅途效果或行动；只是简单地经过每个交叉路口获得胜利点。若你的分数标记已在长路径上，继续正常得分直至重新汇入主分数轨。</p>
+
+  <h3>每位玩家从以下来源获得胜利点</h3>
+  <ol class="steps">
+    <li><b>学者状态</b></li>
+    <li><b>排名计分</b></li>
+    <li><b>终局计分发明</b>（第 XX 页）</li>
+    <li><b>解锁的导师计分牌</b>（第 XX 页）</li>
+  </ol>
+
+  <h4>1. 学者状态</h4>
+  <p>你的状态由双面信条标记当前面与学者在游戏结束时的位置决定。将你的学者米宝移至主版图顶部<b>大教堂</b>的对应空格。每格可容纳多名玩家。</p>
+  <table class="tab">
+    <thead><tr><th>状态</th><th>条件</th></tr></thead>
+    <tbody>
+      <tr><td><b>自由</b></td><td>你的学者在行动格或个人版图旁。依据信条放入大教堂对应行。</td></tr>
+      <tr><td><b>牢房</b></td><td>你的学者在主版图牢房格。依据信条放入大教堂对应行。</td></tr>
+      <tr><td><b>火刑架</b></td><td>你的学者在主版图火刑架格。依据信条放入大教堂对应行。</td></tr>
+    </tbody>
+  </table>
+  <p>获得学者在大教堂中位置上方所示的胜利点。</p>
+
+  <h4>2. 排名计分</h4>
+  <p>每位玩家每比一名其他玩家低排名，获得 <b>+4 胜利点</b>（即排名低的玩家数 × 4）。</p>
+
+  <h4>3. 终局计分发明</h4>
+  <p>你已获得的终局计分发明牌提供具体得分条件（详见第 XX 页）。</p>
+
+  <h4>4. 解锁的导师计分牌</h4>
+  <p>你已解锁的计分导师牌提供终局得分（详见第 XX 页）。</p>
+
+  <h3>每位玩家扣除胜利点</h3>
+  <ol class="steps">
+    <li><b>赎罪牌</b>：每张你持有的赎罪牌（无论在手牌、牌库、弃牌堆还是场地区），扣除该牌面所示胜利点。</li>
+    <li><b>火刑架罚分</b>：若你的学者在火刑架，且到达火刑架后你又继续增加了怀疑值，将承受额外罚分。<br>
+      <b>失去等同于你当前怀疑值 × 2 的胜利点</b>。<br>
+      若你的怀疑标记在 3 格，失去 6 胜利点。若在「0」格，则不扣分。</li>
+  </ol>
+
+  <div class="callout">
+    <p><b>胜者</b>：胜利点最多的玩家获胜。若平局，回合顺序最靠前的玩家获胜。</p>
+  </div>
+
+  <h4>计分示例</h4>
+  <div class="ex ok">
+    <p><b>Luna</b>：学者状态获得 <b>15 胜利点</b>；排名计分获得 <b>+12 胜利点</b>（其他 3 名玩家排名更低，3 × +4）。</p>
+    <p><b>Meg</b>：学者状态获得 <b>10 胜利点</b>；排名计分获得 <b>+8 胜利点</b>（2 名玩家排名更低，2 × +4），合计 <b>18 胜利点</b>。</p>
+    <p><b>Dan</b>：学者状态获得 <b>5 胜利点</b>；排名计分获得 <b>+4 胜利点</b>（1 名玩家更低）。</p>
+    <p><b>Domy</b>：学者状态获得 <b>0 胜利点</b>；无玩家排名更低。</p>
+  </div>
+  <figure>
+    <img src="GalileosTruth_Rules_images/page_17.jpg" alt="终局计分示意">
+    <figcaption>终局与计分（原书第 17 页下半部分）</figcaption>
+  </figure>
+</section>
+
+<footer>
+  <p><b>排版与翻译说明</b>：本规则书基于《Galileo's Truth》原版（ThunderGryph Games, 2026）翻译整理，章节按主题重排而非按原版页码顺序，主题色取自原作美术风格（星空深蓝紫 + 学术金 + 宗教裁判暗红 + 羊皮纸米白）。版式与导航为便于阅读而添加。</p>
+  <p>本翻译版本为 <b>A 版</b>，与 <b>B 版</b>（黎明天空主题）独立完成并交叉比对后定稿。术语标准基于奇思工作室 Key Studio 2026-09-24 官宣译名，并按桌游通用惯例补充。</p>
+  <p class="credits">
+    <b>版权</b>：Galileo's Truth © 2026 ThunderGryph Games. Designed by Flaminia Brasini &amp; Virginio Gigli. Art by Giada Princi &amp; Paolo Voto.
+  </p>
+</footer>
+
+</main>
+</div>
+</body>
+</html>
