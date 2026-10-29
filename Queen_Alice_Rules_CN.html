@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Queen Alice（爱丽丝女王）— 游戏规则</title>
+<style>
+  :root{
+    --bone:#f7f1e8; --bone2:#f0e5d5; --ink:#33262a; --ink-soft:#6d5a5f;
+    --red:#9c2b35; --red-d:#6e1d26; --red-l:#f5e1de;
+    --wk:#45597a; --wk-l:#e4e9f2;
+    --accent:#a8781f; --accent-d:#8a6114;
+    --green:#3f7d52; --green-l:#e4f0e7;
+    --line:#ddd0bd; --card:#fffdf8;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bone); color:var(--ink);
+    font-family:"Songti SC","Noto Serif SC","Source Han Serif SC",STSong,
+                "Iowan Old Style","Palatino Linotype",Georgia,serif;
+    line-height:1.8; font-size:17px;
+  }
+  .wrap{display:flex; align-items:flex-start; max-width:1180px; margin:0 auto;}
+  nav{
+    position:sticky; top:0; align-self:flex-start;
+    width:250px; flex:0 0 250px; height:100vh; overflow-y:auto;
+    background:var(--red-d); color:#f6ecea; padding:22px 14px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;
+  }
+  nav h2{font-size:13px; letter-spacing:.12em; text-transform:uppercase;
+    color:#e0a9a4; margin:0 0 12px;}
+  nav ol{list-style:none; margin:0; padding:0;}
+  nav a{display:block; color:#f6ecea; text-decoration:none; font-size:13.5px;
+    padding:6px 10px; border-radius:7px;}
+  nav a:hover{background:var(--red);}
+  nav .grp{margin:10px 0 4px; font-size:12px; color:#e0a9a4; letter-spacing:.08em;}
+  main{flex:1 1 auto; min-width:0; padding:0 40px 80px;}
+  .cover{
+    background:linear-gradient(160deg,#5c161e,var(--red));
+    color:#f9f1e9; padding:60px 40px; border-radius:0 0 18px 18px;
+    margin-bottom:36px; text-align:center;
+    box-shadow:0 10px 30px rgba(110,29,38,.3);
+  }
+  .cover h1{font-size:40px; margin:0 0 8px; letter-spacing:.02em;}
+  .cover .sub{font-size:16px; opacity:.92; font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .cover .tag{display:inline-block; margin-top:16px; padding:6px 16px;
+    border:1px solid rgba(255,255,255,.45); border-radius:20px; font-size:14px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  section{padding:14px 0 8px; border-bottom:1px solid var(--line); scroll-margin-top:18px;}
+  h2.sec{font-size:28px; color:var(--red-d); margin:18px 0 6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  h2.sec .num{color:var(--accent); font-weight:700; margin-right:10px;}
+  h3{font-size:20px; color:var(--red); margin:24px 0 6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  h4{font-size:17px; color:var(--wk); margin:18px 0 4px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  p{margin:10px 0;}
+  ul,ol{margin:10px 0 10px 4px; padding-left:22px;}
+  li{margin:5px 0;}
+  b{color:var(--red-d);}
+  .lead{font-size:18px;}
+  .comp-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:16px 0;}
+  .comp{border:1px solid var(--line); background:var(--card); border-radius:12px;
+    padding:12px 16px; box-shadow:0 2px 6px rgba(0,0,0,.04);}
+  .comp b{color:var(--red-d);}
+  .callout{border-left:5px solid var(--accent); background:var(--bone2);
+    padding:12px 18px; margin:16px 0; border-radius:0 10px 10px 0;}
+  .callout.tip{border-color:var(--green); background:var(--green-l);}
+  .callout.tip b{color:var(--green);}
+  .callout.note{border-color:var(--wk); background:var(--wk-l);}
+  .callout.note b{color:var(--wk);}
+  .steps{counter-reset:step; list-style:none; padding-left:0; margin:14px 0;}
+  .steps li{position:relative; padding:10px 14px 10px 52px; margin:8px 0;
+    background:var(--card); border:1px solid var(--line); border-radius:10px;}
+  .steps li::before{counter-increment:step; content:counter(step);
+    position:absolute; left:12px; top:50%; transform:translateY(-50%);
+    width:28px; height:28px; background:var(--red); color:#fff;
+    border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-weight:700; font-family:Arial,sans-serif;}
+  .skill{border:1px solid var(--line); background:var(--card); border-radius:12px;
+    padding:14px 18px; margin:12px 0; box-shadow:0 2px 6px rgba(0,0,0,.04);}
+  .skill .name{font-weight:700; color:var(--red-d); font-size:18px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .skill .name .ico{display:inline-block; min-width:24px; color:var(--accent);}
+  .req{border:1px solid var(--line); background:var(--card); border-radius:10px;
+    padding:12px 16px; margin:10px 0;}
+  .ex{font-size:15px; color:var(--ink-soft); border-top:1px dashed var(--line);
+    margin-top:8px; padding-top:8px;}
+  .ex::before{content:"示 例 — "; color:var(--accent-d); font-weight:700;}
+  figure{margin:18px 0; text-align:center;}
+  figure img{max-width:100%; max-width:760px; border:1px solid var(--line); border-radius:12px;
+    box-shadow:0 4px 14px rgba(0,0,0,.08); background:#fff;}
+  figcaption{font-size:13px; color:var(--ink-soft); margin-top:6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .two{display:grid; grid-template-columns:1fr 1fr; gap:16px; align-items:start;}
+  .suit{font-weight:700;}
+  .s-h{color:var(--red);} .s-s{color:var(--ink);} .s-c{color:var(--green);} .s-d{color:var(--accent-d);}
+  .res-c{color:var(--red); font-weight:700;}
+  .res-w{color:var(--wk); font-weight:700;}
+  table.ref{border-collapse:collapse; width:100%; margin:14px 0; font-size:15.5px;}
+  table.ref th,table.ref td{border:1px solid var(--line); padding:8px 12px; text-align:left; vertical-align:top;}
+  table.ref th{background:var(--red-l); color:var(--red-d);
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  table.ref tr:nth-child(even) td{background:var(--bone2);}
+  @media(max-width:900px){
+    .wrap{flex-direction:column;}
+    nav{position:static; width:100%; height:auto; flex-basis:auto;}
+    main{padding:0 18px 60px;}
+    .comp-grid,.two{grid-template-columns:1fr;}
+  }
+  footer{margin-top:40px; font-size:13px; color:var(--ink-soft);
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; text-align:center;}
+  .credits{background:var(--bone2); border:1px solid var(--line); border-radius:12px;
+    padding:16px 20px; margin-top:14px;}
+  .credits b{color:var(--red-d);}
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <h1>Queen Alice</h1>
+  <div class="sub">爱丽丝女王 · 游戏规则（中文重排版）</div>
+  <div class="tag">1–4 人 ｜ 60–90 分钟 ｜ 12 岁以上 ｜ Combo Games 出版</div>
+</header>
+
+<div class="wrap">
+  <nav>
+    <h2>目录</h2>
+    <ol>
+      <li><a href="#overview">1 · 简介与背景</a></li>
+      <li><a href="#components">2 · 配件</a></li>
+      <li><a href="#setup-common">3 · 公共设置</a></li>
+      <li><a href="#setup-player">4 · 玩家设置</a></li>
+      <li><a href="#cards">5 · 卡牌与邀请</a></li>
+      <li><a href="#central">6 · 中央版图</a></li>
+      <li><a href="#courtier">7 · 朝臣版图</a></li>
+      <li><a href="#turn">8 · 回合结构</a></li>
+      <li><a href="#actions">9 · 行动总则</a></li>
+      <li><a href="#hearts">10 · 红心 · 百花花园</a></li>
+      <li><a href="#spades">11 · 黑桃 · 国王信使</a></li>
+      <li><a href="#clubs">12 · 梅花 · 双子之树</a></li>
+      <li><a href="#diamonds">13 · 方块 · 矮胖子之墙</a></li>
+      <li><a href="#examples">14 · 回合示例</a></li>
+      <li><a href="#endgame">15 · 游戏结束与终局计分</a></li>
+      <li><a href="#solo">16 · 单人模式 · 黛娜</a></li>
+      <li><a href="#annex-flowers">附录 1 · 花（永久加成）</a></li>
+      <li><a href="#annex-cards">附录 2 · 卡牌邀请奖励</a></li>
+      <li><a href="#annex-bookmarks">附录 3 · 书签</a></li>
+      <li><a href="#annex-wishes">附录 4 · 爱丽丝的心愿</a></li>
+      <li><a href="#annex-train">附录 5 · 车票卡</a></li>
+      <li><a href="#annex-symbols">附录 6 · 符号表</a></li>
+      <li><a href="#variants">变体规则</a></li>
+      <li><a href="#credits">制作人员</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+  <section id="overview">
+    <h2 class="sec"><span class="num">1</span>简介与背景</h2>
+    <p class="lead">爱丽丝接到了一声奇怪的求救。经过客厅的镜子时，她猛然看见镜面上反写着一行字：“爱丽丝，我们需要一位新女王。”她毫不犹豫地伸手触碰镜子，手掌竟然穿了过去——紧接着整个人也被拽进了镜中的世界……</p>
+    <p>在《Queen Alice》中，每位玩家都是<b>镜中宫廷</b>（Looking-Glass Court）的一员，负责筹备爱丽丝的加冕宴席。表现最好的人将成为新女王的首席顾问，赢得游戏胜利。</p>
+    <p>为此，玩家必须说服居住在这个世界里的<b>红色与白色棋子</b>出手相助。玩家在宫廷中的<b>影响力</b>是关键：哪一方对宴席贡献最大，爱丽丝就会被加冕为<b>白女王</b>或<b>红女王</b>——甚至可能同时成为两位！</p>
+    <p>你能否把局势操纵得对自己有利，确保爱丽丝以对你最有利的颜色加冕？你能否成为爱丽丝新王朝中最有势力的廷臣？</p>
+    <div class="callout note"><b>关于原著：</b>《Queen Alice》的灵感来自刘易斯·卡罗尔的《爱丽丝镜中奇遇记》，并借用了其中一些角色与叙事母题。不过我们创作的是原创故事，并不旨在复现卡罗尔书中的情节。</div>
+    <div class="callout"><b>本节摘要：</b>《Queen Alice》是一款引擎构筑游戏，玩家扮演廷臣筹备爱丽丝的加冕宴席。目标是招募镜中宫廷红白两方的臣民，获取最多的<b>声望（Influence Point，IP）</b>；游戏的最终计分取决于爱丽丝以红方还是白方加冕。</div>
+    <figure>
+      <img src="Queen_Alice_Rules_images/page_02.jpg" alt="简介页">
+      <figcaption>简介页（原书第 2 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="components">
+    <h2 class="sec"><span class="num">2</span>配件</h2>
+    <div class="comp-grid">
+      <div class="comp"><b>公共配件</b><br>
+        中央版图 ×1 · 卡牌市场版图 ×1 · 行动版图 ×4（红心、黑桃、梅花、方块）<br>
+        红色棋子 ×9 · 白色棋子 ×9 · 皇冠标记 ×11<br>
+        书本标记 ×27（3 种颜色）· 书签板块 ×42 · 花朵标记 ×32（每种 8 个）<br>
+        爱丽丝的心愿板块 ×16 · 200/300 声望标记 ×4（分数标记）· 镜子标记 ×1<br>
+        卡牌 ×90（30 铜 + 30 银 + 30 金）</div>
+      <div class="comp"><b>特殊角色件</b><br>
+        红园丁与白园丁（红心版图）<br>
+        国王信使：红疯帽匠与白三月兔（黑桃版图）<br>
+        双子：红特威达姆（Tweedledum）与白特威迪（Tweedledee）（梅花版图）<br>
+        矮胖子（Humpty Dumpty）红白半身件（方块版图）<br>
+        红爱丽丝与白爱丽丝棋子</div>
+      <div class="comp"><b>每位玩家（×4）</b><br>
+        朝臣版图 ×1 · 声望标记 ×1 · 时钟指针 ×1<br>
+        红心标记 ×10 · 方块标记 ×10 · 爪印标记 ×2（红白各一）<br>
+        黑色立方体 ×5 · 3 个玩家色立方体 · 基础卡 ×10<br>
+        玩家提示板块 ×1 · 棋子走法提示卡 ×1</div>
+      <div class="comp"><b>车票卡</b><br>
+        车票卡（Train Cards）×16 · 黛娜卡（Dinah cards）×10（单人模式用）</div>
+    </div>
+    <figure>
+      <img src="Queen_Alice_Rules_images/page_03.jpg" alt="配件页">
+      <figcaption>配件一览（原书第 3 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="setup-common">
+    <h2 class="sec"><span class="num">3</span>公共设置</h2>
+    <p>按以下步骤布置游戏场地：</p>
+    <ol class="steps">
+      <li><b>主版图：</b>放置中央版图，将四块行动版图与卡牌市场版图围放在四周。每块版图都按玩家人数使用对应的一面（1–2 人 或 3–4 人）。</li>
+      <li><b>棋子：</b>洗混玩家提示板块，抽取一块，按其背面图示在中央版图上布好棋盘。</li>
+      <li><b>爱丽丝的心愿：</b>把心愿板块按图标类型分成四叠。每叠洗混后各抽取 1 块，组成一组四块。（第一局游戏请使用此处图示指定的四块。）将这四块洗混，随机放到心愿格上，黄色面朝上。</li>
+      <li><b>皇冠：</b>把皇冠标记放到中央版图底部的对应格上，“×2”面朝上。4 人游戏用 8 个皇冠，3 人用 7 个，2 人用 6 个。</li>
+      <li><b>爱丽丝棋子：</b>把红爱丽丝与白爱丽丝棋子放到各自路径的起点。</li>
+      <li><b>卡牌市场：</b>把玩家颜色的基础卡放到一旁。其余卡牌分成铜、银、金三副牌库并各自洗混。为市场的每一层补位：在该层左侧两个空格各放一张对应颜色的卡，牌库剩余的卡面朝上放在该层最右侧的格子——这些顶牌在获取卡牌时同样可以选购。</li>
+      <li><b>行动棋子：</b>把红园丁与白园丁放到红心版图上（7a）；把玩家颜色的国王信使（红疯帽匠与白三月兔）放到黑桃版图上（7b）；把玩家颜色的双子（红特威达姆与白特威迪）放到梅花版图上（7c）；把矮胖子的红白半身件放到方块版图上（7d）。</li>
+      <li><b>书签、书本与花朵：</b>书签板块按其顶部标示的书本费用分成数叠，放在梅花版图旁。每种颜色的书本标记成叠放在梅花版图旁，每种颜色的花朵标记放在红心版图旁。在梅花版图上每个没有印制书本图案的格子里放 1 个白色书本标记（8a）。</li>
+      <li><b>爪印：</b>把每位玩家的白色爪印标记放到白猫轨道起点，红色爪印标记放到红猫轨道起点。</li>
+    </ol>
+    <div class="callout note"><b>3 人游戏设置：</b>用皇冠标记盖住红、白爱丽丝路径上标有 <span class="s-h">③</span> 记号的格子，并使用未被选用的那种颜色的红心与方块标记，盖住红心版图与方块版图上标有相应记号的格子。</div>
+    <div class="callout"><b>先手玩家：</b>最近照过镜子的人拿走镜子标记并开始游戏。分不清就拿随机方式决定。</div>
+    <figure>
+      <img src="Queen_Alice_Rules_images/page_04.jpg" alt="公共设置 1">
+      <figcaption>公共设置（原书第 4 页）</figcaption>
+    </figure>
+    <figure>
+      <img src="Queen_Alice_Rules_images/page_05.jpg" alt="公共设置 2">
+      <figcaption>公共设置 · 步骤 7–9（原书第 5 页）</figcaption>
+    </figure>
+    <div class="callout"><b>本节摘要：</b>中央版图、行动版图与卡牌市场版图放在桌子中央，棋子按随机抽取的玩家提示板块背面的布阵图摆放。皇冠标记、爱丽丝棋子，以及每种图标随机各抽取一块的心愿板块，被放置到中央版图上。</div>
+  </section>
+
+  <section id="setup-player">
+    <h2 class="sec"><span class="num">4</span>玩家设置</h2>
+    <ol class="steps">
+      <li><b>版图与标记：</b>拿取一块朝臣版图和对应玩家颜色的标记。把亚克力时钟指针装到版图的钟面上。</li>
+      <li><b>摆放标记：</b>把红色与白色的红心标记（2a）和方块标记（2b）放入各自的槽位。</li>
+      <li><b>起始资源：</b>把 3 个玩家色立方体放到银盘上。</li>
+      <li><b>黑色立方体：</b>拿 5 个黑色立方体，放入上锁储藏区。</li>
+      <li><b>起始手牌与牌库：</b>拿取你颜色的 10 张基础卡，洗混后面朝下放到抽牌区，抽取 3 张组成起始手牌。</li>
+      <li><b>玩家提示板块：</b>拿取你颜色的玩家提示板块，放在朝臣版图旁。<br><b>声望（IP）轨道：</b>把你颜色的声望标记放到环绕中央版图的声望轨道“0”位上。</li>
+      <li><b>车票卡 · 选择：</b>每位玩家获得 2 张车票卡。秘密选择 1 张，并决定使用其白色面还是红色面。第一局游戏可以直接发标有星星的 4 张。</li>
+    </ol>
+    <div class="callout note"><b>车票卡 · 结算：</b>同时亮出所选的车票卡。按回合顺序，玩家获得所选卡上标示的全部奖励。</div>
+    <div class="callout"><b>注意：</b>只获得卡面明确标示的奖励；这些奖励可能与在该地点执行行动时的标准奖励不同。</div>
+    <div class="ex">Cris 选择了双子车票卡的红色面。她把红双子前进 1 格，获得图示的书签、3 点时间，以及卡上标示的 1 个黄油吐司。她<b>不</b>拿取双子落格处的书本，因为她只获得车票卡上描绘的奖励。</div>
+    <figure>
+      <img src="Queen_Alice_Rules_images/page_06.jpg" alt="玩家设置">
+      <figcaption>玩家设置与车票卡（原书第 6 页）</figcaption>
+    </figure>
+    <p>完成以上步骤后，加冕的筹备工作就可以开始了。</p>
+  </section>
+
+  <section id="cards">
+    <h2 class="sec"><span class="num">5</span>卡牌与邀请</h2>
+    <p>在《Queen Alice》中，你通过在镜中世界各处执行行动、移动棋子来召集臣民协助，为爱丽丝筹备加冕宴席。</p>
+    <div class="callout"><b>邀请（Invitation）：</b>当有机会执行邀请行动（<span class="s-h">✉</span>）时，你可以通过“邀请”来<b>裁剪（cull）</b>卡牌——把卡移出牌库直到游戏结束，并在终局计入声望。被邀请的卡沿朝臣版图底边摆放。你可以从手牌或弃牌堆邀请卡牌。</div>
+    <div class="callout note"><b>注意：</b>如果邀请会导致你在本回合打出卡牌之前手牌清空，或使你手牌与牌库合计不足 3 张，则不能邀请。</div>
+    <h3>卡牌结构</h3>
+    <p>卡牌是游戏引擎的驱动力，按层级分级：基础、铜、银、金。每层有独特的底色与横幅形状。起始牌库只含基础卡，更强大的卡可在游戏中购入。卡面包含四个部分：</p>
+    <div class="skill"><div class="name"><span class="ico">A</span>棋子</div><p>标示你可移动的棋子类型与颜色。<b>百搭棋子卡</b>允许你移动对应类型的任意颜色棋子。</p></div>
+    <div class="skill"><div class="name"><span class="ico">B</span>打出奖励</div><p>打出该卡时立刻获得的奖励。基础卡没有打出奖励。</p></div>
+    <div class="skill"><div class="name"><span class="ico">C</span>弃除奖励</div><p>在你回合开始时弃除该卡所能获得的奖励。</p></div>
+    <div class="skill"><div class="name"><span class="ico">D</span>邀请奖励</div><p>终局计分时，若该卡被邀请参加加冕宴席，可获得的声望点数。</p></div>
+    <figure>
+      <img src="Queen_Alice_Rules_images/page_07.jpg" alt="卡牌结构">
+      <figcaption>如何游玩 · 卡牌结构（原书第 7 页）</figcaption>
+    </figure>
+    <div class="callout"><b>本节摘要：</b>卡牌按层级分级（基础、铜、银、金）。卡面标示要在棋盘上移动的棋子类型与颜色（左上）；打出该卡时获得的打出奖励（左下）；弃除该卡时获得的弃除奖励（右下）；以及终局计分时用邀请行动裁掉该卡可得的邀请奖励 IP（右上）。</div>
+  </section>
+
+  <section id="central">
+    <h2 class="sec"><span class="num">6</span>中央版图</h2>
+    <p>中央版图包含棋盘（A）、爱丽丝的路径（B）、皇冠陈列区（C）、猫咪轨道（D）与声望轨道（E）。</p>
+    <figure>
+      <img src="Queen_Alice_Rules_images/page_08.jpg" alt="中央版图结构">
+      <figcaption>中央版图结构（原书第 8 页）</figcaption>
+    </figure>
+
+    <h3>棋盘</h3>
+    <p>棋盘用于选择行动，并在打出棋子时获得资源。</p>
+    <ul>
+      <li><b>1 · 列</b>：决定要执行的行动。</li>
+      <li><b>2 · 通用行动</b>：中央列可以执行任意行动，但需支付 1 个资源作为代价。</li>
+      <li><b>3 · 行</b>：决定获得的资源。</li>
+      <li><b>4 · 百搭资源</b>：中央两行允许你在三种资源中任选。</li>
+    </ul>
+
+    <h3>爱丽丝的路径</h3>
+    <p>爱丽丝的路径代表她穿越镜中世界的旅程，标记她决定成为红女王还是白女王。</p>
+    <ul>
+      <li><b>5 · 爱丽丝路径</b>：沿红爱丽丝或白爱丽丝的路径推进时，把爱丽丝棋子向上移到下一个空格，并得到该格标示的声望；跳过任何放有皇冠标记的格子。</li>
+      <li><b>6 · 爱丽丝的心愿</b>：当爱丽丝抵达一格<b>心愿</b>（计分条件）时：<ul>
+        <li>从陈列区移除 1 个皇冠，先放到该心愿上作为提醒，然后结算路径格上标示的声望。</li>
+        <li>完成你的整个回合，包括任何重复行动。</li>
+        <li>回合结束时，所有玩家按该心愿的条件计分。之后皇冠弃除。</li></ul></li>
+      <li><b>7 · 王座格</b>：当红或白爱丽丝走到路径终点进入王座格时，爱丽丝将以该颜色加冕为女王。从陈列区移除 1 个皇冠并弃除。王座格只能被一个爱丽丝棋子占据，但另一颜色的爱丽丝仍可继续推进至其路径终点。</li>
+    </ul>
+    <p>当某个爱丽丝棋子无法再推进时，该颜色的后续推进改为获得 <b>5 IP</b> 并移除 1 个皇冠。</p>
+    <div class="callout tip"><b>提示：</b>推动爱丽丝能给你可观的声望，还会触发各种心愿计分。何时推进、沿哪条路径推进，要精打细算！</div>
+
+    <h3>皇冠陈列区</h3>
+    <p>皇冠既是倍率器，也是游戏结束的触发器。</p>
+    <ul>
+      <li><b>获得皇冠：</b>执行某些行动可以获得皇冠。得到皇冠时，从陈列区取 1 个皇冠标记，放到<b>当前活跃路径</b>上爱丽丝位置前方的下一个空格，并立刻结算该格标示声望的<b>两倍</b>。爱丽丝下次在该路径上推进时，会跳过放有皇冠的格子，前进到下一个空格。</li>
+      <li><b>皇冠奖励：</b>得到皇冠时，若当前路径没有空格或皇冠陈列区已空，改为结算 <b>10 IP</b>。若路径已满但陈列区仍有皇冠，则从陈列区移除并弃除 1 个皇冠，结算 10 IP。</li>
+      <li><b>游戏结束：</b>当最后一个皇冠被从陈列区移除时，触发游戏结束。完成当前轮次，让所有玩家获得相同的行动次数，直到持有镜子标记的玩家<b>右侧</b>的玩家完成回合为止。</li>
+    </ul>
+    <div class="callout note"><b>注意：</b>皇冠不能放在心愿格上。</div>
+    <div class="callout tip"><b>提示：</b>游戏中放置皇冠非常重要，它们会奖励大量声望！</div>
+
+    <h3>猫咪轨道</h3>
+    <p>当你获得爪印<span class="s-h">🐾</span>时，沿对应的红猫或白猫轨道前进你的标记。获得你落格以及跳过的所有格子的奖励。多个标记可以共用一格。</p>
+    <p><b>终局计分条件：</b>你在这条轨道上的进度决定你终局能计哪些心愿：</p>
+    <ul>
+      <li><b>×1</b>：为该颜色计分一个你自选的心愿。</li>
+      <li><b>×2</b>：为该颜色计分两个心愿。</li>
+    </ul>
+    <div class="callout tip"><b>提示：</b>游戏中推进猫咪轨道的即时回报不大，但终局结算爱丽丝的心愿可能为你带来大量声望。</div>
+
+    <h3>卡牌市场</h3>
+    <p>卡牌市场为铜、银、金三档卡牌各设三个格位。</p>
+    <table class="ref">
+      <tr><th>格位</th><th>费用</th></tr>
+      <tr><td>左格</td><td>免费。</td></tr>
+      <tr><td>中格</td><td>支付 1 点时间。</td></tr>
+      <tr><td>右格</td><td>支付 1 个自选资源。</td></tr>
+    </table>
+    <p><b>获取：</b>购入的卡直接加入手牌，可以立刻使用。市场只在<b>休整阶段</b>补货：把卡向左滑动填补空位。</p>
+    <div class="ex">Camila 从中格购入一张银卡。她支付 1 点时间，把卡加入手牌。该格保持空置，直到她的回合结束、休整阶段到来时才补货。</div>
+    <figure>
+      <img src="Queen_Alice_Rules_images/page_09.jpg" alt="皇冠、猫轨道与卡牌市场">
+      <figcaption>皇冠陈列区、猫咪轨道与卡牌市场（原书第 9 页）</figcaption>
+    </figure>
+    <div class="callout"><b>本节摘要：</b>中央版图围绕行动与计分展开。棋盘的行决定资源奖励，列决定行动。爱丽丝的路径授予声望、触发心愿计分，并决定爱丽丝将成为红女王、白女王还是两者皆是。皇冠陈列区记录剩余皇冠并触发游戏结束。猫咪轨道在游戏中授予奖励并影响终局计分。卡牌市场是玩家购入更强新卡的地方。推进爱丽丝路径与猫咪轨道，尤其是获得皇冠，是赚取声望并取胜的主要途径。</div>
+  </section>
+
+  <section id="courtier">
+    <h2 class="sec"><span class="num">7</span>朝臣版图</h2>
+    <p>玩家的个人版图——朝臣版图——划分为若干区域。</p>
+    <figure>
+      <img src="Queen_Alice_Rules_images/page_10.jpg" alt="朝臣版图结构">
+      <figcaption>朝臣版图结构（原书第 10 页）</figcaption>
+    </figure>
+    <h4>上部区域</h4>
+    <ul>
+      <li><b>A · 上锁储藏区</b>：存放尚未解锁的黑色资源立方体。</li>
+      <li><b>B · 回合结构提示</b>：概括一个回合的各阶段。</li>
+      <li><b>C · 资源储存区</b>：包含存放未分配资源立方体的银盘，以及三个资源区：樱桃蛋糕（红）、茶、黄油吐司（白）。</li>
+      <li><b>D · 时间时钟</b>：追踪累积的时间。获得时间时顺时针拨动指针，花费时间时逆时针回拨。时间不能超过 10，也不能低于 0。每当有超出 10 的时间时，改为获得 1 IP。</li>
+    </ul>
+    <p>版图其余部分划分为<b>红色王国（左）</b>与<b>白色王国（右）</b>的要素。</p>
+    <h4>中央与下部区域</h4>
+    <ol>
+      <li><b>方块（砌墙砖）</b>：执行方块行动时，任选一个标记放到墙上并获得标示的奖励。</li>
+      <li><b>监狱</b>：位于每色方块下方，关押被俘获的对方颜色棋子，并展示俘获每种棋子的奖励。</li>
+      <li><b>红心（花园玫瑰）</b>：执行红心行动时，从下到上移除标记放入花园。支付费用并获得该格标示的奖励。</li>
+    </ol>
+    <h3>资源管理</h3>
+    <ul>
+      <li><b>获得资源：</b>把 1 个立方体从银盘移到相应的资源区。</li>
+      <li><b>花费资源：</b>把 1 个立方体从资源区放回银盘。</li>
+      <li><b>重新分配：</b>若你获得资源时银盘已空，可以把任何一个已分配的立方体放回银盘，再重新分配它。</li>
+      <li><b>黑色立方体（额外容量）</b>：解锁后，黑色立方体等同玩家色立方体使用。</li>
+      <li><b>用时间和黑色立方体兑换资源：</b>支付时，可以用以下方式替代 1 个自选资源：耗去 <b>3 点时间</b>，或把 <b>1 个黑色立方体</b>放回上锁储藏区。可以按此方式替代任意数量的资源。用时间或黑色立方体换得的资源必须立刻花掉，不能储存。<b>同一次行动中不能</b>把已经用作支付的黑色立方体再拿去兑换。不过，执行<b>重复行动</b>时，初次行动中用掉（放回银盘）的黑色立方体视为可用于兑换。</li>
+    </ul>
+    <div class="callout note"><b>皇冠计数卡：</b>你可以选择用这些卡垫在朝臣版图下方，追踪你已获得的各色皇冠数量（0 到 4）。</div>
+    <div class="callout"><b>本节摘要：</b>朝臣版图通过可移动立方体追踪时间与资源（樱桃蛋糕、茶、黄油吐司）。黑色立方体充当额外储存容量。版图上还有放置后授予奖励的红心（花园玫瑰）与方块（砌墙砖），以及关押被俘棋子的监狱。</div>
+  </section>
+
+  <section id="turn">
+    <h2 class="sec"><span class="num">8</span>回合结构</h2>
+    <p>每位玩家的回合依次经过四个阶段：三个必选，一个可选。</p>
+    <ul>
+      <li><b>a · 弃除一张牌。</b></li>
+      <li><b>b · 打出一张牌。</b></li>
+      <li><b>c · 重复行动（可选）。</b></li>
+      <li><b>d · 休整（整理）。</b></li>
+    </ul>
+    <h3>a · 弃除一张牌</h3>
+    <p>从手牌选一张卡弃除，获得其弃除奖励。把卡面朝上放入你的弃牌堆。</p>
+    <h3>b · 打出一张牌</h3>
+    <p>从手牌再选一张打出，叠放在刚弃除的那张卡上。</p>
+    <ul>
+      <li><b>打出奖励：</b>若打出的卡标有打出奖励，立刻获得。奖励中的折扣每回合只能生效一次。<b>注意：基础卡没有打出奖励。</b></li>
+      <li><b>移动或营救：</b>打出卡上标示的棋子。<ul>
+        <li><b>移动</b>：按标准国际象棋规则（见棋子走法提示卡）在棋盘上移动棋子。<b>注意：兵永远不能移动超过一格。</b></li>
+        <li><b>营救</b>：你也可以改为“营救”一枚该类型的被俘棋子（你的或对手的）。被营救的棋子当回合不能移动。</li></ul></li>
+      <li><b>结算落格：</b>棋子本回合停驻格的<b>行</b>决定获得的资源，<b>列</b>决定要执行的行动。先收资源，再以棋子的颜色执行行动。</li>
+      <li><b>打出被堵的棋子：</b>若棋子被堵住无法移动，原地打出它，激活其当前位置的效果。即使其他兵还能动，你也可以打出被堵的兵。</li>
+    </ul>
+    <h4>俘获</h4>
+    <p>俘获遵循标准国际象棋规则。若你的移动落在一个对方颜色棋子占据的格上，将其俘获并放入你版图上相应的监狱。国王也可以像其他棋子一样被俘获；<b>没有“将军”</b>。按被俘棋子的价值获得累积奖励：</p>
+    <ul>
+      <li><b>兵</b>：1 点时间。</li>
+      <li><b>马/象/车</b>：1 资源 + 1 点时间。</li>
+      <li><b>王/后</b>：1 个被俘颜色爪印 + 1 资源 + 1 点时间。</li>
+    </ul>
+    <div class="ex">Carmen 俘获一枚白皇后，放到她朝臣版图的红方监狱。因为俘获的是皇后，她获得 1 个白爪印、1 个樱桃蛋糕和 1 点时间。</div>
+    <h4>营救棋子</h4>
+    <p>若你想打出的棋子已被任何玩家（包括你自己）俘获，可以营救它。把该棋子放到其颜色的任意空置重生格上，激活该格效果来结束移动。营救来源监狱所属的玩家获得 1 点时间作为补偿。若所有重生格都被占满，把棋子放到任意空格。</p>
+    <div class="ex">Kortes 需要一枚红兵，但它被 Vera 俘获。Kortes 把它移到一个红色重生格并激活该格（该兵不移动）；Vera 获得 1 点时间。</div>
+    <h4>兵的升变</h4>
+    <p>若你把兵移入最远一行，获得 1 个该兵颜色的爪印。立刻把兵移到其颜色的一个重生格上，并以激活该新格（含其关联资源与行动）结束移动。</p>
+    <h4>跳过行动</h4>
+    <p>若你不能或不想执行行动，改为获得 2 点时间并休整。</p>
+    <h3>c · 重复行动（可选）</h3>
+    <p>每回合限一次，可选支付 <b>6 点时间</b>重复刚执行的行动。必须以相同颜色执行重复的行动，并支付其行动费用。不打出新卡。</p>
+    <div class="ex">触发黑桃行动后，Kortes 支付 2 个樱桃蛋糕把她的红信使前进两格。她在该格获得的奖励之一是 2 点时间。现在她有足够的时间来重复行动，于是支付 6 点时间和另 1 个樱桃蛋糕，把信使再前进一格。</div>
+    <h3>d · 休整（整理）</h3>
+    <p>回合的最后阶段：刷新你的手牌、卡牌市场、所有已翻面的书签板块，并结算已触发的心愿。</p>
+    <ul>
+      <li><b>刷新手牌：</b>补抽至手牌上限（通常为 3）或弃除至手牌上限。若牌库已空，洗混弃牌堆重组牌库。</li>
+      <li><b>刷新卡牌市场：</b>把卡向左滑动填补空位。</li>
+      <li><b>刷新书签：</b>把所有已使用的每回合书签板块翻回可用面。（见“梅花”。）</li>
+      <li><b>结算爱丽丝的心愿：</b>若本回合爱丽丝抵达了心愿格，所有玩家现在结算它。（确认陈列区的一个皇冠已被移除。）</li>
+    </ul>
+    <div class="callout"><b>本节摘要：</b>回合有四个阶段：a. 弃除一张卡获得其奖励；b. 打一张卡移动棋子、获得资源并执行行动（也可俘获或营救棋子）；c. 可选：支付时间以同色重复上一个行动并支付其费用；d. 补牌至手牌上限（必要时洗混弃牌堆）、补货卡牌市场、重新激活书签，并在触发时结算心愿。</div>
+  </section>
+
+  <section id="actions">
+    <h2 class="sec"><span class="num">9</span>行动总则</h2>
+    <p>打出棋子时，你可以以该棋子的颜色执行一个行动，并支付该行动的关联费用。要执行的行动由打出的棋子停驻的<b>列</b>决定。即使付得起更多，<b>每个行动也只能执行一次</b>。</p>
+    <ul>
+      <li><b>行动费用：</b>行动的资源费用与所打棋子的颜色相关。费用必须在获得任何奖励之前支付。</li>
+      <li><b>红色行动费用</b>：樱桃蛋糕 <span class="res-c">🍰</span> 和/或 茶 <span class="res-c">🍵</span>。</li>
+      <li><b>白色行动费用</b>：黄油吐司 <span class="res-w">🍞</span> 和/或 茶 <span class="res-w">🍵</span>。</li>
+    </ul>
+    <p><b>费用</b>始终用<b>黑色</b>数字与图标表示。</p>
+    <ul>
+      <li><b>奖励</b>：奖励指执行行动时直接获得的、或任何次级效果产生的一切（例如资源、时间、黑色立方体、购卡或邀请卡、花朵、迷你行动、爪印、爱丽丝推进、皇冠、IP 等）。</li>
+      <li><b>领取奖励：</b>同一行动中获得的奖励可以按你想要的任意顺序领取。但必须在产生它们的那个具体行动中立刻结算——例如不能留到重复行动时才激活某个奖励。</li>
+      <li>领取奖励是<b>可选</b>的，<b>除了</b>爱丽丝推进与皇冠——这两者一旦触发必须拿取。</li>
+    </ul>
+    <p><b>奖励</b>始终用<b>白色</b>数字与图标表示，或仅用不带数字的图标表示。</p>
+    <h3>通用行动（Wild Action）</h3>
+    <p>棋盘中央列的星星是通用行动，允许你执行四种行动中的任意一种。但它有代价：<b>必须额外支付 1 个自选资源</b>（樱桃蛋糕、黄油吐司或茶）才能使用。你可以直接使用当回合从行中获得的那份资源，立刻花掉而不入库。</p>
+    <p>若你选择重复行动（回合阶段 c），无需再次支付通用行动列的费用。</p>
+    <h3>迷你行动（Mini-Actions）</h3>
+    <p>迷你行动作为奖励发放，提供主行动的部分收益。每个主行动都有对应的迷你行动。迷你行动<b>没有颜色限制</b>。</p>
+    <div class="callout tip"><b>提示：</b>迷你行动非常适合通过串联行动触发连击。它们还让你能操作主行动之外的其他版图。</div>
+    <figure>
+      <img src="Queen_Alice_Rules_images/page_13.jpg" alt="行动总则">
+      <figcaption>行动 · 通用行动 · 迷你行动（原书第 13 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="hearts">
+    <h2 class="sec"><span class="num">10</span><span class="suit s-h">♥</span> 红心 · 百花花园（The Garden of Live Flowers）</h2>
+    <p>在花园里，玩家种植红色或白色的玫瑰丛，为典礼装点王国。</p>
+    <h3>行动流程</h3>
+    <ol class="steps">
+      <li><b>移动园丁（可选）：</b>种植前，你可以让相应颜色的园丁移到该颜色的相邻格，每次移动支付 1 点茶（即移入正对面的格子需 2 点茶）。<b>注意：</b>园丁从休息位移入花园是免费的——放到与其颜色匹配的四个格子中的任意一个。见“园丁休息”。</li>
+      <li><b>放一枚红心：</b>从朝臣版图取相应颜色编号最小的红心标记。支付标示的费用（樱桃蛋糕或黄油吐司），获得图示的奖励。</li>
+      <li><b>种植玫瑰丛：</b>把你的红心标记放到园丁当前区域内一个空格上。获得被标记盖住的奖励。</li>
+    </ol>
+    <h4>里程碑奖励</h4>
+    <p>以下奖励按各颜色的进度授予：</p>
+    <ul>
+      <li><b>第 3 枚红心放置后</b>：爱丽丝前进一格。</li>
+      <li><b>第 4 枚红心放置后</b>：获得一个迷你行动。</li>
+      <li><b>第 5 枚红心放置后</b>：获得一个皇冠。</li>
+    </ul>
+    <ul>
+      <li><b>花朵：</b>大部分奖励是花朵，它们在游戏中给你<b>永久加成</b>。可以把收集到的花朵标记放在提示板块上以便记住这些加成。（各项加成的详情见附录 1。）</li>
+      <li><b>园丁休息：</b>若种植后园丁所在区域没有空格了，把园丁放回其休息位。</li>
+    </ul>
+    <div class="ex">Carmen 支付 1 点茶把园丁移到指定区域（A）。她支付 2 个樱桃蛋糕（B）种下一丛红玫瑰（C），并按她版图上的标示获得一张银卡（D）。她用红心标记盖住花园里的一个黄花奖励格，于是从供应区拿取 1 个黄花标记（E）。</div>
+    <div class="skill"><div class="name"><span class="ico">♥</span>红心迷你行动</div><p>移除你的<b>任一颜色</b>编号最小的红心，<b>免费</b>获得揭示出的奖励。把标记放到一旁；它不放入花园。</p></div>
+    <div class="callout"><b>红心小结（百花花园）：</b>可选支付茶移动园丁，然后支付费用从版图解锁一枚红心。把红心作为玫瑰丛放入花园，获得被盖住的奖励和朝臣版图上标示的奖励。这个行动是获得花朵永久加成的唯一途径。红心迷你行动则是免费移除任一颜色编号最小的红心并获得图示奖励。</div>
+    <figure>
+      <img src="Queen_Alice_Rules_images/page_14.jpg" alt="红心行动">
+      <figcaption>红心 · 百花花园（原书第 14 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="spades">
+    <h2 class="sec"><span class="num">11</span><span class="suit s-s">♠</span> 黑桃 · 国王信使（The King's Messengers）</h2>
+    <p>国王信使（红疯帽匠与白三月兔）为宴席递送请柬，并请求其他棋子协助。</p>
+    <h3>行动流程</h3>
+    <ol class="steps">
+      <li><b>支付并移动：</b>沿箭头让相应颜色的信使前进若干格，格数取决于你支付的资源：<table class="ref">
+        <tr><th>移动格数</th><th>红信使（疯帽匠）费用</th><th>白信使（三月兔）费用</th></tr>
+        <tr><td>1 格</td><td>1 樱桃蛋糕</td><td>1 黄油吐司</td></tr>
+        <tr><td>2 格</td><td>2 樱桃蛋糕</td><td>2 黄油吐司</td></tr>
+        <tr><td>3 格</td><td>2 樱桃蛋糕 + 1 茶</td><td>2 黄油吐司 + 1 茶</td></tr>
+      </table>
+      有些格让你自选路径。同一格可被多名玩家占据。</li>
+      <li><b>奖励：</b>只获得你<b>落格</b>标示的格奖励，外加其卡牌奖励。</li>
+    </ol>
+    <h4>卡牌奖励（二选一）</h4>
+    <ul>
+      <li><b>购卡（Acquire）：</b>按落格背后横幅标示的层级购买一张卡，支付其市场费用。</li>
+      <li><b>邀请（Invite）：</b>从你的手牌或弃牌堆裁掉任意层级的卡，放到朝臣版图下方，终局时折算 IP。</li>
+    </ul>
+    <h4>里程碑奖励</h4>
+    <ul>
+      <li><b>印章（Seals）：</b>经过标有印章的箭头时获得奖励：<ul>
+        <li><b>第一名玩家</b>：获得大印章中标示的全部奖励。</li>
+        <li><b>后续玩家</b>：获得小印章中标示的全部奖励。</li></ul></li>
+      <li><b>中央区：</b>进入中央的金色区至少获得 1 次爱丽丝推进。</li>
+      <li><b>中央穿越：</b>经过时授予一个免费迷你行动。（这不是印章。）</li>
+      <li><b>路径终点：</b>任一信使抵达路径终点，获得相应颜色的一个皇冠。</li>
+    </ul>
+    <div class="callout tip"><b>提示：</b>通常值得尽可能走远。</div>
+    <div class="ex">Carmen 支付 1 个黄油吐司、1 点茶（A）和 3 点时间（替代 1 个黄油吐司）（B），让白三月兔前进 3 格。她停在一个奖励 2 个爪印和一张银卡的格上（C）。作为首位越过里程碑印章的玩家，她还获得 6 IP（D）。</div>
+    <div class="skill"><div class="name"><span class="ico">♠</span>黑桃迷你行动</div><p>让<b>任一</b>信使恰好前进一格，<b>免费</b>。照常获得所有奖励（格奖励、卡牌奖励、印章里程碑、中央穿越奖励）。</p></div>
+    <div class="callout"><b>黑桃小结（国王信使）：</b>支付资源费用让红或白信使移动 1、2 或 3 格。获得落格奖励，并可选择购卡或邀请卡。越过里程碑可获额外奖励。黑桃迷你行动则是免费让任一信使前进一格并获得该处奖励。</div>
+    <figure>
+      <img src="Queen_Alice_Rules_images/page_15.jpg" alt="黑桃行动">
+      <figcaption>黑桃 · 国王信使（原书第 15 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="clubs">
+    <h2 class="sec"><span class="num">12</span><span class="suit s-c">♣</span> 梅花 · 双子之树（The Tree of Tweedledum and Tweedledee）</h2>
+    <p>在双子之树，玩家移动特威达姆（红双子）或特威迪（白双子）向上攀爬，代表学习镜中世界的故事以便在宴席上讲述。</p>
+    <h3>行动流程</h3>
+    <ol class="steps">
+      <li><b>支付并移动：</b>选一条路径，让相应颜色的双子沿箭头移动，并支付箭头标示的费用（不能穿过超过 1 个箭头）。<br>
+      黄色箭头标有两种费用，取决于移动的双子：樱桃蛋糕（红双子）或黄油吐司（白双子）。<br>
+      黑色箭头只标一种费用，无论移动哪个双子都一样。</li>
+      <li><b>获得奖励：</b>拿走移动落格上的所有实体书本标记。若格上印有书本，你再获得一个标记（印有多种颜色时任选一种颜色），以及其他标示的奖励。<b>不要</b>收取你抵达时已被书本标记盖住的任何印制奖励。因此，首个落在一个有实体书本标记格子的玩家会获得两本书，而标记被拿走后到访该格的后续玩家获得一本书加另一个印制奖励。</li>
+      <li><b>购买书签（可选）：</b>花书本购买一枚书签。可以检视所有可用书签并任选。书签提供即时奖励、永久加成，或终局计分 IP。</li>
+    </ol>
+    <div class="callout note"><b>注意：</b>多个棋子可以占据同一格。格子的高度标在其下方的书签图标旁。</div>
+    <h4>里程碑奖励</h4>
+    <ul>
+      <li><b>高度奖励：</b>从第 2 层爬到第 3 层时，对应颜色的爱丽丝沿其路径前进一格。</li>
+      <li><b>路径终点：</b>任一双子抵达树顶，获得相应颜色的一个皇冠。</li>
+    </ul>
+    <div class="ex">移动一辆白色车后，Camila 沿左侧箭头让白双子前进，支付 3 个黄油吐司（A）。她经过一个爱丽丝推进格（B），拿走 1 个实体白色书本标记，并从格上印制的选项中选了 1 本绿书（C）。然后她花这两本书加上原本就有的一本白书，购入一枚迷你行动书签（D）。</div>
+    <div class="skill"><div class="name"><span class="ico">♣</span>梅花迷你行动</div><p>让<b>任一</b>双子沿任意相邻的黑色箭头路径移动，<b>免费</b>。照常获得奖励并获得购买书签的机会。</p></div>
+    <div class="callout"><b>梅花小结（双子之树）：</b>支付费用让红或白双子沿树向上爬。获得标示的书本和/或其他奖励，并可选花书本购买书签。沿途的里程碑会推进爱丽丝，树顶授予皇冠。梅花迷你行动则是免费让任一双子沿相邻黑色箭头路径移动并获得奖励。</div>
+    <figure>
+      <img src="Queen_Alice_Rules_images/page_16.jpg" alt="梅花行动">
+      <figcaption>梅花 · 双子之树（原书第 16 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="diamonds">
+    <h2 class="sec"><span class="num">13</span><span class="suit s-d">♦</span> 方块 · 矮胖子之墙（Humpty Dumpty's Wall）</h2>
+    <p>矮胖子（Humpty Dumpty）摔了个粉碎，一半忠于红色王国，另一半心向白色领地。玩家帮助矮胖子修建红白两半的墙，并爬上墙头宣扬他的理想、保卫首都。</p>
+    <h3>行动流程</h3>
+    <ol class="steps">
+      <li><b>选格：</b>在墙上选一个与所打棋子颜色匹配的格位。同时支付该格<b>行</b>与<b>列</b>标示的费用，把一块砖放进该格。注意：所有行都有费用；两列各需 1 点茶（格上的小图标是提示），另外两列没有额外费用。</li>
+      <li><b>放置规则：</b>砖必须放在你选定列的<b>最低空位</b>上。砖不必放在矮胖子所在的那一行。</li>
+      <li><b>取方块：</b>从朝臣版图任选一枚方块砖标记并移除，获得其标示的奖励。</li>
+      <li><b>放砖：</b>把砖放到你在墙上选定的格，获得该格标示的奖励。</li>
+    </ol>
+    <h4>奖励与里程碑</h4>
+    <ul>
+      <li><b>同层奖励：</b>在与相应矮胖子半身件同一行砌砖时，获得 2 IP。</li>
+      <li><b>砌完一行：</b>若你的砖砌完了矮胖子所在的那一行，把矮胖子半身件移到下一行，并改为获得 4 IP。</li>
+      <li><b>里程碑奖励</b>（按各颜色的进度授予）：<ul>
+        <li><b>第 3 枚方块放置后</b>：爱丽丝前进一格。</li>
+        <li><b>第 4 枚方块放置后</b>：获得一个迷你行动。</li>
+        <li><b>第 5 枚方块放置后</b>：获得一个皇冠。</li></ul></li>
+    </ul>
+    <div class="ex">Kortes 打出红色棋子触发方块行动，在墙的红色一侧砌砖。她为一个底行格支付 1 个樱桃蛋糕和 1 点茶。她从版图获得 1 个爪印（A），又从墙上获得 2 个爪印，共拿取 3 个白爪印。因为她的砖砌完了一行，她拿取 4 IP 并把红矮胖子半身件上移（C）。</div>
+    <div class="skill"><div class="name"><span class="ico">♦</span>方块迷你行动</div><p>从版图移除<b>任一颜色</b>的一枚方块，<b>免费</b>。获得图示奖励并把标记放到一旁；它不放到墙上。</p></div>
+    <div class="callout"><b>方块小结（矮胖子之墙）：</b>支付所选格位的费用，从版图取任一枚当前颜色的方块，获得其关联奖励，然后把方块作为砖放到墙上，获得被盖住的奖励。在与矮胖子同层砌砖时结算 IP，砌满一行另有额外 IP。沿途的里程碑会推进爱丽丝并授予迷你行动和皇冠。方块迷你行动则是免费从版图移除任一枚方块并获得图示奖励。</div>
+    <figure>
+      <img src="Queen_Alice_Rules_images/page_17.jpg" alt="方块行动">
+      <figcaption>方块 · 矮胖子之墙（原书第 17 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="examples">
+    <h2 class="sec"><span class="num">14</span>回合示例</h2>
+    <h3>推进爱丽丝的回合示例</h3>
+    <p>Cris 弃除一张白兵卡获得 1 点时间（A），然后打出并移动一辆红马，进入红心列获得 1 个樱桃蛋糕（B）。</p>
+    <p>她决定不动园丁，支付 2 个樱桃蛋糕放置一枚红心（C）。她把红心从朝臣版图上移除，获得该处标示的红爱丽丝推进（D），并盖住一个蓝花奖励格，从供应区拿取蓝花（E）。</p>
+    <p>红爱丽丝前进一格。但红爱丽丝路径上的下一格已被皇冠占据，于是她跳过它，前进到下一个可用格，为 Cris 赢得 8 IP（F）。此外这是一格心愿格，因此 Cris 立刻从皇冠陈列区移除一个皇冠（G），放到心愿上。她的时间不足以重复行动，所以将休整。她的回合结束时，所有玩家将结算该心愿（H）。之后皇冠弃除。</p>
+    <h3>迷你行动 + 皇冠的回合示例</h3>
+    <p>Camila 弃除一张银色白象卡获得 1 个樱桃蛋糕和 2 IP（I），然后打出并移动一辆红马进入红心列，获得 1 个樱桃蛋糕（K）。</p>
+    <p>接着她支付 2 个樱桃蛋糕放置一枚红心，盖住一个蓝花奖励格并从供应区拿取蓝花（L）。她从移除红心的版图格上还获得了梅花迷你行动，可以沿黑色路径移动一枚双子。奖励可以按任意顺序领取，她选择先拿花再执行迷你行动。Camila 把白双子移到树顶的最后一格（M），获得一个皇冠（N）和 3 本书。她选了 2 本蓝书和 1 本白书，立刻换成一枚终局计分书签（O）。<b>注意：迷你行动可以任选颜色执行，与触发它的棋子无关。</b></p>
+    <p>然后她从皇冠陈列区取下一个可用皇冠，放到白爱丽丝的路径上。从爱丽丝当前位置起，下一格不可用（是心愿格，不能放皇冠），再下一格已被另一个皇冠占据，于是 Camila 把皇冠放到第三格（Q）。这为她结算该格声望的两倍（7 × 2），共计 14 IP。</p>
+    <figure>
+      <img src="Queen_Alice_Rules_images/page_18.jpg" alt="回合示例">
+      <figcaption>回合示例（原书第 18 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="endgame">
+    <h2 class="sec"><span class="num">15</span>游戏结束与终局计分</h2>
+    <p>当最后一个皇冠被移除时触发游戏结束。此后继续打完当前轮次，直到持有镜子标记的玩家右侧的玩家完成其回合。</p>
+    <h3>终局计分</h3>
+    <ol>
+      <li><b>爱丽丝的加冕：</b>爱丽丝以推进更多的一方颜色加冕。<ul>
+        <li><b>若一个爱丽丝领先另一个</b>：把较领先颜色的心愿板块翻到白金面。每位玩家为其获得的该颜色每个皇冠获得 8 IP（以朝臣版图与中央版图上追踪的为准）。</li>
+        <li><b>若两个爱丽丝持平</b>：两组心愿板块都不翻面。每位玩家为其获得的每个皇冠获得 8 IP，无论颜色。</li></ul></li>
+      <li><b>猫咪轨道：</b>查看你每个爪印标记的位置，决定如何结算爱丽丝的心愿：<ul>
+        <li><b>未到 ×1</b>：该颜色的心愿不计分。</li>
+        <li><b>×1 与 ×2 之间</b>：从该颜色的心愿中自选一个计分。</li>
+        <li><b>超过 ×2</b>：该颜色的两个心愿都计分。</li></ul></li>
+      <li><b>受邀宾客：</b>把你所有已邀请卡的邀请奖励（卡面右上角标示）加总计分。（见附录 2。）</li>
+      <li><b>书签：</b>若有终局计分书签，现在加总计其 IP。</li>
+    </ol>
+    <h3>终局计分示例</h3>
+    <div class="req">游戏结束，爱丽丝加冕为红女王。红爱丽丝的心愿通过翻到白金面升级（A）。此外，由于加冕为红色，每位玩家为其获得的每个红皇冠结算 8 IP。Vera 有 2 个红皇冠：一个来自在百花花园种下她全部的红玫瑰丛，一个来自在矮胖子之墙砌完她全部的红砖。因此她结算 16 IP（2 × 8）。她还因登上双子树顶获得过 1 个白皇冠。但由于加冕为红色，这个白皇冠不授予额外 IP。</div>
+    <div class="req">接着 Vera 查看她的猫爪印位置。她在红白两条轨道上都越过了 ×1 格，但都没有到 ×2 格（B）。因此她必须各选一个红心愿和一个白心愿来计分。她选择结算方块心愿和双子心愿（C）。</div>
+    <div class="req">她的方块标记已全部放置，且方块心愿已升级为白金，她每放置一枚方块结算 4 IP，共计 40 IP（4 × 10）。</div>
+    <div class="req">她的白双子到了第 4 层，红双子第 2 层（D）。双子心愿下每层 3 IP，她共结算 18 IP（6 × 3）。至此共计 74 IP（皇冠 16 + 方块心愿 40 + 双子心愿 18）。</div>
+    <div class="req">接下来结算她的受邀卡。宾客区有 2 张基础兵卡，每张 1 IP，共 2 IP（E）。还有 1 张银色白兵卡，每邀请一张白兵（包括它自己）结算 2 IP。她邀请了 3 张白兵和 1 张百搭兵（百搭也可算作白色），结算 8 IP（F）。她有 1 张金兵卡，每邀请一张任意颜色的兵结算 2 IP。共邀请 5 张兵，结算 10 IP（G）。最后她还有 1 张固定授予 6 IP 的金兵卡（H）。受邀卡共结算 26 IP。加上此前的 74 IP，Vera 终局总计 100 IP。</div>
+    <h3>胜利</h3>
+    <p>声望最高的玩家成为新爱丽丝女王的首席顾问，赢得游戏。平局时，女王决定多留几个人在身边，他们共享胜利。</p>
+    <div class="callout"><b>本节摘要：</b>游戏在最后一个皇冠被移除的那个轮次结束后结束。终局计分包括：1. 爱丽丝的加冕（获胜颜色的每个皇冠 8 IP；获胜颜色的心愿板块翻面）；2. 猫咪轨道进度（决定爱丽丝心愿的结算方式）；3. 受邀卡的 IP；4. 终局计分书签的 IP。IP 最高的玩家获胜。</div>
+    <figure>
+      <img src="Queen_Alice_Rules_images/page_19.jpg" alt="游戏结束与终局计分">
+      <figcaption>游戏结束与终局计分（原书第 19 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="solo">
+    <h2 class="sec"><span class="num">16</span>单人模式 · 黛娜（Dinah）</h2>
+    <p>单人模式中，你与<b>黛娜</b>（Dinah）对抗——《爱丽丝镜中奇遇记》里两只小猫的妈妈。黛娜是一个自动对手，会与你争夺资源和对王国的控制。</p>
+    <div class="callout note"><b>注意：</b>《Queen Alice》中的互动可能很复杂。作为玩家，遇到模糊情形时你可以自行决定如何执行黛娜的行动。例如，黛娜既能俘获王也能俘获后时，你可以选择让她俘获哪一个。</div>
+    <h3>单人模式设置</h3>
+    <ol class="steps">
+      <li><b>版图与棋子：</b>按两人游戏布置中央版图。按难度选择黛娜的颜色：绿色（简单）、紫色（普通）、橙色（困难）、蓝色（极难）。拿取所选颜色的玩家版图，翻到黛娜一面，并按以下方式准备。</li>
+      <li><b>A · 黑色立方体轨道：</b>把 1 个黑色立方体放到上轨道起点。</li>
+      <li><b>B · 颜色标记：</b>拿 1 个黛娜颜色的立方体作颜色标记（见回合顺序）。</li>
+      <li><b>C · 红心与方块标记：</b>把黛娜颜色的所有红心和方块标记放入槽位。</li>
+      <li><b>D · 车票卡：</b>洗混车票卡并抽取两张。你自选一张并决定用哪一面。黛娜拿另一张，使用相反的颜色（例如你选了你卡片的白面，黛娜就用她卡片的红面）。黛娜获得该车票卡的其余奖励与行动推进。</li>
+      <li><b>E · 起始资源：</b>用 1 个黛娜颜色立方体标记黛娜从车票卡获得的起始资源——放到相应资源轨道的底部（樱桃蛋糕放红列，黄油吐司放白列）。</li>
+      <li><b>F · 黛娜牌库：</b>洗混 10 张黛娜卡（兵、象、车、马各 2 张；王、后各 1 张），组成牌库，放在黛娜版图旁。</li>
+    </ol>
+    <h3>黛娜的奖励、资源与计分</h3>
+    <p>游戏中，黛娜会像人类玩家一样沿爱丽丝路径推进、放置皇冠、结算心愿。黛娜每回合也能重复一次行动。黛娜管理资源的方式不同，且<b>不支付资源费用</b>。她不累积时间；本应获得的时间每 1 点改为换成 IP。游戏结束时，黛娜像人类玩家一样计分，但<b>不</b>使用终局计分书签的判定，而是改为：她持有的每张终局计分书签、每回合书签、每朵花和每张未邀请的购入卡，各按黛娜版图上按难度标示的固定 IP 计分。</p>
+    <h3>回合顺序</h3>
+    <ol>
+      <li><b>抽卡：</b>翻开黛娜牌库顶卡。</li>
+      <li><b>确定颜色：</b>黛娜资源轨道中立方体所在位置（红列或白列）决定黛娜用抽到的卡打出红色还是白色的棋子。把颜色标记立方体放到卡上标记。</li>
+      <li><b>打出一个棋子：</b>按以下优先级打出卡上标示类型与颜色的棋子（见“棋子走法与行动”）。<ol>
+        <li><b>俘获：</b>只要可能，黛娜总是俘获，并选择价值最高的可用棋子。并列时由你决定她俘获哪个。</li>
+        <li><b>营救：</b>若要打的棋子身在监狱，黛娜营救它。把被救棋子放到黛娜版图右上角图示之后的第一个可用重生格。被救棋子本回合不移动。</li>
+        <li><b>移动：</b>移动棋子。移动方向参照卡面顶部的走法图，从左上开始、自左向右选第一个可行走法。若黛娜移动的是车、象或后，她会尽可能推进，直到抵达棋盘边缘、俘获或被同色棋子挡住。</li></ol></li>
+      <li><b>获得资源：</b>黛娜获得落格行的资源；若是百搭行则获得 1 点茶。</li>
+      <li><b>执行行动：</b>黛娜无视落格的列，改为总是执行她卡上标示的行动。</li>
+      <li><b>重复行动：</b>若资源立方体在 <span class="s-h">🔄</span> 格，把立方体放回底行并重复黛娜的行动。</li>
+      <li><b>重洗：</b>若黛娜已打出 6 张或更多卡，把她的弃牌堆与其牌库剩余的卡洗混，刷新牌库。</li>
+    </ol>
+    <h3>管理黛娜的资源</h3>
+    <p>黛娜从不支付资源，她获取和追踪资源的方式与人类玩家不同。</p>
+    <ul>
+      <li><b>时间：</b>黛娜每获得 1 点时间，按难度换算为 1、2 或 3 IP（标示在黛娜版图右上角）。</li>
+      <li><b>资源：</b>她获得资源时，把黛娜的资源立方体在资源轨道上左移或右移。她获得茶或当前标记颜色的资源时，把立方体上移。若立方体已在最顶格，她改为获得 4 IP。<b>注意：</b>立方体的起始位置取决于黛娜的车票卡。</li>
+      <li><b>爪印：</b>在某些版图/难度下，当资源立方体沿侧边箭头向上移动时，黛娜还在标示处获得爪印。</li>
+      <li><b>卡牌：</b>购卡时，拿取标示层级最左边的一张卡，叠放到黛娜牌库旁单独的“已购卡牌堆”。邀请卡时，从已购卡牌堆抽取黛娜已购最高层级的顶卡。若她没有可邀请的卡，黛娜改为购入一张铜卡。</li>
+      <li><b>黑色立方体：</b>让黑色立方体沿其轨道右移，经过的格位授予标示奖励。若立方体移出最后一格，把它放回轨道起点并授予黛娜 6 IP。</li>
+      <li><b>迷你行动：</b>黛娜以与主行动相反的颜色执行迷你行动（如可能）。若该颜色无法执行，则以当前活跃颜色执行。</li>
+    </ul>
+    <h3>棋子走法与行动（黛娜）</h3>
+    <div class="skill"><div class="name"><span class="ico">♟</span>兵</div><p><b>走法：</b>移动一枚仍在棋盘上且未被堵住的兵。按卡上标示的优先级选一个有兵的列来移动；一列有多枚兵时移动最靠前的一枚。<br><b>行动：</b>拿取当前活跃颜色编号最小的红心标记，按卡上标示的优先级在园丁当前位置选一个花园格种植。若黛娜已有两朵同类型的花，她不能再在该类型的格子里种第三丛。若当前位置无法种植，则顺时针移动园丁。</p></div>
+    <div class="skill"><div class="name"><span class="ico">♝</span>象</div><p><b>走法：</b>按卡上标示的优先级，沿一个方向斜走尽可能远。<br><b>行动：</b>让相应信使移动 2 格。邀请黛娜已购卡牌堆中最高层级的顶卡。（这<b>不</b>算邀请奖励，即黛娜没有卡可邀请时也不会购入铜卡。）给予黛娜落格奖励。若已购卡牌堆没卡，她让信使前进 3 格，拿取标示层级最左边的卡，并拿取落格奖励。遇到岔路时，黛娜按卡底箭头标示选左或右。</p></div>
+    <div class="skill"><div class="name"><span class="ico">♞</span>马</div><p><b>走法：</b>尽可能向前移动马；否则按卡上标示的优先级横向移动。<br><b>行动：</b>有多条路径时，黛娜按卡上标示颜色的箭头推进相应的双子。她照常获取书本。每当她持有任意 2 本书，就换 1 枚书签——无视费用，按卡上标示的优先级选择。黛娜优先凑齐“1 即时 + 1 每回合 + 1 终局计分（费用 2）”的一套，然后再凑费用 3 的一套。拿即时书签时，她优先选授予爪印的，并选拯最多爪印的那枚（红白都有时随机选）。其余书签随机选。即时书签立刻结算。每回合与终局计分书签的效果忽略，改为计入黛娜的终局得分。</p></div>
+    <div class="skill"><div class="name"><span class="ico">♜</span>车</div><p><b>走法：</b>按卡上标示的优先级，沿一个方向直走尽可能远。<br><b>行动：</b>从黛娜版图拿取当前活跃颜色编号最小的方块标记，按卡上标示的优先级放到最低的合法格。黛娜照常获得版图与墙的奖励以及矮胖子的 IP。</p></div>
+    <div class="skill"><div class="name"><span class="ico">♛</span>后</div><p><b>走法：</b>按卡上标示的优先级，沿一个方向走尽可能远。<br><b>行动：</b>邀请黛娜已购卡牌堆最高层级的 2 张顶卡。抽取一张新卡并执行该卡标示的行动，但不移动其棋子。</p></div>
+    <div class="skill"><div class="name"><span class="ico">♚</span>王</div><p><b>走法：</b>按卡上标示的优先级朝一个方向移动一格。<br><b>行动：</b>黛娜获得 2 个当前活跃颜色的爪印。抽取一张新卡并执行该卡标示的行动，但不移动其棋子。</p></div>
+    <p><b>通用说明：</b>除兵外的所有棋子，只有在其他方向都走不了时才允许向后移动。若打出的棋子被堵住，照常在其当前位置执行行动。</p>
+    <h3>耗尽（Exhaustion）</h3>
+    <p>若一个行动已彻底完成或无法执行，抽取一张新卡并执行该卡标示的行动。与王、后一样，只执行行动，不移动该卡标示的棋子。</p>
+    <h3>黛娜的终局计分</h3>
+    <p>游戏结束时，黛娜像人类玩家一样计分，书签与以下增项除外。选心愿计分时，她选给自己 IP 最多的那个。此外，结算完受邀卡后，她还为以下类别结算额外 IP：(1) 每回合与终局计分书签；(2) 花朵；(3) 未被邀请的购入卡。这些类别的 IP 数量标示在黛娜版图右上角，随难度变化。</p>
+    <figure>
+      <img src="Queen_Alice_Rules_images/page_20.jpg" alt="单人模式设置">
+      <figcaption>单人模式 · 黛娜（原书第 20 页）</figcaption>
+    </figure>
+    <figure>
+      <img src="Queen_Alice_Rules_images/page_21.jpg" alt="黛娜的规则">
+      <figcaption>黛娜的资源与棋子走法（原书第 21 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="annex-flowers">
+    <h2 class="sec">附录 1 · 花（永久加成）</h2>
+    <p>在红心版图上，玩家可以获得授予永久加成的花。同类型第二朵花会提升加成；允许持有超过两朵同类型花，但不再提供额外好处。</p>
+    <h3>粉玫瑰（Rose）</h3>
+    <ul>
+      <li><b>1 朵</b>：免费使用棋盘上的通用行动列。</li>
+      <li><b>2 朵</b>：若打出的棋子停在棋盘四条中央行之一，除资源外再获得标示数量的时间。</li>
+    </ul>
+    <h3>黄花</h3>
+    <ul>
+      <li><b>1 朵</b>：手牌上限永久提高到 5 张。</li>
+      <li><b>2 朵</b>：购卡时可进入卡牌市场任意层级，作为额外费用或奖励——可支付 1 点时间升一层，或获得 1 点时间降一层（例如花 2 点时间把铜卡升为金卡，或得 2 点时间把金卡降为铜卡）。先选层级并支付或获得时间，再购卡并支付其费用（如有）。</li>
+    </ul>
+    <h3>蓝花</h3>
+    <ul>
+      <li><b>1 朵</b>：购买资源的费用从 3 点时间降为 2 点时间。</li>
+      <li><b>2 朵</b>：获得 1 点茶换 2 点时间的能力，次数不限。</li>
+    </ul>
+    <h3>橙花</h3>
+    <ul>
+      <li><b>1 朵</b>：重复行动的费用从 6 点时间降为 5 点时间。</li>
+      <li><b>2 朵</b>：执行重复行动的费用减免 1 个任意资源。</li>
+    </ul>
+    <figure>
+      <img src="Queen_Alice_Rules_images/page_22.jpg" alt="附录1 花与附录2 卡牌">
+      <figcaption>附录 1 · 花 ／ 附录 2 · 卡牌（原书第 22 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="annex-cards">
+    <h2 class="sec">附录 2 · 卡牌</h2>
+    <h3>打出与弃除奖励（按棋子类型 × 卡牌等级）</h3>
+    <p>每张棋子卡有<b>打出奖励</b>（打出时立刻获得）与<b>弃除奖励</b>（回合开始弃除时获得）。</p>
+    <table class="ref">
+      <tr><th>棋子</th><th>基础/铜卡</th><th>银卡</th><th>金卡</th></tr>
+      <tr><td><b>兵</b></td>
+        <td>打出：邀请 1 张卡。<br>弃除：1 资源。</td>
+        <td>打出：1 资源 + 邀请 1 张卡。<br>弃除：1 爪印。</td>
+        <td>打出：1 自选资源 + 邀请 1 张卡。<br>弃除：2 爪印。</td></tr>
+      <tr><td><b>马</b></td>
+        <td>打出：1 点时间。<br>弃除：1 资源。</td>
+        <td>打出：2 点时间。<br>弃除：3 点时间。</td>
+        <td>打出：3 点时间。<br>弃除：4 点时间。</td></tr>
+      <tr><td><b>象</b></td>
+        <td>打出：2 IP。<br>弃除：1 资源。</td>
+        <td>打出：4 IP。<br>弃除：1 资源 + 2 IP。</td>
+        <td>打出：6 IP。<br>弃除：1 资源 + 4 IP。</td></tr>
+      <tr><td><b>车</b></td>
+        <td>打出：减免 1 个资源。<br>弃除：1 资源。</td>
+        <td>打出：减免 1 个自选资源。<br>弃除：1 个自选资源。</td>
+        <td>打出：减免 2 个自选资源。<br>弃除：解锁并分配 1 个黑色立方体到标示资源。</td></tr>
+      <tr><td><b>王</b></td>
+        <td>打出：弃除一张基础或铜卡并获得其弃除奖励。<br>弃除：购入 1 张铜卡。</td>
+        <td>打出：弃除一张基础、铜或银卡并获得其弃除奖励。<br>弃除：购入 1 张铜卡 + 1 点时间。</td>
+        <td>打出：弃除任意层级的卡并获得其弃除奖励。<br>弃除：购入 1 张银卡 + 1 点时间。</td></tr>
+      <tr><td><b>后</b></td>
+        <td>打出：俘获 1 枚对方颜色的兵。<br>弃除：邀请 1 张卡。</td>
+        <td>打出：俘获对方颜色中除王/后外的任意棋子。<br>弃除：邀请 1 张卡 + 1 点时间。</td>
+        <td>打出：俘获对方颜色中除王/后外的任意棋子，并获得 2 个对方颜色爪印。<br>弃除：邀请 2 张卡。</td></tr>
+    </table>
+    <div class="callout note"><b>王的通用规则（ALL）：</b>无论王的棋子停在哪里，你都可以执行你想执行的任何行动。</div>
+    <h3>邀请奖励（Invitation Bonuses）</h3>
+    <div class="skill"><div class="name">固定 IP</div><p>若此卡被邀请，获得标示的 IP。</p></div>
+    <div class="skill"><div class="name">同类型同色 ×2</div><p>若此卡被邀请，每有一张被邀请的同类型同色卡（包括本卡）获得 2 IP。</p></div>
+    <div class="skill"><div class="name">同类型任意色 ×2</div><p>若此卡被邀请，每有一张被邀请的同类型卡（任意颜色，包括本卡）获得 2 IP。</p></div>
+    <div class="skill"><div class="name">每张购入卡 ×1</div><p>若此卡被邀请，每有一张购入的卡获得 1 IP。包括所有铜、银、金卡——无论被邀请、在牌库、手牌还是弃牌堆。</p></div>
+    <div class="skill"><div class="name">每张受邀卡 ×1</div><p>若此卡被邀请，每有一张被邀请的卡获得 1 IP。</p></div>
+    <figure>
+      <img src="Queen_Alice_Rules_images/page_23.jpg" alt="附录2 卡牌奖励">
+      <figcaption>附录 2 · 卡牌：打出与弃除奖励（原书第 23 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="annex-bookmarks">
+    <h2 class="sec">附录 3 · 书签</h2>
+    <h3>即时（INSTANT）</h3>
+    <table class="ref">
+      <tr><th>费用</th><th>效果</th></tr>
+      <tr><td>任意 2 本书</td><td>获得 2 点时间。</td></tr>
+      <tr><td>2 本白书</td><td>获得标示数量的标示颜色爪印。<b>仅限 3–4 人游戏</b>。</td></tr>
+      <tr><td>2 本白书 + 1 本绿书</td><td>获得标示的迷你行动（红心或方块）。</td></tr>
+    </table>
+    <h3>每回合（ONCE PER TURN）</h3>
+    <p class="note" style="color:var(--ink-soft)">使用时翻面，休整时翻回。以下费用除注明外均为 1 本白书 + 1 本绿书：</p>
+    <table class="ref">
+      <tr><th>费用</th><th>效果</th></tr>
+      <tr><td>1 白 + 1 绿</td><td>若你本回合解锁了黑色立方体，获得 2 点时间。</td></tr>
+      <tr><td>1 白 + 1 绿</td><td>若你本回合俘获了棋子，获得 2 点时间。</td></tr>
+      <tr><td>1 白 + 1 绿</td><td>若你本回合购入了卡，获得 2 点时间。</td></tr>
+      <tr><td>1 白 + 1 绿</td><td>若你本回合营救了棋子，获得 2 点时间。</td></tr>
+      <tr><td>1 白 + 1 绿</td><td>若你本回合邀请了卡，获得 2 点时间。</td></tr>
+      <tr><td>1 白 + 1 绿</td><td>若你推动了任一爱丽丝，获得 3 点时间。</td></tr>
+      <tr><td>1 白 + 2 绿</td><td>执行黑桃/方块/红心行动时，减免 1 个樱桃蛋糕或 1 个黄油吐司。</td></tr>
+      <tr><td>1 白 + 2 绿</td><td>执行黑桃/方块/红心行动时，减免 1 点茶。</td></tr>
+    </table>
+    <h3>终局计分（FINAL SCORING）</h3>
+    <table class="ref">
+      <tr><th>费用</th><th>效果</th></tr>
+      <tr><td>1 白 + 1 蓝</td><td>标示颜色的每个爪印 2 IP。上限 10 步。</td></tr>
+      <tr><td>1 白 + 2 蓝</td><td>每个解锁的黑色立方体 6 IP。上限 5 个。</td></tr>
+      <tr><td>1 白 + 1 蓝</td><td>标示颜色的每张受邀卡 2 IP。百搭卡按两色计。上限 10 张。</td></tr>
+      <tr><td>1 白 + 2 蓝</td><td>时钟上剩余的每点时间 3 IP。上限 10 点。</td></tr>
+      <tr><td>1 白 + 1 蓝</td><td>每张购入的铜卡与银卡 2 IP（上限 10 张）；每张购入的金卡 4 IP（上限 5 张）。</td></tr>
+      <tr><td>1 白 + 2 蓝</td><td>你沿红/白爱丽丝路径每前进一格 8 IP。（在朝臣版图上查红心与方块的进度，在其行动版图上查黑桃与梅花的进度。）</td></tr>
+    </table>
+    <figure>
+      <img src="Queen_Alice_Rules_images/page_24.jpg" alt="附录3 书签">
+      <figcaption>附录 3 · 书签（原书第 24 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="annex-wishes">
+    <h2 class="sec">附录 4 · 爱丽丝的心愿</h2>
+    <p>每块心愿板块有黄色起始面与白金升级面（获得 8 人时代加冕升级后使用白金面数值）。</p>
+    <table class="ref">
+      <tr><th>心愿</th><th>起始</th><th>白金</th></tr>
+      <tr><td>你移除的每枚红心（红白加总）</td><td>2 IP</td><td>4 IP</td></tr>
+      <tr><td>你的双子走的每一步（红白加总，取各双子所在格底部的数字）</td><td>3 IP</td><td>6 IP</td></tr>
+      <tr><td>你移除的每枚方块（红白加总）</td><td>2 IP</td><td>4 IP</td></tr>
+      <tr><td>你的信使走的每一步（红白加总）</td><td>1 IP</td><td>2 IP</td></tr>
+      <tr><td>你的每对红白红心（已移除）</td><td>5 IP</td><td>9 IP</td></tr>
+      <tr><td>红白双子配对同步走的每一步（取各双子所在格底部的数字）</td><td>7 IP</td><td>12 IP</td></tr>
+      <tr><td>红白信使配对同步走的每一步</td><td>2 IP</td><td>4 IP</td></tr>
+      <tr><td>你的每对红白方块（已移除）</td><td>5 IP</td><td>9 IP</td></tr>
+      <tr><td>你的每对同类型花</td><td>7 IP</td><td>12 IP</td></tr>
+      <tr><td>每本书：未花掉的剩余书本，加上你拥有的书签板块上印的书本数，上限 20 本</td><td>1 IP（上限 20/40）</td><td>2 IP</td></tr>
+      <tr><td>信使抵达的每个铜区与金区格（红白加总步数）</td><td>2 IP</td><td>3 IP</td></tr>
+      <tr><td>你放置在矮胖子所在层或其下方的每枚方块（红白加总）</td><td>3 IP</td><td>5 IP</td></tr>
+      <tr><td>每 3 朵不同类型的花</td><td>11 IP</td><td>16 IP</td></tr>
+      <tr><td>你拥有的每枚即时或每回合书签</td><td>3 IP</td><td>5 IP</td></tr>
+      <tr><td>你越过的每个印章</td><td>5 IP</td><td>8 IP</td></tr>
+      <tr><td>墙的每一条含有你方块的列（红白加总）</td><td>3 IP</td><td>5 IP</td></tr>
+    </table>
+    <figure>
+      <img src="Queen_Alice_Rules_images/page_25.jpg" alt="附录4 心愿">
+      <figcaption>附录 4 · 爱丽丝的心愿（原书第 25 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="annex-train">
+    <h2 class="sec">附录 5 · 车票卡</h2>
+    <p>每张车票卡一面偏红、一面偏白，两面奖励对称（红/白对应）。以下按卡面条目整理：</p>
+    <div class="two">
+      <div>
+        <div class="req"><b>红心类 · 第 1 张</b>：3 时间 + 1 樱桃蛋糕/黄油吐司 + 1 蓝花。<b>行动</b>：把你编号最小的红/白红心放到图示格。移除或放置红心均不收取奖励。</div>
+        <div class="req"><b>红心类 · 第 2 张</b>：3 时间 + 1 樱桃蛋糕/黄油吐司 + 1 粉花。<b>行动</b>：同上。</div>
+        <div class="req"><b>红心类 · 第 3 张</b>：3 时间 + 1 樱桃蛋糕/黄油吐司 + 1 橙花。<b>行动</b>：同上。</div>
+        <div class="req"><b>红心类 · 第 4 张</b>：3 时间 + 1 樱桃蛋糕/黄油吐司 + 1 黄花。<b>行动</b>：同上。</div>
+        <div class="req"><b>双子类 · 第 1 张</b>：3 时间 + 1 樱桃蛋糕/黄油吐司 + 1 枚图示的每回合书签。<b>行动</b>：把你的红/白双子放到树底标“1”的格。不收取任何书本。</div>
+        <div class="req"><b>双子类 · 第 2 张</b>：3 时间 + 1 樱桃蛋糕/黄油吐司 + 1 枚图示的每回合书签。<b>行动</b>：同上。</div>
+        <div class="req"><b>双子类 · 第 3 张</b>：3 时间 + 1 樱桃蛋糕/黄油吐司 + 1 枚图示的每回合书签。<b>行动</b>：同上。</div>
+      </div>
+      <div>
+        <div class="req"><b>双子类 · 第 4 张</b>：3 时间 + 1 樱桃蛋糕/黄油吐司 + 1 枚图示的每回合书签。<b>行动</b>：同上。</div>
+        <div class="req"><b>方块类 · 第 1 张</b>：6 时间 + 1 樱桃蛋糕/黄油吐司。<b>行动</b>：把价值 2 点时间的红/白方块放到墙上底行第一列（从矮胖子数起）。移除或放置方块均不收取奖励。</div>
+        <div class="req"><b>方块类 · 第 2 张</b>：5 时间 + 1 樱桃蛋糕/黄油吐司 + 1 爪印（此项不获得时间）。<b>行动</b>：把价值 1 爪印的红/白方块放到墙上底行第三列（从矮胖子数起）。</div>
+        <div class="req"><b>方块类 · 第 3 张</b>：4 时间 + 1 樱桃蛋糕/黄油吐司 + 1 铜卡（取自市场中央铜格）。<b>行动</b>：把价值 1 铜卡的红/白方块放到墙上第二行第二列（从矮胖子数起）。</div>
+        <div class="req"><b>方块类 · 第 4 张</b>：3 时间 + 1 樱桃蛋糕/黄油吐司 + 1 黑色立方体作为图示资源。<b>行动</b>：把价值 1 黑色立方体的红/白方块放到墙上第二行第四列（从矮胖子数起）。</div>
+        <div class="req"><b>黑桃类 · 第 1 张</b>：2 时间 + 1 樱桃蛋糕/黄油吐司 + 1 银卡（取自市场左侧银格）。<b>行动</b>：你的红/白信使前进 2 步。移动信使不收取奖励。</div>
+        <div class="req"><b>黑桃类 · 第 2 张</b>：4 时间 + 1 樱桃蛋糕/黄油吐司 + 邀请 1 张卡。<b>行动</b>：你的红/白信使前进 3 步。移动信使不收取奖励。</div>
+        <div class="req"><b>黑桃类 · 第 3 张</b>：1 樱桃蛋糕/黄油吐司 + 1 金卡（取自市场左侧金格）。<b>行动</b>：你的红/白信使前进 1 步。移动信使不收取奖励。</div>
+        <div class="req"><b>黑桃类 · 第 4 张</b>：4 时间 + 1 樱桃蛋糕/黄油吐司 + 1 铜卡（取自市场左侧铜格）。<b>行动</b>：你的红/白信使前进 2 步。移动信使不收取奖励。</div>
+      </div>
+    </div>
+    <figure>
+      <img src="Queen_Alice_Rules_images/page_26.jpg" alt="附录5 车票卡">
+      <figcaption>附录 5 · 车票卡（原书第 26 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="annex-symbols">
+    <h2 class="sec">附录 6 · 符号表</h2>
+    <h3>通用符号</h3>
+    <table class="ref">
+      <tr><th>符号</th><th>含义</th></tr>
+      <tr><td>⏱＋</td><td>获得时间。</td></tr>
+      <tr><td>⏱−</td><td>支付时间。</td></tr>
+      <tr><td>★（棋盘中央列）</td><td>通用行动：执行四种行动中的任意一种。</td></tr>
+      <tr><td>🍰 / 🍞 / 🍵 / 任意</td><td>樱桃蛋糕（红）/ 黄油吐司（白）/ 茶；无指定图标时为自选资源。</td></tr>
+      <tr><td>👑↑（红/白）</td><td>放置红皇冠 / 白皇冠 / 当前活跃颜色路径上的皇冠。</td></tr>
+      <tr><td>🐾（红/白/任意）</td><td>沿红猫轨道 / 白猫轨道 / 任一猫轨道前进；标示数字则按活跃颜色轨道前进相应步数。</td></tr>
+      <tr><td>♠♥♣♦ 图标</td><td>执行对应行动；对应迷你行动见各行动章节。</td></tr>
+      <tr><td>卡牌图标（铜/银/金）</td><td>购入一张铜/银/金卡。</td></tr>
+      <tr><td>🔒→📦</td><td>解锁一个黑色立方体并分配给标示的资源。</td></tr>
+      <tr><td>📦−</td><td>从你的资源区移除一个黑色立方体，放回上锁储藏区。</td></tr>
+      <tr><td>📗（多色）</td><td>拿取标示颜色中的任意一种书；单一颜色则拿取该书。</td></tr>
+      <tr><td>✉</td><td>从弃牌堆或手牌邀请任意一张卡（计分时：受邀卡）；标示颜色时为邀请红/白卡（计分时：对应颜色的受邀卡）。</td></tr>
+      <tr><td>💠（心愿）</td><td>爱丽丝的心愿（起始面 / 白金面）。</td></tr>
+      <tr><td>👑−</td><td>从陈列区弃除一个皇冠。</td></tr>
+      <tr><td>🌸</td><td>拿取标示的花；无指定则为任意花。</td></tr>
+      <tr><td>折扣图标</td><td>获得标示资源的减免；支付标示资源（全部标示时任选其一）；支付标示数量的当前活跃颜色资源；获得任意资源；获得标示资源。</td></tr>
+      <tr><td>❤/♦ 标记</td><td>放置红心（花园玫瑰）/ 方块（砌墙砖）。</td></tr>
+      <tr><td>棋子图标</td><td>俘获任意棋子 / 弃除奖励（弃除一张卡）。</td></tr>
+      <tr><td>⟳（手牌）</td><td>补牌至手牌上限。</td></tr>
+      <tr><td>＋IP</td><td>主行动奖励 / 声望点数。</td></tr>
+    </table>
+    <h3>单人模式符号（SOLO MODE）</h3>
+    <table class="ref">
+      <tr><th>符号</th><th>含义</th></tr>
+      <tr><td>🂠＋</td><td>黛娜抽取一张新卡。</td></tr>
+      <tr><td>⟳</td><td>黛娜重复刚执行的行动。</td></tr>
+      <tr><td>📦</td><td>黛娜获得通用黑色立方体奖励。</td></tr>
+      <tr><td>🂠＋⚡</td><td>黛娜抽取一张新卡并执行该卡行动，不移动棋子。</td></tr>
+      <tr><td>−2 / ＋1</td><td>数值调整示例。</td></tr>
+    </table>
+    <figure>
+      <img src="Queen_Alice_Rules_images/page_27.jpg" alt="附录6 符号表">
+      <figcaption>附录 6 · 符号表（原书第 27 页）</figcaption>
+    </figure>
+  </section>
+
+  <section id="variants">
+    <h2 class="sec">变体规则</h2>
+    <h3>隐藏目标（Hidden objectives）</h3>
+    <p>给每位玩家发 1 张隐藏目标卡。只有四人游戏才加入标有 <span class="s-h">④</span> 的两张卡，否则发牌前放到一旁。这些卡授予标示颜色的 2 个皇冠，终局计分照常计入。</p>
+    <p>标有 <span class="s-h">③</span> 的卡只用于三人游戏：若红白爱丽丝相差一格（不计被皇冠覆盖的格），授予 16 IP；若两者持平，授予 24 IP。</p>
+    <h3>替代皇冠奖励（Alternative crown rewards）</h3>
+    <p>洗混迷你行动皇冠。在皇冠陈列区左侧第一个空位放一个 ×2 皇冠，接着放一个迷你行动皇冠，如此交替直到陈列区放满。移除皇冠时始终从左到右。迷你行动皇冠被获得时，授予其所覆盖格的点数和标示的迷你行动奖励。可选规则：放置迷你行动皇冠时，你可以选择放弃迷你行动奖励，改为获得双倍点数（视同 ×2 皇冠）。</p>
+    <h3>强化起始卡（Enhanced starting cards）</h3>
+    <p>非对称强化卡按以下方式替换起始牌库中的基础卡：每位玩家抽取 2 张强化卡，看过两张后选 1 张保留，把另一张交给左手边的玩家。然后每位玩家从起始牌库中移除与强化卡颜色和类型对应的两张基础卡，把两张强化卡洗入（例如用强化白兵替换基础白兵）。单人模式下，直接抽取 2 张强化卡并换掉基础牌库中对应的卡。然后照常开始游戏。</p>
+  </section>
+
+  <section id="credits">
+    <h2 class="sec">制作人员</h2>
+    <div class="credits">
+      <p><b>设计：</b>David Heras &amp; Héctor Carrión</p>
+      <p><b>插画：</b>Amelia Sales &amp; Iván Iserte</p>
+      <p><b>平面设计：</b>Iván Iserte（Dossom Studio）&amp; Pablo Sanz</p>
+      <p><b>开发：</b>Antonio Fernández Díez、Kortes Serrano、Pablo Sanz &amp; Manuel J. García Gata</p>
+      <p><b>规则书：</b>Héctor Carrión &amp; Antonio Fernández Díez</p>
+      <p><b>文字编辑与校对：</b>Jess Haskins（The Game Editors）</p>
+      <p><b>出版：</b>Combo Games S.L. · c/ Teresa Claramunt 3, 3B, 02006 Albacete（España）</p>
+      <p><b>版权：</b>©2026 Combo Games, S.L. 保留所有权利。</p>
+    </div>
+    <div class="credits">
+      <p><b>致谢（节译）：</b>Combo Games 感谢所有参与《Queen Alice》项目的团队成员：感谢 David 与 Héctor 给了我们开发并出版这款精彩游戏的机会；感谢 Iván Iserte 在时间紧任务重的情况下做出的巨大贡献，让游戏美观又易上手；感谢 Amelia Sales 让我们的游戏成为有史以来最美的游戏之一；感谢每一位让游戏不断成长的测试者，尤其是 Dani Garcia、Carlos Martínez “Gemerlos”、Natalia Angulo、Juan Cantos、David Bernal、Antonio Guillamó “Guilla”、Daniel Montesinos “Kabra”、Johanna Frontado “Nana”，以及所有在 TTS/Discord 上、在 Protos y Miguelitos 和 Protos y Tipos 上玩过《Queen Alice》的朋友们。最重要的是感谢我们的“廷臣”们、Gamefound 众筹支持者，以及为这款游戏传播推广的桌游媒体。</p>
+      <p><b>David Heras：</b>感谢女儿 Camila，她的笑容点亮我的每一天；感谢 Keyla，她给了我一个漂亮的小女儿，也证明了她是世界上最好的妈妈；感谢 Héctor 容忍我，并愿意和我一起做出年度游戏；最后感谢整个 Combo 团队在开发过程中对我们盲目信任、没有叫我们滚蛋（至少没太经常），并出版了世界上最美的游戏。</p>
+      <p><b>Héctor Carrión：</b>感谢家人一直鼓励我做热爱的事；感谢伴侣 Cris 日复一日地包容我、帮助我实现做桌游的梦想；感谢 David 给了我与他一起做这款游戏并向他学习的机会；感谢 Combo 相信我们能把提案变成像样的作品；也感谢桌游社区里所有用建议和支持帮助这款游戏成型的人。</p>
+    </div>
+  </section>
+
+  <footer>
+    本页面为《Queen Alice》规则书的中文重排版，内容译自英文原版规则书（Manual_ENG.pdf，Combo Games, 2026），版式与导航为便于阅读而添加。图标为示意替代，以实物配件为准。
+  </footer>
+  </main>
+</div>
+</body>
+</html>
