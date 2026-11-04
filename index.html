@@ -37,6 +37,14 @@
   .back-btn{display:none;font-size:14px;color:var(--accent);text-decoration:none;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--panel);cursor:pointer;}
   .bar .title-wrap{display:flex;align-items:center;gap:10px;min-width:0;}
   .bar .cur{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  /* == group-tune == */
+  .group-head{padding:10px 12px 4px;font-size:12px;font-weight:700;color:var(--accent);
+    letter-spacing:.5px;display:flex;align-items:center;gap:6px;}
+  .group-head .n{font-weight:600;color:var(--muted);font-size:11px;}
+  .group-head.essen{color:#b3541e;}
+  .item .tag{display:inline-block;font-size:10px;color:#b3541e;border:1px solid #e8c9ad;
+    background:#fdf3ea;border-radius:4px;padding:0 5px;margin-left:6px;vertical-align:1px;}
+  /* == end group-tune == */
   /* == mobile-tune-injected == */
   @media (max-width:768px){
     .app{flex-direction:column;height:100vh;}
@@ -83,45 +91,47 @@
 </div>
 <script>
   const books=[
-    {file:"Archipels_Rulebook_CN.html", zh:"群岛", en:"Archipels"},
-    {file:"Athletes_de_Compete_FAQ_CN.html", zh:"运动员大乱斗 规则答疑 FAQ 2.0", en:"Athlètes de Compète FAQ 2.0"},
-    {file:"BBLL_Rules_CN.html", zh:"熊孩子巫妖领主", en:"Bad Baby Lich Lords"},
-    {file:"BIM_Rulebook_CN.html", zh:"请相信我！", en:"Believe in Me!"},
-    {file:"BiY_Rulebook_CN.html", zh:"巴巴就是你", en:"Baba Is You"},
-    {file:"Biddle_Rules_CN.html", zh:"估算挑战", en:"Biddle"},
-    {file:"Big2_Rules_CN.html", zh:"锄大弟", en:"Big 2"},
-    {file:"Catvale_Rules_CN.html", zh:"猫之谷", en:"Catvale"},
-    {file:"CYA_Rules_CN.html", zh:"盖住你的资产", en:"Cover Your Assets"},
-    {file:"DiceyDevices_Rules_CN.html", zh:"骰子装置", en:"Dicey Devices"},
-    {file:"Dirt_and_dust_Rules_CN.html", zh:"泥土与尘埃", en:"Dirt & Dust"},
-    {file:"EGO_Rules_CN.html", zh:"外星问候组织", en:"EGO"},
-    {file:"GalileosTruth_Rules_CN.html", zh:"伽利略的真理", en:"Galileo's Truth"},
-    {file:"Gardling_Rules_CN.html", zh:"园艺精灵", en:"Gardling"},
-    {file:"Greenwood_Rules_CN.html", zh:"格林伍德", en:"Greenwood"},
-    {file:"Hercules_Rules_CN.html", zh:"大力神十二试炼", en:"Hercules and the 12 Labors"},
-    {file:"ICE_Rules_CN.html", zh:"冰封远征", en:"I C E"},
-    {file:"Iliad_Rules_CN.html", zh:"伊利亚特", en:"Iliad"},
-    {file:"La_Fleur_CN.html", zh:"繁花", en:"La Fleur"},
-    {file:"Mahe_Rules_CN.html", zh:"马埃", en:"Mahe"},
-    {file:"MantisFalls_Rules_CN.html", zh:"谜镇异途", en:"Mantis Falls"},
-    {file:"Medicus_Rules_CN.html", zh:"医者", en:"Medicus"},
-    {file:"MR_TC_Base_Rules_CN.html", zh:"议事会（基础游戏）", en:"Mini Rogue: The Council"},
-    {file:"MR_TC_Add_Rules_CN.html", zh:"议事会（扩展）", en:"Mini Rogue: The Council"},
-    {file:"Moonlight_Rules_CN.html", zh:"月光", en:"Moonlight"},
-    {file:"ORBIT_Rules_CN.html", zh:"星际游客轨道竞速", en:"ORBIT"},
-    {file:"PragueUnseen_Rules_CN.html", zh:"布拉格秘境", en:"Prague Unseen"},
-    {file:"Queen_Alice_Rules_CN.html", zh:"爱丽丝女王", en:"Queen Alice"},
-    {file:"Ritual_Rules_CN.html", zh:"仪式", en:"Ritual"},
-    {file:"Salamandra_Rules_CN.html", zh:"萨曼德拉", en:"Salamandra"},
-    {file:"SixtyBelow_Rules_CN.html", zh:"深寒之下", en:"Sixty Below"},
-    {file:"Stubbornmules_Rules_CN.html", zh:"顽固的骡子", en:"Stubborn Mules"},
-    {file:"sumidagawa_Rules_CN.html", zh:"隅田川之争", en:"Sumidagawa"},
-    {file:"Taxiover_Rules_CN.html", zh:"疯狂出租车", en:"Taxi Over"},
-    {file:"Through_the_Desert_Rules_CN.html", zh:"穿越沙漠", en:"Through the Desert"},
-    {file:"TongaBonga_Rules_CN.html", zh:"环岛营生", en:"Tonga Bonga"},
-    {file:"TowerUp_Rules_CN.html", zh:"楼起", en:"Tower Up"},
-    {file:"Twisted_Cryptids_Rules_CN.html", zh:"扭曲传说", en:"Twisted Cryptids"},
-    {file:"Verso_Rules_CN.html", zh:"双面景观", en:"Verso"}
+    // == 埃森 2026 新游戏（后续追加：在这里加一行, group 值用 essen2026） ==
+    {file:"PragueUnseen_Rules_CN.html", zh:"布拉格秘境", en:"Prague Unseen", group:"essen2026"},
+    {file:"Queen_Alice_Rules_CN.html", zh:"爱丽丝女王", en:"Queen Alice", group:"essen2026"},
+    {file:"SixtyBelow_Rules_CN.html", zh:"深寒之下", en:"Sixty Below", group:"essen2026"},
+    // == 其他规则书 ==
+    {file:"Archipels_Rulebook_CN.html", zh:"群岛", en:"Archipels", group:"others"},
+    {file:"Athletes_de_Compete_FAQ_CN.html", zh:"运动员大乱斗 规则答疑 FAQ 2.0", en:"Athlètes de Compète FAQ 2.0", group:"others"},
+    {file:"BBLL_Rules_CN.html", zh:"熊孩子巫妖领主", en:"Bad Baby Lich Lords", group:"others"},
+    {file:"BIM_Rulebook_CN.html", zh:"请相信我！", en:"Believe in Me!", group:"others"},
+    {file:"BiY_Rulebook_CN.html", zh:"巴巴就是你", en:"Baba Is You", group:"others"},
+    {file:"Biddle_Rules_CN.html", zh:"估算挑战", en:"Biddle", group:"others"},
+    {file:"Big2_Rules_CN.html", zh:"锄大弟", en:"Big 2", group:"others"},
+    {file:"Catvale_Rules_CN.html", zh:"猫之谷", en:"Catvale", group:"others"},
+    {file:"CYA_Rules_CN.html", zh:"盖住你的资产", en:"Cover Your Assets", group:"others"},
+    {file:"DiceyDevices_Rules_CN.html", zh:"骰子装置", en:"Dicey Devices", group:"others"},
+    {file:"Dirt_and_dust_Rules_CN.html", zh:"泥土与尘埃", en:"Dirt & Dust", group:"others"},
+    {file:"EGO_Rules_CN.html", zh:"外星问候组织", en:"EGO", group:"others"},
+    {file:"GalileosTruth_Rules_CN.html", zh:"伽利略的真理", en:"Galileo's Truth", group:"others"},
+    {file:"Gardling_Rules_CN.html", zh:"园艺精灵", en:"Gardling", group:"others"},
+    {file:"Greenwood_Rules_CN.html", zh:"格林伍德", en:"Greenwood", group:"others"},
+    {file:"Hercules_Rules_CN.html", zh:"大力神十二试炼", en:"Hercules and the 12 Labors", group:"others"},
+    {file:"ICE_Rules_CN.html", zh:"冰封远征", en:"I C E", group:"others"},
+    {file:"Iliad_Rules_CN.html", zh:"伊利亚特", en:"Iliad", group:"others"},
+    {file:"La_Fleur_CN.html", zh:"繁花", en:"La Fleur", group:"others"},
+    {file:"Mahe_Rules_CN.html", zh:"马埃", en:"Mahe", group:"others"},
+    {file:"MantisFalls_Rules_CN.html", zh:"谜镇异途", en:"Mantis Falls", group:"others"},
+    {file:"Medicus_Rules_CN.html", zh:"医者", en:"Medicus", group:"others"},
+    {file:"MR_TC_Base_Rules_CN.html", zh:"议事会（基础游戏）", en:"Mini Rogue: The Council", group:"others"},
+    {file:"MR_TC_Add_Rules_CN.html", zh:"议事会（扩展）", en:"Mini Rogue: The Council", group:"others"},
+    {file:"Moonlight_Rules_CN.html", zh:"月光", en:"Moonlight", group:"others"},
+    {file:"ORBIT_Rules_CN.html", zh:"星际游客轨道竞速", en:"ORBIT", group:"others"},
+    {file:"Ritual_Rules_CN.html", zh:"仪式", en:"Ritual", group:"others"},
+    {file:"Salamandra_Rules_CN.html", zh:"萨曼德拉", en:"Salamandra", group:"others"},
+    {file:"Stubbornmules_Rules_CN.html", zh:"顽固的骡子", en:"Stubborn Mules", group:"others"},
+    {file:"sumidagawa_Rules_CN.html", zh:"隅田川之争", en:"Sumidagawa", group:"others"},
+    {file:"Taxiover_Rules_CN.html", zh:"疯狂出租车", en:"Taxi Over", group:"others"},
+    {file:"Through_the_Desert_Rules_CN.html", zh:"穿越沙漠", en:"Through the Desert", group:"others"},
+    {file:"TongaBonga_Rules_CN.html", zh:"环岛营生", en:"Tonga Bonga", group:"others"},
+    {file:"TowerUp_Rules_CN.html", zh:"楼起", en:"Tower Up", group:"others"},
+    {file:"Twisted_Cryptids_Rules_CN.html", zh:"扭曲传说", en:"Twisted Cryptids", group:"others"},
+    {file:"Verso_Rules_CN.html", zh:"双面景观", en:"Verso", group:"others"},
   ];
   const listEl=document.getElementById('list');
   const qEl=document.getElementById('q');
@@ -129,8 +139,13 @@
   const welcome=document.getElementById('welcome');
   const curEl=document.getElementById('cur');
   const openLink=document.getElementById('openLink');
-  document.getElementById('count').textContent='共 '+books.length+' 本';
+  const nEssen=books.filter(b=>b.group==='essen2026').length;
+  document.getElementById('count').textContent='共 '+books.length+' 本 · 埃森 2026 '+nEssen+' 本';
 
+  const GROUP_META=[
+    {id:"essen2026", title:"埃森 2026 新游戏", cls:"essen"},
+    {id:"others", title:"其他规则书", cls:""}
+  ];
   function render(filter){
     listEl.innerHTML='';
     const f=(filter||'').trim().toLowerCase();
@@ -139,13 +154,21 @@
       listEl.innerHTML='<div class="empty">没有匹配的规则书</div>';
       return;
     }
-    matched.forEach(b=>{
-      const d=document.createElement('div');
-      d.className='item';
-      d.dataset.file=b.file;
-      d.innerHTML='<div class="zh">'+b.zh+'</div><div class="en">'+b.en+'</div>';
-      d.onclick=()=>select(b,d);
-      listEl.appendChild(d);
+    GROUP_META.forEach(g=>{
+      const items=matched.filter(b=>(b.group||'others')===g.id);
+      if(!items.length) return;
+      const head=document.createElement('div');
+      head.className='group-head '+g.cls;
+      head.innerHTML=g.title+' <span class="n">'+items.length+'</span>';
+      listEl.appendChild(head);
+      items.forEach(b=>{
+        const d=document.createElement('div');
+        d.className='item';
+        d.dataset.file=b.file;
+        d.innerHTML='<div class="zh">'+b.zh+(g.id==='essen2026'?'<span class="tag">埃森</span>':'')+'</div><div class="en">'+b.en+'</div>';
+        d.onclick=()=>select(b,d);
+        listEl.appendChild(d);
+      });
     });
   }
   function select(b,elm){
