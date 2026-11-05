@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>灰月镇 Greylune · 中文规则书</title>
+<style>
+:root{
+  --paper:#faf8f2; --paper2:#f1eee4; --ink:#1c2a25; --ink2:#40544b;
+  --deep:#14261f; --deep2:#1e3529; --moss:#4a6b57; --moss2:#6e8b78;
+  --silver:#8f9c96; --line:#d9d4c4; --gold:#a8823c; --gold2:#c9a860;
+  --rose:#8b5a4a;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:"Songti SC","Noto Serif SC",Georgia,"Times New Roman",serif;
+  font-size:16px; line-height:1.85; -webkit-font-smoothing:antialiased;
+}
+/* ============ 布局 ============ */
+.wrap{display:flex; align-items:flex-start; max-width:1500px; margin:0 auto;}
+nav.toc{
+  position:sticky; top:0; flex:0 0 246px; height:100vh; overflow-y:auto;
+  background:linear-gradient(170deg,#14261f 0%,#1b332a 62%,#203c30 100%);
+  color:#cfd8d2; padding:30px 20px 44px; font-family:"Noto Sans SC",system-ui,sans-serif;
+  font-size:13.2px; line-height:1.6; border-right:1px solid #0d1a14;
+}
+nav.toc::-webkit-scrollbar{width:6px;}
+nav.toc::-webkit-scrollbar-thumb{background:#3c5a4a; border-radius:3px;}
+nav.toc .brand{font-family:"Songti SC",serif; font-size:21px; color:#e8dfc6; letter-spacing:.14em; margin-bottom:2px;}
+nav.toc .brand small{display:block; font-size:10.5px; letter-spacing:.32em; color:#7f9a8a; margin-top:5px; font-family:system-ui,sans-serif;}
+nav.toc .rule{height:2px; width:38px; background:var(--gold); margin:15px 0 17px;}
+nav.toc a{display:block; color:#b6c4bb; text-decoration:none; padding:4.4px 8px; border-radius:4px; border-left:2px solid transparent;}
+nav.toc a:hover{color:#f2ecd9; background:#254536; border-left-color:var(--gold2);}
+nav.toc a .n{display:inline-block; width:22px; color:#6d8a7a; font-variant-numeric:tabular-nums; font-size:11.5px;}
+nav.toc .grp{margin:17px 0 6px; font-size:10.5px; letter-spacing:.26em; color:#6a8276; padding-left:8px;}
+nav.toc a.sub{padding-left:22px; font-size:12.4px;}
+main{flex:1 1 auto; min-width:0; padding:0 0 90px;}
+/* ============ 封面 ============ */
+header.cover{
+  position:relative; padding:64px 58px 46px; color:#e9e3d2;
+  background:
+    radial-gradient(ellipse at 78% 18%, rgba(200,168,96,.20) 0%, transparent 55%),
+    radial-gradient(ellipse at 12% 88%, rgba(74,107,87,.55) 0%, transparent 60%),
+    linear-gradient(160deg,#101f19 0%,#1b332a 55%,#254436 100%);
+  border-bottom:3px solid var(--gold);
+}
+header.cover::after{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background-image:radial-gradient(rgba(255,255,255,.05) 1px, transparent 1px);
+  background-size:5px 5px; opacity:.5;
+}
+header.cover .kicker{font-family:system-ui,sans-serif; font-size:11px; letter-spacing:.42em; color:var(--gold2); text-transform:uppercase;}
+header.cover h1{font-size:52px; margin:14px 0 4px; letter-spacing:.07em; font-weight:600; line-height:1.15;}
+header.cover .en{font-family:Georgia,serif; font-style:italic; font-size:22px; color:#9fb3a6; letter-spacing:.06em; margin-bottom:22px;}
+header.cover .tag{font-size:15px; color:#c4cfc6; max-width:640px; line-height:1.9;}
+header.cover .meta{margin-top:26px; display:flex; flex-wrap:wrap; gap:10px 12px; font-family:system-ui,sans-serif; font-size:12px; color:#a5b8ac;}
+header.cover .meta span{border:1px solid rgba(200,168,96,.42); padding:4px 12px; border-radius:20px; letter-spacing:.06em;}
+/* ============ 章节 ============ */
+main{padding-top:0;}
+section.sec{padding:46px 58px 10px; border-bottom:1px solid var(--line); scroll-margin-top:0;}
+section.sec:last-of-type{border-bottom:none;}
+h2{
+  font-size:27px; margin:0 0 22px; padding-bottom:12px; letter-spacing:.04em;
+  border-bottom:1px solid var(--line); color:var(--deep); font-weight:600;
+}
+h2 .num{
+  display:inline-block; font-family:system-ui,sans-serif; font-size:12px; font-weight:700;
+  color:var(--paper); background:var(--moss); padding:3px 9px; border-radius:3px;
+  margin-right:13px; vertical-align:3px; letter-spacing:.1em;
+}
+h3{font-size:19.5px; margin:30px 0 11px; color:var(--deep2); letter-spacing:.03em; font-weight:600;}
+h3::before{content:"◆"; color:var(--gold); font-size:11px; margin-right:8px; vertical-align:2px;}
+h4{font-size:16px; margin:22px 0 8px; color:var(--moss); letter-spacing:.02em;}
+p{margin:0 0 13px;}
+p.lead{font-size:16.5px; color:var(--ink2); border-left:3px solid var(--moss2); padding-left:15px; background:linear-gradient(90deg,rgba(110,139,120,.07),transparent 70%); padding-top:6px; padding-bottom:6px;}
+b,strong{color:var(--deep); font-weight:700;}
+em{color:var(--rose); font-style:normal; border-bottom:1px dotted var(--rose);}
+/* 列表 */
+ul,ol{margin:0 0 14px; padding-left:24px;}
+li{margin-bottom:7px;}
+ul li::marker{color:var(--moss);}
+ol li::marker{color:var(--gold); font-family:system-ui,sans-serif; font-weight:700;}
+ul.tight li{margin-bottom:3px;}
+/* 提示框 */
+.side{
+  background:linear-gradient(180deg,#f3efe1,#efe9d7); border-left:4px solid var(--gold);
+  padding:14px 18px 13px; margin:18px 0; border-radius:0 4px 4px 0; font-size:14.6px; color:#4a4232;
+}
+.side .label{display:block; font-family:system-ui,sans-serif; font-size:10.5px; letter-spacing:.24em; color:#9c7c3c; margin-bottom:5px; font-weight:700;}
+.side.imp{background:linear-gradient(180deg,#f6ecdf,#f2e3d3); border-left-color:var(--rose);}
+.side.imp .label{color:var(--rose);}
+.tn{
+  border:1px dashed #b9ae91; background:#f7f4ea; padding:12px 16px; margin:16px 0;
+  border-radius:4px; font-size:14.2px; color:#5d5544;
+}
+.tn .label{display:block; font-family:system-ui,sans-serif; font-size:10.5px; letter-spacing:.2em; color:#9a8a63; margin-bottom:4px; font-weight:700;}
+/* 示例 */
+.example{
+  background:#fff; border:1px solid var(--line); border-top:3px solid var(--moss2);
+  border-radius:5px; padding:15px 18px; margin:16px 0; font-size:14.6px; color:#3f5049;
+}
+.example .label{display:block; font-family:system-ui,sans-serif; font-size:10.5px; letter-spacing:.24em; color:var(--moss); margin-bottom:6px; font-weight:700;}
+/* 表格 */
+table{width:100%; border-collapse:collapse; margin:15px 0 20px; font-size:14.4px;}
+th{background:var(--deep); color:#e5dfcd; text-align:left; padding:9px 12px; font-weight:600; letter-spacing:.05em; font-family:system-ui,sans-serif; font-size:13px;}
+td{padding:9px 12px; border-bottom:1px solid var(--line); vertical-align:top;}
+tbody tr:nth-child(even){background:rgba(217,212,196,.22);}
+td.n{white-space:nowrap; font-family:system-ui,sans-serif; color:var(--moss); font-weight:700;}
+/* 卡表 */
+table.cards{font-size:13.8px;}
+table.cards th:nth-child(1){width:20%;}
+table.cards th:nth-child(2){width:8%;}
+table.cards th:nth-child(3){width:9%;}
+table.cards td:first-child{font-weight:700; color:var(--deep);}
+.tag{display:inline-block; font-family:system-ui,sans-serif; font-size:10.5px; padding:1.5px 7px; border-radius:3px; letter-spacing:.05em; font-weight:700;}
+.tag.c{background:#dbe6ef; color:#37556e;}
+.tag.i{background:#e8dbd6; color:#7d4a3a;}
+.tag.b{background:#dde8dc; color:#3d6244;}
+.tag.t{background:#efe4c9; color:#7d6127;}
+.tag.e{background:#e3dcec; color:#574070;}
+.tag.q{background:#f0dcd6; color:#8a4530;}
+/* 双语图注 */
+figure{margin:20px 0; text-align:center;}
+figure img{max-width:100%; border:1px solid var(--line); border-radius:3px; box-shadow:0 3px 14px rgba(20,38,31,.10);}
+figcaption{margin-top:8px; font-family:system-ui,sans-serif; font-size:12.2px; color:var(--silver); letter-spacing:.04em;}
+/* 页脚 */
+footer{padding:34px 58px 60px; color:var(--silver); font-size:12.6px; font-family:system-ui,sans-serif; border-top:1px solid var(--line); background:var(--paper2);}
+footer b{color:var(--moss);}
+/* 小工具类 */
+.kv{display:flex; flex-wrap:wrap; gap:8px 22px; margin:12px 0 16px; font-family:system-ui,sans-serif; font-size:13.4px;}
+.kv div{color:var(--ink2);}
+.kv b{color:var(--moss); margin-right:5px;}
+.grid2{display:grid; grid-template-columns:1fr 1fr; gap:0 30px;}
+@media (max-width:1100px){
+  nav.toc{display:none;}
+  section.sec,header.cover,footer{padding-left:26px; padding-right:26px;}
+  header.cover h1{font-size:36px;}
+  .grid2{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<nav class="toc">
+  <div class="brand">灰月镇<small>GREYLUNE</small></div>
+  <div class="rule"></div>
+  <div class="grp">基础规则</div>
+  <a href="#intro"><span class="n">01</span>简介与目标</a>
+  <a href="#comp"><span class="n">02</span>配件</a>
+  <a href="#setup"><span class="n">03</span>设置</a>
+  <a href="#concept"><span class="n">04</span>核心概念</a>
+  <a href="#flow"><span class="n">05</span>游戏流程</a>
+  <a href="#skills"><span class="n">06</span>技能：力量与魔法</a>
+  <a href="#encounter"><span class="n">07</span>遭遇卡</a>
+  <div class="grp">四季</div>
+  <a href="#winter"><span class="n">08</span>冬季：设置</a>
+  <a href="#spring"><span class="n">09</span>春季：村民放置</a>
+  <a href="#summer"><span class="n">10</span>夏季：行动</a>
+  <a href="#autumn"><span class="n">11</span>秋季：维护与收入</a>
+  <div class="grp">冒险与终局</div>
+  <a href="#adventure"><span class="n">12</span>冒险与英雄任务</a>
+  <a href="#story"><span class="n">13</span>讲故事</a>
+  <a href="#bonus"><span class="n">14</span>奖励标记</a>
+  <a href="#end"><span class="n">15</span>游戏结束与计分</a>
+  <div class="grp">附录</div>
+  <a href="#apx-event"><span class="n">16</span>事件（6 张）</a>
+  <a href="#apx-village"><span class="n">17</span>村庄卡（49 张）</a>
+  <a href="#apx-enc"><span class="n">18</span>遭遇卡（41 张）</a>
+  <a href="#apx-quest"><span class="n">19</span>英雄任务（9 张）</a>
+  <a href="#apx-token"><span class="n">20</span>封印与收入标记</a>
+  <div class="grp">速查</div>
+  <a href="#aid"><span class="n">21</span>玩家帮助卡</a>
+  <a href="#faq"><span class="n">22</span>常见问题</a>
+  <a href="#credits"><span class="n">23</span>制作名单</a>
+</nav>
+
+<main>
+<header class="cover">
+  <div class="kicker">Essen 2026 · 中文规则</div>
+  <h1>灰月镇</h1>
+  <div class="en">Greylune</div>
+  <div class="tag">在荒野边缘，灰月镇是无数远征的起点，也是它们的归乡。你扮演追寻声望的冒险者：招募伙伴、购置物品、走访镇上的建筑磨炼技艺，直面每一次危险。离开灰月镇，你会遭遇独一无二的际遇，接下非凡的委托；而当你回到镇上，在酒馆里把这些经历一遍遍讲出来，你的功业便会化作流传数百年的名声。</div>
+  <div class="meta">
+    <span>2–4 人</span><span>5 年 · 20 个季节</span><span>工人放置 + 工人取回</span><span>德式策略</span><span>Wiliam Attia</span>
+  </div>
+</header>
+
+<section class="sec" id="intro">
+  <h2><span class="num">01</span>简介与目标</h2>
+  <p class="lead">你的目标是在五年游戏结束时拥有最多的胜利分（VP），成为灰月镇最有声望的人物。</p>
+  <p>为此，你会：</p>
+  <ul>
+    <li>招募<b>伙伴</b>、购买<b>物品</b>、走访<b>建筑</b>；</li>
+    <li>外出冒险，经历各种<b>遭遇</b>；</li>
+    <li>在镇上的<b>酒馆</b>里讲述你的故事；</li>
+    <li>提升你的<b>力量</b>与<b>魔法</b>技能；</li>
+    <li>参与<b>事件</b>，完成<b>英雄任务</b>。</li>
+  </ul>
+  <figure><img src="Greylune_Rules_images/page_01.jpg" alt="灰月镇规则书第 1 页：游戏总览：目标与五条主要途径"><figcaption>原书第 1 页 · 游戏总览：目标与五条主要途径</figcaption></figure>
+<p>第五年结束时，VP 最多的玩家获胜。</p>
+  <div class="side">
+    <span class="label">计分时机</span>
+    部分得分在游戏过程中即时结算，另一部分只在游戏结束时才计入。
+  </div>
+</section>
+
+<section class="sec" id="comp">
+  <h2><span class="num">02</span>配件</h2>
+
+  <h3>公共配件</h3>
+  <table>
+    <thead><tr><th>配件</th><th>数量</th><th>说明</th></tr></thead>
+    <tbody>
+      <tr><td>主版图</td><td class="n">1 张</td><td>放置村庄卡、遭遇卡、事件与任务的核心版面</td></tr>
+      <tr><td>村庄卡</td><td class="n">49 张</td><td>20 张（I 组）、20 张（II 组）、9 张（III 组）</td></tr>
+      <tr><td>遭遇卡</td><td class="n">41 张</td><td>16 张（I 组）、16 张（II 组）、9 张（III 组）</td></tr>
+      <tr><td>任务板块</td><td class="n">9 张</td><td>英雄任务，放置在主版图对应位置</td></tr>
+      <tr><td>封印标记</td><td class="n">24 个</td><td>放在建筑与部分物品上，取值 1–3</td></tr>
+      <tr><td>金币</td><td class="n">50 枚</td><td>38 枚面值 1、12 枚面值 5</td></tr>
+      <tr><td>季节版图</td><td class="n">1 张</td><td>标注冬、春、夏、秋，左侧为营地</td></tr>
+      <tr><td>起始玩家标记</td><td class="n">1 个</td><td>每年传递给左手玩家</td></tr>
+      <tr><td>事件板块</td><td class="n">6 张</td><td>每年翻开一张作为当年事件</td></tr>
+      <tr><td>村民</td><td class="n">7 个</td><td>公共备用的村民供应</td></tr>
+      <tr><td>规则书</td><td class="n">1 本</td><td>—</td></tr>
+    </tbody>
+  </table>
+
+  <figure><img src="Greylune_Rules_images/page_02.jpg" alt="灰月镇规则书第 2 页：配件清单与初始设置步骤"><figcaption>原书第 2 页 · 配件清单与初始设置步骤</figcaption></figure>
+<h3>玩家配件</h3>
+  <table>
+    <thead><tr><th>配件</th><th>数量</th><th>说明</th></tr></thead>
+    <tbody>
+      <tr><td>个人版图</td><td class="n">1 张</td><td>放置技能轨、村民区、故事卡与特殊行动位</td></tr>
+      <tr><td>冒险者</td><td class="n">1 个</td><td>在主版图上移动</td></tr>
+      <tr><td>季节标记</td><td class="n">1 个</td><td>在季节版图上指示当前季节</td></tr>
+      <tr><td>胜利分标记</td><td class="n">2 个</td><td>25／50 与 75／100 各一枚，翻面表示过百</td></tr>
+      <tr><td>力量标记</td><td class="n">1 个</td><td>在力量轨上移动</td></tr>
+      <tr><td>魔法标记</td><td class="n">1 个</td><td>在魔法轨上移动</td></tr>
+      <tr><td>计分标记</td><td class="n">1 个</td><td>在分数轨上移动</td></tr>
+      <tr><td>任务标记</td><td class="n">3 个</td><td>完成英雄任务时放置</td></tr>
+      <tr><td>收入标记</td><td class="n">8 个</td><td>按颜色区分归属</td></tr>
+      <tr><td>奖励标记</td><td class="n">3 个</td><td>初始正面朝上放在个人版图旁</td></tr>
+    </tbody>
+  </table>
+
+  <div class="side">
+    <span class="label">注意</span>
+    每位玩家的 7 个村民中，只有 3 个在开局时可用；其余 4 个暂置于主版图旁，随着招募伙伴逐步进入游戏。
+  </div>
+</section>
+
+<section class="sec" id="setup">
+  <h2><span class="num">03</span>设置</h2>
+
+  <h3>3.1 公共设置</h3>
+  <ol>
+    <li>把<b>主版图</b>与<b>季节版图</b>放在桌面中央。</li>
+    <li><b>组建村庄牌堆</b>：不看内容，随机移除 2 张 I 组卡与 2 张 II 组卡。先把 9 张 III 组卡洗混放在最底，再把 18 张 II 组卡洗混叠在其上，最后把 18 张 I 组卡洗混叠在最上。牌堆背面朝上放在主版图旁，然后翻开顶部 <b>9 张</b>，在主版图左侧排成 <b>3×3</b> 网格，卡与卡之间留出一点空隙。</li>
+    <li><b>组建遭遇牌堆</b>：按 2／3／4 人局，分别把 5／6／7 张 III 组卡放在最底、10／12／14 张 II 组卡叠在中、10／12／14 张 I 组卡叠在最上（多余的卡不看内容直接收回盒中）。牌堆背面朝上放在主版图旁，然后翻开顶部 <b>5／6／7 张</b>，按与灰月镇的<b>距离</b>排到主版图右侧：每张遭遇卡左上角的<b>徽记</b>指示它该放在哪一格。</li>
+    <li><b>组建事件堆</b>：不看内容随机移除 1 张事件板块，把其余 5 张秘密洗混，背面朝上叠放在主版图对应位置上，形成事件堆。翻开第一张事件。</li>
+    <li>随机抽 <b>3 张任务板块</b>，正面朝上随机放在主版图对应的 3 个位置上（靠近遭遇区域处）。未用到的任务收回盒中。</li>
+    <li>A．把<b>收入标记</b>背面朝上放在主版图旁。<br>B．每张已翻开且带收入图标的遭遇卡上，放上对应的收入标记（正面朝上）。</li>
+    <li>A．把<b>封印标记</b>背面朝下放在主版图旁。若某些卡要求在其上放置封印标记，则立即放上并翻至正面。<br>B．标有「−1」的卡：放置等于<b>玩家人数减 1</b> 的封印标记。标有「?」的卡：不论人数，只放 <b>1 个</b>封印标记。</li>
+    <li>用金币建立<b>公共供应区</b>，金币视为无限。</li>
+    <li>最近一次去冒险的玩家拿取起始玩家标记。</li>
+  </ol>
+
+  <h3>3.2 玩家设置</h3>
+  <ol type="A">
+    <li>每位玩家选择一种颜色，拿取对应颜色的个人版图与该颜色的全部配件；但其中 <b>4 个村民</b>暂置于主版图旁，此时不可使用。</li>
+    <li>每位玩家拿取 1 个<b>力量标记</b>与 1 个<b>魔法标记</b>，分别放在个人版图上各自技能轨的<b>最底格</b>。</li>
+    <li>每位玩家把 3 个<b>任务标记</b>放在个人版图对应的位置上。</li>
+    <li>每位玩家把 3 个<b>村民</b>放在个人版图的「活跃村民」区。</li>
+    <li>在季节版图上，每位玩家把<b>季节标记</b>放在「春」；在主版图上，把<b>冒险者</b>放在灰月镇，<b>计分标记</b>放在分数轨起点格，并把 25／50 与 75／100 两枚标记放在其正下方。</li>
+    <li>每位玩家把 3 个<b>奖励标记</b>正面朝上放在个人版图旁。</li>
+    <li>每位玩家以 <b>8 枚金币</b>开始游戏。</li>
+  </ol>
+</section>
+
+<section class="sec" id="concept">
+  <h2><span class="num">04</span>核心概念</h2>
+
+  <h3>4.1 工人放置与工人取回</h3>
+  <p>《灰月镇》是一款<b>工人放置 + 工人取回</b>的游戏（本作中的「工人」即<b>村民</b>）：在五年之中，玩家按自己当前所处的季节行动。它首先是一款关于<b>时机</b>的游戏。</p>
+  <ul>
+    <li><b>春季</b>，玩家把村民放到两张村庄卡<b>之间</b>（卡牌以 3×3 网格展示）。这一步既让自己的未来选择保持不确定，又抬高对手激活这两张卡的费用。</li>
+    <li><b>夏季</b>，玩家把村民从村庄撤走，以购买物品、招募伙伴或使用建筑（村庄中的三类卡）。玩家还可以激活自己的物品卡，去做包括冒险在内的事：移动冒险者、结算遭遇卡——这些遭遇之后还能回到镇上的酒馆里讲述成故事。</li>
+  </ul>
+
+  <figure><img src="Greylune_Rules_images/page_04.jpg" alt="灰月镇规则书第 4 页：工人放置与取回：春放夏取，村庄卡三类与冒险机制"><figcaption>原书第 4 页 · 工人放置与取回：春放夏取，村庄卡三类与冒险机制</figcaption></figure>
+<h3>4.2 村庄卡</h3>
+  <p>村庄里有三种卡：<b>伙伴</b>、<b>物品</b>、<b>建筑</b>。</p>
+
+  <h4>伙伴</h4>
+  <p>每名伙伴的招募费用都是 <b>7 金币</b>，并立即给你 <b>1 个活跃村民</b>。所有伙伴在卡面下方都有一个<b>反应能力</b>，需要把该卡<b>横置</b>才能发动。部分伙伴另有<b>永久能力</b>，无需横置，无论该伙伴是否横置都持续有效。每名伙伴都有自己独特的终局得分方式。</p>
+
+  <h4>物品</h4>
+  <p>物品的费用<b>不等</b>（2 到 7 金币），通常带有一个可在夏季行动中使用的<b>能力</b>。它们有时在游戏结束时值 VP，也可能在购买时立即给予技能或 VP 上的好处。它们代表装备、交通工具、贵重品，或是用后必须弃掉的药水。</p>
+  <div class="side">
+    <span class="label">上限</span>
+    除少数例外，每位玩家最多持有 <b>3 件物品</b>。
+  </div>
+
+  <h4>建筑</h4>
+  <p>建筑被激活后<b>仍留在村庄里</b>。有些建筑让玩家提升技能或获得 VP，另一些（侦察行会与旅人行会）则是外出冒险的途径。在<b>酒馆</b>里，你可以讲述自己的故事。建筑可以被多次激活，但部分建筑在冬季会被放上<b>封印标记</b>：激活这类建筑时，必须选择并弃掉一个封印标记来决定其效果；若标记已用尽，该建筑便不能再被激活。</p>
+
+  <h3>4.3 冒险</h3>
+  <p>当你要去冒险时，你的冒险者先从灰月镇出发，然后可以在停留的格子上结算一张遭遇卡（前提是你满足其条件）：获得该遭遇卡的奖励，并把它滑到个人版图上方。同一年内，冒险者从上次停下的格子继续出发；每到<b>秋季</b>，冒险者便返回灰月镇。</p>
+
+  <h3>4.4 营地</h3>
+  <p>季节版图左侧是<b>营地</b>：每当一个村民被从村庄移除或被消耗，它就变为不活跃，必须放进营地，表示本年不能再使用。</p>
+</section>
+
+<section class="sec" id="flow">
+  <h2><span class="num">05</span>游戏流程</h2>
+
+  <h3>5.1 年与时期</h3>
+  <p>游戏进行 <b>5 年</b>，分为 3 个时期：<b>I</b>（2 年）、<b>II</b>（2 年）、<b>III</b>（1 年）。每一年分为 <b>4 个季节</b>：</p>
+  <ol>
+    <li><b>冬季</b>：设置</li>
+    <li><b>春季</b>：村民放置</li>
+    <li><b>夏季</b>：行动</li>
+    <li><b>秋季</b>：维护与收入</li>
+  </ol>
+  <p>每年从起始玩家开始，按顺时针轮流进行，直到所有玩家都进入秋季。轮到你时，必须从当前季节允许的行动中选择一项。</p>
+
+  <h3>5.2 各季节可选的行动</h3>
+  <table>
+    <thead><tr><th>季节</th><th>可选行动</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><b>春季</b></td>
+        <td>① 放置一个村民<br>② 参加事件<br>③ 进入夏季，并立即执行一个夏季行动</td>
+      </tr>
+      <tr>
+        <td><b>夏季</b></td>
+        <td>① 获得金币<br>② 激活一张卡<br>③ 参加事件<br>④ 使用一件物品<br>⑤ 使用个人版图上的特殊行动<br>⑥ 进入秋季，并立即执行秋季行动</td>
+      </tr>
+      <tr>
+        <td><b>秋季</b></td>
+        <td>① 停手（只能一次）</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>有些玩家可能已进入夏季或秋季，而另一些玩家仍在春季。每位玩家只按<b>自己的季节</b>选择行动，与对手无关。每年开始时玩家所控制的村民称为<b>活跃村民</b>，始终位于个人版图的「活跃村民」区。</p>
+
+  <figure><img src="Greylune_Rules_images/page_05.jpg" alt="灰月镇规则书第 5 页：一年四季的流程与各季可选行动"><figcaption>原书第 5 页 · 一年四季的流程与各季可选行动</figcaption></figure>
+<div class="side imp">
+    <span class="label">重要</span>
+    处于夏季的玩家，在同一年内<b>永远不能</b>回到春季。此外，玩家一旦进入秋季，直到本年年末都不能再行动，但对手仍照常行动。只有当所有玩家都进入秋季，这一年才结束。
+  </div>
+</section>
+
+<section class="sec" id="skills">
+  <h2><span class="num">06</span>技能:力量与魔法</h2>
+  <p><b>力量</b>与<b>魔法</b>是你的技能。你必须提升它们，才能应付越来越危险的遭遇与任务。</p>
+  <ul>
+    <li>游戏结束时，若你的力量与魔法<b>都至少为 3</b>，得 <b>2 VP</b>。</li>
+    <li>若两者<b>都达到 5</b>，改为得 <b>5 VP</b>。</li>
+    <li>当某项技能已经在顶格、而你还需把它上移时，改为立即得 <b>1 VP</b>。</li>
+  </ul>
+  <div class="side">
+    <span class="label">上限</span>
+    技能轨的上限是 5。达到 5 之后的每一次提升都换算成 1 VP。
+  </div>
+</section>
+
+<section class="sec" id="encounter">
+  <h2><span class="num">07</span>遭遇卡</h2>
+  <p>每张遭遇卡包含四个要素：</p>
+  <div class="kv">
+    <div><b>距离</b>左上角徽记，决定它摆放在主版图右侧的哪一栏</div>
+    <div><b>故事值</b>0–3，决定讲故事时的贡献</div>
+    <div><b>条件</b>左下角，结算前必须满足</div>
+    <div><b>奖励</b>右下角</div>
+  </div>
+
+  <h3>7.1 双重条件的遭遇卡</h3>
+  <p>部分遭遇卡有<b>两个条件</b>与<b>两个奖励</b>。你只需满足其中一个条件，即可结算该遭遇并获得对应奖励（左条件对应左奖励，右条件对应右奖励）。若你想同时获得两个奖励，则必须在结算<b>开始时</b>就满足<b>两个</b>条件。</p>
+  <div class="side">
+    <span class="label">注意</span>
+    你不能用其中一个奖励去满足另一个条件。
+  </div>
+
+  <h3>7.2 收入标记</h3>
+  <p>当一张带收入图标 <b>⊞</b> 的遭遇卡在冬季进入游戏时，把对应的收入标记直接放在该卡上（收入面朝上）。玩家结算带收入标记的遭遇卡后，把该卡放到自己的个人版图上，并立即结算一次收入效果；此后每到<b>秋季的收入步骤</b>，再结算一次。</p>
+  <p>玩家可拥有的收入标记数量<b>没有上限</b>（可以超过 3 个）。</p>
+</section>
+
+<section class="sec" id="winter">
+  <h2><span class="num">08</span>冬季:设置</h2>
+  <p>按以下顺序执行：</p>
+  <ol>
+    <li>把每位玩家的<b>季节标记</b>移回季节版图的「春」。</li>
+    <li><b>起始玩家</b>把起始玩家标记交给左手边的玩家。</li>
+    <li>弃掉上一年的<b>村庄卡</b>、<b>遭遇卡</b>与<b>事件板块</b>。若这些卡上放有标记（封印或收入），一并弃掉。</li>
+    <li>翻开村庄牌堆顶部的 <b>9 张</b>卡，随机摆在主版图旁组成 <b>3×3</b> 网格，卡与卡之间留出空隙。若某些卡要求放置封印标记，立即放上并翻至正面：标「−1」的卡放<b>人数减 1</b> 个；标「?」的卡不论人数只放 <b>1 个</b>。若封印标记不足，把弃牌堆洗混组成新的背面朝下的标记堆。</li>
+    <li>翻开事件堆顶部一张：这是本年度的<b>当前事件</b>。</li>
+    <li>翻开顶部 <b>5／6／7 张</b>遭遇卡（2／3／4 人局），按<b>距离</b>摆在主版图右侧。</li>
+  </ol>
+  <div class="side">
+    <span class="label">第一年</span>
+    第一年跳过冬季——它在初始设置时已经做过一次了。
+  </div>
+</section>
+
+<section class="sec" id="spring">
+  <h2><span class="num">09</span>春季:村民放置</h2>
+  <p>春季有三种行动可选。</p>
+
+  <h3>9.1 放置一个村民</h3>
+  <p>取一个自己的<b>活跃村民</b>，放到村庄中<b>两张相邻卡之间</b>，或放在一张卡与一个空的卡位之间。两张卡之间可放置的村民数量<b>没有上限</b>（不论归属）。</p>
+  <div class="example">
+    <span class="label">示例</span>
+    威廉取一个活跃村民，决定把他放在玉雕像与旅人行会之间。
+  </div>
+
+  <figure><img src="Greylune_Rules_images/page_06.jpg" alt="灰月镇规则书第 6 页：冬季设置与春季的三种行动"><figcaption>原书第 6 页 · 冬季设置与春季的三种行动</figcaption></figure>
+<h3>9.2 参加事件</h3>
+  <p>每位玩家每年只能采取一次此行动。要参加事件，你必须把一个<b>活跃村民</b>放到事件板块上，并且能够立即激活它（若有费用则支付），从而获得其好处。</p>
+  <div class="example">
+    <span class="label">示例</span>
+    威廉把自己的一个活跃村民放到事件上，并结算其效果。
+  </div>
+
+  <h3>9.3 进入夏季</h3>
+  <p>把季节标记移到季节版图的「夏」，并<b>立即</b>执行一个夏季行动。</p>
+  <div class="example">
+    <span class="label">示例</span>
+    威廉把季节标记移到夏季，随即执行一个可用的夏季行动。
+  </div>
+</section>
+
+<section class="sec" id="summer">
+  <h2><span class="num">10</span>夏季:行动</h2>
+  <p>夏季共有六种可选的行动。</p>
+
+  <h3>10.1 参加事件</h3>
+  <p>每位玩家每年只能采取一次此行动。要在夏季使用当前事件，你必须把一个<b>活跃村民</b><em>或</em>一个<b>正位于村庄中的村民</b>放到事件板块上，并且能够立即激活它（若有费用则支付），从而获得其好处。</p>
+  <div class="example">
+    <span class="label">示例</span>
+    威廉决定把村庄里的一个村民移到事件上，然后结算事件效果。
+  </div>
+
+  <h3>10.2 获得金币</h3>
+  <p>选择自己在村庄中的一个村民：指定一张<b>相邻</b>的卡，从银行获得金币，数额为<b>其他相邻该卡的村民数</b>（不论归属）。随后，被选中的村民从村庄移除，放到营地上。</p>
+  <div class="side imp">
+    <span class="label">重要</span>
+    若被选中村民两侧的卡都已被移除，你什么也得不到，但该村民仍要从村庄移除并作为不活跃村民放进营地。这<b>仍然算作一个行动</b>。
+  </div>
+  <div class="side">
+    <span class="label">提示</span>
+    如果你还没用过，也可以改为采取「参加事件」行动。
+  </div>
+  <div class="example">
+    <span class="label">示例</span>
+    威廉指定玉雕像这张卡，移除自己的一个相邻村民并放进营地。此时该卡周围还有两名村民，于是他获得 2 枚金币。
+  </div>
+
+  <h3>10.3 使用一件物品</h3>
+  <p>选择自己一件<b>已扶正</b>且带有可用效果的物品，把该卡<b>横置</b>（本年不能再使用，除非有卡牌效果将其扶正）。若它有多个效果，你必须选择其中一个。若所选效果需要消耗一个或多个村民，把它们放进营地。</p>
+  <p>有些效果要求<b>弃掉</b>该物品（多为药水），此时必须立即把它收回盒中，然后结算物品效果。</p>
+  <div class="example">
+    <span class="label">示例</span>
+    康妮横置自己的短剑并结算其效果：消耗 1 个活跃村民，换得 1 点力量。
+  </div>
+
+  <h3>10.4 激活一张卡</h3>
+  <p>选择自己在村庄中的一个村民，指定一张<b>相邻</b>的卡并激活它：若是建筑，则<b>使用</b>它；若是物品卡，则<b>购买</b>它；若是伙伴卡，则<b>招募</b>它。</p>
+  <p>无论哪种情况，你都要向银行支付该卡左上角标示的价格（建筑<b>无费用</b>），并<b>另外</b>为该卡周围每一个其他村民（不论归属）多付 <b>1 金币</b>。随后，被选中的村民从村庄移除，作为不活跃村民放进营地（位于季节版图左侧）。</p>
+
+  <h4>使用建筑</h4>
+  <p>立即（一次性）获得该建筑的效果。激活后，建筑卡留在原处，可被其他相邻村民使用，也包括同一玩家的其他村民。</p>
+  <p>部分建筑的费用或效果取决于<b>封印标记</b>的数值。只有当卡上至少还剩一个标记时，你才能使用这类建筑。此时你选择一个标记，用它的数值来决定本次激活，然后弃掉该标记。即使建筑上的标记全部用尽，该建筑仍留在村庄里。</p>
+  <div class="example">
+    <span class="label">示例</span>
+    康妮激活魔法学校：移除自己的一个村民放进营地，按封印标记所示支付 2 金币并弃掉该标记；随后又为该卡旁剩下的那个村民支付 1 金币，最终获得 1 点魔法。由于这是最后一个封印标记，该建筑此后再不能被激活。
+  </div>
+
+  <h4>购买物品</h4>
+  <p>买下物品，放在个人版图<b>右侧</b>：大多数物品之后可以横置使用。除少数例外，每位玩家最多持有 <b>3 件物品</b>；若因购买而超出上限，则自选一件物品弃掉（可以包括刚买到的那件，但要在结算完它可能提供的即时 VP 之后），不论是否已横置。</p>
+  <p>购买某些物品会立即获得好处（标在卡面右上角）。例如，若你买的物品上放着一枚显示 VP 数值的封印标记，这些 VP 立即结算，然后弃掉该封印标记。</p>
+  <div class="example">
+    <span class="label">示例</span>
+    威廉买下汤米：移除自己的一个村民放进营地，支付 4 金币，把汤米这张卡放在自己个人版图右侧。
+  </div>
+
+  <h4>招募伙伴</h4>
+  <p>招募一名伙伴，放在个人版图<b>左侧</b>。每位玩家在整局游戏中最多招募 <b>3 名</b>伙伴。每名伙伴立即带来 <b>1 个村民</b>（直接放进个人版图的「活跃村民」区）以及一项或多项永久优势，但也会使玩家在秋季的收入<b>减少 1 金币</b>。</p>
+  <div class="example">
+    <span class="label">示例</span>
+    康妮招募凯尔：移除自己的一个村民放进营地，支付 7 金币，把凯尔放在个人版图左侧。她随即从供应区取 1 个村民，放进自己版图的「活跃村民」区。
+  </div>
+
+  <figure><img src="Greylune_Rules_images/page_08.jpg" alt="灰月镇规则书第 8 页：夏季行动：购买物品、招募伙伴、激活卡牌与建筑"><figcaption>原书第 8 页 · 夏季行动：购买物品、招募伙伴、激活卡牌与建筑</figcaption></figure>
+<h3>10.5 使用个人版图上的特殊行动</h3>
+  <p>每位玩家个人版图上都有一个特殊位置，每年<b>只能使用一次</b>：放上 <b>1 个活跃村民</b>，然后从以下三项中选择一项：</p>
+  <ul>
+    <li><b>讲故事</b>（见第 13 节），讲故事总值最多为 3，获得：<b>2 金币 + 1 力量 + 2 VP</b>；</li>
+    <li>把<b>冒险者移动 1 格</b>（见第 12 节）；</li>
+    <li>获得 <b>1 点魔法</b>。</li>
+  </ul>
+  <div class="example">
+    <span class="label">示例</span>
+    威廉把一个活跃村民放到个人版图的特殊行动位上，决定讲一个讲故事值为 2 的故事，获得 2 金币与 1 点力量。他把那张卡滑到个人版图右侧，表示故事已讲述。
+  </div>
+
+  <h3>10.6 进入秋季</h3>
+  <p>把季节标记移到季节版图的「秋」，并<b>立即</b>结算该季节的全部步骤（见第 11 节）。</p>
+  <div class="side imp">
+    <span class="label">重要</span>
+    只有当玩家在村庄里<b>不再有自己的任何村民</b>时，才能进入秋季。
+  </div>
+</section>
+
+<section class="sec" id="autumn">
+  <h2><span class="num">11</span>秋季:维护与收入</h2>
+  <p>玩家进入秋季后，本年不能再采取任何行动，并按顺序执行以下步骤：</p>
+  <ol>
+    <li>你的<b>冒险者返回灰月镇</b>。</li>
+    <li>把营地、事件板块与特殊行动位上的村民全部收回个人版图的「活跃村民」区。</li>
+    <li><b>扶正</b>你所有的卡牌。</li>
+    <li><b>获得收入</b>：<b>3 金币</b>，每名伙伴 <b>减 1 金币</b>，再加上收入标记带来的收益（见第 20 节）。</li>
+  </ol>
+  <p>当所有玩家都进入秋季，这一年结束。游戏最后一年同样要进行秋季。</p>
+  <div class="example">
+    <span class="label">示例</span>
+    威廉把季节标记移到秋季。他先让冒险者返回灰月镇，然后收回所有村民——事件上的、营地上的，以及特殊行动位上的——放进「活跃村民」区。接着扶正自己横置的卡，最后获得收入：基础收入 3 金币，因有一名伙伴减去 1；再从绵羊收入标记得到 1 金币，合计 3 金币。
+  </div>
+</section>
+
+<section class="sec" id="adventure">
+  <h2><span class="num">12</span>冒险与英雄任务</h2>
+
+  <h3>12.1 去冒险</h3>
+  <p>当你触发一次<b>移动</b>行动（移动图标）时，可以让冒险者朝<b>任意方向</b>移动至多所示格数；也可以选择原地不动。之后，你可以结算<b>目的地格</b>上的一张遭遇卡。</p>
+  <p>要结算一张遭遇卡，你必须满足它的<b>条件</b>（左下角），才能获得<b>奖励</b>（右下角）。</p>
+  <p>部分遭遇卡有<b>两个条件</b>与<b>两个奖励</b>。你至少要满足其中一个条件，才能结算该遭遇并获得对应奖励（左条件得左奖励，右条件得右奖励）。若想同时获得两个奖励，必须在结算<b>开始时</b>就满足两个条件。</p>
+  <p>结算完一次遭遇后，把该卡滑到个人版图顶边下方的「<b>未讲述的故事</b>」区。多个冒险者可以处在同一格。</p>
+  <div class="example">
+    <span class="label">示例</span>
+    康妮触发「至多 2 格」的移动。她只让冒险者移动 1 格，然后结算目的地格上的遭遇。她只满足了右侧条件（至少 1 点魔法），因此只获得 2 VP。随后她把该遭遇卡放进个人版图的「未讲述的故事」栏。
+  </div>
+
+  <figure><img src="Greylune_Rules_images/page_11.jpg" alt="灰月镇规则书第 11 页：冒险：移动、结算遭遇、英雄任务与其他奖励"><figcaption>原书第 11 页 · 冒险：移动、结算遭遇、英雄任务与其他奖励</figcaption></figure>
+<h3>12.2 其他奖励</h3>
+  <p>到达某些格子时，你可以选择<b>不结算遭遇</b>，改为获得以下好处：</p>
+  <ul>
+    <li>到达标有金币的格子：获得 <b>1 金币</b>。</li>
+    <li>到达标有 VP 的格子：获得 <b>1 VP</b>。</li>
+  </ul>
+
+  <h3>12.3 英雄任务</h3>
+  <p>到达任务格时，你可以选择<b>不结算遭遇</b>，改为结算该处的<b>英雄任务</b>。此时你需要满足任务板块上的条件（见第 19 节）。</p>
+  <p><b>第一个</b>完成任务的玩家，把自己的一个任务标记放在<b>第一格</b>（该格在终局计分时价值最高）。其他玩家则把标记放在<b>第二格</b>。每位玩家对每个任务只能完成<b>一次</b>。</p>
+  <p>无论该处是否还有可用的遭遇卡，你都可以选择这些其他奖励或英雄任务。</p>
+  <div class="example">
+    <span class="label">示例</span>
+    康妮触发「至多 1 格」的移动。她决定留在原地，去结算那里的任务——该任务要求把一个村民从活跃区退回供应区。结算后，她把自己的一个任务标记放在第一个可用格上，终局时可得 8 VP。
+  </div>
+</section>
+
+<section class="sec" id="story">
+  <h2><span class="num">13</span>讲故事</h2>
+  <p>当你激活一家<b>酒馆</b>，或使用个人版图上的特殊行动时，你就可以讲故事：用一张或多张此前已结算过的遭遇卡，讲一段<b>讲故事总值最多为 3</b> 的故事。</p>
+  <p>每家酒馆的奖励是<b>累加</b>的：</p>
+  <ul>
+    <li>讲故事总值为 <b>1</b>：只得酒馆的<b>第一项</b>奖励。</li>
+    <li>总值为 <b>2</b>：得<b>前两项</b>奖励。</li>
+    <li>总值为 <b>3</b>：<b>三项</b>奖励全得。</li>
+  </ul>
+  <p>故事讲完后，把所用的遭遇卡移到右侧个人版图的「<b>已讲述的故事</b>」区。这些卡此后不能再用于讲故事。</p>
+  <div class="example">
+    <span class="label">示例</span>
+    威廉使用银狼讲故事。他决定移动两张遭遇卡（一张故事值 1、一张故事值 2），总值 3。于是他获得三项奖励：4 金币；弃掉剩余的封印标记换 1 VP；扶正自己的一张卡。
+  </div>
+
+  <figure><img src="Greylune_Rules_images/page_12.jpg" alt="灰月镇规则书第 12 页：讲故事、奖励标记与封印标记的用法"><figcaption>原书第 12 页 · 讲故事、奖励标记与封印标记的用法</figcaption></figure>
+<h3>13.1 多张卡组合讲故事的规则</h3>
+  <ul>
+    <li>只有当<b>每张卡都对奖励有贡献</b>时，才能用多张遭遇卡一起讲故事。</li>
+    <li><b>故事值为 3</b> 的卡<b>只能单独使用</b>。</li>
+    <li><b>故事值为 0</b> 的卡<b>不能使用</b>（除非用卡牌效果把它提升）。</li>
+    <li>允许同时使用<b>两张故事值为 2</b> 的卡，凑成讲故事总值 3。</li>
+  </ul>
+  <div class="side">
+    <span class="label">注意</span>
+    你不能用故事值为 0 的遭遇卡讲故事，除非先提升它的数值（魅力药水、吟游诗人塞伦）。
+  </div>
+</section>
+
+<section class="sec" id="bonus">
+  <h2><span class="num">14</span>奖励标记</h2>
+  <p>每位玩家开局有 3 个<b>奖励标记</b>，正面朝上放在个人版图旁。三个标记的效果分别是：</p>
+  <ul>
+    <li>得 <b>1 个村民</b>；</li>
+    <li>得 <b>1 点力量与 1 点魔法</b>；</li>
+    <li>得 <b>5 金币</b>。</li>
+  </ul>
+  <p>触发时机如下：</p>
+  <ul>
+    <li>当玩家达到 <b>8 VP</b> 时，从自己的 3 个奖励标记中选<b>一个</b>，结算其效果，然后把它收回盒中。</li>
+    <li>当玩家达到 <b>20 VP</b> 时，从剩下的 2 个中选<b>一个</b>，结算其效果，然后把自己<b>全部</b>奖励标记收回盒中。</li>
+  </ul>
+  <div class="example">
+    <span class="label">示例</span>
+    康妮达到 9 VP，越过了 8 VP 那一格：她决定获得 1 个村民，并把该奖励标记收回盒中。威廉则达到 20 VP，在剩下的两个标记中选择了「得 1 力量与 1 魔法」，随后把这个标记和最后一个标记一并收回盒中。
+  </div>
+</section>
+
+<section class="sec" id="end">
+  <h2><span class="num">15</span>游戏结束与计分</h2>
+  <p>游戏在第 <b>5 年</b>结束后结束。游戏最后一年同样要进行秋季。</p>
+  <p>所有未使用的奖励标记在<b>终局计分之前</b>弃掉；若玩家在终局计分过程中达到 8 VP 或 20 VP，也<b>不能</b>再获得奖励标记。</p>
+  <p>每位玩家按以下方式计算 VP：在分数轨上推进计分标记，到达相应数值时取用或翻面 25／50 与 75／100 标记。</p>
+  <p>在游戏过程中已获得的 VP 之外，再加上：</p>
+  <ul>
+    <li><b>任务</b>带来的 VP；</li>
+    <li><b>伙伴</b>带来的 VP；</li>
+    <li><b>物品</b>带来的 VP；</li>
+    <li>若你有 5 点力量与 5 点魔法，得 <b>5 VP</b>；若力量与魔法都至少为 3，得 <b>2 VP</b>。</li>
+  </ul>
+  <p>VP 最多的玩家获胜。若出现平手，则共享胜利。</p>
+  <div class="example">
+    <span class="label">示例</span>
+    威廉在分数轨上有 26 VP。他加上任务带来的 14 VP（5 VP + 9 VP），伙伴带来的 8 VP（卢坎 4 VP、塞伦 4 VP），物品带来的 11 VP（汤米 1 VP、号角 1 VP、魔法戒指 9 VP），以及技能带来的 2 VP（力量标记未达 5，故只计 2 VP）。威廉的最终得分是 <b>61 VP</b>。
+  </div>
+</section>
+
+<figure><img src="Greylune_Rules_images/page_13.jpg" alt="灰月镇规则书第 13 页：终局计分方式与完整算例"><figcaption>原书第 13 页 · 终局计分方式与完整算例</figcaption></figure>
+<section class="sec" id="apx-event">
+  <h2><span class="num">16</span>附录 A:事件</h2>
+  <p>事件共 <b>6 张</b>。每年冬季翻开一张作为当年的当前事件；参加事件需把村民放上去并立即激活。</p>
+  <table class="cards">
+    <thead><tr><th>事件</th><th>类型</th><th>费用</th><th>效果</th></tr></thead>
+    <tbody>
+      <tr><td>宴会 Banquet</td><td><span class="tag e">事件</span></td><td class="n">—</td><td>得 3 金币，或扶正一张自己横置的卡。</td></tr>
+      <tr><td>比武大会 Tournament</td><td><span class="tag e">事件</span></td><td class="n">1 力量</td><td>消耗 1 力量，得 6 金币或 4 VP。</td></tr>
+      <tr><td>集会 Gathering</td><td><span class="tag e">事件</span></td><td class="n">1 力量或 3 金币</td><td>消耗 1 力量或 3 金币，得 1 个村民。</td></tr>
+      <tr><td>大集市 Great fair</td><td><span class="tag e">事件</span></td><td class="n">3 金币</td><td>消耗 3 金币，得 1 力量与 1 魔法。</td></tr>
+      <tr><td>魔法表演 Magic show</td><td><span class="tag e">事件</span></td><td class="n">1 魔法</td><td>消耗 1 魔法，冒险者移动至多 5 格。</td></tr>
+      <tr><td>节庆 Festival</td><td><span class="tag e">事件</span></td><td class="n">—</td><td>把村民放在一个空位上，并同时获得两侧相邻的奖励。若你选择了「去冒险」奖励，则在另一项之后结算。秋季被腾出的空位可以再被其他玩家使用。</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="sec" id="apx-village">
+  <h2><span class="num">17</span>附录 B:村庄卡</h2>
+  <p>村庄卡共 <b>49 张</b>：I 组 20 张、II 组 20 张、III 组 9 张，组成村庄牌堆（III 组在底、II 组居中、I 组在顶）。</p>
+
+  <h3>I 组 · 伙伴（6 张）</h3>
+  <table class="cards">
+    <thead><tr><th>卡名</th><th>类型</th><th>费用</th><th>效果</th></tr></thead>
+    <tbody>
+      <tr><td>阿里奥克 Ariok</td><td><span class="tag c">伙伴</span></td><td class="n">7</td><td>即时效果：得 1 个村民与 1 点魔法。<br>反应：冒险时横置并消耗 1 魔法，完全无视遭遇卡的一项条件。<br>终局：每点魔法 1 VP。</td></tr>
+      <tr><td>多里安 Dorian</td><td><span class="tag c">伙伴</span></td><td class="n">7</td><td>即时效果：得 1 个村民。<br>反应：购买物品时横置，费用减 1 并得 1 VP。<br>永久：物品上限 +2。<br>终局：每件物品 1 VP。</td></tr>
+      <tr><td>凯尔 Kael</td><td><span class="tag c">伙伴</span></td><td class="n">7</td><td>即时效果：得 1 个村民。<br>反应：需消耗力量时横置，少消耗 1 点。<br>永久：物品上限 +1。<br>终局：每点力量 1 VP。</td></tr>
+      <tr><td>艾尔温 Elwen</td><td><span class="tag c">伙伴</span></td><td class="n">7</td><td>即时效果：得 1 个村民。<br>反应：冒险时横置，冒险者额外移动至多 2 格。<br>终局：个人版图上每张带指定徽记的遭遇卡 1 VP（已讲述或未讲述皆算）。</td></tr>
+      <tr><td>内里斯 Neris</td><td><span class="tag c">伙伴</span></td><td class="n">7</td><td>即时效果：得 1 个村民。<br>反应：若为「获得金币」移除村民，横置可多得 2 金币；若为「激活卡牌」移除村民，横置可忽略额外费用。<br>终局：每对剩余金币 1 VP。</td></tr>
+      <tr><td>塞莉娅 Selia</td><td><span class="tag c">伙伴</span></td><td class="n">7</td><td>即时效果：得 1 个村民。<br>反应：弃封印标记时横置，可自选其数值（1 至 3）。<br>永久：使用药水时改为横置而非弃掉；同一回合可使用多瓶药水。<br>终局：每瓶药水 2 VP。</td></tr>
+    </tbody>
+  </table>
+
+  <h3>I 组 · 建筑、酒馆与物品（14 张）</h3>
+  <table class="cards">
+    <thead><tr><th>卡名</th><th>类型</th><th>费用</th><th>效果</th></tr></thead>
+    <tbody>
+      <tr><td>旅人行会 Travelers guild</td><td><span class="tag b">建筑</span></td><td class="n">0</td><td>冒险者移动至多 2 格。</td></tr>
+      <tr><td>魔法学校 Magical school</td><td><span class="tag b">建筑</span></td><td class="n">弃封印标记</td><td>弃掉一个封印标记并支付等额金币：得 1 点魔法。</td></tr>
+      <tr><td>铁匠铺 Smithy</td><td><span class="tag b">建筑</span></td><td class="n">0</td><td>得 1 点力量。</td></tr>
+      <tr><td>裂橡 The Riven Oak</td><td><span class="tag t">酒馆</span></td><td class="n">0</td><td>讲一或多段总值至多 3 的故事：得 2 VP + 1 力量 + 1 个村民。</td></tr>
+      <tr><td>金狮 The Golden Lion</td><td><span class="tag t">酒馆</span></td><td class="n">0</td><td>讲一或多段总值至多 3 的故事：得 4 金币 + 1 VP + X 金币（X＝弃掉的封印标记数值）。</td></tr>
+      <tr><td>侦察行会 Scouts guild</td><td><span class="tag b">建筑</span></td><td class="n">0</td><td>弃一个封印标记，冒险者移动至多等于其数值的格数。</td></tr>
+      <tr><td>汤米 Tommy</td><td><span class="tag i">物品</span></td><td class="n">4</td><td>横置去冒险至多 1 格；或横置并消耗 1 个村民，移动至多 2 格。<br>终局：1 VP。</td></tr>
+      <tr><td>百里靴 Hundred-league boots</td><td><span class="tag i">物品</span></td><td class="n">2</td><td>即时 VP：弃掉封印标记，得等于其数值的 VP。<br>能力：横置并弃掉该卡，冒险者移动至多 5 格。</td></tr>
+      <tr><td>短剑 Short sword</td><td><span class="tag i">物品</span></td><td class="n">2</td><td>即时效果：得 1 点力量。<br>能力：横置并消耗 1 个村民，得 1 点力量。<br>终局：1 VP。</td></tr>
+      <tr><td>玉雕像 Jade statue</td><td><span class="tag i">物品</span></td><td class="n">3</td><td>即时效果：得 1 点力量或 1 点魔法。<br>终局：5 VP。</td></tr>
+      <tr><td>神秘地图 Mysterious map</td><td><span class="tag i">物品</span></td><td class="n">3</td><td>横置移动至多 1 格；或横置、消耗 1 个村民并弃掉该卡，移动至多 3 格。<br>终局：1 VP。</td></tr>
+      <tr><td>巫师法杖 Wizard's staff</td><td><span class="tag i">物品</span></td><td class="n">3</td><td>即时效果：得 1 点魔法。<br>能力：横置并消耗 1 个村民，得 1 点魔法。<br>终局：1 VP。</td></tr>
+      <tr><td>法力药水 Mana potion</td><td><span class="tag i">物品</span></td><td class="n">3</td><td>即时 VP：弃掉封印标记，得等于其数值的 VP。<br>反应：冒险时弃掉该卡，魔法临时 +2（至本次遭遇或任务结束）。不移动标记，也不能消耗这部分魔法；魔法可临时超过 5，但不因此得分。</td></tr>
+      <tr><td>力量药水 Strength potion</td><td><span class="tag i">物品</span></td><td class="n">2</td><td>即时 VP：弃掉封印标记，得等于其数值的 VP。<br>反应：冒险时弃掉该卡，力量临时 +2（至本次遭遇或任务结束）。不移动标记，也不能消耗这部分力量；力量可临时超过 5，但不因此得分。</td></tr>
+    </tbody>
+  </table>
+
+  <h3>II 组 · 伙伴（5 张）</h3>
+  <table class="cards">
+    <thead><tr><th>卡名</th><th>类型</th><th>费用</th><th>效果</th></tr></thead>
+    <tbody>
+      <tr><td>布兰 Bran</td><td><span class="tag c">伙伴</span></td><td class="n">7</td><td>即时效果：得 1 个村民。<br>反应：激活卡牌需消耗一个或多个村民时横置，该数量减 1。<br>终局：你拥有的每个村民 1 VP，再减 2。</td></tr>
+      <tr><td>高德里克 Gaudric</td><td><span class="tag c">伙伴</span></td><td class="n">7</td><td>即时效果：得 1 个村民。<br>反应：当你要横置一张卡时横置本卡，使该卡改为被扶正。若被扶正的卡带有反应效果，可立即再次触发该效果，如此反复。<br>终局：每名伙伴 2 VP（含本卡）。</td></tr>
+      <tr><td>卢坎 Lucan</td><td><span class="tag c">伙伴</span></td><td class="n">7</td><td>即时效果：得 1 个村民。<br>反应：当你获得魔法时横置，改为得 1 点力量（反之亦然）。<br>终局：你较低的那项技能每级 1 VP。</td></tr>
+      <tr><td>米拉 Mira</td><td><span class="tag c">伙伴</span></td><td class="n">7</td><td>即时效果：得 1 个村民。<br>反应：冒险时（结算遭遇之前或之后）横置，在村庄放置 1 个村民。<br>终局：每张徽记各不相同的遭遇卡 1 VP（已讲述或未讲述皆算）。</td></tr>
+      <tr><td>塞伦 Seren</td><td><span class="tag c">伙伴</span></td><td class="n">7</td><td>即时效果：得 1 个村民。<br>反应：讲故事时横置，使某一张遭遇卡的故事值变为 3。<br>终局：每讲述一个故事 1 VP。</td></tr>
+    </tbody>
+  </table>
+
+  <h3>II 组 · 建筑、酒馆与物品（15 张）</h3>
+  <table class="cards">
+    <thead><tr><th>卡名</th><th>类型</th><th>费用</th><th>效果</th></tr></thead>
+    <tbody>
+      <tr><td>银狼 The Silver Wolf</td><td><span class="tag t">酒馆</span></td><td class="n">0</td><td>讲一或多段总值至多 3 的故事：得 4 金币 + X VP（X＝弃掉的封印标记数值）+ 扶正一张自己的卡。</td></tr>
+      <tr><td>侦察行会 Scouts guild</td><td><span class="tag b">建筑</span></td><td class="n">0</td><td>弃一个封印标记，冒险者移动至多等于其数值的格数。</td></tr>
+      <tr><td>旅人行会 Travelers guild</td><td><span class="tag b">建筑</span></td><td class="n">2</td><td>冒险者移动至多 4 格。</td></tr>
+      <tr><td>镇公所 Town hall</td><td><span class="tag b">建筑</span></td><td class="n">弃封印标记</td><td>弃掉一个封印标记并支付等额金币：得 1 点力量与 1 点魔法。</td></tr>
+      <tr><td>快活熊 The Jolly Bear</td><td><span class="tag t">酒馆</span></td><td class="n">0</td><td>讲一或多段总值至多 3 的故事：得 3 VP + 2 金币 + 1 点力量或 1 点魔法。</td></tr>
+      <tr><td>英雄厅 Hall of the heroes</td><td><span class="tag b">建筑</span></td><td class="n">0</td><td>消耗 1 点力量得 3 VP，和／或消耗 1 点魔法得 4 VP。</td></tr>
+      <tr><td>飞行药水 Flying potion</td><td><span class="tag i">物品</span></td><td class="n">2</td><td>即时 VP：弃掉封印标记，得等于其数值的 VP。<br>反应：冒险时弃掉该卡，力量与魔法各临时 +1（至本次遭遇或任务结束）。不移动标记，也不能消耗这部分技能；可临时超过 5，但不因此得分。</td></tr>
+      <tr><td>雪鬃 Snowmane</td><td><span class="tag i">物品</span></td><td class="n">4</td><td>横置并消耗 1／2 个村民，去冒险至多 3／5 格。<br>终局：2 VP。</td></tr>
+      <tr><td>隐形药水 Invisibility potion</td><td><span class="tag i">物品</span></td><td class="n">3</td><td>即时 VP：弃掉封印标记，得等于其数值的 VP。<br>反应：冒险时弃掉该卡，完全无视遭遇卡的一项条件。</td></tr>
+      <tr><td>剑咒 Bladechant</td><td><span class="tag i">物品</span></td><td class="n">5</td><td>横置：得 1 点力量或 1 点魔法；或消耗 1 个村民，得 1 点力量与 1 点魔法。<br>终局：1 VP。</td></tr>
+      <tr><td>藏宝图 Treasure map</td><td><span class="tag i">物品</span></td><td class="n">3</td><td>横置移动至多 2 格；或横置、消耗 1 个村民并弃掉该卡，移动至多 4 格。<br>终局：1 VP。</td></tr>
+      <tr><td>号角 Horn</td><td><span class="tag i">物品</span></td><td class="n">2</td><td>横置并消耗 1／2 个村民，得 3／5 VP。<br>终局：1 VP。</td></tr>
+      <tr><td>金雕像 Gold statue</td><td><span class="tag i">物品</span></td><td class="n">4</td><td>即时效果：得 1 点力量或 1 点魔法。<br>终局：5 VP。</td></tr>
+      <tr><td>耐力药水 Endurance potion</td><td><span class="tag i">物品</span></td><td class="n">3</td><td>即时 VP：弃掉封印标记，得等于其数值的 VP。<br>反应：冒险时弃掉该卡，在村庄放置 1 个村民。</td></tr>
+      <tr><td>魅力药水 Charisma potion</td><td><span class="tag i">物品</span></td><td class="n">3</td><td>即时 VP：弃掉封印标记，得等于其数值的 VP。<br>反应：讲故事时弃掉该卡，使某一张遭遇卡的故事值变为 3。</td></tr>
+    </tbody>
+  </table>
+
+  <h3>III 组（9 张）</h3>
+  <table class="cards">
+    <thead><tr><th>卡名</th><th>类型</th><th>费用</th><th>效果</th></tr></thead>
+    <tbody>
+      <tr><td>图书馆 Library</td><td><span class="tag b">建筑</span></td><td class="n">弃封印标记</td><td>弃掉一个封印标记并支付等额金币：你「已讲述的故事」区每张卡得 1 VP（不看其数值）。</td></tr>
+      <tr><td>旅人行会 Travelers guild</td><td><span class="tag b">建筑</span></td><td class="n">2</td><td>冒险者移动至多 5 格。</td></tr>
+      <tr><td>要塞 Fortress</td><td><span class="tag b">建筑</span></td><td class="n">弃封印标记</td><td>弃掉一个封印标记并支付等额金币：每名伙伴得 2 VP。</td></tr>
+      <tr><td>曼陀林 Mandolin</td><td><span class="tag i">物品</span></td><td class="n">5</td><td>横置并消耗 1 个村民：你「未讲述的故事」区每张卡得 1 VP（不看其数值）。<br>终局：5 VP。</td></tr>
+      <tr><td>贤者之石 Philosopher stone</td><td><span class="tag i">物品</span></td><td class="n">3</td><td>即时 VP：弃掉封印标记，得等于其数值的 VP。<br>能力：横置并消耗 1 个村民，得 5 VP。</td></tr>
+      <tr><td>赤龙 The Scarlet Dragon</td><td><span class="tag t">酒馆</span></td><td class="n">0</td><td>讲一或多段总值至多 3 的故事：得 3 VP + 2 VP + 1 VP。</td></tr>
+      <tr><td>魔法戒指 Magic ring</td><td><span class="tag i">物品</span></td><td class="n">7</td><td>终局：9 VP。（卡面无能力）</td></tr>
+      <tr><td>红宝雕像 Rubis statue</td><td><span class="tag i">物品</span></td><td class="n">6</td><td>即时效果：得 1 点力量或 1 点魔法。<br>终局：6 VP。</td></tr>
+      <tr><td>次元袋 Bag of holding</td><td><span class="tag i">物品</span></td><td class="n">4</td><td>永久：物品上限 +1；即使取得本卡前已达上限也生效。<br>能力：横置并消耗 1 个村民，每件物品得 1 VP。<br>终局：4 VP。</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="sec" id="apx-enc">
+  <h2><span class="num">18</span>附录 C:遭遇卡</h2>
+  <p>遭遇卡共 <b>41 张</b>：I 组 16 张、II 组 16 张、III 组 9 张。「即时奖励 + 收入」表示该卡带收入标记：结算时得一次，此后每个秋季的收入步骤再得一次。</p>
+
+  <h3>I 组（16 张）</h3>
+  <table class="cards">
+    <thead><tr><th>卡名</th><th>故事值</th><th>条件</th><th>奖励</th></tr></thead>
+    <tbody>
+      <tr><td>世界树 World-tree</td><td class="n">0</td><td>无</td><td>即时奖励 + 收入：得 1 VP。</td></tr>
+      <tr><td>旅店 Inn</td><td class="n">1</td><td>支付 2 金币</td><td>得 1 个村民。</td></tr>
+      <tr><td>营地 Camp</td><td class="n">1</td><td>至少 1 力量或 1 魔法</td><td>得 1 个村民。</td></tr>
+      <tr><td>石阵 Circle of stones</td><td class="n">1</td><td>无</td><td>得 1 点魔法。</td></tr>
+      <tr><td>诅咒头骨 Cursed skull</td><td class="n">3</td><td>至少 2 魔法</td><td>扶正一张自己的卡。</td></tr>
+      <tr><td>伏击 Ambush</td><td class="n">1</td><td>至少 1 魔法</td><td>即时奖励 + 收入：得 1 金币。</td></tr>
+      <tr><td>隐士 Hermit</td><td class="n">2</td><td>至少 2 力量</td><td>得 1 点魔法。</td></tr>
+      <tr><td>入会仪式 Initiation</td><td class="n">1</td><td>支付 4 金币</td><td>得 1 点力量与 1 点魔法。</td></tr>
+      <tr><td>劫掠者 Marauders</td><td class="n">2</td><td>至少 2 力量、或 2 魔法、或力量+魔法合计至少 2</td><td>得 4 金币。</td></tr>
+      <tr><td>狼群 Pack of wolves</td><td class="n">2</td><td>至少 2 力量</td><td>得 3 VP。</td></tr>
+      <tr><td>矿坑 Mine</td><td class="n">1</td><td>消耗 1 个村民</td><td>即时奖励 + 收入：得 2 金币。</td></tr>
+      <tr><td>绵羊 Sheep</td><td class="n">0</td><td>无</td><td>即时奖励 + 收入：得 1 金币。</td></tr>
+      <tr><td>熊 Bear</td><td class="n">3</td><td>左：至少 1 力量<br>右：至少 1 魔法</td><td>左：得 2 VP<br>右：得 2 VP</td></tr>
+      <tr><td>乱石隘口 Rocky pass</td><td class="n">2</td><td>无</td><td>得 1 点力量。</td></tr>
+      <tr><td>猛虎 Tiger</td><td class="n">3</td><td>消耗 1 个村民</td><td>无（见译者注）</td></tr>
+      <tr><td>山谷 Valley</td><td class="n">0</td><td>左：至少 1 力量<br>右：消耗 1 个村民</td><td>左：冒险者移动至多 2 格（若同时取得另一项奖励，先结算该项再移动）<br>右：得 3 VP</td></tr>
+    </tbody>
+  </table>
+  <div class="tn">
+    <span class="label">译者注</span>
+    猛虎（Tiger）这张卡的奖励区在原文中为空，卡面也未印奖励。此处照原文如实留空：它的价值在于故事值为 3，可作为讲故事的高值素材。
+  </div>
+
+  <h3>II 组（16 张）</h3>
+  <table class="cards">
+    <thead><tr><th>卡名</th><th>故事值</th><th>条件</th><th>奖励</th></tr></thead>
+    <tbody>
+      <tr><td>匪帮 Bandits</td><td class="n">1</td><td>至少 3 力量</td><td>得 4 金币与 2 VP。</td></tr>
+      <tr><td>商队 Caravan</td><td class="n">0</td><td>消耗 2 个村民</td><td>即时奖励 + 收入：得 4 金币。</td></tr>
+      <tr><td>游侠骑士 Errant knight</td><td class="n">1</td><td>支付 2 金币</td><td>得 1 点力量与 2 VP。</td></tr>
+      <tr><td>流浪者 Vagabond</td><td class="n">2</td><td>至少 4 力量、或 4 魔法、或力量+魔法合计至少 4</td><td>得 1 个村民。</td></tr>
+      <tr><td>训练 Training</td><td class="n">0</td><td>支付 4 金币</td><td>即时奖励 + 收入：得 1 点力量。</td></tr>
+      <tr><td>制桶铺 Cooperage</td><td class="n">0</td><td>支付 4 金币</td><td>即时奖励 + 收入：得 2 VP。</td></tr>
+      <tr><td>传说之剑 Legendary sword</td><td class="n">1</td><td>消耗 1 个村民</td><td>得 3 VP。</td></tr>
+      <tr><td>恶魔 Demon</td><td class="n">3</td><td>左：至少 3 力量<br>右：至少 3 魔法</td><td>左：得 3 VP<br>右：得 3 VP</td></tr>
+      <tr><td>农庄 Farm</td><td class="n">0</td><td>无</td><td>得 1 个村民。</td></tr>
+      <tr><td>钻石 Diamond</td><td class="n">2</td><td>消耗 1 点力量</td><td>得 5 金币。</td></tr>
+      <tr><td>比武 Joust</td><td class="n">1</td><td>左：消耗 1 个村民<br>右：至少 4 力量</td><td>左：得 3 VP<br>右：得 4 VP</td></tr>
+      <tr><td>独角兽 Unicorn</td><td class="n">3</td><td>至少 3 魔法</td><td>扶正一张自己的卡。<br>即时奖励 + 收入：得 1 VP。</td></tr>
+      <tr><td>咒语 Incantation</td><td class="n">3</td><td>消耗 1 个村民</td><td>得 1 点魔法。</td></tr>
+      <tr><td>巫术 Witchcraft</td><td class="n">1</td><td>支付 4 金币</td><td>得 2 点魔法。</td></tr>
+      <tr><td>孤塔 Lone tower</td><td class="n">3</td><td>消耗 1 点魔法</td><td>得 3 VP，然后冒险者移动至多 3 格。</td></tr>
+      <tr><td>宝藏 Treasure</td><td class="n">2</td><td>左：至少 3 魔法<br>右：消耗 1 点魔法</td><td>左：得 3 金币<br>右：得 4 金币</td></tr>
+    </tbody>
+  </table>
+
+  <h3>III 组（9 张）</h3>
+  <table class="cards">
+    <thead><tr><th>卡名</th><th>故事值</th><th>条件</th><th>奖励</th></tr></thead>
+    <tbody>
+      <tr><td>射术 Archery</td><td class="n">1</td><td>支付 3 金币</td><td>得 1 点力量与 3 VP。</td></tr>
+      <tr><td>圣杯 Holy chalice</td><td class="n">2</td><td>至少 5 魔法</td><td>得 4 VP 并扶正一张自己的卡。</td></tr>
+      <tr><td>仙环 Fairy ring</td><td class="n">2</td><td>消耗 1 个村民</td><td>得 1 点魔法与 3 VP。</td></tr>
+      <tr><td>迷宫 Labyrinth</td><td class="n">0</td><td>左：消耗 1 个村民<br>右：消耗 1 个村民</td><td>左：得 4 VP<br>右：得 4 VP</td></tr>
+      <tr><td>金矿 Gold mine</td><td class="n">0</td><td>消耗 1 个村民</td><td>得 7 金币。</td></tr>
+      <tr><td>死灵法师 Necromancer</td><td class="n">1</td><td>力量+魔法合计至少 8</td><td>得 9 VP。</td></tr>
+      <tr><td>接力 Relay</td><td class="n">1</td><td>支付 4 金币</td><td>得 2 VP，然后冒险者移动至多 3 格。</td></tr>
+      <tr><td>巨龙 Dragon</td><td class="n">3</td><td>左：至少 5 力量<br>右：至少 5 魔法</td><td>左：得 4 VP<br>右：得 4 VP</td></tr>
+      <tr><td>雪隘 Snowy pass</td><td class="n">2</td><td>至少 5 力量</td><td>得 5 金币与 3 VP。</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="sec" id="apx-quest">
+  <h2><span class="num">19</span>附录 D:英雄任务</h2>
+  <p>英雄任务共 <b>9 张</b>，每局随机抽 3 张放上主版图。第一个完成任务者把任务标记放在第一格，之后完成者放在第二格；每位玩家对每个任务只能完成一次。</p>
+  <table class="cards">
+    <thead><tr><th>任务</th><th>完成条件</th><th>说明</th></tr></thead>
+    <tbody>
+      <tr><td>捐赠 Donation</td><td>弃掉一件自己的物品</td><td>—</td></tr>
+      <tr><td>火龙 Fire dragon</td><td>力量+魔法合计至少 6</td><td>—</td></tr>
+      <tr><td>巨人 Giant</td><td>至少 4 力量</td><td>—</td></tr>
+      <tr><td>吟游诗人赛会 Bard tournament</td><td>把 2 张遭遇卡从「未讲述的故事」区移到「已讲述的故事」区</td><td>不看其数值；即使是 0 值的遭遇卡也可用于此任务。</td></tr>
+      <tr><td>亡灵 Undead</td><td>消耗 1 点力量与 1 点魔法</td><td>—</td></tr>
+      <tr><td>赎金 Ransom</td><td>支付 6 金币</td><td>—</td></tr>
+      <tr><td>致命陷阱 Deadly trap</td><td>把 1 个可用村民退回供应区</td><td>—</td></tr>
+      <tr><td>怨灵 Wraiths</td><td>至少 4 魔法</td><td>—</td></tr>
+      <tr><td>婚礼 Wedding</td><td>消耗 2 个村民</td><td>—</td></tr>
+    </tbody>
+  </table>
+  <div class="tn">
+    <span class="label">译者注</span>
+    任务板块上的两档 VP 数值（先完成者较高）印在板块上，规则书正文与附录均未列出具体数字；示例中曾出现「第一个完成者可得 8 VP」。此处照原文只列条件，具体分值请以实物板块为准。
+  </div>
+</section>
+
+<section class="sec" id="apx-token">
+  <h2><span class="num">20</span>附录 E:封印标记与收入标记</h2>
+
+  <h3>20.1 封印标记的放置</h3>
+  <table>
+    <thead><tr><th>图标</th><th>含义</th></tr></thead>
+    <tbody>
+      <tr><td>−1</td><td>该建筑获得等于<b>玩家人数减 1</b> 的封印标记。（设置时与每年冬季放置）</td></tr>
+      <tr><td>?</td><td>该物品获得 <b>1 个</b>封印标记，不论人数。</td></tr>
+    </tbody>
+  </table>
+  <p>封印标记<b>永远正面朝上</b>放置。</p>
+
+  <h3>20.2 封印标记的三种用法</h3>
+  <p>封印标记的用法取决于它被放在哪里：</p>
+  <table>
+    <thead><tr><th>位置</th><th>用法</th></tr></thead>
+    <tbody>
+      <tr><td><b>建筑</b></td><td>作为<b>费用</b>时：弃掉一个标记，并支付等于其数值的金币，才能执行该建筑的行动。若建筑上已无标记，则不能执行该行动。</td></tr>
+      <tr><td><b>建筑</b></td><td>作为<b>效果</b>时：弃掉一个标记，用其数值作为本次行动的强度。若建筑上已无标记，则不能执行该行动。</td></tr>
+      <tr><td><b>物品</b></td><td>购买带此符号的物品时，立即获得等于标记数值的 <b>VP</b>，然后弃掉该标记。</td></tr>
+      <tr><td><b>酒馆</b></td><td>作为<b>奖励</b>：若讲故事的总值达到对应等级，弃掉一个标记，获得等于其数值的 VP／金币。若标记已用尽，仍可用这家酒馆讲故事并享受其他奖励。</td></tr>
+    </tbody>
+  </table>
+
+  <h3>20.3 收入标记</h3>
+  <p>带收入图标的遭遇卡在冬季进入游戏时，会在其上放一个对应的收入标记。玩家结算该遭遇后，把卡放到个人版图上，<b>立即</b>结算一次收入效果；此后每个<b>秋季的收入步骤</b>再结算一次。收入标记的数量没有上限。</p>
+</section>
+
+<section class="sec" id="aid">
+  <h2><span class="num">21</span>玩家帮助卡</h2>
+  <p>帮助卡在手，用来速查常用图标与效果。</p>
+
+  <h3>21.1 费用的表示</h3>
+  <table>
+    <thead><tr><th>图标含义</th><th>说明</th></tr></thead>
+    <tbody>
+      <tr><td>支付 1 金币</td><td>从自己的金币中支付 1 枚给银行。</td></tr>
+      <tr><td>消耗 1 个活跃村民</td><td>从个人版图的「活跃村民」区取 1 个村民，放进营地。</td></tr>
+      <tr><td>消耗 1 点力量／1 点魔法</td><td>把对应的技能标记下移相应格数。</td></tr>
+      <tr><td>至少 1 力量／1 魔法／力量+魔法合计 2</td><td>条件判定，不消耗。</td></tr>
+      <tr><td>把 1 个活跃村民退回供应区</td><td>该村民回到公共供应，不再属于你。</td></tr>
+      <tr><td>弃掉一件自己的物品</td><td>把该物品收回盒中。</td></tr>
+      <tr><td>弃掉这瓶药水／这件物品</td><td>使用后即弃，收回盒中。</td></tr>
+      <tr><td>横置这张卡／横置并消耗 1 个活跃村民</td><td>横置表示本年已用；需要玩家消耗时一并放进营地。</td></tr>
+      <tr><td>弃掉一个封印标记并支付等额金币</td><td>两者都要做。</td></tr>
+      <tr><td>弃掉一个封印标记，用其数值作为奖励</td><td>只看数值，不付金币。</td></tr>
+    </tbody>
+  </table>
+
+  <h3>21.2 卡面符号</h3>
+  <table>
+    <thead><tr><th>符号</th><th>含义</th></tr></thead>
+    <tbody>
+      <tr><td><b>建筑</b>／<b>物品</b>／<b>伙伴</b>／<b>药水</b></td><td>卡牌类型标识。</td></tr>
+      <tr><td><b>未讲述的故事</b>／<b>已讲述的故事</b></td><td>个人版图上的两个故事区。</td></tr>
+      <tr><td><b>VP</b></td><td>胜利分。</td></tr>
+      <tr><td><b>反应</b></td><td>该效果只有在执行图示行动时才能发动。</td></tr>
+      <tr><td><b>永久效果</b></td><td>持续有效，无需横置。</td></tr>
+      <tr><td><b>终局得分</b>／<b>即时得分</b></td><td>分别在游戏结束时／立即结算。</td></tr>
+    </tbody>
+  </table>
+
+  <h3>21.3 常见效果的写法</h3>
+  <ul class="tight">
+    <li>得 1 金币。</li>
+    <li>得 1 力量／1 魔法／1 力量或 1 魔法。</li>
+    <li>（卢坎）获得魔法时，改为得 1 力量（反之亦然）。</li>
+    <li>把对应的收入标记放到自己的版图上：立即获得该奖励，且此后每个秋季再获得一次。</li>
+    <li>得 1 个村民：直接放进个人版图的「活跃村民」区。</li>
+    <li>冒险者移动至多 1 格。</li>
+    <li>（艾尔温）冒险时，最大距离 +2。</li>
+    <li>弃掉一个封印标记，获得等于其数值的 VP／金币。</li>
+    <li>扶正一张自己的卡（物品或伙伴）。</li>
+    <li>（内里斯）在村庄「获得金币」时多得 2 金币，<em>或</em>激活村庄卡时忽略额外费用。</li>
+    <li>完全无视一次遭遇的一项条件（对任务无效）。</li>
+    <li>力量／魔法临时 +2。</li>
+    <li>（布兰）使用物品时少消耗 1 个村民。</li>
+    <li>使某一张遭遇卡的故事值变为 3。</li>
+    <li>把一个活跃村民放进村庄。</li>
+  </ul>
+</section>
+
+<section class="sec" id="faq">
+  <h2><span class="num">22</span>常见问题</h2>
+
+  <h3>遭遇</h3>
+  <p><b>双条件的遭遇怎么结算？</b><br>遭遇开始时，你必须声明要满足哪一个条件。你不能用某个条件对应的奖励去达成第二个条件。</p>
+  <p><b>遭遇卡上的「去冒险」奖励怎么用？</b><br>你必须先获得当前遭遇的全部奖励，或者放弃它们，才能移动到另一个遭遇。</p>
+  <p><b>「无视 1 项条件」怎么运作？</b><br>它让你完全无视遭遇的一项条件。若该遭遇有两个条件，你仍需满足另一个条件才能获得两项奖励。此效果对任务<b>无效</b>。</p>
+
+  <h3>酒馆</h3>
+  <p><b>金狮与银狼怎么用？</b><br>这两家酒馆带封印标记。只有当你的故事达到该等级奖励时，才弃掉封印标记。若标记已用尽，你仍可使用该酒馆，只是拿不到需要标记的那项奖励。</p>
+  <p><b>如何讲多段故事？</b><br>只有当每段故事都对奖励有贡献时，才能讲多段。因此故事值为 3 的卡不能与其他卡组合；故事值为 0 的卡也不能讲，除非用塞伦（吟游诗人）或魅力药水把它的值变成 3。</p>
+
+  <h3>药水</h3>
+  <p><b>法力、力量或飞行药水能把技能提升到 5 以上吗？</b><br>可以。但因为这是临时提升，你<b>不因此得分</b>。它对某些遭遇或任务仍然有用。</p>
+
+  <h3>伙伴</h3>
+  <p><b>伙伴横置时，永久效果还有效吗？</b><br>有效，这些效果持续生效。</p>
+  <p><b>内里斯（盗贼）的能力怎么算？</b><br>内里斯有两项能力，取决于你移除村民时选择的行动。若你选择获得金币，多得 2 金币；若你选择激活卡牌，则不必为相邻村民支付额外金币。若你用村民参加事件，内里斯<b>不生效</b>。</p>
+  <p><b>米拉（侦察兵）的能力可以在遭遇奖励带来额外移动之后使用吗？</b><br>可以。别忘了你只能在村庄放置<b>活跃</b>村民。</p>
+  <p><b>用塞莉娅（炼金术士）改变封印标记的数值后，标记怎么处理？</b><br>照常弃掉。</p>
+
+  <h3>事件</h3>
+  <p><b>节庆上的某个位置被玩家在其秋季腾出，我能接着用吗？</b><br>可以。你可以选择任何空位，即使它之前被占用过。</p>
+  <p><b>在节庆上获得多项奖励时，顺序如何？</b><br>你可以自选顺序领取，唯一例外是「去冒险」必须<b>最后</b>结算。</p>
+
+  <h3>个人版图</h3>
+  <p><b>特殊行动有什么限制？</b><br>每年只能用一次，且只能在夏季阶段使用；该位置只能放<b>活跃</b>村民。</p>
+  <p><b>力量（或魔法）标记已在 5 时，再获得力量（或魔法）会怎样？</b><br>标记停在 5，你立即得 1 VP。</p>
+
+  <h3>游戏结束</h3>
+  <p><b>最后一年也有秋季吗？</b><br>有。游戏结束前你会再收一次收入。这对内里斯（盗贼）与某些收入标记有影响。</p>
+  <p><b>终局计分时能结算奖励标记吗？</b><br>不能，奖励标记在终局计分<b>之前</b>就已弃掉。</p>
+  <p><b>5 力量与 5 魔法能得多少 VP？</b><br>5 VP。这项奖励<b>替代</b>「两项至少 3」时的 2 VP。</p>
+</section>
+
+<section class="sec" id="credits">
+  <h2><span class="num">23</span>制作名单</h2>
+  <table>
+    <tbody>
+      <tr><td>游戏设计</td><td>Wiliam Attia</td></tr>
+      <tr><td>美术</td><td>David Sitbon &amp; Ulric</td></tr>
+      <tr><td>规则撰写</td><td>Mathieu Verdier</td></tr>
+      <tr><td>排版（DTP）</td><td>Ulric Maes</td></tr>
+      <tr><td>开发</td><td>Wiliam Attia &amp; Mathieu Verdier</td></tr>
+      <tr><td>项目管理</td><td>Yann Beligné</td></tr>
+      <tr><td>制作管理</td><td>Jeanne Danmanville</td></tr>
+      <tr><td>传播</td><td>Pauline Lebel</td></tr>
+      <tr><td>出品人</td><td>Emmanuel Beltrando</td></tr>
+      <tr><td>校对</td><td>Alexandre Figuière</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<footer>
+  <p>本页为《灰月镇 Greylune》官方英文规则书与官方 FAQ 的中文译本，供中文玩家查阅。原文一切解释权归出版方所有；规则冲突时以英文原版为准。</p>
+  <p>译制依据：<b>RULES_GREYLUNE_236X236_EN_LIGHT.pdf</b>（20 页）与 <b>FAQ_GREYLUNE_EN_236X236_WEB.pdf</b>（2 页）。术语处理：Villager＝村民、Companion＝伙伴、Seal token＝封印标记、exhaust＝横置、ready＝扶正。</p>
+</footer>
+</main>
+</div>
+</body>
+</html>
