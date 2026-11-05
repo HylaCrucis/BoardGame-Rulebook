@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gaudí 中文规则书 · 高迪</title>
+<style>
+:root{
+  --clay:#a8472a;
+  --clay-soft:#c4693f;
+  --clay-pale:#e8c3ad;
+  --teal:#1f6f68;
+  --teal-soft:#3d8f86;
+  --gold:#b8892f;
+  --ink-900:#1c1916;
+  --ink-800:#2a251f;
+  --ink-700:#3a332b;
+  --paper:#fbf7f0;
+  --paper-2:#f4ece0;
+  --ink:#242019;
+  --ink-soft:#565046;
+  --rule:#e0d3c1;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:#ece3d4;
+  color:var(--ink);
+  font-family:"Noto Serif SC","Source Han Serif SC","Songti SC","SimSun",Georgia,"Times New Roman",serif;
+  font-size:16.5px;
+  line-height:1.9;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ---------- 顶栏 ---------- */
+.topbar{
+  position:sticky;top:0;z-index:60;
+  height:54px;
+  background:linear-gradient(180deg,#231e19,#2a251f);
+  border-bottom:1px solid rgba(184,137,47,.55);
+}
+.topbar-inner{
+  max-width:1280px;margin:0 auto;height:100%;padding:0 28px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.brand{
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:14px;letter-spacing:.3em;color:#e6d0a8;text-transform:uppercase;
+}
+.brand-sub{
+  margin-left:16px;padding-left:16px;
+  border-left:1px solid rgba(255,255,255,.16);
+  font-size:12px;letter-spacing:.14em;color:#a2968a;
+  font-family:inherit;text-transform:none;
+}
+.topbar-meta{font-size:12px;letter-spacing:.22em;color:#a2968a;}
+
+/* ---------- 首屏 ---------- */
+.hero{
+  background:
+    radial-gradient(800px 380px at 12% -10%, rgba(168,71,42,.42), transparent 70%),
+    radial-gradient(700px 360px at 88% 110%, rgba(31,111,104,.34), transparent 72%),
+    linear-gradient(158deg,#1c1916 0%,#332b23 58%,#1c1916 100%);
+  border-bottom:3px solid var(--gold);
+  color:#f5ece0;
+}
+.hero-inner{
+  max-width:1280px;margin:0 auto;
+  display:grid;grid-template-columns:1.12fr .88fr;gap:52px;
+  padding:54px 48px 50px;align-items:center;
+}
+.eyebrow{
+  margin:0 0 18px;font-size:11.5px;letter-spacing:.36em;text-transform:uppercase;
+  color:#d5a869;
+}
+h1{
+  margin:0;font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(46px,6.6vw,78px);line-height:1;letter-spacing:.05em;
+  background:linear-gradient(180deg,#f7e6c8,#d5a869 58%,#8f6420);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+.hero-cn{margin:14px 0 0;font-size:20px;letter-spacing:.14em;color:#efe0ca;}
+.hero-lead{margin:18px 0 0;max-width:46ch;font-size:15px;line-height:1.85;color:#c9bcae;}
+.hero-meta{list-style:none;display:flex;flex-wrap:wrap;gap:8px;padding:0;margin:26px 0 0;}
+.hero-meta li{
+  font-size:12px;letter-spacing:.1em;color:#dfc194;
+  border:1px solid rgba(184,137,47,.45);border-radius:2px;padding:4px 10px;
+}
+.hero-fig{margin:0;}
+.hero-fig img{
+  display:block;width:100%;height:auto;border-radius:3px;
+  border:1px solid rgba(184,137,47,.55);
+  box-shadow:0 18px 44px rgba(0,0,0,.5);
+}
+.hero-fig figcaption{
+  margin-top:10px;text-align:center;font-size:12px;letter-spacing:.14em;color:#a2937f;
+}
+
+/* ---------- 版式 ---------- */
+.layout{
+  max-width:1280px;margin:0 auto;
+  display:grid;grid-template-columns:276px minmax(0,1fr);
+  background:var(--paper);
+  box-shadow:0 0 70px rgba(40,30,20,.22);
+}
+
+/* ---------- 左侧目录 ---------- */
+.toc{
+  position:sticky;top:54px;align-self:start;
+  height:calc(100vh - 54px);overflow-y:auto;
+  background:
+    radial-gradient(520px 300px at 50% 0%, rgba(168,71,42,.3), transparent 70%),
+    linear-gradient(180deg,#241f1a,#2a251f 60%,#1c1916);
+  border-right:1px solid rgba(184,137,47,.32);
+  padding:30px 18px 48px;
+}
+.toc-title{
+  margin:0 0 18px;padding:0 12px;
+  font-size:11.5px;letter-spacing:.34em;color:#d5a869;text-transform:uppercase;
+}
+.toc-title::after{
+  content:"";display:block;margin-top:10px;height:1px;
+  background:linear-gradient(90deg,rgba(184,137,47,.7),transparent);
+}
+.toc nav{display:flex;flex-direction:column;gap:1px;}
+.toc a{
+  display:flex;gap:10px;align-items:baseline;
+  padding:6px 12px;text-decoration:none;
+  font-size:13.6px;letter-spacing:.05em;color:#b6aa9d;
+  border-left:2px solid transparent;transition:.18s;
+}
+.toc a:hover{color:#f0dcbc;background:rgba(184,137,47,.12);border-left-color:rgba(184,137,47,.6);}
+.toc a.active{color:#fff;background:rgba(168,71,42,.26);border-left-color:var(--clay-soft);}
+.toc .no{
+  font-family:Georgia,serif;font-size:11px;color:#8b8074;min-width:19px;
+}
+.toc a.active .no{color:#d5a869;}
+.toc-foot{
+  margin:26px 12px 0;padding-top:14px;
+  border-top:1px solid rgba(255,255,255,.09);
+  font-size:11.6px;line-height:1.75;color:#8a7f72;
+}
+
+/* ---------- 正文 ---------- */
+.doc{padding:46px 56px 30px;min-width:0;}
+.sec{margin:0 0 54px;scroll-margin-top:70px;}
+.sec > h2{
+  margin:0 0 18px;display:flex;align-items:baseline;gap:14px;
+  font-size:26px;letter-spacing:.1em;color:var(--ink-800);
+  padding-bottom:12px;border-bottom:2px solid var(--rule);
+  position:relative;
+}
+.sec > h2::before{
+  content:"";position:absolute;left:0;bottom:-2px;width:64px;height:2px;background:var(--clay);
+}
+.sec > h2 .num{
+  font-family:Georgia,serif;font-size:13px;letter-spacing:.2em;
+  color:var(--clay);background:#f8ece3;border:1px solid rgba(168,71,42,.35);
+  border-radius:2px;padding:3px 8px;
+}
+.sec h3{
+  margin:26px 0 10px;font-size:17.5px;letter-spacing:.06em;color:var(--ink-700);
+  padding-left:12px;border-left:3px solid var(--clay-soft);
+}
+.sec h4{margin:20px 0 8px;font-size:15.6px;color:var(--ink-700);letter-spacing:.04em;}
+.sec p{margin:11px 0;}
+.sec > .lead{
+  font-size:16.6px;color:#33302a;line-height:1.9;
+  padding:2px 0 2px 16px;border-left:3px solid rgba(168,71,42,.3);
+  margin-bottom:20px;
+}
+.sec b,.sec strong{color:var(--ink-800);}
+em{font-style:normal;color:#8d3a20;font-weight:600;}
+
+/* 提示框 */
+.callout{
+  margin:20px 0;padding:14px 20px;
+  background:#fdf3ec;border:1px solid rgba(168,71,42,.28);border-left:3px solid var(--clay);
+  border-radius:0 4px 4px 0;font-size:15px;
+}
+.callout .label{
+  display:block;margin-bottom:4px;font-size:11px;letter-spacing:.22em;color:var(--clay);
+}
+.side{
+  margin:16px 0;padding:11px 16px;
+  background:var(--paper-2);border-radius:3px;
+  font-size:14.4px;color:#514a40;
+}
+.side .label{display:block;margin-bottom:3px;font-size:11px;letter-spacing:.2em;color:#8d7f6a;}
+
+/* 译者注 */
+.tn{
+  margin:16px 0;padding:12px 16px;
+  background:#f2f5f4;border:1px dashed #bfccc9;border-radius:3px;
+  font-size:14.2px;line-height:1.8;color:#4a5350;
+}
+.tn .label{display:block;margin-bottom:3px;font-size:11px;letter-spacing:.2em;color:#6f817d;}
+
+/* 流程条 */
+.flow{
+  display:flex;flex-wrap:wrap;align-items:center;gap:10px;
+  margin:24px 0;padding:16px 18px;
+  background:var(--ink-800);border-radius:4px;
+}
+.flow span{
+  font-size:13px;letter-spacing:.14em;color:#e6d0a8;
+  border:1px solid rgba(184,137,47,.45);border-radius:2px;padding:5px 12px;
+}
+.flow i{font-style:normal;color:#8b8074;font-size:12px;}
+
+/* 表格 */
+table{width:100%;border-collapse:collapse;margin:20px 0;font-size:14.5px;}
+th{
+  background:var(--ink-800);color:#e6d0a8;font-weight:400;
+  letter-spacing:.16em;font-size:12px;text-align:left;padding:10px 13px;
+}
+td{padding:9px 13px;border-bottom:1px solid #eae0d2;vertical-align:top;color:#2d2822;}
+tbody tr:nth-child(even){background:#f8f1e6;}
+td.n{white-space:nowrap;color:#8d3a20;font-family:Georgia,serif;}
+
+/* 列表 */
+ol.steps{list-style:none;padding:0;margin:16px 0;counter-reset:s;}
+ol.steps > li{
+  position:relative;padding:0 0 0 46px;margin:0 0 14px;line-height:1.85;
+}
+ol.steps > li::before{
+  counter-increment:s;content:counter(s);
+  position:absolute;left:0;top:.2em;
+  width:27px;height:27px;line-height:25px;text-align:center;
+  font-family:Georgia,serif;font-size:13px;
+  color:var(--ink-800);background:#f7ebdd;
+  border:1px solid rgba(168,71,42,.6);border-radius:50%;
+}
+ol.steps.alpha > li::before{content:counter(s,upper-alpha);}
+ul.plain{margin:12px 0;padding-left:1.2em;}
+ul.plain li{margin:.35em 0;}
+
+/* 动作块 */
+.act{
+  margin:20px 0;padding:18px 22px 20px;
+  background:#fffdf9;border:1px solid var(--rule);border-radius:5px;
+}
+.act > h4{
+  margin:0 0 10px;display:flex;align-items:center;gap:10px;
+  font-size:17px;color:var(--ink-800);
+}
+.act > h4 .k{
+  font-size:10.5px;letter-spacing:.2em;color:var(--clay);
+  border:1px solid rgba(168,71,42,.45);border-radius:2px;padding:2px 6px;
+  font-weight:400;
+}
+
+/* 定义列表 */
+dl.defs{margin:16px 0;}
+dl.defs dt{
+  font-weight:600;color:var(--ink-700);margin-top:14px;letter-spacing:.04em;
+  font-size:15.4px;
+  padding-left:10px;border-left:2px solid rgba(168,71,42,.45);
+}
+dl.defs dd{margin:3px 0 0 0;color:#2d2822;font-size:15px;}
+
+/* 图片 */
+figure{margin:28px 0;padding:10px;background:#fffdf9;border:1px solid var(--rule);border-radius:4px;
+  box-shadow:0 10px 28px rgba(40,30,20,.09);}
+figure img{display:block;width:100%;height:auto;border-radius:2px;}
+figcaption{
+  margin-top:10px;padding:9px 4px 2px;border-top:1px solid #f2e9dc;
+  text-align:center;font-size:12.6px;letter-spacing:.1em;color:#7d7161;
+}
+
+/* 计分 */
+.score{list-style:none;padding:0;margin:20px 0;counter-reset:sc;}
+.score > li{
+  position:relative;padding:14px 18px 14px 62px;margin:0 0 10px;
+  background:#fffdf9;border:1px solid var(--rule);border-left:3px solid var(--clay);border-radius:0 4px 4px 0;
+}
+.score > li::before{
+  counter-increment:sc;content:counter(sc);
+  position:absolute;left:18px;top:14px;
+  font-family:Georgia,serif;font-size:22px;color:var(--clay);line-height:1;
+}
+.score > li b{display:block;font-size:15px;color:var(--ink-800);letter-spacing:.08em;margin-bottom:2px;}
+
+/* 双栏 */
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin:18px 0;}
+.duo.three{grid-template-columns:repeat(3,1fr);}
+.card{
+  background:#fffdf9;border:1px solid var(--rule);border-radius:4px;padding:16px 20px;
+}
+.card h5{
+  margin:0 0 8px;font-size:14.5px;letter-spacing:.12em;color:var(--ink-700);
+  padding-bottom:6px;border-bottom:1px solid #f2e9dc;font-weight:600;
+}
+.card ul{margin:0;padding-left:1.15em;font-size:14.4px;}
+.card li{margin:.3em 0;}
+
+/* 马赛克色标 */
+.chip{
+  display:inline-block;width:11px;height:11px;border-radius:2px;margin-right:6px;
+  vertical-align:-1px;border:1px solid rgba(0,0,0,.15);
+}
+.c-g{background:#4f9d69;} .c-y{background:#d8b23c;} .c-b{background:#3b7ec0;}
+.c-r{background:#b8452f;} .c-gr{background:#8d9295;} .c-t{background:#2f8f86;}
+
+/* 制作名单 */
+.credits{margin:18px 0;font-size:14.6px;}
+.credits div{
+  display:grid;grid-template-columns:220px 1fr;gap:14px;
+  padding:9px 0;border-bottom:1px dotted #e2d8c7;
+}
+.credits dt,.credits .role{color:#7f7263;letter-spacing:.06em;font-size:13.6px;}
+.names{font-size:13.6px;line-height:1.85;color:#4f483f;letter-spacing:.02em;}
+
+/* 页脚 */
+.foot{
+  margin-top:26px;padding:26px 0 8px;border-top:1px solid var(--rule);
+  text-align:center;font-size:12.6px;letter-spacing:.12em;color:#7b746a;
+}
+.foot .mark{display:block;color:var(--gold);letter-spacing:.4em;font-size:11px;margin-bottom:10px;}
+
+/* ---------- 窄屏 ---------- */
+@media (max-width:980px){
+  .layout{grid-template-columns:1fr;}
+  .toc{
+    position:relative;top:0;height:auto;max-height:none;
+    border-right:none;border-bottom:1px solid rgba(184,137,47,.4);
+    padding:20px 18px 24px;
+  }
+  .toc nav{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:2px;}
+  .toc a{padding:7px 10px;font-size:13.4px;}
+  .toc-foot{display:none;}
+  .doc{padding:34px 22px 20px;}
+  .hero-inner{grid-template-columns:1fr;gap:28px;padding:36px 22px 34px;}
+  .hero-fig{order:-1;max-width:400px;}
+  .sec > h2{font-size:23px;}
+  .duo,.duo.three{grid-template-columns:1fr;}
+  .credits div{grid-template-columns:1fr;gap:2px;}
+  .topbar-meta{display:none;}
+  table{font-size:13.6px;}
+  th,td{padding:7px 9px;}
+}
+@media (max-width:520px){
+  body{font-size:15.6px;}
+  .hero-inner{padding:26px 16px;}
+  .doc{padding:26px 15px;}
+  .score > li{padding:12px 14px 12px 50px;}
+  .score > li::before{left:14px;font-size:19px;}
+}
+@media print{
+  .topbar,.toc{display:none;}
+  .layout{grid-template-columns:1fr;box-shadow:none;}
+  .hero{background:#fff;color:#000;}
+  body{background:#fff;}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <span class="brand">Gaudí<span class="brand-sub">中文规则书</span></span>
+    <span class="topbar-meta">高迪</span>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <p class="eyebrow">A Game by Dani Garcia</p>
+      <h1>Gaudí</h1>
+      <p class="hero-cn">《高迪》完整中文规则书</p>
+      <p class="hero-lead">1852 年生于加泰罗尼亚的建筑师安东尼·高迪，一生只爱三样东西：自然、上帝与加泰罗尼亚。你围绕中央吊灯周游，收集碎瓷、打出卡牌、攀上烟囱，让这三根支柱同时立稳。</p>
+      <ul class="hero-meta">
+        <li>原书 28 页全文译出</li>
+        <li>3 轮 · 2–4 人</li>
+        <li>含专家模式、单人模式与全部附录</li>
+      </ul>
+    </div>
+    <figure class="hero-fig">
+      <img src="Gaudi_Rules_images/page_01.jpg" alt="Gaudí 规则书封面">
+      <figcaption>原书封面 · DEVIR</figcaption>
+    </figure>
+  </div>
+</section>
+
+<div class="layout">
+
+<aside class="toc">
+  <p class="toc-title">目录</p>
+  <nav>
+    <a href="#intro"><span class="no">01</span>简介与目标</a>
+    <a href="#components"><span class="no">02</span>配件</a>
+    <a href="#setup"><span class="no">03</span>设置</a>
+    <a href="#play"><span class="no">04</span>如何游玩</a>
+    <a href="#vp"><span class="no">05</span>获得胜利分</a>
+    <a href="#actions"><span class="no">06</span>行动</a>
+    <a href="#endgame"><span class="no">07</span>终局计分</a>
+    <a href="#expert"><span class="no">08</span>专家模式</a>
+    <a href="#solo"><span class="no">09</span>单人模式</a>
+    <a href="#apxA"><span class="no">10</span>附录 A 专家烟囱板块</a>
+    <a href="#apxB"><span class="no">11</span>附录 B 宗教卡详解</a>
+    <a href="#apxC"><span class="no">12</span>附录 C 图标一览</a>
+    <a href="#essay"><span class="no">13</span>背景：想象安东尼·高迪</a>
+    <a href="#credits"><span class="no">14</span>制作名单</a>
+  </nav>
+  <p class="toc-foot">本页依原书顺序全文译出，<br>未增删任何规则。</p>
+</aside>
+
+<main class="doc">
+
+<!-- ================= 01 简介与目标 ================= -->
+<section class="sec" id="intro">
+  <h2><span class="num">01</span>简介与目标</h2>
+  <p class="lead">安东尼·高迪是 1852 年出生的加泰罗尼亚远见建筑师，以融合哥特与「新艺术」风格、极富想象力的独特语言闻名。他最标志性的杰作是巴塞罗那的圣家堂：一座在他 1926 年去世一个世纪后仍在施工的、令人叹为观止的大教堂。</p>
+
+  <p>高迪留下的建筑地标还包括巴特罗之家、桂尔公园与米拉之家，它们各自映照出定义他世界观的三根支柱：对自然深怀敬意、强烈的加泰罗尼亚认同、深沉的宗教虔敬。这些灵感贯穿他的全部作品，从圣家堂高耸的立面，到最小的一件手工家具细节。他的建筑至今仍是艺术创新、文化自豪与精神表达的证言。</p>
+
+  <p>本作是对高迪非凡视野与一生的诚挚致敬：它所庆祝的不只是那些著名立面，而是藏在每个角落里的精微之美——高迪著名地偏爱曲线而非直线。他把形式与功能巧妙结合，设计出不仅视觉震撼、在舒适与实用上也超越时代的空间。他的创新之一是<b>特伦卡迪斯（trencadís）</b>：一种用碎瓷砖与碎陶器拼成的马赛克技法，尤其适合覆盖曲面。特伦卡迪斯是加泰罗尼亚语词，意为「许多小小的碎片」。</p>
+
+  <p>游戏过程中，你会在卡牌上看到这些精微细节，并在自己的玩家版图上体会排布特伦卡迪斯图案的创作乐趣。</p>
+
+  <div class="callout">
+    <span class="label">游戏目标</span>
+    <p>游戏过程中，玩家在高迪的一生与作品间行进，在塑造其作品的三根支柱——<b>自然、加泰罗尼亚、宗教</b>——上获得胜利分（VP）。</p>
+    <p>要取胜，玩家必须让自己的进度保持<b>均衡</b>：终局计分时，三根支柱中<b>只有你最低的两个 VP 分数</b>会被计入。</p>
+    <p>分数靠打出卡牌、在玩家版图上放置特伦卡迪斯板块获得。三根支柱给分方式各不相同：自然分主要来自自然卡；加泰罗尼亚分大多在每轮结束时结算；宗教分主要在游戏结束时结算。</p>
+    <p>游戏进行 <b>3 轮</b>。每轮中，玩家轮流围绕主版图中央的<b>吊灯</b>移动，仔细选择停留位置以执行关键行动：抽卡，以及收集不同种类的特伦卡迪斯板块。这些资源随后用于打出卡牌、在玩家版图上沿<b>烟囱</b>攀升。所有玩家都绕吊灯走完一整圈后，本轮结束。</p>
+    <p>第三轮结束时，VP 最高且最均衡的玩家获胜。</p>
+  </div>
+
+  <p>本规则书末尾附有游戏中最常用图标的速查表。</p>
+
+  <figure>
+    <img src="Gaudi_Rules_images/page_02.jpg" alt="简介页：高迪生平与游戏概述，配以圣家堂等建筑插图">
+    <figcaption>原书第 2 页 · 简介与游戏目标</figcaption>
+  </figure>
+</section>
+
+<!-- ================= 02 配件 ================= -->
+<section class="sec" id="components">
+  <h2><span class="num">02</span>配件</h2>
+  <table>
+    <thead><tr><th style="width:46%">组件</th><th style="width:18%">数量</th><th>说明</th></tr></thead>
+    <tbody>
+      <tr><td>主版图</td><td class="n">1 块</td><td>双面：白天面／夜晚面</td></tr>
+      <tr><td>玩家版图</td><td class="n">4 块</td><td>每人 1 块</td></tr>
+      <tr><td>烟囱板块</td><td class="n">12 块</td><td>按自然／加泰罗尼亚／宗教各一套，每人每类 1 块</td></tr>
+      <tr><td>布袋</td><td class="n">1 个</td><td>盛放全部特伦卡迪斯板块</td></tr>
+      <tr><td>中央吊灯板块</td><td class="n">7 块</td><td>设置时随机取 3 块叠成一叠</td></tr>
+      <tr><td>支柱卡</td><td class="n">99 张</td><td>自然 33 张、加泰罗尼亚 33 张、宗教 33 张</td></tr>
+      <tr><td>特伦卡迪斯板块</td><td class="n">96 块</td><td>每种颜色与形状各 6 块</td></tr>
+      <tr><td>吊灯标记</td><td class="n">4 个</td><td>每人 1 个</td></tr>
+      <tr><td>烟囱标记</td><td class="n">12 个</td><td>每人 3 个</td></tr>
+      <tr><td>胜利分标记</td><td class="n">16 个</td><td>每人 4 个</td></tr>
+      <tr><td>起始玩家标记</td><td class="n">1 个</td><td>—</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <span class="label">每位玩家收到的 4 个胜利分标记</span>
+    1 个<b>自然</b> VP 标记、1 个<b>加泰罗尼亚</b> VP 标记、1 个<b>宗教</b> VP 标记，以及 1 个<b>总分</b>（Grand Total）VP 标记。
+  </div>
+
+  <figure>
+    <img src="Gaudi_Rules_images/page_03.jpg" alt="配件总览：主版图、玩家版图、烟囱板块、支柱卡、特伦卡迪斯板块、各类标记与布袋">
+    <figcaption>原书第 3 页 · 配件一览</figcaption>
+  </figure>
+</section>
+
+<!-- ================= 03 设置 ================= -->
+<section class="sec" id="setup">
+  <h2><span class="num">03</span>设置</h2>
+  <p class="lead">本作提供两种玩法：<b>休闲模式</b>与<b>专家模式</b>。休闲模式适合所有玩家，也是本书默认讲解的模式。专家模式建议在你玩过几局《高迪》、准备好接受更深挑战之后再使用，其具体设置与通用规则见 08 节。开始设置前，请先确定本局使用哪种模式。</p>
+
+  <h3>3.1 公共设置</h3>
+  <ol class="steps">
+    <li>把主版图放在桌上，<b>白天面</b>朝上。</li>
+    <li>把全部特伦卡迪斯板块放进布袋洗匀，从袋中随机取 5 块，放到主版图上 5 个特伦卡迪斯格中的每一格（即天花板漩涡边缘所指的位置）。布袋留在版图旁。</li>
+    <li>把三叠支柱卡分别洗匀，按从左到右的顺序——自然、加泰罗尼亚、宗教——背面朝下放在主版图下方。</li>
+    <li>从每叠翻开 3 张，正面朝上放在该叠上方的 3 个<b>窗口</b>格。放卡时让卡顶部的横幅完整可见。</li>
+    <li>把吊灯板块背面朝下洗匀，随机取 3 块叠成一叠。把整叠翻面，正面朝上放在主版图吊灯的中央，注意不要看到最上面那块以下的板块。剩余的吊灯板块不看内容，直接退回盒中。</li>
+  </ol>
+
+  <h3>3.2 玩家设置</h3>
+  <ol class="steps">
+    <li>每位玩家取一块玩家版图，以及自己所选颜色的全部配件。</li>
+    <li>把烟囱板块按自然、加泰罗尼亚、宗教分开。每位玩家分到每一类各 1 块，<b>白天面</b>朝上放在自己版图上方的对应槽位。然后，玩家把自己的 3 个烟囱标记分别放在各条烟囱的下方。</li>
+    <li>玩家把自己的自然、加泰罗尼亚、宗教 VP 标记放在主版图 VP 轨「0」格附近。</li>
+    <li>每位玩家暂时把自己的吊灯标记与总分 VP 标记留在玩家版图旁。</li>
+    <li>按以下步骤发给每位玩家起始手牌：<b>双人局</b>取自然与加泰罗尼亚两叠的第一张；<b>三人局</b>取每叠的第一张；<b>四人局</b>取自然与加泰罗尼亚两叠的前 2 张。把这些卡洗匀，随机发给每位玩家 1 张。</li>
+    <li>双人局中，另取一个未参战颜色的吊灯标记，放在主版图旁。</li>
+    <li>最近一次在巴塞罗那街头漫步过的玩家拿起始玩家标记。决定不了就随机选一人。</li>
+  </ol>
+
+  <figure>
+    <img src="Gaudi_Rules_images/page_04.jpg" alt="公共设置示意：主版图白天面朝上，5 个特伦卡迪斯格各放 5 块板块，三叠支柱卡在下，中央吊灯叠放 3 块板块">
+    <figcaption>原书第 4 页 · 公共设置（步骤 1–5）</figcaption>
+  </figure>
+
+  <figure>
+    <img src="Gaudi_Rules_images/page_05.jpg" alt="玩家设置示意：玩家版图、烟囱板块与标记、VP 标记与起始手牌">
+    <figcaption>原书第 5 页 · 玩家设置（步骤 6–12）</figcaption>
+  </figure>
+</section>
+
+<!-- ================= 04 如何游玩 ================= -->
+<section class="sec" id="play">
+  <h2><span class="num">04</span>如何游玩</h2>
+  <p class="lead">高迪从自然界汲取无尽灵感，把树干的曲线、海螺的螺旋、植物的分叉形态编入他建筑的每一个元素。对他而言，自然不只是缪斯，更是主人：自然的有机几何与静默天才，指引他去建造那些仿佛「长出来」而不是「盖起来」的房子。</p>
+
+  <p>游戏进行 <b>3 轮</b>。每轮中，玩家从持有起始玩家标记的人开始，按顺时针轮流行动。轮到你时，你必须先把吊灯标记沿主版图上的吊灯<b>顺时针</b>移动，想走几格就走几格，然后执行你停留那一格所示的行动。所有玩家都把吊灯标记绕完一圈后，本轮结束，由起始玩家开启新一轮。</p>
+
+  <h3>4.1 移动吊灯标记</h3>
+  <ul class="plain">
+    <li>如果这是你本轮的<b>第一次移动</b>（吊灯标记还在你玩家版图旁），你必须从吊灯轨<b>最上方</b>那一格开始移动（即印有该标记较小图形的那一格）。这一步算作你本回合移动的<b>第一格</b>，你也可以选择就停在那里（前提是该格空着——见下一条）。</li>
+    <li>你必须始终沿吊灯<b>顺时针</b>移动。想走几格就走几格，但<b>不能</b>选择停在已有其他玩家吊灯标记的格子上。</li>
+    <li>如果你移动结束时<b>领先</b>于所有其他玩家，本回合你将获得额外行动！</li>
+    <li>如果你绕完吊灯一整圈、到达轨道终点，你必须把吊灯标记从主版图上取下，放到自己玩家版图旁。然后，你激活吊灯中央的<b>吊灯板块</b>。如果你是本轮第一个到达终点的人，你还取得<b>起始玩家标记</b>——这对本轮的回合顺序没有影响，但下一轮你将是起始玩家。</li>
+    <li>如果轮到你行动，而你的吊灯标记已经离开主版图，你必须什么都不做，跳过回合。</li>
+  </ul>
+
+  <h3>4.2 双人局</h3>
+  <p>玩双人局时，你还必须使用一个未参战颜色的吊灯标记。无论谁是起始玩家，该标记在回合顺序上<b>始终视为最后一名玩家</b>。</p>
+  <p>到它行动时，把该标记移到「能使它成为吊灯上最领先者」的<b>第一个</b>格子。它不执行任何行动、不做别的事，因此下一位玩家可以立即行动。</p>
+  <p>这个「第三位玩家」有可能抢先到达最后一格——如果那正是「能使它成为最领先者」的第一个格子。若出现这种情况，你们两位都无法执行吊灯板块上的<b>两个</b>行动（见 4.4），因为你们都不是第一个到达的人。不过，由于「第三位玩家」始终最后，它不会取走起始玩家标记；第一个到达吊灯轨终点的<b>人类</b>玩家才会取走它。</p>
+
+  <h3>4.3 吊灯格</h3>
+  <p>吊灯轨的每一格都印有一个图标，对应游戏中的某个行动（图标与行动说明见本书末尾）。每一格还印有若干个<b>铅笔</b>与<b>锤子</b>。铅笔与锤子的数量表示你停在该格时可以执行几次行动、以及可以执行哪一类行动。</p>
+  <ul class="plain">
+    <li>每个<b>铅笔</b>让你把该格所示的行动执行<b>一次</b>。</li>
+    <li>每个<b>锤子</b>让你从以下三个选项中选一个执行一次：
+      <ul class="plain">
+        <li>把该格所示的行动执行一次，或</li>
+        <li>推进你 1 个烟囱标记，或</li>
+        <li>从手牌打出 1 张卡。</li>
+      </ul>
+    </li>
+  </ul>
+  <p>你能用哪些铅笔或锤子，取决于你的吊灯标记是否<b>最领先</b>：</p>
+  <div class="duo">
+    <div class="card">
+      <h5>最领先时</h5>
+      <p>如果你的吊灯标记是吊灯上（顺时针方向）<b>最领先</b>的，你可以同时使用该格上的铅笔<b>和</b>锤子！</p>
+      <p><b>重要</b>：已经到达最后一格并从主版图取下的吊灯标记，<b>始终</b>视为「最领先」，因此其他标记都不可能是「最领先」的那一个。</p>
+    </div>
+    <div class="card">
+      <h5>不领先时</h5>
+      <p>如果你的吊灯标记不是最领先的，你可以使用该格上的铅笔<b>或</b>锤子，但不能两者都用；具体用哪一类由你选择。</p>
+    </div>
+  </div>
+  <p>例：Roser（红）把标记推进到最领先的格子，因此她本回合用了 1 个铅笔和 1 个锤子。Roser 的回合结束后，Irene（蓝）也推进到了那一格，所以她可以选择用 2 个铅笔、或用 1 个锤子。</p>
+
+  <figure>
+    <img src="Gaudi_Rules_images/page_06.jpg" alt="如何游玩示意：吊灯轨、吊灯标记的移动方向与各格的铅笔／锤子">
+    <figcaption>原书第 6 页 · 如何游玩与移动吊灯标记</figcaption>
+  </figure>
+
+  <h3>4.4 中央吊灯板块</h3>
+  <p>吊灯中央的格子很特殊：它没有铅笔也没有锤子，取而代之的是一块<b>吊灯板块</b>，上面始终印有 2 个行动。</p>
+  <ul class="plain">
+    <li>如果你是第一个到达吊灯终点的人，你可以执行<b>两个</b>行动，顺序自定。</li>
+    <li>在第一个到达者之后抵达中央吊灯板块的玩家，只能执行这 2 个行动中的 <b>1 个</b>。</li>
+  </ul>
+
+  <h3>4.5 轮次结束</h3>
+  <p>有玩家到达吊灯终点（并取下自己的标记）之后，轮次结束就临近了。其余玩家此时仍可继续轮流行动。注意吊灯上有一些格子颜色更深、偏红：当有玩家已经到达终点之后，若有玩家把标记移到这些深色格上、或到达吊灯终点，则他们在完成本回合行动后必须取下自己的吊灯标记。</p>
+  <div class="callout">
+    <span class="label">重要</span>
+    若另一名玩家到达吊灯终点，已经停在深色格上的标记<b>不会立即</b>被取下；只有在该玩家（在有玩家到达终点之后）把标记移上这类格子时，才会被取下。
+  </div>
+  <p>当所有玩家都把吊灯标记从主版图取下后，本轮结束。从吊灯中央<b>移除最上面一块</b>吊灯板块。如果这是最后一块，游戏结束，进入终局计分（见 07 节）；否则，持有起始玩家标记的玩家开启下一轮。</p>
+
+  <figure>
+    <img src="Gaudi_Rules_images/page_07.jpg" alt="吊灯格与双人局示意：每格的铅笔与锤子数量、领先时可用两者、深色格规则">
+    <figcaption>原书第 7 页 · 双人局与吊灯格</figcaption>
+  </figure>
+
+  <figure>
+    <img src="Gaudi_Rules_images/page_08.jpg" alt="中央吊灯板块与轮次结束示意：第一个到达者执行两个行动，其余玩家执行一个">
+    <figcaption>原书第 8 页 · 中央吊灯板块、轮次结束与获得胜利分</figcaption>
+  </figure>
+
+  <div class="side">
+    <span class="label">历史一瞬</span>
+    1924 年，高迪因拒绝用西班牙语回答警察、坚持讲加泰罗尼亚语而被捕，那年他 72 岁。尽管年迈体弱，他仍坚守信念——这既是这个人的写照，也是他作品的写照。
+  </div>
+</section>
+
+<!-- ================= 05 获得胜利分 ================= -->
+<section class="sec" id="vp">
+  <h2><span class="num">05</span>获得胜利分</h2>
+  <p class="lead">游戏中每当看到带数字的星形图标，就表示你获得与星形下方所示支柱类型相符的胜利分（VP）。</p>
+  <p>把对应的自然、加泰罗尼亚或宗教 VP 标记，在轨道上向前移动与标示数值相等的格数。</p>
+
+  <div class="duo three">
+    <div class="card"><h5>自然</h5><p>主要来自打出的自然卡、自然烟囱的即时奖励。</p></div>
+    <div class="card"><h5>加泰罗尼亚</h5><p>主要在每轮结束时结算你的加泰罗尼亚列。</p></div>
+    <div class="card"><h5>宗教</h5><p>主要在游戏结束时结算宗教列。</p></div>
+  </div>
+
+  <div class="tn">
+    <span class="label">译者注</span>
+    三种 VP 各自独立记在一条轨道上，终局只取其中<b>最低的两个</b>计入总分（见 07 节），因此单根支柱冲得再高也无用。
+  </div>
+</section>
+
+<!-- ================= 06 行动 ================= -->
+<section class="sec" id="actions">
+  <h2><span class="num">06</span>行动</h2>
+  <p class="lead">任何时候你获得下列某个行动图标，就可以执行该行动。多数情况下这发生在你的吊灯标记停到吊灯某格时，但你也可能从其他来源（例如打出的卡牌）获得行动图标作为奖励。无论来自何处，所有行动的执行方式完全一致。</p>
+  <p>下文把每个行动都当作「单次行动」来描述，但请记住你可以多次执行它们——就像你停在有多个铅笔或锤子的吊灯格上那样。</p>
+  <p><b>你永远不会被强制执行任何行动</b>——你随时可以放弃任意数量的行动。</p>
+
+  <p>你的回合中可执行的行动共有 4 种，它们出现在吊灯周围，或由锤子激活：</p>
+  <ol class="steps">
+    <li><b>取一块特伦卡迪斯板块</b>并放到你的玩家版图上（见 6.1）。</li>
+    <li><b>从主版图取一张卡</b>加入手牌，手牌上限 4 张（见 6.2）。</li>
+    <li><b>从手牌打出一张卡</b>到你玩家版图上，前提是你拥有所需数量的特伦卡迪斯板块（见 6.3）。</li>
+    <li><b>推进一个烟囱标记</b>，前提是你拥有所需数量的特伦卡迪斯板块，并获得奖励（见 6.4）。</li>
+  </ol>
+  <p>此外还有一个<b>万能行动</b>，允许你执行吊灯周围的任何其他行动（见 6.5）。</p>
+
+  <div class="side">
+    <span class="label">关于特伦卡迪斯</span>
+    高迪用特伦卡迪斯把碎裂的陶与玻璃变成闪耀的马赛克，色彩如波纹流动，为他的建筑裹上一层欢愉的混沌。这种技法在桂尔公园尤为鲜明，把废弃的碎片变成诗意的图案，呼应自然的节律与加泰罗尼亚的精神。
+  </div>
+
+  <h3>6.1 取特伦卡迪斯板块</h3>
+  <p>该行动让你从主版图取 <b>1 块</b>特伦卡迪斯板块。</p>
+  <ul class="plain">
+    <li>若图标显示<b>特定形状和／或颜色</b>，你必须取与之相符的板块。</li>
+    <li>若图标显示<b>黑色形状</b>，你可以选择与该形状相符的<b>任意颜色</b>。</li>
+    <li>若图标显示<b>彩色圆圈</b>，你可以选择与该颜色相符的<b>任意形状</b>。</li>
+  </ul>
+  <p>若你在同一回合取多于 1 块，它们可以来自同一个或不同的供应格。</p>
+
+  <h4>领取与拥有</h4>
+  <p>视你正在执行的行动而定，你可能<b>领取</b>若干所示资源，也可能只是<b>需要拥有</b>它们。</p>
+  <dl class="defs">
+    <dt>黑色描边数字</dt>
+    <dd>表示你从供应区<b>领取</b>该数量。例：从主版图领取 1 块你自选形状与颜色的特伦卡迪斯板块。</dd>
+    <dt>红色描边数字</dt>
+    <dd>表示你必须<b>至少拥有</b>该数量才能执行此行动，但<b>不消耗</b>它们（可以留着）。</dd>
+  </dl>
+  <p>例：你需要拥有 6 块<b>同色</b>特伦卡迪斯板块（颜色自选）。也就是说，如果你手上有 6 块蓝色，可以全用蓝的；但不能拿 4 块绿加 2 块灰凑数。</p>
+  <p>当规则要求你拥有「自选颜色」的若干板块时，它们必须<b>同色</b>，形状不限。</p>
+  <p>当你需要拥有若干<b>特定形状</b>的板块时，它们<b>不必同色</b>。</p>
+
+  <h4>放置规则</h4>
+  <p>你获得的全部特伦卡迪斯板块都必须放到玩家版图上，各自放在与板块形状相符的<b>空格</b>。板块可以<b>翻面和／或旋转</b>来匹配格子。</p>
+  <p>如果你发现自己无法放置某块板块，因为已无匹配的空格，你必须把它<b>退回原处</b>，并可以改取另一块。若你的玩家版图已满，就不能再取板块。</p>
+  <p>如果你取走了主版图某一格上的<b>最后一块</b>特伦卡迪斯板块，你可以额外执行 1 个行动（见下文「供应耗尽」）。在你回合结束时，你要从袋中抽 5 块新板块，补到那块空格上。</p>
+  <p>你需要收集特伦卡迪斯板块来满足打牌的条件（见 6.3）。此外，如果你能在玩家版图上形成<b>同色</b>的板块组合，终局时还能获得额外 VP（见 07 节）。</p>
+
+  <h4>相邻与组合</h4>
+  <p>在玩家版图上，两块特伦卡迪斯板块只要有<b>一条边</b>相接，就算「相邻」；若只是一块板块的角碰到另一块的角，则不算。为便于辨认，相邻的格子之间印有细小的<b>连接线</b>。</p>
+  <p>任意数量彼此相连、形成不间断相邻序列的板块，称为一个<b>组合（group）</b>。除非规则另有说明，组合还按颜色区分，因此多数时候你检查的是「某颜色的相连板块组合」。</p>
+  <p>例：本例中该玩家有由 2 块黄色特伦卡迪斯组成的组合，因为它们彼此相连。灰色与绿色板块与那块黄色相邻，但它们彼此不相邻。</p>
+
+  <h3>6.2 取卡</h3>
+  <p>这些图标让你从主版图的某个<b>窗口</b>取一张与支柱类型相符的卡，加入手牌。</p>
+  <p>若你用「任意类型」图标取多于 1 张，它们可以是相同或不同的支柱类型。</p>
+  <p>你能取主版图上的<b>所有</b>卡，不只是每一类的顶上那张。在你把某个窗口的 3 张卡全部取走之前，<b>不要</b>补充新卡。</p>
+  <p>如果你取走了某个窗口的<b>最后一张</b>卡，你可以执行印在该窗口正上方木质格上的<b>额外行动</b>（见下文「供应耗尽」）。在你回合结束时，你从对应牌堆抽 3 张新卡补满该窗口。</p>
+  <p>你的手牌<b>永远不能超过 4 张</b>。若你已满 4 张却还想取新卡，可以先弃掉手牌腾出空间。</p>
+
+  <h4>卡牌构成</h4>
+  <dl class="defs">
+    <dt>打牌条件</dt>
+    <dd>印在卡上的颜色与数字。例：你需要在玩家版图上至少拥有 2 块蓝色特伦卡迪斯板块。</dd>
+    <dt>奖励</dt>
+    <dd>这张卡为你提供的奖励。</dd>
+    <dt>类别</dt>
+    <dd>宗教卡与烟囱效果在计分或给奖励时会参照这些类别。「高迪生平」是<b>万能</b>类别，这类卡可以算作任何其他类别。</dd>
+    <dt>支柱类型</dt>
+    <dd>自然、加泰罗尼亚或宗教，由颜色与卡背表示。</dd>
+    <dt>图面</dt>
+    <dd>高迪的某件作品，或他生平中的某个重要事件。</dd>
+    <dt>编号</dt>
+    <dd>宗教卡上印有编号，便于在本书末尾的速查中识别。</dd>
+  </dl>
+
+  <h4>卡牌类别</h4>
+  <p>立面（Façade）· 门（Door）· 花园（Garden）· 室内（Interior）· 天花板／屋顶（Ceiling / Rooftop）· 塔楼（Tower）· 雕塑（Sculpture）· 铁艺／玻璃（Iron / Glass）· 家具（Furniture）· 高迪生平（Life of Gaudí）</p>
+
+  <h4>供应耗尽</h4>
+  <p>注意特伦卡迪斯格旁与卡牌窗口上方的图标。如果你取走了该格／该窗口的<b>最后一块板块或最后一张卡</b>，你可以在本回合的任意时点触发这些<b>奖励行动</b>。</p>
+  <p>若你在一回合内清空了多个格或窗口，可以执行多个这样的额外行动；但每种行动每回合只能触发一次。</p>
+  <p>若你清空了某格或某窗口，在你回合结束时、轮到下一位玩家之前，你必须补满：空的特伦卡迪斯格从袋中随机抽 <b>5 块</b>补上；空的窗口从对应牌堆抽 <b>3 张</b>补上。若袋已空，就尽可能多补，并从最左侧开始<b>顺时针</b>逐格填充。若某个牌堆用完，就尽可能补满，然后继续游戏。</p>
+
+  <h3>6.3 打出卡牌</h3>
+  <p>该图标表示：只要你满足条件，就可以打出一张卡（见下）。把卡放进玩家版图下方对应的列，放法要保证每张卡顶部的横幅始终可见，同时<b>遮住</b>下一张卡上的颜色图标。每列的卡数没有上限。</p>
+  <p>该行动出现在吊灯上，同时也是你使用锤子时可以选择的选项之一。</p>
+
+  <h4>打牌条件</h4>
+  <p>每张卡都有一个由颜色与数字构成的条件。打这张卡时，你必须把它放在对应列的<b>最下方</b>，然后把该列中所有数字<b>相加</b>。总和就是你在玩家版图上必须<b>拥有</b>（不消耗）的、与卡上颜色相符的特伦卡迪斯板块的<b>最低数量</b>（形状不限），它们不必相邻。</p>
+  <p>若卡上显示黑色图标，你可以自选颜色，但所有板块必须<b>同色</b>。</p>
+  <p>如果你发现按这些条件无法合法放置该卡，你必须把它退回手牌。</p>
+
+  <h4>结算列</h4>
+  <p>当规则要求你「结算某一列」时，你获得该列中<b>每张卡横幅上印有的全部奖励</b>，以及你玩家版图上该列上方所示的任何奖励。</p>
+
+  <h4>自然卡</h4>
+  <p>你在<b>自然列</b>打出一张卡之后（仅限该列），你<b>立即结算</b>该列：按你自选的顺序获得该列所有卡横幅上的全部奖励，其中包括玩家版图上该列上方所示的 <b>4 点自然 VP</b>。在另外两列打牌没有这种即时效果。</p>
+
+  <h4>加泰罗尼亚卡</h4>
+  <p>它们可以在轮次结束时结算，结算次数等于中央吊灯板块所示的次数——前提是你到达该格并选择了那项奖励。</p>
+
+  <h4>宗教卡</h4>
+  <p>与其他卡不同，宗教卡不提供直接奖励。每张宗教卡给你一定数量的<b>宗教 VP</b>，乘以你达成某个目标的<b>次数</b>，通常在游戏结束时结算。</p>
+  <p>其中有些目标参照你已打出的某类别卡牌数量。例如，你可能每有一张「门」类卡就得 3 VP。你的「高迪生平」卡视为万能，可以随时当作你需要的任何类别来计分，因此也能计入这类卡的分数。</p>
+  <p>另有图标允许你结算并计分你拥有的<b>某一张</b>宗教卡，而不是整列。</p>
+
+  <div class="act">
+    <h4><span class="k">示例</span>打出一张自然卡</h4>
+    <p>Xavier 想打出这张自然卡。他必须在玩家版图上<b>拥有</b>（不支付）共 4 块绿色特伦卡迪斯板块。若满足，他就结算自己的自然列：把自然 VP 标记前进 7 格，并从主版图取 1 块任意形状的蓝色特伦卡迪斯板块。</p>
+  </div>
+
+  <h3>6.4 推进烟囱标记</h3>
+  <p class="lead">高迪标志性的烟囱——尤其是桂尔宫屋顶那些——以超现实、雕塑般的造型闻名，模糊了功能与幻想的界线。这些奇思妙想的结构常覆满彩色马赛克或扭曲的石材，展现他把自然灵感与建筑创新熔于一炉的独特手法。</p>
+  <p>该行动<b>不</b>出现在吊灯上，但它是你使用锤子时可以选择的选项之一，也会在游戏的其他环节作为奖励出现。</p>
+  <p>把你 1 个烟囱标记移到它所在烟囱的<b>下一个位置</b>，即自下而上推进。视你想移去的那一格上所示的数字与形状，你必须在玩家版图上<b>拥有</b>（不消耗）至少该数量的、与所示形状相符的特伦卡迪斯板块（颜色不限，也不必相邻）。</p>
+  <p>视你推进的是哪条烟囱，你会获得<b>即时奖励</b>或一项在<b>游戏结束时</b>生效的效果。</p>
+  <p>若你的某个烟囱标记到达该烟囱的<b>顶端</b>，该标记在余下的游戏中不能再移动。</p>
+
+  <div class="act">
+    <h4><span class="k">示例</span>推进到顶端</h4>
+    <p>Neus（黄）想把她的烟囱标记推进到加泰罗尼亚烟囱的最后一步。为此，她需要在玩家版图上至少拥有 5 块<b>梯形</b>特伦卡迪斯板块（颜色不限）。若满足，她只需把标记上移 1 格，然后立即结算自己的加泰罗尼亚列（顶端格的奖励）：获得该列卡牌上以及玩家版图该列上方所示的全部分数（共 7 点），并取 1 块自选形状与颜色的特伦卡迪斯板块。</p>
+    <p>此后，她不能再推进这个标记。</p>
+  </div>
+
+  <h4>烟囱板块奖励一览</h4>
+  <p>以下是你在烟囱板块上推进标记时能获得的全部奖励（本书末尾亦有汇总）。</p>
+  <div class="duo">
+    <div class="card">
+      <h5>即时类</h5>
+      <ul>
+        <li>立即结算你的自然列。</li>
+        <li>立即从主版图取 1 块任意形状与颜色的特伦卡迪斯板块。</li>
+        <li>立即结算你的加泰罗尼亚列。</li>
+        <li>立即获得 5 点加泰罗尼亚 VP。</li>
+        <li>立即结算你宗教列中的 1 张卡。</li>
+        <li>你可以立即打出手牌中的 1 张卡，无视其条件。</li>
+        <li>你可以立即从主版图取任意一张卡。</li>
+        <li>本回合结束后，立即再进行一个回合，再次移动你的吊灯标记——除非你已到达吊灯轨终点。</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h5>终局类</h5>
+      <ul>
+        <li>游戏结束时，在结算完你的宗教列之后，你可以把 1 个 VP 标记<b>恰好减 3 点</b>，并把另一个标记增加相同的点数。</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>6.5 万能行动</h3>
+  <p>该图标表示你可以选择并执行吊灯周围的<b>任何其他行动</b>（不含中央板块上的行动）。该行动旁同时印有<b>铅笔</b>与<b>锤子</b>，因此若你两个图标都用在这个格上，你可以选择执行吊灯上最多 <b>2 个不同</b>的行动。</p>
+
+  <figure>
+    <img src="Gaudi_Rules_images/page_09.jpg" alt="行动总览：取特伦卡迪斯板块、取卡、打牌、推进烟囱，附形状与颜色说明">
+    <figcaption>原书第 9 页 · 行动总述与取特伦卡迪斯板块</figcaption>
+  </figure>
+
+  <figure>
+    <img src="Gaudi_Rules_images/page_10.jpg" alt="领取与拥有的区别、放置规则、相邻与组合示意">
+    <figcaption>原书第 10 页 · 领取与拥有、放置、相邻与组合</figcaption>
+  </figure>
+
+  <figure>
+    <img src="Gaudi_Rules_images/page_11.jpg" alt="取卡行动、卡牌构成、卡牌类别与供应耗尽规则">
+    <figcaption>原书第 11 页 · 取卡、卡牌构成与类别、供应耗尽</figcaption>
+  </figure>
+
+  <figure>
+    <img src="Gaudi_Rules_images/page_12.jpg" alt="打牌行动、打牌条件与结算列，以及自然卡示例">
+    <figcaption>原书第 12 页 · 打出卡牌与结算列</figcaption>
+  </figure>
+
+  <figure>
+    <img src="Gaudi_Rules_images/page_13.jpg" alt="加泰罗尼亚卡与宗教卡的结算时机，推进烟囱标记的规则">
+    <figcaption>原书第 13 页 · 加泰罗尼亚卡、宗教卡与推进烟囱标记</figcaption>
+  </figure>
+
+  <figure>
+    <img src="Gaudi_Rules_images/page_14.jpg" alt="烟囱推进示例与全部烟囱奖励一览">
+    <figcaption>原书第 14 页 · 烟囱推进示例与烟囱奖励</figcaption>
+  </figure>
+
+  <figure>
+    <img src="Gaudi_Rules_images/page_15.jpg" alt="万能行动说明与终局计分步骤">
+    <figcaption>原书第 15 页 · 万能行动与终局计分</figcaption>
+  </figure>
+</section>
+
+<!-- ================= 07 终局计分 ================= -->
+<section class="sec" id="endgame">
+  <h2><span class="num">07</span>终局计分</h2>
+  <p class="lead">在某位玩家移除最后一块吊灯板块的那一轮结束时，游戏结束，进入终局计分。</p>
+
+  <ol class="score">
+    <li><b>先结算宗教列</b>每位玩家先结算自己的宗教列。结算前，把你所有的「高迪生平」卡<b>最后一次</b>指派到自选的一个类别，因为部分卡会依据这些类别计分。相应地推进你的宗教 VP 标记。</li>
+    <li><b>加泰罗尼亚烟囱第 2 步效果</b>如果你已到达加泰罗尼亚烟囱的第 2 步，此时可以应用该效果。</li>
+    <li><b>取最低两项计入总分</b>把你<b>最低的两个</b> VP 标记的数值相加，把总分 VP 标记放在该总值上。</li>
+    <li><b>特伦卡迪斯组合加分</b>然后，按你玩家版图上<b>第二大</b>与<b>第三大</b>的同色单一组合中的板块数量，把总分 VP 标记前进相应格数（这两个组合可以是不同颜色）。</li>
+  </ol>
+
+  <div class="callout">
+    <span class="label">并列时的处理</span>
+    若有 2 个（或更多）VP 标记或特伦卡迪斯组合<b>并列</b>，由你选择其中一个算作「最大」、另一个算作「最小」（并列超过 2 个时依此类推），以便计算你的第二、第三项。
+  </div>
+
+  <p>最终总分最高者获胜！若平手，则<b>总分以外</b>最领先的那个 VP 标记所属的并列玩家获胜。若仍然平手，并列玩家共享胜利。</p>
+
+  <h3>终局计分示例</h3>
+  <div class="act">
+    <h4><span class="k">示例</span>Roser 的终局计分</h4>
+    <ol class="steps">
+      <li>Roser（红）先结算她的宗教列。第一张卡按「每张天花板／屋顶卡」计 3 点宗教 VP，她有 3 张这类卡，外加 1 张指派为天花板／屋顶的「高迪生平」卡，共 12 VP。她还得到 6 VP（2 × 宗教烟囱上已推进的 3 步）与 8 VP（2 × 已打出的 4 张加泰罗尼亚卡），合计 26 点宗教 VP，加到她原本为 4 的宗教分上。</li>
+      <li>接着，由于她已到达加泰罗尼亚烟囱的第 2 格，她把加泰罗尼亚标记后退 3 格、宗教标记前进 3 格。</li>
+      <li>然后，她把自己最低的两个标记（自然与宗教）相加，共 64 VP，用总分 VP 标记记录。</li>
+      <li>最后，她结算特伦卡迪斯组合。绿色与黄色组合并列第一、第二，因此其中一个作为她的第二大（6 VP），灰色的是第三大（再 4 VP），最终得分 <b>74 VP</b>。</li>
+    </ol>
+  </div>
+
+  <figure>
+    <img src="Gaudi_Rules_images/page_16.jpg" alt="终局计分示例：宗教列结算、烟囱效果、最低两项相加与组合加分">
+    <figcaption>原书第 16 页 · 终局计分示例</figcaption>
+  </figure>
+</section>
+
+<!-- ================= 08 专家模式 ================= -->
+<section class="sec" id="expert">
+  <h2><span class="num">08</span>专家模式</h2>
+  <p class="lead">用标准规则玩过几局之后，你也许想再提高一点难度。此时仍按基础规则游玩，但把下列指定章节替换为以下改动。</p>
+
+  <h3>8.1 设置改动</h3>
+  <ol class="steps">
+    <li>把主版图放在桌上，<b>夜晚面</b>朝上。</li>
+    <li>把全部特伦卡迪斯板块放进布袋洗匀，从袋中随机取 <b>4 块</b>放到 5 个特伦卡迪斯格中的每一格。注意：此后每次需要补满这些供应格时，你都抽 <b>4 块</b>而非 5 块。</li>
+    <li>把烟囱板块按自然、加泰罗尼亚、宗教分开。每套<b>背面朝下</b>洗匀，随机给每位玩家分配每类各 1 块。玩家把板块<b>夜晚面</b>朝上放在自己版图上方的对应槽位。</li>
+    <li>起始手牌不再随机发放：从起始玩家<b>右手边</b>的玩家开始，按<b>逆时针</b>进行，每位玩家拿起这组卡，选 1 张留下，然后把剩余的卡传给下一位玩家。</li>
+  </ol>
+
+  <h3>8.2 规则改动</h3>
+  <dl class="defs">
+    <dt>取卡行动（见 6.2）</dt>
+    <dd>你<b>不能</b>再弃掉手牌来为自己想取的新卡腾出空间。</dd>
+    <dt>供应耗尽（见 6.2）</dt>
+    <dd>回合结束时补满空的特伦卡迪斯格，改为从袋中随机抽 <b>4 块</b>，而非 5 块。</dd>
+    <dt>打牌条件（见 6.3）</dt>
+    <dd>要打出一张卡，你拥有的所需数量特伦卡迪斯板块必须属于<b>同一个相连组合</b>，且颜色与卡上所示一致。</dd>
+    <dt>推进烟囱标记（见 6.4）</dt>
+    <dd>你拥有的所需数量板块必须属于<b>同一个相连组合</b>，且形状与所示一致。注意这个组合<b>可以包含不同颜色与形状</b>，只要其中含有你需要的形状即可。</dd>
+  </dl>
+
+  <div class="callout">
+    <span class="label">关于「形状」的判定</span>
+    除蓝色三角形外，所有三角形在判定特定形状时都属于同一个组合，即使它们颜色不同。若放入一块方块把蓝色三角形与组合连接起来，它也会成为该组合的一部分。
+  </div>
+
+  <h3>8.3 烟囱的被动效果</h3>
+  <p>烟囱具有「<b>被动</b>」效果：一旦激活，在余下的游戏中，每当满足所示条件时就会对你生效（见附录 A 专家烟囱板块）。除了只获得一次的即时奖励之外，你<b>始终</b>可以使用这些被动效果，以及你的烟囱标记已经走到或经过的全部终局效果。</p>
+  <p>部分被动效果在你打出某类别的卡时给你奖励。「高迪生平」卡在触发这类烟囱效果时，可以在打出的当下当作任何其他类别使用。</p>
+  <p>如果你可以使用多于 1 个「打出某类别卡时触发」的烟囱奖励，你只能选择其中 <b>1 个</b>。终局结算宗教卡时，你可以<b>重新</b>指派这些卡的类别，可能与打牌时所选的类别不同。</p>
+
+  <h3>8.4 专家模式的终局计分</h3>
+  <ol class="score">
+    <li><b>先结算宗教列</b>所有玩家必须先结算自己的宗教列。结算之前，把你所有的「高迪生平」卡指派到自选的一个类别，因为部分卡会依据这些类别计分。若你的烟囱标记已到达或经过任何终局效果，你可以把每个效果各应用一次。视效果而定，有些在终局计分<b>开始前</b>应用，有些在计分<b>过程中</b>应用。</li>
+    <li><b>总分计算</b>把你<b>第二低</b>的 VP 标记数值，加上<b>最低</b>那个标记数值的<b>两倍</b>，把总分 VP 标记放在所得值上。</li>
+    <li><b>组合加分</b>你<b>第二大</b>的同色组合中每块板块，让总分 VP 标记前进 <b>1 格</b>；你<b>第三大</b>的同色组合中每块板块，前进 <b>2 格</b>（这两个组合可以是不同颜色）。</li>
+  </ol>
+  <p>总分最高者获胜！若平手，则总分以外最领先的那个 VP 标记所属的并列玩家获胜。若仍然平手，并列玩家共享胜利。</p>
+
+  <div class="act">
+    <h4><span class="k">示例</span>专家模式终局计分</h4>
+    <ol class="steps">
+      <li>Roser（红）先结算她的宗教列。第一张卡按「每张天花板／屋顶卡」计 3 点宗教 VP，她有 3 张这类卡，外加 1 张指派为天花板／屋顶的「高迪生平」卡，共 12 VP。她还得到 8 VP（2 × 宗教烟囱上已推进的 4 步）与 8 VP（2 × 已打出的 4 张加泰罗尼亚卡），合计 28 点宗教 VP，加到她原本为 6 的宗教分上。</li>
+      <li>她把自己第二低的 VP 标记（自然），加上最低标记（宗教）的两倍，共 103 VP，用总分标记记录。</li>
+      <li>然后结算特伦卡迪斯组合。绿色与黄色组合并列第一、第二，其中一个作为第二大（6 VP），灰色的是第三大（再 8 VP），最终得分 <b>117 VP</b>。</li>
+    </ol>
+  </div>
+
+  <figure>
+    <img src="Gaudi_Rules_images/page_17.jpg" alt="专家模式设置与规则改动：夜晚面、4 块板块、轮抽起始手牌、单一组合要求">
+    <figcaption>原书第 17 页 · 专家模式设置与规则改动</figcaption>
+  </figure>
+
+  <figure>
+    <img src="Gaudi_Rules_images/page_18.jpg" alt="专家模式烟囱被动效果说明与终局计分示例">
+    <figcaption>原书第 18 页 · 被动效果与专家终局计分</figcaption>
+  </figure>
+</section>
+
+<!-- ================= 09 单人模式 ================= -->
+<section class="sec" id="solo">
+  <h2><span class="num">09</span>单人模式</h2>
+  <p class="lead">想象一下要与这样的人对抗！在本作的单人模式中，你将与高迪本人对战。为此，你需要先熟悉专家模式。</p>
+  <p>按<b>专家模式的两人局</b>准备游戏（不能玩单人休闲局），包括使用第三个吊灯标记，并作以下改动：</p>
+  <ul class="plain">
+    <li>高迪不需要玩家版图，也不需要烟囱或烟囱标记。</li>
+    <li>高迪只使用总分 VP 标记。</li>
+    <li>你是起始玩家，同时也是第一个从设置时为此翻出的起始卡中挑选的人。把你没选的那张卡放在桌上一个专属于高迪的区域。</li>
+  </ul>
+  <p>开始游戏前，选择一个难度：<b>简单、普通、困难、疯狂</b>。</p>
+
+  <h3>9.1 游戏流程</h3>
+  <p>你完全按多人局的方式游玩。只有游戏<b>第一轮</b>例外：你先行动，然后高迪行动，接着虚拟第三玩家行动，之后才轮回到你。第一轮结束后，照常进行——由上一轮取得起始玩家标记的一方（你或高迪）先开始。</p>
+
+  <h3>9.2 高迪的回合</h3>
+  <p>高迪行动时，他会把吊灯标记移到<b>第一个能完整执行该格所示行动</b>的格子。这意味着：如果他的标记是最领先的，他必须能够执行该行动「铅笔数 + 锤子数」那么多次；如果他的标记不是最领先的，他可以执行「铅笔数或锤子数中较大者」那么多次。若他无法完整执行，他会继续沿顺时针检查吊灯上的格子，直到找到能执行的那一格。</p>
+  <p>除上述规则外，如果在他回合开始时，高迪的标记是吊灯上<b>最后一个</b>，且他的标记与顺时针方向下一个标记之间有 <b>3 个或更多空格</b>，高迪会跳过那些空格，直接把标记移到第一个既让他成为最领先者、又允许他完整执行行动的格子。</p>
+
+  <div class="act">
+    <h4><span class="k">示例</span>高迪选格</h4>
+    <p>高迪以黄色行动。要以最领先者的身份执行「取绿色特伦卡迪斯板块」这一行动，主版图上至少需要有 3 块绿色板块可取；如果他不是最领先者，则至少需要 2 块，因为该行动有 2 个铅笔。否则他就会跳过这一格去检查下一格，因为他无法完整执行该行动。</p>
+  </div>
+
+  <div class="side">
+    <span class="label">历史一瞬</span>
+    高迪的工作伦理近乎修道：他不只是设计建筑，而是住在建筑里。圣家堂施工的最后几年，他搬进工地上一间小工作室，放弃舒适以完全沉浸于工程；从雕塑造型到不同时辰自然光如何透窗而入，他都亲自把关。在桂尔公园等工地，人们常见他与工匠并肩工作，亲手引导、塑形，甚至爬上脚手架自己调整。对高迪而言，建筑不是职业，而是召唤——要求他身心与灵魂全然在场。
+  </div>
+
+  <h3>9.3 虚拟第三玩家的回合</h3>
+  <p>与双人局一样，「虚拟」第三玩家<b>始终第三个</b>行动，无论谁是起始玩家。到它行动时，把它的吊灯标记移到第一个能使它成为顺时针方向最领先者的格子；但与普通双人局不同，它会尝试把该行动执行<b>尽可能多次</b>，上限为该格铅笔与锤子之和。与双人局相同，这位第三玩家<b>不能</b>取得起始玩家标记，即使它第一个到达吊灯最后一格——只有你或高迪能取得。</p>
+  <p>高迪与虚拟第三玩家都<b>忽略</b>因他们耗尽供应或卡牌而触发的行动，也<b>从不</b>激活他们所取卡牌上的图标。</p>
+  <p>高迪与虚拟第三玩家取走的全部特伦卡迪斯板块与卡牌，都存放在桌上高迪的区域内。卡牌按类型分放 3 列（每类 1 列），左右顺序与玩家相同。特伦卡迪斯板块按颜色横排、按形状纵排（见原书图示），方便你一眼看出高迪每种颜色与形状各有多少块。</p>
+
+  <h3>9.4 高迪的行动细则</h3>
+  <dl class="defs">
+    <dt>取特伦卡迪斯板块</dt>
+    <dd>当需取<b>特定形状</b>的板块时，在可选板块中，取高迪该形状<b>数量最少</b>的那种颜色。当需取<b>特定颜色</b>的板块时，取高迪该颜色中<b>数量最少</b>的那个形状。两种情况下，若有多块板块符合条件，从这些板块所在的<b>第一个</b>格子取起——从最左侧格开始，按顺时针推进。若同一格上有多块符合条件，由你选择高迪与虚拟第三玩家取哪一块。</dd>
+    <dt>取卡</dt>
+    <dd>取卡时，永远取高迪与虚拟第三玩家所取类型中<b>最下面</b>的那张。当需取「任意类型」时，取高迪<b>数量最少</b>的类型；若并列，从并列选项中<b>最左侧</b>的那一列取。</dd>
+    <dt>打出卡牌／万能行动</dt>
+    <dd>高迪与虚拟第三玩家都把「打出卡牌」图标与「万能行动」图标视为「取一张任意类型的卡」行动。</dd>
+    <dt>中央吊灯板块</dt>
+    <dd>当高迪或虚拟第三玩家激活吊灯中央的格子时，他们只获得 <b>1 次</b>「取一张任意类型的卡」行动——不论板块上的图标是什么，也不论他们是否为第一个到达者。</dd>
+  </dl>
+
+  <h3>9.5 高迪的终局计分</h3>
+  <p>你照常完成自己的终局计分后，按以下方式计算高迪的分数：</p>
+  <ul class="plain">
+    <li>若你在开局选择的是<b>简单／普通／困难</b>难度，则分别从他每一列中<b>移除最前面 3／2／1 张</b>卡。</li>
+    <li>把他所有卡上的 VP 数值相加（包括宗教 VP），其中所有倍率一律按 <b>1</b> 计。然后把这个总和乘以 <b>3</b>；若你选择的是<b>疯狂</b>难度，则乘以 <b>4</b>。给他相应的总分 VP。</li>
+    <li>再按他<b>第二多</b>的那种颜色的特伦卡迪斯板块数量增加该值，并按他<b>第三多</b>颜色板块数量的 <b>2 倍</b>再增加。</li>
+  </ul>
+  <p>如果你的总分 VP 高于高迪，你获胜！</p>
+
+  <figure>
+    <img src="Gaudi_Rules_images/page_19.jpg" alt="单人模式设置与流程：以专家双人局准备，高迪无版图、只用总分标记，四档难度">
+    <figcaption>原书第 19 页 · 单人模式设置与流程</figcaption>
+  </figure>
+
+  <figure>
+    <img src="Gaudi_Rules_images/page_20.jpg" alt="单人模式行动示意：高迪如何选格、取板块与取卡，虚拟第三玩家的行动">
+    <figcaption>原书第 20 页 · 高迪与虚拟第三玩家的行动</figcaption>
+  </figure>
+
+  <figure>
+    <img src="Gaudi_Rules_images/page_21.jpg" alt="单人模式终局计分：按难度移除卡牌、总和乘 3 或 4、加上板块颜色加成">
+    <figcaption>原书第 21 页 · 高迪的终局计分与行动细则</figcaption>
+  </figure>
+</section>
+
+<!-- ================= 10 附录 A ================= -->
+<section class="sec" id="apxA">
+  <h2><span class="num">10</span>附录 A · 专家烟囱板块</h2>
+  <p class="lead">专家模式的烟囱板块分为「即时」与「被动」两类效果。即时奖励只获得一次；被动效果一经到达便持续生效。以下按三根支柱分组列出全部效果。</p>
+
+  <h3>自然烟囱（Nature）</h3>
+  <ul class="plain">
+    <li>你每往玩家版图上放置 1 块特伦卡迪斯板块，获得 2 点自然 VP。</li>
+    <li>每当你因吊灯上的某个行动而从主版图取至少 1 块特伦卡迪斯板块时，你可以多取 1 块<b>同类型</b>的板块。</li>
+    <li>每当你打出「天花板／屋顶」或「雕塑」卡时，所需的特伦卡迪斯板块总数视为<b>少 2 块</b>。</li>
+    <li>立即获得 5 点自然 VP。</li>
+    <li>你可以立即把 1 个 VP 标记<b>恰好减 7 点</b>，把另一个标记增加相同的点数。</li>
+    <li>立即结算你的自然列<b>两次</b>。</li>
+    <li>每当你清空主版图上的一个特伦卡迪斯供应格，你可以从主版图额外取 1 块特伦卡迪斯板块。每回合只能这样做一次。</li>
+    <li>你可以立即在其他任意一条烟囱上前进 1 步，无视其条件。</li>
+    <li>本回合结束后，立即再进行一个回合，再次移动你的吊灯标记——除非你已到达吊灯轨终点。</li>
+    <li>每当你往自然列打出一张卡时，所需的特伦卡迪斯板块总数视为<b>少 2 块</b>。</li>
+    <li>立即结算你的自然列。</li>
+    <li>每当你打出「雕塑」或「花园」卡时，你可以从主版图取 1 块特伦卡迪斯板块。</li>
+    <li>立即按你玩家版图上每块蓝色特伦卡迪斯板块获得 2 点自然 VP。</li>
+    <li>你可以把吊灯标记移到其他玩家已占据的同一格上。若你前方没有其他玩家的标记，你可以激活全部铅笔与锤子。此规则不适用于吊灯中央那格。</li>
+    <li>每当你打出「花园」或「天花板／屋顶」卡时，获得 3 点自然 VP。</li>
+    <li>立即从版图上取最多 3 块任意形状与颜色的特伦卡迪斯板块。</li>
+  </ul>
+
+  <h3>加泰罗尼亚烟囱（Catalonia）</h3>
+  <ul class="plain">
+    <li>每当你激活吊灯中央的板块，结算你的加泰罗尼亚列。</li>
+    <li>每当你往加泰罗尼亚列打出一张卡时，所需的特伦卡迪斯板块总数视为<b>少 2 块</b>。</li>
+    <li>每当你打出「家具」或「门」卡时，获得 3 点加泰罗尼亚 VP。</li>
+    <li>每当你激活吊灯中央的板块，你可以打出 1 张卡。</li>
+    <li>立即获得当前吊灯板块上的奖励。</li>
+    <li>每当你激活吊灯中央的板块，你可以从主版图取 2 块<b>不同形状</b>的特伦卡迪斯板块。</li>
+    <li>每当你打出「室内」或「门」卡时，所需的特伦卡迪斯板块总数视为<b>少 2 块</b>。</li>
+    <li>立即获得 5 点加泰罗尼亚 VP。</li>
+    <li>每当你激活吊灯中央的板块，你可以把 1 个 VP 标记<b>恰好减 3 点</b>，把另一个标记增加相同的点数。</li>
+    <li>立即结算你的加泰罗尼亚列<b>两次</b>。</li>
+    <li>每当你激活吊灯中央的板块，你可以取 1 张卡。</li>
+    <li>每当你激活吊灯中央的板块，获得 2 点加泰罗尼亚 VP。</li>
+    <li>每当你激活吊灯中央的板块，按你玩家版图上每块绿色特伦卡迪斯板块获得 2 点加泰罗尼亚 VP。</li>
+    <li>每当你激活吊灯中央的板块，你可以从主版图取 2 块<b>不同颜色</b>的特伦卡迪斯板块。</li>
+    <li>立即结算你的加泰罗尼亚列。</li>
+    <li>每当你激活吊灯中央的板块，你可以打出一张「家具」或「室内」卡，所需板块总数视为<b>少 2 块</b>。</li>
+  </ul>
+
+  <h3>宗教烟囱（Religion）</h3>
+  <ul class="plain">
+    <li>游戏结束时，把你宗教卡上的宗教 VP 数值视为<b>高 1 点</b>，再乘以你达成条件的次数。</li>
+    <li>游戏结束时，在结算完你的宗教列之后，你可以把 1 个 VP 标记<b>恰好减 3 点</b>，把另一个标记增加相同的点数。</li>
+    <li>游戏结束时，你可以打出手牌中的 1 张卡，无视全部条件。此行动可照常触发其他游戏效果。</li>
+    <li>每当你打出「铁艺／玻璃」或「塔楼」卡时，获得 2 点宗教 VP。</li>
+    <li>立即获得 4 点自然、加泰罗尼亚与宗教 VP。</li>
+    <li>每当你往宗教列打出一张卡时，所需的特伦卡迪斯板块总数视为<b>少 2 块</b>。</li>
+    <li>每当你打出「塔楼」或「立面」卡时，所需的特伦卡迪斯板块总数视为<b>少 2 块</b>。</li>
+    <li>你可以立即按你玩家版图上每块灰色特伦卡迪斯板块取 1 张卡。</li>
+    <li>立即结算你宗教列中的 1 张卡，其 VP 按<b>自然或加泰罗尼亚</b> VP 计入，而非宗教 VP。</li>
+    <li>每当你取 1 张卡，你可以打出 1 张卡。</li>
+    <li>立即结算你宗教列中的 1 张卡。</li>
+    <li>立即获得 5 点宗教 VP。</li>
+    <li>你可以立即打出手牌中的 1 张卡，并按你玩家版图上每块黄色特伦卡迪斯板块，获得 2 点与该卡支柱类型相符的 VP（自然、加泰罗尼亚或宗教）。</li>
+    <li>你的手牌上限现在为 <b>6 张</b>。若你因吊灯上的某个行动而从主版图取至少 1 张卡，你可以多取 1 张<b>同支柱类型</b>的卡。</li>
+    <li>每当你打出「立面」或「铁艺／玻璃」卡时，你可以取 1 张卡。</li>
+    <li>游戏结束时，按你手中每张卡获得 2 点宗教 VP。</li>
+  </ul>
+
+  <div class="tn">
+    <span class="label">译者注</span>
+    原书此页以图示按「板块 01–04」分组排版，且图标与文字交错，文字抽取后不再能可靠地区分每块板块。此处按原文文字出现顺序、分三根支柱列出全部效果，<b>未合并、未删减</b>；具体哪条属于哪块板块，以实物为准。
+  </div>
+
+  <figure>
+    <img src="Gaudi_Rules_images/page_25.jpg" alt="专家模式自然烟囱板块全图">
+    <figcaption>原书第 25 页 · 自然烟囱板块</figcaption>
+  </figure>
+
+  <figure>
+    <img src="Gaudi_Rules_images/page_26.jpg" alt="专家模式加泰罗尼亚烟囱板块全图">
+    <figcaption>原书第 26 页 · 加泰罗尼亚烟囱板块</figcaption>
+  </figure>
+
+  <figure>
+    <img src="Gaudi_Rules_images/page_27.jpg" alt="专家模式宗教烟囱板块全图">
+    <figcaption>原书第 27 页 · 宗教烟囱板块</figcaption>
+  </figure>
+</section>
+
+<!-- ================= 11 附录 B ================= -->
+<section class="sec" id="apxB">
+  <h2><span class="num">11</span>附录 B · 宗教卡详解</h2>
+  <p class="lead">33 张宗教卡共有 15 种计分方式，原书按卡牌编号分组列出。</p>
+
+  <table>
+    <thead><tr><th style="width:18%">卡牌编号</th><th>计分方式</th></tr></thead>
+    <tbody>
+      <tr><td class="n">01–04</td><td>你玩家版图上每块<b>所示颜色</b>的特伦卡迪斯板块，得 1 点宗教 VP。</td></tr>
+      <tr><td class="n">05–08</td><td>你玩家版图上每块<b>所示形状</b>的特伦卡迪斯板块，得 1 点宗教 VP。</td></tr>
+      <tr><td class="n">09</td><td>你已完成的每一格烟囱推进，得 1 点宗教 VP。</td></tr>
+      <tr><td class="n">10</td><td>每一个位于<b>最顶端</b>的烟囱标记，得 5 点宗教 VP。</td></tr>
+      <tr><td class="n">11</td><td>你推进得<b>最少</b>的那条烟囱上，每一格推进得 4 点宗教 VP。</td></tr>
+      <tr><td class="n">12–14</td><td><b>所示特定烟囱</b>上每一格推进，得 2 点宗教 VP。</td></tr>
+      <tr><td class="n">15</td><td>你玩家版图上每凑齐一组「<b>每种颜色各 1 块</b>」，得 2 点宗教 VP。</td></tr>
+      <tr><td class="n">16</td><td>你玩家版图上每凑齐一组「<b>每种形状各 1 块</b>」，得 2 点宗教 VP。</td></tr>
+      <tr><td class="n">17</td><td>你已打出的卡牌中，每一个<b>不同类别</b>得 1 点宗教 VP。</td></tr>
+      <tr><td class="n">18</td><td>你<b>卡牌最少</b>的那一列中，每张已打出的卡得 4 点宗教 VP。</td></tr>
+      <tr><td class="n">19–21</td><td>你已打出的每张<b>所示支柱类型</b>的卡，得 2 点宗教 VP。</td></tr>
+      <tr><td class="n">22–30</td><td>你玩家版图上每张<b>所示类别</b>的卡，得 3 点宗教 VP。</td></tr>
+      <tr><td class="n">31</td><td>你自选的一列中，已打出卡牌上的每一个<b>不同类别</b>，得 2 点宗教 VP。</td></tr>
+      <tr><td class="n">32</td><td>你已打出的每张卡，得 1 点宗教 VP。</td></tr>
+      <tr><td class="n">33</td><td>你玩家版图上每 <b>3 块</b>特伦卡迪斯板块，得 1 点宗教 VP。</td></tr>
+    </tbody>
+  </table>
+
+  <div class="tn">
+    <span class="label">译者注</span>
+    原文此页为「编号 + 图示」排版，编号与计分文字的对应关系按原文排列顺序整理；若与实物卡面有出入，以实物为准。
+  </div>
+
+  <figure>
+    <img src="Gaudi_Rules_images/page_28.jpg" alt="宗教卡计分方式全表与图标一览">
+    <figcaption>原书第 28 页 · 宗教卡详解与图标一览</figcaption>
+  </figure>
+</section>
+
+<!-- ================= 12 附录 C ================= -->
+<section class="sec" id="apxC">
+  <h2><span class="num">12</span>附录 C · 图标一览</h2>
+  <p class="lead">以下图标出现在主版图、吊灯板块与卡牌上。</p>
+
+  <h3>资源与数量</h3>
+  <ul class="plain">
+    <li><b>把所示奖励执行该次数。</b></li>
+    <li><b>拥有</b>所示数量的该特伦卡迪斯板块（拥有即可，不消耗）。</li>
+    <li>从主版图取 1 块<b>所示形状</b>、颜色任选的板块（见 6.1）。</li>
+    <li>从主版图取 1 块<b>所示颜色</b>、形状任选的板块（见 6.1）。</li>
+    <li>从主版图取任意 1 块特伦卡迪斯板块（见 6.1）。</li>
+    <li>打出 1 张卡（见 6.3）。</li>
+    <li>打出 1 张<b>所示支柱类型</b>的卡（见 6.3）。</li>
+    <li>从主版图取任意 1 张卡（见 6.2）。</li>
+    <li>从主版图取 1 张<b>所示支柱类型</b>的卡（见 6.2）。</li>
+  </ul>
+
+  <h3>效果与行动</h3>
+  <ul class="plain">
+    <li><b>无视条件</b>（见 6.1）。</li>
+    <li>结算<b>所示</b>那一列（见 6.3）。</li>
+    <li>结算你宗教列中的 1 张卡（见 6.3）。</li>
+    <li>获得<b>所示支柱类型</b>的 VP（见 05 节）。</li>
+    <li>推进一个烟囱标记，按其条件执行（见 6.4）。</li>
+    <li>选择吊灯上的任何其他行动来执行（中央板块除外）（见 6.5）。</li>
+    <li>再进行一个回合（见 6.4）。</li>
+    <li>游戏结束时，你可以把 1 个 VP 标记<b>恰好</b>减去所示点数，把另一个标记增加相同的点数（见 6.4）。</li>
+    <li>当你取走某个供应格的<b>最后一块</b>特伦卡迪斯板块时触发（见 6.1）。</li>
+  </ul>
+</section>
+
+<!-- ================= 13 背景 ================= -->
+<section class="sec" id="essay">
+  <h2><span class="num">13</span>背景：想象安东尼·高迪</h2>
+  <p class="lead">以下为原书收录的专文，作者 Jordi Graupera（建筑哲学教授），英译 Louise Keohane。此处依原文全文译出。</p>
+
+  <p>安东尼·高迪是加泰罗尼亚建筑师。1852 年生于拜什坎普（Baix Camp），1926 年逝于巴塞罗那。他创造了一种全然没有先例、至今也没有继承者的建筑风格。每年有数百万人参观他的建筑，尤其是仍未完工、至今仍在施工的圣家堂，还有米拉之家、桂尔宫与桂尔公园，以及别具一格的巴特罗之家与维森斯之家。</p>
+
+  <p>传统上他被视为现代主义（Modernisme）者，其作品与该运动同代人有若干共通元素；但事实上，他的作品很难归类。要更好地理解他，你需要知道高迪一生有三大热爱：<b>自然、上帝与加泰罗尼亚</b>。在我们隔着一个多世纪的遥远视角看来，这像是三种不同的建构；但对他而言，并无必要把这三种爱分成三个词、三种想法或三个概念。高迪可以把它们逐层叠加、融为一体。</p>
+
+  <p>乍看之下，我们会说高迪像任何雕塑家那样模仿自然形态：桂尔宫阳台栏杆上的骷髅、圣家堂外墙上的动物、几乎每座建筑里都能见到的锻铁植物纹样，都是显而易见的例子。再深入一些看，会发现立面的蜿蜒形态、像生了根一样扎入地下的柱子、末端呈枝条状的支柱，以及他为多个项目设计的家具那种有机外观——这些都证明他的灵感不止于复制植物与动物。对高迪而言，自然是关于世界、关于我们所占据的空间的<b>知识来源</b>。当然，这也帮他造出更好的建筑，启发更坚固、更宽敞、更契合某种人性观念的构造。</p>
+
+  <p>高迪的建筑意在对抗 20 世纪之交人们所遭受的社会与精神解体——那些被工业社会塞进城市与方盒公寓、陷入与真实世界无关的异化与绝望处境的人。</p>
+
+  <p>这种对自然的观察，其根基不只是那个体弱敏感、无法上学、被留在留多姆斯（Riudoms）家中四处游荡的孩子（当地口述传说坚持他生于此，与几公里外雷乌斯城的文献记载相左）。这个「被蜗牛形状迷住、被蚂蚁的结构强度吸引」的典型孩童形象，并不足以解释高迪的天才——那天才同样得益于对建筑史、数学与几何构造的近乎强迫式的研究。</p>
+
+  <p>他是一位解决了建筑学数百年难题的天才：<b>如何构造一个巨大的开放空间</b>。哥特建筑曾试图用中殿外侧的大量支撑来解决——比如飞扶壁（看看巴黎圣母院的航拍照片就能体会其规模）。高迪靠对自然中作用力的更深理解，解决了这个问题，并削去了大部分此外部骨架。然而他并非只凭直觉工作，而是把这些想法与技术功力熔合。讽刺的是，他恰在历史那一刻达成了平衡——而那一刻，这个解法本身已不再重要：技术上改良的建筑材料，意味着摩天楼与火车站可以为大众拔地而起，无需一座纯石建筑所需的那些计算。高迪这一精彩的建筑姿态，既神圣，也无用。</p>
+
+  <p>在科洛尼亚桂尔教堂地下室或圣家堂那些分叉的柱子背后，是对<b>重量分配</b>的深刻理解。泰雷西亚学院走廊里的杰作，源于高迪式拱（悬链拱与抛物线拱）凯旋般的登场。桂尔宫那种「不可能的穹顶」的源头，是几何学家所称的旋转椭球面或旋转抛物面——这些词召唤出令心智迷惑的结构。高迪的建筑把精神与技术功力熔在一起。换句话说：在「模仿自然形态」的表象背后，是一种同时叩问<b>超越性</b>与<b>坚固性</b>的野心。</p>
+
+  <p>然而，与别的自然研究者不同，高迪并不试图支配世界，而是<b>适应</b>它。这个差别很细微，桂尔公园的小径就是好例子：它们为沉思式的漫步而设计，顺应山体的形状，而不是改造自然形态去迎合某种理想化的幻想。在这种对大地野性的俯首之中，有一种近乎神秘的态度——它构想出与物质的关系，而这份敬意，吊诡地，是非物质的。</p>
+
+  <p>相应地，高迪的演变可以从卡维特之家的起点，一直看到晚年对圣家堂的绝对奉献：这是一个从世俗社会要求中自我解放的过程。说它神秘，是因为其中有一种朝向更精神化美学的接近，而这把我们引向他对上帝的爱。</p>
+
+  <p>他最初在自然中的灵感——无论美学上还是数学上——与他日益激进的基督教虔敬平行演化。这份虔敬，一方面强调<b>赎罪</b>的必要，一方面凸显一种不那么受折磨的精神感受力。圣家堂是一座赎罪的神殿：它被构想为让建造它的经济与社会付出，为现代世界的罪赎罪。那些背离精神的傲慢之罪、物质主义之罪、政治与社会失和之罪、工人阶级的异化与无望之罪。</p>
+
+  <p>与此同时，这件作品中也有喜悦与希望的含义：高迪把自己创作的努力构想为对上帝的<b>奉献</b>。正如塑土者之于泥土，对他、对建造它的工匠而言，设计与建造这座神殿的行为本身就是祈祷。这可以从他作品中众多象征元素看出来：每一个都既力求向上帝言说，也力求听见上帝的回应。高迪的宗教以苦修为基——如同隐修士把每一个动作都用于精炼自己与上帝的关系，好让自己成为祂工作的载体与工具。正如祈祷转化信者，数十年的建堂也逐渐纯化高迪的虔敬。</p>
+
+  <p>与他研究自然一样，他的作品中也有一种演变：从最显见的部分开始，终于一系列含蓄而唤起联想的含义。桂尔宫里明确的宗教指涉，可见于主厅中央供奉的圣母祭坛，也可见于建筑避雷针顶端那枚希腊十字。还有一个事实：耶稣塔（圣家堂最高塔）高 172 米，略低于巴塞罗那蒙特惠奇山的 177 米——这其中有一种近乎卡巴拉的微妙。高迪不愿人造之物在自然中凌驾于上帝之作。</p>
+
+  <p>要看清楚这一点，最好的方式是设想高迪把上帝想成一位画家。巴特罗之家的立面微微起伏，缀满小块玻璃与陶片，会随天气、时辰与季节变换颜色。圣家堂内部，地中海的自然光借彩色玻璃与其他材料，把神殿中殿填满各种色彩——那色彩宛如在自然中所见的上帝的情绪。</p>
+
+  <p>高迪生命的第三种爱是加泰罗尼亚。这里同样既有显白、也有隐微。高迪属于 19 世纪后半叶那一代加泰罗尼亚人：他们希望加泰罗尼亚成为一个拥有继续存在之自由与保障的政治共同体——也就是不受卡斯蒂利亚西班牙或其国家机构支配。显白的例子有桂尔宫里带加泰罗尼亚旗四道条纹的彩色玻璃，以及桂尔宫风向标上那枚加泰罗尼亚王冠的锻铁蝙蝠。另一个标志是巴特罗之家屋顶上那条龙——它被加泰罗尼亚主保圣乔治的烟囱长矛刺死。还有佩德拉尔贝斯宫赫拉克勒斯喷泉流出的水，穿过加泰罗尼亚纹章的四道竖条。这类例子数不胜数。</p>
+
+  <p>他的作品是一种政治激进主义一生的表达。生命将尽、离世仅数年之前，高迪卷入了一件足以证明其担当的事件。一年前，普里莫·德·里维拉发动政变，一位激烈反对加泰罗尼亚人的独裁者上台；高迪因对西班牙警察讲加泰罗尼亚语而被捕。那是 1924 年 9 月 11 日，独裁政权已禁止任何纪念活动。对加泰罗尼亚人而言，9 月 11 日纪念的是 1714 年巴塞罗那向西班牙与法国军队的陷落——那场战争终结了他们国家的政治自由。这一天用来记住那些抵抗到底的人，也提醒人们不要忘记为恢复那些自由与宪制所需的努力。</p>
+
+  <p>尽管纪念被禁，高迪仍前往圣胡斯特堂区，那里正为抵抗中的阵亡者举行弥撒。在当时这样做需要极大的勇气与信念，尤其警察还封锁了入口。高迪试图进堂，当拦住他的警察质问时，他拒绝使用独裁政权强加的西班牙语。他被逮捕并带到警局。朋友们不得不为他交保——因为这位在 1924 年已然声名显赫的建筑师，在警察局长面前仍继续拒绝改换语言。</p>
+
+  <p>在高迪的建筑中，至少还有两个不那么显白的元素，把他与这份对故土的爱连接起来。第一个是最微小的细节：<b>特伦卡迪斯</b>。这是一种用不规则陶片、玻璃与其他材料、以石灰砂浆固定的马赛克。高迪取用陶瓷厂淘汰的碎片，或盘子、杯子、玻璃的碎片，用它们覆盖表面。他起初只是把它用于大块平板无法使用的曲面，但特伦卡迪斯风格一点一点成了他作品的美学标记。他与建筑师 Josep Maria Jujol 合作，造出了桂尔公园主广场周边那条起伏蜿蜒的长椅——一件辉煌的抽象艺术作品。</p>
+
+  <p>但这一突破其实是对一种古老技法的重新表述，那技法诞生于匮乏：用优质材料的废弃碎片去覆盖贫寒住家的白墙。工作的剩余物成了故土的剩余物的象征：他从身边最卑微、最被轻视的物件中取材，把它们变成美丽而有用之物。这种「把破碎之物提升至崇高」的姿态，正是 19 世纪民族主义者想对一块衰败、被压制、被击碎的加泰罗尼亚所做的：把它变成丰饶、美丽、有用——而且，自由。</p>
+
+  <p>最后一个隐微元素大到几乎不被注意，却把高迪的三种爱联在一起。这位拜什坎普建筑师的作品在构想上是原创的，因为它不参与任何当代传统，也无意成为当时西班牙任何建筑与美学潮流的一部分。这是一种刻意的分离，意在创造一种独特的、加泰罗尼亚式的存在于世界的方式；为此，它向当下可见之物之外去寻找。这就解释了高迪作品中持续不断的探索：从东方主义与伊斯兰阶段的试验，到借用古典希腊的影响，再到深入哥特传统。与之并列的，还有宗教与民族民俗的元素、与传统智慧融合的技术构造方案、以科学知识获得却以艺术洞察运用的专门技艺。这一切使他能够同时<b>开启</b>——并<b>延续</b>——一个传统。一个位于三角形中心的传统，其三个顶点是上帝、自然与加泰罗尼亚。</p>
+
+  <p>当你走近安东尼·高迪时，请这样想：每一个元素中都有无穷的含义（甚至包括我们自己投射进去的），但这三者始终在场。</p>
+
+  <p style="text-align:right;color:#7d7161;font-size:14.4px;">— Jordi Graupera，建筑哲学教授<br>（英文版由 Louise Keohane 翻译）</p>
+
+  <figure>
+    <img src="Gaudi_Rules_images/page_22.jpg" alt="专文首页：高迪生平与建筑思想，配以圣家堂与柱林照片">
+    <figcaption>原书第 22 页 · 想象安东尼·高迪（一）</figcaption>
+  </figure>
+
+  <figure>
+    <img src="Gaudi_Rules_images/page_23.jpg" alt="专文续：自然、上帝与加泰罗尼亚三种爱，及圣家堂的赎罪象征">
+    <figcaption>原书第 23 页 · 想象安东尼·高迪（二）</figcaption>
+  </figure>
+
+  <figure>
+    <img src="Gaudi_Rules_images/page_24.jpg" alt="专文续：1924 年被捕事件、特伦卡迪斯与故土隐喻">
+    <figcaption>原书第 24 页 · 想象安东尼·高迪（三）</figcaption>
+  </figure>
+</section>
+
+<!-- ================= 14 制作名单 ================= -->
+<section class="sec" id="credits">
+  <h2><span class="num">14</span>制作名单</h2>
+  <div class="credits">
+    <div><span class="role">设计</span><span class="names">Dani Garcia</span></div>
+    <div><span class="role">插画</span><span class="names">Edu Valls</span></div>
+    <div><span class="role">平面设计</span><span class="names">Sol Saavedra I.</span></div>
+    <div><span class="role">文字编辑</span><span class="names">William Niebling</span></div>
+    <div><span class="role">编辑</span><span class="names">David Esbrí</span></div>
+    <div><span class="role">献辞</span><span class="names">To Anna, we've almost seen them all.（致 Anna：我们几乎把它们都看遍了。）</span></div>
+    <div><span class="role">出版</span><span class="names">DEVIR CONTENIDOS S.L.<br>Via Augusta 153, Entl. 4, 08021 - Barcelona<br>DEVIR AMERICAS LLC.<br>8123 South Orange Avenue, Suite 166 - Orlando, Florida, FL 32809, USA<br>www.devirgames.com</span></div>
+  </div>
+
+  <div class="foot">
+    <span class="mark">GAUDÍ</span>
+    本页为桌游《高迪》中文规则书，依 DEVIR 英文版全文译出。<br>
+    游戏名称、术语与美术版权归 DEVIR 及原作者所有。
+  </div>
+</section>
+
+</main>
+</div>
+
+<script>
+(function(){
+  var links = Array.prototype.slice.call(document.querySelectorAll('.toc a'));
+  var secs = links.map(function(a){ return document.querySelector(a.getAttribute('href')); });
+  function onScroll(){
+    var y = window.scrollY + 120, idx = 0;
+    for (var i = 0; i < secs.length; i++){
+      if (secs[i] && secs[i].offsetTop <= y) idx = i;
+    }
+    links.forEach(function(a,i){ a.classList.toggle('active', i === idx); });
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+})();
+</script>
+</body>
+</html>
