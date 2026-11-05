@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>莫伊图拉 Moytura · 中文规则书</title>
+<style>
+:root{
+  --paper:#f8f6ef; --paper2:#efebe0; --ink:#1b2a2c; --ink2:#41585a;
+  --deep:#12262a; --deep2:#1b3a38; --moss:#4e6b4f; --moss2:#75906f;
+  --slate:#4a5f6b; --stone:#8d968f; --line:#d7d2c2; --copper:#a9753c; --copper2:#cf9d5f;
+  --blood:#8a4a3c;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:"Songti SC","Noto Serif SC",Georgia,"Times New Roman",serif;
+  font-size:16px; line-height:1.85; -webkit-font-smoothing:antialiased;
+}
+.wrap{display:flex; align-items:flex-start; max-width:1500px; margin:0 auto;}
+nav.toc{
+  position:sticky; top:0; flex:0 0 250px; height:100vh; overflow-y:auto;
+  background:linear-gradient(168deg,#102024 0%,#17302f 58%,#1d3c39 100%);
+  color:#cbd6d2; padding:30px 19px 46px; font-family:"Noto Sans SC",system-ui,sans-serif;
+  font-size:13.2px; line-height:1.6; border-right:1px solid #0a1618;
+}
+nav.toc::-webkit-scrollbar{width:6px;}
+nav.toc::-webkit-scrollbar-thumb{background:#375a54; border-radius:3px;}
+nav.toc .brand{font-family:"Songti SC",serif; font-size:21px; color:#eee3cc; letter-spacing:.14em;}
+nav.toc .brand small{display:block; font-size:10.5px; letter-spacing:.32em; color:#7f9a92; margin-top:5px; font-family:system-ui,sans-serif;}
+nav.toc .rule{height:2px; width:38px; background:var(--copper); margin:15px 0 17px;}
+nav.toc a{display:block; color:#b4c3bd; text-decoration:none; padding:4.4px 8px; border-radius:4px; border-left:2px solid transparent;}
+nav.toc a:hover{color:#f4eeda; background:#22453f; border-left-color:var(--copper2);}
+nav.toc a .n{display:inline-block; width:22px; color:#6b8a80; font-variant-numeric:tabular-nums; font-size:11.5px;}
+nav.toc .grp{margin:17px 0 6px; font-size:10.5px; letter-spacing:.26em; color:#69857c; padding-left:8px;}
+nav.toc a.sub{padding-left:22px; font-size:12.4px;}
+main{flex:1 1 auto; min-width:0; padding:0 0 90px;}
+header.cover{
+  position:relative; padding:64px 58px 46px; color:#eae4d2;
+  background:
+    radial-gradient(ellipse at 80% 16%, rgba(207,157,95,.20) 0%, transparent 55%),
+    radial-gradient(ellipse at 10% 90%, rgba(78,107,79,.5) 0%, transparent 62%),
+    linear-gradient(158deg,#0d1c1e 0%,#17302f 56%,#20423c 100%);
+  border-bottom:3px solid var(--copper);
+}
+header.cover::after{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background-image:radial-gradient(rgba(255,255,255,.05) 1px, transparent 1px);
+  background-size:5px 5px; opacity:.45;
+}
+header.cover .kicker{font-family:system-ui,sans-serif; font-size:11px; letter-spacing:.42em; color:var(--copper2); text-transform:uppercase;}
+header.cover h1{font-size:52px; margin:14px 0 4px; letter-spacing:.07em; font-weight:600; line-height:1.15;}
+header.cover .en{font-family:Georgia,serif; font-style:italic; font-size:22px; color:#9fb3ac; letter-spacing:.06em; margin-bottom:22px;}
+header.cover .tag{font-size:15px; color:#c5d0cb; max-width:660px; line-height:1.9;}
+header.cover .meta{margin-top:26px; display:flex; flex-wrap:wrap; gap:10px 12px; font-family:system-ui,sans-serif; font-size:12px; color:#a6b8b1;}
+header.cover .meta span{border:1px solid rgba(207,157,95,.42); padding:4px 12px; border-radius:20px; letter-spacing:.06em;}
+section.sec{padding:46px 58px 10px; border-bottom:1px solid var(--line);}
+section.sec:last-of-type{border-bottom:none;}
+h2{
+  font-size:27px; margin:0 0 22px; padding-bottom:12px; letter-spacing:.04em;
+  border-bottom:1px solid var(--line); color:var(--deep); font-weight:600;
+}
+h2 .num{
+  display:inline-block; font-family:system-ui,sans-serif; font-size:12px; font-weight:700;
+  color:var(--paper); background:var(--moss); padding:3px 9px; border-radius:3px;
+  margin-right:13px; vertical-align:3px; letter-spacing:.1em;
+}
+h3{font-size:19.5px; margin:30px 0 11px; color:var(--deep2); letter-spacing:.03em; font-weight:600;}
+h3::before{content:"◆"; color:var(--copper); font-size:11px; margin-right:8px; vertical-align:2px;}
+h4{font-size:16px; margin:22px 0 8px; color:var(--moss); letter-spacing:.02em;}
+p{margin:0 0 13px;}
+p.lead{font-size:16.5px; color:var(--ink2); border-left:3px solid var(--moss2); padding-left:15px; background:linear-gradient(90deg,rgba(117,144,111,.08),transparent 70%); padding-top:6px; padding-bottom:6px;}
+b,strong{color:var(--deep); font-weight:700;}
+em{color:var(--blood); font-style:normal; border-bottom:1px dotted var(--blood);}
+ul,ol{margin:0 0 14px; padding-left:24px;}
+li{margin-bottom:7px;}
+ul li::marker{color:var(--moss);}
+ol li::marker{color:var(--copper); font-family:system-ui,sans-serif; font-weight:700;}
+ul.tight li{margin-bottom:3px;}
+.side{
+  background:linear-gradient(180deg,#f2efe0,#ece7d4); border-left:4px solid var(--copper);
+  padding:14px 18px 13px; margin:18px 0; border-radius:0 4px 4px 0; font-size:14.6px; color:#4b4433;
+}
+.side .label{display:block; font-family:system-ui,sans-serif; font-size:10.5px; letter-spacing:.24em; color:#96733a; margin-bottom:5px; font-weight:700;}
+.side.imp{background:linear-gradient(180deg,#f1e7dd,#ecdfd0); border-left-color:var(--blood);}
+.side.imp .label{color:var(--blood);}
+.tn{
+  border:1px dashed #b7ad91; background:#f6f3e9; padding:12px 16px; margin:16px 0;
+  border-radius:4px; font-size:14.2px; color:#5c5544;
+}
+.tn .label{display:block; font-family:system-ui,sans-serif; font-size:10.5px; letter-spacing:.2em; color:#96875f; margin-bottom:4px; font-weight:700;}
+.example{
+  background:#fff; border:1px solid var(--line); border-top:3px solid var(--moss2);
+  border-radius:5px; padding:15px 18px; margin:16px 0; font-size:14.6px; color:#3e4f4c;
+}
+.example .label{display:block; font-family:system-ui,sans-serif; font-size:10.5px; letter-spacing:.24em; color:var(--moss); margin-bottom:6px; font-weight:700;}
+table{width:100%; border-collapse:collapse; margin:15px 0 20px; font-size:14.4px;}
+th{background:var(--deep); color:#e8e1cd; text-align:left; padding:9px 12px; font-weight:600; letter-spacing:.05em; font-family:system-ui,sans-serif; font-size:13px;}
+td{padding:9px 12px; border-bottom:1px solid var(--line); vertical-align:top;}
+tbody tr:nth-child(even){background:rgba(215,210,194,.24);}
+td.n{white-space:nowrap; font-family:system-ui,sans-serif; color:var(--moss); font-weight:700;}
+table.k th:nth-child(1){width:26%;}
+table.k th:nth-child(3){width:22%;}
+figure{margin:20px 0; text-align:center;}
+figure img{max-width:100%; border:1px solid var(--line); border-radius:3px; box-shadow:0 3px 14px rgba(18,38,42,.12);}
+figcaption{margin-top:8px; font-family:system-ui,sans-serif; font-size:12.2px; color:var(--stone); letter-spacing:.04em;}
+footer{padding:34px 58px 60px; color:var(--stone); font-size:12.6px; font-family:system-ui,sans-serif; border-top:1px solid var(--line); background:var(--paper2);}
+footer b{color:var(--moss);}
+.kv{display:flex; flex-wrap:wrap; gap:8px 22px; margin:12px 0 16px; font-family:system-ui,sans-serif; font-size:13.4px;}
+.kv div{color:var(--ink2);}
+.kv b{color:var(--moss); margin-right:5px;}
+.grid2{display:grid; grid-template-columns:1fr 1fr; gap:0 30px;}
+@media (max-width:1100px){
+  nav.toc{display:none;}
+  section.sec,header.cover,footer{padding-left:26px; padding-right:26px;}
+  header.cover h1{font-size:36px;}
+  .grid2{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<nav class="toc">
+  <div class="brand">莫伊图拉<small>MOYTURA</small></div>
+  <div class="rule"></div>
+  <div class="grp">基础规则</div>
+  <a href="#s1"><span class="n">1</span>简介与目标</a>
+  <a href="#s2"><span class="n">2</span>配件</a>
+  <a href="#s3"><span class="n">3</span>版图要素</a>
+  <a href="#s4"><span class="n">4</span>游戏准备</a>
+  <a href="#s5"><span class="n">5</span>游戏流程总览</a>
+  <a href="#s6"><span class="n">6</span>玩家回合</a>
+  <a href="#s61" class="sub">6.1 选择板块或卡</a>
+  <a href="#s62" class="sub">6.2 升级板块</a>
+  <a href="#s63" class="sub">6.3 扩张</a>
+  <a href="#s64" class="sub">6.4 解决冲突</a>
+  <a href="#s65" class="sub">6.5 认领崇拜标记</a>
+  <a href="#s66" class="sub">6.6 重置神祇展示区</a>
+  <a href="#s7"><span class="n">7</span>四位神祇</a>
+  <a href="#s8"><span class="n">8</span>敌方回合</a>
+  <a href="#s9"><span class="n">9</span>时代末计分</a>
+  <a href="#s10"><span class="n">10</span>游戏结束</a>
+  <div class="grp">追加规则</div>
+  <a href="#s11"><span class="n">11</span>替代起始位置</a>
+  <a href="#s12"><span class="n">12</span>特殊敌方氏族</a>
+  <a href="#s121" class="sub">12.1 埃伦·特雷亨德</a>
+  <a href="#s122" class="sub">12.2 弗摩尔人</a>
+  <a href="#s123" class="sub">12.3 报丧女妖</a>
+  <a href="#s124" class="sub">12.4 奥伊利菲什</a>
+  <a href="#s13"><span class="n">13</span>玛格梅尔扩展</a>
+  <a href="#s14"><span class="n">14</span>单人／合作变体</a>
+  <a href="#s15"><span class="n">15</span>制作名单</a>
+</nav>
+
+<main>
+
+<header class="cover">
+  <div class="kicker">Bitewing Games · 2026</div>
+  <h1>莫伊图拉</h1>
+  <div class="en">Moytura — The Battle for Ireland</div>
+  <div class="tag">莫伊图拉的战争已经打响。作为图阿萨·德·达南的族长，你要让影响力铺满这片土地，借助众神对水、远行、战争与创造的权柄，夺取爱尔兰至高王座。挡在你面前的是阴森的弗摩尔人与其他嗜战的神话生灵，更不必说另一个同样野心勃勃的敌对氏族。</div>
+  <div class="meta">
+    <span>2 人对战</span><span>10 轮 · 2 个时代</span><span>含单人／合作变体</span><span>含玛格梅尔扩展</span>
+  </div>
+</header>
+
+<section class="sec" id="s1">
+  <h2><span class="num">01</span>简介与目标</h2>
+  <p class="lead">在古爱尔兰全境拥有最强影响力者获胜。每位玩家控制一个氏族（白或黑），三个敌方氏族合并构成与两位玩家竞争的<b>第三派系</b>。</p>
+  <p>每个<b>地区</b>在每个<b>时代</b>结束时结算一次：该地区内单位数最多与第二多的派系得分。两个时代结束后，分数最高的派系获胜。</p>
+  <p>本规则涵盖第一次游戏所需的全部内容。追加规则与选项见第 11–12 节；玛格梅尔（Mag Mell）扩展见第 13 节；单人／合作玩法见第 14 节。</p>
+  <figure>
+    <img src="Moytura_Rules_images/page_01.jpg" alt="Moytura 规则书首页">
+    <figcaption>原书第 1 页：凯尔特神话背景与目标</figcaption>
+  </figure>
+  <div class="side imp">
+    <span class="label">重要用词</span>
+    <b>信徒（follower）</b>永远指两位玩家控制的黑色与白色单位。<b>敌方（enemy）</b>永远指由三个氏族组成的第三派系。两位玩家固然彼此竞争，但规则书中的「敌方」<b>从不</b>指对手玩家。
+  </div>
+  <div class="kv">
+    <div><b>设计师</b>David Thompson &amp; Trevor Benjamin</div>
+    <div><b>美术</b>Harry Conway</div>
+    <div><b>版图插画</b>Alisha Giroux</div>
+    <div><b>平面设计</b>Brigette Indelicato</div>
+    <div><b>编辑</b>Scott Darrington</div>
+    <div><b>出版</b>Nick Murray &amp; Kyle Spackman</div>
+  </div>
+</section>
+
+<section class="sec" id="s2">
+  <h2><span class="num">02</span>配件</h2>
+  <table>
+    <thead><tr><th>配件</th><th>数量</th><th>说明</th></tr></thead>
+    <tbody>
+      <tr><td>版图</td><td class="n">1 张</td><td>印有 11 个地区、小径、海与湖泊、神祇展示区、分数轨</td></tr>
+      <tr><td>信徒</td><td class="n">92 个</td><td>黑、白各 46 个</td></tr>
+      <tr><td>玩家标记</td><td class="n">18 个</td><td>兼作分数标记与升级标记</td></tr>
+      <tr><td>敌方要塞标记</td><td class="n">3 个</td><td>每个敌方氏族 1 个</td></tr>
+      <tr><td>崇拜标记</td><td class="n">25 个</td><td>用于付费选板块、兑换与计分平手判定</td></tr>
+      <tr><td>指示物标记</td><td class="n">11 个</td><td>辅助记忆用（标记待扩张格、待计分地区等）</td></tr>
+      <tr><td>敌方分数标记</td><td class="n">2 个</td><td>红色，敌方派系共用</td></tr>
+      <tr><td>神祇板块</td><td class="n">4 块</td><td>埃里乌（Ériu）、波安德（Bóand）、莫里甘（Morrigan）、达格达（Dagda）</td></tr>
+      <tr><td>敌方单位</td><td class="n">60 个</td><td>双面，每个氏族 20 个</td></tr>
+      <tr><td>敌方卡</td><td class="n">24 张</td><td>每个氏族 4 张</td></tr>
+      <tr><td>玩家帮助卡</td><td class="n">4 张</td><td>每位玩家 2 张</td></tr>
+      <tr><td>地图卡</td><td class="n">3 张</td><td>双面，共 6 种地图设置</td></tr>
+      <tr><td>图阿萨·德·达南卡</td><td class="n">1 张</td><td>扩张规则：向与起点相邻的目标扩张，并从供应区取 1 枚崇拜标记</td></tr>
+    </tbody>
+  </table>
+  <p>信徒、敌方单位、崇拜标记与玩家标记<b>不设数量上限</b>。用尽时请自行寻找合适的替代物。</p>
+  <figure>
+    <img src="Moytura_Rules_images/page_02.jpg" alt="版图与配件">
+    <figcaption>原书第 2 页：版图各部位标注与部分配件</figcaption>
+  </figure>
+  <figure>
+    <img src="Moytura_Rules_images/page_03.jpg" alt="神祇板块、敌方单位与地图卡">
+    <figcaption>原书第 3 页：神祇板块、敌方单位与卡牌、地图卡</figcaption>
+  </figure>
+</section>
+
+<section class="sec" id="s3">
+  <h2><span class="num">03</span>版图要素</h2>
+  <table class="k">
+    <thead><tr><th>要素</th><th>原文</th><th>说明</th></tr></thead>
+    <tbody>
+      <tr><td>小径</td><td>paths</td><td>连接相邻格子的虚线，决定陆路扩张与敌方扩张的连通条件</td></tr>
+      <tr><td>海</td><td>sea</td><td>环绕爱尔兰的水域，波安德与奥伊利菲什都依赖它</td></tr>
+      <tr><td>湖泊</td><td>lakes</td><td>内陆水域，与海一样算「同一片水域」的判定对象</td></tr>
+      <tr><td>格子</td><td>spaces</td><td>放置信徒与敌方单位的最小单位</td></tr>
+      <tr><td>地区</td><td>regions</td><td>全图共 11 个，是计分单位；一个地区含多个格子</td></tr>
+      <tr><td>地区分值圆</td><td>region value circles</td><td>印在该地区上，形如「6 | 3」，即第一名 6 分、第二名 3 分</td></tr>
+      <tr><td>消耗</td><td>cost</td><td>神祇展示区每格左侧的圈，选择该格需付的崇拜标记数</td></tr>
+      <tr><td>神祇展示区</td><td>deity display area</td><td>版图左侧竖排 5 格：最下 1 格放图阿萨·德·达南卡，其上 4 格放神祇板块</td></tr>
+      <tr><td>分数轨</td><td>score track</td><td>沿版图边缘，0–50</td></tr>
+      <tr><td>升级区</td><td>upgrades</td><td>神祇板块上的一排圆圈，放玩家标记表示已升级</td></tr>
+      <tr><td>信徒</td><td>followers</td><td>展示区每格右侧印有数量图标，即选择该格可放置的信徒数</td></tr>
+    </tbody>
+  </table>
+  <div class="tn">
+    <span class="label">译者注</span>
+    地图卡为双面，共 6 种设置：1 种<b>新手设置</b>（卡面直接印出双方起始信徒与敌方单位的摆放位置），5 种<b>标准设置</b>（只印起始格与敌方要塞格，起始格由玩家轮抽决定，见第 11 节）。4 个起始格与要塞格的符号在任何设置下含义相同。
+  </div>
+</section>
+
+<section class="sec" id="s4">
+  <h2><span class="num">04</span>游戏准备</h2>
+  <ol>
+    <li><b>版图</b>：把版图放在桌面中央。</li>
+    <li><b>地图卡</b>：取出<b>新手地图设置</b>（注意卡为双面，该设置直接印出信徒与敌方单位的位置）。其余地图卡放回盒中。</li>
+    <li><b>信徒（每位玩家）</b>：选择黑或白，取该色 46 个信徒，在地图卡标示的每个起始格各放 2 个，其余放在自己面前的供应区。</li>
+    <li><b>敌方要塞标记</b>：把三个弗摩尔氏族的要塞标记放在地图卡标示的格子上。</li>
+    <li><b>敌方单位</b>：把所有敌方单位翻到<b>弗摩尔面</b>朝上，按三个氏族（颜色）分开。这些单位整局都保持弗摩尔面朝上。每个氏族取 4 个单位放到地图卡标示的格子上，其余放在版图旁的供应区。</li>
+    <li><b>敌方卡</b>：把三个弗摩尔氏族的卡洗混，面朝下各发 5 张，分别作为第一时代与第二时代的抽牌堆。剩余 2 张与其他敌方卡一起放回盒中。</li>
+    <li><b>神祇板块与图阿萨·德·达南卡</b>：把图阿萨·德·达南卡正面朝上放在展示区最下面一格；洗混 4 块神祇板块，正面朝上放在其余 4 格，构成神祇展示区。</li>
+    <li><b>崇拜标记</b>：每位玩家面前放 2 枚作为个人供应区；每个<b>无人占据的土丘格</b>各放 1 枚；其余放在图阿萨·德·达南卡指定的公共供应区。</li>
+    <li><b>玩家与敌方标记</b>：每位玩家的 1 枚标记放在分数轨 0 格，其余放个人供应区；敌方分数标记放在分数轨 0 格（第二枚先放在分数轨旁待用）。</li>
+    <li><b>指示物标记</b>：放在版图旁备用。</li>
+    <li><b>玩家帮助卡</b>：每位玩家拿取自己颜色的 2 张，放在手边。</li>
+  </ol>
+  <figure>
+    <img src="Moytura_Rules_images/page_05.jpg" alt="准备示意图">
+    <figcaption>原书第 5 页：准备完成后的桌面示意（数字对应上述步骤）</figcaption>
+  </figure>
+  <div class="tn">
+    <span class="label">译者注</span>
+    第 4、5 步摆放敌方初始单位的数量，取决于该地图设置使用哪个敌方氏族：弗摩尔人与埃伦·特雷亨德为「要塞格 2 个 + 每个经小径相连的相邻格 1 个」；奥伊利菲什为「要塞格 2 个 + 每个经海路相连的相邻格 1 个」，且要塞格必须临海；报丧女妖为「要塞格 3 个」。新手设置只用三个弗摩尔氏族，按弗摩尔人处理。
+  </div>
+</section>
+
+<section class="sec" id="s5">
+  <h2><span class="num">05</span>游戏流程总览</h2>
+  <p>游戏共 <b>10 轮</b>。每轮分三个回合，依次为：</p>
+  <ul class="tight">
+    <li>先手玩家的回合</li>
+    <li>后手玩家的回合</li>
+    <li>敌方的回合</li>
+  </ul>
+  <p>每 5 轮构成一个<b>时代</b>。第 5 轮与第 10 轮结束时（即最后一敌方卡被翻开并结算完毕后），双方与敌方按版图上的地区控制情况计分。第二时代计分后游戏结束。</p>
+  <p>玩家回合的先后由时代决定：<b>第一时代白方先手，第二时代黑方先手</b>。</p>
+  <div class="kv">
+    <div><b>轮次</b>10 轮</div>
+    <div><b>每轮回合</b>先手方 → 后手方 → 敌方</div>
+    <div><b>计分时机</b>第 5、10 轮末</div>
+    <div><b>地区数</b>11 个</div>
+  </div>
+  <h4>轮次结构</h4>
+  <table>
+    <thead><tr><th>阶段</th><th>轮次</th><th>每轮内容</th><th>结束动作</th></tr></thead>
+    <tbody>
+      <tr><td>第一时代</td><td class="n">第 1–5 轮</td><td>白方回合 → 黑方回合 → 敌方回合</td><td>第 5 轮末尾按 11 个地区计分</td></tr>
+      <tr><td>第二时代</td><td class="n">第 6–10 轮</td><td>黑方回合 → 白方回合 → 敌方回合</td><td>第 10 轮末尾计分，随后终局判定</td></tr>
+    </tbody>
+  </table>
+  <div class="side">
+    <span class="label">节奏提示</span>
+    计分并不即时：地区归属要等到时代末尾才结算，因此一轮之内占下的格子，可能在结算之前被对手或敌方改写。铺开的优势必须撑到时代末才算数；敌方每个时代只有 5 张卡，也就是 5 次扩张机会，用完即进入计分。
+  </div>
+</section>
+
+<section class="sec" id="s6">
+  <h2><span class="num">06</span>玩家回合</h2>
+  <p class="lead">轮到你时，按顺序执行以下六步：① 选择板块或卡 → ② 升级板块 → ③ 扩张 → ④ 解决冲突 → ⑤ 认领崇拜标记 → ⑥ 重置神祇展示区。</p>
+  <div class="side">
+    <span class="label">必做与选做</span>
+    第 1、3、6 步<b>每个回合都要做</b>；第 2、4、5 步<b>只在符合条件时</b>做。
+  </div>
+
+  <h3 id="s61">6.1 选择板块或卡</h3>
+  <p>从神祇展示区中选择一块板块或一张卡。<b>图阿萨·德·达南卡</b>与<b>最下面（第一块）神祇板块</b>永远可以免费选择。若想选更靠上的神祇板块，每跳过一格就要支付 1 枚崇拜标记：第二块神祇板块付 1 枚，第三块付 2 枚，第四块付 3 枚。支付的崇拜标记放回公共供应区。</p>
+  <table>
+    <thead><tr><th>展示区格位（自下而上）</th><th>可放内容</th><th>崇拜标记花费</th></tr></thead>
+    <tbody>
+      <tr><td>最下格</td><td>图阿萨·德·达南卡</td><td class="n">0</td></tr>
+      <tr><td>第一块神祇板块</td><td>四块神祇板块之一</td><td class="n">0</td></tr>
+      <tr><td>第二块神祇板块</td><td>四块神祇板块之一</td><td class="n">1</td></tr>
+      <tr><td>第三块神祇板块</td><td>四块神祇板块之一</td><td class="n">2</td></tr>
+      <tr><td>第四块神祇板块（最上）</td><td>四块神祇板块之一</td><td class="n">3</td></tr>
+    </tbody>
+  </table>
+  <div class="tn">
+    <span class="label">译者注</span>
+    规则书后面提到的「第一格 / 第三格 / 第四格」都只数<b>神祇板块</b>，不把最下面那张图阿萨·德·达南卡算在内：第一格＝最下面的神祇板块，第四格＝最上面那块。全展示区共 5 格（1 张卡 + 4 块板块）。
+  </div>
+  <div class="side">
+    <span class="label">记忆要点</span>
+    位置越高的板块信徒越多，但要用崇拜标记换。崇拜标记的主要来源是土丘格、兑换被击败的敌方单位、以及选择图阿萨·德·达南卡。
+  </div>
+
+  <h3 id="s62">6.2 升级板块</h3>
+  <p>如果你选择的神祇板块位于展示区<b>最上面两格</b>之一，取一枚自己的玩家标记，放在该板块上与它在展示区位置对应的升级圈上。</p>
+  <p>如果该位置已经有你的升级标记，就不再放。每块神祇板块<b>最多升级两次</b>：一次是你第一次在<b>第四格（最上格）</b>选择它时，另一次是你第一次在<b>第三格</b>选择它时。</p>
+  <div class="example">
+    <span class="label">示例</span>
+    康纳（白）付 2 枚崇拜标记，选择展示区第三块神祇板块波安德（Bóand）。因为板块位于第三格，他可以升级它，把升级标记放到对应位置，本次共放置 4 名信徒（该展示位 3 名 + 升级 1 名）。<br>
+    诺拉（黑）付 1 枚崇拜标记，选择第二块神祇板块埃里乌（Ériu）。她此前已在两个回合中升级过这块板块，因此本次共放置 6 名信徒（该展示位 3 名 + 两次升级共 3 名）。
+  </div>
+  <div class="tn">
+    <span class="label">译者注</span>
+    信徒数量 = 所选展示位印刷的数值 + 该板块上已有的升级数值，合计落在 <b>2–6 名</b>之间。原书两个示例的「展示位」数值都写作 3，但两者位置不同；具体数值印在版图展示区与板块的升级区上，请以实物为准。按两例反推，第三格升级为 +1、两次升级合计 +3（即第四格升级为 +2），此推导仅供对照，仍以实物印刷为准。
+  </div>
+
+  <h3 id="s63">6.3 扩张</h3>
+  <p>选择一个<b>起点格</b>与一个<b>目标格</b>。起点必须含有一个或多个你的信徒。目标<b>不能</b>含有任何一方的信徒，也<b>不能</b>含有敌方要塞标记；<b>可以</b>含有敌方单位。</p>
+  <p>起点与目标之间的最大距离取决于你选的板块或卡：</p>
+  <ul>
+    <li><b>图阿萨·德·达南</b>：1 格。</li>
+    <li><b>神祇板块</b>：1 至 5 格，具体见第 7 节。</li>
+  </ul>
+  <p>从自己的供应区取出对应数量的信徒放到目标格：</p>
+  <ul>
+    <li>选图阿萨·德·达南卡：取 <b>1</b> 名信徒。</li>
+    <li>选神祇板块：取「所选展示位数值 + 该板块上已有升级数值」之和名信徒，即 <b>2–6</b> 名。</li>
+  </ul>
+  <div class="side imp">
+    <span class="label">注意</span>
+    不要把起点格或版图上任何其他格子的信徒拿起或移动。扩张只从供应区取新信徒。
+  </div>
+  <figure>
+    <img src="Moytura_Rules_images/page_07.jpg" alt="扩张示例：起点、目标与可选格">
+    <figcaption>原书第 7 页：扩张示例（勾号＝可放，叉号＝不可放）与两位玩家的选板块示例</figcaption>
+  </figure>
+
+  <h3 id="s64">6.4 解决冲突</h3>
+  <p>如果你扩张进入的格子里有一个或多个敌方单位，就必须解决冲突：从该格移除<b>你 1 名信徒与 1 个敌方单位</b>，重复此过程，直到你的信徒或敌方的单位全部被移除为止。</p>
+  <p>冲突发生<b>在你的回合</b>：把被移除的敌方单位放进你面前的个人供应区，之后可以兑换成崇拜标记（见 6.5）。</p>
+  <p>冲突发生<b>在敌方回合</b>：把被移除的敌方单位放回公共供应区，<b>不</b>归任何玩家。</p>
+  <p>被移除的信徒一律放回自己所属玩家的供应区。</p>
+  <div class="example">
+    <span class="label">示例</span>
+    布莱恩放置 4 名信徒扩张进一格，该格内有 2 个敌方单位，于是爆发冲突：移除 2 名信徒与 2 个敌方单位，剩下 2 名信徒留在该格。被移除的信徒回到布莱恩的供应区；因为冲突发生在他的回合，被移除的敌方单位放到他面前归他所有。
+  </div>
+  <figure>
+    <img src="Moytura_Rules_images/page_08.jpg" alt="冲突结算示例">
+    <figcaption>原书第 8 页：冲突结算与认领敌方单位的示例</figcaption>
+  </figure>
+
+  <h3 id="s65">6.5 认领崇拜标记</h3>
+  <p>认领崇拜标记即把它放进你的个人供应区。一个回合内可以认领多枚，个人供应区的数量不设上限。共有三种认领方式：</p>
+  <ul>
+    <li><b>土丘格</b>：如果你扩张进入的土丘格上有崇拜标记，拿走它。但若该格内的信徒在「解决冲突」步骤中<b>全部被移除</b>，则不能拿。</li>
+    <li><b>击败敌人</b>：个人供应区累计有 3 个被击败的敌方单位（氏族不限、可混搭）时，把这 3 个单位放回公共供应区，从公共供应区认领 1 枚崇拜标记。</li>
+    <li><b>图阿萨·德·达南</b>：如果你选择的是图阿萨·德·达南卡，从公共供应区认领 1 枚崇拜标记。</li>
+  </ul>
+
+  <h3 id="s66">6.6 重置神祇展示区</h3>
+  <p>若你选的是<b>神祇板块</b>：把展示区中位于该板块<b>上方</b>的所有板块向下滑一格，再把你选的这块放到<b>第四格（最上格）</b>。</p>
+  <p>若你选的是<b>图阿萨·德·达南卡</b>：把<b>第一格（最下格）</b>的神祇板块取出放到第四格（最上格），其余三块向下滑一格。</p>
+  <div class="side">
+    <span class="label">提示</span>
+    板块被选走后一定要重置，否则「第三格 / 第四格」的升级条件与价格都会算错。升级标记<b>留在板块上</b>，不随重置移动，且一直归放置它的玩家所有。
+  </div>
+</section>
+
+<section class="sec" id="s7">
+  <h2><span class="num">07</span>四位神祇</h2>
+  <p class="lead">四位神祇的差别在于扩张距离与附带能力。距离一律指起点到目标的最大格数；「途经格」可以有任何一方的信徒或敌方单位，不影响扩张。</p>
+
+  <h3>埃里乌 Ériu，土地之神</h3>
+  <p>向<b>距起点 2 格以内</b>的目标扩张。中间那一格可以有敌方单位或对手的信徒。</p>
+
+  <h3>波安德 Bóand，水之神</h3>
+  <p>向<b>距起点 5 格以内</b>的目标扩张。目标、起点以及所有途经格必须<b>都临同一片水域</b>（海或某一个湖）。途经格可以有敌方单位或对手的信徒。</p>
+  <div class="side">
+    <span class="label">操作技巧</span>
+    沿着每个格子的海岸线边缘数格子最不容易出错。
+  </div>
+
+  <h3>莫里甘 Morrigan，战争之神</h3>
+  <p>向<b>与起点相邻</b>的目标扩张。扩张之后，你可以立即击败目标格内或与目标相邻的格内共 <b>1–2 个</b>敌方单位，组合方式随意。若这一步把目标格内的敌方单位<b>全部</b>清除，则跳过「解决冲突」步骤。</p>
+  <p>被击败的敌方单位放进你面前的个人供应区。</p>
+
+  <h3>达格达 Dagda，创造之神</h3>
+  <p>你可以<b>扩张两次</b>。每次的目标都必须与自己的起点相邻，但两个起点<b>不必</b>彼此相邻。第一次扩张的目标<b>不能</b>作为第二次扩张的起点（两者不能接力）。新信徒可自由分配到这两个目标格。</p>
+  <figure>
+    <img src="Moytura_Rules_images/page_09.jpg" alt="四位神祇的板块插画">
+    <figcaption>原书第 9 页：四位神祇与各自的扩张距离（1–5 格）</figcaption>
+  </figure>
+  <table>
+    <thead><tr><th>神祇</th><th>领域</th><th>距离</th><th>额外能力</th></tr></thead>
+    <tbody>
+      <tr><td>埃里乌 Ériu</td><td>土地</td><td class="n">2 格</td><td>无（途经格可被占据）</td></tr>
+      <tr><td>波安德 Bóand</td><td>水</td><td class="n">5 格</td><td>起点、目标与途经格须临同一片水域</td></tr>
+      <tr><td>莫里甘 Morrigan</td><td>战争</td><td class="n">相邻</td><td>扩张后额外击败目标或邻格 1–2 个敌方单位</td></tr>
+      <tr><td>达格达 Dagda</td><td>创造</td><td class="n">相邻 ×2</td><td>可扩张两次，信徒自由分配</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="sec" id="s8">
+  <h2><span class="num">08</span>敌方回合</h2>
+  <p class="lead">敌方回合按顺序执行四步：① 翻开一张敌方卡 → ② 找出该氏族最大的连通群体 → ③ 扩张该群体 → ④ 解决冲突。</p>
+
+  <h3>8.1 翻开敌方卡</h3>
+  <p>翻开当前时代敌方牌堆最上面一张，正面朝上放进敌方弃牌区，按卡面上的图标执行（具体见 8.3）。本节规则只涵盖<b>弗摩尔人</b>；特殊敌方氏族的规则见第 12 节。</p>
+
+  <h3>8.2 找出该氏族最大的连通群体</h3>
+  <p>找出「含至少一个该氏族敌方单位」的<b>最大连通格群</b>。<b>不要求</b>格子之间有小径相连（相邻即可）。这个最大群体才在下一步扩张，<b>较小</b>的群体不扩张。</p>
+  <p>若有多个同样大的最大群体，选其中<b>单位总数最多</b>的那个。仍然并列时，这些最大群体依次各自扩张一次，先后顺序不影响结果（见 8.3 末的注意事项）。</p>
+
+  <h3>8.3 扩张该群体</h3>
+  <p>从公共供应区取<b>1 个或 2 个</b>敌方单位（视翻开的卡而定），放到每个<b>同时满足以下三项</b>的格子上：</p>
+  <ol>
+    <li>该格与最大群体中的<b>一个或多个</b>格子<b>直接相邻</b>。</li>
+    <li>该格与最大群体中的<b>一个或多个</b>格子<b>有小径相连</b>。</li>
+    <li>该格<b>尚未</b>被任何氏族的敌方单位占据。</li>
+  </ol>
+  <p>敌方单位进入新格的先后顺序不影响结果。</p>
+  <div class="side">
+    <span class="label">操作技巧</span>
+    先在每个将要扩张的格子里放一枚指示物标记，再统一替换成敌方单位。这样可以避免中途改变最大群体的边界，多放敌方单位。
+  </div>
+  <h4>无法扩张时</h4>
+  <p>少数情况下被翻开的氏族可能无法扩张，例如版图上已无该族单位，或已无可扩张的格子。此时把该氏族的 <b>2 个</b>敌方单位放到其要塞标记所在格，然后<b>结束</b>敌方回合：不按卡面结算，也不进行解决冲突步骤。</p>
+
+  <h3>8.4 解决冲突</h3>
+  <p>若任何含有玩家信徒的格子里有敌方单位，按 6.4 的规则解决冲突，先后顺序不影响结果。</p>
+  <div class="side imp">
+    <span class="label">切记</span>
+    只有<b>自己回合</b>击败的敌方单位才归你；敌方回合中击败的单位一律回公共供应区。
+  </div>
+  <div class="example">
+    <span class="label">示例</span>
+    翻开一张青绿色、强度 2 的弗摩尔卡。青绿弗摩尔人有两个同样大的最大群体（控制的格子数相同），但北面那个群体里的单位更多，因此只有它扩张：它扩张进三个有小径相连的格子，但<b>不</b>进入北面第四个格子，因为那里已有其他氏族的敌方单位。随后解决与黑方玩家的冲突：被移除的信徒回到该玩家处，被移除的弗摩尔单位回到供应区（玩家不收取）。
+  </div>
+  <figure>
+    <img src="Moytura_Rules_images/page_11.jpg" alt="敌方回合扩张示例">
+    <figcaption>原书第 11 页：最大群体的判定与扩张示例</figcaption>
+  </figure>
+</section>
+
+<section class="sec" id="s9">
+  <h2><span class="num">09</span>时代末计分</h2>
+  <p class="lead">当牌堆中最后（第 5）张敌方卡被翻开并结算完毕，时代结束，此时进行全部计分。</p>
+  <p>计分时把三个敌方氏族视为<b>单一第三派系</b>，用红色分数标记记录其总分；两位玩家用各自颜色的玩家标记记录。</p>
+  <p>逐个检查 <b>11 个地区</b>（建议在每个地区先放一枚指示物标记，计完就移除）。对每个地区，按白、黑、敌方三个派系在该地区<b>所有格子内的单位总数</b>排名。敌方<b>要塞标记不计</b>为单位。</p>
+
+  <h4>排名与得分</h4>
+  <ul>
+    <li>单位数最多与第二多的派系，各得该地区标明的分数。</li>
+    <li>若某地区<b>只有一方</b>在场，它仍然只得<b>第一名</b>的分数。</li>
+    <li><b>并列第一</b>：把第一名与第二名的分数相加，由并列各方<b>均分</b>（向下取整），此时<b>不再</b>颁发第二名。</li>
+    <li><b>并列第二</b>：由并列各方均分第二名的分数（向下取整）。</li>
+  </ul>
+
+  <h4>要塞加成</h4>
+  <p>每个含有<b>敌方要塞</b>的地区，玩家若在该地区<b>占据多数</b>（非并列）额外得 <b>2 分</b>；若并列，则<b>不加</b>分。敌方派系<b>不会</b>因为控制要塞而得分。</p>
+
+  <div class="example">
+    <span class="label">示例</span>
+    含有要塞的「6 | 3」绿色地区：Ciara（黑方）有 4 名信徒，敌方有 3 个单位。Ciara 得 8 分（第一名 6 分 + 在红色弗摩尔要塞地区占多数 2 分），敌方得 3 分。<br>
+    「4 | 2」绿色地区：Ciara 有 2 名信徒，敌方有 2 个单位，两者并列第一，各得 3 分（4+2=6，双方均分）。<br>
+    「3 | 1」绿色地区：Cillian（白方）有 2 名信徒，Ciara 有 1 名，Cillian 得 3 分，Ciara 得 1 分。
+  </div>
+
+  <h4>计分情形速查</h4>
+  <table>
+    <thead><tr><th>情形</th><th>处理方式</th><th>示例</th></tr></thead>
+    <tbody>
+      <tr><td>正常排名</td><td>第一名得第一项分，第二名得第二项分</td><td>「6 | 3」地区：6 分与 3 分</td></tr>
+      <tr><td>只有一方在场</td><td>只拿第一名分数，第二名作废</td><td>「3 | 1」地区：仍只得 3 分</td></tr>
+      <tr><td>并列第一</td><td>第一名 + 第二名分数合并，并列各方均分（向下取整），不再颁发第二名</td><td>「4 | 2」地区：6 ÷ 2 = 各 3 分</td></tr>
+      <tr><td>并列第二</td><td>第二名分数由并列各方均分（向下取整）</td><td>「6 | 3」地区：3 ÷ 2 = 各 1 分</td></tr>
+      <tr><td>要塞奖励</td><td>玩家在该地区占多数（非并列）额外 +2</td><td>6 + 2 = 8 分</td></tr>
+      <tr><td>要塞区并列</td><td>不加分；敌方控制要塞也不加分</td><td>—</td></tr>
+    </tbody>
+  </table>
+  <figure>
+    <img src="Moytura_Rules_images/page_12.jpg" alt="时代末计分示例">
+    <figcaption>原书第 12 页：三个地区的计分示例</figcaption>
+  </figure>
+  <div class="side">
+    <span class="label">计分顺序</span>
+    11 个地区逐个数完再进入下一时代。第一时代计分后开始第二时代；第二时代计分后进入游戏结束。
+  </div>
+</section>
+
+<section class="sec" id="s10">
+  <h2><span class="num">10</span>游戏结束</h2>
+  <p>第二时代计分完毕，游戏结束，<b>分数最高</b>的派系获胜。</p>
+  <ul>
+    <li>若平手涉及<b>敌方派系</b>，<b>敌方获胜</b>。</li>
+    <li>若两位玩家平手，比较各自剩余的<b>崇拜标记</b>数量，多者获胜。</li>
+    <li>若仍然平手，两位玩家<b>共享胜利</b>。</li>
+  </ul>
+  <div class="side imp">
+    <span class="label">罕见情形</span>
+    若某位玩家版图上再也<b>没有信徒</b>，另一位玩家<b>立即获胜</b>，不论当前分数。
+  </div>
+</section>
+
+<section class="sec" id="s11">
+  <h2><span class="num">11</span>追加规则：替代起始位置</h2>
+  <p>这套规则让玩家与敌方都可以使用替代的起始位置。</p>
+  <ol>
+    <li>准备阶段，从地图卡上的 <b>5 种标准设置</b>中选一种（注意每张卡都是双面）。其余地图卡放回盒中。</li>
+    <li>把敌方要塞标记放进标示的格子；按所选氏族的准备规则摆放初始敌方单位（见第 12 节各氏族）。</li>
+    <li>玩家按以下顺序<b>轮抽</b>四个标示的起始格：<b>白方选 1 格 → 黑方从剩下的格里选 2 格 → 白方拿最后 1 格</b>。</li>
+    <li>双方在各自的两个起始格各放 <b>2 名</b>信徒。</li>
+    <li>每个<b>无人占据的土丘格</b>放 1 枚崇拜标记。</li>
+  </ol>
+  <p>若某个分数标记到达 <b>50 分</b>，把它留在 50 格，另取一枚放到 0 格，之后的得分由这第二枚继续推进。</p>
+  <p>第一时代计分后开始第二时代；第二时代计分后进入第 10 节的游戏结束流程。</p>
+  <div class="tn">
+    <span class="label">译者注</span>
+    新手地图卡已印定双方起始位置，无需轮抽；轮抽只用于 5 种标准设置。另外，本节的替代起始位置规则是使用<b>特殊敌方氏族</b>（第 12 节）的<b>前置条件</b>。
+  </div>
+</section>
+
+<section class="sec" id="s12">
+  <h2><span class="num">12</span>特殊敌方氏族</h2>
+  <p class="lead">以下规则让你使用特殊的敌方氏族。这些规则<b>必须</b>与第 11 节的替代起始位置规则同时使用。</p>
+  <p>建议第一次先用<b>1 个特殊氏族 + 2 个弗摩尔氏族</b>；熟练后可改用 2 个甚至 3 个特殊氏族。无论怎样组合，场上<b>永远正好是 3 个氏族</b>。</p>
+  <p>准备时，找出所选氏族的敌方卡与要塞标记，并把对应单位整局翻到该氏族面朝上；其余敌方配件放回盒中。</p>
+  <div class="side">
+    <span class="label">提示</span>
+    你也可以用要塞标记来随机决定使用哪些特殊氏族，以及它们从哪一格开始。别忘了<b>奥伊利菲什必须从临海的格子起步</b>。
+  </div>
+  <div class="side imp">
+    <span class="label">开局前务必做一次</span>
+    强烈建议在准备阶段把场上<b>12 张</b>敌方卡都过一遍，弄清两个 5 张抽牌堆可能由哪些卡组成。敌方回合翻卡时把它们摊开排列，方便推算抽牌堆里还剩什么。
+  </div>
+
+  <h3 id="s121">12.1 埃伦·特雷亨德 Ellén Trechend（三头兽）</h3>
+  <p><b>准备</b>：要塞格放 2 个本单位，与要塞经小径相连的每个相邻格放 1 个。</p>
+  <p><b>规则</b>：翻到<b>单图标</b>卡时正常扩张。翻到<b>双图标</b>卡时，在与最大群体<b>相邻</b>（不只是有小径相连）、且<b>无任何敌方单位</b>的每个格子里各放 1 个埃伦·特雷亨德单位。其余一切按标准规则处理。</p>
+  <div class="side">
+    <span class="label">原书旁注</span>
+    图示说明：最大群体向每一个相邻格扩张，但已被弗摩尔单位占据的格子除外。
+  </div>
+
+  <h3 id="s122">12.2 弗摩尔人 Fomorians</h3>
+  <p><b>准备</b>：要塞格放 2 个同色弗摩尔单位，与要塞经小径相连的每个相邻格放 1 个。</p>
+  <p><b>规则</b>：完全按第 8 节的标准敌方回合规则执行。</p>
+
+  <h3 id="s123">12.3 报丧女妖 Banshees</h3>
+  <p><b>准备</b>：要塞格放 <b>3 个</b>报丧女妖单位。</p>
+  <p><b>规则</b>：每张报丧女妖卡都画出地图上的一个区块。抽到时，在标示的每个格子里各放 1 个本单位——<b>即使该格已被其他敌方氏族占据</b>。两个敌方氏族可以共存。（其他敌方氏族仍按正常扩张规则，<b>不能</b>扩张进已有报丧女妖单位的格子。）其余一切按标准规则处理。</p>
+  <div class="side">
+    <span class="label">注意</span>
+    卡面标示的所有格子都是<b>土丘格</b>，且每个土丘格在四张卡中<b>只出现一次</b>。
+  </div>
+
+  <h3 id="s124">12.4 奥伊利菲什 Oilliphéist（海蛇）</h3>
+  <p><b>准备</b>：要塞必须放在<b>临海</b>（环绕爱尔兰的水域）的格子上。要塞格放 2 个单位，经<b>海路</b>相连的每个相邻格放 1 个。</p>
+  <p><b>规则</b>：翻到<b>单图标</b>卡时，找出奥伊利菲什单位的最大群体，在与该群体相邻且<b>经海路相连</b>的每个格子里各放 1 个单位。若该格已有敌方单位（本族或其他氏族），<b>跳过</b>此格，沿海岸线把新单位放到下一个没有敌方单位的空格。</p>
+  <ul>
+    <li><b>双图标</b>卡：把上述过程执行 <b>2 次</b>。</li>
+    <li><b>三图标</b>卡：把上述过程执行 <b>3 次</b>。</li>
+  </ul>
+  <p>在<b>所有</b>新的奥伊利菲什单位放完之后，才解决冲突。其余一切按标准规则处理。</p>
+  <figure>
+    <img src="Moytura_Rules_images/page_15.jpg" alt="报丧女妖与奥伊利菲什">
+    <figcaption>原书第 15 页：报丧女妖的卡面区块与奥伊利菲什的海路扩张示例</figcaption>
+  </figure>
+</section>
+
+<section class="sec" id="s13">
+  <h2><span class="num">13</span>玛格梅尔扩展</h2>
+  <p class="lead">本扩展需另行购买，可直接在官方商店 <b>www.BitewingGames.com</b> 购买。图阿萨·德·达南的氏族为翡翠岛的主导权厮杀，众神已经注意到这一切，于是送来更强的力量……以及更强的敌人。</p>
+  <p>氏族之争不再只为凡间王国，也为了 <b>玛格梅尔</b>（Mag Mell）的原野——最勇武强大者将在那里与众神同住，获得永恆的安宁与喜乐。响应荣耀的召唤，去夺取你的王冠吧，族长，无论此世还是彼世。</p>
+
+  <h3>13.1 扩展配件</h3>
+  <table>
+    <thead><tr><th>配件</th><th>数量</th><th>说明</th></tr></thead>
+    <tbody>
+      <tr><td>地图卡</td><td class="n">2 张</td><td>双面，提供 4 种新地图设置</td></tr>
+      <tr><td>玩家帮助卡</td><td class="n">2 张</td><td></td></tr>
+      <tr><td>神祇板块</td><td class="n">1 块</td><td>卢格（Lugh），诡计之神</td></tr>
+      <tr><td>敌方要塞标记</td><td class="n">3 个</td><td></td></tr>
+      <tr><td>敌方卡</td><td class="n">12 张</td><td>每个新氏族 4 张</td></tr>
+      <tr><td>营地标记</td><td class="n">10 个</td><td>巴洛尔之军用</td></tr>
+      <tr><td>传送门标记</td><td class="n">10 个</td><td>埃斯·西用</td></tr>
+      <tr><td>灵魂标记</td><td class="n">10 个</td><td>巴纳纳赫用</td></tr>
+      <tr><td>敌方单位</td><td class="n">60 个</td><td>每个新氏族 20 个</td></tr>
+    </tbody>
+  </table>
+  <p>营地、传送门、灵魂标记与敌方单位<b>不设数量上限</b>，用尽时请找合适的替代物。</p>
+  <div class="side imp">
+    <span class="label">特殊标记</span>
+    新氏族的标记与敌方单位、要塞标记<b>不同</b>：它们<b>不能</b>通过冲突、莫里甘的能力或任何其他方式被移除。
+  </div>
+
+  <h3>13.2 新起始位置与新神祇</h3>
+  <p>扩展提供 <b>4 种新地图设置</b>，准备时可用它们替代基础游戏的地图卡。</p>
+  <p>扩展还提供一位新神祇，可替代基础游戏四位神祇中的一位。第一次游戏时，建议用他替换 <b>达格达</b>。</p>
+
+  <h4>卢格 Lugh，诡计之神</h4>
+  <p>向与起点<b>相邻</b>的目标扩张。扩张之后，在版图上<b>任意</b>选一格，把该格内的 <b>1 个</b>敌方单位移到与它相邻的一个空格。</p>
+  <p>卢格的升级方式不同：<b>不给额外信徒</b>，而是解锁额外能力。</p>
+  <ul>
+    <li>拥有<b>小升级</b>：可以把所选格内的<b>全部</b>敌方单位移出（不止 1 个）。</li>
+    <li>拥有<b>大升级</b>：可以把敌方单位（若同时拥有小升级，则为全部单位）移到<b>任意</b>相邻空格。</li>
+  </ul>
+  <p>按落点结算：</p>
+  <ul>
+    <li>落点有自己的信徒：解决冲突，并<b>收取</b>被击败的敌方单位。</li>
+    <li>落点有对手的信徒：解决冲突，被击败的敌方单位与信徒<b>都</b>放回供应区，双方<b>都不</b>收取。</li>
+    <li>落点有其他敌方单位（同族或异族）：<b>共存</b>。</li>
+  </ul>
+  <div class="side imp">
+    <span class="label">限制</span>
+    不能把奥伊利菲什（海蛇）移到<b>非临海</b>的格子。不能移动信徒、要塞标记，也不能移动敌方标记（灵魂、营地、传送门）。
+  </div>
+  <div class="example">
+    <span class="label">示例</span>
+    Cillian（白）先扩张进一个相邻格，然后把 1 个弗摩尔单位移进 Ciara 所在的相邻格（该格已被占据，因为 Cillian 已把这块神祇板块为自己做过部分升级），由此触发 Ciara 与该弗摩尔单位之间的冲突。若该板块对 Cillian 已完全升级，他可以一次把<b>两个</b>弗摩尔单位都移进这一格。
+  </div>
+  <figure>
+    <img src="Moytura_Rules_images/page_17.jpg" alt="卢格的规则与示例">
+    <figcaption>原书第 17 页：卢格的扩张与移动示例</figcaption>
+  </figure>
+
+  <h3>13.3 新敌方氏族</h3>
+  <p>扩展提供三个特殊敌方氏族，准备流程按第 12 节执行。三者各自的标记用法如下。</p>
+
+  <h4>巴纳纳赫 Bánánach（战场幽魂）</h4>
+  <p><b>准备</b>：要塞格放 2 个单位，与要塞经小径相连的每个相邻格放 1 个。</p>
+  <ul>
+    <li><b>单图标</b>卡：正常扩张，但每个格子里放 <b>1 个单位 + 1 枚灵魂标记</b>。若该格已有灵魂标记，就不再放第二枚。</li>
+    <li><b>双图标</b>卡：正常扩张，但每个格子里放 <b>2 个单位</b>，<b>不放</b>灵魂标记。</li>
+  </ul>
+  <p>计分时，把<b>灵魂标记的数量</b>加到敌方单位数上，作为敌方派系在该地区的单位总数。其余一切按标准规则处理。</p>
+
+  <h4>巴洛尔之军 Balor's Army（弗摩尔人之王）</h4>
+  <p><b>准备</b>：要塞格放 2 个单位，与要塞经小径相连的每个相邻格放 1 个。</p>
+  <ul>
+    <li><b>单图标</b>卡：正常扩张。</li>
+    <li><b>双图标</b>卡：正常扩张，但每个格子里放 <b>2 个单位 + 1 枚营地标记</b>。若该格已有营地标记，就不再放第二枚。</li>
+  </ul>
+  <p>计分时，<b>任何派系</b>（玩家与敌方）每占据一个<b>含营地标记</b>的格子就得 <b>1 分</b>，无论该地区是否正常给他们分数。其余一切按标准规则处理。</p>
+
+  <h4>埃斯·西 Aos Sí（异界之民）</h4>
+  <p><b>准备</b>：要塞格放 2 个单位，与要塞经小径相连的每个相邻格放 1 个。并在被其单位占据的每个地区各放 1 枚<b>传送门标记</b>（放在地区内哪一格不限）。</p>
+  <ul>
+    <li><b>单图标</b>卡：正常扩张。然后给本次扩张进入、且尚无传送门标记的每个地区各放 1 枚传送门标记（地区内哪一格不限）。</li>
+    <li><b>双图标</b>卡：在<b>每个有传送门标记的地区</b>里，对每一个<b>没有敌方单位</b>的格子各放 1 个埃斯·西单位。（传送门在地区内的位置无关紧要：每个没有敌方单位的格子都得到 1 个单位。）</li>
+  </ul>
+  <p>其余一切按标准规则处理。</p>
+  <figure>
+    <img src="Moytura_Rules_images/page_19.jpg" alt="巴洛尔之军与埃斯·西">
+    <figcaption>原书第 19 页：巴洛尔之军的营地与埃斯·西的传送门示例</figcaption>
+  </figure>
+</section>
+
+<section class="sec" id="s14">
+  <h2><span class="num">14</span>单人／合作变体</h2>
+  <p class="lead">Moytura 设计为 2 人对战，但只需几处小改动，就能变成优秀的单人或合作体验。</p>
+
+  <h3>准备</h3>
+  <p>按正常流程准备，再按想要的难度做以下调整：</p>
+  <table>
+    <thead><tr><th>难度</th><th>调整</th></tr></thead>
+    <tbody>
+      <tr><td>新手</td><td>不做任何改动</td></tr>
+      <tr><td>标准</td><td>每个已有敌方单位的格子，额外放 <b>1 个同氏族</b>敌方单位</td></tr>
+      <tr><td>最高</td><td>每个已有敌方单位的格子，额外放 <b>2 个同氏族</b>敌方单位</td></tr>
+    </tbody>
+  </table>
+
+  <h3>进行游戏</h3>
+  <p>按正常规则进行，但有以下改动：</p>
+  <ul>
+    <li><b>计分时</b>：每个含有敌方要塞的地区，若<b>敌方派系</b>在该地区占多数，敌方额外得 <b>2 分</b>；并列则不加。也就是说，现在<b>任何</b>派系（玩家或敌方）都能在含敌方要塞的地区拿到这 2 分加成。</li>
+    <li><b>游戏结束时</b>：若敌方派系的分数比白方、黑方都<b>低</b>，单人玩家或合作玩家获胜。若敌方并列最低，或敌方分数高于白方或黑方，则<b>敌方获胜</b>。</li>
+  </ul>
+
+  <h3>单人操作两方</h3>
+  <p>你同时操作白方与黑方，按正常回合顺序行动。为方便追踪回合与轮次状态，各取 1 枚该色玩家标记放在面前（不要用供应区里的标记）。某一派系行动时，把它的玩家标记放在所选神祇板块或卡的<b>图案上</b>；本轮结束（白、黑、敌方三方都行动完毕）后，收回这两枚放在图案上的标记。</p>
+  <p>开局取 <b>2 枚</b>崇拜标记，之后获得的也全部放进一个<b>共享</b>供应区，白黑两方都可自由使用。小心：如果把崇拜标记全花在一方身上，另一方可能就跟不上计分节奏了。</p>
+  <p>被你击败并收取的敌方单位也放进同一个共享供应区，仍然按正常规则用 <b>3 个</b>被击败的敌方单位换 1 枚崇拜标记。记住：只收取<b>自己回合</b>击败的敌方单位，<b>敌方回合</b>击败的不算。</p>
+</section>
+
+<section class="sec" id="s15">
+  <h2><span class="num">15</span>制作名单</h2>
+  <div class="kv">
+    <div><b>设计</b>David Thompson &amp; Trevor Benjamin</div>
+    <div><b>美术</b>Harry Conway</div>
+    <div><b>版图插画</b>Alisha Giroux</div>
+    <div><b>平面设计</b>Brigette Indelicato</div>
+    <div><b>编辑</b>Scott Darrington</div>
+    <div><b>出版</b>Nick Murray &amp; Kyle Spackman</div>
+    <div><b>文化顾问</b>Nick Ferris</div>
+    <div><b>版权</b>©2026 Bitewing Games LLC / David Thompson &amp; Trevor Benjamin</div>
+  </div>
+  <p>官方订阅与更新：<b>bitewinggames.com/subscribe</b></p>
+</section>
+
+<footer>
+  本页为《莫伊图拉 Moytura》中文规则书，由英文原版规则书（Bitewing Games，2026）翻译整理，仅供学习与游戏辅助使用。原文版权归 Bitewing Games LLC 及设计师所有。<br>
+  术语对照：信徒 follower／敌方 enemy／崇拜标记 worship token／神祇板块 deity tile／神祇展示区 deity display／土丘格 mound space／要塞标记 stronghold marker／时代 era／地区 region／小径 path／指示物标记 indicator token／升级 upgrade／扩张 expand／冲突 conflict。
+</footer>
+
+</main>
+</div>
+</body>
+</html>
