@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ASHES: Blackout Protocol 中文规则书 · 灰烬：停电协议</title>
+<style>
+:root{
+  --g-900:#0d1014;
+  --g-800:#141a21;
+  --g-700:#1d252e;
+  --g-600:#2b3540;
+  --amber:#d9611f;
+  --amber-soft:#e08a4c;
+  --amber-pale:#f4cda6;
+  --paper:#faf8f5;
+  --paper-2:#f3efe9;
+  --ink:#1f2429;
+  --ink-soft:#4d565f;
+  --rule:#ddd6cc;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:#e8e4dd;
+  color:var(--ink);
+  font-family:"Noto Serif SC","Source Han Serif SC","Songti SC","SimSun",Georgia,"Times New Roman",serif;
+  font-size:16.5px;
+  line-height:1.9;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ---------- 顶栏 ---------- */
+.topbar{
+  position:sticky;top:0;z-index:60;
+  height:54px;
+  background:linear-gradient(180deg,#0b0e12,#141a21);
+  border-bottom:1px solid rgba(217,97,31,.55);
+}
+.topbar-inner{
+  max-width:1280px;margin:0 auto;height:100%;padding:0 28px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.brand{
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:14px;letter-spacing:.3em;color:var(--amber-pale);text-transform:uppercase;
+}
+.brand-sub{
+  margin-left:16px;padding-left:16px;
+  border-left:1px solid rgba(255,255,255,.16);
+  font-size:12px;letter-spacing:.14em;color:#8b95a1;
+  font-family:inherit;text-transform:none;
+}
+.topbar-meta{font-size:12px;letter-spacing:.22em;color:#8b95a1;}
+
+/* ---------- 首屏 ---------- */
+.hero{
+  background:
+    radial-gradient(900px 420px at 14% -12%, rgba(217,97,31,.32), transparent 70%),
+    linear-gradient(158deg,#0b0e12 0%,#1b232c 56%,#0b0e12 100%);
+  border-bottom:3px solid var(--amber);
+  color:#f2ece3;
+}
+.hero-inner{
+  max-width:1280px;margin:0 auto;
+  display:grid;grid-template-columns:1.12fr .88fr;gap:52px;
+  padding:54px 48px 50px;align-items:center;
+}
+.eyebrow{
+  margin:0 0 18px;font-size:11.5px;letter-spacing:.36em;text-transform:uppercase;
+  color:var(--amber-soft);
+}
+h1{
+  margin:0;font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(40px,5.4vw,66px);line-height:1.02;letter-spacing:.06em;
+  background:linear-gradient(180deg,#ffe6c8,#e08a4c 58%,#a34a12);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+.hero-cn{margin:16px 0 0;font-size:19px;letter-spacing:.14em;color:#efe3d4;}
+.hero-lead{margin:18px 0 0;max-width:46ch;font-size:15px;line-height:1.85;color:#c3cbd4;}
+.hero-meta{list-style:none;display:flex;flex-wrap:wrap;gap:8px;padding:0;margin:26px 0 0;}
+.hero-meta li{
+  font-size:12px;letter-spacing:.1em;color:#e3c19b;
+  border:1px solid rgba(217,97,31,.45);border-radius:2px;padding:4px 10px;
+}
+.hero-fig{margin:0;}
+.hero-fig img{
+  display:block;width:100%;height:auto;border-radius:3px;
+  border:1px solid rgba(217,97,31,.55);
+  box-shadow:0 18px 44px rgba(0,0,0,.5);
+}
+.hero-fig figcaption{
+  margin-top:10px;text-align:center;font-size:12px;letter-spacing:.14em;color:#9c9184;
+}
+
+/* ---------- 版式 ---------- */
+.layout{
+  max-width:1280px;margin:0 auto;
+  display:grid;grid-template-columns:276px minmax(0,1fr);
+  background:var(--paper);
+  box-shadow:0 0 70px rgba(20,25,32,.22);
+}
+
+/* ---------- 左侧目录 ---------- */
+.toc{
+  position:sticky;top:54px;align-self:start;
+  height:calc(100vh - 54px);overflow-y:auto;
+  background:
+    radial-gradient(500px 300px at 50% 0%, rgba(217,97,31,.26), transparent 70%),
+    linear-gradient(180deg,#10151a,#141a21 60%,#0b0e12);
+  border-right:1px solid rgba(217,97,31,.32);
+  padding:30px 18px 48px;
+}
+.toc-title{
+  margin:0 0 18px;padding:0 12px;
+  font-size:11.5px;letter-spacing:.34em;color:var(--amber-soft);text-transform:uppercase;
+}
+.toc-title::after{
+  content:"";display:block;margin-top:10px;height:1px;
+  background:linear-gradient(90deg,rgba(217,97,31,.7),transparent);
+}
+.toc nav{display:flex;flex-direction:column;gap:1px;}
+.toc a{
+  display:flex;gap:10px;align-items:baseline;
+  padding:6px 12px;text-decoration:none;
+  font-size:13.6px;letter-spacing:.05em;color:#a9b3be;
+  border-left:2px solid transparent;transition:.18s;
+}
+.toc a:hover{color:var(--amber-pale);background:rgba(217,97,31,.1);border-left-color:rgba(217,97,31,.6);}
+.toc a.active{color:#fff;background:rgba(217,97,31,.18);border-left-color:var(--amber);}
+.toc .no{
+  font-family:Georgia,serif;font-size:11px;color:#7d8792;min-width:19px;
+}
+.toc a.active .no{color:var(--amber-soft);}
+.toc-foot{
+  margin:26px 12px 0;padding-top:14px;
+  border-top:1px solid rgba(255,255,255,.09);
+  font-size:11.6px;line-height:1.75;color:#78828d;
+}
+
+/* ---------- 正文 ---------- */
+.doc{padding:46px 56px 30px;min-width:0;}
+.sec{margin:0 0 54px;scroll-margin-top:70px;}
+.sec > h2{
+  margin:0 0 18px;display:flex;align-items:baseline;gap:14px;
+  font-size:26px;letter-spacing:.1em;color:var(--g-800);
+  padding-bottom:12px;border-bottom:2px solid var(--rule);
+  position:relative;
+}
+.sec > h2::before{
+  content:"";position:absolute;left:0;bottom:-2px;width:64px;height:2px;background:var(--amber);
+}
+.sec > h2 .num{
+  font-family:Georgia,serif;font-size:13px;letter-spacing:.2em;
+  color:var(--amber);background:#f8ede2;border:1px solid rgba(217,97,31,.35);
+  border-radius:2px;padding:3px 8px;
+}
+.sec h3{
+  margin:26px 0 10px;font-size:17.5px;letter-spacing:.06em;color:var(--g-700);
+  padding-left:12px;border-left:3px solid var(--amber-soft);
+}
+.sec h4{margin:20px 0 8px;font-size:15.6px;color:var(--g-700);letter-spacing:.04em;}
+.sec p{margin:11px 0;}
+.sec > .lead{
+  font-size:16.6px;color:#333c45;line-height:1.9;
+  padding:2px 0 2px 16px;border-left:3px solid rgba(217,97,31,.3);
+  margin-bottom:20px;
+}
+.sec b,.sec strong{color:var(--g-800);}
+em{font-style:normal;color:#a34a12;font-weight:600;}
+
+/* 提示框 */
+.callout{
+  margin:20px 0;padding:14px 20px;
+  background:#fdf4ea;border:1px solid rgba(217,97,31,.28);border-left:3px solid var(--amber);
+  border-radius:0 4px 4px 0;font-size:15px;
+}
+.callout .label{
+  display:block;margin-bottom:4px;font-size:11px;letter-spacing:.22em;color:var(--amber);
+}
+.side{
+  margin:16px 0;padding:11px 16px;
+  background:var(--paper-2);border-radius:3px;
+  font-size:14.4px;color:#4f5862;
+}
+.side .label{display:block;margin-bottom:3px;font-size:11px;letter-spacing:.2em;color:#8a7a66;}
+
+/* 流程条 */
+.flow{
+  display:flex;flex-wrap:wrap;align-items:center;gap:10px;
+  margin:24px 0;padding:16px 18px;
+  background:var(--g-800);border-radius:4px;
+}
+.flow span{
+  font-size:13px;letter-spacing:.14em;color:var(--amber-pale);
+  border:1px solid rgba(217,97,31,.45);border-radius:2px;padding:5px 12px;
+}
+.flow i{font-style:normal;color:#78828d;font-size:12px;}
+
+/* 表格 */
+table{width:100%;border-collapse:collapse;margin:20px 0;font-size:14.5px;}
+th{
+  background:var(--g-800);color:var(--amber-pale);font-weight:400;
+  letter-spacing:.16em;font-size:12px;text-align:left;padding:10px 13px;
+}
+td{padding:9px 13px;border-bottom:1px solid #e8e0d5;vertical-align:top;color:#2b3742;}
+tbody tr:nth-child(even){background:#f7f2ea;}
+td.n{white-space:nowrap;color:#a34a12;font-family:Georgia,serif;}
+
+/* 列表 */
+ol.steps{list-style:none;padding:0;margin:16px 0;counter-reset:s;}
+ol.steps > li{
+  position:relative;padding:0 0 0 46px;margin:0 0 14px;line-height:1.85;
+}
+ol.steps > li::before{
+  counter-increment:s;content:counter(s);
+  position:absolute;left:0;top:.2em;
+  width:27px;height:27px;line-height:25px;text-align:center;
+  font-family:Georgia,serif;font-size:13px;
+  color:var(--g-800);background:#f6ece0;
+  border:1px solid rgba(217,97,31,.6);border-radius:50%;
+}
+ol.steps.alpha > li::before{content:counter(s,upper-alpha);}
+ul.plain{margin:12px 0;padding-left:1.2em;}
+ul.plain li{margin:.35em 0;}
+
+/* 动作块 */
+.act{
+  margin:20px 0;padding:18px 22px 20px;
+  background:#fffdf9;border:1px solid var(--rule);border-radius:5px;
+}
+.act > h4{
+  margin:0 0 10px;display:flex;align-items:center;gap:10px;
+  font-size:17px;color:var(--g-800);
+}
+.act > h4 .k{
+  font-size:10.5px;letter-spacing:.2em;color:var(--amber);
+  border:1px solid rgba(217,97,31,.45);border-radius:2px;padding:2px 6px;
+  font-weight:400;
+}
+
+/* 定义列表 */
+dl.defs{margin:16px 0;}
+dl.defs dt{
+  font-weight:600;color:var(--g-700);margin-top:14px;letter-spacing:.04em;
+  font-size:15.4px;
+  padding-left:10px;border-left:2px solid rgba(217,97,31,.45);
+}
+dl.defs dd{margin:3px 0 0 0;color:#2b3742;font-size:15px;}
+
+/* 图片 */
+figure{margin:28px 0;padding:10px;background:#fffdf9;border:1px solid var(--rule);border-radius:4px;
+  box-shadow:0 10px 28px rgba(20,25,32,.09);}
+figure img{display:block;width:100%;height:auto;border-radius:2px;}
+figcaption{
+  margin-top:10px;padding:9px 4px 2px;border-top:1px solid #f0e8db;
+  text-align:center;font-size:12.6px;letter-spacing:.1em;color:#7d7264;
+}
+
+/* 计分 */
+.score{list-style:none;padding:0;margin:20px 0;counter-reset:sc;}
+.score > li{
+  position:relative;padding:14px 18px 14px 62px;margin:0 0 10px;
+  background:#fffdf9;border:1px solid var(--rule);border-left:3px solid var(--amber);border-radius:0 4px 4px 0;
+}
+.score > li::before{
+  counter-increment:sc;content:counter(sc);
+  position:absolute;left:18px;top:14px;
+  font-family:Georgia,serif;font-size:22px;color:var(--amber);line-height:1;
+}
+.score > li b{display:block;font-size:15px;color:var(--g-800);letter-spacing:.08em;margin-bottom:2px;}
+
+/* 双栏 */
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin:18px 0;}
+.duo.three{grid-template-columns:repeat(3,1fr);}
+.card{
+  background:#fffdf9;border:1px solid var(--rule);border-radius:4px;padding:16px 20px;
+}
+.card h5{
+  margin:0 0 8px;font-size:14.5px;letter-spacing:.12em;color:var(--g-700);
+  padding-bottom:6px;border-bottom:1px solid #f0e8db;font-weight:600;
+}
+.card ul{margin:0;padding-left:1.15em;font-size:14.4px;}
+.card li{margin:.3em 0;}
+
+/* 制作名单 */
+.credits{margin:18px 0;font-size:14.6px;}
+.credits div{
+  display:grid;grid-template-columns:220px 1fr;gap:14px;
+  padding:9px 0;border-bottom:1px dotted #e0d8c8;
+}
+.credits dt,.credits .role{color:#7f7261;letter-spacing:.06em;font-size:13.6px;}
+.names{font-size:13.6px;line-height:1.85;color:#4c5763;letter-spacing:.02em;}
+
+/* 页脚 */
+.foot{
+  margin-top:26px;padding:26px 0 8px;border-top:1px solid var(--rule);
+  text-align:center;font-size:12.6px;letter-spacing:.12em;color:#7b8490;
+}
+.foot .mark{display:block;color:var(--amber);letter-spacing:.4em;font-size:11px;margin-bottom:10px;}
+
+/* ---------- 窄屏 ---------- */
+@media (max-width:980px){
+  .layout{grid-template-columns:1fr;}
+  .toc{
+    position:relative;top:0;height:auto;max-height:none;
+    border-right:none;border-bottom:1px solid rgba(217,97,31,.4);
+    padding:20px 18px 24px;
+  }
+  .toc nav{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:2px;}
+  .toc a{padding:7px 10px;font-size:13.4px;}
+  .toc-foot{display:none;}
+  .doc{padding:34px 22px 20px;}
+  .hero-inner{grid-template-columns:1fr;gap:28px;padding:36px 22px 34px;}
+  .hero-fig{order:-1;max-width:400px;}
+  .sec > h2{font-size:23px;}
+  .duo,.duo.three{grid-template-columns:1fr;}
+  .credits div{grid-template-columns:1fr;gap:2px;}
+  .topbar-meta{display:none;}
+  table{font-size:13.6px;}
+  th,td{padding:7px 9px;}
+}
+@media (max-width:520px){
+  body{font-size:15.6px;}
+  .hero-inner{padding:26px 16px;}
+  .doc{padding:26px 15px;}
+  .score > li{padding:12px 14px 12px 50px;}
+  .score > li::before{left:14px;font-size:19px;}
+}
+@media print{
+  .topbar,.toc{display:none;}
+  .layout{grid-template-columns:1fr;box-shadow:none;}
+  .hero{background:#fff;color:#000;}
+  body{background:#fff;}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <span class="brand">ASHES<span class="brand-sub">中文规则书</span></span>
+    <span class="topbar-meta">灰烬：停电协议</span>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <p class="eyebrow">Artificial Shelter &amp; Human Evacuation Sequence</p>
+      <h1>ASHES</h1>
+      <p class="hero-cn">《灰烬：停电协议》Blackout Protocol · 完整中文规则书</p>
+      <p class="hero-lead">1989 年的大核战把世界烧成废墟。你是一座地下殖民地的领导者：营救幸存者、建造避难所、为「凤凰计划」贡献科技——让生命重返地表。</p>
+      <ul class="hero-meta">
+        <li>原书 23 页全文译出</li>
+        <li>3 轮 · 2–4 人</li>
+        <li>含单人模式与全部附录</li>
+      </ul>
+    </div>
+    <figure class="hero-fig">
+      <img src="ASHES_Rules_images/page_01.jpg" alt="ASHES: Blackout Protocol 规则书封面：废土中的辐射标志与橙红火光">
+      <figcaption>原书封面 · PERRO LOKO GAMES</figcaption>
+    </figure>
+  </div>
+</section>
+
+<div class="layout">
+
+<aside class="toc">
+  <p class="toc-title">目录</p>
+  <nav>
+    <a href="#intro"><span class="no">01</span>简介</a>
+    <a href="#components"><span class="no">02</span>配件</a>
+    <a href="#setup"><span class="no">03</span>游戏设置</a>
+    <a href="#before"><span class="no">04</span>开始游戏前</a>
+    <a href="#concepts"><span class="no">05</span>通用概念</a>
+    <a href="#flow"><span class="no">06</span>游戏流程</a>
+    <a href="#round"><span class="no">07</span>一轮的结构</a>
+    <a href="#protocols"><span class="no">08</span>协议</a>
+    <a href="#main"><span class="no">09</span>主要行动</a>
+    <a href="#extra"><span class="no">10</span>额外行动</a>
+    <a href="#endround"><span class="no">11</span>轮次结束</a>
+    <a href="#endgame"><span class="no">12</span>游戏结束</a>
+    <a href="#solo"><span class="no">13</span>单人模式</a>
+    <a href="#apx1"><span class="no">14</span>附录 I 特殊角色</a>
+    <a href="#apx2"><span class="no">15</span>附录 II 殖民地升级</a>
+    <a href="#apx3"><span class="no">16</span>附录 III 计分板块</a>
+    <a href="#apx4"><span class="no">17</span>附录 IV 里程碑</a>
+    <a href="#apx5"><span class="no">18</span>附录 V 计分科技</a>
+    <a href="#apx6"><span class="no">19</span>附录 VI 通用图标</a>
+    <a href="#credits"><span class="no">20</span>制作名单</a>
+  </nav>
+  <p class="toc-foot">本页依原书顺序全文译出，<br>未增删任何规则。</p>
+</aside>
+
+<main class="doc">
+
+<!-- ================= 01 简介 ================= -->
+<section class="sec" id="intro">
+  <h2><span class="num">01</span>简介</h2>
+  <p class="lead">A.S.H.E.S.（Artificial Shelter &amp; Human Evacuation Sequence，人工避难所与人类撤离序列）——灰烬之中，凤凰必将重生。</p>
+  <p>经历了数十年的政治紧张，世界在 1989 年的大核战中崩塌。数日之内，城市化为尘土，天空烧成赤红。</p>
+  <p>废墟之间，人类组织起来求生，把民众引导进第一批地下避难所。新生的殖民地自地底深处不知疲倦地工作：营救幸存者、重建文明，并开发一个能让生命重返地表的计划——凤凰计划。</p>
+  <p>在《A.S.H.E.S.：停电协议》中，你领导一座殖民地完成这项使命。营救幸存者并把他们带到安全处，建造新的避难所，为凤凰计划的发展做出贡献，让人性重获希望。</p>
+</section>
+
+<!-- ================= 02 配件 ================= -->
+<section class="sec" id="components">
+  <h2><span class="num">02</span>配件</h2>
+
+  <h3>2.1 公共配件</h3>
+  <table>
+    <thead><tr><th style="width:38%">组件</th><th style="width:18%">数量</th><th>说明</th></tr></thead>
+    <tbody>
+      <tr><td>主版图</td><td class="n">1 块</td><td>双面；一面带辐射带，用于双人局与单人模式</td></tr>
+      <tr><td>场址板块</td><td class="n">12 块</td><td>放置于主版图中央</td></tr>
+      <tr><td>封锁场址板块</td><td class="n">5 块</td><td>仅三人局使用</td></tr>
+      <tr><td>区域板块</td><td class="n">29 块</td><td>分为四个等级（以颜色与底部标记区分）</td></tr>
+      <tr><td>封锁区域板块</td><td class="n">6 块</td><td>仅三人局使用</td></tr>
+      <tr><td>轮次标记</td><td class="n">1 个</td><td>放在主版图轮次轨第一格</td></tr>
+      <tr><td>抗辐射剂</td><td class="n">28 个</td><td>资源</td></tr>
+      <tr><td>数据</td><td class="n">24 个</td><td>资源</td></tr>
+      <tr><td>燃料</td><td class="n">32 个</td><td>资源</td></tr>
+      <tr><td>材料方块</td><td class="n">50 个</td><td>九种材料</td></tr>
+      <tr><td>活跃幸存者</td><td class="n">50 个</td><td>黄色</td></tr>
+      <tr><td>关键幸存者</td><td class="n">25 个</td><td>白色</td></tr>
+      <tr><td>任务卡</td><td class="n">64 张</td><td>正面朝上展示 4 张</td></tr>
+      <tr><td>避难所卡</td><td class="n">36 张</td><td>正面朝上展示 3 张</td></tr>
+      <tr><td>凤凰计划版图</td><td class="n">1 块</td><td>双面；一面用于双人局与单人模式</td></tr>
+      <tr><td>知识圆片</td><td class="n">3 个</td><td>放在知识轨起始位置</td></tr>
+      <tr><td>终局计分板块</td><td class="n">12 块</td><td>正反面不同，取决于放在凤凰计划版图左侧还是右侧</td></tr>
+      <tr><td>成就板块</td><td class="n">3 块</td><td>放在计分板块旁</td></tr>
+      <tr><td>里程碑</td><td class="n">6 块</td><td>每个成就板块旁放 1 块</td></tr>
+      <tr><td>生产技术</td><td class="n">14 块</td><td>随机放在凤凰计划 II 级各格</td></tr>
+      <tr><td>计分科技</td><td class="n">12 块</td><td>随机放在凤凰计划 I 级与 III 级各格</td></tr>
+      <tr><td>封锁科技</td><td class="n">6 块</td><td>仅三人局使用</td></tr>
+      <tr><td>起始生产技术</td><td class="n">6 块</td><td>与起始资源卡配对</td></tr>
+      <tr><td>起始资源卡</td><td class="n">5 张</td><td>设置时翻出「玩家人数 +1」张</td></tr>
+      <tr><td>布袋</td><td class="n">1 个</td><td>装全部幸存者</td></tr>
+      <tr><td>特殊角色卡</td><td class="n">12 张</td><td>每人 1 张</td></tr>
+      <tr><td>特殊科技</td><td class="n">6 块</td><td>由特殊角色授予</td></tr>
+      <tr><td>对手行动卡</td><td class="n">12 张</td><td>单人模式</td></tr>
+      <tr><td>对手难度卡</td><td class="n">3 张</td><td>单人模式</td></tr>
+    </tbody>
+  </table>
+
+  <h3>2.2 玩家配件（每色一套）</h3>
+  <table>
+    <thead><tr><th style="width:38%">组件</th><th style="width:18%">数量</th><th>说明</th></tr></thead>
+    <tbody>
+      <tr><td>殖民地板</td><td class="n">1 块</td><td>含材料金字塔、生产面板、计分区与三个协议提示</td></tr>
+      <tr><td>避难所圆片</td><td class="n">6 个</td><td>在殖民地板上每格叠 2 个</td></tr>
+      <tr><td>升级板块</td><td class="n">10 块</td><td>含 I 级与 II 级</td></tr>
+      <tr><td>圆片</td><td class="n">5 个</td><td>幸福轨 1 个、生产轨 3 个、回合顺序轨 1 个</td></tr>
+      <tr><td>撤离车</td><td class="n">2 辆</td><td>1 辆起始避难所，1 辆回合顺序轨</td></tr>
+      <tr><td>分数标记</td><td class="n">1 个</td><td>放在胜利分轨第 20 格</td></tr>
+      <tr><td>殖民地强度标记</td><td class="n">1 个</td><td>放在主版图强度树上</td></tr>
+      <tr><td>起始避难所卡</td><td class="n">1 张</td><td>放在幸福轨旁</td></tr>
+      <tr><td>玩家提示卡</td><td class="n">1 张</td><td>双面；停手时翻到停手面</td></tr>
+    </tbody>
+  </table>
+
+  <figure>
+    <img src="ASHES_Rules_images/page_02.jpg" alt="配件总览：上排为公共配件（场址板块、区域板块、计分科技、任务卡、避难所卡、成就板块、里程碑、生产技术等），下排为玩家配件（殖民地板、避难所圆片、升级板块、撤离车、分数标记等）">
+    <figcaption>原书第 2–3 页 · 2.1 公共配件与 2.2 玩家配件</figcaption>
+  </figure>
+</section>
+
+<!-- ================= 03 游戏设置 ================= -->
+<section class="sec" id="setup">
+  <h2><span class="num">03</span>游戏设置</h2>
+  <p class="lead">下图为三人局的设置示意。设置分两步：先完成公共设置，再各自完成玩家设置。</p>
+
+  <h3>3.1 公共设置</h3>
+  <ol class="steps">
+    <li>把主版图放在桌子中央，按人数选用正确的一面，并把轮次标记放在第一格。<br>三人局或四人局使用<b>不带辐射带</b>的一面；双人局或单人模式使用<b>带辐射带</b>的一面。</li>
+    <li>洗匀场址板块，按图示在中央版图的每个空格各放一块，剩余的退回盒中。</li>
+    <li>三人局时，在主版图图示的空格各放一块封锁场址板块。单人模式、双人局、四人局都不使用这些板块。</li>
+    <li>按等级（以颜色与底部标记区分）分开区域板块，分别洗匀，按等级把一块放到对应空格，<b>主面朝上</b>。剩余的退回盒中。<br>每块区域板块有两面：主面与副面。</li>
+    <li>三人局时，在图示的空格各放一块封锁区域板块。单人模式、双人局、四人局都不放这些板块。</li>
+    <li>把凤凰计划版图放在主版图旁，按人数选用正确的一面（版图上有标示知识轨起始格的示意图标）。<br>一面用于三人局或四人局，另一面用于双人局或单人模式。</li>
+    <li>三人局时，在图示的空格各放一块封锁科技。单人模式、双人局、四人局都不放封锁科技。</li>
+    <li>把三个知识圆片放在知识轨的起始位置。该位置以图标标示，分别对应双人局、三人局、四人局。</li>
+    <li>凤凰计划版图从左到右分为三个等级。洗匀计分科技，在 I 级与 III 级的每个空格各随机放一块；洗匀生产技术，在 II 级的每个空格各随机放一块。</li>
+    <li>洗匀 12 块终局计分板块，按图示在凤凰计划版图<b>每侧各随机放 3 块</b>，剩余退回盒中。<br>注意：终局计分板块有两面，取决于放在版图左侧还是右侧。</li>
+    <li>把每块成就板块放在凤凰计划版图左侧计分板块旁的对应位置。知识圆片图标的颜色必须与该行的颜色一致。按以下规则随机翻面：
+      <ul class="plain">
+        <li>双人局：所有成就板块都显示<b>一格</b>。</li>
+        <li>三人局：有两块成就板块显示<b>两格</b>。</li>
+        <li>四人局：所有成就板块都显示<b>两格</b>。</li>
+      </ul>
+    </li>
+    <li>按图示在每个成就板块旁放一块里程碑，剩余的退回盒中。</li>
+    <li>洗匀避难所卡，在主版图旁成背面朝下的牌堆，然后按图示翻出三张正面朝上。</li>
+    <li>洗匀任务卡成背面朝下的牌堆，按图示翻出四张正面朝上。</li>
+    <li>把全部燃料、数据、抗辐射剂与材料方块作为公共供应，放在所有玩家都能拿到的地方。</li>
+    <li>把活跃幸存者与关键幸存者放进布袋。每当需要取一名幸存者，就从袋中抽一个；每当弃掉一个，就放回袋中。</li>
+  </ol>
+
+  <h3>3.2 玩家设置</h3>
+  <p>取走你所选颜色的全部配件，按以下方式摆好。</p>
+  <p><b>在主版图上：</b></p>
+  <ul class="plain">
+    <li>把分数标记放在胜利分轨第 <b>20</b> 格。</li>
+    <li>把一个圆片放在 <b>+0 胜利分</b>格。</li>
+    <li>把殖民地强度标记放在图示的格子。</li>
+    <li>把一辆撤离车放在起始避难所。另一辆撤离车暂时放到一旁。</li>
+  </ul>
+  <p><b>在自己的游戏区：</b></p>
+  <ul class="plain">
+    <li>放好殖民地板。</li>
+    <li>在殖民地板每个位置叠放<b>两个</b>避难所圆片，图示的一面朝上。</li>
+    <li>按图示放好 10 块升级板块。</li>
+    <li>把剩下四个圆片这样放：一个放在幸福轨的 <b>3</b>，另外三个放在各条生产轨的第一格。</li>
+    <li>把一张玩家提示卡放在殖民地板旁。</li>
+    <li>按图示把起始避难所卡放在幸福轨旁。</li>
+  </ul>
+
+  <div class="callout">
+    <span class="label">特殊角色</span>
+    <p>第一次玩《ASHES》时，取背面带星号标记的特殊角色卡，洗匀后每人随机发一张，正面朝上放在自己的殖民地板旁。</p>
+    <p>之后的游戏中，洗匀全部特殊角色卡，每人发两张。每人从中选一张正面朝上放在殖民地板旁，另一张退回盒中。</p>
+  </div>
+
+  <p>洗匀起始资源卡，翻出比玩家人数<b>多一张</b>。再取起始生产技术，随机在每张卡旁放一块，组成「卡 + 科技」组合。例：三人局共有 4 个组合。</p>
+
+  <p><b>起始玩家</b>是最近一次用微波炉加热过东西的人。把其第二辆撤离车放在回合顺序轨第一格；其余玩家按座位顺时针顺序，依次把第二辆撤离车放到下一格。</p>
+  <p>按回合顺序轨上的位置，给第二、第三、第四位玩家分别发放 <b>1 / 2 / 3</b> 个数据。</p>
+  <p>三人局时，回合顺序轨最右侧的格子不使用。取未参战颜色的撤离车占住这些格子。</p>
+
+  <p>按回合顺序轨的<b>逆序</b>，每位玩家选择一个「起始资源卡 + 起始生产技术」组合：取得所示资源，把科技放进你选择的槽位，从袋中抽出所示数量的幸存者放在殖民地入口。</p>
+  <p>角色卡授予的特殊科技或幸存者也一并处理，然后把起始资源卡退回盒中。</p>
+
+  <figure>
+    <img src="ASHES_Rules_images/page_03.jpg" alt="三人局设置示意：主版图居中，场址板块与区域板块按等级铺好，凤凰计划版图在右侧，回合顺序轨上摆放撤离车">
+    <figcaption>原书第 4–5 页 · 三人局设置示意（3.1 与 3.2 全流程）</figcaption>
+  </figure>
+</section>
+
+<!-- ================= 04 开始游戏前 ================= -->
+<section class="sec" id="before">
+  <h2><span class="num">04</span>开始游戏前</h2>
+  <p class="lead">规则 5.1 与 5.3 解释了各种资源符号的含义。这些资源，连同下一节讲述的强度，是游戏中的主要资源。</p>
+
+  <dl class="defs">
+    <dt>绿色圆圈图标</dt>
+    <dd>表示你从公共供应获得所示数量的该资源，放进自己的供应区。例：从公共供应获得 2 个数据，放在自己的游戏区。</dd>
+    <dt>红色圆圈图标</dt>
+    <dd>表示你必须从自己的供应区支付所示数量的该资源，退回公共供应。例：从游戏区支付 1 个燃料，退回公共供应。</dd>
+  </dl>
+
+  <div class="side">
+    <span class="label">提示</span>
+    资源总量是有限的：一旦公共供应耗尽，就只能等别人把资源退回。
+  </div>
+</section>
+
+<!-- ================= 05 通用概念 ================= -->
+<section class="sec" id="concepts">
+  <h2><span class="num">05</span>通用概念</h2>
+
+  <h3>5.1 燃料、数据与抗辐射剂</h3>
+  <p>这三种是可以用标记表示的资源，加上 5.2 的殖民地强度，构成本作的主要资源。获得与支付都用上述绿圈／红圈图标表示。</p>
+
+  <h3>5.2 殖民地强度</h3>
+  <p>与前几种资源不同，殖民地强度不用标记表示，而是记录在主版图的<b>强度树</b>上，由你的殖民地强度标记指示当前强度。</p>
+  <ul class="plain">
+    <li>每获得 1 点强度，把殖民地强度标记在树上<b>向上</b>移动一格；数量显示在图标旁的绿圈内。向上移动时，在树上选择路径。</li>
+    <li>每支付 1 点强度，把标记在树上<b>向下</b>移动一格；数量显示在图标上的红圈内。向下移动时，在树上选择路径。</li>
+    <li>向上移动时，获得途中经过的每一格的奖励；向下移动时不获得任何奖励。</li>
+  </ul>
+  <p>例：Angela 在强度树上向上移动两格，获得一个塑料和一个金属。</p>
+  <div class="side">
+    <span class="label">禁止通行</span>
+    除非你拥有允许的特殊角色，否则不能走带禁止通行符号的粉色路径（见附录 I）。
+  </div>
+
+  <h3>5.3 材料</h3>
+  <p>殖民地板上有你的<b>材料金字塔</b>，共九个独立存储格，每格对应一种材料。材料图标表示你获得该种材料：从公共供应取一个材料方块，放进对应存储格。例：取一个材料方块放进塑料存储格。</p>
+  <p>带红色「×」的图标表示你必须支付该材料。例：从金属存储格退回一个方块到公共供应。</p>
+  <p>材料按位置分为 <b>I 级、II 级、III 级</b>，分别位于材料金字塔的下排、中排、上排。</p>
+  <p>开局时每个存储格只能放<b>一个</b>方块。若某格已满，就不能再获得该种材料。升级殖民地可以提高容量（见附录 II）。</p>
+  <p>如材料金字塔所示，你可以用紧下一级的<b>两种不同</b>材料制造一个更高级的材料（见 10.1.3）。</p>
+
+  <h3>5.4 胜利分</h3>
+  <p>下文统一把胜利分简称为 <b>VP</b>。</p>
+  <dl class="defs">
+    <dt>即时计分图标</dt>
+    <dd>立即结算：按图标所示格数，把分数标记在胜利分轨上前进。</dd>
+    <dt>扣分图标</dt>
+    <dd>立即把分数标记在胜利分轨上后退所示格数。</dd>
+    <dt>终局计分图标</dt>
+    <dd>在游戏结束时才结算。</dd>
+  </dl>
+  <p>你的分数在胜利分轨上<b>永远不会低于 0</b>。</p>
+  <p>分数标记跑完胜利分轨第一圈后，把圆片移到 <b>+100</b> 位置；跑完第二圈后，移到 <b>+200</b> 位置。</p>
+
+  <h3>5.5 幸福轨</h3>
+  <p>幸福轨表示殖民地的幸福水平，与停手协议时的收入相关（见 8.1.2）。</p>
+  <ul class="plain">
+    <li>每获得 1 点幸福，把圆片在幸福轨上<b>向上</b>移动一格。已到达最高幸福等级后，每有一格无法上移，就获得 <b>1 VP</b>。</li>
+    <li>每失去或支付 1 点幸福，把圆片在幸福轨上<b>向下</b>移动一格。已到达最低等级后，每有一格无法下移，就失去 <b>2 VP</b>。</li>
+  </ul>
+  <p>幸福轨的范围是 <b>0 到 9</b>，首尾两格都是有效位置。</p>
+
+  <h3>5.6 三人局中的封锁区</h3>
+  <p>三人局在设置完成后会放置封锁区域板块、封锁场址板块与封锁科技。<b>把封锁区视为不存在。</b></p>
+
+  <h3>5.7 配件上限</h3>
+  <p>本作中除幸存者外，所有配件都是<b>无限</b>的。万一某种配件供应耗尽，用其他物件代替即可。</p>
+  <p>袋中的幸存者耗尽时，7.1.4 与 10.2.1 分别规定了各自情况下的处理方式。</p>
+
+  <h3>5.8 强制行动与奖励</h3>
+  <p>你可以放弃任何获得的奖励，或放弃执行任何行动；放弃时不予结算。但你不能放弃支付资源、材料或幸福，也不能无视必需的前提条件。</p>
+
+  <h3>5.9 补牌</h3>
+  <p>任务卡与避难所卡运作方式相同：抽走或弃掉一张正面朝上的卡后，立即把剩余的卡<b>向右</b>推以填补空位，并从对应牌堆翻出一张新卡。</p>
+
+  <figure>
+    <img src="ASHES_Rules_images/page_04.jpg" alt="通用概念示意：胜利分轨、幸福轨、强度树、材料金字塔与资源图标说明">
+    <figcaption>原书第 6–7 页 · 4 开始游戏前与 5.1–5.3 资源、强度、材料</figcaption>
+  </figure>
+</section>
+
+<!-- ================= 06 游戏流程 ================= -->
+<section class="sec" id="flow">
+  <h2><span class="num">06</span>游戏流程</h2>
+  <p class="lead">一局《ASHES》进行 <b>3 轮</b>，随后进入游戏结束。得分最高的玩家获胜；平手时，回合顺序轨上位置最高的玩家获胜。</p>
+  <div class="flow">
+    <span>第 1 轮</span><i>→</i><span>第 2 轮</span><i>→</i><span>第 3 轮</span><i>→</i><span>终局计分</span>
+  </div>
+  <p>每一轮包含两个步骤：</p>
+  <ol class="steps">
+    <li><b>7.1 轮次准备</b></li>
+    <li><b>7.2 玩家回合</b></li>
+  </ol>
+</section>
+
+<!-- ================= 07 一轮的结构 ================= -->
+<section class="sec" id="round">
+  <h2><span class="num">07</span>一轮的结构</h2>
+
+  <h3>7.1 轮次准备</h3>
+  <p>按顺序执行以下步骤。<b>第一轮只执行 7.1.4「幸存者出现」。</b></p>
+
+  <h4>7.1.1 辐射（第一轮不执行）</h4>
+  <p>主版图分为 4 个区段：1、2、3、4，对应的辐射等级分别为 1、2、3、4。每个区段又分为若干区域。</p>
+  <ul class="plain">
+    <li>对所有<b>含有幸存者</b>的区域结算辐射。撤离车提供辐射防护：至少有一辆撤离车的区域跳过。</li>
+    <li>每个区域中，把数量等于其所在区段辐射等级的幸存者退回袋中。每位玩家失去等于退回袋中幸存者数量的幸福（见 5.5）。</li>
+    <li>每个区域内<b>先</b>移除活跃幸存者；只有在没有活跃幸存者时，才移除关键幸存者。</li>
+  </ul>
+  <p>例：某区域中有两名活跃幸存者与一名关键幸存者，移除那两名活跃幸存者，关键幸存者留在版图上。</p>
+
+  <h4>7.1.2 弃两张任务卡（第一轮不执行）</h4>
+  <p>弃掉右侧两张任务卡退回盒中，翻出两张新任务卡（见 5.9）。</p>
+
+  <h4>7.1.3 重置区域板块（第一轮<b>要</b>执行）</h4>
+  <p>把所有背面朝上的区域板块翻正，使主面可见。</p>
+
+  <h4>7.1.4 幸存者出现（每轮都执行）</h4>
+  <p>在<b>当前轮次数字</b>与<b>其上一个数字</b>所对应的区段的全部区域中执行此步骤：</p>
+  <table>
+    <thead><tr><th style="width:24%">轮次</th><th>出现幸存者的区段</th></tr></thead>
+    <tbody>
+      <tr><td>第 1 轮</td><td class="n">区段 1 与 2</td></tr>
+      <tr><td>第 2 轮</td><td class="n">区段 2 与 3</td></tr>
+      <tr><td>第 3 轮</td><td class="n">区段 3 与 4</td></tr>
+    </tbody>
+  </table>
+  <p>对每个标有布袋图标的区域，从袋中抽<b>两名</b>幸存者放在那里。</p>
+  <p>放置顺序：先从辐射等级最低的区段开始，自上而下在标有布袋图标的区域放置；一个区段放完，再进入下一个区段。万一袋中已无幸存者，剩余区域不再放置。</p>
+
+  <h3>7.2 玩家回合</h3>
+  <p>玩家按回合顺序轨所示的顺序轮流行动。轮到你时，若你此前尚未停手，就执行<b>一个协议</b>，以及任意数量的<b>额外行动</b>（见第 10 节）。</p>
+  <p>你的回合中，从以下三个协议中选一个执行：</p>
+  <div class="duo three">
+    <div class="card"><h5>8.1 停手</h5><p>结算回收、收入、计分与下轮顺序，然后本轮不再行动。</p></div>
+    <div class="card"><h5>8.2 移动车辆</h5><p>付 2 燃料移动撤离车，并激活目的地区域板块。</p></div>
+    <div class="card"><h5>8.3 激活幸存者</h5><p>把一个活跃幸存者放进激活区，取得科技与生产收益。</p></div>
+  </div>
+  <p>每个协议都印在你殖民地板的顶端。</p>
+
+  <figure>
+    <img src="ASHES_Rules_images/page_05.jpg" alt="胜利分轨、幸福轨、强度树与轮次准备步骤示意">
+    <figcaption>原书第 8–9 页 · 5.4 胜利分、5.5 幸福轨与 7.1 轮次准备</figcaption>
+  </figure>
+</section>
+
+<!-- ================= 08 协议 ================= -->
+<section class="sec" id="protocols">
+  <h2><span class="num">08</span>协议</h2>
+  <p class="lead">每个回合执行一个协议。三个协议分别是：停手、移动车辆、激活幸存者。</p>
+
+  <h3>8.1 停手</h3>
+  <p>把玩家提示卡翻到<b>停手面</b>，按上面列出的步骤执行。殖民地板上的蓝色连线同样是这个协议的提示。按顺序完成以下步骤后，把提示卡翻回。这是你本轮的<b>最后一个协议</b>：执行停手协议之后，本轮不能再执行任何行动（主要或额外）。</p>
+
+  <h4>8.1.1 回收幸存者</h4>
+  <p>为你希望从激活区回收的每一名幸存者支付 <b>1 个抗辐射剂</b>，把回收的幸存者放到殖民地入口。</p>
+  <p>每有一名<b>未</b>回收的幸存者，就把它退回袋中，并失去 <b>1 点幸福</b>（见 5.5）。</p>
+  <p>若殖民地入口没有空位、而你必须弃掉已经在那里的幸存者，每弃掉一名就失去 1 点幸福。</p>
+  <p>例：Elio 支付两个抗辐射剂回收两名幸存者。他决定不为第三名付费：把该幸存者退回袋中，并失去 1 点幸福。</p>
+
+  <h4>8.1.2 幸福轨收入</h4>
+  <p>要取得幸福轨收入，你必须在避难所卡上带收入标记的<b>净化舱</b>里放有幸存者（活跃或关键）。</p>
+  <p>收取那些既放有幸存者、等级又<b>等于或低于</b>你幸福轨上圆片位置的舱位收入。部分收入会改变圆片位置，因此要<b>自下而上</b>结算。</p>
+  <p>你总是可以取一项「1 名活跃幸存者」的收入：从袋中取一名活跃幸存者，放在殖民地入口。结算完这一项后，再结算其余收入。</p>
+  <p>例：Elio 自下而上收取收入。先取一名活跃幸存者放在殖民地入口（1）；然后把圆片上移两格幸福（2）。按圆片的新位置，他又取到另一项收入：取一个材料方块放进电路板存储格（3）。</p>
+
+  <h4>8.1.3 殖民地计分</h4>
+  <p>结算若干个计分区，数量不超过你的殖民地板与升级所允许的上限，具体选哪几个由你决定。</p>
+  <p>初始配置允许你结算<b>两个</b>计分区；通过殖民地升级可以提高可结算的区数（见附录 II）。</p>
+  <p>殖民地板上共有 <b>5 个计分区</b>：3 个避难所列计分区、1 个材料计分区、1 个幸存者计分区。</p>
+  <div class="duo three">
+    <div class="card">
+      <h5>避难所列计分</h5>
+      <p>所选列中每张叠放的已封闭避难所卡得 <b>3 VP</b>。注意堆放上限，可通过殖民地升级提高（见附录 II）。</p>
+    </div>
+    <div class="card">
+      <h5>材料计分</h5>
+      <p>每个 II 级材料得 <b>2 VP</b>，每个 III 级材料得 <b>4 VP</b>。材料计分有上限，可通过殖民地升级提高（见附录 II）。</p>
+    </div>
+    <div class="card">
+      <h5>幸存者计分</h5>
+      <p>按殖民地板所示计分：此时在殖民地入口的每名活跃幸存者得 <b>0 / 1 / 2 VP</b>（取决于你的升级）。</p>
+    </div>
+  </div>
+  <p>例：Elio 可结算 2 个计分区，他选择结算两个已封闭避难所列（6 + 3 = 9 VP）。他没有选材料计分：虽然他有价值 4 VP 的材料，但该计分区此时只能计 2 VP。</p>
+
+  <h4>8.1.4 回合顺序</h4>
+  <p>回合顺序轨有两行：<b>上行</b>用于第 1 轮与第 3 轮，<b>下行</b>用于第 2 轮。</p>
+  <p>为下一轮选择一个车辆在回合顺序轨上的新位置，并获得该位置标示的奖励。你不能占据回合顺序轨上已被其他玩家占据的格子。</p>
+  <p>例：Angela 决定停手。她把车辆放到第一位，表示下一轮她要先手，并取得 1 个数据。</p>
+
+  <h3>8.2 移动车辆</h3>
+  <p>支付 <b>2 个燃料</b>移动车辆，并激活目的地区域的<b>区域板块</b>。一个区域中可以有两辆或更多撤离车。</p>
+  <ul class="plain">
+    <li>移动时，最多移动的格数与最多搭载的幸存者数，都由你的殖民地板与升级标示（见附录 II）。</li>
+    <li>移动一格指把车辆从一个区域移到<b>相邻</b>区域。主版图上的<b>红线不可通过</b>。你可以把车辆的移动结束在出发的同一格。两个相邻区域总是在周界上共享一条线。</li>
+    <li><b>载货量</b>是车辆最多能搭载的幸存者数。移动过程中可以在每一站上下客，但任何时刻都不得超过载货量。</li>
+    <li>移动之后，激活区域板块：取得可见面所示的奖励。</li>
+  </ul>
+  <p>例：由于殖民地升级，Angela 的车辆最多可移动三格、最多搭载三名幸存者。她决定带上幸存者移动两格：先从起始区域带走两名幸存者，移到一格处放下，再搭上 3 名幸存者前往目的地区域。抵达后激活区域板块。</p>
+  <p>区域板块有两面：主面与副面。若显示的是主面，激活后<b>翻面</b>；若已经是副面，则不翻。</p>
+  <p>激活区域板块时，你可能获得材料、任务卡、主要行动，或触发殖民地计分。</p>
+  <div class="side">
+    <span class="label">起始避难所</span>
+    离开起始避难所算作<b>一次</b>移动。
+  </div>
+
+  <h3>8.3 激活幸存者</h3>
+  <p>要激活幸存者，你必须有一名<b>活跃（黄色）</b>幸存者。从殖民地入口取一名活跃幸存者，放到殖民地板上你选择的<b>激活区</b>。同一轮内不能两次选择同一个激活区。</p>
+  <p>开局时这个协议每轮限用 <b>3 次</b>，通过殖民地升级可提高到每轮 4 次（见附录 II）。</p>
+  <p>每个激活区对应一个<b>科技槽位</b>与生产面板上的一个<b>生产区</b>。接下来按顺序执行以下步骤。</p>
+
+  <h4>8.3.1 激活槽位</h4>
+  <p>自上而下取得对应槽位中科技板块上的全部奖励（见附录 VI）。</p>
+
+  <h4>8.3.2 生产面板</h4>
+  <ul class="plain">
+    <li><b>位置 1</b>：从主版图旁四张可用任务卡中取一张加入手牌，立即补牌（见 5.9）。</li>
+    <li><b>位置 2、3、4</b>：分别生产<b>燃料、数据、强度</b>。产量等于你的圆片在对应生产轨上的高度。</li>
+  </ul>
+  <p>除生产之外，如果你的圆片位于该轨的<b>最高</b>位置，额外获得 <b>2 VP</b>。</p>
+  <p>例：Elio 获得 3 个燃料与 2 点胜利分。</p>
+
+  <h4>8.3.3 执行一个主要行动</h4>
+  <p>执行游戏四个主要行动之一（见第 09 节）。</p>
+
+  <figure>
+    <img src="ASHES_Rules_images/page_06.jpg" alt="停手协议提示卡与殖民地板蓝色连线示意：回收幸存者、幸福轨收入、殖民地计分、回合顺序四步">
+    <figcaption>原书第 10–11 页 · 8.1 停手（含 8.1.1–8.1.4）</figcaption>
+  </figure>
+</section>
+
+<!-- ================= 09 主要行动 ================= -->
+<section class="sec" id="main">
+  <h2><span class="num">09</span>主要行动</h2>
+  <p class="lead">四个主要行动可以通过「8.3.3」或区域板块获得。</p>
+
+  <h3>9.1 建造避难所</h3>
+  <p>避难所圆片按殖民地板<b>自上而下</b>建造。前两个各支付 <b>2 点强度</b>，后两个各支付 <b>4 点强度</b>。</p>
+  <p>支付圆片旁标示的强度，把它放到你选择的场址板块上任意一个<b>空闲建造格</b>。放置时，获得该建造格标示的奖励并更新你的生产轨。你不能建造在已有避难所圆片的建造格上。</p>
+  <div class="callout">
+    <span class="label">此图标出现在所有建造格上</span>
+    从三张可用的避难所卡中取一张，放在你的幸福轨旁，并立即补充展示区（见 5.9）。
+  </div>
+  <p>避难所卡在幸福轨上<b>自下而上</b>放置，只有三个位置。若已无空位，你可以替换最上面那张避难所卡；被替换的卡放回牌堆底部。如果那张卡上指派了幸存者，则每有一名幸存者，失去 1 点幸福并将其退回袋中。</p>
+  <p>每个建造格都伴随对生产轨的修正：每有一个修正，就把圆片在对应生产轨上<b>上移一格</b>。因为该轨已达最高级而<b>无法</b>上移的每一格，获得 <b>2 VP</b>。</p>
+  <p>例：Elio 支付 2 点强度建造第一个避难所，放在主版图上一个自选的空闲建造格。按该格所示，他获得 2 个数据和一张避难所卡（放在幸福轨上），然后把燃料生产圆片上移一格。</p>
+  <div class="side">
+    <span class="label">地标建造格</span>
+    在地标建造格上建造时，按常规建造即可。「该格是地标」这一事实只在对计分板块结算时才有意义（见附录 III）。
+  </div>
+
+  <h3>9.2 营救幸存者</h3>
+  <p>从与你某个避难所<b>相邻</b>的区域营救幸存者，放到<b>殖民地入口</b>。所有幸存者必须来自<b>同一</b>区域。</p>
+  <p>你的殖民地入口有<b>四个</b>可用空位；通过殖民地升级可获得第五个（见附录 II）。每名在殖民地入口的幸存者占一个空位。</p>
+  <p>你可以营救活跃幸存者与关键幸存者，但不得超过殖民地入口的空位数量。</p>
+  <div class="side">
+    <span class="label">起始避难所</span>
+    你可以从起始避难所营救幸存者。
+  </div>
+  <p>例：Angela 决定从与起始避难所相邻的区域营救，获得 3 名幸存者（她有 3 个空位），把这些幸存者放到殖民地入口。</p>
+
+  <h3>9.3 在凤凰计划中安装升级</h3>
+  <p>凤凰计划承载着人类的希望：一个旨在恢复地表、让文明有机会重新开始的系统。</p>
+  <p>在凤凰计划中选择一个格子安装升级，按以下顺序执行：</p>
+  <ol class="steps">
+    <li><b>支付费用</b>，视该格是凤凰计划的 I 级、II 级还是 III 级而定：
+      <ul class="plain">
+        <li><b>I 级</b>：从材料金字塔支付 <b>1 个 I 级材料</b> + <b>1 / 2 / 3 个数据</b>（分别对应它是在该等级上被任何玩家——包括你自己——安装的第 1 / 第 2 / 第 3 及以后个升级）。</li>
+        <li><b>II 级</b>：支付 <b>2 个 II 级材料</b> + <b>1 / 2 / 3 个数据</b>（同上判定）。</li>
+        <li><b>III 级</b>：支付 <b>2 个 III 级材料</b> + <b>2 / 3 / 4 个数据</b>（同上判定）。</li>
+      </ul>
+    </li>
+    <li><b>取科技</b>：把所选格上的生产科技或计分科技指派到你的一个槽位。开局时每个槽位最多可叠<b>两个</b>科技，可通过殖民地升级提高（见附录 II）。若所有槽位都已无空位，就弃掉获得的科技，或用它替换某个槽位最上面的科技。</li>
+    <li><b>放升级板块</b>：取一块你的升级板块，放在所选格上。要选择 <b>II 级</b>升级，你必须已经建造或弃掉 I 级升级，并且至少有一个圆片到达某条生产轨的<b>第三格</b>。</li>
+    <li><b>取得奖励</b>：获得升级所在格标示的奖励。I / II / III 级分别获得 <b>2 / 6 / 12 VP</b>，并把对应的知识圆片<b>右移一格</b>。凤凰计划的每一行都对应一个知识圆片。</li>
+  </ol>
+  <p>例：Angela 支付 1 个数据和 1 个 I 级材料，在凤凰计划 I 级第 1 格安装第一个升级（1）。她取走选定的 I 级计分科技放进任选槽位（2）。随后取一块升级板块放进所选格（3），获得 2 VP，并把对应的知识圆片移动一格（4）。</p>
+
+  <h3>9.4 休息</h3>
+  <p>把圆片在幸福轨上<b>上移两格</b>，并获得 <b>1 个燃料</b>（见 5.5）。</p>
+
+  <figure>
+    <img src="ASHES_Rules_images/page_07.jpg" alt="生产面板与主要行动示意：建造避难所、营救幸存者、在凤凰计划安装升级、休息">
+    <figcaption>原书第 12–13 页 · 8.3.1 激活槽位、8.3.2 生产面板与 9 主要行动</figcaption>
+  </figure>
+</section>
+
+<!-- ================= 10 额外行动 ================= -->
+<section class="sec" id="extra">
+  <h2><span class="num">10</span>额外行动</h2>
+  <p class="lead">本作的额外行动分为两类：即时额外行动与受限额外行动。玩家提示卡上列出了全部额外行动。</p>
+
+  <h3>10.1 即时额外行动</h3>
+  <p>可以在自己回合的任何时刻执行，但<b>不得打断</b>其他行动：先完成当前行动或单项奖励的结算，再执行即时额外行动。</p>
+  <p>一个回合内可以执行任意数量的即时额外行动，但在<b>停手协议进行中或之后</b>不能执行。</p>
+
+  <h4>10.1.1 净化幸存者</h4>
+  <p>从殖民地入口取一名幸存者（活跃或关键），放进幸福轨旁某张避难所卡的一个净化舱里，获得舱内印刷的奖励。例：Elio 获得 1 点幸福。</p>
+
+  <h4>10.1.2 封闭避难所</h4>
+  <p>翻面一张<b>所有净化舱都被幸存者占满</b>（活跃或关键）的避难所卡，放进殖民地板下方某一列。那些幸存者退回袋中。</p>
+  <p>开局时每列上限为 <b>2 张</b>避难所卡，可通过殖民地升级提高（见附录 II）。</p>
+
+  <h4>10.1.3 制造材料</h4>
+  <p>用紧下一级的<b>两种不同</b>材料制造一个更高级的材料。殖民地板上的连线指示每种更高级材料需要哪几种材料。例：用一个塑料和一个金属制造一个工具。</p>
+  <div class="side">
+    <span class="label">注意</span>
+    与所有即时额外行动一样，你不能打断任何奖励的结算来执行本行动，因此不能在一项允许你在强度轨上前进多格的奖励途中制造材料。
+  </div>
+
+  <h4>10.1.4 轮换避难所卡</h4>
+  <p>支付 <b>1 个数据</b>，把主版图上可见的三张避难所卡放到牌堆底部，翻出三张新卡。</p>
+
+  <h3>10.2 受限额外行动</h3>
+  <p>只能在执行一个协议<b>之前或之后</b>执行，绝不能在协议进行中执行（见第 08 节）。</p>
+  <p>每回合每种类型的受限额外行动只能执行<b>一次</b>。在停手协议进行中或之后不能执行受限额外行动。</p>
+
+  <h4>10.2.1 侦察</h4>
+  <p>支付 <b>2 点强度</b>，从袋中抽出你的殖民地板与升级所示数量的幸存者。把这些幸存者放在<b>你的车辆所在区域</b>。若殖民地入口有空位，抽到的关键幸存者可以直接放在那里。</p>
+  <p>若袋已空，就不能侦察。</p>
+  <p>例：Elio 支付 2 点强度，按他的殖民地升级所示抽 3 名幸存者。他把抽到的 2 名关键幸存者直接放在殖民地入口，剩下的活跃幸存者必须放在车辆所在区域。</p>
+  <p>有些卡允许你不支付强度就进行侦察。</p>
+  <div class="side">
+    <span class="label">起始避难所</span>
+    即使车辆在起始避难所也可以侦察。此时把幸存者放在与起始避难所<b>相邻</b>的区域。
+  </div>
+
+  <h4>10.2.2 达成里程碑</h4>
+  <p>若你已满足里程碑所示的条件，且成就板块上至少还剩一格，你就可以达成该里程碑（见附录 IV）。</p>
+  <p>同一个里程碑不能达成两次。双人局中，每个里程碑只有一名玩家的位置。</p>
+  <p>达成的费用按成就板块所示支付：<b>第一个</b>达成的玩家付 <b>2 个数据</b>，<b>第二个</b>付 <b>3 个数据</b>。然后取一块你的升级板块，放在成就板块对应的格子上。</p>
+  <p>要选择 <b>II 级</b>升级，你必须已经建造或弃掉 I 级升级，并且至少有一个圆片到达某条生产轨的第三格。</p>
+  <p>按以下顺序获得奖励：</p>
+  <ol class="steps">
+    <li>按计分板块所示，把你拥有的该类元素数量，乘以金／银／铜值（取决于对应知识圆片的位置）计分。每项计分上限为 <b>12 VP</b>，不能超过。</li>
+    <li>把对应的知识圆片<b>右移一格</b>。</li>
+  </ol>
+  <p>例：Elio 完成了他的第三张任务卡，决定达成对应里程碑。他支付 2 个数据，取一块升级板块放在成就板块上（1）。根据浅蓝知识圆片的位置，按银值计分（2）：用他当前拥有的 I 级材料数量乘以计分板块所示的银值（2 × 1 = 2 VP），然后移动浅蓝知识圆片（3）。</p>
+  <div class="side">
+    <span class="label">允许</span>
+    即使最终得分为 0 VP，你也可以达成里程碑。
+  </div>
+
+  <h4>10.2.3 完成任务卡</h4>
+  <p>从手牌取一张任务卡，在满足标示的条件并支付费用之后，获得其奖励，然后把完成的卡背面朝下放在殖民地板旁。</p>
+  <p>每张卡布局相同，分为「条件与费用」和「奖励」两部分。条件为以下两种之一：</p>
+  <dl class="defs">
+    <dt>加强避难所</dt>
+    <dd>翻面一个所在区段<b>等于（不超过）</b>当前轮次数字的避难所圆片。例：第 1 轮翻面区段 1 的避难所。你仍可从已加强的避难所继续营救幸存者。同一个避难所不能加强两次。</dd>
+    <dt>车辆位置</dt>
+    <dd>你的车辆必须位于区段<b>等于（不超过）</b>当前轮次数字的区域中。例：第 1 轮，你的车辆必须在区段 1 的某个区域（含起始避难所）。</dd>
+  </dl>
+  <p>其余条件与奖励见附录 VI 通用图标。</p>
+  <div class="side">
+    <span class="label">与 10.1 的配合</span>
+    如第 10.1 节所述，你可以在任务卡多项奖励的结算之间执行即时额外行动，但必须先把每一项奖励完整结算完。
+  </div>
+
+  <figure>
+    <img src="ASHES_Rules_images/page_08.jpg" alt="额外行动示意：净化幸存者、封闭避难所、制造材料、轮换避难所卡、侦察、达成里程碑、完成任务卡">
+    <figcaption>原书第 14–15 页 · 10 额外行动（10.1 即时／10.2 受限）</figcaption>
+  </figure>
+</section>
+
+<!-- ================= 11 轮次结束 ================= -->
+<section class="sec" id="endround">
+  <h2><span class="num">11</span>轮次结束</h2>
+  <p>当所有玩家都已停手时，本轮结束。把主版图上的轮次标记移到下一位置，开始新一轮。</p>
+  <p><b>第三轮之后</b>，直接进入游戏结束。</p>
+</section>
+
+<!-- ================= 12 游戏结束 ================= -->
+<section class="sec" id="endgame">
+  <h2><span class="num">12</span>游戏结束</h2>
+  <p class="lead">游戏在第三轮后结束。按以下顺序执行各步骤。</p>
+
+  <h3>12.1 辐射</h3>
+  <p>按 7.1.1「辐射」所述执行一次辐射步骤。</p>
+
+  <h3>12.2 幸福计分</h3>
+  <p>把你剩余的全部燃料、数据与抗辐射剂换成幸福：每 <b>3 个资源</b>（不分种类）获得 <b>1 点幸福</b>。</p>
+  <p>游戏结束时，每 1 点幸福得 <b>1 VP</b>。</p>
+
+  <h3>12.3 殖民地板计分</h3>
+  <p>结算你殖民地板上避难所圆片格内可见的 VP。</p>
+  <p>例：Angela 共得 10 VP（4 + 6）。</p>
+
+  <h3>12.4 凤凰计划计分</h3>
+  <p>凤凰计划有三行，每行右侧各配一块计分板块，每行对应一个知识圆片。逐行结算。</p>
+  <p>每块计分板块显示三个值：<b>金、银、铜</b>。这些值对应游戏结束时其知识圆片所占据的位置。</p>
+  <p>对凤凰计划的每一行，把以下三个值<b>相乘</b>：</p>
+  <ul class="plain">
+    <li>你在该行已安装的升级数量</li>
+    <li>你满足该计分板块条件的<b>次数</b></li>
+    <li>根据知识圆片位置取的金／银／铜值</li>
+  </ul>
+  <p>每行得分上限为 <b>24 VP</b>，不能超过。</p>
+  <p>例：本例计算 Angela 在浅蓝行的得分，其计分板块以 II 级材料为准。计分时，Angela 把她殖民地板上 II 级材料的数量，乘以她在浅蓝行已安装的升级数量，再乘以知识圆片位置指示的金值（4 × 3 × 3 = 36，上限 24）。</p>
+  <p>得分最高的玩家获胜。平手时，<b>回合顺序轨上位置更高</b>的玩家获胜。</p>
+
+  <figure>
+    <img src="ASHES_Rules_images/page_09.jpg" alt="终局计分示意：幸福计分、殖民地板计分与凤凰计划三行相乘计分">
+    <figcaption>原书第 16–17 页 · 12 游戏结束与 13 单人模式起始</figcaption>
+  </figure>
+</section>
+
+<!-- ================= 13 单人模式 ================= -->
+<section class="sec" id="solo">
+  <h2><span class="num">13</span>单人模式</h2>
+  <p class="lead">并非所有幸存者都相信重建。废墟中出现了另一座殖民地，足以挫败你最好的意图。随着他们获得追随者，他们会为一个不同的未来而竞争。为方便起见，这个对手在规则中称为「<b>对手</b>」。</p>
+
+  <h3>13.1 游戏设置</h3>
+  <p>按<b>双人局</b>的方式完成设置。</p>
+
+  <h3>13.2 对手设置</h3>
+  <ol class="steps">
+    <li>取对手难度卡，选择 <b>1 张</b>。卡上的辐射符号表示游戏难度等级，符号越多难度越高。把所选卡放在对手的游戏区，并把一个材料方块放在对手轨的起始格。这个方块称为<b>对手标记</b>。</li>
+    <li>取对手行动卡，洗匀后成堆放在难度卡旁。</li>
+    <li>为对手选一个玩家颜色，取对应的殖民地板，照常放好其升级板块、避难所圆片与分数标记。再放一个该色圆片在主版图的 <b>+0 VP</b> 格。把强度标记与该色剩余 4 个圆片退回盒中。</li>
+    <li>把对手的一辆撤离车放在回合顺序轨<b>第二</b>个位置；另一辆撤离车照常放在起始避难所。</li>
+  </ol>
+  <p>不要对你自己的常规设置做任何改动。</p>
+
+  <h3>13.3 玩家设置</h3>
+  <p>洗匀特殊角色卡，抽两张选一张；首局也可以从背面带星号的中随机选一张。这些卡详见附录 I。</p>
+  <p>取起始资源卡洗匀，在桌上翻出两张。再取起始生产技术，随机在各卡旁翻出一块，组成组合。然后选择其中一个「卡 + 科技」组合：获得资源，并照常把科技放进一个科技槽位。</p>
+
+  <h3>13.4 开始游戏前</h3>
+  <p>按 13.2、13.3 完成设置后即可开始。对手不需要起始资源卡。</p>
+
+  <h3>13.5 通用概念</h3>
+  <p>对手<b>不花费也不积累</b>资源。每回合对手只是执行其卡上所示的行动。</p>
+  <p>对手在幸福轨上<b>没有</b>圆片；忽略任何涉及对手的幸福效果。</p>
+  <p>照常进行 3 轮，之后结算终局计分。</p>
+
+  <h3>13.6 对手行动卡</h3>
+  <p>每轮与每个玩家回合都按标准游戏进行。翻开一张对手行动卡后，你会看到以下构成：</p>
+  <div class="duo">
+    <div class="card">
+      <h5>难度卡</h5>
+      <ul>
+        <li>难度等级</li>
+        <li>直接得分</li>
+        <li>对手轨与对手标记</li>
+        <li>对手达成里程碑的得分</li>
+        <li>对手激活符号提示（依难度而定）</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h5>行动卡（正面）</h5>
+      <ul>
+        <li>对手激活符号</li>
+        <li>第 1 轮与第 3 轮的对手主要行动</li>
+        <li>第 2 轮的对手主要行动</li>
+        <li>对手次要行动</li>
+        <li>序数参数</li>
+      </ul>
+    </div>
+  </div>
+  <p>行动卡背面印有<b>数值参数</b>与<b>区段参数</b>。</p>
+
+  <h3>13.7 对手的回合</h3>
+  <p>按以下顺序结算对手的回合。</p>
+
+  <h4>13.7.1 翻卡</h4>
+  <p>若对手标记位于对手轨<b>最上方</b>格，对手停手并结束本轮（见 13.8.5）。</p>
+  <p>若对手标记在其它任何格，则结算对手的回合：翻开一张对手行动卡。</p>
+
+  <h4>13.7.2 对手激活符号</h4>
+  <p>只有当行动卡上出现该箭头时，才把对手标记在对手轨上<b>上移一格</b>。这个箭头有三种颜色，按所选难度判定：</p>
+  <table>
+    <thead><tr><th style="width:34%">难度</th><th>何时上移对手标记</th></tr></thead>
+    <tbody>
+      <tr><td>普通模式（1 个辐射符号）</td><td>不论箭头颜色（橙、蓝、粉）都上移</td></tr>
+      <tr><td>进阶模式（2 个辐射符号）</td><td>仅当箭头为<b>粉色或蓝色</b>时上移</td></tr>
+      <tr><td>专家模式（3 个辐射符号）</td><td>仅当箭头为<b>蓝色</b>时上移</td></tr>
+    </tbody>
+  </table>
+  <p>按所选难度，卡上会提示哪些箭头会影响对手标记。</p>
+
+  <h4>13.7.3 确定主要行动</h4>
+  <p>视对手的撤离车位于回合顺序轨<b>第一行</b>还是<b>第二行</b>，对手执行两种行动之一：</p>
+  <ul class="plain">
+    <li>车辆在第一行 → 执行「第 1 轮与第 3 轮的主要行动」</li>
+    <li>车辆在第二行 → 执行「第 2 轮的主要行动」</li>
+  </ul>
+  <p>按主要行动的类型套用相应参数。</p>
+
+  <h4>13.7.4 参数的套用</h4>
+  <p>把对手行动卡上的数值、序数与区段参数组合起来，确定对手执行行动的准确位置。</p>
+  <dl class="defs">
+    <dt>区段参数</dt>
+    <dd>指示对手在哪个区段执行行动，按当前轮次套用：<br>
+      · 在<b>等于当前轮次数字</b>的区段执行。例：第 1 轮 → 区段 1。<br>
+      · 在<b>等于当前轮次数字 +1</b> 的区段执行。例：第 1 轮 → 区段 2。<br>
+      此参数<b>不适用</b>于凤凰计划的「安装升级」行动。</dd>
+    <dt>序数参数</dt>
+    <dd>指示数值参数是自下而上、自上而下、从右到左还是从左到右计数；也就是定义使用数值参数时的<b>起点</b>。</dd>
+    <dt>数值参数</dt>
+    <dd>从序数参数定义的起点开始，按此数量计数。</dd>
+  </dl>
+  <p>各行动的参数套用方式基本相同。套用区段参数后，只在<b>行动可行</b>的情形上套用序数与数值参数。若数值参数超过可行情形的数量，数到最后一个后从第一个继续数。</p>
+  <p>若对手因无可行情形而无法执行行动，则获得难度卡上所示的<b>直接得分</b>。</p>
+
+  <div class="act">
+    <h4><span class="k">例 1</span>建造</h4>
+    <p>第 1 轮，按此设置对手执行建造行动。确定建造格：</p>
+    <ul class="plain">
+      <li>确定区段（第 1 轮）：区段 1</li>
+      <li>用序数参数确定起点：自下而上</li>
+      <li>用数值参数在可行情形中数到建造格：1…2…3</li>
+    </ul>
+    <p>对手在指示的格子建造。</p>
+  </div>
+
+  <div class="act">
+    <h4><span class="k">例 2</span>营救幸存者</h4>
+    <p>第 2 轮，按此设置对手进行营救。确定营救区域：</p>
+    <ul class="plain">
+      <li>确定区段（第 2 轮）：区段 3</li>
+      <li>用序数参数确定起点：自上而下</li>
+      <li>用数值参数在可行情形中数到区域：1…2</li>
+    </ul>
+    <p>对手从指示的区域营救幸存者。</p>
+  </div>
+
+  <div class="act">
+    <h4><span class="k">例 3</span>安装升级</h4>
+    <p>第 2 轮，按此设置对手进行安装升级。确定安装格：</p>
+    <ul class="plain">
+      <li>安装升级时<b>忽略区段参数</b>；行动本身已指明适用于哪一行（深蓝、浅蓝或粉色）。</li>
+      <li>用序数参数确定起点：从右。</li>
+      <li>用数值参数在可行情形中数到安装格：由于所有格都已占据，没有任何可行情形，因此对手获得其难度卡上所示的即时得分。</li>
+    </ul>
+  </div>
+
+  <h4>13.7.5 结算主要行动</h4>
+  <p>结算对手的主要行动，详见 13.8。</p>
+
+  <h4>13.7.6 结算次要行动</h4>
+  <p>结算对手的次要行动，详见 13.9。</p>
+
+  <h3>13.8 对手的行动</h3>
+
+  <h4>13.8.1 建造避难所</h4>
+  <p>用参数在主版图上定位建造格，照常放置一个避难所圆片。然后取主版图上<b>最右侧</b>的避难所卡，背面朝下放进对手殖民地板上对应颜色的「已封闭避难所」列——颜色由行动卡上建造图标右侧所示的颜色决定。例：本例放进蓝色列。</p>
+  <p>计数可行情形时，只数所示区段中的<b>空闲</b>格。若对手因无可行格、或已建完所有避难所而无法执行，则获得难度卡上所示的直接得分。</p>
+
+  <h4>13.8.2 营救幸存者</h4>
+  <p>用参数定位营救区域，把该处<b>所有</b>幸存者退回袋中。每退回一名幸存者，对手获得 <b>1 VP</b>。</p>
+  <p>计数可行情形时，只数<b>有幸存者</b>的区域，无论是否有相邻避难所。若无可行情形，对手获得难度卡上所示的直接得分。</p>
+
+  <h4>13.8.3 在凤凰计划中安装升级</h4>
+  <p>在凤凰计划中定位目标格；行动图标中的颜色指示对手安装在哪一行。把该处的科技板块退回盒中，把对手的升级放在指示格。若该格为 I / II / III 级，对手分别获得 <b>2 / 6 / 12 VP</b>，然后照常移动对应的知识圆片。</p>
+  <p>计数可行情形时，只数<b>未安装升级</b>的格。若对手因无可行格、或已装完所有升级而无法执行，则获得难度卡上所示的直接得分。</p>
+  <p>安装升级与达成里程碑时，都按对手殖民地板上<b>从左到右、自上而下</b>的顺序取升级。若安装的是 <b>II 级</b>升级，对手<b>立即</b>达成一个里程碑。</p>
+  <p>例：对手执行安装升级行动（1）。由于是 II 级升级，它取下一块升级，用其达成浅蓝里程碑——由安装升级行动本身指示（2）。对手获得难度卡上达成里程碑所示的 <b>4 VP</b>（3）。</p>
+  <p>对手<b>无视</b>里程碑板块所示的条件，在安装 II 级升级后立即达成。它从自己的殖民地板取一块升级，放在成就板块上与「用于安装该 II 级升级的行动图标颜色」相符的那一行。然后按难度卡获得 <b>2 / 4 / 6 VP</b>，再照常移动对应的知识圆片。若成就板块已无空位，对手不达成该里程碑。</p>
+
+  <h4>13.8.4 移动车辆</h4>
+  <p>用参数定位车辆的目的地区域，把对手的车辆移到那里，并翻面对应的区域板块。</p>
+  <p>对手<b>总是</b>把它起始区域的<b>全部</b>幸存者带到目的地区域。</p>
+  <p>计数可行情形时，只数区域板块显示<b>主面</b>的区域。若无可行情形，对手获得难度卡上所示的直接得分。</p>
+
+  <h4>13.8.5 停手</h4>
+  <p>某些行动卡上还有一名额外行动标记：立即翻开一张新行动卡，并把它作为<b>额外回合</b>结算，无论对手标记是否已到达对手轨最后一格。</p>
+  <p>只有当对手回合<b>开始时</b>其标记位于对手轨<b>最上方</b>格，对手才停手。此时按顺序执行：</p>
+  <ol class="steps">
+    <li>重置对手标记，放回对手轨<b>最下方</b>格。</li>
+    <li>把全部对手行动卡重新洗匀成堆。</li>
+    <li>把对手的撤离车放到回合顺序轨上<b>第一个可用</b>位置。</li>
+  </ol>
+
+  <h3>13.9 次要行动</h3>
+  <p>若行动卡上出现，则执行。共有两种次要行动：</p>
+  <dl class="defs">
+    <dt>弃任务卡</dt>
+    <dd>弃掉右侧两张任务卡，从牌堆补充（见 5.9）。</dd>
+    <dt>即时殖民地计分</dt>
+    <dd>共有三种可能的殖民地计分，分别对应对手殖民地板下方的每个已封闭避难所列。对手在对应列中<b>每张</b>避难所卡得 <b>3 VP</b>。</dd>
+  </dl>
+
+  <h3>13.10 轮次结束</h3>
+  <p>当两人（玩家与对手）中<b>最后一位</b>停手时，本轮结束。把主版图上的轮次标记移到下一位置，开始新一轮。</p>
+
+  <h3>13.11 游戏结束</h3>
+  <p>游戏在第三轮后结束。照常执行终局步骤。</p>
+
+  <h3>13.12 对手的终局得分</h3>
+  <p>对手<b>不</b>计幸福分，但会结算其殖民地板上避难所圆片格内所示的 VP。</p>
+  <p>凤凰计划计分：翻面对手难度卡，按对应行知识圆片的位置（金／银／铜），为每个已安装的升级计分。</p>
+  <table>
+    <thead><tr><th style="width:34%">难度</th><th>每个已安装升级的得分（铜 / 银 / 金）</th></tr></thead>
+    <tbody>
+      <tr><td>普通（1 个辐射符号）</td><td class="n">2 / 4 / 6 VP</td></tr>
+      <tr><td>进阶（2 个辐射符号）</td><td class="n">4 / 6 / 10 VP</td></tr>
+      <tr><td>专家（3 个辐射符号）</td><td class="n">6 / 8 / 12 VP</td></tr>
+    </tbody>
+  </table>
+
+  <figure>
+    <img src="ASHES_Rules_images/page_10.jpg" alt="单人模式示意：对手难度卡、对手轨与对手标记、行动卡的区段／序数／数值参数，以及建造、营救、安装升级三个示例">
+    <figcaption>原书第 18–19 页 · 13.7 对手的回合与 13.8 对手的行动</figcaption>
+  </figure>
+</section>
+
+<!-- ================= 14 附录 I ================= -->
+<section class="sec" id="apx1">
+  <h2><span class="num">14</span>附录 I · 特殊角色</h2>
+  <p class="lead">共 12 张特殊角色卡。部分特殊角色会授予你一块<b>特殊科技</b>：立即把它指派到一个槽位，此后每次激活该槽位都获得其标示的奖励（见 8.3.1）。</p>
+  <p>以下按原书卡面顺序列出各角色的能力。</p>
+  <ul class="plain">
+    <li>获得对应的特殊科技。该角色授予你一项新的即时额外行动：<b>支付 1 个抗辐射剂，获得任意 I 级材料</b>。</li>
+    <li>拥有该角色时，每当你获得一个<b>金属</b>，可以把它换成<b>塑料</b>，反之亦然；每当你获得一个<b>蘑菇</b>，可以把它换成<b>线缆</b>，反之亦然。</li>
+    <li>该角色给你一项额外的即时行动，让你执行「制造材料」的<b>反向</b>操作：支付 1 个材料，制造紧下一级的两个<b>不同</b>材料，仍按殖民地板上的连线执行（见 10.1.3）。与所有额外行动一样，不能在停手协议进行中或之后执行。</li>
+    <li>拥有该角色时，你在强度树上<b>上行或下行</b>都可以走粉色路径。</li>
+    <li>该角色为你的已封闭避难所卡解锁<b>第四列</b>：按常规堆放上限把它们叠在该角色卡下方。停手协议时照常结算这一列，任何殖民地计分也同样适用。<br>此外，该角色修改你的某项殖民地升级，使你可结算 <b>3 / 4 / 5</b> 个殖民地计分区，而非常规的 2 / 3 / 4 个。</li>
+    <li>获得对应的特殊科技。该角色授予你一个新协议：可以<b>支付 4 点幸福</b>代替常规的 2 个燃料来移动车辆。此时若幸福轨上没有幸福就不能支付幸福，因此若你的幸福轨已到最低等级，你<b>不会</b>为执行此协议而失分。</li>
+    <li>开局时获得对应的特殊科技和一名<b>关键幸存者</b>。在幸福轨收入时，位于「带收入标记、且等级等于或低于你幸福轨圆片位置」的净化舱中的每一名关键幸存者，额外为你带来 <b>2 VP</b>（见 8.1.2）。<br>位于不带收入的净化舱、或位于你标记上方净化舱中的关键幸存者不给你分。</li>
+    <li>获得对应的特殊科技。你<b>不能</b>执行该特殊角色卡上标示的 II 级升级。</li>
+    <li>该角色授予你一项新的即时额外行动：支付 <b>1 个数据</b>，交换主版图上的两块区域板块。若你的车辆无法通过升级进入区段 IV，则不能交换区段 IV 的板块（见附录 II）。被交换的两块板块不必来自同一区段。</li>
+    <li>获得对应的特殊科技。对该角色而言，材料的殖民地计分上限以角色卡上所示的数值为准（见附录 II）。</li>
+    <li>每当你执行「在凤凰计划中安装升级」的主要行动时，可以额外弃掉自己另一块升级并退回盒中。要弃掉 II 级升级，你必须已经建造或弃掉 I 级升级，且至少有一个圆片到达某条生产轨的第三格。</li>
+    <li>获得对应的特殊科技。每当游戏指示你取一张卡时，你可以改取避难所卡代替任务卡，或反之。</li>
+    <li>每当你封闭一个避难所，获得一名关键幸存者。此外，该角色还授予你一项新的即时额外行动：支付 <b>1 个数据</b>抽一张避难所卡。</li>
+  </ul>
+
+  <figure>
+    <img src="ASHES_Rules_images/page_11.jpg" alt="附录 I 特殊角色卡与附录 II 殖民地升级轨道示意">
+    <figcaption>原书第 20–21 页 · 附录 I 特殊角色与附录 II 殖民地升级</figcaption>
+  </figure>
+</section>
+
+<!-- ================= 15 附录 II ================= -->
+<section class="sec" id="apx2">
+  <h2><span class="num">15</span>附录 II · 殖民地升级</h2>
+  <p class="lead">殖民地升级共 <b>5 条轨道</b>，每条都有「初始」「I 级」「II 级」三个状态。升级由你在凤凰计划中安装的升级板块解锁。</p>
+
+  <table>
+    <thead><tr><th style="width:22%">升级轨道</th><th style="width:26%">初始</th><th style="width:26%">I 级</th><th>II 级</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><b>激活区</b></td>
+        <td>每轮可选 4 个激活区中的 3 个执行幸存者激活协议。</td>
+        <td>殖民地入口解锁<b>第五个</b>幸存者空位。</td>
+        <td>每轮可激活<b>全部 4 个</b>激活区执行幸存者激活协议。</td>
+      </tr>
+      <tr>
+        <td><b>科技堆放／计分区</b></td>
+        <td>科技槽位最多叠 2 个科技；各列最多叠 2 张已封闭避难所卡。结算阶段最多结算 <b>2</b> 个殖民地计分区。</td>
+        <td>同上叠放上限。最多结算 <b>3</b> 个殖民地计分区。</td>
+        <td>科技槽位最多叠 <b>3</b> 个科技、各列最多叠 3 张已封闭避难所卡。最多结算 <b>4</b> 个殖民地计分区。</td>
+      </tr>
+      <tr>
+        <td><b>侦察／幸存者计分</b></td>
+        <td>侦察行动从袋中抽 <b>2</b> 名幸存者。殖民地入口的每名幸存者计 <b>0 VP</b>。</td>
+        <td>侦察行动抽 <b>3</b> 名。每名幸存者计 <b>1 VP</b>。</td>
+        <td>侦察行动抽 <b>4</b> 名。每名幸存者计 <b>2 VP</b>。</td>
+      </tr>
+      <tr>
+        <td><b>材料存储</b></td>
+        <td>每个存储格最多放 <b>1</b> 个材料。材料计分上限 <b>2 VP</b>。</td>
+        <td>每格最多 <b>2</b> 个材料。材料计分上限 <b>6 VP</b>。</td>
+        <td>每格最多 <b>3</b> 个材料。材料计分上限 <b>12 VP</b>。</td>
+      </tr>
+      <tr>
+        <td><b>车辆性能</b></td>
+        <td>撤离车最多移动 <b>2</b> 格、最多搭载 <b>2</b> 名幸存者。<b>不能</b>进入区段 IV 的区域。</td>
+        <td>最多移动 <b>3</b> 格、最多搭载 <b>3</b> 名幸存者。仍不能进入区段 IV。</td>
+        <td>最多移动 <b>4</b> 格、最多搭载 <b>4</b> 名幸存者。可以进入区段 IV 的区域。</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="side">
+    <span class="label">提示</span>
+    「计分上限」指的是该计分区单次结算的封顶值；「可结算的计分区数」是每次殖民地计分能选几个区，二者是两条不同的限制。
+  </div>
+</section>
+
+<!-- ================= 16 附录 III ================= -->
+<section class="sec" id="apx3">
+  <h2><span class="num">16</span>附录 III · 计分板块</h2>
+  <p class="lead">每块计分板块按其上所示元素有不同的计分标准。达成里程碑时结算，或在游戏结束时结算——取决于它位于凤凰计划的左侧还是右侧。按对应知识圆片的位置，取金、银或铜值（见 12.4 与 10.2.2）。</p>
+  <ul class="plain">
+    <li>按<b>指定颜色</b>的生产修正计分：在你放有避难所圆片的建造格上（含起始避难所所示的那一格），每有一个该颜色的修正计一次分（见 9.1）。</li>
+    <li>按<b>指定等级</b>的材料计分：你的存储格中每有一个该等级的材料计一次分（见 5.3）。</li>
+    <li>按你已安装或已弃掉的 <b>II 级</b>升级计分。</li>
+    <li>按你各列中的每张<b>已封闭避难所卡</b>计分（见 10.1.2）。</li>
+    <li>按你每张<b>已完成的任务卡</b>计分（见 10.2.3）。</li>
+    <li>按你在凤凰计划中<b>每块已安装的升级</b>计分（见 9.3）。</li>
+    <li>按<b>彼此相连</b>的每一处避难所（无论是否已加强）计分。当两处避难所被主版图上两区域之间的边界线连接时，视为相连。<b>起始避难所不计</b>。</li>
+    <li>按建在<b>地标建造格</b>上的每一处避难所（无论是否已加强）计分。注意主版图上部分建造格底部带蓝灯。</li>
+  </ul>
+
+  <figure>
+    <img src="ASHES_Rules_images/page_12.jpg" alt="附录 III 计分板块、附录 IV 里程碑、附录 V 计分科技与附录 VI 通用图标汇总">
+    <figcaption>原书第 22–23 页 · 附录 III–VI 汇总</figcaption>
+  </figure>
+</section>
+
+<!-- ================= 17 附录 IV ================= -->
+<section class="sec" id="apx4">
+  <h2><span class="num">17</span>附录 IV · 里程碑</h2>
+  <p class="lead">若你满足以下条件，即可支付费用达成对应里程碑（见 10.2.2）。</p>
+  <ul class="score">
+    <li><b>圆片到达幸福轨第 8 格</b>（见 5.5）。</li>
+    <li><b>在凤凰计划中至少安装了 2 块升级</b>（见 9.3）。</li>
+    <li><b>至少建造了 3 个避难所圆片</b>（无论是否已加强，见 9.1）。</li>
+    <li><b>至少完成了 3 张任务卡</b>（见 10.2.3）。</li>
+    <li><b>各列中至少有 2 张已封闭避难所卡</b>（见 10.1.2）。</li>
+    <li><b>至少拥有 3 个 II 级材料</b>（见 5.3）。</li>
+  </ul>
+</section>
+
+<!-- ================= 18 附录 V ================= -->
+<section class="sec" id="apx5">
+  <h2><span class="num">18</span>附录 V · 计分科技</h2>
+  <p class="lead">每次激活对应槽位时，按以下标准结算该科技（见 8.3.1）。</p>
+  <div class="duo three">
+    <div class="card"><h5>科技一</h5><p>你各列中每张已封闭避难所卡得 <b>1 VP</b>（见 10.1.2）。</p></div>
+    <div class="card"><h5>科技二</h5><p>你已建造的每处避难所得 <b>1 VP</b>（无论是否已加强）。起始避难所不计（见 9.1）。</p></div>
+    <div class="card"><h5>科技三</h5><p>你每张已完成的任务卡得 <b>1 VP</b>（见 10.2.3）。</p></div>
+    <div class="card"><h5>科技四</h5><p>你存储格中每个 II 级材料得 <b>1 VP</b>（见 5.3）。</p></div>
+    <div class="card"><h5>科技五</h5><p>你在凤凰计划中每块已安装的升级得 <b>1 VP</b>（见 9.3）。</p></div>
+    <div class="card"><h5>科技六</h5><p>获得 <b>2 VP</b>。</p></div>
+  </div>
+</section>
+
+<!-- ================= 19 附录 VI ================= -->
+<section class="sec" id="apx6">
+  <h2><span class="num">19</span>附录 VI · 通用图标</h2>
+  <p class="lead">以下为全套图标速查。</p>
+
+  <h3>任务卡条件</h3>
+  <dl class="defs">
+    <dt>加强避难所</dt>
+    <dd>翻面一个所在区段<b>等于（不大于）</b>当前轮次数字的避难所圆片。例：第 1 轮翻面区段 1 的避难所。你仍可从已加强的避难所继续营救幸存者。同一个避难所不能加强两次。</dd>
+    <dt>车辆位置</dt>
+    <dd>你的车辆必须位于区段<b>等于（不大于）</b>当前轮次数字的区域中。例：第 1 轮，你的车辆必须在区段 1 的某个区域（含起始避难所）。</dd>
+  </dl>
+
+  <h3>行动与资源</h3>
+  <ul class="plain">
+    <li>执行一次<b>移动</b>协议（见 8.2）。</li>
+    <li>获得或支付所示数量的<b>资源</b>（见 5.1、5.2）。</li>
+    <li>获得或支付所示的<b>材料</b>（见 5.3）。</li>
+    <li>执行一个<b>主要行动</b>（见第 09 节）。</li>
+    <li>执行一个<b>额外行动</b>（见第 10 节）。</li>
+  </ul>
+
+  <h3>停手协议的四个步骤</h3>
+  <ul class="plain">
+    <li>为每名希望回收的幸存者支付一个<b>抗辐射剂</b>（见 8.1.1）。</li>
+    <li>取得你的<b>幸福轨收入</b>（见 8.1.2）。</li>
+    <li>结算你的<b>殖民地计分</b>（见 8.1.3）。</li>
+    <li>把你的车辆放到<b>回合顺序轨</b>上（见 8.1.4）。</li>
+  </ul>
+
+  <h3>取卡与计分</h3>
+  <ul class="plain">
+    <li>从四张可见任务卡中取一张加入手牌，立即从牌堆补一张（见 5.9）。</li>
+    <li>从三张可用避难所卡中取一张，放在殖民地板对应区域，立即补充展示区（见 9.1）。</li>
+    <li>所示列中每张已封闭避难所卡得 <b>3 VP</b>（见 10.1.2）。</li>
+    <li>以所示强度费用执行一次侦察行动（见 10.2.1）。</li>
+    <li>从殖民地板弃掉一块升级。要弃掉 II 级升级，你必须已经建造或弃掉 I 级升级，且至少有一个圆片到达某条生产轨的第三格。</li>
+    <li>把圆片在幸福轨上<b>上移一格</b>（见 5.5）。</li>
+    <li>把圆片在幸福轨上<b>下移一格</b>（见 5.5）。</li>
+    <li><b>即时计分</b>：按图标所示格数推进分数标记（见 5.4）。</li>
+    <li><b>终局计分</b>：在终局计分时按图标所示格数推进分数标记（见 5.4）。</li>
+    <li>把图标所示颜色的知识圆片<b>前进一格</b>（见 9.3）。</li>
+    <li>任选一个知识圆片<b>前进或后退</b>一格。不能把知识圆片退到开局起始位置之前。</li>
+  </ul>
+
+  <h3>流程触发</h3>
+  <ul class="plain">
+    <li>执行 7.1.1 辐射 · 7.1.2 弃两张任务卡 · 7.1.3 重置区域板块 · 7.1.4 幸存者出现。</li>
+    <li>执行 12.2 幸福计分 · 12.3 殖民地板计分 · 12.4 凤凰计划计分。</li>
+  </ul>
+</section>
+
+<!-- ================= 20 制作名单 ================= -->
+<section class="sec" id="credits">
+  <h2><span class="num">20</span>制作名单</h2>
+  <div class="credits">
+    <div><span class="role">设计</span><span class="names">Eduardo Pavón、Jorge J. Barroso、Jesús Fuentes</span></div>
+    <div><span class="role">插画</span><span class="names">Jorge Tabanera</span></div>
+    <div><span class="role">平面设计</span><span class="names">Jesús Fuentes</span></div>
+    <div><span class="role">规则撰写</span><span class="names">Jesús Fuentes、Javier Valera</span></div>
+    <div><span class="role">英文翻译</span><span class="names">Javier Valera、Elaine Fischer</span></div>
+    <div><span class="role">编辑</span><span class="names">Jesús Fuentes</span></div>
+    <div><span class="role">出版</span><span class="names">2025 PERRO LOKO GAMES. All rights reserved.<br>Calle Lamarque de Novoa nº9, 3º Ñ. 41008 Sevilla (Spain)<br>www.perrolokogames.com</span></div>
+  </div>
+
+  <figure>
+    <img src="ASHES_Rules_images/page_13.jpg" alt="规则书末页：制作名单与版权信息">
+    <figcaption>原书末页 · 制作名单与版权信息</figcaption>
+  </figure>
+
+  <div class="foot">
+    <span class="mark">A.S.H.E.S.</span>
+    本页为《ASHES: Blackout Protocol》中文规则书，依 2025 年英文版全文译出。<br>
+    游戏名称、术语与美术版权归 PERRO LOKO GAMES 所有。
+  </div>
+</section>
+
+</main>
+</div>
+
+<script>
+(function(){
+  var links = Array.prototype.slice.call(document.querySelectorAll('.toc a'));
+  var secs = links.map(function(a){ return document.querySelector(a.getAttribute('href')); });
+  function onScroll(){
+    var y = window.scrollY + 120, idx = 0;
+    for (var i = 0; i < secs.length; i++){
+      if (secs[i] && secs[i].offsetTop <= y) idx = i;
+    }
+    links.forEach(function(a,i){ a.classList.toggle('active', i === idx); });
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+})();
+</script>
+</body>
+</html>
