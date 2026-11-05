@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>荒野生机 Wildscape · 中文规则书</title>
+<style>
+:root{
+  --paper:#f8f3e7; --paper2:#efe6d2; --ink:#2b2416; --ink2:#54492f;
+  --deep:#2f2716; --deep2:#463a22; --olive:#5c6b3a; --olive2:#8a9a5b;
+  --clay:#a8542c; --clay2:#c8794a; --sand:#c2a878; --line:#d8cbaa;
+  --sky:#5a7d8c; --ink3:#7a6c4c;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:"Songti SC","Noto Serif SC",Georgia,"Times New Roman",serif;
+  font-size:16px; line-height:1.85; -webkit-font-smoothing:antialiased;
+}
+.wrap{display:flex; align-items:flex-start; max-width:1500px; margin:0 auto;}
+nav.toc{
+  position:sticky; top:0; flex:0 0 252px; height:100vh; overflow-y:auto;
+  background:linear-gradient(168deg,#241d10 0%,#3a2f1a 55%,#4d3d22 100%);
+  color:#d6cbb2; padding:28px 19px 46px; font-family:"Noto Sans SC",system-ui,sans-serif;
+  font-size:13.2px; line-height:1.6; border-right:1px solid #1a1408;
+}
+nav.toc::-webkit-scrollbar{width:6px;}
+nav.toc::-webkit-scrollbar-thumb{background:#6b5636; border-radius:3px;}
+nav.toc .brand{font-family:"Songti SC",serif; font-size:21px; color:#f2e3c4; letter-spacing:.14em;}
+nav.toc .brand small{display:block; font-size:10.5px; letter-spacing:.32em; color:#b09a72; margin-top:5px; font-family:system-ui,sans-serif;}
+nav.toc .rule{height:2px; width:38px; background:var(--clay2); margin:15px 0 17px;}
+nav.toc a{display:block; color:#c4b697; text-decoration:none; padding:4.2px 8px; border-radius:4px; border-left:2px solid transparent;}
+nav.toc a:hover{color:#fdf3da; background:#4a3c22; border-left-color:var(--clay2);}
+nav.toc a .n{display:inline-block; width:24px; color:#96835e; font-variant-numeric:tabular-nums; font-size:11.5px;}
+nav.toc .grp{margin:16px 0 6px; font-size:10.5px; letter-spacing:.26em; color:#907d5a; padding-left:8px;}
+nav.toc a.sub{padding-left:24px; font-size:12.2px;}
+main{flex:1 1 auto; min-width:0; padding:0 0 90px;}
+header.cover{
+  position:relative; padding:62px 56px 44px; color:#f4e9cf;
+  background:
+    radial-gradient(ellipse at 82% 14%, rgba(200,121,74,.26) 0%, transparent 55%),
+    radial-gradient(ellipse at 8% 92%, rgba(92,107,58,.55) 0%, transparent 60%),
+    linear-gradient(158deg,#1d180d 0%,#3a2f1a 55%,#57462a 100%);
+  border-bottom:3px solid var(--clay2);
+}
+header.cover::after{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background-image:radial-gradient(rgba(255,255,255,.05) 1px, transparent 1px);
+  background-size:5px 5px; opacity:.45;
+}
+header.cover .kicker{font-family:system-ui,sans-serif; font-size:11px; letter-spacing:.42em; color:var(--clay2); text-transform:uppercase;}
+header.cover h1{font-size:52px; margin:14px 0 4px; letter-spacing:.07em; font-weight:600; line-height:1.15;}
+header.cover .en{font-family:Georgia,serif; font-style:italic; font-size:22px; color:#c1b28f; letter-spacing:.06em; margin-bottom:20px;}
+header.cover .tag{font-size:15px; color:#ded2b6; max-width:680px; line-height:1.9;}
+header.cover .meta{margin-top:26px; display:flex; flex-wrap:wrap; gap:10px 12px; font-family:system-ui,sans-serif; font-size:12px; color:#c2b393;}
+header.cover .meta span{border:1px solid rgba(200,121,74,.45); padding:4px 12px; border-radius:20px; letter-spacing:.06em;}
+section.sec{padding:44px 56px 10px; border-bottom:1px solid var(--line);}
+section.sec:last-of-type{border-bottom:none;}
+h2{
+  font-size:27px; margin:0 0 20px; padding-bottom:12px; letter-spacing:.04em;
+  border-bottom:1px solid var(--line); color:var(--deep); font-weight:600;
+}
+h2 .num{
+  display:inline-block; font-family:system-ui,sans-serif; font-size:12px; font-weight:700;
+  color:var(--paper); background:var(--olive); padding:3px 9px; border-radius:3px;
+  margin-right:13px; vertical-align:3px; letter-spacing:.1em;
+}
+h3{font-size:19.5px; margin:28px 0 11px; color:var(--deep2); letter-spacing:.03em; font-weight:600;}
+h3::before{content:"◆"; color:var(--clay); font-size:11px; margin-right:8px; vertical-align:2px;}
+h4{font-size:16px; margin:20px 0 8px; color:var(--olive); letter-spacing:.02em;}
+p{margin:0 0 13px;}
+p.lead{font-size:16.5px; color:var(--ink2); border-left:3px solid var(--olive2); padding-left:15px; background:linear-gradient(90deg,rgba(138,154,91,.1),transparent 70%); padding-top:6px; padding-bottom:6px;}
+b,strong{color:var(--deep); font-weight:700;}
+em{color:var(--clay); font-style:normal; border-bottom:1px dotted var(--clay);}
+ul,ol{margin:0 0 14px; padding-left:24px;}
+li{margin-bottom:6px;}
+ul li::marker{color:var(--olive);}
+ol li::marker{color:var(--clay); font-family:system-ui,sans-serif; font-weight:700;}
+ul.tight li{margin-bottom:2px;}
+.side{
+  background:linear-gradient(180deg,#f4eeda,#ece2c8); border-left:4px solid var(--clay);
+  padding:14px 18px 13px; margin:18px 0; border-radius:0 4px 4px 0; font-size:14.6px; color:#4b4229;
+}
+.side .label{display:block; font-family:system-ui,sans-serif; font-size:10.5px; letter-spacing:.24em; color:#8e5b34; margin-bottom:5px; font-weight:700;}
+.side.imp{background:linear-gradient(180deg,#f5e8dd,#eeddc9); border-left-color:var(--olive);}
+.side.imp .label{color:var(--olive);}
+.tn{
+  border:1px dashed #bcae8b; background:#f7f2e2; padding:12px 16px; margin:16px 0;
+  border-radius:4px; font-size:14.2px; color:#5d543c;
+}
+.tn .label{display:block; font-family:system-ui,sans-serif; font-size:10.5px; letter-spacing:.2em; color:#9a8a5f; margin-bottom:4px; font-weight:700;}
+.example{
+  background:#fffdf6; border:1px solid var(--line); border-top:3px solid var(--olive2);
+  border-radius:5px; padding:15px 18px; margin:16px 0; font-size:14.6px; color:#453d2b;
+}
+.example .label{display:block; font-family:system-ui,sans-serif; font-size:10.5px; letter-spacing:.24em; color:var(--olive); margin-bottom:6px; font-weight:700;}
+table{width:100%; border-collapse:collapse; margin:14px 0 18px; font-size:14.3px;}
+th{background:var(--deep); color:#f0e4c8; text-align:left; padding:8px 11px; font-weight:600; letter-spacing:.05em; font-family:system-ui,sans-serif; font-size:12.8px;}
+td{padding:7.5px 11px; border-bottom:1px solid var(--line); vertical-align:top;}
+tbody tr:nth-child(even){background:rgba(216,203,170,.26);}
+td.n{white-space:nowrap; font-family:system-ui,sans-serif; color:var(--olive); font-weight:700;}
+td.id{white-space:nowrap; font-family:system-ui,sans-serif; font-weight:700; color:var(--clay); font-size:13px;}
+table.cards{font-size:13.6px;}
+table.cards th:nth-child(1){width:9%;}
+figure{margin:18px 0; text-align:center;}
+figure img{max-width:100%; border:1px solid var(--line); border-radius:3px; box-shadow:0 3px 14px rgba(47,39,22,.14);}
+figcaption{margin-top:8px; font-family:system-ui,sans-serif; font-size:12.2px; color:var(--ink3); letter-spacing:.04em;}
+footer{padding:32px 56px 58px; color:var(--ink3); font-size:12.6px; font-family:system-ui,sans-serif; border-top:1px solid var(--line); background:var(--paper2);}
+footer b{color:var(--olive);}
+.kv{display:flex; flex-wrap:wrap; gap:8px 22px; margin:12px 0 16px; font-family:system-ui,sans-serif; font-size:13.4px;}
+.kv div{color:var(--ink2);}
+.kv b{color:var(--olive); margin-right:5px;}
+.grid2{display:grid; grid-template-columns:1fr 1fr; gap:0 30px;}
+@media (max-width:1100px){
+  nav.toc{display:none;}
+  section.sec,header.cover,footer{padding-left:24px; padding-right:24px;}
+  header.cover h1{font-size:34px;}
+  .grid2{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<nav class="toc">
+  <div class="brand">荒野生机<small>WILDSCAPE</small></div>
+  <div class="rule"></div>
+  <div class="grp">基础规则</div>
+  <a href="#s1"><span class="n">1</span>简介与目标</a>
+  <a href="#s2"><span class="n">2</span>配件</a>
+  <a href="#s3"><span class="n">3</span>游戏概览</a>
+  <a href="#s4"><span class="n">4</span>准备</a>
+  <a href="#s5"><span class="n">5</span>核心概念：栖息地</a>
+  <a href="#s6"><span class="n">6</span>野放食草动物</a>
+  <a href="#s7"><span class="n">7</span>回合与能量</a>
+  <a href="#s8"><span class="n">8</span>选择轮盘扇区</a>
+  <a href="#s9"><span class="n">9</span>栖息地板块或灵长类卡</a>
+  <a href="#s10"><span class="n">10</span>轮盘行动</a>
+  <a href="#s11"><span class="n">11</span>免费行动</a>
+  <a href="#s111" class="sub">11.1 打出掠食者卡</a>
+  <a href="#s112" class="sub">11.2 吸引专家</a>
+  <a href="#s113" class="sub">11.3 激活专家效果</a>
+  <a href="#s12"><span class="n">12</span>回合结束</a>
+  <a href="#s13"><span class="n">13</span>终局计分</a>
+  <div class="grp">单人玩法</div>
+  <a href="#s14"><span class="n">14</span>单人规则：盗猎者</a>
+  <div class="grp">附录</div>
+  <a href="#a1"><span class="n">A</span>鸟类卡 B01–B10</a>
+  <a href="#a2"><span class="n">B</span>灵长类卡 M01–M28</a>
+  <a href="#a3"><span class="n">C</span>掠食者卡 D01–D28</a>
+  <a href="#a4"><span class="n">D</span>掠食者奖励板块</a>
+  <a href="#a5"><span class="n">E</span>动物志卡 F01–F28</a>
+  <a href="#a6"><span class="n">F</span>专家卡 S01–S40</a>
+  <a href="#a7"><span class="n">G</span>专家轮抽变体</a>
+  <a href="#a8"><span class="n">H</span>名词表</a>
+  <a href="#a9"><span class="n">I</span>图标速查</a>
+  <a href="#a10"><span class="n">J</span>制作名单</a>
+</nav>
+
+<main>
+
+<header class="cover">
+  <div class="kicker">Karma Games · 2026 · 1–4 人</div>
+  <h1>荒野生机</h1>
+  <div class="en">Wildscape — Rebuild a Living Land</div>
+  <div class="tag">世界变了。数十年的气候压力与人为干预把全球的自然系统推到极限，非洲大片土地在长期干旱、土壤退化与栖息地丧失中变得脆弱。而在人烟退去之后，土地开始重新呼吸。<br>你是一位留在荒野边缘的自然学者，要用一格格栖息地、一群群重新野放的动物，把这片土地种回最健壮的生态系统。</div>
+  <div class="meta">
+    <span>1–4 人</span><span>30 分钟</span><span>10 岁以上</span><span>含单人模式</span><span>含专家轮抽变体</span>
+  </div>
+</header>
+
+<section class="sec" id="s1">
+  <h2><span class="num">01</span>简介与目标</h2>
+  <p class="lead"><b>wildscape</b>（名词）：植物与动物得以在极少或没有人类介入的情况下繁茂生长的区域。——《牛津英语词典》，2024 年 6 月</p>
+  <p>世界变了。</p>
+  <p>数十年的气候压力与人为干预，把全球的自然系统推到了极限。有些地区受损尤为严重：在非洲的大片区域，长期干旱、土壤退化与栖息地丧失让地貌变得脆弱、难以维持。情况恶化后，一连串自然危机迫使社区迁徙——有些社区彻底消亡。</p>
+  <p>但在人口凋零之后，土地开始重新呼吸。土壤稳定下来，水回来了，栖息地重新连通。在非洲某些偏僻的地方，少数执着的自然学者正一粒种子一粒种子地照料着自己那片恢复中的土地。他们保护脆弱的栖息地，重新引入消失的物种，扶助新的野生生长。土地会对他们的选择作出回应——有时细微，有时剧烈。</p>
+  <p>过去的错误不会重演。<b>逼土地，它就枯萎；听荒野，它就会长成最健壮的生态系统。</b></p>
+  <p>若想看到一个真实的例子，强烈推荐 2013 年的短纪录片《Forest Man》（森林之人）——一个人献身自然所能成就的事，会让你受到触动。</p>
+  <div class="kv">
+    <div><b>设计</b>Sebastian Bleasdale</div>
+    <div><b>开发</b>Juma Al-JouJou</div>
+    <div><b>出版</b>Karma Games</div>
+    <div><b>插画</b>Miguel Coimbra</div>
+    <div><b>平面</b>Jess denHeyer</div>
+    <div><b>排版</b>Aleksandr Kähar / Dina Said So Studio</div>
+  </div>
+  <figure>
+    <img src="Wildscape_Rules_images/page_04.jpg" alt="Wildscape 简介页">
+    <figcaption>原书第 4 页：背景设定与游戏概览</figcaption>
+  </figure>
+</section>
+
+<section class="sec" id="s2">
+  <h2><span class="num">02</span>配件</h2>
+  <table>
+    <thead><tr><th>配件</th><th>数量</th><th>说明</th></tr></thead>
+    <tbody>
+      <tr><td>轮盘版图</td><td class="n">1 块</td><td>双面：多人面 / 单人面</td></tr>
+      <tr><td>栖息地板块</td><td class="n">70 块</td><td>单格六角板块，含 1–3 种栖息地类型</td></tr>
+      <tr><td>食草动物板块</td><td class="n">108 块</td><td>双面：野放面 / 定居面</td></tr>
+      <tr><td>蛇板块</td><td class="n">24 块</td><td>双面：体型 1 / 体型 2</td></tr>
+      <tr><td>河流板块</td><td class="n">46 块</td><td>18 块体型 1、16 块体型 2、12 块体型 3</td></tr>
+      <tr><td>土地板块</td><td class="n">16 块</td><td>用于扩张领地</td></tr>
+      <tr><td>起始土地板块</td><td class="n">4 块</td><td>每位玩家 1 块，双面</td></tr>
+      <tr><td>绿洲板块</td><td class="n">15 块</td><td>沙漠专用，含纯沙漠与带其他栖息地的版本</td></tr>
+      <tr><td>掠食者奖励板块</td><td class="n">18 块</td><td>编号 P01–P18</td></tr>
+      <tr><td>鸟类卡</td><td class="n">10 张</td><td>B01–B10，双面（a / b 两面）</td></tr>
+      <tr><td>灵长类卡</td><td class="n">28 张</td><td>M01–M28</td></tr>
+      <tr><td>掠食者卡</td><td class="n">28 张</td><td>D01–D28</td></tr>
+      <tr><td>动物志卡</td><td class="n">28 张</td><td>F01–F28，终局目标</td></tr>
+      <tr><td>专家卡</td><td class="n">40 张</td><td>5 类各 8 张（河流 / 湿地 / 林地 / 稀树草原 / 沙漠）</td></tr>
+      <tr><td>专家板</td><td class="n">1 块</td><td>双面：2 人 / 3–4 人</td></tr>
+      <tr><td>专家标记</td><td class="n">5 个</td><td>每类 1 个，在各自轨道上推进</td></tr>
+      <tr><td>太阳能量标记</td><td class="n">14 个</td><td>黄色，置于轮盘中环</td></tr>
+      <tr><td>生物能量标记</td><td class="n">30+ 个</td><td>绿色，个人供应区</td></tr>
+      <tr><td>灵长类棋子</td><td class="n">14+ 个</td><td></td></tr>
+      <tr><td>掠食者棋子</td><td class="n">14+ 个</td><td></td></tr>
+      <tr><td>行动选择标记</td><td class="n">1 个</td><td></td></tr>
+      <tr><td>观鸟板块</td><td class="n">2 块</td><td>压在栖息地板块堆上</td></tr>
+      <tr><td>终局触发板块</td><td class="n">1 块</td><td>压在最后一堆栖息地板块上</td></tr>
+      <tr><td>记录骰</td><td class="n">10+ 颗</td><td>可选，用于记录栖息地剩余空间</td></tr>
+      <tr><td>单人卡</td><td class="n">1 张</td><td>单人模式专用</td></tr>
+      <tr><td>起始玩家卡</td><td class="n">1 张</td><td></td></tr>
+      <tr><td>玩家帮助卡</td><td class="n">4 张</td><td></td></tr>
+      <tr><td>计分纸</td><td class="n">1 本</td><td></td></tr>
+    </tbody>
+  </table>
+  <div class="side">
+    <span class="label">不设上限</span>
+    掠食者棋子、灵长类棋子与生物能量标记都<b>不视为有限</b>。用尽时请自行寻找合适的替代物。
+  </div>
+</section>
+
+<section class="sec" id="s3">
+  <h2><span class="num">03</span>游戏概览</h2>
+  <p>Wildscape 以若干<b>轮</b>进行，每轮中每位玩家各行动一次。持起始玩家卡者先行动，之后按顺时针进行。</p>
+  <p>每个回合，你在中央<b>轮盘</b>上选择一个<b>扇区</b>：该扇区决定你本回合能拿到的栖息地板块、可以执行的一组行动，以及可用的能量数量。</p>
+  <p>取得的栖息地板块要一格格放进自己的<b>领地</b>，相同类型的边缘相接即拼成不同大小的<b>栖息地</b>。你可以按栖息地的板块总数，往里面放入食草动物。某一类栖息地里放够数量的动物，就能吸引该类栖息地的<b>专家</b>，获得即时或持续的效果。</p>
+  <p>你花费能量来让食草动物<b>定居</b>、扩张领地、放置绿洲与河流、放置蛇，并获取各种动物卡——掠食者卡与灵长类卡带来独特的奖励效果，动物志卡则是你的个人终局目标。</p>
+  <p><b>鸟类卡</b>是相邻玩家之间的竞争目标：顺应它们的偏好，就能赢得生物能量与胜利分（VP）。</p>
+  <p>回合结束时，你要补充卡牌展列区、补充轮盘上的栖息地板块，并把用掉的能量一枚一枚顺时针发回轮盘各扇区，使各个行动在整局中强弱不断变化。</p>
+  <p>当最后一堆栖息地板块翻出<b>终局触发板块</b>时，再完整进行一轮，游戏结束。终局时为领地中的河流与动物、你拥有的专家卡与动物志卡、以及鸟类目标统一计分。<b>生态系统最有价值者获胜。</b></p>
+  <div class="side imp">
+    <span class="label">第一次游戏的建议</span>
+    可选的行动与栖息地类型很多，开局容易无所适从。第一局不妨把行动集中在：<b>① 尽快拿到 1–2 位专家；② 挑 2 张鸟类卡，并在观鸟中赢下它们。</b>
+  </div>
+</section>
+
+<section class="sec" id="s4">
+  <h2><span class="num">04</span>准备</h2>
+  <h4>轮盘</h4>
+  <ol>
+    <li>把轮盘版图放在桌面中央，<b>多人面</b>朝上。</li>
+    <li>随机选一个扇区作为起点，从此处顺时针，把 <b>14 枚太阳能量标记</b>（黄色）按「2 枚、1 枚、2 枚、1 枚……」交替放进轮盘中环，直到填满所有格位。</li>
+    <li>把<b>行动选择标记</b>放在轮盘旁。</li>
+  </ol>
+  <h4>栖息地板块</h4>
+  <ol start="4">
+    <li>洗混栖息地板块，把 <b>9 块</b>正面朝上放在轮盘上为其预留的格位。</li>
+    <li>在轮盘旁按玩家人数设置 <b>3 堆</b>背面朝上的栖息地板块：<b>2 人局每堆 8 块、3 人局每堆 12 块、4 人局每堆 16 块</b>。</li>
+    <li>在其中 <b>2 堆</b>的顶上各放 1 块<b>观鸟板块</b>。</li>
+    <li>把<b>所有剩余</b>的栖息地板块叠成第 4 堆，背面朝上，顶上放<b>终局触发板块</b>。</li>
+  </ol>
+  <div class="side">
+    <span class="label">短局变体</span>
+    建议前几局、或时间较少时使用：2/3/4 人局的每堆改为 <b>6/9/12 块</b>。
+  </div>
+  <h4>专家板</h4>
+  <ol start="8">
+    <li>把专家板按人数对应的一面朝上（<b>3/4 人面</b>或<b>2 人面</b>）。</li>
+    <li>把 5 个专家标记分别放到各自颜色轨道的<b>起始格</b>。</li>
+    <li>把 5 类专家卡分别洗混，背面朝上放在专家板旁。</li>
+  </ol>
+  <h4>卡牌展列区</h4>
+  <ol start="11">
+    <li>把三类动物卡（动物志、灵长类、掠食者）分别洗混。每类各占一行，从每叠翻出顶部 3 张，构成 <b>3×3</b> 的展列区；每叠剩下的牌背面朝下放在对应行的右侧。</li>
+    <li>洗混鸟类卡，在<b>每一对相邻玩家</b>之间发 2 张——随机决定哪一面朝上。其余的放回盒中。<b>2 人局：</b>两位玩家之间一共发 4 张。</li>
+  </ol>
+  <h4>公共供应区</h4>
+  <ol start="13">
+    <li>洗混 16 块土地板块，背面朝下叠成一堆，把最上面一块翻到正面。</li>
+    <li>随机翻出数量等于<b>玩家人数 ×3</b> 的掠食者奖励板块，正面朝上；其余放回盒中。</li>
+    <li>放在玩家伸手可及处：食草动物板块（按栖息地类型与数值分类，<b>野放面</b>朝上，见第 6 节）、蛇板块（按栖息地类型分类）、河流板块（按体型分类）、绿洲板块（按附带的栖息地分类）、掠食者棋子、灵长类棋子、生物能量标记（绿色）。</li>
+  </ol>
+  <h4>玩家准备</h4>
+  <ol start="16">
+    <li>洗混 4 块起始土地板块，每位玩家发 1 块。</li>
+    <li>每位玩家取 <b>2 枚</b>生物能量标记。</li>
+    <li>最近一次亲眼见过野生动物的人先手，拿取起始玩家卡。</li>
+    <li>每位玩家抽 <b>6 张</b>卡：动物志、掠食者、灵长类各 2 张。</li>
+    <li>每位玩家从手牌中<b>弃掉任意 3 张</b>动物卡，并选择起始土地板块的<b>任意一面</b>朝上打出（图中未显示）。</li>
+  </ol>
+  <div class="side imp">
+    <span class="label">专家专家变体 #1</span>
+    适合熟悉游戏、想提前规划专家触发时机的玩家。在此变体中，准备时给每位玩家每类各发 2 张随机专家卡；到玩家准备第 20 步，每人每类<b>留 1 张、弃 1 张</b>，留下的按第 11.2 节「吸引专家」的说明进入游戏。
+    <br>更进阶的玩法见附录 G 的<b>专家轮抽</b>。
+  </div>
+  <figure>
+    <img src="Wildscape_Rules_images/page_03.jpg" alt="准备示意图">
+    <figcaption>原书第 3 页：准备完成后的桌面示意（数字对应上述步骤）</figcaption>
+  </figure>
+</section>
+
+<section class="sec" id="s5">
+  <h2><span class="num">05</span>核心概念：栖息地</h2>
+  <p class="lead">Wildscape 的两个核心动作是<b>放置栖息地板块</b>与<b>放置食草动物</b>。这一节讲清前者，下一节讲后者。</p>
+
+  <h3>五种栖息地类型</h3>
+  <p>河流、林地、湿地、稀树草原、沙漠。</p>
+  <p>一块栖息地板块上可能含有 <b>1、2 或 3 种</b>不同的栖息地类型。每当你获得栖息地板块，把它放进自己领地的<b>任意空格</b>，朝向随意：<b>不需要</b>与相邻板块的边缘匹配，也<b>不需要</b>与其他板块相邻。如果你不想放，也可以直接弃掉。</p>
+
+  <h3>栖息地的大小</h3>
+  <p>规则中单独说「栖息地」，指的是你领地内由栖息地板块拼成、<b>同一类型且彼此连通</b>的一片区域。一片栖息地的大小＝<b>边缘相接且类型相同</b>的板块数。</p>
+  <p>部分栖息地板块上印有<b>新芽图标</b>，代表格外丰茂的板块：该图标使它所在的<b>那一种</b>栖息地<b>+1</b>（不增加同一板块上其他类型的数值）。</p>
+  <div class="example">
+    <span class="label">示例</span>
+    图中这片领地里有一片<b>大小 4 的林地</b>、一片<b>大小 3 的湿地</b>，以及一片<b>大小 6 的稀树草原</b>（由 5 块板块 + 1 个新芽图标构成）。此外你还会在领地各处见到许多<b>大小 1</b> 的栖息地。
+  </div>
+  <figure>
+    <img src="Wildscape_Rules_images/page_05.jpg" alt="栖息地示例">
+    <figcaption>原书第 5 页：栖息地连通与大小计算示例</figcaption>
+  </figure>
+
+  <h3>山与山脉</h3>
+  <p>山占据土地板块上的格位，<b>不能</b>在上面放栖息地板块。彼此相邻的山合称一道<b>山脉</b>（单独一座山也算<b>大小 1 的山脉</b>）。部分山带<b>瀑布</b>，可作为在其旁边放置河流的<b>水源</b>。</p>
+
+  <h3>漏油</h3>
+  <p>漏油视为<b>空格</b>，可以在上面（也应该在上面）放栖息地板块。终局时每一个<b>仍未覆盖</b>的漏油扣 <b>1 VP</b>。</p>
+
+  <h3>从「活动堆」抽取栖息地板块</h3>
+  <p>通常在回合结束时、以及某些效果进行中，你会被要求从<b>活动堆</b>抽一块栖息地板块。活动堆指准备阶段叠好的那几堆背面朝上的栖息地板块。</p>
+  <p><b>活动堆</b>就是那堆<b>顶上没有</b>观鸟板块或终局触发板块的牌堆。每次抽板块，都从这堆的顶上拿。</p>
+  <p>若因任何原因在活动堆已空时仍需抽取，就从<b>下一堆</b>上取走观鸟板块（若已无观鸟板块，则取走终局触发板块），那一堆随即成为新的活动堆。</p>
+  <p>当你从某堆上取走观鸟板块或终局触发板块时，把它<b>翻到正面</b>放进轮盘中央，提醒本回合结束时执行第 12 节中对应的流程。</p>
+</section>
+
+<section class="sec" id="s6">
+  <h2><span class="num">06</span>野放食草动物</h2>
+  <p class="lead">「野放（reintroduction）」是把物种刻意释放回野外，以建立健康、遗传多样、可自我维持的种群。「定居（established）」则指该物种已在新环境成功落脚并繁殖，扩散开来。</p>
+  <p>食草动物板块是双面的：进入游戏时都是<b>野放面</b>，之后才可能翻到<b>定居面</b>。两面都印有名称、体型、数值与栖息地类型。</p>
+  <p>野放状态下的食草动物，<b>体型与数值相等</b>；板块上的圆点表示它若定居，数值会提高多少。定居面以<b>心形图标</b>标示，代表种群健康兴旺——数值提高后的完整数值会显示出来，而<b>体型不变</b>。请注意：卡牌一般引用食草动物的<b>数值</b>，从不引用体型。</p>
+  <figure>
+    <img src="Wildscape_Rules_images/page_06.jpg" alt="食草动物板块结构">
+    <figcaption>原书第 6 页：食草动物板块的野放面与定居面、圆点与心形图标</figcaption>
+  </figure>
+
+  <h3>放入栖息地</h3>
+  <p>只要放得下，你可以从公共供应区往对应的栖息地里放入<b>任意数量</b>的食草动物。判断标准：一片栖息地内<b>所有动物板块</b>（食草动物与蛇）的体型之和，<b>小于或等于</b>该栖息地的大小。</p>
+  <div class="example">
+    <span class="label">示例</span>
+    这片林地大小为 6。你可以放一只<b>体型 6 的 Kudu（捻角羚）</b>，也可以放两只<b>体型 3 的 Pouched Rats（囊鼠）</b>。之后若再往这片区域加 4 块林地栖息地板块，就能再加一只体型 4 的林地食草动物。
+  </div>
+  <div class="side imp">
+    <span class="label">免费行动</span>
+    把食草动物放进领地是<b>免费行动</b>，在你回合中的任意时刻都可以做。
+  </div>
+  <p>不过，也可以等栖息地长大一些再放动物：体型越大的动物，定居后分值越高。</p>
+  <p>已放下的食草动物<b>不能</b>从栖息地移走。但它并不占据区域内任何单独的六角格——它属于整片栖息地——任何时候都可以为了便于阅读而挪动位置。</p>
+  <div class="side">
+    <span class="label">可选：木质记录骰</span>
+    记录骰用于跟踪「半满」栖息地的剩余空间。例如把<b>体型 7 的非洲水牛</b>放进大小为 9 的湿地，可以放一颗「2」朝上的骰子提醒剩余 2 格，之后每次扩建只需把骰子往上拨，不必每回合重数。
+  </div>
+
+  <h3>沙漠栖息地</h3>
+  <p>所有食草动物都需要水源——湿地、林地、稀树草原都容易找到，沙漠则极为稀缺。</p>
+  <p>在沙漠栖息地中，必须<b>先放一块绿洲板块</b>，才能在那里野放食草动物。绿洲板块基本上是一种特殊的沙漠栖息地板块，但也可能含有一小片其他类型的栖息地。绿洲<b>不在</b>栖息地板块抽牌堆里，只能通过特定的轮盘行动、以及卡牌与板块上的特殊奖励获得。</p>
+  <p>绿洲板块以中央的特殊水域标示。由于水源充足，<b>每块绿洲板块都使其所在的沙漠栖息地 +1</b>。</p>
+  <div class="side imp">
+    <span class="label">注意</span>
+    部分<b>沙漠栖息地板块</b>也印有新芽图标，但那<b>不</b>等于绿洲。
+  </div>
+  <p>你在沙漠中放下的<b>每一块</b>食草动物板块，都必须有<b>自己的一块</b>绿洲来支撑：即一片放了 2 块食草动物板块的沙漠栖息地，其中至少要有 2 块绿洲板块。</p>
+  <p>小建议：把沙漠食草动物压在绿洲板块上，可以提醒自己这块绿洲已被占用。</p>
+</section>
+
+<section class="sec" id="s7">
+  <h2><span class="num">07</span>回合与能量</h2>
+  <p class="lead">回合中可做的行动很多，有些要花能量，有些免费。Wildscape 的能量分为两种。</p>
+  <p><b>太阳能量</b>显示在轮盘上。你<b>永远不能</b>拿走它，也不能弃掉它。它被使用后会自动循环回来，供你用于各种用途——它从不真正耗尽，只是从一种形态转成另一种。</p>
+  <p>另一种是<b>生物能量</b>，储存在大地与生物体内，放在你的个人供应区，需要时花掉。你可以从环境中获得生物能量（部分专家即代表环境），也可以从生物界获得——掠食者、灵长类、鸟类。在轮盘上也能把太阳能量转化为生物能量（见第 10 节）。</p>
+  <div class="side">
+    <span class="label">花钱的通用规则</span>
+    每当被要求支付能量，你都可以用手上<b>任意一种</b>能量支付。
+  </div>
+
+  <h3>回合结构</h3>
+  <p>每回合有 <b>2 个必做动作</b>：</p>
+  <ul class="tight">
+    <li>在轮盘上选择一个扇区。</li>
+    <li>选择拿取免费的栖息地板块，<b>或</b>打出一张灵长类卡。</li>
+  </ul>
+  <p><b>可选动作</b>有：</p>
+  <ul class="tight">
+    <li>执行轮盘行动</li>
+    <li>打出掠食者卡</li>
+    <li>吸引专家</li>
+    <li>激活专家效果</li>
+    <li>野放食草动物（见第 6 节）</li>
+  </ul>
+  <p>除了一处例外，所有动作的顺序随意：你必须<b>先</b>选好轮盘扇区，才能做依赖它的动作（拿免费栖息地板块、执行轮盘行动）。除此之外，这些依赖动作之间、以及它们与其他动作之间，顺序都可以自由安排。</p>
+  <p>每个动作必须<b>完整结算</b>后才能做下一个。所有对自己有利的效果都是<b>可选</b>的——可以全拿、拿一部分、或全都不拿——但必须<b>当场</b>决定，否则视为放弃。同理，获得的板块必须立刻放置或弃掉。若在同一时点获得多个奖励，可以任意顺序结算。任何代价（例如弃一张卡、或按图标支付能量）都必须支付，才能获得与之关联的效果。</p>
+  <figure>
+    <img src="Wildscape_Rules_images/page_07.jpg" alt="回合与能量">
+    <figcaption>原书第 7 页：两种能量与回合结构；轮盘插画取材于莫桑比克的 Lico 山</figcaption>
+  </figure>
+  <div class="tn">
+    <span class="label">译者注</span>
+    轮盘插画的原型是非洲莫桑比克的 <b>Lico 山</b>：700 米垂直峭壁之上，火山口顶部藏着 74 英亩原始雨林，其发现过程见于 2020 年国家地理纪录片《The Lost Forest》。在本作的架空世界里，Lico 山周围已被过度采伐、植被剥光，唯独高原上的森林因地处偏远而幸存——精心规划之下，它仍然保有的生命或许就是重启新生态系统的种子。
+  </div>
+</section>
+
+<section class="sec" id="s8">
+  <h2><span class="num">08</span>选择轮盘扇区（必做）</h2>
+  <p>把<b>行动选择标记</b>放到任意一个轮盘扇区旁。这个选择决定你本回合可用的栖息地板块、可执行的轮盘行动，以及可用的太阳能量数量。</p>
+  <p>你可以选任何扇区，不管它上一回合被谁用过——<b>甚至可以选和上一位玩家完全相同的扇区</b>。</p>
+  <div class="side">
+    <span class="label">操作建议</span>
+    如果本回合你打了（或打算打）灵长类卡，可以用行动选择标记盖住该扇区的栖息地板块，提醒自己本回合<b>不能</b>拿免费栖息地板块（但可以通过其他奖励效果取得）。轮盘行动仍然可以做。
+  </div>
+</section>
+
+<section class="sec" id="s9">
+  <h2><span class="num">09</span>栖息地板块或灵长类卡（必做）</h2>
+  <p>回合中的某个时刻，你必须在这两个选项中<b>选一个</b>执行。</p>
+
+  <h3>拿取免费栖息地板块</h3>
+  <p>选择此项，你必须拿走<b>你所在扇区</b>的那块栖息地板块。不过如果你不想放进领地，可以把它弃掉。</p>
+
+  <h3>或者：打出一张灵长类卡</h3>
+  <p>作为拿免费栖息地板块的替代，你每回合可以打出 <b>1 张</b>手牌中的灵长类卡。流程如下：</p>
+  <ol>
+    <li>把一枚<b>灵长类棋子</b>放到一块栖息地板块上，该板块须含有卡片左上角标示的栖息地类型之一。若该板块同时具备两种偏好类型，你必须为这只灵长类<b>选定其中一种</b>作为它的家。</li>
+    <li>你<b>不能</b>把灵长类放到与其他灵长类棋子<b>相邻</b>的格子上——灵长类有领地性！如果无处可放，就不能打出这张卡。</li>
+    <li>放好棋子后，获得卡面上的<b>即时效果</b>。</li>
+  </ol>
+  <div class="example">
+    <span class="label">示例</span>
+    你想放一只<b>Green Monkey（绿猴）</b>，它偏好林地或稀树草原。由于图中 A 处已有一只灵长类，红色轮廓范围内的所有栖息地板块都<b>不能</b>再放（它们都与那只灵长类相邻）。你必须在这片红区之外，选一块林地或稀树草原的栖息地板块。
+  </div>
+  <div class="side">
+    <span class="label">注意</span>
+    灵长类<b>不计入</b>所在栖息地的大小（它们住在树上）。
+  </div>
+  <p>灵长类需要很大的领地，因此终局时，围绕它们的板块若与其偏好栖息地匹配，会上分（见第 13 节）。玩家帮助卡上标出了各类栖息地在灵长类卡中出现的频率（<b>林地最常见</b>）。</p>
+  <figure>
+    <img src="Wildscape_Rules_images/page_08.jpg" alt="灵长类卡与放置限制">
+    <figcaption>原书第 8 页：灵长类卡结构与「不得相邻」的放置示例</figcaption>
+  </figure>
+</section>
+
+<section class="sec" id="s10">
+  <h2><span class="num">10</span>轮盘行动</h2>
+  <p class="lead">每个扇区上印有 2–3 种可执行的行动，各自标明所需能量。</p>
+  <p>执行行动时，把相应数量的能量标记从你的扇区<b>推到版图中央</b>，表示已花费。如前所述，你也可以弃掉生物能量（开局有 2 枚），当作轮盘上的太阳能量来支付。</p>
+  <p>你可以<b>任意多次</b>执行本扇区上的行动，包括同一行动重复执行，直到没有能量、能量不足、或你不想再做为止。</p>
+
+  <table class="cards">
+    <thead><tr><th>行动</th><th>原文</th><th>效果</th></tr></thead>
+    <tbody>
+      <tr><td>获得生物能量</td><td>Gain Bio Energy</td><td>从供应区取 1 枚生物能量。</td></tr>
+      <tr><td>拿取卡牌</td><td>Take a Card</td><td>从展列区拿取 1 张指定类型的正面朝上的卡（灵长类 / 掠食者 / 动物志）。展列区的空位要到回合结束才补。</td></tr>
+      <tr><td>使食草动物定居</td><td>Establish a Herbivore</td><td>把一块食草动物板块翻到<b>定居面</b>（见第 6 节）。它的数值提高——这会同时影响专家、掠食者、动物志的达成条件与终局计分。</td></tr>
+      <tr><td>拿取栖息地板块</td><td>Take Habitat Tiles</td><td>从你所在扇区<b>逆时针</b>方向的扇区拿取并放置栖息地板块。紧邻的扇区 <b>2</b> 能量，隔 1 格 <b>3</b> 能量，再远 <b>4</b> 能量，依此类推。不必按由近到远拿。</td></tr>
+      <tr><td>放置土地板块</td><td>Place a Land Tile</td><td>取土地板块堆顶上的一块，放在现有领地旁的任意位置、任意朝向，必须与现有领地<b>至少一个六角格边对边相接</b>。放好后把堆上下一块翻到正面。</td></tr>
+      <tr><td>放置绿洲</td><td>Place an Oasis</td><td>把一块绿洲板块放在空格上。可任选现有绿洲：带林地 / 湿地 / 稀树草原的，或纯沙漠的。</td></tr>
+      <tr><td>放置河流</td><td>Place a River</td><td>按图标支付 <b>2/3</b> 能量，放置体型 2/3 的河流板块。河流板块双面，可任选一面朝上（两面栖息地分布不同，但板块本身相同）。放置时<b>至少要有一条水边</b>与领地内已有的水边相接。</td></tr>
+      <tr><td>放置 2 个蛇板块</td><td>Place 2 Snakes</td><td>取 2 块蛇板块（可同可不同）放进对应栖息地。蛇板块双面（体型 1 / 体型 2），只要栖息地够大，可任选一面朝上。放入后<b>不能</b>再翻面。</td></tr>
+      <tr><td>蛇与河流</td><td>Snakes &amp; Rivers</td><td>体型 1 的河流与蛇任选共 2 个，放置规则同上。</td></tr>
+    </tbody>
+  </table>
+
+  <div class="side imp">
+    <span class="label">沙漠特例</span>
+    与食草动物不同，<b>沙漠蛇不需要绿洲</b>。
+  </div>
+  <div class="side">
+    <span class="label">水源从哪来</span>
+    起始土地上的那座山有<b>两条水边</b>（瀑布）；之后每块土地板块上也各有一座带水边的山。
+  </div>
+  <div class="tn">
+    <span class="label">注意</span>
+    若因其他原因（例如卡牌效果）执行上述行动，按本节说明结算，但<b>不支付</b>轮盘上的能量代价。
+  </div>
+  <figure>
+    <img src="Wildscape_Rules_images/page_09.jpg" alt="轮盘行动图标">
+    <figcaption>原书第 9 页：各轮盘行动的图标、代价与效果</figcaption>
+  </figure>
+</section>
+
+<section class="sec" id="s11">
+  <h2><span class="num">11</span>免费行动</h2>
+  <p class="lead">除「野放食草动物」外，以下行动在你回合中可以任意次执行。它们不花能量，但各自可能有前置条件。</p>
+
+  <h3 id="s111">11.1 打出掠食者卡</h3>
+  <p>要打出手牌中的掠食者卡，必须：</p>
+  <ol>
+    <li><b>满足</b>卡面上写明的条件。</li>
+    <li>把一枚<b>掠食者棋子</b>放到用于满足条件的<b>动物板块</b>之一上。每块动物板块<b>只能有 1 枚</b>掠食者棋子——若没有可用的动物板块，就不能打出这张卡。</li>
+    <li>放好棋子后，可以任选一块<b>正面朝上的掠食者奖励板块</b>，获得其即时效果。奖励板块用完后，仍然可以继续打掠食者卡。</li>
+  </ol>
+  <div class="side">
+    <span class="label">注意</span>
+    已放有掠食者棋子的动物板块，<b>仍然可以</b>用来满足之后打出的掠食者卡的条件！
+  </div>
+  <p>掠食者偏好体型大、已定居的猎物（这样的兽群数量更多），因此终局时你还将按其所在动物板块的数值得分（见第 13 节）。</p>
+  <p>几点说明：</p>
+  <ul>
+    <li>掠食者<b>不计入</b>所在栖息地的大小。</li>
+    <li>一块动物板块代表的不是一只动物，而是<b>一个兽群</b>。因此即使被掠食者捕猎过，食草动物兽群依然可以定居！这对猎手而言意味着更稳定的食物来源，掠食者终局也更值分。</li>
+    <li>掠食者的条件只在<b>初次放置</b>时检查。之后即使条件不再成立，也没有关系——它仍然留在那只食草动物身上。</li>
+  </ul>
+  <div class="example">
+    <span class="label">示例</span>
+    你打出 <b>Desert Crocodile（沙漠鳄）</b>。它的条件要求「2 块湿地与 2 块沙漠动物板块，且所在栖息地彼此连续相邻」。你还必须把掠食者棋子放到用于满足条件的 <b>4 块动物板块之一</b>上。<br>
+    沙漠里的 <b>Hyrax（岩蹄兔）</b> 上已有掠食者棋子，不能再放——但注意，它<b>仍然可以</b>用来满足沙漠鳄的条件！你选择把棋子放到湿地里空闲的 <b>Bushpig（非洲野猪）</b> 上；<b>Jaculus（跳鼠）</b>与 <b>Greater Cane Rat（大蔗鼠）</b> 同样有效，因为它们也计入沙漠鳄的条件。<br>
+    随后你可以领取一块剩余的掠食者奖励板块，例如「放置体型 3 的河流板块」，并按正常规则把河流放进领地。
+  </div>
+  <figure>
+    <img src="Wildscape_Rules_images/page_10.jpg" alt="掠食者卡与示例">
+    <figcaption>原书第 10 页：掠食者卡结构、条件与奖励板块的示例</figcaption>
+  </figure>
+
+  <h3 id="s112">11.2 吸引专家</h3>
+  <p>专家一直在为自己的研究领域寻找新的站点。要吸引他们，你必须在与其类型相符的栖息地里拥有兴旺的动物群落。</p>
+  <p><b>每位玩家在整局中每类专家只能吸引 1 位</b>，合计 5 位。</p>
+  <p>把某一类栖息地中<b>所有动物板块</b>（食草动物与蛇）的数值相加——它们<b>不必</b>在同一片栖息地里！若是河流专家，则把你所有河流板块的数值相加。若总和<b>大于或等于</b>该专家在轨道上<b>正上方</b>格印的数字，即视为成功引起注意。此时：</p>
+  <ol>
+    <li>立刻把该专家标记在轨道上<b>上移 1 格</b>。</li>
+    <li>从对应牌堆抽 <b>2 张</b>专家卡，选 <b>1 张</b>正面朝上放在桌上，另一张放到该牌堆底部。</li>
+  </ol>
+  <div class="example">
+    <span class="label">示例</span>
+    林地专家标记还在起始格，所以你必须让林地动物板块数值合计达到 <b>6</b>。你有一只数值 5 的林地食草动物，加一条数值 2 的林地蛇，合计 <b>7</b>（绰绰有余）！于是把林地专家标记移到轨道的 6 上，抽 2 张林地专家卡并选 1 张打出。下一位想吸引林地专家的玩家，就得多花点力气了。
+  </div>
+  <p>若你同时达成多位专家的条件，可以任意顺序选择；但每次选择必须<b>单独</b>进行，且不能先看后面牌堆的内容。</p>
+  <p>若使用专家变体：不抽牌堆，直接打出你在游戏开始时选定的那位专家。</p>
+  <div class="side">
+    <span class="label">五类专家的效果主题</span>
+    河流 → 食草动物的定居与相关奖励；湿地 → 土地；林地 → 每局一次的效果；稀树草原 → 轮盘行动；沙漠 → 动物卡。
+  </div>
+
+  <h3 id="s113">11.3 激活专家效果</h3>
+  <p>专家卡的效果按图标决定使用频率：每局一次、每回合一次、或可重复。若卡上没有图标，请到附录查阅该卡的触发时机。</p>
+  <p>若多张卡的效果在同一时点触发，由你决定结算顺序。</p>
+  <p>若专家给予你某个具体行动，你<b>不需要</b>站在对应的轮盘扇区上——除非卡面或附录另有说明。</p>
+  <table>
+    <thead><tr><th>图标</th><th>含义</th></tr></thead>
+    <tbody>
+      <tr><td class="id">1×</td><td><b>每局一次</b>：使用后把卡横置，表示不能再用。</td></tr>
+      <tr><td class="id">↻1×</td><td><b>每回合一次</b>：同一回合内不能重复使用该专家效果。</td></tr>
+      <tr><td class="id">∞</td><td><b>可重复</b>：你回合中可以任意次获得该效果。</td></tr>
+    </tbody>
+  </table>
+  <figure>
+    <img src="Wildscape_Rules_images/page_11.jpg" alt="专家卡与轨道">
+    <figcaption>原书第 11 页：专家卡结构、专家轨道与三种效果图标</figcaption>
+  </figure>
+</section>
+
+<section class="sec" id="s12">
+  <h2><span class="num">12</span>回合结束</h2>
+  <p>行动做完后，依次执行：</p>
+  <ol>
+    <li><b>分配能量</b></li>
+    <li><b>补充栖息地板块</b></li>
+    <li><b>补充卡牌展列区</b></li>
+    <li><b>观鸟或终局触发</b>（如需要）</li>
+  </ol>
+
+  <h3>12.1 分配能量</h3>
+  <div class="side imp">
+    <span class="label">注意</span>
+    当前扇区上<b>未使用</b>的能量<b>不要</b>移动。
+  </div>
+  <p>从行动选择标记<b>顺时针</b>的下一个扇区开始，把一枚已使用的能量标记放进之后的各个顺时针扇区，直到中央清空为止。</p>
+
+  <h3>12.2 补充栖息地板块</h3>
+  <p>从行动选择标记所在扇区开始顺时针，用<b>活动堆</b>的栖息地板块把轮盘上的空扇区逐一补满。</p>
+
+  <h3>12.3 补充卡牌展列区</h3>
+  <p>展列区若有空位，先把正面朝上的卡<b>向左推</b>填补空隙，再从各自牌堆翻牌补齐剩余空位。若某类牌堆已空，把该类弃牌洗混作为新牌堆。</p>
+
+  <h3>12.4 观鸟或终局触发</h3>
+  <p>若本回合从某堆栖息地板块上取走了观鸟板块或终局触发板块，执行下面对应流程；否则直接轮到下一位玩家。</p>
+
+  <h4>观鸟</h4>
+  <ol>
+    <li><b>每次</b>游戏中期的观鸟开始时，先更新展列区：把每行最左边的一张动物卡弃掉，然后照常补齐。</li>
+    <li>然后开始观鸟。每张鸟类卡都依据你领地中的板块或棋子设定独特条件（完整说明与平手判定见附录 A）。每一对相邻玩家共同比较他们之间的 2 张鸟类卡（2 人局为 4 张），谁更符合某只鸟的条件，就从供应区获得 <b>2 枚</b>生物能量。若平手（在适用平手判定之后），双方<b>各得 1 枚</b>——你也可以以 0 比 0 平手。</li>
+    <li>观鸟结束后<b>立刻</b>检查：若你此时生物能量超过 <b>8 枚</b>，超出的部分退回公共供应区。请提前把能量花掉，别浪费。</li>
+  </ol>
+  <div class="side">
+    <span class="label">为什么听鸟</span>
+    持续的鸟鸣通常意味着环境安全、没有迫近的掠食者威胁——掠食者靠近时，鸟往往会安静下来。这种天然的声学线索是稳定的信号，能让人、鸟与其他动物的神经系统都放松下来。
+  </div>
+
+  <h4>终局触发</h4>
+  <p>记住持起始玩家卡的人是谁，让所有玩家把当前这一轮走完，使每人行动次数相同；然后<b>所有人再各进行 1 个完整回合</b>。随后按第 13 节计分。
+  </p>
+  <figure>
+    <img src="Wildscape_Rules_images/page_12.jpg" alt="回合结束流程">
+    <figcaption>原书第 12 页：能量分配、补充与观鸟／终局触发</figcaption>
+  </figure>
+</section>
+
+<section class="sec" id="s13">
+  <h2><span class="num">13</span>终局计分</h2>
+  <p>最后一轮结束后，把来自卡牌与棋子的胜利分相加：</p>
+  <ul class="tight">
+    <li>最终的观鸟</li>
+    <li>掠食者棋子</li>
+    <li>灵长类棋子</li>
+    <li>手牌中的动物志卡</li>
+    <li>已打出的专家卡</li>
+  </ul>
+  <p>再加上领地中板块印的数值：</p>
+  <ul class="tight">
+    <li>所有河流的数值总和</li>
+    <li>所有食草动物与蛇的<b>正面数值</b>总和（黑底白字那个数）</li>
+  </ul>
+  <p>最后，每一个<b>仍然露着</b>的漏油扣 <b>1 VP</b>。</p>
+  <p>胜利分最高者获胜，拥有最有价值的生态系统！<b>平手时，回合顺序靠后的玩家获胜。</b></p>
+  <div class="side imp">
+    <span class="label">注意</span>
+    未使用的能量在终局计分中<b>不值分</b>。
+  </div>
+
+  <h3>13.1 最终观鸟</h3>
+  <p>每对相邻玩家照旧比较他们之间的 2 张鸟类卡（2 人局 4 张），判定每只鸟的归属。但此时<b>不再获得能量</b>：每赢得一只鸟得 <b>2 VP</b>，平手则各得 <b>1 VP</b>。</p>
+
+  <h3>13.2 掠食者棋子</h3>
+  <p>掠食者偏好体型大的猎物与数量充足的兽群。每枚掠食者棋子按其猎物（即所在动物板块）的数值，依下表得分。</p>
+  <table>
+    <thead><tr><th>猎物数值</th><th>掠食者棋子得分</th></tr></thead>
+    <tbody>
+      <tr><td class="n">1–3</td><td class="n">1 VP</td></tr>
+      <tr><td class="n">4–6</td><td class="n">2 VP</td></tr>
+      <tr><td class="n">7–9</td><td class="n">3 VP</td></tr>
+      <tr><td class="n">10–12</td><td class="n">4 VP</td></tr>
+    </tbody>
+  </table>
+
+  <h3>13.3 灵长类棋子</h3>
+  <p>灵长类偏好大片领地：与其所在栖息地板块的偏好类型<b>每个相邻且匹配的边缘</b>得 <b>1 VP</b>。</p>
+  <div class="example">
+    <span class="label">示例</span>
+    灵长类 A 认领的是该栖息地板块的<b>林地</b>一面，周围有 3 块板块的林地边缘与之匹配，因此得 <b>3 VP</b>；与之匹配的湿地边缘<b>不得分</b>。稀树草原上的灵长类 B 有 4 条匹配边缘，得 <b>4 VP</b>。
+  </div>
+  <div class="side">
+    <span class="label">提醒</span>
+    若该灵长类的板块同时具备两种偏好类型，你在放置时已经选定了其中之一，此时<b>只</b>看那一种。
+  </div>
+
+  <h3>13.4 动物志卡</h3>
+  <p>动物志卡一旦获得就留在手中。它们属于<b>动物卡</b>，可以用来支付任何要求「弃一张动物卡」的效果。</p>
+  <p>若把动物志卡留到终局，则按你满足卡面条件的程度得分。图标右侧标示<b>要数什么</b>——可能是栖息地、动物板块、某种特定的六角板块等等。卡右侧列出对应数量的分值。<b>每张动物志卡只计一次分</b>，即使你的数量超出表格上限。不过，同一样东西可以同时计入<b>多张</b>动物志卡。</p>
+  <div class="example">
+    <span class="label">示例</span>
+    <b>East African Lowland Honey Bee（东非低地蜜蜂）</b>要数你领地中「含有 1 个以上动物板块（食草动物或蛇）的稀树草原栖息地」的数量。你有 3 片稀树草原，但只有 2 片里有动物板块——第三片是空的。于是按卡面分值，为这 2 片合格栖息地得 <b>2 VP</b>。其中一片放了 2 块动物板块也没用，因为这种蜜蜂只数<b>栖息地</b>，不数单个动物板块。
+  </div>
+  <figure>
+    <img src="Wildscape_Rules_images/page_13.jpg" alt="终局计分">
+    <figcaption>原书第 13 页：终局计分项、掠食者得分表与动物志卡示例</figcaption>
+  </figure>
+</section>
+<section class="sec" id="s14">
+  <h2><span class="num">14</span>单人规则：盗猎者</h2>
+  <p class="lead">单人模式中，你的对手是<b>盗猎者</b>——他们在荒芜之地上猎捕脆弱的动物。你唯一的希望，是把这片荒野恢复到足够健壮，让动物有一个安全的避难所。</p>
+  <p>盗猎者是一个<b>模拟人类对手行动</b>的人工玩家。开局前你必须选择 <b>1（最易）到 7（最难）</b>的难度：它决定盗猎者的起始动物板块，以及他们在游戏中获得的动物与河流板块的数值。</p>
+
+  <h3>14.1 单人准备</h3>
+  <p>按 2 人局准备，但有以下差异：</p>
+  <ol>
+    <li>轮盘版图<b>单人面</b>朝上。</li>
+    <li>不需要按观鸟板块专门分堆栖息地板块。把<b>终局触发板块（最下）与两块观鸟板块（最上）</b>按图示叠放在<b>单人卡中央</b>。观鸟阶段与终局会在固定轮次发生；需要抽栖息地板块时，直接从公共供应的背面堆里抽。</li>
+    <li><b>不使用</b>鸟类卡 <b>B07 黑胸蛇鹰 / 秃鹮</b>（数蛇的种类 / 数专家卡张数）。若发到，换一张别的鸟。</li>
+    <li>把 <b>6 块</b>可用的掠食者奖励板块随机排成一行。盗猎者领取时<b>从左往右</b>依次拿走。</li>
+    <li>盗猎者<b>不拿</b>卡牌、生物能量，也没有起始土地板块。</li>
+    <li>盗猎者开局拥有：
+      <ul>
+        <li>个人供应区中各 1 枚灵长类棋子与掠食者棋子。</li>
+        <li>每种栖息地各 <b>1 块</b>动物板块——每块动物的体型等于<b>难度等级</b>。因此难度为 1 或 2 时，盗猎者起始用的是对应体型的蛇。</li>
+        <li>由你选择、总数值等于<b>难度等级</b>的河流板块。</li>
+      </ul>
+    </li>
+  </ol>
+  <div class="side imp">
+    <span class="label">难度 6 及以上</span>
+    盗猎者开局<b>即已达成所有专家的阈值</b>：立刻把全部专家标记移到<b>覆盖第 6 行</b>的位置。你吸引专家的起始阈值变为 <b>8</b>。
+  </div>
+  <div class="example">
+    <span class="label">示例</span>
+    难度 5 时，盗猎者开局拥有四只<b>体型 5</b> 的食草动物（每种栖息地各一只），外加一块体型 3 与一块体型 2 的河流板块。
+  </div>
+
+  <h3>14.2 进行游戏</h3>
+  <p>游戏恰好进行 <b>12 轮</b>。第 4 轮与第 8 轮后各进行一次完整的观鸟阶段；第 12 轮盗猎者回合结束后，游戏结束。</p>
+  <p>每轮你先行动，按正常规则进行。轮到盗猎者时，他们依次：</p>
+  <ol>
+    <li>选择一个轮盘扇区。</li>
+    <li>弃掉免费栖息地板块。</li>
+    <li>只结算该扇区上标示的<b>盗猎者专属行动</b>。</li>
+    <li>照常执行回合结束阶段（观鸟规则见下）。</li>
+  </ol>
+
+  <h3>14.3 盗猎者选择扇区</h3>
+  <p>盗猎者总是选择<b>能量最多</b>的扇区。若并列，选从你的行动选择扇区<b>顺时针数第一个</b>的那个。</p>
+
+  <h3>14.4 盗猎者弃掉栖息地板块</h3>
+  <p>盗猎者对保护环境毫无兴趣，总是弃掉自己扇区上的栖息地板块，把它放到<b>单人卡上的空位</b>。当单人卡上放满 <b>4 块</b>时，在盗猎者回合结束时结算单人卡<b>中央板块</b>上的事件（见 14.7）。</p>
+
+  <h3>14.5 盗猎者的轮盘行动</h3>
+  <p>盗猎者的行动永远是「先拿一块动物板块」，然后结算额外行动。</p>
+  <h4>动物板块</h4>
+  <ul>
+    <li>盗猎者拿取一块栖息地类型与「其扇区的盗猎者环」相符的动物板块。</li>
+    <li>若该环显示<b>全白</b>，盗猎者选择自己<b>动物总数值最低</b>的那种栖息地（并列时由你选择）。</li>
+    <li>体型等于该扇区上<b>现有的能量标记数</b>——这些能量由盗猎者支付到版图中央。若扇区上印有 <b>+</b> 图标，体型＝能量数 <b>+ 难度等级</b>！</li>
+    <li>若没有该体型的动物可用，就取<b>下一个更小</b>体型，再取另一块动物板块补足差额，依此类推。</li>
+  </ul>
+  <div class="example">
+    <span class="label">示例</span>
+    难度 5。盗猎者选中一个有 5 点能量、且带 <b>+</b> 图标的扇区，合计 <b>10</b>。于是盗猎者取一只<b>体型 8</b> 的食草动物加一条<b>体型 2</b> 的蛇。
+  </div>
+  <h4>额外行动</h4>
+  <ul>
+    <li>拿取总数值等于<b>难度等级</b>的河流板块（由你选择）。</li>
+    <li>让盗猎者<b>体型最大的 2 只</b>食草动物定居（并列时由你选择）。</li>
+    <li>弃掉展列区中指定类型<b>最左边</b>的一张卡。若是灵长类卡，盗猎者取 1 枚灵长类棋子；若是掠食者卡，盗猎者取 1 枚掠食者棋子，并弃掉<b>最左边</b>的掠食者奖励板块。</li>
+  </ul>
+
+  <h3>14.6 专家</h3>
+  <p>盗猎者活动太多，专家会觉得极不安全。盗猎者<b>不拿</b>专家；但若他们在你打出对应专家之前先累积到 <b>6 点</b>动物或河流数值，就把该专家标记推到轨道<b>第 6 行</b>。此后你吸引该专家的阈值变为 <b>8</b>。</p>
+
+  <h3>14.7 观鸟与终局</h3>
+  <p>盗猎者回合结束时，若单人卡上的 <b>4 个槽位</b>都已填满，把这 4 块板块取下另放成一堆，然后结算单人卡<b>中央板块</b>的事件。</p>
+  <h4>观鸟板块</h4>
+  <p>与盗猎者进行一次完整的观鸟阶段。争夺鸟类卡时，盗猎者照常获得生物能量。</p>
+  <p>部分鸟类卡带<b>特殊图标</b>，表示这张卡对盗猎者另有评估方式，详见附录 A。</p>
+  <p>之后，即使盗猎者的能量超过 8 枚也<b>不</b>弃掉；终局时他们每持有 1 枚生物能量就得 <b>1 VP</b>。</p>
+  <p>最后，把最上面的那块观鸟板块放到刚才那 4 块栖息地板块堆上。</p>
+  <h4>终局触发板块</h4>
+  <p>游戏<b>立刻</b>结束，按 14.8 计分。</p>
+
+  <h3>14.8 单人终局计分</h3>
+  <p>第 12 轮结束后游戏结束。照常进行最终观鸟：胜者得 <b>2 VP</b>，平手各得 <b>1 VP</b>。</p>
+  <p>你按正常规则计算总分；盗猎者的总分等于：</p>
+  <ul class="tight">
+    <li>他们的最终观鸟得分</li>
+    <li>他们食草动物的数值</li>
+    <li>他们蛇的数值</li>
+    <li>他们河流的数值</li>
+    <li>他们每枚生物能量 <b>1 VP</b></li>
+  </ul>
+  <p>若你的分数高于盗猎者，说明你建起的生态系统足够健壮，能把动物从灭绝边缘救回来。</p>
+  <figure>
+    <img src="Wildscape_Rules_images/page_15.jpg" alt="单人卡与盗猎者行动">
+    <figcaption>原书第 15 页：单人卡、盗猎者环与观鸟／终局流程</figcaption>
+  </figure>
+</section>
+
+<section class="sec" id="a1">
+  <h2><span class="num">A</span>附录 A：鸟类卡 B01–B10</h2>
+  <p class="lead">鸟类卡双面，每张都有 a / b 两面。同一张卡的两面是<b>两只不同的鸟</b>，各自有独立的条件。</p>
+  <table class="cards">
+    <thead><tr><th>编号</th><th>鸟名</th><th>条件</th></tr></thead>
+    <tbody>
+      <tr><td class="id">B01a</td><td>Saddle-billed Stork<br>鞍嘴鹳</td><td>你拥有<b>数值最高</b>的那片河流栖息地。</td></tr>
+      <tr><td class="id">B01b</td><td>Lesser Flamingo<br>小红鹳</td><td>你拥有<b>最多</b>「数值至少 3」的河流栖息地。</td></tr>
+      <tr><td class="id">B02a</td><td>African Openbill<br>非洲钳嘴鹳</td><td>你拥有<b>最多</b>的湿地动物板块。</td></tr>
+      <tr><td class="id">B02b</td><td>African Fish Eagle<br>非洲海雕</td><td>你拥有<b>数值最高</b>的那一块湿地动物板块；平手时比较第二高，依此类推。</td></tr>
+      <tr><td class="id">B03a</td><td>Yellow-billed Kite<br>黄嘴鸢</td><td>你拥有<b>最多</b>的林地动物板块。</td></tr>
+      <tr><td class="id">B03b</td><td>Helmeted Guinea Fowl<br>盔珠鸡</td><td>你拥有<b>数值最高</b>的那一块林地动物板块；平手时比较第二高，依此类推。</td></tr>
+      <tr><td class="id">B04a</td><td>Cattle Egret<br>牛背鹭</td><td>你拥有<b>最多</b>的稀树草原动物板块。</td></tr>
+      <tr><td class="id">B04b</td><td>Ostrich<br>鸵鸟</td><td>你拥有<b>数值最高</b>的那一块稀树草原动物板块；平手时比较第二高，依此类推。</td></tr>
+      <tr><td class="id">B05a</td><td>Crowned Sandgrouse<br>冠沙鸡</td><td>你拥有<b>最多</b>的沙漠动物板块。</td></tr>
+      <tr><td class="id">B05b</td><td>Secretary Bird<br>蛇鹫</td><td>你拥有<b>数值最高</b>的那一块沙漠动物板块；平手时比较第二高，依此类推。</td></tr>
+      <tr><td class="id">B06a</td><td>Kori Bustard<br>灰颈鹭鸨</td><td>你拥有<b>最多</b>已定居的食草动物。</td></tr>
+      <tr><td class="id">B06b</td><td>Southern Ground Hornbill<br>红脸地犀鸟</td><td>你拥有<b>最多</b>「数值 6 以上」的食草动物。<br><small>单人模式：不计盗猎者的起始动物板块。</small></td></tr>
+      <tr><td class="id">B07a</td><td>Black-chested Snake Eagle<br>黑胸蛇鹰</td><td>你拥有<b>种类最多</b>的蛇。蛇共 8 种——每种栖息地各有数值 1 与数值 2 各一种。<br><small>单人模式不使用。</small></td></tr>
+      <tr><td class="id">B07b</td><td>Northern Bald Ibis<br>隐鹮</td><td>你<b>打出过最多</b>的专家卡。<br><small>单人模式不使用。</small></td></tr>
+      <tr><td class="id">B08a</td><td>Fischer’s Lovebird<br>费氏牡丹鹦鹉</td><td>你拥有<b>最多</b>的灵长类棋子。</td></tr>
+      <tr><td class="id">B08b</td><td>White-backed Vulture<br>白背兀鹫</td><td>你拥有<b>最多</b>的掠食者棋子。</td></tr>
+      <tr><td class="id">B09a</td><td>Mountain Wheatear<br>山䳭</td><td>你拥有<b>最多</b>的山脉。<br><small>单人模式：在争夺第 1／第 2／最后一名的比较中，视盗猎者拥有 2／4／6 道山脉。</small></td></tr>
+      <tr><td class="id">B09b</td><td>Mountain Buzzard<br>山鵟</td><td>你拥有<b>最多</b>「至少大小 2」的山脉。<br><small>单人模式：比较三档时视盗猎者拥有 1／2／3 道大小 2 的山脉。</small></td></tr>
+      <tr><td class="id">B10a</td><td>Grey Crowned Crane<br>灰冠鹤</td><td>你拥有<b>最长的一条直线</b>连续已占据格。<br><small>单人模式：比较三档时视盗猎者有 5／7／9 个连续已占据格。</small></td></tr>
+      <tr><td class="id">B10b</td><td>Shoebill<br>鲸头鹳</td><td>在 3 个方向上分别找出你最长的连续已占据格直线，用你的<b>第二长</b>那条与对手比较。若你有两条并列最长，其中一条算作第二长。<br><small>单人模式：比较三档时视盗猎者有 4／6／8 个连续已占据格。</small></td></tr>
+    </tbody>
+  </table>
+  <div class="tn">
+    <span class="label">译者注</span>
+    「三档」指观鸟在游戏中的三次比较：第 1 次观鸟、第 2 次观鸟、最终观鸟。原文写作 1st / 2nd / last time。另外 B07 整张卡（a / b 两面）在单人模式中都不使用。
+  </div>
+  <div class="side">
+    <span class="label">保护现状（原书旁注）</span>
+    <b>红脸地犀鸟（B06b）</b>：在南非城市地区，被吵到的屋主会因它们撞碎窗户（把倒影当成入侵者）而将其杀死。红脸地犀鸟是世界最大的犀鸟，以 5–10 只的群体生活，并会结群捕猎难对付的猎物。<br>
+    <b>灰冠鹤（B10a）</b>：部分得益于保护措施，卢旺达、赞比亚与乌干达近年数量回升，可能扭转其下滑趋势。坦桑尼亚的鸟类图谱项目估计现有 1000–1600 只，高于 2014 年的 600–1000 只，这很可能与卢旺达和坦桑尼亚之间卡盖拉河谷的种群移动有关。
+  </div>
+</section>
+
+<section class="sec" id="a2">
+  <h2><span class="num">B</span>附录 B：灵长类卡 M01–M28</h2>
+  <p class="lead">灵长类卡打出后立即结算卡面效果。放置棋子时必须遵守第 9 节的三条限制（类型匹配、不得与其他灵长类相邻、无处可放则不能打）。</p>
+  <table class="cards">
+    <thead><tr><th>编号</th><th>名称</th><th>效果</th></tr></thead>
+    <tbody>
+      <tr><td class="id">M01</td><td>Mantled Guereza<br>东黑白疣猴</td><td>弃 1 张手牌中的动物卡，放置 1 块土地板块与 1 块体型 3 的河流板块。</td></tr>
+      <tr><td class="id">M02</td><td>Mandrill<br>山魈</td><td>弃 1 张手牌中的动物卡，从<b>轮盘</b>放置 2 块栖息地板块。</td></tr>
+      <tr><td class="id">M03</td><td>Red-tailed Monkey<br>红尾长尾猴</td><td>从<b>活动堆</b>取 2 块栖息地板块并放置。</td></tr>
+      <tr><td class="id">M04</td><td>Blue Monkey<br>青猴</td><td>使 2 只食草动物定居。</td></tr>
+      <tr><td class="id">M05</td><td>Gorilla<br>大猩猩</td><td>从展列区<b>同一列</b>取 2 张动物卡（不必相邻）。</td></tr>
+      <tr><td class="id">M06</td><td>Ring-tailed Lemur<br>环尾狐猴</td><td>从展列区取 2 张动物志卡。</td></tr>
+      <tr><td class="id">M07</td><td>King Colobus<br>黑白疣猴</td><td>从展列区取 2 张掠食者卡。</td></tr>
+      <tr><td class="id">M08</td><td>Mona Monkey<br>白鼻长尾猴</td><td>从展列区取 2 张灵长类卡。</td></tr>
+      <tr><td class="id">M09</td><td>Bonobo<br>倭黑猩猩</td><td>获得能量，直到个人供应区有 4 枚为止。</td></tr>
+      <tr><td class="id">M10</td><td>Garnett’s Bushbaby<br>加氏婴猴</td><td>你打出过或手中持有的<b>每张</b>灵长类卡（含本张）各使你获得 1 能量。</td></tr>
+      <tr><td class="id">M11</td><td>Black-and-white Ruffed Lemur<br>黑白领狐猴</td><td>使 1 只林地食草动物定居，并放置 1 条林地蛇。</td></tr>
+      <tr><td class="id">M12</td><td>Yellow Baboon<br>黄狒狒</td><td>使 1 只湿地食草动物定居，并放置 1 条湿地蛇。</td></tr>
+      <tr><td class="id">M13</td><td>Campbell’s Monkey<br>坎氏长尾猴</td><td>放置 2 条蛇。</td></tr>
+      <tr><td class="id">M14</td><td>Sooty Mangabey<br>白眉白睑猴</td><td>放置 1 块体型 1 与 1 块体型 2 的河流板块。</td></tr>
+      <tr><td class="id">M15</td><td>Grey-cheeked Mangabey<br>灰颊白睑猴</td><td>放置 1 块活动堆的栖息地板块与 1 块体型 1 的河流板块。</td></tr>
+      <tr><td class="id">M16</td><td>Gelada Baboon<br>狮尾狒</td><td>弃 1 张手牌中的动物卡，从<b>活动堆与轮盘各</b>放置 1 块栖息地板块。</td></tr>
+      <tr><td class="id">M17</td><td>Senegal Bushbaby<br>塞内加尔婴猴</td><td>你打出过或手中持有的<b>每张</b>掠食者卡各使你获得 1 能量。</td></tr>
+      <tr><td class="id">M18</td><td>Green Monkey<br>绿猴</td><td>使 1 只稀树草原食草动物定居，并放置 1 条稀树草原蛇。</td></tr>
+      <tr><td class="id">M19</td><td>Western Red Colobus<br>西非红疣猴</td><td>放置 1 块土地板块。</td></tr>
+      <tr><td class="id">M20</td><td>Tantalus Monkey<br>坦塔罗斯长尾猴</td><td>放置 1 块体型 3 的河流板块。</td></tr>
+      <tr><td class="id">M21</td><td>Mohol Bushbaby<br>莫氏婴猴</td><td>放置 1 块体型 1 的河流板块，并获得 2 能量。</td></tr>
+      <tr><td class="id">M22</td><td>Chimpanzee<br>黑猩猩</td><td>你拥有的<b>每块</b>土地（不含起始土地）使你获得 1 能量。</td></tr>
+      <tr><td class="id">M23</td><td>Vervet Monkey<br>绿长尾猴</td><td>弃 1 张手牌中的动物卡，放置 1 块土地板块与 1 块<b>纯沙漠绿洲</b>。</td></tr>
+      <tr><td class="id">M24</td><td>Barbary Macaque<br>巴巴利猕猴</td><td>弃 1 张手牌中的动物卡，放置<b>任意</b>绿洲与 1 块活动堆的栖息地板块。</td></tr>
+      <tr><td class="id">M25</td><td>Patas Monkey<br>赤猴</td><td>弃 1 张手牌中的动物卡，放置<b>任意</b>绿洲与 1 块体型 2 的河流板块。</td></tr>
+      <tr><td class="id">M26</td><td>Olive Baboon<br>橄榄狒狒</td><td>使 1 只沙漠食草动物定居，并放置 1 条沙漠蛇。</td></tr>
+      <tr><td class="id">M27</td><td>Hamadryas Baboon<br>阿拉伯狒狒</td><td>从<b>轮盘</b>放置 1 块栖息地板块。</td></tr>
+      <tr><td class="id">M28</td><td>Chacma Baboon<br>南非狒狒</td><td>放置<b>任意</b>绿洲。</td></tr>
+    </tbody>
+  </table>
+  <div class="side">
+    <span class="label">保护现状（原书旁注）</span>
+    <b>环尾狐猴（M06）</b>：由于严重的森林碎片化与本地非法宠物贸易的不可持续活体捕捉，其种群在三代内疑似下降 ≥50%，很可能在不久的将来被列为极危。环尾狐猴是机会主义的杂食者，容易获得的都吃：蜘蛛、变色龙、毛毛虫、昆虫、小鸟与白蚁丘。<br>
+    <b>西非红疣猴（M19）</b>：种群本已小而孤立，又因西非快速增长的人口对自然资源的需求而持续下降。自 1990 年以来，其分布区内 7 个国家的人口增长超过 100%，森林丧失的速度自 2013 年以来翻了一倍以上。
+  </div>
+</section>
+
+<section class="sec" id="a3">
+  <h2><span class="num">C</span>附录 C：掠食者卡 D01–D28</h2>
+  <p class="lead">每只掠食者都有一个必须在打出时满足的独特条件。</p>
+  <table class="cards">
+    <thead><tr><th>编号</th><th>名称</th><th>条件</th></tr></thead>
+    <tbody>
+      <tr><td class="id">D01</td><td>Nile Crocodile<br>尼罗鳄</td><td>2 只<b>已定居</b>的湿地食草动物。</td></tr>
+      <tr><td class="id">D02</td><td>Leopard<br>花豹</td><td>2 只已定居的林地食草动物。</td></tr>
+      <tr><td class="id">D03</td><td>Cheetah<br>猎豹</td><td>2 只已定居的稀树草原食草动物。</td></tr>
+      <tr><td class="id">D04</td><td>Brown Hyena<br>棕鬣狗</td><td>2 只已定居的沙漠食草动物。</td></tr>
+      <tr><td class="id">D05</td><td>Honey Badger<br>蜜獾</td><td>湿地、林地、稀树草原各 1 只<b>已定居</b>的食草动物。</td></tr>
+      <tr><td class="id">D06</td><td>African Clawless Otter<br>非洲无爪水獭</td><td>湿地与林地各 1 只<b>数值 7 以上</b>的食草动物。</td></tr>
+      <tr><td class="id">D07</td><td>Serval<br>薮猫</td><td>湿地与稀树草原各 1 只数值 7 以上的食草动物。</td></tr>
+      <tr><td class="id">D08</td><td>Side-striped Jackal<br>侧纹胡狼</td><td>林地与稀树草原各 1 只数值 7 以上的食草动物。</td></tr>
+      <tr><td class="id">D09</td><td>Marsh Mongoose<br>沼泽獴</td><td>一片湿地栖息地内，含 1 只数值 7 以上的食草动物与 1 条蛇。</td></tr>
+      <tr><td class="id">D10</td><td>Banded Mongoose<br>斑獴</td><td>一片林地栖息地内，含 1 只数值 7 以上的食草动物与 1 条蛇。</td></tr>
+      <tr><td class="id">D11</td><td>Serengeti Wolf<br>塞伦盖蒂狼</td><td>一片稀树草原栖息地内，含 1 只数值 7 以上的食草动物与 1 条蛇。</td></tr>
+      <tr><td class="id">D12</td><td>Rüppell’s Fox<br>吕氏沙狐</td><td>一片沙漠栖息地内，含 1 只数值 7 以上的食草动物与 1 条蛇。</td></tr>
+      <tr><td class="id">D13</td><td>Spotted-necked Otter<br>斑颈水獭</td><td>一片湿地栖息地内，含 2 只数值 4 以上的食草动物。</td></tr>
+      <tr><td class="id">D14</td><td>Ring-tailed Vontsira<br>环尾獴</td><td>一片林地栖息地内，含 2 只数值 4 以上的食草动物。</td></tr>
+      <tr><td class="id">D15</td><td>Spotted Hyena<br>斑鬣狗</td><td>一片稀树草原栖息地内，含 2 只数值 4 以上的食草动物。</td></tr>
+      <tr><td class="id">D16</td><td>Fennec Fox<br>耳廓狐</td><td>一片沙漠栖息地内，含 2 只数值 4 以上的食草动物。</td></tr>
+      <tr><td class="id">D17</td><td>Small-spotted Genet<br>小斑獛</td><td>1 只数值 5 以上的湿地食草动物，其所在栖息地<b>与 2 道不同山脉相邻</b>。</td></tr>
+      <tr><td class="id">D18</td><td>African Striped Weasel<br>非洲条纹鼬</td><td>1 只数值 5 以上的林地食草动物，其所在栖息地与 2 道不同山脉相邻。</td></tr>
+      <tr><td class="id">D19</td><td>Bat-eared Fox<br>大耳狐</td><td>1 只数值 5 以上的稀树草原食草动物，其所在栖息地与 2 道不同山脉相邻。</td></tr>
+      <tr><td class="id">D20</td><td>African Wildcat<br>非洲野猫</td><td>1 只数值 5 以上的沙漠食草动物，其所在栖息地与 2 道不同山脉相邻。</td></tr>
+      <tr><td class="id">D21</td><td>Dwarf Crocodile<br>侏鳄</td><td>1 只数值 6 以上的湿地食草动物，其所在栖息地<b>与 2 片不同河流栖息地相邻</b>。</td></tr>
+      <tr><td class="id">D22</td><td>Fossa<br>马岛獴</td><td>1 只数值 6 以上的林地食草动物，其所在栖息地与 2 片不同河流栖息地相邻。</td></tr>
+      <tr><td class="id">D23</td><td>Algerian Wolf<br>阿尔及利亚狼</td><td>1 只数值 6 以上的稀树草原食草动物，其所在栖息地与 2 片不同河流栖息地相邻。</td></tr>
+      <tr><td class="id">D24</td><td>African Wild Dog<br>非洲野犬</td><td>1 只数值 6 以上的沙漠食草动物，其所在栖息地与 2 片不同河流栖息地相邻。</td></tr>
+      <tr><td class="id">D25</td><td>Desert Crocodile<br>沙漠鳄</td><td>2 块湿地与 2 块沙漠动物板块，所在栖息地彼此相邻。<sup>*</sup></td></tr>
+      <tr><td class="id">D26</td><td>Black-backed Jackal<br>黑背胡狼</td><td>2 块林地与 2 块沙漠动物板块，所在栖息地彼此相邻。<sup>*</sup></td></tr>
+      <tr><td class="id">D27</td><td>Caracal<br>狞猫</td><td>2 块稀树草原与 2 块沙漠动物板块，所在栖息地彼此相邻。<sup>*</sup></td></tr>
+      <tr><td class="id">D28</td><td>Lion<br>狮</td><td>2 只数值 10 以上的食草动物。</td></tr>
+    </tbody>
+  </table>
+  <div class="tn">
+    <span class="label">＊D25–D27 补充</span>
+    每一对动物板块可以同处一片栖息地，也可以分处两片，但四者必须属于<b>同一组连续相邻的栖息地</b>。栖息地相邻指<b>边对边相接</b>；只在角上碰到不算。参见第 11.1 节的示例。
+  </div>
+  <div class="side">
+    <span class="label">保护现状（原书旁注）</span>
+    <b>非洲野犬（D24）</b>：成熟个体仅约 1400 只，极为罕见。作为游牧物种，它们的领域极大——塞伦盖蒂的族群每群领域估计达 900 平方英里。真正特别的是它们牢固的纽带与独特的社会结构：由优势配偶领导，优势雌性通常独占繁殖，全群共同抚育幼崽；它们甚至用「喷嚏」投票决定群体行动，也是少数会照顾病弱与年长成员的掠食者，捕猎后总让幼崽先吃。<br>
+    <b>狮（D28）</b>：狮子曾遍布非洲大部以及亚洲与欧洲部分地区，如今已从历史分布区的 94% 消失，仅存于撒哈拉以南非洲的部分地区。狮群中的捕猎由雌狮承担，它们结群狩猎，比雄狮更快更灵活，能猎杀比自己更大更快的动物。
+  </div>
+</section>
+
+<section class="sec" id="a4">
+  <h2><span class="num">D</span>附录 D：掠食者奖励板块 P01–P18</h2>
+  <p class="lead">打出掠食者卡并放好棋子后，可任选一块正面朝上的奖励板块，获得其即时效果。</p>
+  <table class="cards">
+    <thead><tr><th>编号</th><th>效果</th></tr></thead>
+    <tbody>
+      <tr><td class="id">P01</td><td>获得 3 能量。</td></tr>
+      <tr><td class="id">P02</td><td>放置 1 条蛇，并获得 2 能量。</td></tr>
+      <tr><td class="id">P03</td><td>放置 1 块体型 1 的河流板块与 1 块蛇板块。</td></tr>
+      <tr><td class="id">P04</td><td>放置 1 块体型 1 的河流板块，并使 1 只食草动物定居。</td></tr>
+      <tr><td class="id">P05</td><td>放置 1 块体型 2 的河流板块，并获得 1 能量。</td></tr>
+      <tr><td class="id">P06</td><td>放置 1 块体型 2 的河流板块与 1 块蛇板块。</td></tr>
+      <tr><td class="id">P07</td><td>放置 1 块体型 3 的河流板块。</td></tr>
+      <tr><td class="id">P08</td><td>放置 1 块土地板块。</td></tr>
+      <tr><td class="id">P09</td><td>放置任意 1 块绿洲板块。</td></tr>
+      <tr><td class="id">P10</td><td>放置 1 块纯沙漠绿洲板块，并获得 1 能量。</td></tr>
+      <tr><td class="id">P11</td><td>从轮盘放置 1 块栖息地板块。</td></tr>
+      <tr><td class="id">P12</td><td>使 1 只食草动物定居，并获得 1 能量。</td></tr>
+      <tr><td class="id">P13</td><td>使 1 只食草动物定居，并放置 1 块蛇板块。</td></tr>
+      <tr><td class="id">P14</td><td>从展列区取任意 1 张动物卡。</td></tr>
+      <tr><td class="id">P15</td><td>弃 1 张手牌中的动物卡，从展列区取 1 张灵长类卡与 1 张掠食者卡。</td></tr>
+      <tr><td class="id">P16</td><td>弃 1 张手牌中的动物卡，从展列区取 1 张灵长类卡与 1 张动物志卡。</td></tr>
+      <tr><td class="id">P17</td><td>弃 1 张手牌中的动物卡，从展列区取 1 张掠食者卡与 1 张动物志卡。</td></tr>
+      <tr><td class="id">P18</td><td>支付 1 能量，放置 1 块土地板块与 1 块体型 1 的河流板块。</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="sec" id="a5">
+  <h2><span class="num">E</span>附录 E：动物志卡 F01–F28</h2>
+  <p class="lead">所有条件都只统计<b>你自己</b>领地或个人供应区中的东西。每张卡只计一次分，但同一样东西可以同时计入多张卡。</p>
+  <table class="cards">
+    <thead><tr><th>编号</th><th>名称</th><th>计数对象</th></tr></thead>
+    <tbody>
+      <tr><td class="id">F01</td><td>African Spurred Tortoise<br>苏卡达象龟</td><td>生物能量标记的数量。</td></tr>
+      <tr><td class="id">F02</td><td>Cape Cobra<br>黄金眼镜蛇</td><td>蛇板块的数量。</td></tr>
+      <tr><td class="id">F03</td><td>Nile Monitor<br>尼罗巨蜥</td><td><b>数值相同</b>的湿地动物板块数量。</td></tr>
+      <tr><td class="id">F04</td><td>African Striped Skink<br>非洲条纹石龙子</td><td>数值相同的林地动物板块数量。</td></tr>
+      <tr><td class="id">F05</td><td>Giant Plated Lizard<br>巨板蜥</td><td>数值相同的稀树草原动物板块数量。</td></tr>
+      <tr><td class="id">F06</td><td>Rainbow Agama<br>彩虹鬣蜥</td><td>数值相同的沙漠动物板块数量。</td></tr>
+      <tr><td class="id">F07</td><td>African Dung Beetle<br>非洲屎壳郎</td><td>数值 8 以上的食草动物数量。</td></tr>
+      <tr><td class="id">F08</td><td>Giant Water Bug<br>巨型负子蝽</td><td>含动物板块的<b>湿地栖息地</b>数量。</td></tr>
+      <tr><td class="id">F09</td><td>African Giant Stick Insect<br>非洲巨竹节虫</td><td>含动物板块的林地栖息地数量。</td></tr>
+      <tr><td class="id">F10</td><td>East African Lowland Honey Bee<br>东非低地蜜蜂</td><td>含动物板块的稀树草原栖息地数量。</td></tr>
+      <tr><td class="id">F11</td><td>Fattail Scorpion<br>肥尾蝎</td><td>含动物板块的沙漠栖息地数量。</td></tr>
+      <tr><td class="id">F12</td><td>Chameleon<br>变色龙</td><td><b>同一片</b>栖息地内的动物板块数量。</td></tr>
+      <tr><td class="id">F13</td><td>Straw-coloured Fruit Bat<br>黄毛果蝠</td><td>只含 1 种栖息地类型的栖息地板块数量（<b>含纯沙漠绿洲</b>）。</td></tr>
+      <tr><td class="id">F14</td><td>Desert Locust<br>沙漠蝗</td><td>绿洲板块的数量。</td></tr>
+      <tr><td class="id">F15</td><td>Cichlid<br>慈鲷</td><td>体型 1 的河流板块数量。</td></tr>
+      <tr><td class="id">F16</td><td>African Obscure Snakehead<br>非洲暗鳢</td><td>体型 2 的河流板块数量。</td></tr>
+      <tr><td class="id">F17</td><td>Sharptooth Catfish<br>尖齿胡鲶</td><td>体型 3 的河流板块数量。</td></tr>
+      <tr><td class="id">F18</td><td>Leatherback Sea Turtle<br>棱皮龟</td><td>同时含 3 种体型河流板块的<b>河流栖息地</b>数量。</td></tr>
+      <tr><td class="id">F19</td><td>Congo Tetra<br>刚果脂鲤</td><td>河流栖息地的数量。</td></tr>
+      <tr><td class="id">F20</td><td>West African Manatee<br>西非海牛</td><td><b>单片</b>河流栖息地拥有的水源数量。</td></tr>
+      <tr><td class="id">F21</td><td>Walia Ibex<br>瓦利亚野山羊</td><td>你最大那道山脉的大小。</td></tr>
+      <tr><td class="id">F22</td><td>Rock Hyrax<br>岩蹄兔</td><td><b>大小各不相同</b>的山脉数量。</td></tr>
+      <tr><td class="id">F23</td><td>Meerkat<br>狐獴</td><td>四面都被已占据格围住（不含其他山格）的山脉数量。</td></tr>
+      <tr><td class="id">F24</td><td>Termites<br>白蚁</td><td>六面都被已占据格围住的领地空格数量。</td></tr>
+      <tr><td class="id">F25</td><td>Giant Ground Pangolin<br>大穿山甲</td><td>土地板块之间的<b>空洞</b>数量（大小不限）。</td></tr>
+      <tr><td class="id">F26</td><td>Driver Ants<br>行军蚁</td><td><b>没有空格</b>的土地板块数量（含起始土地）。</td></tr>
+      <tr><td class="id">F27</td><td>Giant Day Gecko<br>巨人日守宫</td><td>含 2 块以上动物板块的栖息地数量。</td></tr>
+      <tr><td class="id">F28</td><td>African Monarch Butterfly<br>非洲君主斑蝶</td><td>只与 1 块其他土地板块相邻的土地板块数量（含起始土地）。</td></tr>
+    </tbody>
+  </table>
+  <div class="side">
+    <span class="label">保护现状（原书旁注）</span>
+    <b>苏卡达象龟（F01）</b>：因大范围栖息地丧失、为食用龟蛋与龟肉而被捕捉，以及气候变化与撒哈拉以南栖息地沙漠化的长期影响，数量急剧下降。它是世界最大的陆栖龟类之一，也是非洲最大的龟，体重可超 100 公斤，背甲直线长度可达 86 厘米。<br>
+    <b>大穿山甲（F25）</b>：过去十年，非洲热带穿山甲鳞片流向亚洲的跨洲贸易有所增加，而防止过度开发所需的治理与执法改革难以在一代人的时间内落实。它们栖身于土豚旧洞、密灌丛或半开的白蚁丘中，洞穴常有多个出口与宽敞的腔室，让穿山甲能转身朝前离开。
+  </div>
+</section>
+
+<section class="sec" id="a6">
+  <h2><span class="num">F</span>附录 F：专家卡 S01–S40</h2>
+  <p class="lead">五类专家各 8 张：河流 S01–S08、湿地 S09–S16、林地 S17–S24、稀树草原 S25–S32、沙漠 S33–S40。</p>
+
+  <h3>河流专家 S01–S08</h3>
+  <table class="cards">
+    <thead><tr><th>编号</th><th>名称</th><th>效果</th></tr></thead>
+    <tbody>
+      <tr><td class="id">S01</td><td>Wildlife Photographer<br>野生动物摄影师</td><td>若你放入一种<b>新的</b>湿地食草动物（按名称区分），可获得 2 能量。</td></tr>
+      <tr><td class="id">S02</td><td>Tracker<br>追踪者</td><td>若你放入一种新的林地食草动物（按名称区分），可从活动堆放置 1 块栖息地板块。</td></tr>
+      <tr><td class="id">S03</td><td>Naturalist<br>博物学家</td><td>若你放入一种新的稀树草原食草动物（按名称区分），可使 1 只湿地、林地或沙漠食草动物定居。</td></tr>
+      <tr><td class="id">S04</td><td>Ophiologist<br>蛇类学家</td><td>若你放入一种新的沙漠食草动物（按名称区分），可放置 2 条蛇。</td></tr>
+      <tr><td class="id">S05</td><td>Wetland Ranger<br>湿地巡护员</td><td>你放入的湿地食草动物<b>立刻定居</b>。</td></tr>
+      <tr><td class="id">S06</td><td>Woodland Ranger<br>林地巡护员</td><td>你放入的林地食草动物立刻定居。</td></tr>
+      <tr><td class="id">S07</td><td>Savanna Ranger<br>稀树草原巡护员</td><td>你放入的稀树草原食草动物立刻定居。</td></tr>
+      <tr><td class="id">S08</td><td>Desert Ranger<br>沙漠巡护员</td><td>你放入的沙漠食草动物立刻定居。</td></tr>
+    </tbody>
+  </table>
+
+  <h3>湿地专家 S09–S16</h3>
+  <table class="cards">
+    <thead><tr><th>编号</th><th>名称</th><th>效果</th></tr></thead>
+    <tbody>
+      <tr><td class="id">S09</td><td>Hydrogeologist<br>水文地质学家</td><td>放置 1 块土地板块与 1 块体型 1 的河流板块。</td></tr>
+      <tr><td class="id">S10</td><td>Hazmat Technician<br>危废处理技师</td><td>放置 1 块土地板块，并在其每个漏油格上放 1 能量。你覆盖该漏油时获得这些能量。</td></tr>
+      <tr><td class="id">S11</td><td>Geophysicist<br>地球物理学家</td><td>选择放置 1 或 2 块土地板块。若放 2 块，所有对手各得 2 能量。</td></tr>
+      <tr><td class="id">S12</td><td>Geologist<br>地质学家</td><td>支付 2 能量，放置 1 块土地板块。</td></tr>
+      <tr><td class="id">S13</td><td>Explorer<br>探险家</td><td>弃 1 张手牌中的动物卡，放置 2 块土地板块。</td></tr>
+      <tr><td class="id">S14</td><td>Topographer<br>地形测量师</td><td>若你放置土地板块，可同时放置 1 块体型 1 的河流板块。</td></tr>
+      <tr><td class="id">S15</td><td>Cartographer<br>制图师</td><td>若你<b>完全填满</b>一块土地板块（含起始土地），可二选一：获得 1 能量，或支付 1 能量放置 1 块新土地板块。</td></tr>
+      <tr><td class="id">S16</td><td>Civil Engineer<br>土木工程师</td><td>你可以把栖息地板块放到<b>没有水源</b>的山格上；若这样做，获得 1 能量。</td></tr>
+    </tbody>
+  </table>
+
+  <h3>林地专家 S17–S24（多为每局一次）</h3>
+  <table class="cards">
+    <thead><tr><th>编号</th><th>名称</th><th>效果</th></tr></thead>
+    <tbody>
+      <tr><td class="id">S17</td><td>Activist<br>行动派</td><td>弃 1 张手牌中的动物卡，<b>额外进行一个回合</b>：把当前回合连同回合结束的所有步骤走完，然后完整再进行一个回合。</td></tr>
+      <tr><td class="id">S18</td><td>Conservationist<br>保育主义者</td><td>使 2 只食草动物定居。</td></tr>
+      <tr><td class="id">S19</td><td>Fundraiser<br>募款人</td><td>获得 4 能量。</td></tr>
+      <tr><td class="id">S20</td><td>Hydrologist<br>水文学家</td><td>放置 1 条体型 1 与 1 条体型 3 的河流；两者都不需要挨着水源，也不必彼此相邻。</td></tr>
+      <tr><td class="id">S21</td><td>Irrigation Engineer<br>灌溉工程师</td><td>放置 2 块纯沙漠绿洲板块。</td></tr>
+      <tr><td class="id">S22</td><td>Surveyor<br>测量员</td><td>从活动堆抽 3 块栖息地板块，弃 1 块，其余放进领地。若此效果使活动堆移除了观鸟板块，照常执行观鸟规则——<b>不得</b>把观鸟板块放回活动堆。</td></tr>
+      <tr><td class="id">S23</td><td>Ecosystem Researcher<br>生态系统研究员</td><td>从轮盘取 1 块栖息地板块放置，并放置 1 条蛇。</td></tr>
+      <tr><td class="id">S24</td><td>Carnivore Ecologist<br>食肉动物生态学家</td><td>取 1 块掠食者奖励板块并获得其奖励。<b>不</b>拿掠食者棋子。</td></tr>
+    </tbody>
+  </table>
+
+  <h3>稀树草原专家 S25–S32（多与轮盘相关）</h3>
+  <table class="cards">
+    <thead><tr><th>编号</th><th>名称</th><th>效果</th></tr></thead>
+    <tbody>
+      <tr><td class="id">S25</td><td>Animal Nutritionist<br>动物营养学家</td><td>支付 3 能量，使 2 只食草动物定居。</td></tr>
+      <tr><td class="id">S26</td><td>Hydraulic Engineer<br>水利工程师</td><td>若你放置绿洲板块，获得 1 能量。</td></tr>
+      <tr><td class="id">S27</td><td>Operational Researcher<br>运筹学家</td><td>若你选择与<b>上一回合相同</b>的轮盘扇区，获得 2 能量；若选其两侧相邻的任一个，获得 1 能量。</td></tr>
+      <tr><td class="id">S28</td><td>Accountant<br>会计师</td><td>若你选择的轮盘扇区上有「获得生物能量」行动，获得 1 能量。<b>不需要</b>真的执行该行动。</td></tr>
+      <tr><td class="id">S29</td><td>Soil Scientist<br>土壤学家</td><td>带「拿取栖息地板块」行动的扇区，允许你从<b>任一方向</b>（顺时针或逆时针）拿取栖息地板块。</td></tr>
+      <tr><td class="id">S30</td><td>Landscape Architect<br>景观设计师</td><td>你可以不放置自己扇区上的栖息地板块，改放<b>相邻扇区</b>的那块。若本回合你打了灵长类卡，则不能使用这位专家。</td></tr>
+      <tr><td class="id">S31</td><td>Ornithologist<br>鸟类学家</td><td>每次观鸟中，每从鸟类获得 2 点能量或胜利分（合计），额外获得 1 枚生物能量或 1 VP（视情况）。此奖励在检查「是否超过 8 能量」<b>之后</b>结算。</td></tr>
+      <tr><td class="id">S32</td><td>Volunteer Coordinator<br>志愿者协调员</td><td>在轮盘上每个「拿取栖息地板块」扇区各放 1 枚生物能量标记。此后整局中，这些标记对你完全等同于普通太阳能量；其他玩家完全无视它们。回合结束分配能量时，由你决定太阳能量与生物能量进入各扇区的顺序。</td></tr>
+    </tbody>
+  </table>
+
+  <h3>沙漠专家 S33–S40（多与动物卡相关）</h3>
+  <table class="cards">
+    <thead><tr><th>编号</th><th>名称</th><th>效果</th></tr></thead>
+    <tbody>
+      <tr><td class="id">S33</td><td>Botanist<br>植物学家</td><td>从展列区<b>同一列</b>取 3 张动物卡；然后从手牌弃 1 张动物卡（可以是刚拿到的）。</td></tr>
+      <tr><td class="id">S34</td><td>Zoologist<br>动物学家</td><td>从展列区<b>同一行</b>取 3 张动物卡；然后从手牌弃 1 张动物卡（可以是刚拿到的）。</td></tr>
+      <tr><td class="id">S35</td><td>Biologist<br>生物学家</td><td>从背面朝上的牌堆取 4 张动物卡；然后从手牌弃 2 张动物卡（可以是刚拿到的）。</td></tr>
+      <tr><td class="id">S36</td><td>Environmentalist<br>环保主义者</td><td>若你取动物卡，获得 1 能量。</td></tr>
+      <tr><td class="id">S37</td><td>Veterinarian<br>兽医</td><td>若你取动物卡，可支付 1 能量，从展列区取任意 1 张动物卡。</td></tr>
+      <tr><td class="id">S38</td><td>Wildlife Rescue Technician<br>野生动物救护技师</td><td>若你覆盖了漏油，可支付 1 能量，从展列区取任意 1 张动物卡。</td></tr>
+      <tr><td class="id">S39</td><td>Reptile Ecologist<br>爬行动物生态学家</td><td>若你放置蛇，可支付 1 能量，从展列区取任意 1 张动物卡。</td></tr>
+      <tr><td class="id">S40</td><td>Phenologist<br>物候学家</td><td>观鸟期间展列区刷新<b>之前</b>，以及终局被触发的那一回合结束时，你可以从展列区取任意 1 张动物卡。<br><small>单人模式：把「终局被触发时」改为「你的最后一个回合中」。</small></td></tr>
+    </tbody>
+  </table>
+</section>
+<section class="sec" id="a7">
+  <h2><span class="num">G</span>附录 G：专家轮抽变体</h2>
+  <p class="lead">专家变体 #2：适合偏好<b>较少随机性</b>的竞技型玩家。与变体 #1 一样，你开局就拥有 5 位专家；区别在于，这 5 位专家是通过与对手竞争<b>轮抽</b>得到的。</p>
+  <p>玩家准备完成后，按<b>河流、湿地、林地、稀树草原、沙漠</b>的顺序，逐类进行轮抽，并且每一类<b>交替</b>更换选人顺序（俗称「蛇形轮抽」）。</p>
+  <ol>
+    <li>按玩家人数 +1 张，正面朝上发出该类专家卡。</li>
+    <li>从<b>最后一位玩家</b>开始、按<b>逆时针</b>顺序，每人选 1 张留下；剩下的那张放回盒中。</li>
+    <li>换到湿地专家，这一次从<b>起始玩家</b>开始、按<b>顺时针</b>顺序选。</li>
+    <li>之后交替：林地从逆时针开始、稀树草原从顺时针开始、沙漠从逆时针开始。</li>
+  </ol>
+  <p>你的专家开局就在手中，之后按第 11.2 节「吸引专家」的说明进入游戏。</p>
+  <div class="tn">
+    <span class="label">译者注</span>
+    原文用 1–5 的编号演示顺序：① 发河流专家 → ② 逆时针选 → ③ 顺时针选湿地 → ④ 林地 → ⑤ 沙漠。轮抽各类的顺序<b>可以</b>自行调整，上面的顺序只是讲解用。
+  </div>
+</section>
+
+<section class="sec" id="a8">
+  <h2><span class="num">H</span>附录 H：名词表</h2>
+  <table>
+    <thead><tr><th>词条</th><th>原文</th><th>定义</th></tr></thead>
+    <tbody>
+      <tr><td>相邻</td><td>Adjacent</td><td>栖息地或板块<b>边对边相接</b>才算相邻；只在角上碰到<b>不算</b>。</td></tr>
+      <tr><td>动物卡</td><td>Animal Card</td><td>展列区里的所有卡都是动物卡——掠食者、灵长类、动物志三类。</td></tr>
+      <tr><td>动物板块</td><td>Animal Tile</td><td>食草动物与蛇都算动物板块。</td></tr>
+      <tr><td>空格</td><td>Empty Space</td><td>你领地中未被栖息地板块、河流板块或山占据的六角格。露出状态的漏油格算空格。领地板块<b>之外</b>不算空格。</td></tr>
+      <tr><td>已占据格</td><td>Occupied Space</td><td>你领地中被栖息地板块、河流板块或山占据的六角格。领地板块之外不算已占据格。</td></tr>
+      <tr><td>栖息地</td><td>Habitat</td><td>你领地中由板块构成、<b>同一类型且连通</b>的一片区域。</td></tr>
+      <tr><td>栖息地板块</td><td>Habitat Tile</td><td>单块六角板块，可含 1 种以上栖息地类型。</td></tr>
+      <tr><td>栖息地类型</td><td>Habitat Type</td><td>河流、湿地、林地、稀树草原、沙漠这五种类别，动物与卡牌都可能引用它。</td></tr>
+      <tr><td>山脉</td><td>Mountain Range</td><td>彼此相邻的山格合为一道山脉；单独一座山算大小 1 的山脉。</td></tr>
+      <tr><td>野放</td><td>Reintroduced</td><td>食草动物刚被放进栖息地时的状态：数值与体型相等的那一面朝上。</td></tr>
+      <tr><td>定居</td><td>Established</td><td>通过轮盘行动或卡牌效果翻面，显示心形图标，数值高于体型。</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="sec" id="a9">
+  <h2><span class="num">I</span>附录 I：图标速查</h2>
+  <p class="lead">原书第 24 页的图标总表，按类别整理。</p>
+  <div class="grid2">
+    <div>
+      <h4>能量</h4>
+      <ul class="tight"><li>太阳能量（轮盘上，不可拿走或弃掉）</li><li>生物能量（个人供应区）</li></ul>
+      <h4>棋子</h4>
+      <ul class="tight"><li>行动选择标记</li><li>灵长类棋子</li><li>掠食者棋子</li></ul>
+      <h4>土地与领地</h4>
+      <ul class="tight"><li>起始土地 / 土地板块 / 任意土地板块</li><li>漏油</li><li>已占据格 / 同一行连续已占据格</li></ul>
+      <h4>栖息地</h4>
+      <ul class="tight"><li>任意栖息地</li><li>河流 / 湿地 / 林地 / 稀树草原 / 沙漠</li><li>山脉</li><li>任意六角板块或领地空格</li><li>轮盘上的栖息地板块 / 活动堆的栖息地板块</li><li>纯沙漠绿洲 / 任意绿洲</li><li>新芽：所指栖息地类型 +1 块</li></ul>
+      <h4>动物板块</h4>
+      <ul class="tight"><li>任意动物（食草动物或蛇）</li><li>食草动物 / 数值 10 以上的食草动物</li><li>已定居的食草动物 / 定居行动</li><li>蛇</li><li>同一块板块 / 需要绿洲</li></ul>
+    </div>
+    <div>
+      <h4>动物卡</h4>
+      <ul class="tight"><li>任意动物卡 / 动物志卡 / 灵长类卡 / 掠食者卡</li><li>掠食者奖励板块</li><li>同一列 / 同一行</li></ul>
+      <h4>鸟类</h4>
+      <ul class="tight"><li>鸟类卡 / 鸟 / 观鸟板块 / 观鸟阶段 / 平手判定</li></ul>
+      <h4>专家</h4>
+      <ul class="tight"><li>专家卡 / 专家板</li><li>可重复（触发即用）/ 每回合一次 / 每局一次 / 终局</li></ul>
+      <h4>限定词</h4>
+      <ul class="tight"><li>另外 / 或</li><li>弃掉</li><li>已完成、已打出 / 手牌中</li><li>不要做、忽略</li></ul>
+      <h4>比较</h4>
+      <ul class="tight"><li>数数量 / 最高数值 / 数值相加</li></ul>
+      <h4>关系</h4>
+      <ul class="tight"><li>相邻 / 不相邻</li><li>不同 / 相同</li><li>大于或等于</li></ul>
+      <h4>其他</h4>
+      <ul class="tight"><li>胜利分 / 轮盘 / 玩家 / 空洞 / 额外回合</li><li>支付或弃牌以取得奖励</li><li>拥有此物 / 当此事发生时，获得奖励</li></ul>
+      <h4>河流板块</h4>
+      <ul class="tight"><li>体型 1 / 2 / 3 河流</li><li>水源</li></ul>
+    </div>
+  </div>
+  <figure>
+    <img src="Wildscape_Rules_images/page_24.jpg" alt="图标速查表">
+    <figcaption>原书第 24 页：全图标总表</figcaption>
+  </figure>
+</section>
+
+<section class="sec" id="a10">
+  <h2><span class="num">J</span>制作名单</h2>
+  <div class="kv">
+    <div><b>设计</b>Sebastian Bleasdale</div>
+    <div><b>开发</b>Juma Al-JouJou</div>
+    <div><b>出版</b>Karma Games</div>
+    <div><b>插画</b>Miguel Coimbra</div>
+    <div><b>平面设计</b>Jess denHeyer</div>
+    <div><b>排版</b>Aleksandr Kähar / Dina Said So Studio</div>
+    <div><b>内衬设计</b>Daniel Cunningham</div>
+    <div><b>特别致谢</b>African Striped Weasel Research Project 的 Kyle Smith 提供动物学专业意见</div>
+  </div>
+  <p>图片除特别注明外均来自 Wikimedia Commons（CC BY-SA 授权）并经图像处理。版本标识：<b>2026-10-16-EN</b>。版权：© 2026 Karma Games GmbH，Rosenthaler Str. 72 A, 10119 Berlin, Germany。</p>
+</section>
+
+<footer>
+  本页为《荒野生机 Wildscape》中文规则书，由英文原版规则书（Karma Games，2026-10-16 版）翻译整理，仅供学习与游戏辅助使用。原文版权归 Karma Games GmbH 及设计师所有。<br>
+  术语对照：rondel 轮盘／segment 扇区／habitat tile 栖息地板块／land tile 土地板块／herbivore 食草动物／reintroduced 野放／established 定居／snake 蛇／river 河流／oasis 绿洲／predator 掠食者／primate 灵长类／fauna 动物志／specialist 专家／bird watching 观鸟／tableau 展列区／active stack 活动堆／oil spill 漏油／mountain range 山脉／Poachers 盗猎者。
+</footer>
+
+</main>
+</div>
+</body>
+</html>
