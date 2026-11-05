@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>波将金村庄 Potemkin Villages · 中文规则书</title>
+<style>
+  :root{
+    --wine:#7c2126;
+    --wine-mid:#5a171b;
+    --wine-dark:#360d11;
+    --wine-deep:#1f0709;
+    --gold:#c39a45;
+    --gold-light:#e3c684;
+    --gold-pale:#f0e0bb;
+    --paper:#fbf7ee;
+    --paper-2:#fdfbf5;
+    --ink:#2a211d;
+    --ink-soft:#4a3d35;
+    --muted:#7b6a5b;
+    --rule:#ded0b4;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Songti SC","Source Han Serif SC","Noto Serif SC",Georgia,"Times New Roman",serif;
+    font-size:16.5px;
+    line-height:1.9;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ============ 布局 ============ */
+  .layout{
+    display:flex;
+    align-items:flex-start;
+    max-width:1400px;
+    margin:0 auto;
+  }
+
+  /* ============ 侧栏目录 ============ */
+  .sidebar{
+    position:sticky;
+    top:0;
+    flex:0 0 288px;
+    width:288px;
+    height:100vh;
+    overflow-y:auto;
+    background:
+      radial-gradient(120% 60% at 0% 0%, #4a1216 0%, rgba(74,18,22,0) 60%),
+      linear-gradient(170deg,#3b0e12 0%,#280a0c 45%,#1b0608 100%);
+    color:#e6d7b8;
+    border-right:1px solid rgba(195,154,69,.45);
+    padding:30px 0 40px;
+  }
+  .sidebar::-webkit-scrollbar{width:8px;}
+  .sidebar::-webkit-scrollbar-thumb{background:rgba(195,154,69,.35);border-radius:4px;}
+  .brand{
+    padding:0 24px 20px;
+    border-bottom:1px solid rgba(195,154,69,.28);
+    margin-bottom:18px;
+  }
+  .brand .mark{
+    font-size:11px;
+    letter-spacing:.32em;
+    color:var(--gold);
+    text-transform:uppercase;
+    margin-bottom:8px;
+  }
+  .brand .cn{
+    font-size:22px;
+    letter-spacing:.14em;
+    color:#f3e6c8;
+    margin:0 0 4px;
+    font-weight:600;
+  }
+  .brand .en{
+    font-family:Georgia,"Times New Roman",serif;
+    font-style:italic;
+    font-size:13px;
+    color:#b79b6c;
+    letter-spacing:.05em;
+  }
+  .toc-label{
+    padding:0 24px;
+    font-size:11px;
+    letter-spacing:.3em;
+    color:var(--gold);
+    margin-bottom:10px;
+  }
+  .toc{list-style:none;margin:0;padding:0 0 0 0;counter-reset:toc;}
+  .toc li{counter-increment:toc;}
+  .toc a{
+    display:flex;
+    gap:10px;
+    align-items:baseline;
+    padding:7px 22px 7px 24px;
+    color:#d8c8a9;
+    text-decoration:none;
+    font-size:14.5px;
+    line-height:1.55;
+    border-left:3px solid transparent;
+    transition:background .18s,color .18s,border-color .18s;
+  }
+  .toc a::before{
+    content:counter(toc,decimal-leading-zero);
+    font-family:Georgia,serif;
+    font-size:10.5px;
+    color:#8d7452;
+    letter-spacing:.08em;
+    flex:0 0 18px;
+  }
+  .toc a:hover,.toc a:focus{
+    background:rgba(195,154,69,.10);
+    color:var(--gold-light);
+    border-left-color:var(--gold);
+    outline:none;
+  }
+  .sidebar-foot{
+    margin:22px 24px 0;
+    padding-top:16px;
+    border-top:1px solid rgba(195,154,69,.22);
+    font-size:11.5px;
+    line-height:1.7;
+    color:#8e7a5c;
+    letter-spacing:.02em;
+  }
+
+  /* ============ 主内容 ============ */
+  .main{
+    flex:1 1 auto;
+    min-width:0;
+    background:var(--paper);
+    background-image:
+      radial-gradient(90% 40% at 100% 0%, rgba(195,154,69,.07), rgba(195,154,69,0) 70%);
+  }
+  .hero{
+    background:linear-gradient(160deg,#2c0a0d 0%,#4a1216 55%,#5d181c 100%);
+    color:#f4e8cd;
+    padding:54px 56px 46px;
+    border-bottom:4px solid var(--gold);
+    position:relative;
+  }
+  .hero::after{
+    content:"";
+    position:absolute;
+    inset:14px;
+    border:1px solid rgba(195,154,69,.4);
+    pointer-events:none;
+  }
+  .hero .kicker{
+    font-size:11.5px;
+    letter-spacing:.42em;
+    color:var(--gold);
+    margin-bottom:16px;
+    text-transform:uppercase;
+  }
+  .hero h1{
+    margin:0 0 8px;
+    font-size:44px;
+    letter-spacing:.16em;
+    font-weight:600;
+    line-height:1.25;
+  }
+  .hero .sub{
+    font-family:Georgia,serif;
+    font-style:italic;
+    font-size:19px;
+    color:var(--gold-light);
+    letter-spacing:.06em;
+    margin-bottom:20px;
+  }
+  .hero p{
+    max-width:640px;
+    margin:0;
+    font-size:14.5px;
+    line-height:1.95;
+    color:#dccaab;
+  }
+
+  article{
+    padding:0 56px 60px;
+    max-width:900px;
+  }
+  section{padding-top:46px;scroll-margin-top:16px;}
+  section > h2{
+    font-size:26px;
+    letter-spacing:.1em;
+    color:var(--wine);
+    margin:0 0 4px;
+    font-weight:600;
+    line-height:1.4;
+  }
+  .head-row{
+    display:flex;
+    align-items:baseline;
+    gap:14px;
+    border-bottom:1px solid var(--rule);
+    padding-bottom:12px;
+    margin-bottom:22px;
+    position:relative;
+  }
+  .head-row::after{
+    content:"";
+    position:absolute;
+    left:0;bottom:-1px;
+    width:74px;height:3px;
+    background:var(--gold);
+  }
+  .page-ref{
+    margin-left:auto;
+    font-family:Georgia,serif;
+    font-size:11.5px;
+    letter-spacing:.12em;
+    color:var(--muted);
+    white-space:nowrap;
+  }
+  h3{
+    font-size:18.5px;
+    color:var(--wine-mid);
+    letter-spacing:.06em;
+    margin:32px 0 10px;
+    font-weight:600;
+  }
+  h3.set-title{
+    font-size:20px;
+    color:var(--wine);
+    border-left:4px solid var(--gold);
+    padding-left:12px;
+    letter-spacing:.12em;
+  }
+  h4{
+    font-size:16px;
+    color:var(--wine-mid);
+    margin:22px 0 6px;
+    letter-spacing:.04em;
+  }
+  p{margin:0 0 14px;}
+  strong{color:var(--wine-mid);font-weight:700;}
+  em{font-style:italic;color:var(--ink-soft);}
+  .en{
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:.92em;
+    color:var(--muted);
+    font-style:italic;
+  }
+  ul,ol{margin:0 0 16px;padding-left:1.5em;}
+  li{margin-bottom:8px;}
+  ul li::marker{color:var(--gold);}
+  ol li::marker{color:var(--wine);font-family:Georgia,serif;font-size:.92em;}
+
+  /* 引文 / 提示框 */
+  .quote{
+    border-left:3px solid var(--gold);
+    background:var(--paper-2);
+    padding:16px 20px;
+    margin:0 0 18px;
+    color:var(--ink-soft);
+  }
+  .note{
+    background:#f7eeda;
+    border:1px solid #e4d0a6;
+    border-left:4px solid var(--gold);
+    padding:14px 18px;
+    margin:0 0 18px;
+    font-size:15px;
+    line-height:1.85;
+  }
+  .note .tag{
+    font-weight:700;
+    color:var(--wine);
+    letter-spacing:.08em;
+  }
+  .warn{
+    background:#fbf0e6;
+    border:1px solid #e3bda3;
+    border-left:4px solid var(--wine);
+    padding:14px 18px;
+    margin:0 0 18px;
+    font-size:15px;
+    line-height:1.85;
+  }
+  .warn .tag{
+    font-weight:700;
+    color:var(--wine);
+    letter-spacing:.08em;
+  }
+
+  /* 术语小卡 */
+  .terms{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));
+    gap:12px;
+    margin:0 0 22px;
+  }
+  .terms div{
+    background:var(--paper-2);
+    border:1px solid var(--rule);
+    border-top:3px solid var(--gold);
+    padding:10px 14px;
+    font-size:14.5px;
+    line-height:1.7;
+  }
+  .terms b{display:block;color:var(--wine);letter-spacing:.06em;margin-bottom:2px;}
+
+  /* 配件清单 */
+  .comp{
+    list-style:none;
+    padding:0;
+    margin:0 0 18px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));
+    gap:10px;
+  }
+  .comp li{
+    margin:0;
+    padding:12px 16px;
+    background:var(--paper-2);
+    border:1px solid var(--rule);
+    line-height:1.65;
+    font-size:15px;
+  }
+  .comp .num{
+    font-family:Georgia,serif;
+    font-size:20px;
+    color:var(--gold);
+    margin-right:8px;
+  }
+
+  /* 阶段时间线 */
+  .phase{
+    display:flex;
+    gap:16px;
+    padding:16px 0;
+    border-bottom:1px dashed var(--rule);
+  }
+  .phase:last-child{border-bottom:none;}
+  .phase .badge{
+    flex:0 0 42px;
+    height:42px;
+    border-radius:50%;
+    border:1px solid var(--gold);
+    background:#fff9ec;
+    color:var(--wine);
+    font-family:Georgia,serif;
+    font-size:16px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-top:2px;
+  }
+  .phase .body{flex:1 1 auto;min-width:0;}
+  .phase .body h4{margin:0 0 4px;font-size:16.5px;}
+  .phase .body p{margin:0;font-size:15.5px;}
+
+  /* 角色能力 */
+  .ability{
+    background:var(--paper-2);
+    border:1px solid var(--rule);
+    border-left:4px solid var(--gold);
+    padding:14px 20px 6px;
+    margin:0 0 14px;
+  }
+  .ability h4{
+    margin:0 0 6px;
+    font-size:16.5px;
+    color:var(--wine);
+    letter-spacing:.05em;
+  }
+  .ability p{font-size:15.5px;line-height:1.88;}
+  .example{
+    background:#fdf8ec;
+    border:1px dashed #d9c6a2;
+    padding:10px 16px;
+    font-size:14.5px;
+    line-height:1.82;
+    color:var(--ink-soft);
+  }
+  .aside{
+    font-size:14.5px;
+    color:var(--muted);
+    border-left:2px solid var(--rule);
+    padding-left:12px;
+    line-height:1.8;
+  }
+  .ability p:last-child{margin-bottom:10px;}
+  .crown{color:var(--wine);font-size:.95em;}
+
+  /* 图 */
+  figure{
+    margin:26px 0 26px;
+    padding:0;
+  }
+  figure img{
+    display:block;
+    width:100%;
+    height:auto;
+    border:1px solid #d8c9ad;
+    background:#fff;
+    box-shadow:0 2px 10px rgba(60,30,20,.10);
+  }
+  figcaption{
+    margin-top:9px;
+    font-size:12.5px;
+    letter-spacing:.05em;
+    color:var(--muted);
+    text-align:center;
+    line-height:1.6;
+  }
+
+  /* 制作名单 */
+  .credits{
+    background:var(--paper-2);
+    border:1px solid var(--rule);
+    padding:22px 26px;
+    margin:0 0 18px;
+  }
+  .credits .dedication{
+    font-size:15px;
+    color:var(--ink-soft);
+    padding-bottom:14px;
+    margin-bottom:16px;
+    border-bottom:1px dashed var(--rule);
+  }
+  .credits dl{
+    display:grid;
+    grid-template-columns:130px 1fr;
+    gap:8px 18px;
+    margin:0;
+    font-size:15px;
+  }
+  .credits dt{
+    color:var(--muted);
+    letter-spacing:.04em;
+  }
+  .credits dd{
+    margin:0;
+    color:var(--ink);
+  }
+
+  footer{
+    margin-top:56px;
+    padding:22px 56px 34px;
+    border-top:1px solid var(--rule);
+    background:#f5efe2;
+    font-size:13px;
+    color:var(--muted);
+    letter-spacing:.04em;
+    text-align:center;
+    line-height:1.8;
+  }
+  footer .rule-mark{
+    color:var(--gold);
+    letter-spacing:.5em;
+    font-size:11px;
+    display:block;
+    margin-bottom:8px;
+  }
+
+  /* ============ 移动端 ============ */
+  @media (max-width:960px){
+    .layout{display:block;}
+    .sidebar{
+      position:static;
+      width:100%;
+      height:auto;
+      border-right:none;
+      border-bottom:3px solid var(--gold);
+      padding:24px 0 22px;
+    }
+    .brand{padding:0 20px 16px;}
+    .toc{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));
+      gap:2px 6px;
+      padding:0 12px;
+    }
+    .toc a{
+      padding:8px 12px;
+      font-size:13.5px;
+      border-left:none;
+      border-bottom:2px solid transparent;
+    }
+    .toc a:hover,.toc a:focus{border-bottom-color:var(--gold);}
+    .sidebar-foot{margin:16px 20px 0;}
+    .hero{padding:38px 26px 32px;}
+    .hero::after{inset:10px;}
+    .hero h1{font-size:30px;letter-spacing:.1em;}
+    .hero .sub{font-size:16px;}
+    .hero p{font-size:13.5px;}
+    article{padding:0 24px 44px;}
+    section{padding-top:34px;}
+    section > h2{font-size:21px;}
+    .head-row{flex-wrap:wrap;gap:6px;}
+    .page-ref{margin-left:0;flex-basis:100%;text-align:left;}
+    .phase{gap:12px;}
+    .phase .badge{flex:0 0 34px;height:34px;font-size:14px;}
+    .credits{padding:18px;}
+    .credits dl{grid-template-columns:1fr;gap:2px;}
+    .credits dd{margin-bottom:10px;}
+    footer{padding:20px 24px 28px;}
+  }
+  @media (max-width:420px){
+    body{font-size:15.5px;}
+    .hero h1{font-size:25px;}
+    .toc{grid-template-columns:1fr 1fr;}
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="mark">Rules · 中文版</div>
+      <div class="cn">波将金村庄</div>
+      <div class="en">Potemkin Villages</div>
+    </div>
+    <div class="toc-label">目 录</div>
+    <nav>
+      <ol class="toc">
+        <li><a href="#background">游戏背景与目标</a></li>
+        <li><a href="#components">配件</a></li>
+        <li><a href="#setup">设置</a></li>
+        <li><a href="#overview">玩法概览</a></li>
+        <li><a href="#phases">一个回合的各阶段</a></li>
+        <li><a href="#characters">角色能力</a></li>
+        <li><a href="#scoring">计分</a></li>
+        <li><a href="#endgame">结束与胜负</a></li>
+        <li><a href="#variants">三人与两人规则</a></li>
+        <li><a href="#tips">提示</a></li>
+        <li><a href="#history">历史说明</a></li>
+        <li><a href="#credits">制作名单</a></li>
+      </ol>
+    </nav>
+    <div class="sidebar-foot">
+      依据原版英文规则书全 12 页翻译整理<br>
+      仅供学习参考
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <div class="hero">
+      <div class="kicker">A Cooperative Trick-taking Game</div>
+      <h1>波将金村庄</h1>
+      <div class="sub">Potemkin Villages</div>
+      <p>叶卡捷琳娜大帝正沿第聂伯河巡游，检视她的帝国。你与同僚大臣必须赶在她抵达之前，用彩绘的假立面造出一座座村庄——只要她看穿一处破绽，整个宫廷都将万劫不复。</p>
+    </div>
+
+    <article>
+
+      <!-- ================= 1 背景 ================= -->
+      <section id="background">
+        <div class="head-row">
+          <h2>游戏背景与目标</h2>
+          <span class="page-ref">原书第 2 页</span>
+        </div>
+
+        <p>当叶卡捷琳娜大帝（Catherine the Great）乘船巡视她的帝国时，你与同僚大臣们必须匆忙搭起彩绘的假立面，制造出一片繁荣的假象。要精明地调度资源以维持这场骗局，因为只要她发现哪怕一处破绽，整个宫廷都将面临覆灭。</p>
+
+        <p><em>Potemkin Villages</em>（波将金村庄）是一款以叶卡捷琳娜大帝前往克里米亚（Crimea）的旅程为背景的吃墩游戏（trick-taking game）。它是一款完全合作型游戏：所有人一起获胜，或所有人一起失败；游戏围绕玩家角色的特殊能力展开，而这些能力由赢下一墩来触发。玩家要设法打光自己手中的所有牌。若大家共同做到，他们便获胜；然而，若叶卡捷琳娜在他们于某地建起村庄之前就抵达该地，他们便告失败。</p>
+
+        <div class="note">
+          <span class="tag">目标</span>　全员在叶卡捷琳娜的船走完整条河之前打光手牌，即为共同胜利；只要船停在一处没有村庄的空位，全员立即失败。
+        </div>
+      </section>
+
+      <!-- ================= 2 配件 ================= -->
+      <section id="components">
+        <div class="head-row">
+          <h2>配件</h2>
+          <span class="page-ref">原书第 2 页</span>
+        </div>
+
+        <ul class="comp">
+          <li><span class="num">16</span><strong>张角色卡</strong>（Character cards，分为四组，即 A、B、C、D 组）</li>
+          <li><span class="num">45</span><strong>张数字牌</strong>（numbered cards，五种颜色各九张，编号 1–9）</li>
+          <li><span class="num">2</span><strong>张辅助卡</strong>（Aid cards）</li>
+          <li><span class="num">1</span><strong>本英文规则书</strong>（English Rules）</li>
+        </ul>
+
+        <p>若发现任何配件缺失或损坏，请通过 info@albi.cz 联系我们，我们将免费为您补寄替换件！</p>
+
+        <figure>
+          <img src="Potemkin_Rules_images/page_02.jpg" alt="原书第 2 页：配件一览，包括角色卡、辅助卡、规则书与五种颜色的数字牌">
+          <figcaption>原书第 2 页 · 配件一览：角色卡、辅助卡、规则书与 45 张数字牌</figcaption>
+        </figure>
+      </section>
+
+      <!-- ================= 3 设置 ================= -->
+      <section id="setup">
+        <div class="head-row">
+          <h2>设置</h2>
+          <span class="page-ref">原书第 3 页</span>
+        </div>
+
+        <p>与大多数吃墩游戏一样，《波将金村庄》最好由四名玩家进行，规则书即以此人数撰写。两人与三人游戏的调整规则见规则书末尾。</p>
+
+        <ol>
+          <li><strong>选择你们想使用的角色卡组。</strong>游戏包含四组（A、B、C、D），其中 A 组被视为入门组。</li>
+          <li><strong>每名玩家自行挑选或随机抽取一张角色卡</strong>，白色一面朝上放在自己面前。卡片的另一面（带多色背景）用于三人或两人游戏（见第 6 页）。</li>
+          <li><strong>洗混全部 45 张数字牌，给每名玩家发十张。</strong>玩家把这些牌作为手牌，对其他玩家保密。</li>
+          <li><strong>从剩余的牌中，正面朝上在桌面中央发四张，排成一行。</strong>这些牌代表第聂伯河（Dnieper）沿岸最初的几座波将金村庄。把最后一张牌背面朝上，放在最左侧村庄的下方。这张牌（游戏过程中会有更多牌加到它上面）代表叶卡捷琳娜大帝前往克里米亚途中所乘的船。</li>
+        </ol>
+
+        <p class="en" style="margin-top:-4px;">Don’t feel like reading the rules? Watch the video tutorial instead!　——不想读规则？也可以先看视频教学。</p>
+
+        <figure>
+          <img src="Potemkin_Rules_images/page_03.jpg" alt="原书第 3 页：四人游戏设置示意图，四张村庄牌排成一行，船牌位于最左村庄下方">
+          <figcaption>原书第 3 页 · 四人游戏设置：四座村庄排成一行，船位于最左侧村庄下方</figcaption>
+        </figure>
+
+        <div class="note">
+          <span class="tag">注</span>　设置阶段同样适用保密规则：不得向其他玩家透露自己手中有哪些牌（详见「玩法概览」）。
+        </div>
+      </section>
+
+      <!-- ================= 4 玩法概览 ================= -->
+      <section id="overview">
+        <div class="head-row">
+          <h2>玩法概览</h2>
+          <span class="page-ref">原书第 4–5 页</span>
+        </div>
+
+        <h3>术语约定</h3>
+        <div class="terms">
+          <div><b>墩（trick）</b>每名玩家各打出 1 张牌所形成的那一叠牌，以及它的结算结果。</div>
+          <div><b>回合（round）</b>从领出第一张牌，到结算完毕、船移动一格为止的完整周期。原文中「以 9 赢下时船在该回合会移动两次」即指此周期。</div>
+          <div><b>上游 / 下游</b>以船为界，船左侧为上游，船右侧为下游。</div>
+          <div><b>行动</b>原文未把 turn 作为术语使用；凡涉及单个玩家出牌动作处，译文统一用「行动」。</div>
+        </div>
+
+        <h3>保密原则</h3>
+        <div class="warn">
+          <span class="tag">重要</span>　游戏过程中（包括设置阶段），玩家不得向其他玩家透露自己手中持有哪几张牌——你们可以自由讨论任何策略，但不得说出手中任何牌的数字或颜色，也不得传递任何直接指向这些信息的内容（不要说类似「如果你先出蓝色牌，我就赢不了这一墩」这样的话）。
+        </div>
+
+        <h3>起始玩家与基本流程</h3>
+        <p>游戏由控制带有<span class="crown">♛</span>王冠符号角色的玩家开始。该玩家从手中打出一张牌，领出第一墩。其他玩家按顺时针方向各打出一张牌。随后结算这一墩，赢家启动其角色的能力。</p>
+        <p>结算完角色能力之后，把叶卡捷琳娜大帝的船向下游（向右）移动一格，并开始新的一回合。上一墩的赢家将领出这一回合（除非角色能力另有说明）。</p>
+        <p>玩家可以自由查看任何村庄或其他正面朝上的牌。船只能在某些角色的特殊能力下查看，因为这些牌是背面朝上的。</p>
+
+        <h3>吃墩的基本规则</h3>
+        <p>游戏的核心是吃墩机制。在第一回合中，控制带有<span class="crown">♛</span>王冠符号角色的玩家领出第一张牌。玩家必须跟花色（follow suit）：若手中持有与领出牌同色的牌，就必须打出（但打哪一张数字的牌由自己决定）。若玩家无法跟花色，则可以打出任意一张牌。</p>
+        <p><strong>赢下一墩：</strong>领出花色中最大的牌赢得该墩，除非有人打出了将牌花色，此时以最大的将牌获胜。</p>
+
+        <h3>将牌</h3>
+        <p>游戏开始时没有将牌（trump）。但某些角色能力允许把一墩或若干张牌放到叶卡捷琳娜的船旁，从而把该颜色设为将牌。从此刻起，该颜色的所有牌都是将牌，可以击败任何其他花色。当玩家在游戏中多次更换将牌颜色时，这里可能会有多张牌，但只有最上面的一张决定将牌。</p>
+
+        <h3>弃牌堆与船</h3>
+        <p>与其他吃墩游戏不同，《波将金村庄》没有常规的弃牌堆。任何时候游戏要求你弃掉任何牌，都把牌背面朝上放到船上。船在任何时刻都必须至少有一张牌。玩家不能采取任何会导致船「消失」的行动。</p>
+
+        <h3>上游与下游</h3>
+        <p>在游戏中，术语<strong>下游</strong>（downstream）指叶卡捷琳娜大帝的船右侧方向，包括最右侧的空位以及村庄（牌）之间的空位。术语<strong>上游</strong>（upstream）指位于船左侧的所有村庄及其之间的空位，包括最左侧的空位。</p>
+
+        <figure>
+          <img src="Potemkin_Rules_images/page_05.jpg" alt="原书第 5 页：上下游示意图，船左右两侧分别标注 upstream 与 downstream">
+          <figcaption>原书第 5 页 · 上游与下游：以船为界，向左为上游，向右为下游</figcaption>
+        </figure>
+
+        <h3>数字牌的特殊效果</h3>
+        <p>若玩家以 <strong>9</strong> 赢下一墩，立即把船向下游（右）移动一格。若玩家以 <strong>1</strong> 赢下一墩，立即把船向上游（左）移动一格。</p>
+      </section>
+
+      <!-- ================= 5 阶段 ================= -->
+      <section id="phases">
+        <div class="head-row">
+          <h2>一个回合的各阶段</h2>
+          <span class="page-ref">原书第 4–5 页</span>
+        </div>
+
+        <p>原书并未给阶段编号，以下顺序严格按原文叙述整理，不增不减。</p>
+
+        <div class="phase">
+          <div class="badge">1</div>
+          <div class="body">
+            <h4>领出（首家出牌）</h4>
+            <p>首家从手中打出一张牌，该牌的颜色即本回合的领出花色。第一回合的首家是控制带<span class="crown">♛</span>王冠符号角色的玩家；此后由上一墩的赢家领出（除非角色能力另有说明）。</p>
+          </div>
+        </div>
+
+        <div class="phase">
+          <div class="badge">2</div>
+          <div class="body">
+            <h4>依次跟牌</h4>
+            <p>其他玩家按顺时针方向各打出一张牌。必须跟花色：手中有同色牌就必须打出，数字自选；若无同色牌，则可打出任意一张牌。</p>
+          </div>
+        </div>
+
+        <div class="phase">
+          <div class="badge">3</div>
+          <div class="body">
+            <h4>结算这一墩</h4>
+            <p>领出花色中最大的牌获胜；若有人打出将牌花色，则以最大的将牌获胜。赢家收走这一墩的全部牌，把自己的获胜牌放在最上面。</p>
+          </div>
+        </div>
+
+        <div class="phase">
+          <div class="badge">4</div>
+          <div class="body">
+            <h4>启动角色能力</h4>
+            <p>赢家用这叠牌结算其角色的能力。除另有明确说明外，角色能力都是强制性的。若能力要求建造新村庄，则始终取走整个获胜墩，并以获胜牌作为村庄的「正面」。</p>
+          </div>
+        </div>
+
+        <div class="phase">
+          <div class="badge">5</div>
+          <div class="body">
+            <h4>数字牌的即时效果</h4>
+            <p>在赢下这一墩的当下：以 <strong>9</strong> 赢墩则船立即向下游（右）移动一格；以 <strong>1</strong> 赢墩则船立即向上游（左）移动一格。此效果与本阶段之后的常规移动相互独立，会叠加。</p>
+          </div>
+        </div>
+
+        <div class="phase">
+          <div class="badge">6</div>
+          <div class="body">
+            <h4>移动船并开始新的一回合</h4>
+            <p>把船向下游（右）移动一格，开始新的一回合，由上一墩的赢家领出（除非角色能力指定了其他首家）。因此，若本墩以 9 赢下，船在该回合会移动两次。</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 6 角色能力 ================= -->
+      <section id="characters">
+        <div class="head-row">
+          <h2>角色能力</h2>
+          <span class="page-ref">原书第 9–12 页</span>
+        </div>
+
+        <p>当玩家赢下一墩时，他们取走这叠牌，把获胜牌放在最上面，并用这叠牌来结算其角色的能力。除另有明确说明外，这些能力都是<strong>强制性</strong>的。若某项能力指示你建造一座新村庄，你总是拿走整个获胜墩，并以获胜牌作为该村庄的「正面」。</p>
+        <p>除非明确指示你建造上游或下游村庄，否则你可以在任一方向建造。船是分界线，因此船正上方的那座村庄既不算上游村庄，也不算下游村庄。</p>
+        <p>若要把这一墩放在两座现有村庄之间，则依船的位置向左或向右挪动村庄：若在下游（船右侧）建造，就把牌向右挪；若在上游（船左侧）建造，就把牌向左挪。同样，当你从河上弃掉一座村庄时，把其他村庄朝船的方向挪动，使村庄之间不留空位。</p>
+
+        <div class="note">
+          <span class="tag">说明</span>　四组角色卡各含 4 名角色，每组中带 <span class="crown">♛</span> 标记的角色为开局首家。以下按 A、B、C、D 组逐条译出。
+        </div>
+
+        <figure>
+          <img src="Potemkin_Rules_images/page_09.jpg" alt="原书第 9 页：A 组四张角色卡与设定将牌的示意图">
+          <figcaption>原书第 9 页 · A 组角色卡与「设定将牌」示意</figcaption>
+        </figure>
+
+        <h3 class="set-title">A 组（入门组）</h3>
+
+        <div class="ability">
+          <h4>工兵 Sapper <span class="crown">♛</span></h4>
+          <p>赢下一墩后，从河上取任意两座村庄，把它们弃到船堆。然后在你喜欢的任意位置，用你的获胜墩建造一座新村庄。若你被迫弃掉船正上方的那座村庄，你立即输掉游戏。</p>
+        </div>
+
+        <div class="ability">
+          <h4>舞台布景师 Stagehand</h4>
+          <p>赢下一墩后，若船堆中至少有两张牌，从该堆中选一张牌，放到船的下方、压在之前放置的任意牌之上（若有）。这将成为新的将牌颜色。你不必选择与本墩颜色相符的牌。但若所选牌确实与本墩颜色相符，你可以在任意位置建造一座新村庄；否则，把这一墩弃到船上。</p>
+        </div>
+
+        <div class="ability">
+          <h4>大臣 Chancellor</h4>
+          <p>用你的获胜墩建造一座上游村庄。此外，若你是通过打出将牌赢下这一墩，所有玩家各从手中弃一张牌到船上。</p>
+        </div>
+
+        <div class="ability">
+          <h4>侦察兵 Scout</h4>
+          <p>每当你赢下一墩，且场上至少有两座上游村庄时，你选择其中一座并把它移到下游。把你的获胜墩弃到船上。若不足两座上游村庄，你只需弃掉这一墩，其他什么也不做。</p>
+        </div>
+
+        <h3 class="set-title">B 组</h3>
+
+        <figure>
+          <img src="Potemkin_Rules_images/page_10.jpg" alt="原书第 10 页：B 组角色卡与艺术家把牌逐张放到村庄上的示例">
+          <figcaption>原书第 10 页 · B 组角色与艺术家的分牌示例</figcaption>
+        </figure>
+
+        <div class="ability">
+          <h4>木匠 Carpenter <span class="crown">♛</span></h4>
+          <p>赢下一墩后，在你的玩家区域（角色卡旁）用这一墩建造一座村庄。之后，你可以把该区域中的任意村庄移到河上的任意位置。被移动的村庄必须与其左侧所有村庄的花色相同。</p>
+          <p>若你从玩家区域移动一座与将牌花色相符的村庄，你可以视其拥有所有花色。换言之，当你赢下一墩时，你总能迁移一座与将牌花色相符的村庄。</p>
+        </div>
+
+        <div class="ability">
+          <h4>艺术家 Artist</h4>
+          <p>赢下一墩后，把这一墩中的牌一张一张地放到任意村庄之上，包括木匠玩家区域中的村庄。你可以把多张牌放在同一座村庄上。或者，若已经设有将牌，你可以把这一墩弃到船上，从而把将牌（该堆中的所有牌）作为一个新村庄，移到河上的任意位置。</p>
+          <p class="example">示例：艺术家以他的蓝色 8 赢下了这一墩。由于尚未设定将牌，他把 3 张蓝色牌分别放到河沿岸的村庄上，最后一张放到他自己玩家区域中木匠的那座村庄上。若他赢下下一墩，他就已经准备好在下游的河段上建造一座新村庄了。</p>
+        </div>
+
+        <div class="ability">
+          <h4>书记官 Secretary</h4>
+          <p>若尚未设有将牌，你用获胜墩设定新的将牌：把获胜墩放到船的下方。</p>
+          <p>若已经设有将牌，你把任意一座数字小于你的获胜墩的上游村庄移到下游，成为一座新的下游村庄。然后用你的获胜墩在空出的位置建造一座新村庄。若你无法这样做（因为没有数字更小的村庄），就把获胜墩弃到船上，其他什么也不做。</p>
+        </div>
+
+        <div class="ability">
+          <h4>哥萨克 Cossack</h4>
+          <p>设置时，从手中选择一张牌作为「调遣牌」（Redeployment card），放进你的玩家区域。在游戏的所有用途上，这张牌都被视为在你手中。</p>
+          <p>当你赢下一墩时，你可以把获胜墩中的一张牌发给任意其他玩家（不能发给自己）。该玩家随后从手中弃一张牌到船的最上方；可以就是他刚收到的那张牌。把获胜墩剩余的牌弃到船上。</p>
+          <p>若你用以一张调遣牌赢下一墩，把船移到与该调遣牌数字相同的村庄下方（若有多座同数字的村庄，由你选择其一）。然后弃掉你的获胜墩，以及河上所有与调遣牌花色相符的村庄，把它们放到船上。</p>
+        </div>
+
+        <h3 class="set-title">C 组</h3>
+
+        <figure>
+          <img src="Potemkin_Rules_images/page_11.jpg" alt="原书第 11 页：C 组角色卡与车队总管迁移村庄的示例">
+          <figcaption>原书第 11 页 · C 组角色与车队总管的迁移示例</figcaption>
+        </figure>
+
+        <div class="ability">
+          <h4>军需官 Commissary</h4>
+          <p>首先，把获胜墩（获胜牌放在最上面）送给车队总管，由后者将其保存在自己的玩家区域，作为一座他之后可以迁到河上的村庄。在下一墩中，数字为 1 的牌是全场最大的牌。也就是说，1 击败 9 或任何其他数字。请记住，1 具有特殊效果，会把船向上游移动一格。</p>
+        </div>
+
+        <div class="ability">
+          <h4>宫廷内侍 Chamberlain</h4>
+          <p>当你赢下一墩时，查看船堆。若其中至少有两张牌（记住你不能让船「消失」），选择一张作为新的将牌。它可以与之前的将牌颜色相同。只需把你选中的牌放到船的下方、压在之前任何牌之上（若有）。然后，把你的获胜墩弃到船上，连同河上以及车队总管玩家区域中所有与将牌颜色相符的村庄。</p>
+          <p>若你无法设定新的将牌，只需把这一墩弃到船上。</p>
+        </div>
+
+        <div class="ability">
+          <h4>军官 Officer</h4>
+          <p>当你赢下一墩时，选择一座上游村庄送给车队总管。后者把它保存在玩家区域，供之后迁移。若没有上游村庄，则什么也不送。若你以将牌赢下这一墩，你还要把获胜墩（获胜牌放在最上面）送给车队总管（也就是一次性送他两座村庄）。若没有上游村庄、但你以将牌颜色获胜，则只送你的获胜墩。</p>
+          <p>若你无法把获胜墩送给车队总管（因为它与将牌颜色不符），就把它弃到船上。</p>
+        </div>
+
+        <div class="ability">
+          <h4>车队总管 Wagonmaster <span class="crown">♛</span></h4>
+          <p>你可以把军需官和军官送给你的获胜墩接收为新村庄；军官甚至可以把一座上游村庄送到你的玩家区域（你的角色卡旁）。任何时候你赢下一墩，你都可以把玩家区域中的任意数量村庄迁到河上的任意位置。之后，把你的获胜墩放到任意一座村庄之上，包括你玩家区域中的村庄。</p>
+          <p>若你玩家区域中没有任何村庄而你赢下一墩，只需把这一墩放到任意村庄之上，其他什么也不做。</p>
+          <p class="example">示例：车队总管以他的橙色 7 赢下了这一墩。在之前的几回合中，他从军需官那里收到 1 座村庄，又从以将牌获胜的军官那里收到 2 座村庄。因此，他可以从自己的玩家区域在河的下游建造 3 座村庄，并把这一墩放到其中一座村庄之上。</p>
+        </div>
+
+        <h3 class="set-title">D 组</h3>
+
+        <div class="ability">
+          <h4>建筑师 Builder <span class="crown">♛</span></h4>
+          <p>把获胜墩正面朝上放到河上，作为一座新村庄。它可以放在牌与牌之间，也可以放在最左或最右的空位。新村庄的数字必须始终大于其左侧所有村庄。或者，建筑师可以不建新村庄，而是把这一墩放到任意一座现有村庄之上。</p>
+        </div>
+
+        <div class="ability">
+          <h4>画师 Painter</h4>
+          <p>把获胜墩放到船的下方。最上面的牌决定新的将牌花色。若已经有将牌堆，把它移到任意一个下游空位，形成一座新村庄。接下来，你必须决定由哪位其他玩家在下一回合成为首家。</p>
+          <p class="aside">注：在两人游戏中，你是在为下一回合指定一个新的角色作为首家。可以是你自己的第二角色，也可以是对方的任意角色。</p>
+        </div>
+
+        <div class="ability">
+          <h4>总督 Governor</h4>
+          <p>洗混所有上游村庄的牌，给每位玩家发一张。剩下的弃到船上。若牌不足以给每位玩家发一张，就把它们全部弃掉。接下来，用获胜墩在任意空位建造一座新的下游村庄。建造没有任何限制。接下来，你必须决定由哪位其他玩家在下一回合成为首家。</p>
+          <p class="aside">注：在两人游戏中，你是在为下一回合指定一个新的角色作为首家。可以是你自己的第二角色，也可以是对方的任意角色。</p>
+        </div>
+
+        <div class="ability">
+          <h4>指挥官 Commander</h4>
+          <p>若你本墩的获胜牌与最左侧上游村庄颜色相同，就用你的获胜墩在任意空位建造一座新村庄。若你本墩的获胜牌与最左侧上游村庄的颜色不符，则把你的这一墩和最左侧上游村庄一起弃到船上。</p>
+        </div>
+
+        <div class="note">
+          <span class="tag">D 组补充说明</span>　本组最初是游戏的免费打印即玩（print-and-play）版本的一部分，该版本在 BoardGameGeek 的「54-Card Game Design Contest」中赢得多个奖项。作为对所有测试者的致谢，我们把这组角色一并放进了盒中，方便玩家使用。
+        </div>
+      </section>
+
+      <!-- ================= 7 计分 ================= -->
+      <section id="scoring">
+        <div class="head-row">
+          <h2>计分</h2>
+          <span class="page-ref">原书全篇</span>
+        </div>
+
+        <p><strong>本作没有计分机制。</strong>原规则书全篇不含任何分数（Points）、分数轨道或分数结算的规定，因此本页不提供计分表，也不臆造计分方式。</p>
+
+        <p>游戏的进展只由两个可见指标衡量：</p>
+        <ul>
+          <li><strong>叶卡捷琳娜的船在河上的位置</strong>——船每回合向下游推进一格，一旦落到没有村庄的空位便告失败；</li>
+          <li><strong>各玩家手中剩余的牌数</strong>——全员手牌清空之时便是胜利之时。</li>
+        </ul>
+
+        <p>也就是说，本作的「得分」只有两种取值：共同获胜，或共同失败。具体判定见下一节。</p>
+      </section>
+
+      <!-- ================= 8 结束与胜负 ================= -->
+      <section id="endgame">
+        <div class="head-row">
+          <h2>结束与胜负</h2>
+          <span class="page-ref">原书第 5 页</span>
+        </div>
+
+        <p>《波将金村庄》是一款合作游戏：所有玩家一起获胜，或一起失败。</p>
+
+        <div class="note">
+          <span class="tag">胜利</span>　若玩家完成完整的一回合，且没有任何玩家手中还有牌，他们立即全体赢得游戏。
+        </div>
+
+        <div class="warn">
+          <span class="tag">失败</span>　任何时候叶卡捷琳娜的船移动到一个上方一排没有村庄的空位，叶卡捷琳娜就看穿了骗局，玩家立即失败。
+        </div>
+
+        <p><span class="tag" style="color:var(--wine);font-weight:700;">注：</span>当船被移动到最左侧上游村庄之外时，同样如此。</p>
+
+        <p>此外还有一处即时的失败条件写在角色能力中：工兵若被迫弃掉船正上方的那座村庄，立即输掉游戏。</p>
+
+        <p>这一判定针对船的每一次移动，包括数字牌造成的即时移动（9 或 1）以及回合结束时的常规推进。</p>
+      </section>
+
+      <!-- ================= 9 变体 ================= -->
+      <section id="variants">
+        <div class="head-row">
+          <h2>三人与两人规则</h2>
+          <span class="page-ref">原书第 6–7 页</span>
+        </div>
+
+        <p>三人游戏中，一名玩家控制两个角色。两人游戏中，每名玩家控制两个角色。当一名玩家控制两个角色时，其能力根据获胜墩的颜色触发。例如，若玩家以一张蓝色牌赢下一墩，他将启动自己那个蓝色背景角色的能力。该角色被视为赢家。</p>
+
+        <p>请注意，在一回合结束时，船仍会像往常一样向下游移动一格。这意味着如果你以 9 赢下，船在该回合会移动两次！</p>
+
+        <div class="note">
+          <span class="tag">注</span>　现在你知道为什么 9 很危险，而 1 很宝贵了。游戏中，尽量以不让 9 赢墩的方式打出它们。另一方面，如果你设法用 1 赢下一墩，你就赢得了宝贵的时间。当领出花色没有其他玩家能跟，或者它是将牌花色时，就可能出现这种情况。
+        </div>
+
+        <h3>三人游戏</h3>
+        <p>设置时，把所有角色翻到多色的一面，选择两个背景颜色不同的角色，例如工兵与舞台布景师（A 组）；这两名角色由其中一名玩家控制。另外两名玩家各取剩余角色之一，并把它们翻回普通的白色一面。</p>
+        <p>从游戏中移除全部 9 张白色数字牌；它们不会被使用。洗混其余的牌，给每名玩家发十张。用剩下的牌按四人游戏的同样方式布置村庄和船——只是船一开始就有两张牌。</p>
+
+        <h3>两人游戏</h3>
+        <p>每名玩家控制两个背景颜色不同的角色。</p>
+        <p>洗混所有数字牌，给每名玩家发十张作为手牌。然后再给每名玩家发十张。每名玩家把这些牌随机分成两叠、每叠五张，正面朝上放在自己两张角色卡的上方（只需让上角的小数字保持可见）。</p>
+
+        <div class="warn">
+          <span class="tag">两人游戏的特殊出牌规则</span>　在两人游戏中，第二墩及之后所有墩的第一张牌，必须来自赢下上一墩的那个<strong>角色</strong>的牌叠（不是玩家手中的牌！）。获胜者是获胜方玩家中、背景颜色与该墩颜色相符的那个角色。在判定使用哪个角色的能力时，白色视为万能色（wild）。
+        </div>
+
+        <p>当某个角色领出一墩时，从该角色牌叠的最上方取一张牌，作为这一墩的第一张牌。接着，另一名玩家从手中打出一张牌，最后由该角色领出的那名玩家从手中打出一张牌。该玩家的两张牌（角色牌叠中的一张与手中的一张）都算作属于该玩家。</p>
+
+        <p>若某个角色应当打出牌，而其牌叠中已没有牌，则打出该玩家控制的第二个角色牌叠最上面的一张。</p>
+
+        <p>关于胜利条件，不要把角色上方的牌视为手牌。换言之，两名玩家都必须打光手中的所有牌并完成该回合，才能赢得游戏。</p>
+
+        <figure>
+          <img src="Potemkin_Rules_images/page_07.jpg" alt="原书第 7 页：两人游戏桌面布局，两叠五张牌分别放在两张角色卡上方">
+          <figcaption>原书第 7 页 · 两人游戏的桌面布局：每名玩家的角色卡上方各放一叠五张牌</figcaption>
+        </figure>
+
+        <h3>示例一（跟花色与角色归属）</h3>
+        <p>安娜（Anna）以一张橙色 2 领出这一墩。托马斯（Thomas）无法跟花色，因为他手中没有任何橙色牌，于是他决定打掉一张 9——那是危险牌。查尔斯（Charles）以一张橙色 7 赢下这一墩。由于他操控两个角色，他要检查两者的背景颜色。舞台布景师的背景是橙色，所以他必须使用舞台布景师的能力。在这一墩里，他不能使用工兵的能力，因为那需要以蓝色或红色牌赢下这一墩。</p>
+
+        <h3>示例二（角色牌叠领出）</h3>
+        <p>查尔斯以上次获胜角色（总督）牌叠顶端的一张蓝色 5 领出这一墩。安娜跟出蓝色 1。这是一张宝贵的牌，但既然它是她手中唯一的蓝色牌，她别无选择。随后查尔斯从手中打出蓝色 8。他赢下这一墩，而由于获胜牌是蓝色，获胜角色是他的建筑师。建筑师的能力被触发，下一墩的第一张牌将从建筑师的牌叠中打出。那是一张危险的白 9！只能希望玩家们应付得来。</p>
+      </section>
+
+      <!-- ================= 10 提示 ================= -->
+      <section id="tips">
+        <div class="head-row">
+          <h2>提示</h2>
+          <span class="page-ref">原书第 6 页</span>
+        </div>
+
+        <p>原书在讲述两人与三人规则时，给出了一段关于 9 与 1 的提示，全文如下：</p>
+
+        <div class="note">
+          <span class="tag">9 与 1</span>　现在你知道为什么 9 很危险，而 1 很宝贵了。游戏中，尽量以不让 9 赢墩的方式打出它们。另一方面，如果你设法用 1 赢下一墩，你就赢得了宝贵的时间。当领出花色没有其他玩家能跟，或者它是将牌花色时，就可能出现这种情况。
+        </div>
+
+        <p>除上述内容外，原规则书未再单列其他技巧或建议。以下三条仅是对前文规则的要点回顾，不构成新规则：</p>
+
+        <ul>
+          <li><strong>不要泄底。</strong>可以讨论策略，但不能说出手中牌的数字或颜色，也不能给出足以直接推断出这些信息的话。</li>
+          <li><strong>船不能「消失」。</strong>任何时候船上至少要有一张牌，任何会让船变空的行动都不被允许。</li>
+          <li><strong>能力是强制的。</strong>除明确写出可以选择的情形外，角色能力必须执行。</li>
+        </ul>
+      </section>
+
+      <!-- ================= 11 历史说明 ================= -->
+      <section id="history">
+        <div class="head-row">
+          <h2>历史说明</h2>
+          <span class="page-ref">原书第 8 页</span>
+        </div>
+
+        <p>依据观察角度的不同，叶卡捷琳娜大帝可以被解读成相当不同的形象：</p>
+
+        <p>从她所生活的时代来看，她普遍被视为一位强有力而卓有成效的统治者——一位开明的君主，她扩张了帝国，巩固了帝国在欧洲的地位，并支持文化、教育与艺术。</p>
+
+        <p>从今天的视角来看，她的遗产更为复杂。人们固然仍承认她的成就与影响力，但同时也批评她强化了农奴制、以专制方式统治，并压制其治下各地区的自治。</p>
+
+        <p>如果你对这个话题感兴趣，它值得深入探究——历史很少给出简单的答案，而这也是我们作为社会去学习、反思并更好地理解当下最好的方式之一。</p>
+
+        <p>与此同时，《波将金村庄》首先、也最重要的，是一款游戏。它的目标是提供一段引人入胜、富有主题感的体验，而不是批判性地审视或完整反映围绕叶卡捷琳娜大帝的历史复杂性与争议。</p>
+      </section>
+
+      <!-- ================= 12 制作名单 ================= -->
+      <section id="credits">
+        <div class="head-row">
+          <h2>制作名单</h2>
+          <span class="page-ref">原书第 12 页</span>
+        </div>
+
+        <div class="credits">
+          <div class="dedication">
+            本游戏献给 Ekaterina 与 Ondřej Bystroň，感谢他们无尽的支持。
+          </div>
+
+          <p style="font-size:15px;">作者谨向所有测试者致谢，尤其感谢 Ondra 与 Honza Malý、Fishbone、Jan Kaplan、Jan Winkler、Richard Lenherr、Jana Langrová、John Megow、Haymire，以及 Albi 的每一位同仁，感谢他们在游戏开发全过程中提供的宝贵反馈、支持与投入。</p>
+
+          <p style="font-size:15px;">特别感谢 John Megow 协助编辑原版规则书。</p>
+
+          <dl>
+            <dt>游戏设计</dt><dd>Petr Čáslava</dd>
+            <dt>插画</dt><dd>Ekaterina Bystroň</dd>
+            <dt>图形与版式</dt><dd>Anežka Bělohoubková</dd>
+            <dt>开发</dt><dd>Petr Čáslava、Ondřej Bystroň</dd>
+            <dt>项目管理</dt><dd>Michal Šmíd</dd>
+            <dt>制作</dt><dd>Jan Cízner</dd>
+            <dt>规则编辑</dt><dd>Barbora Šulcová、Tomáš Benda</dd>
+            <dt>校对</dt><dd>Corinna Spellerberg、Textguru</dd>
+          </dl>
+        </div>
+
+        <p>欢迎在 Boardgamegeek.com 上为《波将金村庄》评分。</p>
+
+        <figure>
+          <img src="Potemkin_Rules_images/page_12.jpg" alt="原书第 12 页：D 组角色卡与制作名单，右下角为 Albi 标志">
+          <figcaption>原书第 12 页 · D 组角色、制作名单与 Albi 标志</figcaption>
+        </figure>
+      </section>
+
+    </article>
+
+    <footer>
+      <span class="rule-mark">❖ ❖ ❖</span>
+      中文版由规则书原 PDF 整理翻译 · 仅供学习参考
+    </footer>
+
+  </main>
+</div>
+</body>
+</html>
