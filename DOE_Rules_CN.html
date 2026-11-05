@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Drops of Evil（恶之滴）— 游戏规则</title>
+<style>
+  :root{
+    --bone:#f5f1e4; --bone2:#ebe5d2; --ink:#22261f; --ink-soft:#5a6053;
+    --moss:#2f4a33; --moss-d:#1d3324; --moss-l:#7fae74;
+    --poison:#7fa83c; --poison-d:#5c8023;
+    --accent:#8c4a7d; --accent-d:#6b3160;
+    --red:#a33a2f; --red-l:#f7e4e0;
+    --green-l:#e6efdc;
+    --line:#d3cbb4; --card:#fffdF5;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bone); color:var(--ink);
+    font-family:"Songti SC","Noto Serif SC","Source Han Serif SC",STSong,
+                "Iowan Old Style","Palatino Linotype",Georgia,serif;
+    line-height:1.8; font-size:17px;
+  }
+  .wrap{display:flex; align-items:flex-start; max-width:1180px; margin:0 auto;}
+  nav{
+    position:sticky; top:0; align-self:flex-start;
+    width:250px; flex:0 0 250px; height:100vh; overflow-y:auto;
+    background:var(--moss-d); color:#e8efe1; padding:22px 16px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;
+  }
+  nav h2{font-size:13px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--moss-l); margin:0 0 12px;}
+  nav ol{list-style:none; margin:0; padding:0;}
+  nav a{display:block; color:#e8efe1; text-decoration:none; font-size:14px;
+    padding:7px 10px; border-radius:7px;}
+  nav a:hover{background:var(--moss);}
+  nav .n{display:inline-block; width:20px; color:var(--moss-l); font-family:Arial,sans-serif;}
+  main{flex:1 1 auto; min-width:0; padding:0 40px 80px;}
+  .cover{
+    background:linear-gradient(160deg,#132018 0%,#233a28 55%,#3d2b46 100%);
+    color:#f2efe0; padding:64px 40px; border-radius:0 0 18px 18px;
+    margin-bottom:36px; text-align:center;
+    box-shadow:0 10px 30px rgba(19,32,24,.3);
+  }
+  .cover .kicker{font-size:13px; letter-spacing:.24em; text-transform:uppercase;
+    color:var(--moss-l); font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .cover h1{font-size:42px; margin:10px 0 6px; letter-spacing:.02em;}
+  .cover .sub{font-size:17px; opacity:.92; font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .cover .tag{display:inline-block; margin-top:18px; padding:6px 16px;
+    border:1px solid rgba(255,255,255,.35); border-radius:20px; font-size:14px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  section{padding:14px 0 10px; border-bottom:1px solid var(--line); scroll-margin-top:18px;}
+  h2.sec{font-size:28px; color:var(--moss-d); margin:18px 0 6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  h2.sec .num{color:var(--poison-d); font-weight:700; margin-right:10px;
+    font-family:Arial,sans-serif;}
+  h3{font-size:20px; color:var(--moss); margin:26px 0 6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  h4{font-size:17px; color:var(--accent-d); margin:18px 0 4px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  p{margin:10px 0;}
+  ul,ol{margin:10px 0 10px 4px; padding-left:22px;}
+  li{margin:5px 0;}
+  .verse{font-style:italic; color:var(--ink-soft); border-left:3px solid var(--moss-l);
+    padding:4px 0 4px 14px; margin:12px 0; font-size:16px;}
+  .lead{font-size:18px;}
+  .comp-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:16px 0;}
+  .comp{border:1px solid var(--line); background:var(--card); border-radius:12px;
+    padding:14px 16px; box-shadow:0 2px 6px rgba(0,0,0,.04);}
+  .comp b{color:var(--moss-d);}
+  .comp ul{padding-left:18px; margin:6px 0 0;}
+  .callout{border-left:5px solid var(--accent); background:var(--bone2);
+    padding:12px 18px; margin:16px 0; border-radius:0 10px 10px 0;}
+  .callout.tip{border-color:var(--poison-d); background:var(--green-l);}
+  .callout.tip b{color:var(--poison-d);}
+  .callout.warn{border-color:var(--red); background:var(--red-l);}
+  .callout.warn b{color:var(--red);}
+  .steps{counter-reset:step; list-style:none; padding-left:0; margin:14px 0;}
+  .steps li{position:relative; padding:12px 16px 12px 54px; margin:8px 0;
+    background:var(--card); border:1px solid var(--line); border-radius:10px;}
+  .steps li::before{counter-increment:step; content:counter(step);
+    position:absolute; left:12px; top:14px;
+    width:28px; height:28px; background:var(--moss); color:#fff;
+    border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-weight:700; font-family:Arial,sans-serif; font-size:15px;}
+  .skill{border:1px solid var(--line); background:var(--card); border-radius:12px;
+    padding:14px 18px; margin:12px 0; box-shadow:0 2px 6px rgba(0,0,0,.04);}
+  .skill .name{font-weight:700; color:var(--moss-d); font-size:18px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .skill .name .ico{display:inline-block; min-width:26px; color:var(--accent);
+    font-family:Arial,sans-serif;}
+  .skill .phase{display:inline-block; font-size:12px; padding:2px 9px; border-radius:12px;
+    background:var(--moss); color:#f2efe0; margin-left:8px; vertical-align:2px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; letter-spacing:.03em;}
+  .skill .phase.br{background:var(--accent-d);}
+  .skill .phase.in{background:var(--poison-d);}
+  .req{border:1px solid var(--line); background:var(--card); border-radius:10px;
+    padding:12px 16px; margin:10px 0;}
+  .req .sym{font-weight:700; color:var(--moss-d);}
+  .req .ex{font-size:15px; color:var(--ink-soft); border-top:1px dashed var(--line);
+    margin-top:8px; padding-top:8px;}
+  figure{margin:20px 0; text-align:center;}
+  figure img{max-width:100%; border:1px solid var(--line); border-radius:12px;
+    box-shadow:0 4px 14px rgba(0,0,0,.08); background:#fff;}
+  figcaption{font-size:13px; color:var(--ink-soft); margin-top:6px;
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;}
+  .two{display:grid; grid-template-columns:1fr 1fr; gap:16px; align-items:start;}
+  table{border-collapse:collapse; width:100%; margin:14px 0; background:var(--card);
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; font-size:15px;}
+  th,td{border:1px solid var(--line); padding:8px 10px; text-align:left;}
+  th{background:var(--bone2); color:var(--moss-d); font-weight:700;}
+  .tag-skull{color:var(--accent-d); font-weight:700;}
+  @media(max-width:900px){
+    .wrap{flex-direction:column;}
+    nav{position:static; width:100%; height:auto; flex-basis:auto;}
+    main{padding:0 18px 60px;}
+    .comp-grid,.two{grid-template-columns:1fr;}
+  }
+  footer{margin-top:40px; font-size:13px; color:var(--ink-soft);
+    font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif; text-align:center;}
+  .credits{background:var(--bone2); border:1px solid var(--line); border-radius:12px;
+    padding:16px 20px; margin-top:14px;}
+  .credits b{color:var(--moss-d);}
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <div class="kicker">Horrible Guild · 2026</div>
+  <h1>Drops of Evil</h1>
+  <div class="sub">女巫熬毒 · 游戏规则（中文版）</div>
+  <div class="tag">2–4 人 &nbsp;|&nbsp; 约 60 分钟 &nbsp;|&nbsp; 12 岁以上 &nbsp;|&nbsp; 重度 2.5</div>
+</header>
+
+<div class="wrap">
+  <nav>
+    <h2>目录</h2>
+    <ol>
+      <li><a href="#intro"><span class="n">1</span>游戏简介</a></li>
+      <li><a href="#components"><span class="n">2</span>配件</a></li>
+      <li><a href="#setup"><span class="n">3</span>游戏设置</a></li>
+      <li><a href="#overview"><span class="n">4</span>流程概览</a></li>
+      <li><a href="#placement"><span class="n">5</span>放置阶段</a></li>
+      <li><a href="#gathering"><span class="n">6</span>采集阶段</a></li>
+      <li><a href="#brewing"><span class="n">7</span>调配阶段 · 放置材料</a></li>
+      <li><a href="#mushrooms"><span class="n">8</span>调配阶段 · 放置蘑菇</a></li>
+      <li><a href="#bonus"><span class="n">9</span>奖励标记</a></li>
+      <li><a href="#rats"><span class="n">10</span>调配阶段 · 放置老鼠</a></li>
+      <li><a href="#income"><span class="n">11</span>收入阶段与回合结束</a></li>
+      <li><a href="#endgame"><span class="n">12</span>终局计分</a></li>
+      <li><a href="#assistants"><span class="n">13</span>助手一览</a></li>
+      <li><a href="#recipes"><span class="n">14</span>配方一览</a></li>
+      <li><a href="#tips"><span class="n">15</span>提示与技巧</a></li>
+      <li><a href="#credits"><span class="n">16</span>制作名单</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+  <section id="intro">
+    <h2 class="sec"><span class="num">1</span>游戏简介</h2>
+    <p class="lead">在《Drops of Evil》中，玩家扮演女巫，比拼谁能熬出最强效的毒药。派出你的使魔深入森林采集材料，再把它们投入你的<strong>炼金实验室（Alchilab）</strong>——一台用于合成致命药剂的诡异装置。</p>
+    <p>把材料放对位置可以提升毒性、解锁珍贵的奖励；招募来路不明的助手，依照阴森的配方行事，让你的药剂更恶毒。你能熬出最致命的毒药吗？</p>
+    <div class="verse">密林深处枝桠乱，月光小径绕不断；<br>良兽远避使魔来，盘绕歪树荆棘间。<br>根须苔下藏奇物，蝠翼利爪独眼观；<br>投入玻璃与烈焰，滴出至毒在人间。</div>
+
+    <figure>
+      <img src="DOE_Rules_images/page_01.jpg" alt="配件与主题插图页">
+      <figcaption>原书第 1 页 · 主题与配件</figcaption>
+    </figure>
+  </section>
+
+  <section id="components">
+    <h2 class="sec"><span class="num">2</span>配件</h2>
+    <div class="comp-grid">
+      <div class="comp">
+        <b>公共配件</b>
+        <ul>
+          <li>2 块双面森林版图（1 大 1 小）</li>
+          <li>8 块配方面板</li>
+          <li>4 个配方材料标记</li>
+          <li>18 块助手面板</li>
+          <li>1 本计分册</li>
+          <li>1 个布袋</li>
+        </ul>
+      </div>
+      <div class="comp">
+        <b>奖励标记（共 96 个）</b>
+        <ul>
+          <li>额外资源标记 56 个</li>
+          <li>卷轴 40 个</li>
+        </ul>
+      </div>
+      <div class="comp">
+        <b>资源标记</b>
+        <ul>
+          <li>猫头鹰爪 30</li>
+          <li>火蜥蜴眼 22</li>
+          <li>蝠翼 26</li>
+          <li>蝎尾 18</li>
+          <li>蜘蛛 14</li>
+          <li>蘑菇 18</li>
+          <li>鼠 14</li>
+          <li>虫 58（公共供应）</li>
+        </ul>
+      </div>
+      <div class="comp">
+        <b>玩家配件（4 色）</b>
+        <ul>
+          <li>1 块炼金实验室板</li>
+          <li>5 个行动棋子：1 乌鸦、1 猫、1 蟾蜍、1 蛇、1 钱袋</li>
+          <li>1 个计分标记</li>
+          <li>1 个回合顺序标记</li>
+          <li>6 个毒性标记</li>
+          <li>14 个额外资源标记</li>
+          <li>10 个卷轴标记</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout">
+      <b>实验室板结构</b>：右上为<strong>行动棋子区</strong>；顶边为<strong>毒性轨道</strong>（每种材料对应一条）；中下部为<strong>熬制器（Brewer）</strong>与<strong>蒸馏器（Distiller）</strong>；左上为<strong>鼠区</strong>（自由鼠 / 捕获鼠两个格子）。
+    </div>
+  </section>
+
+  <section id="setup">
+    <h2 class="sec"><span class="num">3</span>游戏设置</h2>
+    <ol class="steps">
+      <li>把一块森林版图放在桌面中央，按人数选用对应的板面：
+        <ul>
+          <li><strong>4 人</strong>：大森林版图 · 4 人面</li>
+          <li><strong>3 人</strong>：大森林版图 · 3 人面</li>
+          <li><strong>2 人</strong>：小森林版图 · 任一面（A 面为常规，B 面为变体，开局前选定）</li>
+        </ul>
+      </li>
+      <li>开局前按人数从资源池中移除部分资源标记：
+        <table>
+          <tr><th>人数</th><th>猫头鹰爪</th><th>火蜥蜴眼</th><th>蝠翼</th><th>蝎尾</th><th>蜘蛛</th><th>蘑菇</th><th>鼠</th></tr>
+          <tr><td>2 人</td><td>14</td><td>12</td><td>10</td><td>8</td><td>8</td><td>6</td><td>6</td></tr>
+          <tr><td>3 人</td><td>7</td><td>6</td><td>5</td><td>4</td><td>4</td><td>3</td><td>3</td></tr>
+          <tr><td>4 人</td><td colspan="7">不移除任何标记</td></tr>
+        </table>
+        移除的标记放回盒中——本局不再使用。
+      </li>
+      <li>洗混助手面板并翻开：4 人或 3 人局翻 <strong>5 块</strong>，2 人局翻 <strong>4 块</strong>，放在森林版图的助手位上。</li>
+      <li>洗混配方面板并翻开 <strong>2 块</strong>，放在森林版图的配方位上；再洗混配方材料标记，在每个翻开的配方面板上各放 1 个（未用到的配方面板与标记放回盒中）。把全部<strong>虫标记</strong>放在版图旁，构成公共供应。</li>
+      <li>每位玩家选一个颜色，拿走该色全部玩家配件（见第 2 节）。把 5 个行动棋子放在实验室板右上的<strong>行动棋子区</strong>；把 6 个毒性标记放在实验室顶边<strong>毒性轨道</strong>上对应图标的格子里——这些是各材料的起始毒点值。</li>
+      <li>把每位玩家的回合顺序标记随机放到森林版图<strong>回合顺序轨</strong>的格子里（从左到右依次排好），确定初始先后手；再把计分标记放到环绕森林版图的计分轨道起点格（带图标的格子）。</li>
+      <li>首位玩家按下列方式在自己的实验室上摆好奖励标记，其余玩家<strong>完全复制</strong>这一布局，使所有实验室起始配置一致；未用到的卷轴收回盒中：
+        <ul>
+          <li>洗混额外资源标记，随机各放 1 个在蒸馏器左侧的圆格、以及自己熬制器底部的圆格上。</li>
+          <li>洗混<strong>蒸馏器卷轴</strong>（背面有蘑菇图标），随机弃 1 个，其余随机放到蒸馏器的对应格。</li>
+          <li>洗混<strong>熬制器卷轴</strong>（背面有小瓶图标），随机弃 1 个，其余随机放到熬制器的对应格。</li>
+        </ul>
+      </li>
+    </ol>
+
+    <figure>
+      <img src="DOE_Rules_images/page_02.jpg" alt="设置示意图">
+      <figcaption>原书第 2 页 · 版图与设置示意</figcaption>
+    </figure>
+  </section>
+
+  <section id="overview">
+    <h2 class="sec"><span class="num">4</span>流程概览</h2>
+    <div class="verse">女巫低语兽听令，月下空地任穿行；<br>利爪兽掌翼与鳞，寻来令你胆寒之物。</div>
+    <p>游戏进行 <strong>3 轮</strong>，每轮分为 4 个阶段：</p>
+    <ol>
+      <li><strong>放置阶段</strong>：玩家轮流把行动棋子放到森林版图上，表示本轮想采集哪些资源，或雇佣一位助手。</li>
+      <li><strong>采集阶段</strong>：收回使魔并取得资源。可采集格越少的使魔先结算，因此可能抢走较慢使魔的资源。</li>
+      <li><strong>调配阶段</strong>：把采到的资源放进自己的炼金实验室。</li>
+      <li><strong>收入阶段</strong>：按已揭示的收益图标得分，然后补充森林，准备下一轮。</li>
+    </ol>
+    <p>第 3 轮结束时，<strong>毒点（☠）最多</strong>的玩家获胜。</p>
+  </section>
+
+  <section id="placement">
+    <h2 class="sec"><span class="num">5</span>放置阶段</h2>
+    <div class="verse">有的贴着老根疾行，有的隐入爬雾深处；<br>有的取少却回得快，有的探深却归得迟。<br>林中道理女巫知：收成越丰，路越慢。</div>
+    <p>玩家按回合顺序轨上的顺序轮流行动。轮到你时，你必须把 5 个行动棋子中的 1 个放到森林版图上的任意<strong>空格</strong>。棋子出场顺序由你自定。如此轮流，直到所有玩家放完全部 5 个行动棋子。</p>
+
+    <h3>行动棋子的种类</h3>
+    <p>行动棋子分两类：<strong>使魔</strong>（采集森林资源）与<strong>钱袋</strong>（用于激活助手）。每类棋子只能放在对应类型的格子上，且<strong>不能放在已被其他棋子占据的格子</strong>上。</p>
+
+    <div class="skill">
+      <div class="name"><span class="ico">鸦</span>乌鸦（Crows）</div>
+      <p>乌鸦只能放在森林版图<strong>林间空地（clearing）</strong>的采集格上——即浅绿色、<strong>实线边框</strong>的格子；不能放在灌木丛（underbrush，虚线边框）里。乌鸦取走<strong>单一采集格</strong>内的全部资源，<strong>最先结算</strong>。</p>
+    </div>
+    <div class="skill">
+      <div class="name"><span class="ico">猫</span>猫（Cats）</div>
+      <p>猫只能放在<strong>双箭头格</strong>上。它们采集箭头所指的 <strong>2 个</strong>采集格内的资源，<strong>第二个结算</strong>。</p>
+    </div>
+    <div class="skill">
+      <div class="name"><span class="ico">蟾</span>蟾蜍（Toads）</div>
+      <p>蟾蜍只能放在<strong>四箭头格</strong>上。它们采集箭头所指的 <strong>4 个</strong>采集格内的资源，<strong>第三个结算</strong>。</p>
+    </div>
+    <div class="skill">
+      <div class="name"><span class="ico">蛇</span>蛇（Snakes）</div>
+      <p>蛇只能放在<strong>下箭头格</strong>上。它们采集箭头所指<strong>整列</strong>采集格内的资源，但也是<strong>最后结算</strong>的使魔。</p>
+    </div>
+    <div class="skill">
+      <div class="name"><span class="ico">袋</span>钱袋（Coin Pouches）</div>
+      <p>钱袋只能放在<strong>助手</strong>上，用于包下助手的服务。助手的效果在回合中的特定阶段使用（详见第 13 节）。</p>
+    </div>
+
+    <figure>
+      <img src="DOE_Rules_images/page_04.jpg" alt="放置阶段与使魔说明">
+      <figcaption>原书第 4 页 · 五种行动棋子的放置规则</figcaption>
+    </figure>
+
+    <h3>更新回合顺序</h3>
+    <div class="verse">蛇若贴着 hut 与石走，最速归家不回头；<br>蛇若绕经根与棘，归来疲惫又迟缓。</div>
+    <p>所有玩家放完行动棋子后、进入采集阶段之前，必须更新回合顺序轨。新的先后顺序由每位玩家<strong>蛇在森林版图上的位置</strong>决定：蛇最靠<strong>左</strong>的玩家成为下一轮首位玩家，第二靠左的成为第二，以此类推，据此重排回合顺序标记。</p>
+    <div class="callout">
+      <b>注意</b>：最后一轮也要执行此步骤——因为回合顺序是<strong>平局裁决</strong>依据。
+    </div>
+  </section>
+
+  <section id="gathering">
+    <h2 class="sec"><span class="num">6</span>采集阶段</h2>
+    <div class="verse">森林给予，森林拿走，从不计较公平的差错；<br>捷者带战利品归爪，慢者只在草堆下捡残渣。</div>
+    <p>玩家此刻收回森林版图上的使魔并取得资源。本阶段的步骤可由所有玩家<strong>同时</strong>执行，但使魔必须严格按<strong>由快到慢</strong>的顺序收回：</p>
+    <ol>
+      <li>所有玩家收回<strong>乌鸦</strong>；然后</li>
+      <li>所有玩家收回<strong>猫</strong>；然后</li>
+      <li>所有玩家收回<strong>蟾蜍</strong>；然后</li>
+      <li>所有玩家收回<strong>蛇</strong>。</li>
+    </ol>
+    <p>收回使魔时，一并取走该使魔能采集的<strong>所有采集格</strong>内的全部资源。</p>
+
+    <div class="callout warn">
+      <b>空格的补偿</b>：由于使魔速度不同，某个采集格可能在你收回前已被更快的使魔取空。此时你<strong>只获得 1 个虫</strong>（无论该格原先有几个资源）。每个采集格上都印有虫图标作提示。若你的使魔采集的多个格子都已空，<strong>每个空格各得 1 虫</strong>。
+    </div>
+
+    <p>收回使魔后，把它放回实验室板右上角对应的格子里；把采集到的资源放在实验室板旁，构成你的<strong>可用资源池</strong>——这些资源将在调配阶段使用。</p>
+
+    <figure>
+      <img src="DOE_Rules_images/page_05.jpg" alt="采集阶段示例">
+      <figcaption>原书第 5 页 · 按速度结算与空格补偿示例</figcaption>
+    </figure>
+  </section>
+
+  <section id="brewing">
+    <h2 class="sec"><span class="num">7</span>调配阶段 · 放置材料</h2>
+    <div class="verse">回到实验室里去，苦涩的烟雾开始蒸腾；<br>翅膀、利爪与独眼铺开，恶心的排列必须成形。<br>每一件若放得恰好，能让药汤黑如夜。</div>
+    <p>玩家把本阶段采集到的所有资源放入自己的炼金实验室。此阶段所有玩家<strong>同时</strong>进行。放置顺序自定，但（在可能的情况下）必须在阶段结束前<strong>全部放完</strong>。</p>
+
+    <h3>资源的三类归属</h3>
+    <div class="comp-grid">
+      <div class="comp"><b>材料（Ingredients）</b><br>放入<strong>熬制器（Brewer）</strong>的药瓶中。</div>
+      <div class="comp"><b>蘑菇（Mushrooms）</b><br>放入<strong>蒸馏器（Distiller）</strong>的药瓶中。</div>
+      <div class="comp"><b>鼠（Rats）</b><br>放入实验室左上<strong>鼠区</strong>的「自由鼠」格。</div>
+    </div>
+    <p>虫（Worms）与奶酪（Cheese）不放入实验室，它们作为资源留在资源池中/立即结算使用（见第 9 节）。</p>
+
+    <h3>材料放置规则</h3>
+    <ul>
+      <li>每个格子只能放 <strong>1 个</strong>材料标记。</li>
+      <li>每个药瓶（Vial）内<strong>只能有一种</strong>材料——<strong>蜘蛛除外</strong>。</li>
+      <li>你<strong>不能移动</strong>前几轮已放置的材料。</li>
+      <li>尽可能全部放完；只有在确实<strong>没有合法位置</strong>时，才在调配阶段结束时弃掉该材料。</li>
+    </ul>
+    <p>游戏结束时，每个<strong>完全填满</strong>的药瓶会为你带来等于该材料当前<strong>毒性值</strong>的毒点（详见第 12 节）。</p>
+
+    <div class="callout">
+      <b>蜘蛛（Spiders）</b>：蜘蛛是万能材料，可当作任意一种材料。它是唯一能与其他材料<strong>同瓶混放</strong>的材料。<br>
+      <b>禁止纯蜘蛛瓶</b>：不能整个药瓶只放蜘蛛——每个瓶中必须至少有 1 个非蜘蛛材料，才能确定该瓶值多少毒点。
+    </div>
+
+    <h3>填满整列</h3>
+    <div class="verse">熬制器下火焰现，一列填满一簇燃；<br>热气上腾烟散开，教聪慧女巫知晓：<br>残渣何用、毒素怎玩、毒药如何愈炼愈利。</div>
+    <p>熬制器中的格子排成<strong>列</strong>，一列可能横跨多个药瓶。每当你<strong>填满某一列的所有格子</strong>，立即获得该列下方的<strong>全部奖励标记</strong>——不论这些格子所属的药瓶是否填满。</p>
+    <p>获得奖励标记时，可能揭示 1 个或多个<strong>收益图标</strong>（见第 11 节）。想预先知道填满某列会揭示几个收益图标，就看该列<strong>底部的火焰数量</strong>：火焰数 = 将揭示的收益图标数。</p>
+
+    <figure>
+      <img src="DOE_Rules_images/page_07.jpg" alt="熬制器与材料放置">
+      <figcaption>原书第 7 页 · 熬制器结构、蜘蛛与整列奖励</figcaption>
+    </figure>
+  </section>
+
+  <section id="mushrooms">
+    <h2 class="sec"><span class="num">8</span>调配阶段 · 放置蘑菇</h2>
+    <div class="verse">蘑菇喂养玻璃机，黄褐绿烟齐冒起；<br>药瓶渐满蒸气升，热度一次高过一次。</div>
+    <p>蘑菇必须放进<strong>蒸馏器（Distiller）</strong>的药瓶，且总是<strong>从最低的可用药瓶开始向上</strong>填。</p>
+    <ul>
+      <li>每当你<strong>填满一个药瓶</strong>，立即获得该瓶<strong>或它下方任意一个药瓶</strong>旁边相邻的 1 个奖励标记。</li>
+      <li><strong>最顶端的药瓶可以反复填</strong>：每在该瓶放入<strong>一对</strong>蘑菇，立即从蒸馏器中任选 1 个<strong>尚可用</strong>的奖励标记获得。填满第一对之后，后续蘑菇就叠放在它们上面。</li>
+      <li>从蒸馏器取走奖励标记时，会揭示 <strong>1 个收益图标</strong>。</li>
+    </ul>
+    <div class="callout">
+      <b>注意</b>：蒸馏器的奖励标记全部解锁之后，再获得蘑菇不再有任何收益。
+    </div>
+
+    <figure>
+      <img src="DOE_Rules_images/page_08.jpg" alt="蘑菇与老鼠放置">
+      <figcaption>原书第 8 页 · 蒸馏器填瓶、奖励标记、鼠区与额外资源</figcaption>
+    </figure>
+  </section>
+
+  <section id="bonus">
+    <h2 class="sec"><span class="num">9</span>奖励标记</h2>
+    <div class="verse">最锋利的女巫看且学，从每个气泡、每次翻搅；<br>试遍利爪、翅膀与独眼，看有何等苦力可升。</div>
+    <p>奖励标记分两种：<strong>额外资源</strong>与<strong>卷轴</strong>。</p>
+
+    <h3>额外资源（Extra Resources）</h3>
+    <p>获得额外资源时，它立即加入你的可用资源池，本轮内<strong>随时可用</strong>。按所示资源类型，用法不同：</p>
+    <table>
+      <tr><th>类型</th><th>用法</th></tr>
+      <tr><td><strong>虫</strong></td><td>可花费该标记，按标记上的虫图标数量从公共供应取等量虫。若不花费，本轮结束时弃掉。</td></tr>
+      <tr><td><strong>任意其他材料</strong></td><td>可把该额外资源标记<strong>当作普通材料标记</strong>直接放进熬制器。</td></tr>
+      <tr><td><strong>蘑菇</strong></td><td>可把该额外资源标记<strong>当作普通蘑菇标记</strong>直接放进蒸馏器。</td></tr>
+      <tr><td><strong>奶酪</strong></td><td>可花费该标记，按标记上的奶酪图标数量，把等量鼠从自由鼠区移到捕获鼠区。不论是否使用、是否只用了一部分，奶酪标记都在本轮结束时弃掉。</td></tr>
+    </table>
+    <div class="callout">
+      未使用的额外资源必须在<strong>调配阶段结束时</strong>弃掉。
+    </div>
+
+    <h3>卷轴（Scrolls）</h3>
+    <p>卷轴会提升特定资源的<strong>毒点值</strong>。获得卷轴时，按卷轴上<strong>完整的</strong>图标数量，把对应毒性标记在毒性轨道上<strong>前进等量格</strong>。获得的卷轴保留在实验室旁。</p>
+    <div class="callout tip">
+      <b>同种卷轴组合的双倍奖励</b>：若你获得第二张指向同一资源的卷轴，两张卷轴<strong>合并</strong>，额外多得 1 格（即第二张卷轴让对应毒性标记前进 <strong>2 格</strong>而非 1 格）。
+      <br><b>注意</b>：由于开局会随机弃掉卷轴，某些局中某种材料的卷轴可能只有一张、甚至两张都不在场。
+    </div>
+
+    <h3>资源的翻面规则</h3>
+    <p>所有资源标记的一面有个小三角形。放置时让<strong>有三角形的一面朝上</strong>；<strong>调配阶段结束时</strong>把它们翻到<strong>无三角形</strong>的一面。这样本轮放置的资源仍可反悔调整，又不会误动前几轮已放好的资源。</p>
+    <p>当你<strong>解锁某个奖励标记</strong>时，把促成解锁的资源翻到无三角形的一面——从那一刻起，这些资源<strong>不能再移动</strong>。</p>
+  </section>
+
+  <section id="rats">
+    <h2 class="sec"><span class="num">10</span>调配阶段 · 放置老鼠</h2>
+    <div class="verse">毒药沸腾处鼠辈横行，坏了女巫手头的活计；<br>但一旦擒住好生看管，它们的脏礼便可分你一份。</div>
+    <p>鼠必须放进实验室<strong>左上角的「自由鼠」格</strong>。自由鼠区的<strong>每只鼠在每次收入阶段让你失去 1 分</strong>。但它们可以用<strong>奶酪</strong>捕获：每使用 1 个奶酪图标，就把 1 只鼠从自由鼠区移到<strong>捕获鼠区</strong>。</p>
+    <p>自由鼠格与捕获鼠格上叠放的鼠标记<strong>数量不限</strong>。</p>
+    <div class="callout">
+      <b>注意</b>：奶酪<strong>不能</strong>从采集格获得，只能通过额外资源标记或助手能力获得。
+    </div>
+  </section>
+
+  <section id="income">
+    <h2 class="sec"><span class="num">11</span>收入阶段与回合结束</h2>
+    <h3>收入阶段</h3>
+    <div class="verse">填满熬制器，喂旺那火焰，蒸馏器也一样；<br>热度越早起，酿出的药越随时间而烈。</div>
+    <ul>
+      <li>实验室上每揭示 <strong>1 个收益图标</strong>，你获得 <strong>1 毒点</strong>。</li>
+      <li>自由鼠区<strong>每只鼠</strong>，你失去 <strong>1 毒点</strong>。</li>
+      <li>按结果移动计分标记（<strong>不能低于 0 分</strong>）。</li>
+    </ul>
+
+    <h3>回合结束</h3>
+    <div class="verse">夜色流转林自生，杂草间又长新礼；<br>湿薄空地之上，难捉的小东西悄悄爬回。</div>
+    <p>此阶段进行「清理」并为下一轮做准备：</p>
+    <ol>
+      <li>所有玩家从森林版图收回自己的<strong>钱袋</strong>。</li>
+      <li>从袋中为森林版图上的<strong>每个采集格</strong>补充 1 个随机资源——<strong>包括</strong>上轮未被取走、仍有资源残留的格子。</li>
+      <li>开始新一轮。</li>
+    </ol>
+    <div class="callout">第 3 轮（最终轮）结束时可以跳过第 2 步的补充。</div>
+
+    <figure>
+      <img src="DOE_Rules_images/page_09.jpg" alt="收入阶段">
+      <figcaption>原书第 9 页 · 收入阶段与回合结束</figcaption>
+    </figure>
+  </section>
+
+  <section id="endgame">
+    <h2 class="sec"><span class="num">12</span>终局计分</h2>
+    <div class="verse">蒸气沉降，火熄烟散，颤抖的玻璃终得安宁；<br>从恶毒的酿物中，经管道与滤网，<br>滴下不该由良善之辈奉上的液滴。<br>当这些「恶之滴」落下，最烈的毒赢走一切。</div>
+    <p>第 3 轮结束时游戏结束，开始计算最终得分：先把你在计分轨道上的毒点记入计分册，再按下列三部分结算——<strong>已完成的药瓶</strong>、<strong>捕获的鼠</strong>、<strong>遵循的配方</strong>。</p>
+
+    <h3>① 已完成的药瓶</h3>
+    <p>若一个药瓶内的<strong>每个格子</strong>都放了材料标记，该瓶即<strong>完成</strong>。每个完成的药瓶，按瓶内材料类型在<strong>毒性轨道上的当前毒性值</strong>得分；<strong>未完成的药瓶不得分</strong>。</p>
+
+    <h3>② 捕获的鼠</h3>
+    <p>捕获鼠区里的<strong>每只鼠</strong>，按其当前的<strong>毒性值</strong>（见毒性轨道）得分。</p>
+
+    <h3>③ 配方</h3>
+    <p>每局有 2 张配方，各配 1 个<strong>配方材料标记</strong>，指示该配方所需的材料类型；配方面板上还画有必须在熬制器中形成的<strong>具体材料图案</strong>，以及一个<strong>毒点值</strong>。你的熬制器中每出现一次符合该图案的匹配材料，就获得一次该毒点值。</p>
+    <div class="callout warn">
+      <b>同一材料对同一配方只能计一次</b>。蜘蛛同样受此限制，但每只蜘蛛可以<strong>分别</strong>为两张配方各计一次。
+    </div>
+
+    <figure>
+      <img src="DOE_Rules_images/page_10.jpg" alt="终局计分页">
+      <figcaption>原书第 10 页 · 完成药瓶、捕获鼠与配方的计分</figcaption>
+    </figure>
+
+    <div class="callout tip">
+      <b>蜘蛛与配方</b>：蜘蛛可作为万能材料用于完成配方，与其所在药瓶的资源类型无关。同一只蜘蛛可以<strong>同时充当三种不同材料</strong>：一次用于填满它所在药瓶，另两次分别对应两张配方。
+    </div>
+
+    <p class="lead">毒点最多的玩家获胜。平局时，<strong>回合顺序在前</strong>的玩家获胜。</p>
+  </section>
+
+  <section id="assistants">
+    <h2 class="sec"><span class="num">13</span>助手一览</h2>
+    <div class="verse">并非每个女巫都得独自熬药，当疑虑的朋友就在近旁；<br>他们带来诡计、工具与手艺，收了钱便乐意借你一用。</div>
+    <p>助手提供多种能力，可在回合中的<strong>特定阶段</strong>激活（放置、调配或收入阶段）。</p>
+    <ul>
+      <li><strong>放置阶段</strong>激活的助手：可在雇佣后<strong>立即</strong>激活，也可在你之后的某个放置回合中、放置行动棋子<strong>之前或之后</strong>激活。这类效果要注意回合顺序（其面板左上角有回合顺序图标）。</li>
+      <li>激活已雇佣的助手时，把你的<strong>钱袋棋子横放</strong>，表示该助手的能力已使用。</li>
+      <li>在调配阶段结束前，你也可以<strong>不激活</strong>助手能力，改为获得 <strong>1 虫</strong>或 <strong>1 奶酪</strong>（见面板上的图标，森林版图助手位旁也有同样提示）。同样横放钱袋作为提醒。</li>
+    </ul>
+
+    <div class="callout">
+      <b>「被认领的采集格」</b>：某些助手提到「被认领的格子」——指采集阶段中<strong>会最先</strong>从该格采集资源的那个使魔所占据的格子。
+    </div>
+
+    <div class="skill"><div class="name"><span class="ico">1</span>药剂师 Apothecary<span class="phase br">调配</span></div>
+      <p>从你的实验室取 1 只鼠，<strong>当作蜘蛛</strong>放入熬制器的某个药瓶。鼠可取自自由鼠区或捕获鼠区。</p></div>
+
+    <div class="skill"><div class="name"><span class="ico">2</span>骗子 Swindler<span class="phase br">调配</span></div>
+      <p>交换实验室上的两个奖励标记。两个标记可以类型不同，也可以在熬制器与蒸馏器<strong>之间</strong>交换。若如此做，额外从公共供应获得 <strong>1 虫</strong>。</p></div>
+
+    <div class="skill"><div class="name"><span class="ico">3</span>小屋看守 Hutkeeper<span class="phase br">调配</span></div>
+      <p>本回合的收入阶段，你从蒸馏器收益图标获得的毒点<strong>翻倍</strong>。</p></div>
+
+    <div class="skill"><div class="name"><span class="ico">4</span>驯鸦人 Raven Master<span class="phase">放置</span></div>
+      <p>放置乌鸦时，可以把乌鸦<strong>当作猫</strong>放到双箭头格；若如此，采集阶段也必须<strong>按猫的顺序</strong>收回。</p></div>
+
+    <div class="skill"><div class="name"><span class="ico">5</span>牧虫人 Worm Herder<span class="phase br">调配</span></div>
+      <p>从公共供应获得 <strong>2 虫</strong>。</p></div>
+
+    <div class="skill"><div class="name"><span class="ico">6</span>寻路者 Pathfinder<span class="phase">放置</span></div>
+      <p>可以把乌鸦放在<strong>灌木丛</strong>（虚线边框）的采集格上；若如此做，额外从公共供应获得 <strong>1 虫</strong>。</p></div>
+
+    <div class="skill"><div class="name"><span class="ico">7</span>清灰工 Ash Sweeper<span class="phase br">调配</span></div>
+      <p>选择熬制器中 1 个<strong>未完成</strong>、且<strong>缺不超过 2 个材料</strong>的列，立即获得该列下方的<strong>全部奖励标记</strong>，如同该列已完成。</p></div>
+
+    <div class="skill"><div class="name"><span class="ico">8</span>猫女士 Cat Lady<span class="phase">放置</span></div>
+      <p>放置猫时，可以把猫<strong>当作蟾蜍</strong>放到四箭头格；若如此，采集阶段也必须<strong>按蟾蜍的顺序</strong>收回。</p></div>
+
+    <div class="skill"><div class="name"><span class="ico">9</span>阴森商人 Grim Merchant<span class="phase br">调配</span></div>
+      <p><strong>特殊</strong>：每轮开始时，从袋中抽 1 个资源放在此面板上（即使上面已有资源）。若抽到鼠，放回袋中重抽。极端情况下袋中只剩鼠，则阴森商人保持空置、本回合无收益。<br>激活此面板时，拿走其上<strong>全部资源</strong>加入可用资源池。</p></div>
+
+    <div class="skill"><div class="name"><span class="ico">10</span>戏法师 Trickster<span class="phase br">调配</span></div>
+      <p>从可用资源池取 1 只蜘蛛，<strong>横跨</strong>熬制器同一药瓶的两个格子放置；两格<strong>各自</strong>视为被蜘蛛占据。</p></div>
+
+    <div class="skill"><div class="name"><span class="ico">11</span>屠夫 Butcher<span class="phase br">调配</span></div>
+      <p>从可用资源池或鼠区取 <strong>1 鼠或 1 虫</strong>，<strong>当作蘑菇</strong>放入蒸馏器。</p></div>
+
+    <div class="skill"><div class="name"><span class="ico">12</span>捕鼠人 Rat Catcher<span class="phase br">调配</span></div>
+      <p>把自由鼠区的<strong>所有鼠</strong>移到捕获鼠区。</p></div>
+
+    <div class="skill"><div class="name"><span class="ico">13</span>拾荒者 Scavenger<span class="phase br">调配</span></div>
+      <p>选择森林版图（林间空地或灌木丛均可）上 1 个在<strong>采集阶段结束时仍含有资源</strong>的采集格，取走该格全部资源加入可用资源池。</p></div>
+
+    <div class="skill"><div class="name"><span class="ico">14</span>智者 Sage<span class="phase">放置</span></div>
+      <p>从森林版图收回自己的<strong>1 个使魔</strong>（不能收回钱袋）。<strong>注意</strong>：这意味着本回合你有<strong>六次</strong>放置回合（而非通常的五次）。</p></div>
+
+    <div class="skill"><div class="name"><span class="ico">15</span>驯蛇人 Snake Charmer<span class="phase">放置</span></div>
+      <p>在你放置蛇的那一列中，选择 1 个<strong>未被对手使魔认领</strong>的采集格，取走该格全部资源加入可用资源池。</p></div>
+
+    <div class="skill"><div class="name"><span class="ico">16</span>驯兽师 Beast Tamer<span class="phase">放置</span></div>
+      <p>选择 1 个<strong>未被对手使魔认领</strong>的采集格，把该格<strong>全部资源</strong>移到任意一个<strong>正交相邻</strong>的采集格；目标格是否被认领不影响。</p></div>
+
+    <div class="skill"><div class="name"><span class="ico">17</span>外科医生 Surgeon<span class="phase in">收入</span></div>
+      <p>本回合收入阶段，你捕获鼠区里的<strong>每只鼠</strong>额外为你带来 <strong>1 毒点</strong>。</p></div>
+
+    <div class="skill"><div class="name"><span class="ico">18</span>盗猎者 Poacher<span class="phase">放置</span></div>
+      <p>取走你蟾蜍周围（箭头所指）<strong>4 个采集格</strong>上的<strong>所有鼠</strong>，直接放入捕获鼠区——即使这些格子被对手的使魔认领。</p></div>
+
+    <figure>
+      <img src="DOE_Rules_images/page_13.jpg" alt="助手面板 4-9">
+      <figcaption>原书第 13 页 · 助手 4–9 面板</figcaption>
+    </figure>
+  </section>
+
+  <section id="recipes">
+    <h2 class="sec"><span class="num">14</span>配方一览</h2>
+    <p>以下为 8 种配方的计分效果。<strong>举例中一律假定所需材料为「猫头鹰爪」</strong>。</p>
+
+    <div class="req">
+      <div class="sym">1. 毒层 Toxic Layers</div>
+      <p>同一行中<strong>水平相邻的 4 个</strong>所需材料为一组，每组 <strong>4 毒点</strong>。</p>
+      <div class="ex">示例：有 2 组这样的 4 连，共 8 毒点。</div>
+    </div>
+
+    <div class="req">
+      <div class="sym">2. 邪恶沉积 Wicked Sediment</div>
+      <p>每组<strong>垂直相邻的 3 个</strong>所需材料，且<strong>包含所在列的底部格子</strong>，得 <strong>2 毒点</strong>。</p>
+      <div class="ex">示例：底部共有 4 组这样的 3 连，共 8 毒点。</div>
+    </div>
+
+    <div class="req">
+      <div class="sym">3. 渗溢团块 Oozing Mass</div>
+      <p>你<strong>最大</strong>的一组正交相连的所需材料中，<strong>每 2 个</strong>得 <strong>1 毒点</strong>。</p>
+      <div class="ex">示例：一组 14 个相连的材料，得 7 毒点。</div>
+    </div>
+
+    <div class="req">
+      <div class="sym">4. 蔓延枯萎 Spreading Blight</div>
+      <p>熬制器中<strong>每含至少 1 个</strong>所需材料的列，得 <strong>1 毒点</strong>。</p>
+      <div class="ex">示例：9 列含有该材料，共 9 毒点。</div>
+    </div>
+
+    <div class="req">
+      <div class="sym">5. 污浊包浆 Tainted Patina</div>
+      <p>位于熬制器<strong>边缘格</strong>上的所需材料，<strong>每 2 个</strong>得 <strong>1 毒点</strong>（这些材料不必彼此相邻）。</p>
+      <div class="ex">示例：边缘共有 15 个该材料，得 7 毒点。</div>
+    </div>
+
+    <div class="req">
+      <div class="sym">6. 诅咒团簇 Cursed Clumps</div>
+      <p>排成 <strong>2×2 方形</strong>的 4 个所需材料为一组，每组 <strong>3 毒点</strong>。</p>
+      <div class="ex">示例：3 组 2×2，共 9 毒点。</div>
+    </div>
+
+    <div class="req">
+      <div class="sym">7. 腐化纽带 Corrupted Bonds</div>
+      <p>分别位于<strong>两个不同药瓶连接处两侧</strong>的所需材料，每 2 个（一对）得 <strong>2 毒点</strong>。</p>
+      <div class="ex">示例：7 对位于连接处两侧，共 14 毒点。</div>
+    </div>
+
+    <div class="req">
+      <div class="sym">8. 蜿蜒剧毒 Winding Venom</div>
+      <p>位于 <strong>L 形药瓶</strong>中的所需材料，每 2 个得 <strong>1 毒点</strong>（不必在同一个药瓶内）。</p>
+      <div class="ex">示例：L 形药瓶中该材料共 16 个，得 8 毒点。</div>
+    </div>
+
+    <figure>
+      <img src="DOE_Rules_images/page_15.jpg" alt="配方图案示例">
+      <figcaption>原书第 15 页 · 配方 1–3 的图案示例</figcaption>
+    </figure>
+    <figure>
+      <img src="DOE_Rules_images/page_16.jpg" alt="配方图案示例 2">
+      <figcaption>原书第 16 页 · 配方 4–8 的图案示例</figcaption>
+    </figure>
+  </section>
+
+  <section id="tips">
+    <h2 class="sec"><span class="num">15</span>提示与技巧</h2>
+    <h3>放置</h3>
+    <p><strong>时机就是一切</strong>。在正确时机选对行动棋子，能让你从使魔身上榨出最大收益。</p>
+    <ul>
+      <li>尽可能<strong>自己取走</strong>对手需要的资源；你抢到的每一个资源，都是对手少用的一分，掌握这个平衡是取胜关键。</li>
+      <li>森林里的格子<strong>价值并不相等</strong>。仔细观察：有些采集格只能被蛇或蟾蜍取到，那些资源是有保障的——放置时要记得这点。</li>
+      <li>留意对手已放下的棋子。例如：乌鸦都已放完后，你之后放的猫就<strong>不会被抢</strong>资源。</li>
+      <li>回合顺序是微妙却重要的一环：<strong>先手</strong>能占到最好的格子，但对最终能拿到哪些资源的控制更弱；<strong>后手</strong>能对对手做出反应、更可预测使魔归来时的收获，但可选项更少。</li>
+    </ul>
+
+    <h3>调配</h3>
+    <p>放材料时你完全自由，但不同放法效果差距很大：</p>
+    <ul>
+      <li><strong>填满整列</strong>解锁奖励标记至关重要——尽量排列材料，解锁最契合你策略的奖励。早早解锁列还能让你在收入阶段拿到更多毒点。</li>
+      <li><strong>善用蜘蛛</strong>：把它们放进价值高的药瓶，并用其灵活性最大化配方得分。</li>
+      <li>游戏后段<strong>避免留下太多未完成的药瓶</strong>——你可能会发现自己需要的具体材料根本凑不齐。</li>
+      <li><strong>同种卷轴收齐两张</strong>回报极高，能让该材料的毒性轨道多前进一格。提前规划，开局就优先锁定契合策略的那一对。</li>
+    </ul>
+
+    <figure>
+      <img src="DOE_Rules_images/page_11.jpg" alt="提示与技巧、蜘蛛计次示例">
+      <figcaption>原书第 11 页 · 蜘蛛计次示例与提示</figcaption>
+    </figure>
+  </section>
+
+  <section id="credits">
+    <h2 class="sec"><span class="num">16</span>制作名单</h2>
+    <div class="credits">
+      <p><b>游戏设计</b>：Hjalmar Hach、Lorenzo Silva<br>
+      <b>美术</b>：Weberson Santiago<br>
+      <b>附加美术</b>：Annachiara Rossi<br>
+      <b>项目管理</b>：Lorenzo Silva<br>
+      <b>平面设计</b>：Annachiara Rossi、Umberto Spaticchia、Gabriel Burghi<br>
+      <b>规则书与编辑</b>：Alessandro Pra’、Hjalmar Hach、William Niebling<br>
+      <b>Horrible Guild 团队</b>：Davide Amici、Federico Corbetta Caci、Ilaria Ceci、Ylenia D’Abundo、Federico “Toy” Dossi、Giulia Monte、Camilla Muschio、Laura Severino</p>
+      <p>产品问题请联系：horribleguild.com/cc · HORRIBLEGUILD.COM</p>
+    </div>
+    <footer>
+      中文版由规则书原 PDF（DOE_Rulebook_v18-web.pdf）整理翻译 · 仅供学习参考<br>
+      原书版权归 Horrible Guild 所有
+    </footer>
+  </section>
+
+  </main>
+</div>
+</body>
+</html>
