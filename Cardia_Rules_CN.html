@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>卡迪亚：潮与风暴 Cardia: Tide &amp; Storm · 中文规则书</title>
+<style>
+  :root{
+    --bg:#eef4f6; --paper:#ffffff; --ink:#12242e; --ink2:#3f5a67; --dim:#7c93a0;
+    --deep:#123b52; --teal:#1f7a8c; --coral:#c9603f; --sand:#e8dcc4; --line:#cfdde3;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Noto Sans SC","Microsoft YaHei",system-ui,sans-serif;font-size:16px;line-height:1.85}
+  .shell{max-width:1180px;margin:0 auto}
+
+  header.top{position:sticky;top:0;z-index:20;background:var(--deep);color:#eaf3f6;
+    box-shadow:0 2px 10px rgba(18,59,82,.25)}
+  header.top .bar{display:flex;align-items:center;gap:16px;padding:10px 20px}
+  header.top .logo{font-size:15px;letter-spacing:.16em;font-weight:700}
+  header.top .logo span{color:#8ecbd8;font-weight:400;letter-spacing:.08em}
+  nav.tabs{display:flex;gap:2px;overflow-x:auto;padding:0 12px 8px;scrollbar-width:thin}
+  nav.tabs a{flex:0 0 auto;color:#b9d3dc;text-decoration:none;font-size:12.5px;padding:5px 9px;border-radius:4px;white-space:nowrap}
+  nav.tabs a:hover{background:rgba(255,255,255,.12);color:#fff}
+
+  main{padding:0 20px 90px;max-width:920px;margin:0 auto}
+
+  .cover{padding:52px 0 30px;border-bottom:3px solid var(--teal);margin-bottom:34px}
+  .cover .k{font-size:11.5px;letter-spacing:.28em;color:var(--coral);margin-bottom:10px}
+  .cover h1{font-size:46px;margin:0;letter-spacing:.04em;color:var(--deep)}
+  .cover .sub{font-size:15px;color:var(--teal);letter-spacing:.18em;margin:6px 0 16px}
+  .cover .meta{font-size:13.5px;color:var(--ink2);line-height:2}
+  .cover .meta b{color:var(--coral)}
+
+  section.sec{background:var(--paper);border:1px solid var(--line);border-radius:10px;
+    padding:26px 28px 30px;margin:0 0 26px;box-shadow:0 1px 3px rgba(18,59,82,.06);scroll-margin-top:96px}
+  h2{font-size:24px;margin:0 0 16px;color:var(--deep);display:flex;align-items:center;gap:12px}
+  h2 .num{font-size:12px;background:var(--deep);color:#fff;padding:3px 9px;border-radius:12px;letter-spacing:.08em}
+  h3{font-size:18.5px;margin:26px 0 8px;color:var(--teal);scroll-margin-top:96px}
+  h3::before{content:"";display:inline-block;width:8px;height:8px;background:var(--coral);
+    border-radius:50%;margin-right:9px;vertical-align:2px}
+  h4{font-size:16px;margin:18px 0 6px;color:var(--deep)}
+  p{margin:9px 0}
+  b,strong{color:#0b1a22}
+  ul,ol{margin:9px 0;padding-left:24px}
+  li{margin:4px 0}
+  li::marker{color:var(--teal)}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.5px}
+  th,td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+  th{background:#dfeef2;color:var(--deep);font-weight:700;font-size:13.5px}
+  tr:nth-child(even) td{background:#f7fbfc}
+  td.n{color:var(--deep);white-space:nowrap;font-weight:700}
+  figure{margin:18px 0;background:#f7fbfc;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{font-size:12px;color:var(--dim);padding:7px 12px;border-top:1px solid var(--line)}
+  .box{background:#eaf4f7;border-left:4px solid var(--teal);border-radius:0 6px 6px 0;padding:11px 15px;margin:15px 0}
+  .box .label{display:block;font-size:11px;letter-spacing:.16em;color:var(--teal);font-weight:700;margin-bottom:4px}
+  .example{background:#fdf6f1;border:1px solid #f0dbcf;border-left:4px solid var(--coral);border-radius:0 6px 6px 0;padding:11px 15px;margin:15px 0}
+  .example .label{display:block;font-size:11px;letter-spacing:.16em;color:var(--coral);font-weight:700;margin-bottom:4px}
+  .warn{background:#fff9e8;border-left:4px solid #c99a2e;padding:11px 15px;margin:15px 0;border-radius:0 6px 6px 0}
+  .warn .label{display:block;font-size:11px;letter-spacing:.16em;color:#a97c18;font-weight:700;margin-bottom:4px}
+  .variant{background:#f3f0f8;border:1px dashed #6b5b95;border-radius:6px;padding:11px 15px;margin:15px 0}
+  .variant .label{display:block;font-size:11px;letter-spacing:.16em;color:#5b4b85;font-weight:700;margin-bottom:4px}
+  .quote{font-style:italic;color:var(--ink2);border-left:3px solid var(--sand);padding-left:14px;margin:16px 0}
+  .dim{color:var(--dim)}
+  footer{margin-top:20px;font-size:12px;color:var(--dim);line-height:1.9;border-top:1px solid var(--line);padding-top:14px}
+  @media(max-width:720px){
+    main{padding:0 12px 60px} .cover h1{font-size:32px}
+    section.sec{padding:18px 16px 22px;border-radius:8px}
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+<header class="top">
+  <div class="bar">
+    <div class="logo">卡迪亚：潮与风暴 <span>CARDIA · TIDE &amp; STORM</span></div>
+  </div>
+  <nav class="tabs">
+    <a href="#s1">01 概览</a>
+    <a href="#s2">02 配件</a>
+    <a href="#s3">03 准备</a>
+    <a href="#s4">04 卡牌</a>
+    <a href="#s5">05 目标与结构</a>
+    <a href="#s6">06 回合流程</a>
+    <a href="#s7">07 持续能力</a>
+    <a href="#s8">08 修正影响力</a>
+    <a href="#s9">09 船与岛屿</a>
+    <a href="#s10">10 游戏结束</a>
+    <a href="#s11">11 完整回合示例</a>
+    <a href="#s12">12 牌组 IV</a>
+    <a href="#s13">13 地点</a>
+    <a href="#s14">14 混组</a>
+    <a href="#s15">15 关键词</a>
+    <a href="#s16">16 牌组 III 澄清</a>
+    <a href="#s17">17 牌组 IV 澄清</a>
+    <a href="#a1">A 术语</a>
+    <a href="#a2">B 制作名单</a>
+  </nav>
+</header>
+
+<main>
+<div class="cover">
+  <div class="k">HANS IM GLÜCK · ESSEN 2026 · 2 人对决 · 独立续作</div>
+  <h1>卡迪亚：潮与风暴</h1>
+  <div class="sub">C A R D I A &nbsp;·&nbsp; T I D E &nbsp;&amp;&nbsp; S T O R M</div>
+  <div class="meta">
+    《卡迪亚对决》（Duel for Cardia）的<b>独立续作</b>，规则同一套骨架，新增两套牌组、两个阵营<br>
+    设计：<b>Mathieu Rivero</b>、<b>Faouzi Boughida</b>｜美术：Giovanni Calore、Florian Herold、Qistina Khalidah、Martin Mottet、Jonas Schmutzler、Nat Spengler<br>
+    出版：Hans im Glück｜本页为<b>非官方中译</b>，仅供对照实体规则书使用
+  </div>
+</div>
+
+<section class="sec" id="s1">
+  <h2><span class="num">01</span>游戏概览</h2>
+  <p>两个强大而新生的阵营正在争夺<b>卡迪亚</b>的控制权。它们统御潮汐，让狂暴的风暴在城市上空炸开。</p>
+  <p><b>群岛航海者</b>与海洋有极深的联系。他们的船驶向神秘的岛屿，那些岛屿会带来强力的效果。</p>
+  <p><b>远征队</b>是一群四处游荡的求知者，他们学会了驾驭风的力量。他们的魔法风瓶赋予他们超凡的能耐。</p>
+  <p>《潮与风暴》是《卡迪亚对决》的<b>独立续作</b>，沿用同一套基本规则。</p>
+  <div class="box">
+    <span class="label">怎么读这本规则</span>
+    如果你<b>第一次</b>接触卡迪亚，读第 2–16 页。如果你<b>已经熟悉</b>卡迪亚，只需读<b>青色标注</b>的部分以及第 12–15 页。<br>
+    每局游戏只用<b>其中一套</b>牌组。本规则先讲<b>牌组 III（群岛）</b>的准备与玩法；牌组 IV 的差异见第 12 章。
+  </div>
+  <p class="quote">更多资讯、常见问题、2v2 规则与比赛规则：www.hans-im-glueck.de/en/cardia-en</p>
+</section>
+
+<section class="sec" id="s2">
+  <h2><span class="num">02</span>配件</h2>
+  <table>
+    <tr><th>配件</th><th>数量</th><th>说明</th></tr>
+    <tr><td>角色卡</td><td class="n">2 × 32 张</td><td>牌组 III 与牌组 IV 各 32 张；每套牌组两位玩家各 16 张，牌背不同</td></tr>
+    <tr><td>速查卡</td><td class="n">6 张</td><td>回合速查卡 ＋ 各阵营速查卡</td></tr>
+    <tr><td>地点卡</td><td class="n">3 张</td><td>微风、未知水域、浮空群岛</td></tr>
+    <tr><td>修正标记</td><td class="n">28 枚</td><td>正反两面数值不同：面值 1 的 8 枚、2 的 6 枚、3 的 8 枚、5 的 6 枚</td></tr>
+    <tr><td>印记</td><td class="n">14 枚</td><td>胜利标记</td></tr>
+    <tr><td>持续标记</td><td class="n">6 枚</td><td>标记“持续能力已生效”</td></tr>
+    <tr><td>船</td><td class="n">3 艘</td><td>放在岛屿卡上</td></tr>
+    <tr><td>风瓶</td><td class="n">8 个</td><td>牌组 IV（远征队）专用</td></tr>
+    <tr><td>岛屿卡</td><td class="n">3 张</td><td>共印有 6 座岛</td></tr>
+  </table>
+  <div class="box">
+    <span class="label">缺件</span>
+    若有配件缺失或损坏，请联系：service@cundco.de。
+  </div>
+  <figure>
+    <img src="Cardia_Rules_images/page_02.jpg" alt="配件总览">
+    <figcaption>原书第 2 页：全部配件一览</figcaption>
+  </figure>
+</section>
+
+<section class="sec" id="s3">
+  <h2><span class="num">03</span>准备（牌组 III）</h2>
+  <ol>
+    <li>两人<b>相对而坐</b>。把<b>印记</b>、<b>修正标记</b>与<b>持续标记</b>的供应堆放在桌子的一端。</li>
+    <li>取出所有<b>右下角标着 III</b> 的角色卡。每位玩家拿取<b>牌背样式相同</b>的 <b>16 张</b>。其余标着 <b>IV</b> 牌背的 32 张放回盒中。</li>
+    <li>把自己那 16 张牌面朝下洗混，叠放在面前——这就是你的<b>抽牌堆</b>（下文简称<b>牌堆</b>）。</li>
+    <li>把 <b>3 张岛屿卡</b>按图示排成一行，放在你与对手之间场地的<b>一侧</b>。</li>
+    <li>在<b>印有船形图标</b>的 3 座岛上各放 <b>1 艘船</b>。</li>
+    <li><b>首局游戏</b>：把<b>微风</b>地点卡正面朝上放在岛屿卡旁。其余地点卡放回盒中（地点卡详见第 13 章）。</li>
+    <li>每人拿 1 张<b>回合速查卡</b>与 1 张<b>群岛速查卡</b>（右上角有标记）。暂时忽略其他速查卡。</li>
+    <li>从牌堆顶抽 <b>5 张</b>作为手牌。</li>
+  </ol>
+  <div class="box">
+    <span class="label">桌面方位</span>
+    你面前是<b>你的牌堆</b>，对面是对手的牌堆；两者之间留出<b>弃牌堆</b>的位置。对局中每打完一次“遭遇”，就往<b>出牌方向</b>再摆下一组，形成一条逐渐延伸的牌列。
+  </div>
+  <figure>
+    <img src="Cardia_Rules_images/page_03.jpg" alt="牌组 III 准备步骤 1–5">
+    <figcaption>原书第 3 页：准备步骤 1–5（供应堆、牌堆、岛屿卡与船）</figcaption>
+  </figure>
+  <figure>
+    <img src="Cardia_Rules_images/page_04.jpg" alt="牌组 III 准备步骤 6–8">
+    <figcaption>原书第 4 页：准备步骤 6–8，以及出牌方向与弃牌堆位置的示意</figcaption>
+  </figure>
+</section>
+
+<section class="sec" id="s4">
+  <h2><span class="num">04</span>卡牌</h2>
+  <p>双方的牌组<b>只有牌背不同</b>：每套牌组都是 16 张，数值 <b>1–16</b> 各一张。这个数值叫做该卡的<b>影响力</b>。</p>
+  <p>每张卡还带有一个<b>能力</b>，并属于某个<b>阵营</b>。每个阵营有自己的颜色与图标。</p>
+  <table>
+    <tr><th>卡面要素</th><th>含义</th></tr>
+    <tr><td class="n">影响力</td><td>1–16 的数值，比大小用</td></tr>
+    <tr><td class="n">名称</td><td>角色名（如「造船师」「海盗」）</td></tr>
+    <tr><td class="n">能力</td><td>该卡被打出并<b>输掉</b>遭遇时发动</td></tr>
+    <tr><td class="n">能力类型</td><td><b>即时能力</b> 或 <b>持续能力</b>（图标不同）</td></tr>
+    <tr><td class="n">阵营与牌组编号</td><td>III（群岛）／IV（远征队）</td></tr>
+  </table>
+  <figure>
+    <img src="Cardia_Rules_images/page_05.jpg" alt="卡面结构">
+    <figcaption>原书第 5 页：卡面各部位（影响力、名称、能力、能力类型、阵营与牌组编号）</figcaption>
+  </figure>
+</section>
+
+<section class="sec" id="s5">
+  <h2><span class="num">05</span>游戏目标与对局结构</h2>
+  <p>卡迪亚是一场<b>对决</b>。每一轮，双方各打出 <b>2 张</b>牌、彼此相对——这称为一次<b>遭遇</b>。</p>
+  <p>一次遭遇中，<b>影响力较高</b>的那张卡获得 <b>1 枚印记</b>；<b>较低</b>的那张卡<b>发动它的能力</b>。打出的卡留在场上，可能被后续能力影响。</p>
+  <p>下一轮，双方再次各出 1 张相对，按<b>出牌方向</b>摆在<b>上一次遭遇的旁边</b>，如此延续。</p>
+  <div class="box">
+    <span class="label">胜利条件</span>
+    最先在自己卡上<b>攒到 5 枚印记</b>的玩家获胜。<br>
+    <span class="dim">注意：若场上使用<b>微风</b>地点卡，则需要 <b>6 枚</b>印记才能获胜。</span>
+  </div>
+  <p>已经赢到的印记在游戏过程中<b>可能易主</b>——后文详述。</p>
+</section>
+
+<section class="sec" id="s6">
+  <h2><span class="num">06</span>回合流程</h2>
+  <p>一局游戏由若干轮组成，直到一方获胜。每一轮按顺序分 <b>3 个阶段</b>：</p>
+  <table>
+    <tr><th>阶段</th><th>做什么</th></tr>
+    <tr><td class="n">① 出牌</td><td>双方各暗置 1 张，同时翻开，比较影响力</td></tr>
+    <tr><td class="n">② 发动能力</td><td>输掉本次遭遇的那张卡发动能力</td></tr>
+    <tr><td class="n">③ 回合结束</td><td>双方各从牌堆抽 1 张</td></tr>
+  </table>
+
+  <h3 id="s61">6.1 阶段一：出牌</h3>
+  <p>双方各把 <b>1 张</b>牌面朝下放到桌上，然后<b>同时翻开</b>，比较两张卡。</p>
+  <ul>
+    <li><b>放牌</b>：从手牌中选 1 张，面朝下放到你这一侧的场地。手牌里<b>任何一张</b>都可以选。对手也选 1 张，放在你那张的对面。</li>
+    <li><b>翻牌</b>：同时翻开两张卡，比较影响力。<b>影响力较高</b>的卡赢得这次遭遇。从供应堆取 <b>1 枚印记</b>放在获胜的卡上。</li>
+    <li><b>平手</b>：若两张卡影响力相同，本次遭遇<b>平手</b>，没有卡获胜或落败。也就是说这次遭遇<b>不放任何印记</b>。<b>跳过阶段二</b>（发动能力），直接进入阶段三（回合结束）。</li>
+  </ul>
+
+  <h3 id="s62">6.2 阶段二：发动能力</h3>
+  <p><b>只有</b>在本次遭遇中<b>输掉</b>的那张卡的所有者，才<b>立刻</b>发动该卡的能力。</p>
+  <p>你必须<b>尽可能完整</b>地结算被发动的能力，<b>包括</b>它对其他卡造成的一切后果。结算方式就是照卡面文字执行。</p>
+  <div class="box">
+    <span class="label">注意</span>
+    你可以打出<b>能力无法完整结算、甚至完全无法结算</b>的卡。
+  </div>
+  <div class="warn">
+    <span class="label">重要</span>
+    只有<b>阶段一中输掉本次遭遇</b>的那张卡会发动能力。如果某个能力导致<b>过去某次遭遇</b>里的卡“落败”，那张卡的能力<b>不会</b>被发动。
+  </div>
+  <div class="warn">
+    <span class="label">重要</span>
+    有些能力<b>与通则矛盾</b>。遇到这种情况，<b>能力永远优先于通则</b>。
+  </div>
+  <p>能力分两类，图标不同：<b>即时能力</b>与<b>持续能力</b>。有些能力会改变卡的影响力（见第 08 章）。</p>
+
+  <h3 id="s63">6.3 阶段三：回合结束</h3>
+  <p>回合结束时，双方各从自己的牌堆<b>抽 1 张</b>加入手牌。</p>
+  <p>如果牌堆已空，就<b>不能再抽</b>。<b>不要</b>洗回弃牌堆。抽不到牌<b>不会</b>让你输掉游戏。</p>
+  <div class="box">
+    <span class="label">注意</span>
+    这个阶段你<b>永远只抽 1 张</b>。也就是说整局下来，你的手牌可能多于也可能少于 5 张。
+  </div>
+  <p>然后从阶段一开始新的轮次。</p>
+  <figure>
+    <img src="Cardia_Rules_images/page_07.jpg" alt="阶段一出牌与翻牌">
+    <figcaption>原书第 7 页：出牌、翻牌与平手的处理</figcaption>
+  </figure>
+</section>
+
+<section class="sec" id="s7">
+  <h2><span class="num">07</span>即时能力与持续能力</h2>
+  <h3 id="s71">7.1 即时能力</h3>
+  <p>发动<b>即时能力</b>时，<b>立刻结算一次</b>，然后结束。</p>
+  <div class="example">
+    <span class="label">示例 · 即时能力</span>
+    你的<b>海盗（5）</b>输掉遭遇，于是你发动它的即时能力：对手弃掉牌堆顶 1 张牌，然后从手牌弃 1 张。对手把这两张牌<b>正面朝上</b>放进自己的弃牌堆。
+  </div>
+  <h3 id="s72">7.2 持续能力</h3>
+  <p>发动<b>持续能力</b>时，在该卡上放 <b>1 枚持续标记</b>。该能力<b>从此持续生效</b>。</p>
+  <p>即使这张卡<b>之后</b>在游戏中赢下了自己的遭遇，能力<b>仍然生效</b>。</p>
+  <p>如果所有持续标记都被移除，该持续能力<b>停止生效</b>。一旦某个持续能力停止生效，必须<b>立刻</b>结算由此引发的所有变化（<b>包括过去遭遇里的变化</b>）。</p>
+  <div class="example">
+    <span class="label">示例 · 持续能力</span>
+    第二次遭遇中对手的卡又赢了，于是他们把自己的印记放到<b>造船师（7）</b>上。<br>
+    你发动自己<b>秘术师（4）</b>的能力：<b>此卡影响力为 0 或更低时，价值 2 枚印记</b>。你在秘术师上放 1 枚持续标记。只要标记还在，该能力就生效。
+  </div>
+  <div class="box">
+    <span class="label">注意</span>
+    有些能力允许你给<b>已在场上</b>的卡放持续标记。这让你可以发动<b>过去遭遇</b>中某张卡的持续能力。
+  </div>
+  <figure>
+    <img src="Cardia_Rules_images/page_09.jpg" alt="即时能力与持续能力">
+    <figcaption>原书第 9 页：两类能力的图标与示例</figcaption>
+  </figure>
+</section>
+
+<section class="sec" id="s8">
+  <h2><span class="num">08</span>修正影响力</h2>
+  <p>有些能力允许你<b>修正</b>某张卡的影响力。发动这类能力时，从供应堆取<b>标示数值</b>的修正标记，放到对应的卡上。</p>
+  <div class="box">
+    <span class="label">注意</span>
+    有时需要用<b>多枚</b>修正标记才能凑出所需数值（例如 <b>+7</b> ＝ 一张 5 ＋ 一张 2）。
+  </div>
+  <p>卡上所有修正标记的数值<b>立刻</b>加进（或减出）该卡的影响力。只要标记还留在卡上，它们就<b>持续</b>修正该卡的影响力。</p>
+  <p>如果因此改变了某次遭遇的结果，把<b>印记移给现在获胜</b>的那张卡。若变成<b>平手</b>，把印记退回供应堆。</p>
+  <div class="warn">
+    <span class="label">记住</span>
+    因修正而“现在落败”的那张卡，其能力<b>不会</b>被发动。
+  </div>
+  <div class="box">
+    <span class="label">注意</span>
+    修正标记的数量<b>不设上限</b>。如果用完了，用任何合适的替代物即可。
+  </div>
+  <div class="example">
+    <span class="label">示例 · 修正与印记转移</span>
+    你发动<b>杂耍者（2）</b>的能力：<b>把你自己某张卡上的所有修正标记翻倍，并全部移到你的另一张卡上</b>。<br>
+    你把杂耍者身上的修正标记翻倍（<b>+3 变成 +6</b>），全部移到<b>造船师（7）</b>上。造船师现在影响力 <b>13</b>。于是你把印记从对手的<b>移潮者（8）</b>移到自己的造船师（13）上。<b>移潮者的能力不会被发动。</b>
+  </div>
+  <figure>
+    <img src="Cardia_Rules_images/page_10.jpg" alt="修正标记的放置">
+    <figcaption>原书第 10 页：修正标记的取用与持续能力的标记放置</figcaption>
+  </figure>
+  <figure>
+    <img src="Cardia_Rules_images/page_11.jpg" alt="修正导致的印记转移">
+    <figcaption>原书第 11 页：修正标记如何即时改变遭遇结果、并转移印记</figcaption>
+  </figure>
+</section>
+
+<section class="sec" id="s9">
+  <h2><span class="num">09</span>船与岛屿</h2>
+  <p>岛屿卡上共印有 <b>6 座岛</b>。你通过发动<b>群岛</b>卡的能力，把船从一座岛移到另一座岛。</p>
+  <p>被一条线连起来的两座岛<b>互为相邻</b>。</p>
+  <p>岛屿卡的摆法使得其中<b>一座岛离你最近</b>、另一座<b>离对手最近</b>。你可以把船<b>推离</b>自己，也可以把船<b>拉向</b>自己。</p>
+  <div class="warn">
+    <span class="label">重要</span>
+    你可以移动<b>任何一艘船</b>，不论它现在在哪座岛上。
+  </div>
+  <table>
+    <tr><th>动作</th><th>效果</th></tr>
+    <tr><td class="n">推船</td><td>把<b>任意 1 艘</b>船移到一座<b>远离你</b>的相邻岛</td></tr>
+    <tr><td class="n">拉船</td><td>把<b>任意 1 艘</b>船移到一座<b>靠近你</b>的相邻岛</td></tr>
+  </table>
+
+  <h3 id="s91">9.1 移动细则</h3>
+  <ul>
+    <li>如果所需方向上有<b>多座</b>相邻岛，由<b>你</b>决定把船推到／拉到哪一座。</li>
+    <li>即使目标岛上<b>已有一艘或多艘</b>船，你仍然可以把船移过去。</li>
+    <li>有些能力允许你<b>直接把船移到指定的岛</b>。这种情况下，目标岛<b>不必</b>与当前岛相邻。</li>
+  </ul>
+  <div class="example">
+    <span class="label">示例 · 推与拉</span>
+    你发动一个允许<b>推船</b>的能力：选定这艘船后，你可以把它推到<b>中央的两座岛中的任意一座</b>。<br>
+    你发动一个允许<b>拉船</b>的能力：如果选这艘船，那么<b>只有你这一侧的岛</b>是唯一可拉去的目标。
+  </div>
+
+  <h3 id="s92">9.2 你的岛</h3>
+  <p><b>离你最近</b>的那座岛就是<b>你的岛</b>。你<b>不能</b>把船从你的岛再往自己这边拉；同样，你也<b>不能</b>把对手岛上的船再往外推。</p>
+  <div class="box">
+    <span class="label">记住</span>
+    你<b>永远</b>必须尽可能完整地结算能力。
+  </div>
+
+  <h3 id="s93">9.3 岛屿效果</h3>
+  <p>每座岛都有自己的效果。每当你<b>移动了一艘或多艘</b>船，<b>至少有 1 艘船在其上结束移动</b>的每座岛，都会发动它的效果。</p>
+  <p>如果因此要发动<b>不止一个</b>岛屿效果，由<b>你</b>决定顺序。</p>
+  <div class="warn">
+    <span class="label">时机</span>
+    永远在<b>所有卡牌能力完整结算之后</b>，才发动岛屿效果。
+  </div>
+  <table>
+    <tr><th>岛</th><th>效果</th></tr>
+    <tr><td class="n">你的岛</td><td>只要船停在这里，<b>每艘船</b>对你价值 <b>1 枚印记</b></td></tr>
+    <tr><td class="n">对手的岛</td><td>只要船停在那里，<b>每艘船</b>对<b>对手</b>价值 <b>1 枚印记</b></td></tr>
+  </table>
+  <p>除上述之外，这两座岛<b>没有</b>其他效果。</p>
+  <div class="example">
+    <span class="label">示例 · 岛屿效果改变结果</span>
+    你发动<b>领航员（3）</b>的能力：<b>推或拉任意 1 艘船</b>。你选一艘船，把它<b>拉</b>到相邻那座印有「<b>每艘船 +2 影响力，加到任意一张卡上</b>」效果的岛上。<br>
+    你发动该岛效果，选择<b>领航员</b>。由于这座岛上有 <b>2 艘船</b>，你给领航员 <b>+4 影响力</b>。它现在影响力 <b>7</b>，击败了对手的<b>走私者（6）</b>，赢下这次遭遇。
+  </div>
+  <figure>
+    <img src="Cardia_Rules_images/page_12.jpg" alt="岛屿卡与相邻关系">
+    <figcaption>原书第 12 页：6 座岛的布局、相邻连线，以及推／拉的方向</figcaption>
+  </figure>
+  <figure>
+    <img src="Cardia_Rules_images/page_13.jpg" alt="推拉选择与直接移动">
+    <figcaption>原书第 13 页：多个相邻岛时的选择、叠船与「直接移到指定岛」</figcaption>
+  </figure>
+  <figure>
+    <img src="Cardia_Rules_images/page_14.jpg" alt="你的岛与岛屿效果">
+    <figcaption>原书第 14 页：你的岛／对手的岛的限制，以及岛屿效果的发动时机</figcaption>
+  </figure>
+</section>
+
+<section class="sec" id="s10">
+  <h2><span class="num">10</span>游戏结束</h2>
+  <p>只要满足下列<b>任一</b>条件，游戏<b>立刻</b>结束，你获胜：</p>
+  <table>
+    <tr><th>阶段</th><th>条件</th></tr>
+    <tr><td class="n">阶段一</td><td>对手<b>无法打出</b>任何卡</td></tr>
+    <tr><td class="n">阶段二</td><td>你发动了某个<b>声明你获胜</b>的能力</td></tr>
+    <tr><td class="n">阶段三</td><td>回合结束时，你卡上的印记（<b>含你岛上的船</b>）达到 <b>5 枚或更多</b></td></tr>
+  </table>
+  <div class="box">
+    <span class="label">记住</span>
+    使用<b>微风</b>地点卡时，需要 <b>6 枚</b>印记。
+  </div>
+  <p><b>平手</b>：如果阶段三时双方印记数<b>相同</b>（且都至少 5 枚），继续游戏，直到一方印记<b>多于</b>另一方，或以其他方式获胜。</p>
+  <div class="box">
+    <span class="label">注意</span>
+    先发动能力，<b>再</b>清点印记。
+  </div>
+  <p><b>特殊情况</b>：如果阶段一时<b>双方都无法出牌</b>，则印记<b>较多</b>的一方获胜；若印记相同，则为<b>平局</b>。</p>
+</section>
+
+<section class="sec" id="s11">
+  <h2><span class="num">11</span>完整回合示例</h2>
+  <p>你的<b>速查卡</b>上有各种提示与提醒，帮助你打完第一局。若遇到疑问，可查〈关键词〉或各牌组的澄清章节。</p>
+  <p>等你熟悉了游戏，再往下读，看看有哪些可以变化的花样。</p>
+  <div class="example">
+    <span class="label">示例 · 一个完整回合</span>
+    <b>阶段一</b>：你与对手各在上一组遭遇旁暗置 1 张牌，然后同时翻开。对手的<b>巨像（15）</b>影响力高于你的<b>制图师（10）</b>，因此巨像获得 <b>1 枚印记</b>。<br>
+    <b>阶段二</b>：你发动<b>制图师（10）</b>的能力：<b>发动你某张已打出、且影响力低于此卡的卡的能力</b>。你选择<b>船歌歌手（9）</b>，发动它的能力，并在它上面放 1 枚持续标记。它的持续能力从此生效。<br>
+    <b>阶段三</b>：双方各从牌堆抽 1 张。
+  </div>
+  <figure>
+    <img src="Cardia_Rules_images/page_16.jpg" alt="游戏结束条件">
+    <figcaption>原书第 16 页：三条即时获胜条件与平手处理</figcaption>
+  </figure>
+  <figure>
+    <img src="Cardia_Rules_images/page_17.jpg" alt="完整回合示例">
+    <figcaption>原书第 17 页：一个完整回合的三阶段示例</figcaption>
+  </figure>
+</section>
+
+<section class="sec" id="s12">
+  <h2><span class="num">12</span>牌组 IV：远征队</h2>
+  <p>你可以改用<b>牌组 IV</b> 代替牌组 III。新阵营<b>远征队</b>使用<b>风瓶</b>来发动强力能力。</p>
+
+  <h3 id="s121">12.1 准备（牌组 IV）</h3>
+  <ol>
+    <li>把牌组 III、岛屿卡、船与<b>群岛速查卡</b>放回盒中。</li>
+    <li>取出标着 <b>IV</b> 的 32 张卡，照常分成两套牌组。</li>
+    <li>每人拿 <b>4 个风瓶</b>，放在自己面前作为<b>个人供应</b>。</li>
+    <li>第一次玩牌组 IV 时，建议<b>同样使用「微风」地点卡</b>。</li>
+    <li>每人拿 1 张<b>远征队速查卡</b>。</li>
+    <li>其余准备步骤<b>完全相同</b>。</li>
+  </ol>
+  <div class="warn">
+    <span class="label">注意</span>
+    牌组 IV <b>不使用</b>岛屿卡与船。因此第 09 章（船与岛屿）只适用于牌组 III。
+  </div>
+
+  <h3 id="s122">12.2 风瓶总览</h3>
+  <table>
+    <tr><th>项目</th><th>规则</th></tr>
+    <tr><td class="n">准备</td><td>每位玩家 <b>4 个风瓶</b></td></tr>
+    <tr><td class="n">放置</td><td>从你的<b>供应</b>取。若供应已空，则<b>移动</b>一枚风瓶</td></tr>
+    <tr><td class="n">夺取</td><td>从对手的<b>卡上</b>或<b>供应</b>取</td></tr>
+    <tr><td class="n">风瓶能力</td><td>把风瓶放到卡上时发动</td></tr>
+  </table>
+  <p>牌组 IV 中，印有风瓶能力的卡是数值 <b>2、4、5、7、10、12、13、15</b> 的那几张。</p>
+
+  <h3 id="s123">12.3 两张能力</h3>
+  <p>每张<b>远征队</b>卡有 <b>2 个</b>能力：</p>
+  <ul>
+    <li><b>上方</b>能力是<b>即时能力</b>，照常在该卡输掉遭遇时发动。</li>
+    <li><b>下方</b>能力是<b>风瓶能力</b>，靠在该卡上放 1 个风瓶来发动。</li>
+  </ul>
+  <p><b>放置风瓶</b>：从你的供应取 1 个风瓶，按你刚发动的那项能力放到对应的卡上。如果供应里<b>没有风瓶</b>了，你必须从自己<b>另一张卡上移动</b>一个风瓶过来。</p>
+  <p><b>夺取风瓶</b>：从对手的某张卡上或对手的供应里取 1 个风瓶，按你刚发动的那项能力放置。</p>
+  <div class="box">
+    <span class="label">注意</span>
+    同一张卡上<b>可以有不止一个</b>风瓶。
+  </div>
+  <p><b>特殊情况</b>：如果你或对手在卡上与供应里都<b>没有足够的风瓶</b>，则<b>不放置也不移动</b>风瓶。</p>
+
+  <h3 id="s124">12.4 风瓶能力</h3>
+  <p>风瓶能力有<b>两类</b>。二者都遵循一般的能力规则，但<b>只由风瓶触发</b>。把风瓶放到某张卡上时，<b>立刻</b>发动该卡的风瓶能力。</p>
+  <table>
+    <tr><th>类型</th><th>规则</th></tr>
+    <tr><td class="n">风瓶即时能力</td><td>每次你在该卡上放风瓶，就发动一次该能力</td></tr>
+    <tr><td class="n">风瓶持续能力</td><td>只要该卡上<b>至少还有 1 个风瓶</b>，能力就持续生效。放置时把风瓶<b>以持续图标朝上</b>摆放，表示该能力正在生效</td></tr>
+  </table>
+  <div class="example">
+    <span class="label">示例 · 驯鹰师</span>
+    你发动<b>驯鹰师（4）</b>的能力：<b>在你某张会输掉遭遇的卡上放 1 个风瓶</b>。<br>
+    你把风瓶放在<b>驯鹰师本身</b>上，从而发动它的<b>风瓶持续能力</b>：<b>上一次遭遇视为平手</b>。于是你把上一次遭遇中<b>篡位者</b>身上的印记<b>移除</b>。
+  </div>
+  <div class="example">
+    <span class="label">示例 · 三张远征队卡的能力</span>
+    <b>篡位者</b>：弃掉对手至多 2 张已打出的卡，每张都换成从对手手牌中随机抽的 1 张卡。<br>
+    <b>间谍</b>：对手弃掉牌堆顶 1 张牌，复制并发动它的即时能力。<br>
+    <b>恶棍</b>：弃掉对面那张卡，对手须用手牌中的 1 张替换它。
+  </div>
+  <figure>
+    <img src="Cardia_Rules_images/page_18.jpg" alt="牌组 IV 准备">
+    <figcaption>原书第 18 页：牌组 IV 的准备与远征队总览</figcaption>
+  </figure>
+  <figure>
+    <img src="Cardia_Rules_images/page_19.jpg" alt="远征队的两张能力">
+    <figcaption>原书第 19 页：卡上两张能力的位置、放置与夺取风瓶</figcaption>
+  </figure>
+  <figure>
+    <img src="Cardia_Rules_images/page_20.jpg" alt="风瓶能力的两种类型">
+    <figcaption>原书第 20 页：风瓶即时／持续能力，以及驯鹰师示例</figcaption>
+  </figure>
+</section>
+
+<section class="sec" id="s13">
+  <h2><span class="num">13</span>地点卡</h2>
+  <p>打过几局之后，你可以用<b>地点卡</b>来加点变化。每张地点卡都有一条<b>整局有效</b>的规则。</p>
+  <ul>
+    <li>玩<b>群岛</b>时，用<b>未知水域</b>；玩<b>远征队</b>时，用<b>浮空群岛</b>。</li>
+    <li>此外建议<b>同时</b>使用<b>微风</b>。</li>
+  </ul>
+  <p>每张地点的<b>难度</b>，由右上角的<b>图标数量</b>表示。</p>
+  <div class="box">
+    <span class="label">注意</span>
+    你也可以改用《卡迪亚对决》里的<b>任何</b>地点卡。
+  </div>
+  <figure>
+    <img src="Cardia_Rules_images/page_21.jpg" alt="地点卡与混组">
+    <figcaption>原书第 21 页：三张地点卡（微风、未知水域、浮空群岛）与混组说明</figcaption>
+  </figure>
+</section>
+
+<section class="sec" id="s14">
+  <h2><span class="num">14</span>混组</h2>
+  <p>当你对两套牌组都熟悉了、想找点新挑战时，可以把它们<b>彼此混合</b>，或与《卡迪亚对决》的牌组混合。<b>牌组 III</b> 的混合难度是 <b>2 个骷髅</b>，<b>牌组 IV</b> 是 <b>3 个骷髅</b>（本节标题旁一共画了 4 个骷髅，标示这种玩法的整体难度）。</p>
+  <div class="warn">
+    <span class="label">注意</span>
+    务必保证双方用的是<b>两套完全相同的牌组</b>，且 <b>1–16 每个数值各恰好一张</b>。
+  </div>
+  <p>使用<b>群岛</b>或<b>远征队</b>时，必须把它们那个阵营的<b>全部 8 张</b>卡都包含进去。</p>
+  <p class="quote">混组的各种剧本见：www.hans-im-glueck.de/en/cardia-en/dlc</p>
+</section>
+
+<section class="sec" id="s15">
+  <h2><span class="num">15</span>关键词</h2>
+
+  <h3 id="s151">15.1 影响力</h3>
+  <ul>
+    <li>游戏过程中<b>任何时刻</b>，只要某张卡的影响力（<b>含修正标记</b>）超过了对面那张卡，就把印记放到影响力<b>较高</b>的卡上，并把对面那张卡上的印记<b>退回供应堆</b>。</li>
+    <li>同一张卡上的<b>多个</b>修正标记（正负都算）<b>立刻相加</b>。卡上只放<b>合计值</b>。一张卡的总影响力<b>可以是负数</b>。</li>
+    <li>如果某个能力给「<b>你下一张打出的卡</b>」加修正，就把该修正标记放在你当前遭遇那张卡的<b>出牌方向一侧</b>旁边。你<b>一翻出</b>下一张卡，就立刻把这个标记放上去。修正<b>立刻</b>计入新卡的影响力，并且在阶段一比较时<b>就已经生效</b>。</li>
+  </ul>
+  <div class="example">
+    <span class="label">示例 · 给下一张卡加修正</span>
+    你发动<b>造船师（7）</b>的能力：<b>给你下一张打出的卡 +3/−3 影响力；给对手下一张打出的卡 +3/−3 影响力</b>。<br>
+    你把「+3」放在你那张卡旁、把「−3」放在对手那张卡旁，都位于<b>出牌方向</b>上。
+  </div>
+  <p>你<b>不能</b>给手牌、牌堆或弃牌堆里的卡放修正标记。</p>
+
+  <h3 id="s152">15.2 弃牌</h3>
+  <p>有些能力会强制你弃掉<b>已打出的卡</b>，或手牌、牌堆里的卡。<b>被弃掉的卡不能再被打出。</b></p>
+  <ul>
+    <li>弃掉的卡<b>正面朝上</b>放进你的弃牌堆。被弃卡上的任何标记都<b>退回供应堆</b>。你与对手的弃牌堆，<b>任何时候</b>都可以翻看。</li>
+    <li>如果<b>某次过去遭遇的两张卡都被弃掉</b>，就把之后所有遭遇的卡<b>逆着出牌方向</b>平移过来，填补空位。</li>
+    <li>如果强制你弃掉<b>手牌</b>，由<b>你</b>决定弃哪一张。</li>
+  </ul>
+
+  <h3 id="s153">15.3 复制并发动／发动</h3>
+  <table>
+    <tr><th>用语</th><th>含义</th></tr>
+    <tr><td class="n">复制并发动</td><td>你<b>复制</b>另一张卡的能力，并当作该能力就印在<b>这张卡上</b>那样发动它</td></tr>
+    <tr><td class="n">发动</td><td>你发动另一张卡的能力（<b>按那张卡所在的位置</b>结算）。若发动的是持续能力，照常在<b>那张卡</b>上放持续标记</td></tr>
+  </table>
+
+  <h3 id="s154">15.4 位置相关用语</h3>
+  <table>
+    <tr><th>用语</th><th>定义</th></tr>
+    <tr><td class="n">已打出的卡</td><td>场上<b>正面朝上</b>的卡（<b>含当前遭遇</b>）。被弃掉的卡不再算已打出的卡。「<b>你的一张已打出的卡</b>」必须是位于<b>你这一侧</b>的卡；「<b>任意一张卡</b>」可以是你的，也可以是<b>对手</b>的</td></tr>
+    <tr><td class="n">上一次遭遇</td><td>紧挨着这次遭遇、位于<b>逆出牌方向</b>的那一组</td></tr>
+    <tr><td class="n">过去遭遇</td><td>在这次遭遇之前、位于<b>逆出牌方向</b>的<b>所有</b>已在场遭遇</td></tr>
+    <tr><td class="n">后续遭遇</td><td>位于<b>出牌方向</b>上、紧跟这次遭遇的那一组（<b>不是</b>尚未打出的“下一次遭遇”）</td></tr>
+  </table>
+  <figure>
+    <img src="Cardia_Rules_images/page_22.jpg" alt="影响力规则">
+    <figcaption>原书第 22 页：影响力与修正标记的规则、给下一张卡加修正的示例</figcaption>
+  </figure>
+  <figure>
+    <img src="Cardia_Rules_images/page_24.jpg" alt="位置用语示意">
+    <figcaption>原书第 24 页：当前遭遇、上一次遭遇、后续遭遇与出牌方向的示意</figcaption>
+  </figure>
+</section>
+
+<section class="sec" id="s16">
+  <h2><span class="num">16</span>牌组 III 卡牌澄清</h2>
+  <table>
+    <tr><th>卡（英）</th><th>澄清</th></tr>
+    <tr><td class="n">杂耍者<br><span class="dim">Juggler</span></td><td>你先取走所选卡上的<b>全部</b>修正标记、把它们<b>翻倍</b>，然后<b>全部</b>放到<b>另一张</b>卡上。如果你翻倍的是<b>负</b>影响力，它仍然是负数。</td></tr>
+    <tr><td class="n">移潮者<br><span class="dim">Tide Shifter</span></td><td>你可以把所选那艘船<b>拉一次或两次</b>。无论拉几次，你<b>只</b>发动船<b>结束移动</b>时所在那座岛的效果。</td></tr>
+    <tr><td class="n">船歌歌手<br><span class="dim">Shanty Singer</span></td><td>你在移动一艘或多艘船<b>之后</b>、发动岛屿效果<b>之前</b>，立刻放上 +2 修正。即使同一轮里多次移船，这些修正也<b>只放一次</b>。</td></tr>
+    <tr><td class="n">走私者<br><span class="dim">Smuggler</span></td><td>「对手那一侧」＝<b>离对手最近</b>的那张岛屿卡上的两座岛。</td></tr>
+    <tr><td class="n">摆渡人<br><span class="dim">Ferryman</span></td><td>你也可以选择把船从<b>一座中央岛移到另一座中央岛</b>。</td></tr>
+    <tr><td class="n">制图师<br><span class="dim">Cartographer</span></td><td>你照常结算所选卡的能力。该能力中提到的<b>任何位置</b>，都以<b>那张卡</b>为参照，而<b>不是</b>以制图师为参照（见 15.3）。你可以选择发动<b>持续能力</b>。</td></tr>
+    <tr><td class="n">导师<br><span class="dim">Mentor</span></td><td>你发动自己那张<b>带持续能力</b>、且<b>离当前遭遇最近</b>（即“最后”）的卡。此处的「最后」指卡的<b>位置</b>，不是它被打出的<b>时点</b>。若目标卡上<b>已有</b>持续标记，就<b>再放一枚</b>。如果你没有任何带持续能力的已打出卡，则<b>什么也不发生</b>。</td></tr>
+    <tr><td class="n">塞壬<br><span class="dim">Siren</span></td><td>你<b>只能选 1 座岛</b>，并且必须把那里的<b>所有船作为一组</b>移到<b>另 1 座岛</b>。即使你因此移了不止一艘船，目标岛的效果也<b>只发动一次</b>。「每艘船」那部分照常结算。你<b>可以</b>选择你自己的岛。</td></tr>
+    <tr><td class="n">海之女神<br><span class="dim">Goddess of the Sea</span></td><td>由于这是<b>持续能力</b>，你在此次遭遇<b>左、右两侧</b>的遭遇（凡你打出了<b>群岛</b>卡的）也都<b>获胜</b>，<b>含平手</b>。<br>如果双方都发动了海之女神的能力、且在同一遭遇中都打出了<b>群岛</b>卡，那么<b>两张卡都获胜</b>。若该能力<b>停止生效</b>，把因它放置的所有印记<b>移除</b>。</td></tr>
+  </table>
+  <figure>
+    <img src="Cardia_Rules_images/page_25.jpg" alt="牌组 III 澄清">
+    <figcaption>原书第 25 页：牌组 III 的卡牌澄清（上半）</figcaption>
+  </figure>
+  <figure>
+    <img src="Cardia_Rules_images/page_26.jpg" alt="牌组 III 澄清续">
+    <figcaption>原书第 26 页：牌组 III 的卡牌澄清（下半）与 FAQ 链接</figcaption>
+  </figure>
+</section>
+
+<section class="sec" id="s17">
+  <h2><span class="num">17</span>牌组 IV 卡牌澄清</h2>
+  <table>
+    <tr><th>卡（英）</th><th>澄清</th></tr>
+    <tr><td class="n">伪造师<br><span class="dim">Forger</span></td><td><b>不要</b>发动新卡的即时能力。把 <b>−3</b> 修正放到那张新卡上。</td></tr>
+    <tr><td class="n">催眠师<br><span class="dim">Mesmerizer</span></td><td>被交换的两张卡上的标记，<b>留在各自原来的卡上</b>。</td></tr>
+    <tr><td class="n">恶棍<br><span class="dim">Scoundrel</span></td><td>如果对手手上<b>没有卡</b>，你<b>获胜</b>。</td></tr>
+    <tr><td class="n">间谍<br><span class="dim">Spy</span></td><td>你<b>不能</b>复制并发动<b>风瓶即时能力</b>。如果被弃掉的那张卡没有即时能力，则<b>什么也不发生</b>。</td></tr>
+    <tr><td class="n">风语者<br><span class="dim">Wind Whisperer</span></td><td>使用这个风瓶能力时，你<b>不能</b>发动<b>上一张卡</b>上的风瓶能力。</td></tr>
+    <tr><td class="n">变形者<br><span class="dim">Shapeshifter</span></td><td>你<b>不能</b>复制并发动<b>风瓶即时能力</b>。如果对面那张卡没有即时能力，则<b>什么也不发生</b>。</td></tr>
+    <tr><td class="n">女族长<br><span class="dim">Matriarch</span></td><td>你先<b>放好两个风瓶</b>，然后按<b>任意顺序</b>结算被发动的能力。<b>不能</b>把两个偷来的风瓶放在<b>同一张卡</b>上。<br>风瓶能力：你卡上的<b>每个</b>风瓶价值 <b>+5 影响力</b>，<b>不论哪一面朝上</b>。</td></tr>
+    <tr><td class="n">篡位者<br><span class="dim">Usurper</span></td><td><b>不发动</b>新卡的即时能力。如果对手手牌不足以替换<b>两张</b>，你<b>获胜</b>。</td></tr>
+  </table>
+  <figure>
+    <img src="Cardia_Rules_images/page_27.jpg" alt="牌组 IV 澄清">
+    <figcaption>原书第 27 页：牌组 IV 的卡牌澄清</figcaption>
+  </figure>
+</section>
+
+<section class="sec" id="a1">
+  <h2><span class="num">A</span>术语</h2>
+  <table>
+    <tr><th>术语</th><th>含义</th></tr>
+    <tr><td class="n">影响力</td><td>卡牌 1–16 的数值，也可被修正标记临时改变</td></tr>
+    <tr><td class="n">遭遇</td><td>双方各打出 1 张牌、彼此相对的一组。整局会沿出牌方向排成一列</td></tr>
+    <tr><td class="n">印记</td><td>赢得遭遇的奖励，5 枚（微风下 6 枚）即获胜</td></tr>
+    <tr><td class="n">修正标记</td><td>改变影响力的标记，面值 1／2／3／5，正反两面数值不同</td></tr>
+    <tr><td class="n">持续标记</td><td>表示某张卡的持续能力正在生效</td></tr>
+    <tr><td class="n">即时能力</td><td>发动时立刻结算一次的能力</td></tr>
+    <tr><td class="n">持续能力</td><td>放了持续标记后一直生效的能力</td></tr>
+    <tr><td class="n">风瓶</td><td>远征队的资源，放在卡上以发动风瓶能力</td></tr>
+    <tr><td class="n">风瓶能力</td><td>只有放风瓶才触发的能力，分即时与持续两类</td></tr>
+    <tr><td class="n">已打出的卡</td><td>场上正面朝上的卡（含当前遭遇）</td></tr>
+    <tr><td class="n">上一次遭遇</td><td>紧挨本次、位于逆出牌方向的那一组</td></tr>
+    <tr><td class="n">过去遭遇</td><td>本次之前的所有已在场遭遇</td></tr>
+    <tr><td class="n">后续遭遇</td><td>出牌方向上紧跟本次的那一组（下一次尚未打出的不算）</td></tr>
+    <tr><td class="n">复制并发动</td><td>把别人的能力当作印在本卡上那样发动</td></tr>
+    <tr><td class="n">发动</td><td>按目标卡所在位置发动它的能力</td></tr>
+    <tr><td class="n">推／拉</td><td>把船移到远离你／靠近你的相邻岛</td></tr>
+    <tr><td class="n">你的岛</td><td>离你最近的那座岛，船在此对你各值 1 枚印记</td></tr>
+    <tr><td class="n">岛屿效果</td><td>船在其上结束移动时发动，在所有卡牌能力结算完之后处理</td></tr>
+    <tr><td class="n">地点卡</td><td>整局有效的额外规则，右上角图标数量表示难度</td></tr>
+  </table>
+</section>
+
+<section class="sec" id="a2">
+  <h2><span class="num">B</span>制作名单</h2>
+  <p><b>设计</b>：Mathieu Rivero、Faouzi Boughida<br>
+  <b>平面设计</b>：Franz-Georg Stämmele、Alena Rolinski<br>
+  <b>编辑</b>：Willi Fabienke、Alena Rolinski、HiG<br>
+  <b>英文翻译</b>：Stephan Rothschuh<br>
+  <b>插画</b>：Giovanni Calore、Florian Herold、Qistina Khalidah、Martin Mottet、Jonas Schmutzler、Nat Spengler</p>
+  <table>
+    <tr><th>插画师</th><th>负责</th></tr>
+    <tr><td class="n">Giovanni Calore</td><td>封面、移潮者、制图师、导师、塞壬</td></tr>
+    <tr><td class="n">Florian Herold</td><td>岛屿卡、微风、未知水域、浮空群岛</td></tr>
+    <tr><td class="n">Qistina Khalidah</td><td>海盗、走私者、船歌歌手、巨像、谄媚者、引水员、风语者、变形者</td></tr>
+    <tr><td class="n">Martin Mottet</td><td>绑架者、探险家、恶棍、女族长</td></tr>
+    <tr><td class="n">Jonas Schmutzler</td><td>牌背、摆渡人、领航员、造船师、海之女神、伪造师、移云者、驯暴者、篡位者</td></tr>
+    <tr><td class="n">Nat Spengler</td><td>秘术师、海军上将、寻宝者、斥候、驯鹰师、催眠师、间谍</td></tr>
+  </table>
+  <p class="quote">© 2026 Hans im Glück Verlags-GmbH　Birnauer Str. 15, 80809 Munich, Germany<br>
+  info@hans-im-glueck.de　www.hans-im-glueck.de/en　规则版本 V1</p>
+
+  <footer>
+    本文件为《卡迪亚：潮与风暴》（Cardia: Tide &amp; Storm，Hans im Glück，2026）的非官方中文翻译，仅供对照实体规则书使用，不作商业用途。<br>
+    翻译依据：英文版规则书 28 页。原书中的图标在本页中多以文字描述替代，实际游戏请以卡面与配件符号为准。<br>
+    卡牌名称首次出现时附英文原名，便于与实体卡对照。如对译名或表述有疑问，请以英文原文为准。
+  </footer>
+</section>
+
+</main>
+</div>
+</body>
+</html>
