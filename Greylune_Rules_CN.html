@@ -223,7 +223,6 @@ footer b{color:var(--moss);}
       <tr><td>季节版图</td><td class="n">1 张</td><td>标注冬、春、夏、秋，左侧为营地</td></tr>
       <tr><td>起始玩家标记</td><td class="n">1 个</td><td>每年传递给左手玩家</td></tr>
       <tr><td>事件板块</td><td class="n">6 张</td><td>每年翻开一张作为当年事件</td></tr>
-      <tr><td>村民</td><td class="n">7 个</td><td>公共备用的村民供应</td></tr>
       <tr><td>规则书</td><td class="n">1 本</td><td>—</td></tr>
     </tbody>
   </table>
@@ -241,6 +240,7 @@ footer b{color:var(--moss);}
       <tr><td>魔法标记</td><td class="n">1 个</td><td>在魔法轨上移动</td></tr>
       <tr><td>计分标记</td><td class="n">1 个</td><td>在分数轨上移动</td></tr>
       <tr><td>任务标记</td><td class="n">3 个</td><td>完成英雄任务时放置</td></tr>
+      <tr><td>村民</td><td class="n">7 个</td><td>3 个开局即活跃，4 个暂置、随招募伙伴逐步进入游戏</td></tr>
       <tr><td>收入标记</td><td class="n">8 个</td><td>按颜色区分归属</td></tr>
       <tr><td>奖励标记</td><td class="n">3 个</td><td>初始正面朝上放在个人版图旁</td></tr>
     </tbody>
@@ -311,7 +311,7 @@ footer b{color:var(--moss);}
   <p>当你要去冒险时，你的冒险者先从灰月镇出发，然后可以在停留的格子上结算一张遭遇卡（前提是你满足其条件）：获得该遭遇卡的奖励，并把它滑到个人版图上方。同一年内，冒险者从上次停下的格子继续出发；每到<b>秋季</b>，冒险者便返回灰月镇。</p>
 
   <h3>4.4 营地</h3>
-  <p>季节版图左侧是<b>营地</b>：每当一个村民被从村庄移除或被消耗，它就变为不活跃，必须放进营地，表示本年不能再使用。</p>
+  <p>季节版图左侧是<b>营地</b>：每当一个村民被从村庄移除或被花掉，它就变为不活跃，必须放进营地，表示本年不能再使用。</p>
 </section>
 
 <section class="sec" id="flow">
@@ -355,7 +355,7 @@ footer b{color:var(--moss);}
 </section>
 
 <section class="sec" id="skills">
-  <h2><span class="num">06</span>技能:力量与魔法</h2>
+  <h2><span class="num">06</span>技能：力量与魔法</h2>
   <p><b>力量</b>与<b>魔法</b>是你的技能。你必须提升它们，才能应付越来越危险的遭遇与任务。</p>
   <ul>
     <li>游戏结束时，若你的力量与魔法<b>都至少为 3</b>，得 <b>2 VP</b>。</li>
@@ -391,7 +391,7 @@ footer b{color:var(--moss);}
 </section>
 
 <section class="sec" id="winter">
-  <h2><span class="num">08</span>冬季:设置</h2>
+  <h2><span class="num">08</span>冬季：设置</h2>
   <p>按以下顺序执行：</p>
   <ol>
     <li>把每位玩家的<b>季节标记</b>移回季节版图的「春」。</li>
@@ -408,7 +408,7 @@ footer b{color:var(--moss);}
 </section>
 
 <section class="sec" id="spring">
-  <h2><span class="num">09</span>春季:村民放置</h2>
+  <h2><span class="num">09</span>春季：村民放置</h2>
   <p>春季有三种行动可选。</p>
 
   <h3>9.1 放置一个村民</h3>
@@ -435,7 +435,7 @@ footer b{color:var(--moss);}
 </section>
 
 <section class="sec" id="summer">
-  <h2><span class="num">10</span>夏季:行动</h2>
+  <h2><span class="num">10</span>夏季：行动</h2>
   <p>夏季共有六种可选的行动。</p>
 
   <h3>10.1 参加事件</h3>
@@ -461,11 +461,11 @@ footer b{color:var(--moss);}
   </div>
 
   <h3>10.3 使用一件物品</h3>
-  <p>选择自己一件<b>已扶正</b>且带有可用效果的物品，把该卡<b>横置</b>（本年不能再使用，除非有卡牌效果将其扶正）。若它有多个效果，你必须选择其中一个。若所选效果需要消耗一个或多个村民，把它们放进营地。</p>
+  <p>选择自己一件<b>已扶正</b>且带有可用效果的物品，把该卡<b>横置</b>（本年不能再使用，除非有卡牌效果将其扶正）。若它有多个效果，你必须选择其中一个。若所选效果需要花费一个或多个村民，把它们放进营地。</p>
   <p>有些效果要求<b>弃掉</b>该物品（多为药水），此时必须立即把它收回盒中，然后结算物品效果。</p>
   <div class="example">
     <span class="label">示例</span>
-    康妮横置自己的短剑并结算其效果：消耗 1 个活跃村民，换得 1 点力量。
+    康妮横置自己的短剑并结算其效果：花费 1 个活跃村民，换得 1 点力量。
   </div>
 
   <h3>10.4 激活一张卡</h3>
@@ -517,7 +517,7 @@ footer b{color:var(--moss);}
 </section>
 
 <section class="sec" id="autumn">
-  <h2><span class="num">11</span>秋季:维护与收入</h2>
+  <h2><span class="num">11</span>秋季：维护与收入</h2>
   <p>玩家进入秋季后，本年不能再采取任何行动，并按顺序执行以下步骤：</p>
   <ol>
     <li>你的<b>冒险者返回灰月镇</b>。</li>
@@ -638,10 +638,10 @@ footer b{color:var(--moss);}
     <thead><tr><th>事件</th><th>类型</th><th>费用</th><th>效果</th></tr></thead>
     <tbody>
       <tr><td>宴会 Banquet</td><td><span class="tag e">事件</span></td><td class="n">—</td><td>得 3 金币，或扶正一张自己横置的卡。</td></tr>
-      <tr><td>比武大会 Tournament</td><td><span class="tag e">事件</span></td><td class="n">1 力量</td><td>消耗 1 力量，得 6 金币或 4 VP。</td></tr>
-      <tr><td>集会 Gathering</td><td><span class="tag e">事件</span></td><td class="n">1 力量或 3 金币</td><td>消耗 1 力量或 3 金币，得 1 个村民。</td></tr>
-      <tr><td>大集市 Great fair</td><td><span class="tag e">事件</span></td><td class="n">3 金币</td><td>消耗 3 金币，得 1 力量与 1 魔法。</td></tr>
-      <tr><td>魔法表演 Magic show</td><td><span class="tag e">事件</span></td><td class="n">1 魔法</td><td>消耗 1 魔法，冒险者移动至多 5 格。</td></tr>
+      <tr><td>比武大会 Tournament</td><td><span class="tag e">事件</span></td><td class="n">1 力量</td><td>花费 1 力量，得 6 金币或 4 VP。</td></tr>
+      <tr><td>集会 Gathering</td><td><span class="tag e">事件</span></td><td class="n">1 力量或 3 金币</td><td>花费 1 力量或 3 金币，得 1 个村民。</td></tr>
+      <tr><td>大集市 Great fair</td><td><span class="tag e">事件</span></td><td class="n">3 金币</td><td>花费 3 金币，得 1 力量与 1 魔法。</td></tr>
+      <tr><td>魔法表演 Magic show</td><td><span class="tag e">事件</span></td><td class="n">1 魔法</td><td>花费 1 魔法，冒险者移动至多 5 格。</td></tr>
       <tr><td>节庆 Festival</td><td><span class="tag e">事件</span></td><td class="n">—</td><td>把村民放在一个空位上，并同时获得两侧相邻的奖励。若你选择了「去冒险」奖励，则在另一项之后结算。秋季被腾出的空位可以再被其他玩家使用。</td></tr>
     </tbody>
   </table>
@@ -655,9 +655,9 @@ footer b{color:var(--moss);}
   <table class="cards">
     <thead><tr><th>卡名</th><th>类型</th><th>费用</th><th>效果</th></tr></thead>
     <tbody>
-      <tr><td>阿里奥克 Ariok</td><td><span class="tag c">伙伴</span></td><td class="n">7</td><td>即时效果：得 1 个村民与 1 点魔法。<br>反应：冒险时横置并消耗 1 魔法，完全无视遭遇卡的一项条件。<br>终局：每点魔法 1 VP。</td></tr>
+      <tr><td>阿里奥克 Ariok</td><td><span class="tag c">伙伴</span></td><td class="n">7</td><td>即时效果：得 1 个村民与 1 点魔法。<br>反应：冒险时横置并花费 1 魔法，完全无视遭遇卡的一项条件。<br>终局：每点魔法 1 VP。</td></tr>
       <tr><td>多里安 Dorian</td><td><span class="tag c">伙伴</span></td><td class="n">7</td><td>即时效果：得 1 个村民。<br>反应：购买物品时横置，费用减 1 并得 1 VP。<br>永久：物品上限 +2。<br>终局：每件物品 1 VP。</td></tr>
-      <tr><td>凯尔 Kael</td><td><span class="tag c">伙伴</span></td><td class="n">7</td><td>即时效果：得 1 个村民。<br>反应：需消耗力量时横置，少消耗 1 点。<br>永久：物品上限 +1。<br>终局：每点力量 1 VP。</td></tr>
+      <tr><td>凯尔 Kael</td><td><span class="tag c">伙伴</span></td><td class="n">7</td><td>即时效果：得 1 个村民。<br>反应：需花费力量时横置，少花费 1 点。<br>永久：物品上限 +1。<br>终局：每点力量 1 VP。</td></tr>
       <tr><td>艾尔温 Elwen</td><td><span class="tag c">伙伴</span></td><td class="n">7</td><td>即时效果：得 1 个村民。<br>反应：冒险时横置，冒险者额外移动至多 2 格。<br>终局：个人版图上每张带指定徽记的遭遇卡 1 VP（已讲述或未讲述皆算）。</td></tr>
       <tr><td>内里斯 Neris</td><td><span class="tag c">伙伴</span></td><td class="n">7</td><td>即时效果：得 1 个村民。<br>反应：若为「获得金币」移除村民，横置可多得 2 金币；若为「激活卡牌」移除村民，横置可忽略额外费用。<br>终局：每对剩余金币 1 VP。</td></tr>
       <tr><td>塞莉娅 Selia</td><td><span class="tag c">伙伴</span></td><td class="n">7</td><td>即时效果：得 1 个村民。<br>反应：弃封印标记时横置，可自选其数值（1 至 3）。<br>永久：使用药水时改为横置而非弃掉；同一回合可使用多瓶药水。<br>终局：每瓶药水 2 VP。</td></tr>
@@ -674,14 +674,14 @@ footer b{color:var(--moss);}
       <tr><td>裂橡 The Riven Oak</td><td><span class="tag t">酒馆</span></td><td class="n">0</td><td>讲一或多段总值至多 3 的故事：得 2 VP + 1 力量 + 1 个村民。</td></tr>
       <tr><td>金狮 The Golden Lion</td><td><span class="tag t">酒馆</span></td><td class="n">0</td><td>讲一或多段总值至多 3 的故事：得 4 金币 + 1 VP + X 金币（X＝弃掉的封印标记数值）。</td></tr>
       <tr><td>侦察行会 Scouts guild</td><td><span class="tag b">建筑</span></td><td class="n">0</td><td>弃一个封印标记，冒险者移动至多等于其数值的格数。</td></tr>
-      <tr><td>汤米 Tommy</td><td><span class="tag i">物品</span></td><td class="n">4</td><td>横置去冒险至多 1 格；或横置并消耗 1 个村民，移动至多 2 格。<br>终局：1 VP。</td></tr>
+      <tr><td>汤米 Tommy</td><td><span class="tag i">物品</span></td><td class="n">4</td><td>横置去冒险至多 1 格；或横置并花费 1 个村民，移动至多 2 格。<br>终局：1 VP。</td></tr>
       <tr><td>百里靴 Hundred-league boots</td><td><span class="tag i">物品</span></td><td class="n">2</td><td>即时 VP：弃掉封印标记，得等于其数值的 VP。<br>能力：横置并弃掉该卡，冒险者移动至多 5 格。</td></tr>
-      <tr><td>短剑 Short sword</td><td><span class="tag i">物品</span></td><td class="n">2</td><td>即时效果：得 1 点力量。<br>能力：横置并消耗 1 个村民，得 1 点力量。<br>终局：1 VP。</td></tr>
+      <tr><td>短剑 Short sword</td><td><span class="tag i">物品</span></td><td class="n">2</td><td>即时效果：得 1 点力量。<br>能力：横置并花费 1 个村民，得 1 点力量。<br>终局：1 VP。</td></tr>
       <tr><td>玉雕像 Jade statue</td><td><span class="tag i">物品</span></td><td class="n">3</td><td>即时效果：得 1 点力量或 1 点魔法。<br>终局：5 VP。</td></tr>
-      <tr><td>神秘地图 Mysterious map</td><td><span class="tag i">物品</span></td><td class="n">3</td><td>横置移动至多 1 格；或横置、消耗 1 个村民并弃掉该卡，移动至多 3 格。<br>终局：1 VP。</td></tr>
-      <tr><td>巫师法杖 Wizard's staff</td><td><span class="tag i">物品</span></td><td class="n">3</td><td>即时效果：得 1 点魔法。<br>能力：横置并消耗 1 个村民，得 1 点魔法。<br>终局：1 VP。</td></tr>
-      <tr><td>法力药水 Mana potion</td><td><span class="tag i">物品</span></td><td class="n">3</td><td>即时 VP：弃掉封印标记，得等于其数值的 VP。<br>反应：冒险时弃掉该卡，魔法临时 +2（至本次遭遇或任务结束）。不移动标记，也不能消耗这部分魔法；魔法可临时超过 5，但不因此得分。</td></tr>
-      <tr><td>力量药水 Strength potion</td><td><span class="tag i">物品</span></td><td class="n">2</td><td>即时 VP：弃掉封印标记，得等于其数值的 VP。<br>反应：冒险时弃掉该卡，力量临时 +2（至本次遭遇或任务结束）。不移动标记，也不能消耗这部分力量；力量可临时超过 5，但不因此得分。</td></tr>
+      <tr><td>神秘地图 Mysterious map</td><td><span class="tag i">物品</span></td><td class="n">3</td><td>横置移动至多 1 格；或横置、花费 1 个村民并弃掉该卡，移动至多 3 格。<br>终局：1 VP。</td></tr>
+      <tr><td>巫师法杖 Wizard's staff</td><td><span class="tag i">物品</span></td><td class="n">3</td><td>即时效果：得 1 点魔法。<br>能力：横置并花费 1 个村民，得 1 点魔法。<br>终局：1 VP。</td></tr>
+      <tr><td>法力药水 Mana potion</td><td><span class="tag i">物品</span></td><td class="n">3</td><td>即时 VP：弃掉封印标记，得等于其数值的 VP。<br>反应：冒险时弃掉该卡，魔法临时 +2（至本次遭遇或任务结束）。不移动标记，也不能花费这部分魔法；魔法可临时超过 5，但不因此得分。</td></tr>
+      <tr><td>力量药水 Strength potion</td><td><span class="tag i">物品</span></td><td class="n">2</td><td>即时 VP：弃掉封印标记，得等于其数值的 VP。<br>反应：冒险时弃掉该卡，力量临时 +2（至本次遭遇或任务结束）。不移动标记，也不能花费这部分力量；力量可临时超过 5，但不因此得分。</td></tr>
     </tbody>
   </table>
 
@@ -689,7 +689,7 @@ footer b{color:var(--moss);}
   <table class="cards">
     <thead><tr><th>卡名</th><th>类型</th><th>费用</th><th>效果</th></tr></thead>
     <tbody>
-      <tr><td>布兰 Bran</td><td><span class="tag c">伙伴</span></td><td class="n">7</td><td>即时效果：得 1 个村民。<br>反应：激活卡牌需消耗一个或多个村民时横置，该数量减 1。<br>终局：你拥有的每个村民 1 VP，再减 2。</td></tr>
+      <tr><td>布兰 Bran</td><td><span class="tag c">伙伴</span></td><td class="n">7</td><td>即时效果：得 1 个村民。<br>反应：激活卡牌需花费一个或多个村民时横置，该数量减 1。<br>终局：你拥有的每个村民 1 VP，再减 2。</td></tr>
       <tr><td>高德里克 Gaudric</td><td><span class="tag c">伙伴</span></td><td class="n">7</td><td>即时效果：得 1 个村民。<br>反应：当你要横置一张卡时横置本卡，使该卡改为被扶正。若被扶正的卡带有反应效果，可立即再次触发该效果，如此反复。<br>终局：每名伙伴 2 VP（含本卡）。</td></tr>
       <tr><td>卢坎 Lucan</td><td><span class="tag c">伙伴</span></td><td class="n">7</td><td>即时效果：得 1 个村民。<br>反应：当你获得魔法时横置，改为得 1 点力量（反之亦然）。<br>终局：你较低的那项技能每级 1 VP。</td></tr>
       <tr><td>米拉 Mira</td><td><span class="tag c">伙伴</span></td><td class="n">7</td><td>即时效果：得 1 个村民。<br>反应：冒险时（结算遭遇之前或之后）横置，在村庄放置 1 个村民。<br>终局：每张徽记各不相同的遭遇卡 1 VP（已讲述或未讲述皆算）。</td></tr>
@@ -706,13 +706,13 @@ footer b{color:var(--moss);}
       <tr><td>旅人行会 Travelers guild</td><td><span class="tag b">建筑</span></td><td class="n">2</td><td>冒险者移动至多 4 格。</td></tr>
       <tr><td>镇公所 Town hall</td><td><span class="tag b">建筑</span></td><td class="n">弃封印标记</td><td>弃掉一个封印标记并支付等额金币：得 1 点力量与 1 点魔法。</td></tr>
       <tr><td>快活熊 The Jolly Bear</td><td><span class="tag t">酒馆</span></td><td class="n">0</td><td>讲一或多段总值至多 3 的故事：得 3 VP + 2 金币 + 1 点力量或 1 点魔法。</td></tr>
-      <tr><td>英雄厅 Hall of the heroes</td><td><span class="tag b">建筑</span></td><td class="n">0</td><td>消耗 1 点力量得 3 VP，和／或消耗 1 点魔法得 4 VP。</td></tr>
-      <tr><td>飞行药水 Flying potion</td><td><span class="tag i">物品</span></td><td class="n">2</td><td>即时 VP：弃掉封印标记，得等于其数值的 VP。<br>反应：冒险时弃掉该卡，力量与魔法各临时 +1（至本次遭遇或任务结束）。不移动标记，也不能消耗这部分技能；可临时超过 5，但不因此得分。</td></tr>
-      <tr><td>雪鬃 Snowmane</td><td><span class="tag i">物品</span></td><td class="n">4</td><td>横置并消耗 1／2 个村民，去冒险至多 3／5 格。<br>终局：2 VP。</td></tr>
+      <tr><td>英雄厅 Hall of the heroes</td><td><span class="tag b">建筑</span></td><td class="n">0</td><td>花费 1 点力量得 3 VP，和／或花费 1 点魔法得 4 VP。</td></tr>
+      <tr><td>飞行药水 Flying potion</td><td><span class="tag i">物品</span></td><td class="n">2</td><td>即时 VP：弃掉封印标记，得等于其数值的 VP。<br>反应：冒险时弃掉该卡，力量与魔法各临时 +1（至本次遭遇或任务结束）。不移动标记，也不能花费这部分技能；可临时超过 5，但不因此得分。</td></tr>
+      <tr><td>雪鬃 Snowmane</td><td><span class="tag i">物品</span></td><td class="n">4</td><td>横置并花费 1／2 个村民，去冒险至多 3／5 格。<br>终局：2 VP。</td></tr>
       <tr><td>隐形药水 Invisibility potion</td><td><span class="tag i">物品</span></td><td class="n">3</td><td>即时 VP：弃掉封印标记，得等于其数值的 VP。<br>反应：冒险时弃掉该卡，完全无视遭遇卡的一项条件。</td></tr>
-      <tr><td>剑咒 Bladechant</td><td><span class="tag i">物品</span></td><td class="n">5</td><td>横置：得 1 点力量或 1 点魔法；或消耗 1 个村民，得 1 点力量与 1 点魔法。<br>终局：1 VP。</td></tr>
-      <tr><td>藏宝图 Treasure map</td><td><span class="tag i">物品</span></td><td class="n">3</td><td>横置移动至多 2 格；或横置、消耗 1 个村民并弃掉该卡，移动至多 4 格。<br>终局：1 VP。</td></tr>
-      <tr><td>号角 Horn</td><td><span class="tag i">物品</span></td><td class="n">2</td><td>横置并消耗 1／2 个村民，得 3／5 VP。<br>终局：1 VP。</td></tr>
+      <tr><td>剑咒 Bladechant</td><td><span class="tag i">物品</span></td><td class="n">5</td><td>横置：得 1 点力量或 1 点魔法；或花费 1 个村民，得 1 点力量与 1 点魔法。<br>终局：1 VP。</td></tr>
+      <tr><td>藏宝图 Treasure map</td><td><span class="tag i">物品</span></td><td class="n">3</td><td>横置移动至多 2 格；或横置、花费 1 个村民并弃掉该卡，移动至多 4 格。<br>终局：1 VP。</td></tr>
+      <tr><td>号角 Horn</td><td><span class="tag i">物品</span></td><td class="n">2</td><td>横置并花费 1／2 个村民，得 3／5 VP。<br>终局：1 VP。</td></tr>
       <tr><td>金雕像 Gold statue</td><td><span class="tag i">物品</span></td><td class="n">4</td><td>即时效果：得 1 点力量或 1 点魔法。<br>终局：5 VP。</td></tr>
       <tr><td>耐力药水 Endurance potion</td><td><span class="tag i">物品</span></td><td class="n">3</td><td>即时 VP：弃掉封印标记，得等于其数值的 VP。<br>反应：冒险时弃掉该卡，在村庄放置 1 个村民。</td></tr>
       <tr><td>魅力药水 Charisma potion</td><td><span class="tag i">物品</span></td><td class="n">3</td><td>即时 VP：弃掉封印标记，得等于其数值的 VP。<br>反应：讲故事时弃掉该卡，使某一张遭遇卡的故事值变为 3。</td></tr>
@@ -726,12 +726,12 @@ footer b{color:var(--moss);}
       <tr><td>图书馆 Library</td><td><span class="tag b">建筑</span></td><td class="n">弃封印标记</td><td>弃掉一个封印标记并支付等额金币：你「已讲述的故事」区每张卡得 1 VP（不看其数值）。</td></tr>
       <tr><td>旅人行会 Travelers guild</td><td><span class="tag b">建筑</span></td><td class="n">2</td><td>冒险者移动至多 5 格。</td></tr>
       <tr><td>要塞 Fortress</td><td><span class="tag b">建筑</span></td><td class="n">弃封印标记</td><td>弃掉一个封印标记并支付等额金币：每名伙伴得 2 VP。</td></tr>
-      <tr><td>曼陀林 Mandolin</td><td><span class="tag i">物品</span></td><td class="n">5</td><td>横置并消耗 1 个村民：你「未讲述的故事」区每张卡得 1 VP（不看其数值）。<br>终局：5 VP。</td></tr>
-      <tr><td>贤者之石 Philosopher stone</td><td><span class="tag i">物品</span></td><td class="n">3</td><td>即时 VP：弃掉封印标记，得等于其数值的 VP。<br>能力：横置并消耗 1 个村民，得 5 VP。</td></tr>
+      <tr><td>曼陀林 Mandolin</td><td><span class="tag i">物品</span></td><td class="n">5</td><td>横置并花费 1 个村民：你「未讲述的故事」区每张卡得 1 VP（不看其数值）。<br>终局：5 VP。</td></tr>
+      <tr><td>贤者之石 Philosopher stone</td><td><span class="tag i">物品</span></td><td class="n">3</td><td>即时 VP：弃掉封印标记，得等于其数值的 VP。<br>能力：横置并花费 1 个村民，得 5 VP。</td></tr>
       <tr><td>赤龙 The Scarlet Dragon</td><td><span class="tag t">酒馆</span></td><td class="n">0</td><td>讲一或多段总值至多 3 的故事：得 3 VP + 2 VP + 1 VP。</td></tr>
       <tr><td>魔法戒指 Magic ring</td><td><span class="tag i">物品</span></td><td class="n">7</td><td>终局：9 VP。（卡面无能力）</td></tr>
       <tr><td>红宝雕像 Rubis statue</td><td><span class="tag i">物品</span></td><td class="n">6</td><td>即时效果：得 1 点力量或 1 点魔法。<br>终局：6 VP。</td></tr>
-      <tr><td>次元袋 Bag of holding</td><td><span class="tag i">物品</span></td><td class="n">4</td><td>永久：物品上限 +1；即使取得本卡前已达上限也生效。<br>能力：横置并消耗 1 个村民，每件物品得 1 VP。<br>终局：4 VP。</td></tr>
+      <tr><td>次元袋 Bag of holding</td><td><span class="tag i">物品</span></td><td class="n">4</td><td>永久：物品上限 +1；即使取得本卡前已达上限也生效。<br>能力：横置并花费 1 个村民，每件物品得 1 VP。<br>终局：4 VP。</td></tr>
     </tbody>
   </table>
 </section>
@@ -754,12 +754,12 @@ footer b{color:var(--moss);}
       <tr><td>入会仪式 Initiation</td><td class="n">1</td><td>支付 4 金币</td><td>得 1 点力量与 1 点魔法。</td></tr>
       <tr><td>劫掠者 Marauders</td><td class="n">2</td><td>至少 2 力量、或 2 魔法、或力量+魔法合计至少 2</td><td>得 4 金币。</td></tr>
       <tr><td>狼群 Pack of wolves</td><td class="n">2</td><td>至少 2 力量</td><td>得 3 VP。</td></tr>
-      <tr><td>矿坑 Mine</td><td class="n">1</td><td>消耗 1 个村民</td><td>即时奖励 + 收入：得 2 金币。</td></tr>
+      <tr><td>矿坑 Mine</td><td class="n">1</td><td>花费 1 个村民</td><td>即时奖励 + 收入：得 2 金币。</td></tr>
       <tr><td>绵羊 Sheep</td><td class="n">0</td><td>无</td><td>即时奖励 + 收入：得 1 金币。</td></tr>
       <tr><td>熊 Bear</td><td class="n">3</td><td>左：至少 1 力量<br>右：至少 1 魔法</td><td>左：得 2 VP<br>右：得 2 VP</td></tr>
       <tr><td>乱石隘口 Rocky pass</td><td class="n">2</td><td>无</td><td>得 1 点力量。</td></tr>
-      <tr><td>猛虎 Tiger</td><td class="n">3</td><td>消耗 1 个村民</td><td>无（见译者注）</td></tr>
-      <tr><td>山谷 Valley</td><td class="n">0</td><td>左：至少 1 力量<br>右：消耗 1 个村民</td><td>左：冒险者移动至多 2 格（若同时取得另一项奖励，先结算该项再移动）<br>右：得 3 VP</td></tr>
+      <tr><td>猛虎 Tiger</td><td class="n">3</td><td>花费 1 个村民</td><td>无（见译者注）</td></tr>
+      <tr><td>山谷 Valley</td><td class="n">0</td><td>左：至少 1 力量<br>右：花费 1 个村民</td><td>左：冒险者移动至多 2 格（若同时取得另一项奖励，先结算该项再移动）<br>右：得 3 VP</td></tr>
     </tbody>
   </table>
   <div class="tn">
@@ -772,21 +772,21 @@ footer b{color:var(--moss);}
     <thead><tr><th>卡名</th><th>故事值</th><th>条件</th><th>奖励</th></tr></thead>
     <tbody>
       <tr><td>匪帮 Bandits</td><td class="n">1</td><td>至少 3 力量</td><td>得 4 金币与 2 VP。</td></tr>
-      <tr><td>商队 Caravan</td><td class="n">0</td><td>消耗 2 个村民</td><td>即时奖励 + 收入：得 4 金币。</td></tr>
+      <tr><td>商队 Caravan</td><td class="n">0</td><td>花费 2 个村民</td><td>即时奖励 + 收入：得 4 金币。</td></tr>
       <tr><td>游侠骑士 Errant knight</td><td class="n">1</td><td>支付 2 金币</td><td>得 1 点力量与 2 VP。</td></tr>
       <tr><td>流浪者 Vagabond</td><td class="n">2</td><td>至少 4 力量、或 4 魔法、或力量+魔法合计至少 4</td><td>得 1 个村民。</td></tr>
       <tr><td>训练 Training</td><td class="n">0</td><td>支付 4 金币</td><td>即时奖励 + 收入：得 1 点力量。</td></tr>
       <tr><td>制桶铺 Cooperage</td><td class="n">0</td><td>支付 4 金币</td><td>即时奖励 + 收入：得 2 VP。</td></tr>
-      <tr><td>传说之剑 Legendary sword</td><td class="n">1</td><td>消耗 1 个村民</td><td>得 3 VP。</td></tr>
+      <tr><td>传说之剑 Legendary sword</td><td class="n">1</td><td>花费 1 个村民</td><td>得 3 VP。</td></tr>
       <tr><td>恶魔 Demon</td><td class="n">3</td><td>左：至少 3 力量<br>右：至少 3 魔法</td><td>左：得 3 VP<br>右：得 3 VP</td></tr>
       <tr><td>农庄 Farm</td><td class="n">0</td><td>无</td><td>得 1 个村民。</td></tr>
-      <tr><td>钻石 Diamond</td><td class="n">2</td><td>消耗 1 点力量</td><td>得 5 金币。</td></tr>
-      <tr><td>比武 Joust</td><td class="n">1</td><td>左：消耗 1 个村民<br>右：至少 4 力量</td><td>左：得 3 VP<br>右：得 4 VP</td></tr>
+      <tr><td>钻石 Diamond</td><td class="n">2</td><td>花费 1 点力量</td><td>得 5 金币。</td></tr>
+      <tr><td>比武 Joust</td><td class="n">1</td><td>左：花费 1 个村民<br>右：至少 4 力量</td><td>左：得 3 VP<br>右：得 4 VP</td></tr>
       <tr><td>独角兽 Unicorn</td><td class="n">3</td><td>至少 3 魔法</td><td>扶正一张自己的卡。<br>即时奖励 + 收入：得 1 VP。</td></tr>
-      <tr><td>咒语 Incantation</td><td class="n">3</td><td>消耗 1 个村民</td><td>得 1 点魔法。</td></tr>
+      <tr><td>咒语 Incantation</td><td class="n">3</td><td>花费 1 个村民</td><td>得 1 点魔法。</td></tr>
       <tr><td>巫术 Witchcraft</td><td class="n">1</td><td>支付 4 金币</td><td>得 2 点魔法。</td></tr>
-      <tr><td>孤塔 Lone tower</td><td class="n">3</td><td>消耗 1 点魔法</td><td>得 3 VP，然后冒险者移动至多 3 格。</td></tr>
-      <tr><td>宝藏 Treasure</td><td class="n">2</td><td>左：至少 3 魔法<br>右：消耗 1 点魔法</td><td>左：得 3 金币<br>右：得 4 金币</td></tr>
+      <tr><td>孤塔 Lone tower</td><td class="n">3</td><td>花费 1 点魔法</td><td>得 3 VP，然后冒险者移动至多 3 格。</td></tr>
+      <tr><td>宝藏 Treasure</td><td class="n">2</td><td>左：至少 3 魔法<br>右：花费 1 点魔法</td><td>左：得 3 金币<br>右：得 4 金币</td></tr>
     </tbody>
   </table>
 
@@ -796,9 +796,9 @@ footer b{color:var(--moss);}
     <tbody>
       <tr><td>射术 Archery</td><td class="n">1</td><td>支付 3 金币</td><td>得 1 点力量与 3 VP。</td></tr>
       <tr><td>圣杯 Holy chalice</td><td class="n">2</td><td>至少 5 魔法</td><td>得 4 VP 并扶正一张自己的卡。</td></tr>
-      <tr><td>仙环 Fairy ring</td><td class="n">2</td><td>消耗 1 个村民</td><td>得 1 点魔法与 3 VP。</td></tr>
-      <tr><td>迷宫 Labyrinth</td><td class="n">0</td><td>左：消耗 1 个村民<br>右：消耗 1 个村民</td><td>左：得 4 VP<br>右：得 4 VP</td></tr>
-      <tr><td>金矿 Gold mine</td><td class="n">0</td><td>消耗 1 个村民</td><td>得 7 金币。</td></tr>
+      <tr><td>仙环 Fairy ring</td><td class="n">2</td><td>花费 1 个村民</td><td>得 1 点魔法与 3 VP。</td></tr>
+      <tr><td>迷宫 Labyrinth</td><td class="n">0</td><td>左：花费 1 个村民<br>右：花费 1 个村民</td><td>左：得 4 VP<br>右：得 4 VP</td></tr>
+      <tr><td>金矿 Gold mine</td><td class="n">0</td><td>花费 1 个村民</td><td>得 7 金币。</td></tr>
       <tr><td>死灵法师 Necromancer</td><td class="n">1</td><td>力量+魔法合计至少 8</td><td>得 9 VP。</td></tr>
       <tr><td>接力 Relay</td><td class="n">1</td><td>支付 4 金币</td><td>得 2 VP，然后冒险者移动至多 3 格。</td></tr>
       <tr><td>巨龙 Dragon</td><td class="n">3</td><td>左：至少 5 力量<br>右：至少 5 魔法</td><td>左：得 4 VP<br>右：得 4 VP</td></tr>
@@ -817,11 +817,11 @@ footer b{color:var(--moss);}
       <tr><td>火龙 Fire dragon</td><td>力量+魔法合计至少 6</td><td>—</td></tr>
       <tr><td>巨人 Giant</td><td>至少 4 力量</td><td>—</td></tr>
       <tr><td>吟游诗人赛会 Bard tournament</td><td>把 2 张遭遇卡从「未讲述的故事」区移到「已讲述的故事」区</td><td>不看其数值；即使是 0 值的遭遇卡也可用于此任务。</td></tr>
-      <tr><td>亡灵 Undead</td><td>消耗 1 点力量与 1 点魔法</td><td>—</td></tr>
+      <tr><td>亡灵 Undead</td><td>花费 1 点力量与 1 点魔法</td><td>—</td></tr>
       <tr><td>赎金 Ransom</td><td>支付 6 金币</td><td>—</td></tr>
       <tr><td>致命陷阱 Deadly trap</td><td>把 1 个可用村民退回供应区</td><td>—</td></tr>
       <tr><td>怨灵 Wraiths</td><td>至少 4 魔法</td><td>—</td></tr>
-      <tr><td>婚礼 Wedding</td><td>消耗 2 个村民</td><td>—</td></tr>
+      <tr><td>婚礼 Wedding</td><td>花费 2 个村民</td><td>—</td></tr>
     </tbody>
   </table>
   <div class="tn">
@@ -868,13 +868,13 @@ footer b{color:var(--moss);}
     <thead><tr><th>图标含义</th><th>说明</th></tr></thead>
     <tbody>
       <tr><td>支付 1 金币</td><td>从自己的金币中支付 1 枚给银行。</td></tr>
-      <tr><td>消耗 1 个活跃村民</td><td>从个人版图的「活跃村民」区取 1 个村民，放进营地。</td></tr>
-      <tr><td>消耗 1 点力量／1 点魔法</td><td>把对应的技能标记下移相应格数。</td></tr>
-      <tr><td>至少 1 力量／1 魔法／力量+魔法合计 2</td><td>条件判定，不消耗。</td></tr>
+      <tr><td>花费 1 个活跃村民</td><td>从个人版图的「活跃村民」区取 1 个村民，放进营地。</td></tr>
+      <tr><td>花费 1 点力量／1 点魔法</td><td>把对应的技能标记下移相应格数。</td></tr>
+      <tr><td>至少 1 力量／1 魔法／力量+魔法合计 2</td><td>条件判定，不花费。</td></tr>
       <tr><td>把 1 个活跃村民退回供应区</td><td>该村民回到公共供应，不再属于你。</td></tr>
       <tr><td>弃掉一件自己的物品</td><td>把该物品收回盒中。</td></tr>
       <tr><td>弃掉这瓶药水／这件物品</td><td>使用后即弃，收回盒中。</td></tr>
-      <tr><td>横置这张卡／横置并消耗 1 个活跃村民</td><td>横置表示本年已用；需要玩家消耗时一并放进营地。</td></tr>
+      <tr><td>横置这张卡／横置并花费 1 个活跃村民</td><td>横置表示本年已用；需要玩家花费时一并放进营地。</td></tr>
       <tr><td>弃掉一个封印标记并支付等额金币</td><td>两者都要做。</td></tr>
       <tr><td>弃掉一个封印标记，用其数值作为奖励</td><td>只看数值，不付金币。</td></tr>
     </tbody>
@@ -907,7 +907,7 @@ footer b{color:var(--moss);}
     <li>（内里斯）在村庄「获得金币」时多得 2 金币，<em>或</em>激活村庄卡时忽略额外费用。</li>
     <li>完全无视一次遭遇的一项条件（对任务无效）。</li>
     <li>力量／魔法临时 +2。</li>
-    <li>（布兰）使用物品时少消耗 1 个村民。</li>
+    <li>（布兰）激活卡牌需花费村民时，所需花费的村民数减 1。</li>
     <li>使某一张遭遇卡的故事值变为 3。</li>
     <li>把一个活跃村民放进村庄。</li>
   </ul>
