@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>深寒之下 · 学习版规则（Sixty Below）</title>
+<style>
+  :root{
+    --bg:#fbf7f0; --paper:#fffdf9; --ink:#2f2a28; --soft:#6b615c;
+    --line:#e3d8c8; --line2:#d3c4ae;
+    --red:#a2303c; --red-l:#fbecec; --blue:#3b5b8c; --blue-l:#eaf0f9;
+    --gold:#a9761c; --gold-l:#fbf1dc; --green:#3d7a55; --green-l:#e9f4ec;
+    --purple:#6b4a86; --purple-l:#f1eaf7;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"PingFang SC","Microsoft YaHei","Noto Sans SC",Arial,sans-serif;
+    font-size:15.5px;line-height:1.85;}
+  .backbar{position:sticky;top:0;z-index:60;height:44px;box-sizing:border-box;
+    display:flex;align-items:center;gap:10px;padding:0 16px;
+    background:var(--paper);border-bottom:1px solid var(--line);font-size:13px;}
+  .backbar a{display:inline-flex;align-items:center;min-height:32px;padding:0 12px;
+    border:1px solid var(--line2);border-radius:8px;background:#fff;
+    color:var(--purple);text-decoration:none;white-space:nowrap;}
+  .backbar a:active{background:var(--purple-l);}
+  .backbar .bb-t{margin-left:auto;font-size:12px;color:var(--soft);}
+  .layout{display:flex;align-items:flex-start;max-width:1280px;margin:0 auto;}
+  nav.toc{position:sticky;top:44px;align-self:flex-start;width:238px;flex:0 0 238px;
+    height:calc(100vh - 44px);overflow-y:auto;background:#fffdf9;border-right:1px solid var(--line);
+    padding:22px 14px 40px;font-size:13px;}
+  nav.toc .brand{font-size:17px;font-weight:800;color:var(--red);margin:0 0 4px;}
+  nav.toc .brand-s{font-size:11.5px;color:var(--soft);margin:0 0 16px;letter-spacing:.04em;}
+  nav.toc .grp{margin:16px 0 5px;font-size:11px;color:var(--gold);font-weight:700;letter-spacing:.12em;}
+  nav.toc a{display:block;color:#49403b;text-decoration:none;padding:4px 9px;border-radius:6px;}
+  nav.toc a:hover{background:var(--red-l);color:var(--red);}
+  main{flex:1 1 auto;min-width:0;padding:0 42px 90px;}
+  .hero{background:linear-gradient(150deg,#7c1f2b,#a2303c 55%,#bd5a4a);
+    color:#fff8f0;border-radius:0 0 20px 20px;padding:40px 42px 34px;margin-bottom:26px;
+    box-shadow:0 8px 26px rgba(124,31,43,.18);}
+  .hero h1{margin:0;font-size:34px;letter-spacing:.02em;}
+  .hero .en{font-size:14px;opacity:.8;margin:2px 0 12px;letter-spacing:.06em;}
+  .hero .desc{font-size:16px;max-width:760px;line-height:1.8;}
+  .hero .meta{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px;}
+  .hero .meta span{border:1px solid rgba(255,255,255,.5);border-radius:20px;padding:3px 13px;font-size:12.5px;}
+  .stand{margin-top:14px;background:#fff6e2;border:1px solid #e8d2a2;border-left:5px solid var(--gold);
+    border-radius:0 10px 10px 0;padding:12px 18px;font-size:14px;color:#5c4a26;}
+  section{padding:22px 0 14px;border-bottom:1px dashed var(--line2);scroll-margin-top:14px;}
+  h2{font-size:25px;color:var(--red);margin:8px 0 4px;line-height:1.4;}
+  h2 .n{display:inline-block;background:var(--red);color:#fff;font-size:14px;
+    min-width:30px;height:30px;line-height:30px;text-align:center;border-radius:8px;
+    margin-right:10px;vertical-align:3px;font-weight:700;}
+  h3{font-size:18.5px;color:#3a3230;margin:26px 0 6px;border-left:4px solid var(--gold);padding-left:10px;}
+  h4{font-size:16px;color:var(--blue);margin:18px 0 4px;}
+  p{margin:9px 0;}
+  ul,ol{margin:9px 0 9px 2px;padding-left:22px;}
+  li{margin:5px 0;}
+  b,strong{color:var(--red);}
+  .goal{background:var(--blue-l);border:1px solid #cfdcf0;border-radius:9px;
+    padding:8px 14px;font-size:13.5px;color:#2f466c;margin:8px 0 16px;}
+  .goal b{color:#2f466c;}
+  .pg{display:inline-block;background:#f0e7d8;color:#7d6231;border:1px solid #e2d2b6;
+    border-radius:5px;font-size:11px;padding:0 6px;line-height:18px;vertical-align:1px;
+    margin-left:4px;font-weight:600;white-space:nowrap;font-family:Arial,sans-serif;}
+  .key{background:var(--green-l);border:1px solid #c9e2d1;border-left:5px solid var(--green);
+    padding:11px 16px;border-radius:0 10px 10px 0;margin:13px 0;}
+  .key b{color:var(--green);}
+  .warn{background:var(--red-l);border:1px solid #eed3d3;border-left:5px solid var(--red);
+    padding:11px 16px;border-radius:0 10px 10px 0;margin:13px 0;}
+  .warn b{color:var(--red);}
+  .tip{background:var(--gold-l);border:1px solid #eddcb8;border-left:5px solid var(--gold);
+    padding:11px 16px;border-radius:0 10px 10px 0;margin:13px 0;}
+  .tip b{color:var(--gold);}
+  .note{background:#f4f1ec;border:1px solid var(--line);border-radius:9px;padding:10px 15px;
+    margin:12px 0;font-size:14px;color:#514844;}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px;background:var(--paper);}
+  th,td{border:1px solid var(--line2);padding:8px 11px;text-align:left;vertical-align:top;}
+  th{background:#f4e9dd;color:#5d4022;font-weight:700;}
+  tr:nth-child(even) td{background:#fdf9f3;}
+  td.c,th.c{text-align:center;}
+  .steps{list-style:none;padding:0;counter-reset:st;margin:14px 0;}
+  .steps>li{position:relative;padding:10px 14px 10px 50px;margin:9px 0;background:var(--paper);
+    border:1px solid var(--line);border-radius:10px;}
+  .steps>li::before{counter-increment:st;content:counter(st);position:absolute;left:12px;top:11px;
+    width:26px;height:26px;background:var(--red);color:#fff;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;}
+  .steps>li>ol{margin:6px 0;padding-left:20px;}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:11px;
+    padding:13px 17px;margin:11px 0;box-shadow:0 2px 6px rgba(80,60,40,.04);}
+  .card .t{font-weight:800;color:var(--red);font-size:16px;margin-bottom:3px;}
+  .card .t .s{display:inline-block;background:var(--red);color:#fff;border-radius:5px;
+    font-size:12px;padding:1px 7px;margin-right:8px;}
+  .card.blue .t{color:var(--blue);} .card.blue .t .s{background:var(--blue);}
+  .card.green .t{color:var(--green);} .card.green .t .s{background:var(--green);}
+  .card.gold .t{color:var(--gold);} .card.gold .t .s{background:var(--gold);}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+  .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;}
+  .mini{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:11px 13px;}
+  .mini .h{font-weight:800;font-size:14px;margin-bottom:4px;}
+  .mini .v{font-size:13px;color:var(--soft);line-height:1.7;}
+  .fig{margin:18px 0;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;}
+  .fig svg{display:block;width:100%;height:auto;}
+  .figcap{font-size:12.5px;color:var(--soft);margin-top:8px;text-align:center;}
+  details{margin:12px 0;background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:8px 14px;}
+  summary{cursor:pointer;font-size:13.5px;color:var(--blue);font-weight:600;}
+  details img{display:block;max-width:100%;margin:12px auto;border:1px solid var(--line);border-radius:8px;}
+  .pit{counter-reset:pit;list-style:none;padding:0;margin:14px 0;}
+  .pit li{position:relative;padding:9px 14px 9px 46px;margin:7px 0;background:var(--paper);
+    border:1px solid var(--line);border-radius:9px;font-size:14.5px;}
+  .pit li::before{counter-increment:pit;content:"✕ " counter(pit);position:absolute;left:10px;top:9px;
+    color:#fff;background:var(--red);border-radius:6px;font-size:11px;padding:1px 6px;font-weight:700;}
+  .bad{color:var(--red);text-decoration:line-through;}
+  .good{color:var(--green);font-weight:700;}
+  .tagR{color:var(--red);font-weight:700;} .tagB{color:var(--blue);font-weight:700;}
+  .tagG{color:var(--gold);font-weight:700;}
+  .pick{display:inline-block;background:#a2303c;color:#fff;border-radius:5px;
+    font-size:11px;padding:1px 7px;margin:0 3px;font-weight:700;letter-spacing:.04em;vertical-align:1px;}
+  .pick.b{background:#3b5b8c;} .pick.g{background:#a9761c;}
+  .either{border:2px dashed #c9a24a;background:#fffaf0;border-radius:12px;padding:14px 16px;margin:15px 0;}
+  .either>.hd{font-size:14px;font-weight:800;color:#7d5511;margin-bottom:10px;}
+  .either .cols{display:grid;grid-template-columns:1fr 46px 1fr;align-items:stretch;}
+  .either .opt{background:var(--paper);border:1px solid var(--line2);border-radius:10px;padding:11px 14px;font-size:14px;}
+  .either .opt .ot{font-weight:800;color:var(--red);margin-bottom:4px;}
+  .either .opt.b .ot{color:var(--blue);}
+  .either .or{display:flex;align-items:center;justify-content:center;font-weight:800;color:#a9761c;font-size:13px;}
+  .either .efoot{font-size:12.5px;color:#6b615c;margin-top:10px;text-align:left;}
+  .why{background:#eef3fa;border:1px solid #cddcee;border-left:5px solid var(--blue);
+    padding:12px 17px;border-radius:0 10px 10px 0;margin:13px 0;font-size:14.5px;}
+  .why b{color:#2f466c;}
+  .why .wt{font-weight:800;color:#2f466c;display:block;margin-bottom:3px;}
+  .idx{font-size:13.5px;}
+  .foot{margin-top:34px;font-size:12.5px;color:var(--soft);text-align:center;line-height:1.9;}
+  @media(max-width:960px){
+    .layout{flex-direction:column;} nav.toc{position:static;width:100%;height:auto;flex-basis:auto;border-right:0;border-bottom:1px solid var(--line);}
+    main{padding:0 18px 60px;} .grid2,.grid4{grid-template-columns:1fr 1fr;}
+  }
+  @media(max-width:640px){.backbar{height:40px;padding:0 10px;} .backbar a{min-height:30px;padding:0 9px;font-size:12.5px;} .backbar .bb-t{display:none;}
+  .grid2,.grid4,.either .cols{grid-template-columns:1fr;} .either .or{padding:6px 0;} main{padding:0 12px 50px;} .hero{padding:28px 20px;} .hero h1{font-size:26px;}}
+
+  /* == 窄屏目录：横向胶囊，正文首屏可见 == */
+  @media(max-width:960px){
+    nav.toc{display:flex;flex-wrap:nowrap;gap:6px;align-items:center;
+      height:auto;max-height:none;overflow-x:auto;overflow-y:hidden;
+      padding:10px 12px;border-right:0;border-bottom:1px solid var(--line);
+      -webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;}
+    nav.toc .brand,nav.toc .brand-s,nav.toc .grp{display:none;}
+    nav.toc a{flex:0 0 auto;white-space:nowrap;padding:6px 11px;
+      border:1px solid var(--line2);border-radius:16px;background:var(--paper);
+      font-size:12.5px;line-height:1.4;}
+    nav.toc a:hover{background:var(--red-l);}
+    nav.toc a[style]{padding-left:11px;}
+  }
+
+  /* == 学习版通用补充（各本共用） == */
+  .flow{margin:18px 0;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;}
+  .flow svg{display:block;width:100%;height:auto;}
+  .either .col{background:var(--paper);border:1px solid var(--line2);border-radius:10px;padding:11px 14px;font-size:14px;}
+  .either .col .ct{font-weight:800;color:var(--red);margin-bottom:4px;}
+  .pgs{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin:14px 0;}
+  .pgs figure{margin:0;background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:8px;}
+  .pgs img{display:block;width:100%;height:auto;margin:0;border:1px solid var(--line);border-radius:6px;}
+  .pgs figcaption{font-size:12px;color:var(--soft);text-align:center;margin-top:6px;line-height:1.5;}
+  @media(max-width:640px){.pgs{grid-template-columns:1fr 1fr;gap:9px;}}
+  /* 窄屏压缩首屏：hero 与体例框收紧，第 0 节进入首屏 */
+  @media(max-width:640px){
+    .hero{padding:22px 18px 24px;margin-bottom:16px;}
+    .hero h1{font-size:24px;} .hero .desc{font-size:14px;line-height:1.65;margin-top:8px;}
+    .hero .meta{margin-top:12px;gap:6px;} .hero .meta span{font-size:11.5px;padding:2px 10px;}
+    .stand{margin-top:10px;padding:9px 12px;font-size:12.5px;line-height:1.6;}
+  }
+</style>
+</head>
+<body>
+<div class="backbar"><a href="index.html">← 学习版目录</a><span class="bb-t">深寒之下 · 学习版规则</span></div>
+<div class="layout">
+<nav class="toc">
+  <div class="brand">深寒之下</div>
+  <div class="brand-s">学习版规则 · Sixty Below</div>
+  <div class="grp">规则概要</div>
+  <a href="#s0">0 · 游戏概要</a>
+  <a href="#s1">1 · 初局设置</a>
+  <a href="#s2">2 · 版图与组件</a>
+  <div class="grp">轮次与行动</div>
+  <a href="#s3">3 · 核心引擎</a>
+  <a href="#pick" style="padding-left:22px;color:var(--gold);font-weight:700;">↳ 3.5 择一决策总表</a>
+  <a href="#s4">4 · 一个轮次与六个轮</a>
+  <a href="#s5">5 · 六个行动</a>
+  <a href="#why" style="padding-left:22px;color:var(--blue);font-weight:700;">↳ 5.0 行动结构与格子差异</a>
+  <div class="grp">全局机制</div>
+  <a href="#s6">6 · 全局系统</a>
+  <a href="#s7">7 · 资源与费用</a>
+  <a href="#s8">8 · 终局与计分链路</a>
+  <div class="grp">查考与附录</div>
+  <a href="#s9">9 · 常见误读（24 条）</a>
+  <a href="#s10">10 · 示例回合拆解</a>
+  <a href="#s11">11 · 单人与变体</a>
+  <a href="#s12">12 · 速查表与页码索引</a>
+</nav>
+
+<main>
+<header class="hero">
+  <h1>深寒之下 · 学习版规则</h1>
+  <div class="en">SIXTY BELOW　｜　按规则结构重排，不按原书章节顺序</div>
+  <div class="desc">以准备阶段的抽牌取舍为主线，展开六个行动、四阶段轮次、三次里程碑与九类终局计分；附择一决策总表、常见误读及原书页码索引。</div>
+  <div class="meta"><span>1–4 人 · 单人模式</span><span>60–90 分钟</span><span>牌库构筑 / 行动位占据 / 里程碑计分</span><span>依据英文原书 24 页</span></div>
+</header>
+
+<div class="stand">
+  <b>体例：</b>按学习顺序重排，章节与原书不对应；每条结论后的 <span class="pg">p.X</span> 为英文原书页码。
+  规则裁决以<b>英文原书页图</b>为准；术语沿用已上线中文版的既定译法。原书自相矛盾处只记录、不裁定，实体版图、升级区印值与卡面数值以配件为准。第 12 节附页码对照与 24 张页图。<br>
+  <b>标记体例：</b><span class="pick">择一</span>＝<b>互斥分支，仅可选定其一</b>，不按先后顺序全部执行；虚线框里的 A / B 两栏同样是择一。
+  <span style="display:inline-block;background:#eef3fa;border-left:4px solid #3b5b8c;border-radius:4px;padding:0 8px;font-weight:700;color:#2f466c;">机制</span> 蓝框＝<b>机制说明</b>，陈述该步骤的作用及各格差异。
+</div>
+
+<section id="s0">
+<h2><span class="n">0</span>游戏概要与目标</h2>
+<p>玩家率领探险队在南极建设站点网络，勘探冰原并向陨石撞击点推进。全局共 6 轮，第 3、5、6 轮末各结算一次里程碑；第三次里程碑结算完毕即进入终局计分，胜利点最高者获胜。<span class="pg">p.6</span><span class="pg">p.16</span><span class="pg">p.17</span></p>
+<div class="grid2">
+  <div class="card"><div class="t">计分来源</div>终局合计九类胜利点：专家、探险轨道、站点基地、站点、升级、升级负分、探险牌、项目牌与里程碑。<span class="pg">p.17</span></div>
+  <div class="card blue"><div class="t">胜负判定</div>胜利点最高者胜；平局时金币较多者胜；仍平局则并列获胜。<span class="pg">p.17</span></div>
+</div>
+<div class="why"><span class="wt">本作的核心取舍</span>准备阶段逐张抽取个人探险牌堆，每抽一张都须在放置与终止之间取舍：风暴牌占据基地并削弱探险牌奖励，同时提供大量能量；放置越多，版图上的牌与基地覆盖越多，本轮可结算的奖励构成随之变化。规划阶段补给探险者与展示区卡牌，行动阶段每回合仅执行六个行动之一，直至全员跳过。风暴数量、基地覆盖与行动位占用共同构成每轮的主要取舍。<span class="pg">p.6</span><span class="pg">p.7</span><span class="pg">p.9</span></div>
+<table>
+  <tr><th>项目</th><th>取值</th><th>依据</th></tr>
+  <tr><td>人数与时长</td><td>1–4 人，另含单人模式；60–90 分钟</td><td><span class="pg">p.2</span><span class="pg">p.19</span></td></tr>
+  <tr><td>轮转</td><td>准备与规划阶段全员同时；行动阶段自起始玩家起顺时针轮流</td><td><span class="pg">p.6</span><span class="pg">p.9</span></td></tr>
+  <tr><td>游戏长度</td><td>6 轮，每轮三阶段；第 3、5、6 轮末增设里程碑阶段</td><td><span class="pg">p.6</span><span class="pg">p.16</span></td></tr>
+  <tr><td>终局</td><td>第 6 轮里程碑结算后合计九类胜利点，非固定分数门槛</td><td><span class="pg">p.17</span></td></tr>
+</table>
+</section>
+
+<section id="s1">
+<h2><span class="n">1</span>初局设置：略过部分内容，关注核心内容</h2>
+<p>初局分公共布置与个人布置两组。原书的背景独白、二维码与制作人员可略过；配件数量见第 2 节。<span class="pg">p.2</span><span class="pg">p.4</span><span class="pg">p.5</span></p>
+<h3>1.1 公共布置</h3>
+<ol>
+  <li>专家规划板与港口板并排放置，轮次标记置于规划板左侧对应槽位。<span class="pg">p.4</span></li>
+  <li>以任务协调员填满规划板右侧区域；自布袋随机抽取其余专家填满各列；标注 3+、4+ 的空格仅在 3 人或 4 人局填满，剩余专家留在布袋内，本局不再使用。<span class="pg">p.4</span></li>
+  <li>温标 –54.1° 至 –57.5° 的 24 张站点基地单独洗混，形成 4 摞面朝下的牌堆；随机抽取 2 张专家行动板块置于规划板下方，初局按原书图示使用两片。<span class="pg">p.4</span></li>
+  <li>84 张探险牌与 70 张项目牌洗在一起形成公共牌堆，旁留公共弃牌堆空位；金币、建材、雷达板块与预报板块置于桌面形成公共供应。<span class="pg">p.4</span></li>
+  <li>自 –30° 至 –37° 冰原中随机抽取等于玩家数的块数，每块随机选一面，自港口板起按红色标记由左至右摆放；所有冰原朝向须一致。<span class="pg">p.4</span></li>
+  <li>自 –40° 至 –49° 冰原中抽取同等数量，以未探索面朝上，自最后一块已翻开的冰原起按红色标记逐一放置。<span class="pg">p.4</span></li>
+  <li>选定陨石，以其左上六边格紧贴最后一块冰原；原书指定初局使用 –60.2° 陨石，其余陨石的附加设置见第 11 节。<span class="pg">p.4</span><span class="pg">p.18</span></li>
+  <li>自 –62.1° 至 –63° 冰原中抽取同等数量，以未探索面朝上置于陨石旁并按红色标记接续；剩余冰原与陨石回盒，本局不再使用。<span class="pg">p.4</span></li>
+</ol>
+<h3>1.2 个人布置</h3>
+<ol start="9">
+  <li>领取 4 块双面个人站点基地，温标 –10.1° 至 –10.8°。<span class="pg">p.5</span></li>
+  <li>各人自公共牌堆抽 7 张，选 4 张置于个人版图上方的个人展示区，其余 3 张置于公共弃牌堆；熟悉规则后可移至个人布置末步再决定弃置的 3 张。<span class="pg">p.5</span></li>
+  <li>选定起始玩家并交付起始标记；按顺时针次序，其后各人依次比前一人多获得 1 点能量，4 人局分别为 1、2、3 点。<span class="pg">p.5</span></li>
+  <li>起始玩家右方玩家随机抽取 4 张（1–2 人局）、5 张（3 人局）或 6 张（4 人局）里程碑牌，选 1 张作个人里程碑；余牌依次向右传递，起始玩家最终自 3 张中选 1 张，剩余 2 张面朝上置于专家规划板上方作公共里程碑。<span class="pg">p.5</span></li>
+  <li>拼合两片双层个人版图；10 张起始牌（5 张风暴与 5 张标记 0° 的探险牌）洗混成个人探险牌堆，面朝下置于版图旁，下方留出个人弃牌堆位置。<span class="pg">p.5</span></li>
+  <li>选定颜色并取对应配件：探险标记与能量标记各置于「0」格；5 个站点；4 张一级、4 张二级、3 张三级升级；5 名探险者置于版图右侧预备区，另 12 名置于公共供应。<span class="pg">p.5</span></li>
+  <li>取 3 块己方颜色的里程碑板块、1 块预报板块、2 枚金币与 1 个雷达板块。<span class="pg">p.5</span></li>
+</ol>
+<h3>1.3 设置中的人数与陨石差异</h3>
+<table>
+  <tr><th>项目</th><th>设置差异</th><th>依据</th></tr>
+  <tr><td>3 人或 4 人局</td><td>专家规划板上标注 3+、4+ 的空格一并填满；每人各阶段规则不变</td><td><span class="pg">p.4</span></td></tr>
+  <tr><td>里程碑牌抽取</td><td>1–2 人局 4 张、3 人局 5 张、4 人局 6 张，由起始玩家右方玩家先选</td><td><span class="pg">p.5</span></td></tr>
+  <tr><td>冰原链长度</td><td>三个温标区段各抽取等于玩家数的冰原，已探索冰原起始为 2 至 4 块</td><td><span class="pg">p.4</span><span class="pg">p.11</span></td></tr>
+  <tr><td>陨石</td><td>六块陨石择一，各自附带设置步骤与行动，详见第 11.1 节</td><td><span class="pg">p.4</span><span class="pg">p.18</span></td></tr>
+</table>
+</section>
+
+<section id="s2">
+<h2><span class="n">2</span>版图与组件速认</h2>
+<p>按一局中用到的先后次序介绍，不按配件表顺序。<span class="pg">p.2</span><span class="pg">p.3</span><span class="pg">p.6</span></p>
+<h3>2.1 个人版图九区</h3>
+<table>
+  <tr><th>区域</th><th>作用</th><th>初始状态</th></tr>
+  <tr><td>顶行三个基地</td><td>容纳风暴牌；未被覆盖时提供投资者基地、无线电基地与机库奖励</td><td>三个基地全空</td></tr>
+  <tr><td>下行牌位</td><td>容纳准备阶段放置的探险牌</td><td>三个空位</td></tr>
+  <tr><td>专家区三列</td><td>容纳工程师、投资者、无线电操作员，任务协调员可置任意列</td><td>已印三类图标各 1 个</td></tr>
+  <tr><td>探险轨道与环形区</td><td>记录探险标记位置；推进时腾出下行空位，轨道末端按环形区续行</td><td>探险标记在「0」格</td></tr>
+  <tr><td>能量轨道</td><td>记录可用能量，风暴与探险牌提供能量</td><td>能量标记在「0」格</td></tr>
+  <tr><td>个人展示区</td><td>容纳规划阶段保留的卡牌，供行动阶段购买</td><td>设置时置 4 张</td></tr>
+  <tr><td>预备区</td><td>容纳本轮可用的探险者与已购买的站点</td><td>5 名探险者</td></tr>
+  <tr><td>升级区与站点区</td><td>容纳三级升级与 5 个站点，移除后计终局胜利点</td><td>4 / 4 / 3 张升级与 5 个站点</td></tr>
+  <tr><td>个人探险牌堆与弃牌堆</td><td>抽牌来源与弃牌去向；牌堆耗尽时洗混弃牌堆续用</td><td>10 张起始牌</td></tr>
+</table>
+<h3>2.2 公共版图六区</h3>
+<table>
+  <tr><th>区域</th><th>作用</th><th>初始状态</th></tr>
+  <tr><td>专家规划板</td><td>陈列可购买的专家，列数由轮次标记开放</td><td>右侧为任务协调员，其余列随机</td></tr>
+  <tr><td>港口板</td><td>常驻行动位购买专家；另有雷达板块与站点行动位</td><td>空；常驻位永不视为占据</td></tr>
+  <tr><td>专家行动板块</td><td>规定飞行员与机修师的行动，并带有可用行动位</td><td>随机 2 片</td></tr>
+  <tr><td>冰原链</td><td>三段温标冰原自港口板向陨石延伸，未探索面朝上者待勘探</td><td>首段已探索，后两段未探索</td></tr>
+  <tr><td>陨石</td><td>与已探索冰原相邻即视为已探索，附带设置与行动</td><td>六择一</td></tr>
+  <tr><td>站点基地牌堆</td><td>提供公共站点基地，按工程师图标数取用</td><td>4 摞面朝下</td></tr>
+</table>
+<h3>2.3 配件数量</h3>
+<p>通用配件含港口板 1 块、专家规划板 1 块、专家行动板块 4 片、站点基地 24 张、任务协调员 16 名、专家 32 名、金币 40 枚、建材 36 个、雷达板块 16 块、预报板块 16 块、探险牌 84 张、项目牌 70 张、里程碑牌 18 张、冰原 24 块、双面陨石 3 块、起始标记 1 个、轮次标记 1 个与布袋 1 个。<span class="pg">p.2</span><span class="pg">p.3</span></p>
+<p>每人配件含双层个人版图 1 块、里程碑板块 3 块、探险标记与能量标记各 1 个、探险者 17 名、站点 5 个、一级升级 4 张、二级升级 4 张、三级升级 3 张、双面个人站点基地 4 块与起始牌 10 张。单人模式另有 Arka 版图、9 张带星行动牌、5 张无星行动牌与 6 张 Arka 里程碑牌。<span class="pg">p.3</span></p>
+</section>
+
+<section id="s3">
+<h2><span class="n">3</span>核心引擎</h2>
+<p>全游戏的流程可归纳为一条因果链：准备阶段自个人探险牌堆抽牌置于版图，风暴与基地共同决定探险奖励；规划阶段补充探险者与个人展示区卡牌；行动阶段以探险者占据行动位，换取专家、站点、升级、卡牌与板块；站点与升级扩展行动位并推进在场；第 3、5、6 轮末结算里程碑；第 6 轮末合计九类胜利点。<span class="pg">p.6</span><span class="pg">p.9</span><span class="pg">p.17</span></p>
+<div class="flow">
+<svg viewBox="0 0 900 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="深寒之下核心引擎因果链">
+  <defs><marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#6b615c"/></marker></defs>
+  <rect x="10" y="24" width="150" height="60" rx="10" fill="#eaf0f9" stroke="#3b5b8c"/>
+  <text x="85" y="49" text-anchor="middle" font-size="16" font-weight="700" fill="#2f466c">准备阶段</text>
+  <text x="85" y="70" text-anchor="middle" font-size="12" fill="#3b5b8c">抽牌 / 风暴 / 基地</text>
+  <rect x="196" y="24" width="164" height="60" rx="10" fill="#f1eaf7" stroke="#6b4a86"/>
+  <text x="278" y="49" text-anchor="middle" font-size="16" font-weight="700" fill="#563a6d">探险奖励</text>
+  <text x="278" y="70" text-anchor="middle" font-size="12" fill="#6b4a86">能量 / 金币 / 轨道推进</text>
+  <rect x="396" y="24" width="164" height="60" rx="10" fill="#fbecec" stroke="#a2303c"/>
+  <text x="478" y="49" text-anchor="middle" font-size="16" font-weight="700" fill="#8c2631">规划阶段</text>
+  <text x="478" y="70" text-anchor="middle" font-size="12" fill="#a2303c">探险者 / 展示区卡牌</text>
+  <rect x="596" y="24" width="164" height="60" rx="10" fill="#fbf1dc" stroke="#a9761c"/>
+  <text x="678" y="49" text-anchor="middle" font-size="16" font-weight="700" fill="#8a5d11">行动阶段</text>
+  <text x="678" y="70" text-anchor="middle" font-size="12" fill="#a9761c">六选一 / 全员跳过</text>
+  <rect x="790" y="24" width="100" height="60" rx="10" fill="#e9f4ec" stroke="#3d7a55"/>
+  <text x="840" y="49" text-anchor="middle" font-size="16" font-weight="700" fill="#2c5c3f">计分</text>
+  <text x="840" y="70" text-anchor="middle" font-size="12" fill="#3d7a55">里程碑 / 终局</text>
+  <line x1="160" y1="54" x2="192" y2="54" stroke="#6b615c" stroke-width="2" marker-end="url(#ar)"/>
+  <line x1="360" y1="54" x2="392" y2="54" stroke="#6b615c" stroke-width="2" marker-end="url(#ar)"/>
+  <line x1="560" y1="54" x2="592" y2="54" stroke="#6b615c" stroke-width="2" marker-end="url(#ar)"/>
+  <line x1="760" y1="54" x2="786" y2="54" stroke="#6b615c" stroke-width="2" marker-end="url(#ar)"/>
+  <rect x="596" y="142" width="164" height="56" rx="10" fill="#fbf1dc" stroke="#a9761c"/>
+  <text x="678" y="166" text-anchor="middle" font-size="14" font-weight="700" fill="#8a5d11">站点与升级</text>
+  <text x="678" y="185" text-anchor="middle" font-size="12" fill="#a9761c">在场 / 新行动位 / 新基地</text>
+  <rect x="396" y="142" width="164" height="56" rx="10" fill="#eaf0f9" stroke="#3b5b8c"/>
+  <text x="478" y="166" text-anchor="middle" font-size="14" font-weight="700" fill="#2f466c">牌堆循环</text>
+  <text x="478" y="185" text-anchor="middle" font-size="12" fill="#3b5b8c">购入探险牌置于牌堆顶</text>
+  <rect x="196" y="142" width="164" height="56" rx="10" fill="#e9f4ec" stroke="#3d7a55"/>
+  <text x="278" y="166" text-anchor="middle" font-size="14" font-weight="700" fill="#2c5c3f">跳过收尾</text>
+  <text x="278" y="185" text-anchor="middle" font-size="12" fill="#3d7a55">版图牌入弃牌堆 / 轮次推进</text>
+  <path d="M840,84 L840,112 L678,112 L678,138" fill="none" stroke="#6b615c" stroke-width="2" marker-end="url(#ar)"/>
+  <line x1="596" y1="170" x2="564" y2="170" stroke="#6b615c" stroke-width="2" marker-end="url(#ar)"/>
+  <line x1="396" y1="170" x2="364" y2="170" stroke="#6b615c" stroke-width="2" marker-end="url(#ar)"/>
+  <path d="M196,170 L120,170 L120,88 L85,88" fill="none" stroke="#6b615c" stroke-width="2" stroke-dasharray="5,4" marker-end="url(#ar)"/>
+</svg>
+</div>
+<div class="grid2">
+  <div class="card"><div class="t">牌堆循环</div>购入的探险牌面朝下置于个人探险牌堆顶，此后准备阶段可抽取；项目牌置于版图右侧，不进入牌堆。个人探险牌堆耗尽时洗混个人弃牌堆形成新牌堆。<span class="pg">p.6</span><span class="pg">p.13</span></div>
+  <div class="card blue"><div class="t">轮循环</div>全员跳过后本轮结束，起始标记按顺时针移交，轮次标记前进一格；第 5 轮末把轮次标记移至最后一轮时，各人获得 1 块预报板块。<span class="pg">p.16</span></div>
+</div>
+</section>
+
+<section id="pick">
+<h2><span class="n">3.5</span>择一决策总表</h2>
+<p>原书标明另择或任选其一之处，逐处判定为互斥择一或可选前置。下表汇总全游戏的互斥选择：每行均为择一，不按先后顺序执行。正文中的<span class="pick">择一</span>标记均回指本表。<span class="pg">p.6</span><span class="pg">p.7</span><span class="pg">p.9</span><span class="pg">p.10</span></p>
+<table>
+  <tr><th>阶段</th><th>决策点</th><th>互斥选项</th><th>约束</th><th>依据</th></tr>
+  <tr><td>准备</td><td>每抽一张牌</td><td>A 面朝上置于版图／B 弃置并结束抽牌步骤</td><td>选 A 后可继续抽牌；无空位可放时必须选 B</td><td><span class="pg">p.6</span></td></tr>
+  <tr><td>准备</td><td>预报板块</td><td>A 弃置刚抽到的牌／B 弃置版图上一张牌</td><td>弃置预报板块触发，两处均可含风暴；不结束抽牌步骤</td><td><span class="pg">p.6</span></td></tr>
+  <tr><td>准备</td><td>探险牌奖励</td><td>顶部奖励／底部奖励／无奖励</td><td>条件分支，由版图风暴数量决定</td><td><span class="pg">p.7</span></td></tr>
+  <tr><td>准备</td><td>机库</td><td>购买站点／以 1 能量换 1 建材</td><td>二选一；后者次数等于版图工程师图标数</td><td><span class="pg">p.7</span></td></tr>
+  <tr><td>规划</td><td>保留抽到的 5 张牌</td><td>免费保留 1 张／支付 2 能量保留 2 张</td><td>二选一；保留牌置于个人展示区</td><td><span class="pg">p.9</span></td></tr>
+  <tr><td>行动</td><td>本回合的行动</td><td>A 激活行动位／B 建站点／C 升级站点／D 使用雷达板块／E 激活飞行员或机修师／F 跳过</td><td>六选一，每回合恰好执行其一，直至全员跳过</td><td><span class="pg">p.9</span></td></tr>
+  <tr><td>行动</td><td>港口常驻行动位</td><td>支付 2 金币购买 1 名专家／支付 6 金币购买 2 名专家</td><td>二选一；可购买列由轮次标记限定</td><td><span class="pg">p.10</span></td></tr>
+  <tr><td>行动</td><td>站点基地来源</td><td>个人 4 块双面站点基地之一／公共牌堆面朝下的站点基地</td><td>二选一；工程师图标数须不超过版图工程师数</td><td><span class="pg">p.11</span></td></tr>
+  <tr><td>行动</td><td>雷达板块免费行动</td><td>3 能量／2 金币／公共牌堆抽 3 张／1 个建材</td><td>四选一；回合内任意时机可弃置 1 枚或多枚雷达板块</td><td><span class="pg">p.15</span></td></tr>
+  <tr><td>行动</td><td>建站点附带奖励</td><td>相邻已探索冰原之一的齿轮效果</td><td>条件分支；存在多个相邻冰原时择一</td><td><span class="pg">p.11</span></td></tr>
+  <tr><td>里程碑</td><td>里程碑牌</td><td>两张公共里程碑之一／个人里程碑</td><td>首次评分三选一；已评过的牌不可再选</td><td><span class="pg">p.16</span></td></tr>
+  <tr><td>里程碑</td><td>里程碑板块面</td><td>低分面／高分面／回盒</td><td>由条件列满足情况决定，三档互斥</td><td><span class="pg">p.16</span></td></tr>
+  <tr><td>陨石</td><td>本局陨石</td><td>六块陨石之一</td><td>设置时择一，决定附加设置与行动</td><td><span class="pg">p.18</span></td></tr>
+</table>
+<div class="warn"><b>非择一的两类表述：</b>准备阶段的探险牌奖励、风暴能量与三个基地奖励按任意顺序结算，不构成互斥；雷达板块所附的「激活雷达效果」与「购买卡牌」按任意顺序执行，二者均可进行，不属编号步骤。各类奖励与两步动作均在同一结算窗口内结算，不受先后顺序约束。<span class="pg">p.7</span><span class="pg">p.13</span></div>
+</section>
+
+<section id="s4">
+<h2><span class="n">4</span>一个轮次与六个轮</h2>
+<div class="flow">
+<svg viewBox="0 0 900 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="深寒之下四阶段流程图">
+  <defs><marker id="ar2" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#6b615c"/></marker></defs>
+  <rect x="14" y="30" width="196" height="72" rx="10" fill="#eaf0f9" stroke="#3b5b8c"/>
+  <text x="112" y="57" text-anchor="middle" font-size="16" font-weight="700" fill="#2f466c">Ⅰ 准备阶段</text>
+  <text x="112" y="78" text-anchor="middle" font-size="12" fill="#3b5b8c">全员同时 · 抽牌与探险奖励</text>
+  <rect x="242" y="30" width="196" height="72" rx="10" fill="#f1eaf7" stroke="#6b4a86"/>
+  <text x="340" y="57" text-anchor="middle" font-size="16" font-weight="700" fill="#563a6d">Ⅱ 规划阶段</text>
+  <text x="340" y="78" text-anchor="middle" font-size="12" fill="#6b4a86">全员同时 · 探险者与展示区</text>
+  <rect x="470" y="30" width="196" height="72" rx="10" fill="#fbecec" stroke="#a2303c"/>
+  <text x="568" y="57" text-anchor="middle" font-size="16" font-weight="700" fill="#8c2631">Ⅲ 行动阶段</text>
+  <text x="568" y="78" text-anchor="middle" font-size="12" fill="#a2303c">顺时针轮流 · 六选一至跳过</text>
+  <rect x="698" y="30" width="188" height="72" rx="10" fill="#e9f4ec" stroke="#3d7a55"/>
+  <text x="792" y="57" text-anchor="middle" font-size="16" font-weight="700" fill="#2c5c3f">Ⅳ 里程碑阶段</text>
+  <text x="792" y="78" text-anchor="middle" font-size="12" fill="#3d7a55">仅第 3、5、6 轮末</text>
+  <line x1="210" y1="66" x2="238" y2="66" stroke="#6b615c" stroke-width="2" marker-end="url(#ar2)"/>
+  <line x1="438" y1="66" x2="466" y2="66" stroke="#6b615c" stroke-width="2" marker-end="url(#ar2)"/>
+  <line x1="666" y1="66" x2="694" y2="66" stroke="#6b615c" stroke-width="2" stroke-dasharray="5,4" marker-end="url(#ar2)"/>
+  <rect x="242" y="140" width="424" height="48" rx="10" fill="#fbf1dc" stroke="#a9761c"/>
+  <text x="454" y="169" text-anchor="middle" font-size="14" font-weight="700" fill="#8a5d11">全员跳过 → 起始标记移交 → 轮次标记前进一格 → 新一轮准备阶段</text>
+  <path d="M568,102 L568,122 L454,122 L454,136" fill="none" stroke="#6b615c" stroke-width="2" marker-end="url(#ar2)"/>
+</svg>
+</div>
+<h3>4.1 阶段划分</h3>
+<p>每轮包含准备、规划、行动三个阶段，全员同时执行前两阶段；行动阶段自持有起始标记者起按顺时针轮流，每次执行恰好一个行动或跳过，直至全员跳过。第 3、5、6 轮末增设第四阶段里程碑评分。<span class="pg">p.6</span><span class="pg">p.9</span><span class="pg">p.16</span></p>
+<h3>4.2 阶段内的判定顺序</h3>
+<ol>
+  <li>准备阶段先逐张抽牌并放置，弃牌方结束抽牌步骤；其后按任意顺序结算探险牌、风暴与三个基地的探险奖励。<span class="pg">p.6</span><span class="pg">p.7</span></li>
+  <li>规划阶段先自公共供应取 2 名己方探险者置于预备区，再自公共牌堆抽 5 张并选定保留数量。<span class="pg">p.9</span></li>
+  <li>行动阶段每次放置探险者时，先获得位置奖励，再执行该行动位的齿轮效果；购买卡牌须先满足条件并支付费用。<span class="pg">p.10</span><span class="pg">p.13</span></li>
+  <li>跳过时把版图上全部风暴与探险牌置于个人弃牌堆，可保留 1 名未用探险者至下一轮，其余未用探险者与站点不予保留。<span class="pg">p.16</span></li>
+  <li>全员跳过后检查里程碑阶段；随后移交起始标记、推进轮次标记，再开始新一轮准备阶段。<span class="pg">p.16</span></li>
+</ol>
+<h3>4.3 六个轮的推进</h3>
+<p>轮次标记每前进一轮，专家规划板增开一列；第 3、5、6 轮末另进行里程碑评分。<span class="pg">p.10</span><span class="pg">p.16</span></p>
+<table>
+  <tr><th>轮</th><th>阶段</th><th>特殊处置</th><th>依据</th></tr>
+  <tr><td>第 1 轮</td><td>Ⅰ Ⅱ Ⅲ</td><td>专家规划板仅开放前三列</td><td><span class="pg">p.10</span></td></tr>
+  <tr><td>第 2 轮</td><td>Ⅰ Ⅱ Ⅲ</td><td>专家规划板增开一列</td><td><span class="pg">p.10</span></td></tr>
+  <tr><td>第 3 轮</td><td>Ⅰ Ⅱ Ⅲ Ⅳ</td><td>首次里程碑评分，使用标记「Ⅰ」的里程碑板块</td><td><span class="pg">p.16</span></td></tr>
+  <tr><td>第 4 轮</td><td>Ⅰ Ⅱ Ⅲ</td><td>专家规划板继续增开一列</td><td><span class="pg">p.10</span></td></tr>
+  <tr><td>第 5 轮</td><td>Ⅰ Ⅱ Ⅲ Ⅳ</td><td>第二次里程碑评分；轮次标记移至最后一轮时各人获得 1 块预报板块</td><td><span class="pg">p.16</span></td></tr>
+  <tr><td>第 6 轮</td><td>Ⅰ Ⅱ Ⅲ Ⅳ</td><td>第三次里程碑评分后进入终局计分</td><td><span class="pg">p.16</span><span class="pg">p.17</span></td></tr>
+</table>
+</section>
+
+<section id="s5">
+<h2><span class="n">5</span>六个行动逐条深挖</h2>
+<h3 id="why">5.0 · 行动结构与格子差异</h3>
+<div class="why"><span class="wt">行动位的分类与格子差异</span>行动位按位置分为公共行动位与专属行动位：冰原、陨石、站点基地、港口与专家行动板块上的行动位对全员开放，项目牌上的行动位仅对该牌持有者开放。行动位的差异体现在位置奖励、齿轮效果、占据限制与所在温度区段；同一探险者放置后永久留在原位，因此占据时点决定后续可用的行动位。港口常驻行动位面积较大且永不视为占据，是唯一可反复激活的行动位。<span class="pg">p.9</span><span class="pg">p.10</span><span class="pg">p.11</span></div>
+<table>
+  <tr><th>位置</th><th>格子差异</th><th>影响范围</th><th>依据</th></tr>
+  <tr><td>顶行三个基地</td><td>投资者、无线电、机库各一，覆盖后失去该基地奖励</td><td>金币、探险轨道推进、站点或建材</td><td><span class="pg">p.7</span></td></tr>
+  <tr><td>下行牌位</td><td>起始 3 格，探险标记推进可腾出新格</td><td>可放置的探险牌数与奖励档位</td><td><span class="pg">p.6</span><span class="pg">p.7</span></td></tr>
+  <tr><td>专家区三列</td><td>每列对应一类专家，第四、第五名专家各计 2 胜利点</td><td>图标数量、终局专家分与里程碑条件</td><td><span class="pg">p.17</span></td></tr>
+  <tr><td>探险轨道与环形区</td><td>轨道格印奖励与胜利点，末端按环形区续行</td><td>下行空位、即时奖励与终局分</td><td><span class="pg">p.7</span><span class="pg">p.17</span></td></tr>
+  <tr><td>港口常驻行动位</td><td>永不占据，可反复激活；可购买列由轮次标记限定</td><td>专家购入与列附加费用</td><td><span class="pg">p.10</span></td></tr>
+  <tr><td>专家规划板各列</td><td>第一列附赠 1 金币，第三列额外支付 1 金币，中间列无附加</td><td>专家购入成本</td><td><span class="pg">p.10</span></td></tr>
+  <tr><td>港口四格限制区</td><td>四个行动位之间每人仅可放 1 名探险者，全场共两处</td><td>雷达板块与站点行动的可执行次数</td><td><span class="pg">p.11</span></td></tr>
+  <tr><td>冰原三段温标</td><td>–30° 至 –37° 已探索，–40° 至 –49° 与 –62.1° 至 –63° 待勘探</td><td>行动位开放次序与里程碑温度条件</td><td><span class="pg">p.4</span><span class="pg">p.11</span></td></tr>
+  <tr><td>站点基地</td><td>印工程师图标数与胜利点，建成后视为已探索冰原</td><td>建造门槛、在场计数与终局分</td><td><span class="pg">p.11</span><span class="pg">p.17</span></td></tr>
+  <tr><td>升级槽位</td><td>按一级、二级、三级顺序占用，各级费用与在场要求印在版图</td><td>建材支出、奖励与升级负分</td><td><span class="pg">p.12</span></td></tr>
+  <tr><td>项目牌右侧区</td><td>持续、轮次、雷达、终局、即时与行动位六类效果</td><td>购买后的生效时机与终局分</td><td><span class="pg">p.14</span></td></tr>
+  <tr><td>陨石行动位</td><td>按陨石种类设定在场门槛与效果，六块各异</td><td>可激活的陨石行动与终局奖励</td><td><span class="pg">p.18</span></td></tr>
+</table>
+<p>各行动位的位置奖励、齿轮效果、升级费用与在场要求、站点基地工程师图标数及卡面数值均印在实体配件上，原书正文未逐项列出。结算时以配件印值为准，不代填数值。<span class="pg">p.10</span><span class="pg">p.12</span><span class="pg">p.22</span></p>
+
+<h3>5.1 · 激活行动位</h3>
+<div class="why"><span class="wt">作用</span>以 1 名探险者换取一次性位置奖励与齿轮效果，并把该行动位永久封锁。占据时点决定己方与对手后续可用的行动位，冰原探索与站点基地放置则持续扩展公共行动位池。<span class="pg">p.9</span><span class="pg">p.10</span></div>
+<p>自预备区取 1 名探险者置于空的行动位；脚印图标标示行动位，位置包括专家行动板块、港口板、冰原、陨石、站点基地与己方项目牌。放置后立即获得位置奖励，再执行齿轮图标所示行动；该行动位此后不再可用。港口常驻行动位面积较大且永不视为占据，任意数量探险者均可激活。<span class="pg">p.9</span><span class="pg">p.10</span></p>
+<div class="either"><div class="hd">港口常驻行动位 <span class="pick">择一</span></div><div class="cols">
+  <div class="opt"><div class="ot">A · 购买 1 名专家</div>支付 2 金币，自专家规划板当前开放的列中取 1 名专家。</div>
+  <div class="or">或</div>
+  <div class="opt b"><div class="ot">B · 购买 2 名专家</div>支付 6 金币，自当前开放的列中取 2 名专家。</div>
+</div><div class="efoot">第 1 轮仅开放前三列，此后每轮增开一列；任务协调员随时可购买且须额外支付 2 金币。自第一列取专家额外获得 1 金币，自第三列取专家额外支付 1 金币，中间列无附加。<span class="pg">p.10</span></div></div>
+<p>专家置于个人版图对应行；起始版图已印工程师、投资者与无线电操作员各 1 名。任务协调员为万能专家，可置于任意行并按该列额外图标计；飞行员与机修师可置于任意列，但不提供额外图标。规划板上三个放置奖励位分别提供 1 名探险者、按无线电图标数推进探险轨道、自公共牌堆抽 2 张牌。<span class="pg">p.10</span></p>
+<p>港口另有雷达板块行动位：激活后获得 1 个雷达板块，并执行一座已建成站点的行动。四个行动位组成的限制区内每人仅可放置 1 名探险者，全场共两处此类区域，故该行动整局至多执行两次；专家行动板块上亦有限制区。<span class="pg">p.11</span></p>
+<p>探索新冰原时，把 1 名探险者置于最近的未探索冰原，即设置时最先摆放的那一块，沿红色标记判定；获得 1 个雷达板块，把该冰原翻至已探索面，再把探险者移至带脚印图标的格子。新冰原的齿轮行动位自此刻起对全员开放。全部冰原探索完毕后，按设置步骤在末块冰原旁补放新冰原。陨石与已探索冰原相邻即视为已探索。<span class="pg">p.11</span></p>
+
+<h3>5.2 · 建站点</h3>
+<div class="why"><span class="wt">作用</span>把规划阶段购入的站点转为版图上的站点基地，既提供终局胜利点与在场计数，又新增一块全员可用的已探索冰原。站点基地的工程师图标数由版图工程师图标总数封顶，因此专家与探险牌的积累直接决定可建基地的等级。<span class="pg">p.11</span></div>
+<p>规划阶段购入站点后，本行动可建造 1 个站点基地。数出专家区与版图上探险牌的工程师图标总数，含起始已印的 1 个；取一张工程师图标数不超过该总数的站点基地，可选个人 4 块双面站点基地的任一面，或公共牌堆中面朝下的站点基地。基地至少有一条边接触已探索冰原；把站点置于基地对应空格，作为奖励执行一个相邻已探索冰原的齿轮效果。该基地此后视为已探索冰原，其行动位对全员开放。<span class="pg">p.11</span></p>
+
+<h3>5.3 · 升级站点</h3>
+<div class="why"><span class="wt">作用</span>以建材与在场换取一次性奖励，并把升级移出版图计入终局胜利点。三级升级必须逐级建造，故同一站点需连续投入三个行动；相邻的两个己方升级站点在终局各扣 3 胜利点，构成站点布局的约束。<span class="pg">p.12</span></div>
+<p>升级按一级、二级、三级顺序建造：某站点须先有一级升级方可建二级，须有一级与二级方可建三级。建造前统计在场，即站点基地上及相邻版图格上的己方探险者与站点数量之和，含直接置于该基地上的探险者；达到该级要求方可支付建材并把升级放入站点槽位，随后取得对应奖励。<span class="pg">p.12</span></p>
+<table>
+  <tr><th>等级</th><th>建材</th><th>在场要求</th><th>奖励</th><th>依据</th></tr>
+  <tr><td>一级</td><td>2</td><td>3</td><td>自专家规划板取 1 名专家</td><td><span class="pg">p.12</span></td></tr>
+  <tr><td>二级</td><td>5</td><td>4</td><td>烧掉 1 张风暴牌（版图或个人弃牌堆）；另获 1 个新基地</td><td><span class="pg">p.12</span><span class="pg">p.13</span></td></tr>
+  <tr><td>三级</td><td>8</td><td>5</td><td>获得 1 个雷达板块；立即获得 1 名探险者，此后规划阶段额外获得 1 名探险者</td><td><span class="pg">p.12</span></td></tr>
+</table>
+<p>二级升级所附新基地不提供探险奖励，仅增加一个放置风暴牌的位置。等级费用与在场要求以个人版图升级区印值为准；原书第 13 页算例写明二级升级为 5 个建材、在场要求 4。<span class="pg">p.12</span><span class="pg">p.13</span></p>
+<div class="warn"><b>终局负分：</b>每个与己方另一升级站点相邻的己方升级站点扣 3 胜利点。<span class="pg">p.12</span><span class="pg">p.17</span></div>
+
+<h3>5.4 · 使用雷达板块</h3>
+<div class="why"><span class="wt">作用</span>以 1 个雷达板块同时开启牌面效果与购牌窗口，把个人展示区卡牌转为牌堆或版图上的长期资产。雷达效果每轮仅可随一次板块支出激活，项目牌以旋转 60° 标记本轮已用，探险牌用后进入个人弃牌堆。<span class="pg">p.13</span><span class="pg">p.14</span></div>
+<p>自个人版图取 1 个雷达板块置于公共供应，其后「激活雷达效果」与「购买卡牌」两步按任意顺序执行。雷达效果指版图上带雷达图标的项目牌与探险牌，可按任意顺序激活；激活探险牌效果后把该牌置于个人弃牌堆，激活项目牌效果后把该牌旋转 60° 以标记本轮已用。决定激活某效果时须执行其全部内容并支付全部相关费用。<span class="pg">p.13</span></p>
+<p>购买卡牌时自个人展示区购入任意数量：探险牌须满足卡面条件（若有）并支付费用，随后面朝下置于个人探险牌堆顶；项目牌支付费用后置于个人版图右侧。原书第 14 页算例给出先激活雷达效果取得金币与建材、再购入项目牌与探险牌的完整顺序。<span class="pg">p.13</span><span class="pg">p.14</span></p>
+<p>回合内任意时机可弃置 1 枚或多枚雷达板块作为免费行动，换取 3 能量、2 金币、自公共牌堆抽 3 张牌或 1 个建材；该行动不占用本回合的行动。<span class="pg">p.15</span></p>
+
+<h3>5.5 · 激活飞行员或机修师</h3>
+<div class="why"><span class="wt">作用</span>把设置时随机确定的专家行动转化为一次性行动。每片飞行员或机修师板块翻至灰面后不再翻回，故整局仅可使用一次；其效果由本局抽取的专家行动板块决定，不同对局的强度与用途随之变化。<span class="pg">p.15</span></div>
+<p>设置时随机抽取 2 张专家行动板块，一张关联飞行员，一张关联机修师，以匹配图标辨认。个人版图上持有对应板块时，可作为行动把该板块翻至灰面并执行该板块所示专家行动。专家行动共八类：烧掉 1 张探险牌（非风暴）并获得 2 金币；把探险者自一块冰原移至相邻冰原的空行动位并执行其行动，不得与陨石互移；把探险者移至相邻冰原的空行动位并执行其行动；支付 6 能量获得 2 个建材、2 枚金币并购买 1 张项目牌；升级一个站点且在场要求减 3；建造一个站点且工程师图标数加 2；获得 2 个建材；获得 6 能量。此类专家终局各值 2 胜利点。<span class="pg">p.15</span></p>
+
+<h3>5.6 · 跳过</h3>
+<div class="why"><span class="wt">作用</span>结束本轮己方的行动序列，清空版图上的牌并决定下一轮的起始玩家。跳过时机决定保留下来的 1 名探险者，也决定全员跳过后的里程碑检查与轮次推进。<span class="pg">p.16</span></div>
+<p>无法或无意继续执行行动时须跳过：把版图上全部风暴与探险牌置于个人弃牌堆，可把 1 名未用探险者带至下一轮，其余未用探险者与站点不予保留。全员跳过后本轮结束，检查是否进入里程碑阶段；随后按顺时针移交起始标记、把轮次标记前进一格。第 5 轮末把轮次标记移至最后一轮时，各人获得 1 块预报板块，其后开始新一轮准备阶段。<span class="pg">p.16</span></p>
+</section>
+
+<section id="s6">
+<h2><span class="n">6</span>贯穿全局的系统</h2>
+<h3>6.1 个人探险牌堆与风暴</h3>
+<div class="why"><span class="wt">作用与差异</span>起始牌堆由 5 张风暴与 5 张标记 0° 的探险牌组成。风暴牌占据顶行基地并提供能量，探险牌置于下行牌位并按风暴数量提供顶部或底部奖励。牌堆循环把购入的探险牌送回抽取序列，使本轮的购牌决策影响后续轮的准备阶段。<span class="pg">p.5</span><span class="pg">p.6</span><span class="pg">p.7</span></div>
+<p>准备阶段自个人探险牌堆逐张抽牌；抽到探险牌置于下行最左空位，起始 3 个空位；抽到风暴牌置于顶行三个基地之一，起始 3 个基地。无空位可放时，该牌须弃置并结束抽牌步骤，且无效果。每次放置后须决定继续抽牌或结束抽牌步骤；牌堆耗尽且个人弃牌堆仍有牌时，洗混弃牌堆形成新牌堆继续抽取。<span class="pg">p.6</span></p>
+<p>抽牌过程中可随时弃置预报板块，把刚抽到的牌或版图上任意一张牌（含风暴）置于个人弃牌堆；此举不结束抽牌步骤。第 5 轮末各人另获 1 块预报板块。<span class="pg">p.6</span><span class="pg">p.16</span></p>
+<h3>6.2 探险奖励与三个基地</h3>
+<p>结束抽牌步骤后，按任意顺序结算版图上探险牌、风暴与三个基地的奖励。探险牌奖励由风暴数量分档：0 或 1 张风暴取顶部奖励，2 张风暴取底部奖励，3 或 4 张风暴无探险牌奖励。风暴数量另提供能量：1 张 2 点、2 张 5 点、3 或 4 张 11 点。<span class="pg">p.7</span></p>
+<table>
+  <tr><th>基地</th><th>未被风暴覆盖时的奖励</th><th>依据</th></tr>
+  <tr><td>投资者基地</td><td>版图上每 1 个投资者图标获得 1 枚金币，含专家区起始已印的 1 个与探险牌上的图标</td><td><span class="pg">p.7</span></td></tr>
+  <tr><td>无线电基地</td><td>版图上每 1 个无线电图标推进探险标记 1 步；经过或到达奖励格立即取得奖励</td><td><span class="pg">p.7</span></td></tr>
+  <tr><td>机库</td><td>购买站点（取最左站点并按价支付建材，首个站点免费）或以 1 能量换 1 建材，二选一；后者次数等于版图工程师图标数</td><td><span class="pg">p.7</span></td></tr>
+</table>
+<p>探险标记推进后腾出的下行空位，自下一轮起可放置新的探险牌；抵达轨道末端后按环形区续行，环形区奖励可在一轮内多次取得。<span class="pg">p.7</span></p>
+<h3>6.3 专家规划板与专家列</h3>
+<div class="why"><span class="wt">作用与差异</span>专家列同时提供三类图标计数与终局胜利点。每列的第四、第五名专家各值 2 胜利点，任务协调员另各值 1 胜利点；列数按轮次逐步开放，因此早期购入受列数限制，后期则受金币与列附加费用约束。<span class="pg">p.10</span><span class="pg">p.17</span></div>
+<p>第 1 轮仅可自专家规划板前三列取专家，此后每轮增开一列；任务协调员不受列数限制。自第一列取专家额外获得 1 金币，自第三列取专家额外支付 1 金币，中间列无附加；第 1 轮不可取第四列及以后的专家。购入专家后置于个人版图对应行；任务协调员按万能专家置于任意行并按该列额外图标计，飞行员与机修师置于任意列但不提供额外图标。<span class="pg">p.10</span></p>
+<h3>6.4 冰原链与陨石</h3>
+<p>冰原链自港口板起按红色标记向陨石延伸，分 –30° 至 –37°、–40° 至 –49°、–62.1° 至 –63° 三段；设置时各段抽取等于玩家数的冰原，首段已探索，后两段以未探索面朝上。已探索冰原的行动位对全员开放；探索新冰原须取设置时最先摆放的未探索块，获得 1 个雷达板块并翻至已探索面。全部冰原探索完毕后按设置步骤在末块旁补放新冰原。<span class="pg">p.4</span><span class="pg">p.11</span></p>
+<p>站点基地建成后视为已探索冰原；陨石与已探索冰原相邻即视为已探索。紧邻陨石的己方探险者与站点数量之和为陨石的在场值，六块陨石各自规定在场门槛与行动效果。<span class="pg">p.11</span><span class="pg">p.18</span></p>
+<h3>6.5 雷达板块与预报板块</h3>
+<table>
+  <tr><th>板块</th><th>取得途径</th><th>用途</th><th>依据</th></tr>
+  <tr><td>雷达板块</td><td>设置时 1 个；探索冰原、港口行动位、三级升级奖励、卡牌效果</td><td>激活雷达效果与购买卡牌；亦可作免费行动换取能量、金币、卡牌或建材</td><td><span class="pg">p.11</span><span class="pg">p.13</span><span class="pg">p.15</span></td></tr>
+  <tr><td>预报板块</td><td>设置时 1 块；第 5 轮末各人 1 块；部分陨石与卡牌效果</td><td>抽牌步骤中弃置，把刚抽到或版图上的一张牌移入个人弃牌堆</td><td><span class="pg">p.5</span><span class="pg">p.6</span><span class="pg">p.16</span></td></tr>
+</table>
+<p>雷达板块激活的每轮一次限制以卡牌状态标记：探险牌用后进入个人弃牌堆，项目牌用后旋转 60°，下一轮恢复。预报板块弃置后不回收，故其使用时机构成抽牌步骤中的独立取舍。<span class="pg">p.13</span><span class="pg">p.14</span></p>
+<h3>6.6 项目牌的六类效果</h3>
+<table>
+  <tr><th>效果</th><th>生效时机</th><th>状态标记</th><th>依据</th></tr>
+  <tr><td>持续效果</td><td>自购入并置于版图右侧起持续至游戏结束</td><td>无需标记</td><td><span class="pg">p.14</span></td></tr>
+  <tr><td>轮次效果</td><td>卡牌面朝上置于版图期间生效</td><td>牌面朝上</td><td><span class="pg">p.14</span></td></tr>
+  <tr><td>雷达效果</td><td>支出雷达板块时每轮可激活一次</td><td>项目牌旋转 60°</td><td><span class="pg">p.14</span></td></tr>
+  <tr><td>终局效果</td><td>终局计分时按条件达成度提供胜利点</td><td>无需标记</td><td><span class="pg">p.14</span></td></tr>
+  <tr><td>即时效果</td><td>准备阶段把牌放上版图时立即触发</td><td>无需标记</td><td><span class="pg">p.14</span></td></tr>
+  <tr><td>行动位效果</td><td>以探险者激活该牌脚印图标时触发，仅对该玩家开放</td><td>占据后不再可用</td><td><span class="pg">p.14</span></td></tr>
+</table>
+<h3>6.7 里程碑牌与里程碑板块</h3>
+<p>第 3、5、6 轮末各进行一次里程碑评分。首次评分可自两张公共里程碑与个人里程碑中择一；每张里程碑牌含四列，前两列对应首次评分，中间两列对应第二次，最后两列对应第三次。满足第一列条件时把对应序号的里程碑板块置于低分面，满足第二列条件时置于高分面；任何条件均不满足则把板块回盒。已评过的里程碑牌此后不可再选。<span class="pg">p.16</span></p>
+<p>里程碑条件由符号与数字构成：符号规定类别，数字规定达成次数。类别含版图专家数、任务协调员数、已建站点数、工程师图标数最高的站点基地、已烧掉的风暴数、不在冰原或陨石上的探险者数、无线电操作员数、工程师数、升级数、牌堆卡牌数、指定温标冰原上的己方探险者与站点数、投资者数、探险轨道步数、项目牌数、项目牌上的探险者数与至少有一名己方探险者或站点的冰原数。<span class="pg">p.17</span><span class="pg">p.22</span></p>
+</section>
+
+<section id="s7">
+<h2><span class="n">7</span>资源与费用</h2>
+<table>
+  <tr><th>项目</th><th>获取途径</th><th>花费去向</th><th>上限与限制</th><th>依据</th></tr>
+  <tr><td>金币</td><td>设置时 2 枚、投资者基地、行动位奖励、卡牌效果</td><td>购买专家、项目牌、探险牌与卡牌效果</td><td>公共供应 40 枚；平局时以金币数量判定</td><td><span class="pg">p.2</span><span class="pg">p.17</span></td></tr>
+  <tr><td>能量</td><td>风暴牌、探险牌、机库兑换、行动位与卡牌效果</td><td>规划阶段保留 2 张牌、机库兑换、购牌与专家行动</td><td>由能量轨道记录</td><td><span class="pg">p.7</span><span class="pg">p.9</span></td></tr>
+  <tr><td>建材</td><td>机库兑换、雷达免费行动、行动位与升级奖励</td><td>购买站点、升级站点、项目牌费用</td><td>公共供应 36 个</td><td><span class="pg">p.2</span><span class="pg">p.12</span></td></tr>
+  <tr><td>探险者</td><td>规划阶段 2 名、专家放置奖励、三级升级、卡牌效果</td><td>占据行动位、探索冰原、计入在场</td><td>每人 17 名；跳过时仅可保留 1 名</td><td><span class="pg">p.9</span><span class="pg">p.16</span></td></tr>
+  <tr><td>站点</td><td>机库购买后置于预备区</td><td>建站点时置于站点基地</td><td>每人 5 个；未用站点不可跨轮保留</td><td><span class="pg">p.7</span><span class="pg">p.16</span></td></tr>
+  <tr><td>雷达板块</td><td>探索冰原、港口行动位、三级升级、卡牌效果</td><td>雷达效果与购牌；免费行动</td><td>用后置回公共供应</td><td><span class="pg">p.11</span><span class="pg">p.13</span></td></tr>
+  <tr><td>预报板块</td><td>设置、第 5 轮末、陨石与卡牌效果</td><td>抽牌步骤中移除一张牌</td><td>弃置后不回收</td><td><span class="pg">p.6</span><span class="pg">p.16</span></td></tr>
+  <tr><td>在场</td><td>己方探险者与站点在相邻版图格上的数量</td><td>升级站点、陨石行动位</td><td>含直接置于站点基地上的探险者</td><td><span class="pg">p.12</span><span class="pg">p.18</span></td></tr>
+</table>
+<div class="why"><span class="wt">资源与行动资格的作用分野</span>金币与建材属于可累计的支付资源，分别对应专家、卡牌与站点、升级；能量由轨道记录，用于规划阶段增量留牌与部分卡牌费用；探险者、站点、雷达板块与预报板块属一次性行动资格，其数量决定单轮可执行的行动次数。在场不是资源，而是按版图位置临时统计的判定值，仅用于升级与陨石行动位。<span class="pg">p.9</span><span class="pg">p.12</span><span class="pg">p.18</span></div>
+<h3>7.1 费用速查</h3>
+<table>
+  <tr><th>项目</th><th>费用</th><th>次数</th><th>依据</th></tr>
+  <tr><td>购买 1 名专家</td><td>2 金币，另按列附加或减免</td><td>每回合 1 个行动</td><td><span class="pg">p.10</span></td></tr>
+  <tr><td>购买 2 名专家</td><td>6 金币，另按列附加或减免</td><td>每回合 1 个行动</td><td><span class="pg">p.10</span></td></tr>
+  <tr><td>购买任务协调员</td><td>在专家费用外额外支付 2 金币</td><td>不受列数限制</td><td><span class="pg">p.10</span></td></tr>
+  <tr><td>购买站点</td><td>按最左站点印值支付建材，首个免费</td><td>机库每次 1 个</td><td><span class="pg">p.7</span></td></tr>
+  <tr><td>以能量换建材</td><td>1 能量换 1 个建材</td><td>次数等于版图工程师图标数</td><td><span class="pg">p.7</span></td></tr>
+  <tr><td>规划阶段保留 2 张牌</td><td>2 能量</td><td>每轮 1 次</td><td><span class="pg">p.9</span></td></tr>
+  <tr><td>升级站点</td><td>按等级支付建材并满足在场要求</td><td>每回合 1 个行动，逐级建造</td><td><span class="pg">p.12</span></td></tr>
+  <tr><td>购买探险牌</td><td>卡面费用与条件</td><td>随雷达板块支出，数量不限</td><td><span class="pg">p.13</span></td></tr>
+  <tr><td>购买项目牌</td><td>卡面费用</td><td>随雷达板块支出，数量不限</td><td><span class="pg">p.13</span></td></tr>
+  <tr><td>雷达板块免费行动</td><td>弃置 1 枚或多枚雷达板块</td><td>回合内任意时机</td><td><span class="pg">p.15</span></td></tr>
+</table>
+</section>
+
+<section id="s8">
+<h2><span class="n">8</span>终局与计分链路</h2>
+<h3>8.1 触发与收尾</h3>
+<p>第 6 轮末完成第三次里程碑评分后进入终局计分，不再开始新一轮。胜利点最高者获胜；平局时金币较多者胜，仍平局则并列获胜。<span class="pg">p.16</span><span class="pg">p.17</span></p>
+<div class="flow">
+<svg viewBox="0 0 900 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="深寒之下终局计分链路">
+  <defs><marker id="ar3" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#6b615c"/></marker></defs>
+  <rect x="14" y="26" width="200" height="64" rx="10" fill="#eaf0f9" stroke="#3b5b8c"/>
+  <text x="114" y="52" text-anchor="middle" font-size="15" font-weight="700" fill="#2f466c">1 专家与探险轨道</text>
+  <text x="114" y="73" text-anchor="middle" font-size="12" fill="#3b5b8c">第四、第五名专家 / 到达格</text>
+  <rect x="242" y="26" width="200" height="64" rx="10" fill="#f1eaf7" stroke="#6b4a86"/>
+  <text x="342" y="52" text-anchor="middle" font-size="15" font-weight="700" fill="#563a6d">2 站点与升级</text>
+  <text x="342" y="73" text-anchor="middle" font-size="12" fill="#6b4a86">基地印值 / 已移除配件</text>
+  <rect x="470" y="26" width="200" height="64" rx="10" fill="#fbecec" stroke="#a2303c"/>
+  <text x="570" y="52" text-anchor="middle" font-size="15" font-weight="700" fill="#8c2631">3 卡牌与里程碑</text>
+  <text x="570" y="73" text-anchor="middle" font-size="12" fill="#a2303c">牌堆 / 项目牌 / 板块印值</text>
+  <rect x="698" y="26" width="188" height="64" rx="10" fill="#e9f4ec" stroke="#3d7a55"/>
+  <text x="792" y="52" text-anchor="middle" font-size="15" font-weight="700" fill="#2c5c3f">4 汇总与平局</text>
+  <text x="792" y="73" text-anchor="middle" font-size="12" fill="#3d7a55">扣负分 / 比金币 / 并列</text>
+  <line x1="214" y1="58" x2="238" y2="58" stroke="#6b615c" stroke-width="2" marker-end="url(#ar3)"/>
+  <line x1="442" y1="58" x2="466" y2="58" stroke="#6b615c" stroke-width="2" marker-end="url(#ar3)"/>
+  <line x1="670" y1="58" x2="694" y2="58" stroke="#6b615c" stroke-width="2" marker-end="url(#ar3)"/>
+  <rect x="242" y="126" width="428" height="46" rx="10" fill="#fbf1dc" stroke="#a9761c"/>
+  <text x="456" y="154" text-anchor="middle" font-size="13.5" font-weight="700" fill="#8a5d11">升级负分：每个与己方另一升级站点相邻的升级站点扣 3 胜利点</text>
+  <path d="M342,90 L342,108 L456,108 L456,122" fill="none" stroke="#a9761c" stroke-width="2" stroke-dasharray="5,4" marker-end="url(#ar3)"/>
+</svg>
+</div>
+<h3>8.2 九类胜利点</h3>
+<table>
+  <tr><th>类别</th><th>计分口径</th><th>依据</th></tr>
+  <tr><td>专家</td><td>个人版图三列中每列第四、第五名专家各 2 分；每名任务协调员另计 1 分；飞行员与机修师按专家行动板块计分</td><td><span class="pg">p.17</span></td></tr>
+  <tr><td>探险轨道</td><td>合计探险标记已到达格上的胜利点</td><td><span class="pg">p.17</span></td></tr>
+  <tr><td>站点基地</td><td>合计已建站点基地上的胜利点</td><td><span class="pg">p.17</span></td></tr>
+  <tr><td>站点</td><td>合计已自个人版图移除的站点上的胜利点</td><td><span class="pg">p.17</span></td></tr>
+  <tr><td>升级</td><td>合计已自个人版图移除的升级上的胜利点</td><td><span class="pg">p.17</span></td></tr>
+  <tr><td>升级负分</td><td>每个与己方另一升级站点相邻的己方升级站点扣 3 分</td><td><span class="pg">p.12</span><span class="pg">p.17</span></td></tr>
+  <tr><td>探险牌</td><td>合计个人探险牌堆中探险牌上的胜利点，起始牌与风暴牌计入</td><td><span class="pg">p.17</span></td></tr>
+  <tr><td>项目牌</td><td>合计项目牌上的胜利点，含终局效果</td><td><span class="pg">p.17</span></td></tr>
+  <tr><td>里程碑</td><td>合计已达成的里程碑板块朝上面所示胜利点</td><td><span class="pg">p.16</span><span class="pg">p.17</span></td></tr>
+</table>
+<p>原书第 24 页提供计分表，按上述九类逐项填写后加总；在线计分表见原书第 17 页二维码。<span class="pg">p.17</span><span class="pg">p.24</span></p>
+<h3>8.3 里程碑条件的计数口径</h3>
+<table>
+  <tr><th>类别</th><th>计数口径</th><th>依据</th></tr>
+  <tr><td>专家类</td><td>版图上指定类别专家总数，同列任务协调员计入；起始已印的三名专家计入</td><td><span class="pg">p.17</span></td></tr>
+  <tr><td>配件类</td><td>已建站点数、工程师图标数最高的站点基地、升级数、已烧掉的风暴数</td><td><span class="pg">p.17</span></td></tr>
+  <tr><td>位置类</td><td>指定温标冰原上的己方探险者与站点数；不在冰原或陨石上的探险者数；至少有一名己方探险者或站点的冰原数</td><td><span class="pg">p.17</span></td></tr>
+  <tr><td>卡牌类</td><td>个人探险牌堆卡牌数（起始牌与风暴牌计入）、已购入项目牌数、项目牌上的探险者数</td><td><span class="pg">p.17</span><span class="pg">p.22</span></td></tr>
+  <tr><td>轨道类</td><td>探险标记已到达的步数</td><td><span class="pg">p.17</span></td></tr>
+</table>
+</section>
+
+<section id="s9">
+<h2><span class="n">9</span>常见误读</h2>
+<ol>
+  <li>全局共 6 轮，第 3、5、6 轮末增设里程碑阶段；其余三轮仅有准备、规划、行动三阶段。<span class="pg">p.6</span><span class="pg">p.16</span></li>
+  <li>准备与规划阶段全员同时进行，行动阶段自起始玩家起按顺时针轮流。<span class="pg">p.6</span><span class="pg">p.9</span></li>
+  <li>每抽一张牌后均须决定继续抽牌或结束抽牌步骤；弃置该牌即结束，且该牌无效果。<span class="pg">p.6</span></li>
+  <li>探险牌置于下行最左空位，风暴牌置于顶行任一空基地；无空位可放时须弃牌并结束。<span class="pg">p.6</span></li>
+  <li>个人探险牌堆耗尽时洗混个人弃牌堆形成新牌堆，抽牌步骤不因此中断。<span class="pg">p.6</span></li>
+  <li>预报板块可在抽牌步骤任意时机弃置，弃置后不结束抽牌步骤。<span class="pg">p.6</span></li>
+  <li>探险牌奖励按风暴数量分档：0 或 1 张取顶部、2 张取底部、3 或 4 张无奖励。<span class="pg">p.7</span></li>
+  <li>风暴牌另提供能量：1 张 2 点、2 张 5 点、3 或 4 张 11 点，与探险牌奖励并行结算。<span class="pg">p.7</span></li>
+  <li>三个基地仅在未被风暴覆盖时提供奖励；二级升级所附新基地不提供探险奖励，仅增加风暴位。<span class="pg">p.7</span><span class="pg">p.12</span></li>
+  <li>机库的站点购买与能量换建材为择一，后者次数等于版图工程师图标数。<span class="pg">p.7</span></li>
+  <li>探险标记推进后腾出的下行空位自下一轮起方可放置新探险牌。<span class="pg">p.7</span></li>
+  <li>规划阶段免费保留 1 张牌或支付 2 能量保留 2 张，二者择一；保留牌置于个人展示区。<span class="pg">p.9</span></li>
+  <li>行动阶段每回合恰好执行六个行动之一或跳过，直至全员跳过。<span class="pg">p.9</span></li>
+  <li>放置探险者后先取得位置奖励，再执行齿轮效果；行动位一经占据即不再可用。<span class="pg">p.10</span></li>
+  <li>港口常驻行动位永不视为占据，任意数量探险者均可激活；其余行动位占据后封锁。<span class="pg">p.10</span></li>
+  <li>第 1 轮仅开放专家规划板前三列，此后每轮增开一列；任务协调员不受列数限制但须额外支付 2 金币。<span class="pg">p.10</span></li>
+  <li>自第一列取专家额外获得 1 金币，自第三列取专家额外支付 1 金币，中间列无附加。<span class="pg">p.10</span></li>
+  <li>任务协调员按万能专家计入所在列图标，飞行员与机修师不提供额外图标。<span class="pg">p.10</span></li>
+  <li>港口与专家行动板块的四格限制区内每人仅可放置 1 名探险者，全场两处区域合计至多执行两次。<span class="pg">p.11</span></li>
+  <li>建站点须先取得站点，站点基地工程师图标数不得超过版图工程师图标总数；基地建成后视为已探索冰原。<span class="pg">p.11</span></li>
+  <li>升级按一级、二级、三级顺序建造，并须满足在场要求；相邻的两个己方升级站点各扣 3 胜利点。<span class="pg">p.12</span><span class="pg">p.17</span></li>
+  <li>雷达板块的「激活雷达效果」与「购买卡牌」按任意顺序执行，二者均在同一行动内完成。<span class="pg">p.13</span></li>
+  <li>跳过时仅可保留 1 名未用探险者，其余未用探险者与站点不予保留；第 5 轮末各人另获 1 块预报板块。<span class="pg">p.16</span></li>
+  <li>里程碑牌含四列，首次评分取前两列、第二次取中间两列、第三次取最后两列；已评过的牌不可再选。<span class="pg">p.16</span></li>
+</ol>
+</section>
+
+<section id="s10">
+<h2><span class="n">10</span>示例回合拆解</h2>
+<h3>10.1 原书第 7 页：抽牌与结束</h3>
+<p>示例呈现抽牌步骤的两次继续与一次终止，以及无空位时的强制结束。<span class="pg">p.6</span><span class="pg">p.7</span></p>
+<table>
+  <tr><th>步骤</th><th>执行</th><th>结果</th></tr>
+  <tr><td>1</td><td>罗德里戈自个人探险牌堆抽到 1 张探险牌，置于下行最左空位</td><td>决定继续抽牌</td></tr>
+  <tr><td>2</td><td>再抽到 1 张探险牌，置于下行次一空位</td><td>决定继续抽牌</td></tr>
+  <tr><td>3</td><td>抽到 1 张风暴牌，三个基地均空</td><td>把该牌置于个人弃牌堆，结束抽牌步骤</td></tr>
+</table>
+<h3>10.2 原书第 8 页：探险奖励结算</h3>
+<table>
+  <tr><th>步骤</th><th>执行</th><th>所得</th></tr>
+  <tr><td>1</td><td>罗德里戈版图上有 1 张风暴与 2 张探险牌</td><td>风暴提供 2 能量，两张探险牌各提供 1 能量，能量标记共前进 4 格</td></tr>
+  <tr><td>2</td><td>投资者基地未被覆盖，专家区 1 个投资者图标与 1 张探险牌上的图标合计</td><td>2 枚金币</td></tr>
+  <tr><td>3</td><td>无线电基地未被覆盖，专家区 1 个无线电图标与 1 张探险牌上的图标合计</td><td>探险标记前进 2 步，尚差 1 步腾出新的下行空位</td></tr>
+  <tr><td>4</td><td>卡塔利娜版图上有 2 张风暴与 1 张带工程师图标的探险牌</td><td>风暴提供 5 能量，探险牌提供 1 能量，合计 6 能量</td></tr>
+  <tr><td>5</td><td>机库提供购买站点或以能量换建材两种选择，工程师图标共 2 个</td><td>选定购买站点；首个站点免费，置于预备区</td></tr>
+</table>
+<h3>10.3 原书第 11 页：建站点</h3>
+<table>
+  <tr><th>步骤</th><th>执行</th><th>所得</th></tr>
+  <tr><td>1</td><td>卡塔利娜版图上工程师图标合计 2 个</td><td>取 1 张工程师图标数为 2 的个人站点基地</td></tr>
+  <tr><td>2</td><td>把基地置于与已探索冰原相邻的位置</td><td>基地此后视为已探索冰原</td></tr>
+  <tr><td>3</td><td>把站点置于基地对应空格，执行一个相邻已探索冰原的齿轮效果</td><td>选定「获得 3 能量」</td></tr>
+</table>
+<h3>10.4 原书第 13 页：二级升级</h3>
+<table>
+  <tr><th>步骤</th><th>执行</th><th>所得</th></tr>
+  <tr><td>1</td><td>罗德里戈为某站点建造二级升级，相邻 3 名探险者加基地上 1 名探险者</td><td>在场值 4，满足要求；支付 5 个建材</td></tr>
+  <tr><td>2</td><td>把升级放入该站点槽位</td><td>取得对应奖励</td></tr>
+  <tr><td>3</td><td>烧掉个人弃牌堆与版图上各 1 张风暴牌</td><td>该升级在终局另计 3 胜利点</td></tr>
+</table>
+<h3>10.5 原书第 14 页：雷达板块与购牌</h3>
+<table>
+  <tr><th>步骤</th><th>执行</th><th>所得</th></tr>
+  <tr><td>1</td><td>支出 1 个雷达板块</td><td>开启雷达效果与购牌窗口</td></tr>
+  <tr><td>2</td><td>激活版图上一张探险牌的雷达效果，弃置个人展示区 1 张牌</td><td>2 枚金币与 1 个建材；该探险牌置于个人弃牌堆</td></tr>
+  <tr><td>3</td><td>以 4 枚金币购入 1 张项目牌</td><td>获得 1 个雷达板块作为奖励；项目牌置于版图右侧</td></tr>
+  <tr><td>4</td><td>已购入第二张项目牌，满足展示区一张探险牌的条件</td><td>支付 7 能量，把该探险牌面朝下置于个人探险牌堆顶</td></tr>
+</table>
+<div class="tip"><b>示例所示关系：</b>准备阶段的奖励由版图上的风暴与基地共同决定；行动阶段的购牌须先具备相应资源与条件，雷达效果可先行为购牌补足资源。<span class="pg">p.7</span><span class="pg">p.13</span><span class="pg">p.14</span></div>
+</section>
+
+<section id="s11">
+<h2><span class="n">11</span>单人与变体</h2>
+<h3>11.1 六块陨石</h3>
+<p>本局自六块陨石中择一，各自附带设置步骤与行动。陨石与已探索冰原相邻即视为已探索；紧邻陨石的己方探险者与站点数量之和为其在场值。<span class="pg">p.18</span></p>
+<table>
+  <tr><th>陨石</th><th>附加设置</th><th>行动与终局</th><th>依据</th></tr>
+  <tr><td>–60.1°</td><td>无</td><td>在场 3；获得 2 枚金币与齿轮图标所示奖励</td><td><span class="pg">p.18</span></td></tr>
+  <tr><td>–60.4°</td><td>以 4 张陨石探险牌形成公共展示区</td><td>在场 3；选 1 张直接置于个人探险牌堆顶并获 1 块预报板块；该牌视为已购入，翻开后整局留在版图上</td><td><span class="pg">p.18</span></td></tr>
+  <tr><td>–60.2°</td><td>以 4 张陨石项目牌形成公共展示区</td><td>在场 3；选 1 张免费建成并加入项目，探险标记前进 2 步</td><td><span class="pg">p.18</span></td></tr>
+  <tr><td>–60.5°</td><td>第 4 块里程碑板块置于陨石上，4 张未用里程碑牌面朝上置于公共供应</td><td>在场 3；取得第 4 块里程碑板块、2 个建材并选 1 张仅己方可评分的里程碑牌</td><td><span class="pg">p.18</span></td></tr>
+  <tr><td>–60.3°</td><td>无</td><td>在场 6 或 4；终局按在场取得对应胜利点；作为行动获得 1 个建材并自公共牌堆抽 2 张置于个人展示区</td><td><span class="pg">p.18</span></td></tr>
+  <tr><td>–60.6°</td><td>无</td><td>无独立行动位，仅在其旁建站点时获得 5 能量；终局在场最高者 5 分、次高者 2 分，平分均得</td><td><span class="pg">p.18</span></td></tr>
+</table>
+<p>–60.5° 陨石所附第 4 块里程碑板块可在任意里程碑阶段置于尚未评分且条件已满足的里程碑牌上。<span class="pg">p.18</span></p>
+<h3>11.2 单人模式设置</h3>
+<p>单人模式按两人局完成公共布置与个人布置至第 12 步，再执行第 13 步：取起始标记与 4 张随机里程碑牌，选 3 张置于专家规划板上方，第 4 张回盒。<span class="pg">p.19</span></p>
+<ol>
+  <li>取 Arka 版图，把 4 块个人站点基地、5 个站点、15 名探险者、3 块里程碑板块与一色全部升级置于其旁。<span class="pg">p.19</span></li>
+  <li>洗混 Arka 里程碑牌，取 3 张置于版图下方，余牌回盒。<span class="pg">p.19</span></li>
+  <li>1 名探险者置于探险路径第 1 步，另 1 名置于环形区起点；探险标记置于探险轨道第 1 格；Arka 不使用能量标记。<span class="pg">p.19</span></li>
+  <li>取 9 张带星 Arka 行动牌，按难度加入无星行动牌：标准 1–2 张、传奇 3–4 张、史诗 5 张；洗混成面朝下的行动牌堆，旁留翻开区与弃牌堆位置。<span class="pg">p.19</span></li>
+</ol>
+<div class="warn"><b>版本差异：</b>中文版注明德文原版难度为「标准 0–1 张、传奇 2–3 张、史诗 4 张」，与英文原书相差 1 张；难度表按英文原书列示，德文版配件以对应语言难度表为准。<span class="pg">p.19</span></div>
+<h3>11.3 Arka 的行动阶段</h3>
+<p>单人玩家照常执行全部阶段；Arka 不执行准备与规划阶段，仅在行动阶段活动，并在第 3、5、6 轮末评分里程碑。行动牌多数含多项行动，一律自上而下执行。Arka 每轮按探险等级决定星数上限：起始按 3 颗星执行，行动牌上的特定指令把其后的星数上限提高至 4 颗；其回合翻开行动牌堆顶 1 张并执行，无法执行时把环形区上的探险者前进 1 步。已打出的牌错位亮开以便计数；达到星数上限即跳过。行动牌堆耗尽时洗混弃牌堆成新堆，轮末把已打出的牌置于弃牌堆。<span class="pg">p.20</span></p>
+<table>
+  <tr><th>环形区效果</th><th>结算口径</th><th>依据</th></tr>
+  <tr><td>投资者</td><td>自公共牌堆抽取等于 Arka 版图投资者图标数的牌，面朝下置于版图左侧；不触发效果，仅计终局胜利点</td><td><span class="pg">p.20</span></td></tr>
+  <tr><td>无线电</td><td>探险标记前进等于无线电图标数的步数；越过末格则回探险路径第 1 步继续</td><td><span class="pg">p.20</span></td></tr>
+  <tr><td>升级</td><td>取 1 张升级置于标记区，每个终局值 4 胜利点</td><td><span class="pg">p.20</span></td></tr>
+</table>
+<h3>11.4 Arka 的计分与里程碑</h3>
+<p>Arka 终局合计五类：每列第四、第五名专家各 2 分；每个升级 4 分；探险轨道每步 1 分（每 5 步在探险路径上标示）；行动牌上的胜利点之和，带终局效果的项目牌取较低值；里程碑板块上的胜利点。<span class="pg">p.21</span></p>
+<p>Arka 于第 3、5、6 轮末自左至右评分专属里程碑牌，自动满足低分条件；欲取得高分，须满足与玩家相比的指定条件。评分后把该牌翻至面朝下，里程碑板块置于朝下一面。<span class="pg">p.21</span></p>
+<p>Arka 行动牌上的常见指令含：取最左工程师、投资者或无线电操作员，无对应专家时改取任务协调员；把探险者置于剩余行动位最多的冰原，平手时取最冷者并优先金币奖励；把探险者置于专家行动板块上，按金币、能量、最左的次序选定；建造站点，站点基地工程师图标数为其工程师数加 1，紧邻最冷且与最多冰原相邻的位置；探索下一块冰原但不取得雷达板块；执行 Arka 下一张或全部未评分里程碑牌的特殊行动。其中占据冰原与专家行动板块的指令仅占位，不执行其齿轮效果。<span class="pg">p.21</span></p>
+</section>
+
+<section id="s12">
+<h2><span class="n">12</span>速查表与页码索引</h2>
+<h3>12.1 一页速查</h3>
+<table>
+  <tr><th>查考项</th><th>结论</th></tr>
+  <tr><td>游戏长度</td><td>6 轮；第 3、5、6 轮末增设里程碑阶段</td></tr>
+  <tr><td>阶段顺序</td><td>准备 → 规划 → 行动 → 里程碑（仅指定轮）</td></tr>
+  <tr><td>行动六选一</td><td>激活行动位／建站点／升级站点／使用雷达板块／激活飞行员或机修师／跳过</td></tr>
+  <tr><td>抽牌终止</td><td>弃置所抽的牌即结束抽牌步骤；无空位可放时强制结束</td></tr>
+  <tr><td>风暴能量</td><td>1 张 2 点／2 张 5 点／3 或 4 张 11 点</td></tr>
+  <tr><td>探险牌奖励</td><td>0 或 1 张风暴取顶部／2 张取底部／3 或 4 张无奖励</td></tr>
+  <tr><td>三个基地</td><td>投资者基地提供金币／无线电基地推进探险标记／机库购买站点或兑换建材</td></tr>
+  <tr><td>规划阶段</td><td>2 名探险者入预备区；抽 5 张，免费留 1 张或支付 2 能量留 2 张</td></tr>
+  <tr><td>港口常驻位</td><td>永不占据；2 金币购 1 名专家或 6 金币购 2 名专家</td></tr>
+  <tr><td>专家开放列</td><td>第 1 轮前三列，此后每轮增开一列；任务协调员随时可购</td></tr>
+  <tr><td>升级顺序</td><td>一级 → 二级 → 三级；每级核在场并支付建材</td></tr>
+  <tr><td>雷达板块</td><td>激活雷达效果与购买卡牌按任意顺序；亦可作免费行动换取四类所得</td></tr>
+  <tr><td>跳过</td><td>版图牌入个人弃牌堆，保留 1 名未用探险者；全员跳过后移交起始标记</td></tr>
+  <tr><td>里程碑</td><td>首次评分三选一；四列牌前两列／中两列／后两列对应三次评分</td></tr>
+  <tr><td>终局九类</td><td>专家／探险轨道／站点基地／站点／升级／升级负分／探险牌／项目牌／里程碑</td></tr>
+  <tr><td>平局</td><td>金币较多者胜 → 仍平则并列获胜</td></tr>
+</table>
+<h3>12.2 章节 ↔ 原书页码</h3>
+<table class="idx">
+  <tr><th>章节</th><th>原书页</th><th>章节</th><th>原书页</th></tr>
+  <tr><td>0 游戏概要与目标</td><td>p.6、p.17</td><td>6 贯穿全局的系统</td><td>p.6–7、p.10–18</td></tr>
+  <tr><td>1 初局设置</td><td>p.4–5</td><td>7 资源与费用</td><td>p.2、p.7、p.9–15</td></tr>
+  <tr><td>2 版图与组件速认</td><td>p.2–3、p.6</td><td>8 终局与计分链路</td><td>p.12、p.17、p.24</td></tr>
+  <tr><td>3 核心引擎</td><td>p.6、p.9、p.24</td><td>9 常见误读</td><td>p.6–17</td></tr>
+  <tr><td>3.5 择一决策总表</td><td>p.6–10、p.13–16</td><td>10 示例回合拆解</td><td>p.7–8、p.11、p.13–14</td></tr>
+  <tr><td>4 一个轮次与六个轮</td><td>p.6、p.9–10、p.16</td><td>11 单人与变体</td><td>p.18–21</td></tr>
+  <tr><td>5 六个行动逐条深挖</td><td>p.9–16</td><td>12 速查表与页码索引</td><td>全册</td></tr>
+</table>
+<h3>12.3 原书页图对照</h3>
+<details>
+  <summary>展开原书页图（24 张，按页序）</summary>
+  <div class="pgs">
+    <figure><img src="images_sixty/page_01.jpg" alt="原书第 1 页 封面" loading="lazy"><figcaption>p.1 封面</figcaption></figure>
+    <figure><img src="images_sixty/page_02.jpg" alt="原书第 2 页 配件清单" loading="lazy"><figcaption>p.2 通用配件清单</figcaption></figure>
+    <figure><img src="images_sixty/page_03.jpg" alt="原书第 3 页 个人配件" loading="lazy"><figcaption>p.3 个人配件与单人模式配件</figcaption></figure>
+    <figure><img src="images_sixty/page_04.jpg" alt="原书第 4 页 公共设置" loading="lazy"><figcaption>p.4 公共布置</figcaption></figure>
+    <figure><img src="images_sixty/page_05.jpg" alt="原书第 5 页 个人设置" loading="lazy"><figcaption>p.5 个人布置</figcaption></figure>
+    <figure><img src="images_sixty/page_06.jpg" alt="原书第 6 页 游戏目标与准备阶段" loading="lazy"><figcaption>p.6 游戏目标、轮次结构与准备阶段</figcaption></figure>
+    <figure><img src="images_sixty/page_07.jpg" alt="原书第 7 页 探险奖励" loading="lazy"><figcaption>p.7 探险奖励与三个基地</figcaption></figure>
+    <figure><img src="images_sixty/page_08.jpg" alt="原书第 8 页 探险奖励示例" loading="lazy"><figcaption>p.8 探险奖励示例</figcaption></figure>
+    <figure><img src="images_sixty/page_09.jpg" alt="原书第 9 页 规划阶段与行动清单" loading="lazy"><figcaption>p.9 规划阶段与行动阶段六类行动</figcaption></figure>
+    <figure><img src="images_sixty/page_10.jpg" alt="原书第 10 页 港口与专家" loading="lazy"><figcaption>p.10 行动位、港口与专家规划板</figcaption></figure>
+    <figure><img src="images_sixty/page_11.jpg" alt="原书第 11 页 探索冰原与建站点" loading="lazy"><figcaption>p.11 探索冰原与建站点</figcaption></figure>
+    <figure><img src="images_sixty/page_12.jpg" alt="原书第 12 页 升级站点" loading="lazy"><figcaption>p.12 升级站点与在场要求</figcaption></figure>
+    <figure><img src="images_sixty/page_13.jpg" alt="原书第 13 页 雷达板块与卡牌结构" loading="lazy"><figcaption>p.13 雷达板块与卡牌结构</figcaption></figure>
+    <figure><img src="images_sixty/page_14.jpg" alt="原书第 14 页 卡牌效果类型" loading="lazy"><figcaption>p.14 项目牌效果类型与购牌算例</figcaption></figure>
+    <figure><img src="images_sixty/page_15.jpg" alt="原书第 15 页 飞行员与机修师" loading="lazy"><figcaption>p.15 飞行员、机修师与雷达免费行动</figcaption></figure>
+    <figure><img src="images_sixty/page_16.jpg" alt="原书第 16 页 跳过与里程碑" loading="lazy"><figcaption>p.16 跳过与里程碑阶段</figcaption></figure>
+    <figure><img src="images_sixty/page_17.jpg" alt="原书第 17 页 终局计分" loading="lazy"><figcaption>p.17 终局计分与里程碑条件总览</figcaption></figure>
+    <figure><img src="images_sixty/page_18.jpg" alt="原书第 18 页 陨石图鉴" loading="lazy"><figcaption>p.18 六块陨石图鉴</figcaption></figure>
+    <figure><img src="images_sixty/page_19.jpg" alt="原书第 19 页 单人设置" loading="lazy"><figcaption>p.19 Arka 单人模式设置</figcaption></figure>
+    <figure><img src="images_sixty/page_20.jpg" alt="原书第 20 页 单人行动阶段" loading="lazy"><figcaption>p.20 Arka 行动阶段与环形区</figcaption></figure>
+    <figure><img src="images_sixty/page_21.jpg" alt="原书第 21 页 单人终局计分" loading="lazy"><figcaption>p.21 Arka 终局计分与行动指令</figcaption></figure>
+    <figure><img src="images_sixty/page_22.jpg" alt="原书第 22 页 符号总览" loading="lazy"><figcaption>p.22 符号总览</figcaption></figure>
+    <figure><img src="images_sixty/page_23.jpg" alt="原书第 23 页 卡牌效果一览" loading="lazy"><figcaption>p.23 项目牌与冰原效果一览</figcaption></figure>
+    <figure><img src="images_sixty/page_24.jpg" alt="原书第 24 页 速查表" loading="lazy"><figcaption>p.24 速查表与计分表</figcaption></figure>
+  </div>
+</details>
+</section>
+
+<div class="foot">
+深寒之下 · 学习版规则　｜　依据英文原书《Sixty Below》Rulebook（24 页）与中文版既定译法编写<br>
+按规则结构重排，非官方规则书；规则裁决以英文原书为准，实体配件印值以配件为准。
+</div>
+</main>
+</div>
+</body>
+</html>
