@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>钻探者 · 学习版规则（Drillers）</title>
+<style>
+  :root{
+    --bg:#fbf7f0; --paper:#fffdf9; --ink:#2f2a28; --soft:#6b615c;
+    --line:#e3d8c8; --line2:#d3c4ae;
+    --red:#a2303c; --red-l:#fbecec; --blue:#3b5b8c; --blue-l:#eaf0f9;
+    --gold:#a9761c; --gold-l:#fbf1dc; --green:#3d7a55; --green-l:#e9f4ec;
+    --purple:#6b4a86; --purple-l:#f1eaf7;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"PingFang SC","Microsoft YaHei","Noto Sans SC",Arial,sans-serif;
+    font-size:15.5px;line-height:1.85;}
+  .backbar{position:sticky;top:0;z-index:60;height:44px;box-sizing:border-box;
+    display:flex;align-items:center;gap:10px;padding:0 16px;
+    background:var(--paper);border-bottom:1px solid var(--line);font-size:13px;}
+  .backbar a{display:inline-flex;align-items:center;min-height:32px;padding:0 12px;
+    border:1px solid var(--line2);border-radius:8px;background:#fff;
+    color:var(--purple);text-decoration:none;white-space:nowrap;}
+  .backbar a:active{background:var(--purple-l);}
+  .backbar .bb-t{margin-left:auto;font-size:12px;color:var(--soft);}
+  .layout{display:flex;align-items:flex-start;max-width:1280px;margin:0 auto;}
+  nav.toc{position:sticky;top:44px;align-self:flex-start;width:238px;flex:0 0 238px;
+    height:calc(100vh - 44px);overflow-y:auto;background:#fffdf9;border-right:1px solid var(--line);
+    padding:22px 14px 40px;font-size:13px;}
+  nav.toc .brand{font-size:17px;font-weight:800;color:var(--red);margin:0 0 4px;}
+  nav.toc .brand-s{font-size:11.5px;color:var(--soft);margin:0 0 16px;letter-spacing:.04em;}
+  nav.toc .grp{margin:16px 0 5px;font-size:11px;color:var(--gold);font-weight:700;letter-spacing:.12em;}
+  nav.toc a{display:block;color:#49403b;text-decoration:none;padding:4px 9px;border-radius:6px;}
+  nav.toc a:hover{background:var(--red-l);color:var(--red);}
+  main{flex:1 1 auto;min-width:0;padding:0 42px 90px;}
+  .hero{background:linear-gradient(150deg,#7c1f2b,#a2303c 55%,#bd5a4a);
+    color:#fff8f0;border-radius:0 0 20px 20px;padding:40px 42px 34px;margin-bottom:26px;
+    box-shadow:0 8px 26px rgba(124,31,43,.18);}
+  .hero h1{margin:0;font-size:34px;letter-spacing:.02em;}
+  .hero .en{font-size:14px;opacity:.8;margin:2px 0 12px;letter-spacing:.06em;}
+  .hero .desc{font-size:16px;max-width:760px;line-height:1.8;}
+  .hero .meta{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px;}
+  .hero .meta span{border:1px solid rgba(255,255,255,.5);border-radius:20px;padding:3px 13px;font-size:12.5px;}
+  .stand{margin-top:14px;background:#fff6e2;border:1px solid #e8d2a2;border-left:5px solid var(--gold);
+    border-radius:0 10px 10px 0;padding:12px 18px;font-size:14px;color:#5c4a26;}
+  section{padding:22px 0 14px;border-bottom:1px dashed var(--line2);scroll-margin-top:14px;}
+  h2{font-size:25px;color:var(--red);margin:8px 0 4px;line-height:1.4;}
+  h2 .n{display:inline-block;background:var(--red);color:#fff;font-size:14px;
+    min-width:30px;height:30px;line-height:30px;text-align:center;border-radius:8px;
+    margin-right:10px;vertical-align:3px;font-weight:700;}
+  h3{font-size:18.5px;color:#3a3230;margin:26px 0 6px;border-left:4px solid var(--gold);padding-left:10px;}
+  h4{font-size:16px;color:var(--blue);margin:18px 0 4px;}
+  p{margin:9px 0;}
+  ul,ol{margin:9px 0 9px 2px;padding-left:22px;}
+  li{margin:5px 0;}
+  b,strong{color:var(--red);}
+  .goal{background:var(--blue-l);border:1px solid #cfdcf0;border-radius:9px;
+    padding:8px 14px;font-size:13.5px;color:#2f466c;margin:8px 0 16px;}
+  .goal b{color:#2f466c;}
+  .pg{display:inline-block;background:#f0e7d8;color:#7d6231;border:1px solid #e2d2b6;
+    border-radius:5px;font-size:11px;padding:0 6px;line-height:18px;vertical-align:1px;
+    margin-left:4px;font-weight:600;white-space:nowrap;font-family:Arial,sans-serif;}
+  .key{background:var(--green-l);border:1px solid #c9e2d1;border-left:5px solid var(--green);
+    padding:11px 16px;border-radius:0 10px 10px 0;margin:13px 0;}
+  .key b{color:var(--green);}
+  .warn{background:var(--red-l);border:1px solid #eed3d3;border-left:5px solid var(--red);
+    padding:11px 16px;border-radius:0 10px 10px 0;margin:13px 0;}
+  .warn b{color:var(--red);}
+  .tip{background:var(--gold-l);border:1px solid #eddcb8;border-left:5px solid var(--gold);
+    padding:11px 16px;border-radius:0 10px 10px 0;margin:13px 0;}
+  .tip b{color:var(--gold);}
+  .note{background:#f4f1ec;border:1px solid var(--line);border-radius:9px;padding:10px 15px;
+    margin:12px 0;font-size:14px;color:#514844;}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px;background:var(--paper);}
+  th,td{border:1px solid var(--line2);padding:8px 11px;text-align:left;vertical-align:top;}
+  th{background:#f4e9dd;color:#5d4022;font-weight:700;}
+  tr:nth-child(even) td{background:#fdf9f3;}
+  td.c,th.c{text-align:center;}
+  .steps{list-style:none;padding:0;counter-reset:st;margin:14px 0;}
+  .steps>li{position:relative;padding:10px 14px 10px 50px;margin:9px 0;background:var(--paper);
+    border:1px solid var(--line);border-radius:10px;}
+  .steps>li::before{counter-increment:st;content:counter(st);position:absolute;left:12px;top:11px;
+    width:26px;height:26px;background:var(--red);color:#fff;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;}
+  .steps>li>ol{margin:6px 0;padding-left:20px;}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:11px;
+    padding:13px 17px;margin:11px 0;box-shadow:0 2px 6px rgba(80,60,40,.04);}
+  .card .t{font-weight:800;color:var(--red);font-size:16px;margin-bottom:3px;}
+  .card .t .s{display:inline-block;background:var(--red);color:#fff;border-radius:5px;
+    font-size:12px;padding:1px 7px;margin-right:8px;}
+  .card.blue .t{color:var(--blue);} .card.blue .t .s{background:var(--blue);}
+  .card.green .t{color:var(--green);} .card.green .t .s{background:var(--green);}
+  .card.gold .t{color:var(--gold);} .card.gold .t .s{background:var(--gold);}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+  .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;}
+  .mini{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:11px 13px;}
+  .mini .h{font-weight:800;font-size:14px;margin-bottom:4px;}
+  .mini .v{font-size:13px;color:var(--soft);line-height:1.7;}
+  .fig{margin:18px 0;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;}
+  .fig svg{display:block;width:100%;height:auto;}
+  .figcap{font-size:12.5px;color:var(--soft);margin-top:8px;text-align:center;}
+  details{margin:12px 0;background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:8px 14px;}
+  summary{cursor:pointer;font-size:13.5px;color:var(--blue);font-weight:600;}
+  details img{display:block;max-width:100%;margin:12px auto;border:1px solid var(--line);border-radius:8px;}
+  .pit{counter-reset:pit;list-style:none;padding:0;margin:14px 0;}
+  .pit li{position:relative;padding:9px 14px 9px 46px;margin:7px 0;background:var(--paper);
+    border:1px solid var(--line);border-radius:9px;font-size:14.5px;}
+  .pit li::before{counter-increment:pit;content:"✕ " counter(pit);position:absolute;left:10px;top:9px;
+    color:#fff;background:var(--red);border-radius:6px;font-size:11px;padding:1px 6px;font-weight:700;}
+  .bad{color:var(--red);text-decoration:line-through;}
+  .good{color:var(--green);font-weight:700;}
+  .tagR{color:var(--red);font-weight:700;} .tagB{color:var(--blue);font-weight:700;}
+  .tagG{color:var(--gold);font-weight:700;}
+  .pick{display:inline-block;background:#a2303c;color:#fff;border-radius:5px;
+    font-size:11px;padding:1px 7px;margin:0 3px;font-weight:700;letter-spacing:.04em;vertical-align:1px;}
+  .pick.b{background:#3b5b8c;} .pick.g{background:#a9761c;}
+  .either{border:2px dashed #c9a24a;background:#fffaf0;border-radius:12px;padding:14px 16px;margin:15px 0;}
+  .either>.hd{font-size:14px;font-weight:800;color:#7d5511;margin-bottom:10px;}
+  .either .cols{display:grid;grid-template-columns:1fr 46px 1fr;align-items:stretch;}
+  .either .opt{background:var(--paper);border:1px solid var(--line2);border-radius:10px;padding:11px 14px;font-size:14px;}
+  .either .opt .ot{font-weight:800;color:var(--red);margin-bottom:4px;}
+  .either .opt.b .ot{color:var(--blue);}
+  .either .or{display:flex;align-items:center;justify-content:center;font-weight:800;color:#a9761c;font-size:13px;}
+  .either .efoot{font-size:12.5px;color:#6b615c;margin-top:10px;text-align:left;}
+  .why{background:#eef3fa;border:1px solid #cddcee;border-left:5px solid var(--blue);
+    padding:12px 17px;border-radius:0 10px 10px 0;margin:13px 0;font-size:14.5px;}
+  .why b{color:#2f466c;}
+  .why .wt{font-weight:800;color:#2f466c;display:block;margin-bottom:3px;}
+  .idx{font-size:13.5px;}
+  .foot{margin-top:34px;font-size:12.5px;color:var(--soft);text-align:center;line-height:1.9;}
+  @media(max-width:960px){
+    .layout{flex-direction:column;} nav.toc{position:static;width:100%;height:auto;flex-basis:auto;border-right:0;border-bottom:1px solid var(--line);}
+    main{padding:0 18px 60px;} .grid2,.grid4{grid-template-columns:1fr 1fr;}
+  }
+  @media(max-width:640px){.backbar{height:40px;padding:0 10px;} .backbar a{min-height:30px;padding:0 9px;font-size:12.5px;} .backbar .bb-t{display:none;}
+  .grid2,.grid4,.either .cols{grid-template-columns:1fr;} .either .or{padding:6px 0;} main{padding:0 12px 50px;} .hero{padding:28px 20px;} .hero h1{font-size:26px;}}
+
+  /* == 窄屏目录：横向胶囊，正文首屏可见 == */
+  @media(max-width:960px){
+    nav.toc{display:flex;flex-wrap:nowrap;gap:6px;align-items:center;
+      height:auto;max-height:none;overflow-x:auto;overflow-y:hidden;
+      padding:10px 12px;border-right:0;border-bottom:1px solid var(--line);
+      -webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;}
+    nav.toc .brand,nav.toc .brand-s,nav.toc .grp{display:none;}
+    nav.toc a{flex:0 0 auto;white-space:nowrap;padding:6px 11px;
+      border:1px solid var(--line2);border-radius:16px;background:var(--paper);
+      font-size:12.5px;line-height:1.4;}
+    nav.toc a:hover{background:var(--red-l);}
+    nav.toc a[style]{padding-left:11px;}
+  }
+
+  /* == 钻探者版补充 == */
+  .flow{margin:18px 0;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;}
+  .flow svg{display:block;width:100%;height:auto;}
+  .either .col{background:var(--paper);border:1px solid var(--line2);border-radius:10px;padding:11px 14px;font-size:14px;}
+  .either .col .ct{font-weight:800;color:var(--red);margin-bottom:4px;}
+  .either .efoot{font-size:12.5px;color:#6b615c;margin-top:10px;text-align:left;}
+  .pgs{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin:14px 0;}
+  .pgs figure{margin:0;background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:8px;}
+  .pgs img{display:block;width:100%;height:auto;margin:0;border:1px solid var(--line);border-radius:6px;}
+  .pgs figcaption{font-size:12px;color:var(--soft);text-align:center;margin-top:6px;line-height:1.5;}
+  @media(max-width:640px){.pgs{grid-template-columns:1fr 1fr;gap:9px;}}
+  /* 窄屏压缩首屏：hero 与体例框收紧，第 0 节进入首屏 */
+  @media(max-width:640px){
+    .hero{padding:22px 18px 24px;margin-bottom:16px;}
+    .hero h1{font-size:24px;} .hero .desc{font-size:14px;line-height:1.65;margin-top:8px;}
+    .hero .meta{margin-top:12px;gap:6px;} .hero .meta span{font-size:11.5px;padding:2px 10px;}
+    .stand{margin-top:10px;padding:9px 12px;font-size:12.5px;line-height:1.6;}
+  }
+</style>
+</head>
+<body>
+<div class="backbar"><a href="index.html">← 学习版目录</a><span class="bb-t">钻探者 · 学习版规则</span></div>
+<div class="layout">
+<nav class="toc">
+  <div class="brand">钻探者</div>
+  <div class="brand-s">学习版规则 · Drillers</div>
+  <div class="grp">规则概要</div>
+  <a href="#s0">0 · 游戏概要</a>
+  <a href="#s1">1 · 初局设置</a>
+  <a href="#s2">2 · 版图与组件</a>
+  <div class="grp">回合与行动</div>
+  <a href="#s3">3 · 核心引擎</a>
+  <a href="#pick" style="padding-left:22px;color:var(--gold);font-weight:700;">↳ 3.5 择一决策总表</a>
+  <a href="#s4">4 · 回合三阶段</a>
+  <a href="#s5">5 · 操作阶段效果</a>
+  <a href="#why" style="padding-left:22px;color:var(--blue);font-weight:700;">↳ 5.0 行动结构与格子差异</a>
+  <div class="grp">全局机制</div>
+  <a href="#s6">6 · 全局系统</a>
+  <a href="#s7">7 · 资源与费用</a>
+  <a href="#s8">8 · 终局与计分链路</a>
+  <div class="grp">查考与附录</div>
+  <a href="#s9">9 · 常见误读（27 条）</a>
+  <a href="#s10">10 · 示例回合拆解</a>
+  <a href="#s11">11 · 单人模式与变体</a>
+  <a href="#s12">12 · 速查表与页码索引</a>
+</nav>
+
+<main>
+<header class="hero">
+  <h1>钻探者 · 学习版规则</h1>
+  <div class="en">DRILLERS　｜　按规则结构重排，不按原书章节顺序</div>
+  <div class="desc">以燃料、移动点、钻井点三种资源为主线，逐层展开操作、上浮与维持三阶段；附择一决策总表、常见误读及原书页码索引。</div>
+  <div class="meta"><span>2–4 人 · 单人模式</span><span>60–90 分钟</span><span>牌库构筑 / 资源管理 / 版图推进</span><span>依据英文原书 20 页</span></div>
+</header>
+
+<div class="stand">
+  <b>体例：</b>按学习顺序重排，章节与原书不对应；每条结论后的 <span class="pg">p.X</span> 为英文原书页码。
+  规则裁决以<b>英文原书页图</b>为准；术语沿用已上线中文版的既定译法，卡面专名沿用中文版所保留的英文原名。原书自相矛盾处只记录、不裁定，实体配件印值以配件为准。第 12 节附页码对照与 15 张页图。<br>
+  <b>标记体例：</b><span class="pick">择一</span>＝<b>互斥分支，仅可选定其一</b>，不按先后顺序全部执行；虚线框里的 A / B 两栏同样是择一。
+  <span style="display:inline-block;background:#eef3fa;border-left:4px solid #3b5b8c;border-radius:4px;padding:0 8px;font-weight:700;color:#2f466c;">机制</span> 蓝框＝<b>机制说明</b>，陈述该步骤的作用及各格差异。
+</div>
+
+<section id="s0">
+<h2><span class="n">0</span>游戏概要与目标</h2>
+<p>玩家各操控一台采矿机甲，在七层矿坑与地表之间往返，收集矿物、钻开矿区板块、改造机甲并精简牌库。终局分数最高者胜。<span class="pg">p.3</span><span class="pg">p.13</span></p>
+<div class="grid2">
+  <div class="card"><div class="t">分数的加分项</div>矿区板块右上角的分值、市场与溢流区与储藏区内每枚矿物的固定分值、里程碑与未使用的商店刷新板块、终局剩余信用点按每 5 点折 1 分。<span class="pg">p.13</span></div>
+  <div class="card blue"><div class="t">分数的扣分项</div>终局时机甲停留层越深扣分越多，扣分印在主板侧边；牌库中右上角标负分的卡逐张扣分。<span class="pg">p.13</span></div>
+</div>
+<div class="why"><span class="wt">本作的核心取舍</span>燃料只在返回地表时补满，矿物只在返回地表时变现，卡牌只在返回地表时购入与修复，机甲上限只在返回地表时提升。留在矿内可继续钻取，代价是燃料与手牌持续消耗、终局深度扣分累积。是否上浮构成每回合的主要取舍。<span class="pg">p.3</span><span class="pg">p.10</span><span class="pg">p.11</span></div>
+<table>
+  <tr><th>项目</th><th>取值</th><th>依据</th></tr>
+  <tr><td>人数与时长</td><td>2–4 人，另含单人模式；60–90 分钟</td><td><span class="pg">p.3</span><span class="pg">p.14</span></td></tr>
+  <tr><td>轮转</td><td>自起始玩家起顺时针，逐个执行完整回合</td><td><span class="pg">p.3</span></td></tr>
+  <tr><td>终局</td><td>由任一玩家填满进度轨触发，非固定轮数</td><td><span class="pg">p.13</span></td></tr>
+  <tr><td>平局</td><td>先比剩余信用点，仍平则比剩余燃料</td><td><span class="pg">p.13</span></td></tr>
+</table>
+</section>
+
+<section id="s1">
+<h2><span class="n">1</span>初局设置：略过部分内容，关注核心内容</h2>
+<p>初局仅需完成三组布置。原书的机甲介绍、背景独白与致谢可略过；配件数量见第 2 节。<span class="pg">p.2</span><span class="pg">p.4</span><span class="pg">p.5</span></p>
+<h3>1.1 布置矿坑</h3>
+<ol>
+  <li>展开主板置于桌面中央。矿坑共七层：地表、矿坑入口、五个地下层。<span class="pg">p.4</span></li>
+  <li>按各层印制的矿物图案放置起始矿物；剩余矿物堆在矿坑旁备用。<span class="pg">p.4</span></li>
+  <li>洗混 3 张起始层卡，取 1 张正面朝上置于第 2 层的层卡指示标记旁。<span class="pg">p.4</span></li>
+  <li>洗混 9 张深层卡，在每个印有深层指示标记的层各放 1 张，背面朝下；未用卡放回盒中。<span class="pg">p.4</span></li>
+  <li>取出 4 块障碍板块，分置于矿坑最深的 4 层，板块左上角层号须与该层编号一致。<span class="pg">p.4</span></li>
+  <li>全部坑道板块翻至正面，按左上角层标记分成 5 叠，各叠内部随机排序，置于对应层左侧的标记区。<span class="pg">p.4</span></li>
+</ol>
+<h3>1.2 布置地表与商店</h3>
+<ol start="7">
+  <li>拼合两块商店板，置于矿坑上方。<span class="pg">p.4</span></li>
+  <li>按卡牌左上角图标分类：起始卡留作各人起始牌库；损伤卡整叠置于商店板左侧；其余按图标分叠洗混，背面朝下置于商店板对应位置，每叠即一家商店。<span class="pg">p.4</span></li>
+  <li>每家商店各翻 2 张，排在商店板下方形成 4 列现货。另从高级商店取 2 张，不看牌面，背面朝下压在第 4 层的深层卡下。<span class="pg">p.4</span></li>
+  <li>4 枚里程碑标记与全部信用点分置商店板旁。<span class="pg">p.4</span></li>
+</ol>
+<h3>1.3 启动机甲</h3>
+<ol start="11">
+  <li>各选一台机甲，模型置于主板最上层的地表。<span class="pg">p.5</span></li>
+  <li>组装起始牌库：每位玩家领取牌架、1 张损伤卡、8 张本方颜色的起始卡；躯干卡先取出，其余洗混后正面朝上放入牌架，最后把躯干卡置于牌库顶。起始牌库共 10 张。本作中仅自己可见自己牌库顶牌。<span class="pg">p.5</span></li>
+  <li>发放仪表盘：燃料盖封住燃料罐的 11 与 12 两格，1 个仪表指示物置于 10 格，另 2 个分别置于钻井表与移动表起点；3 枚无人机置于底部槽位，1 枚正面朝上、2 枚背面朝上；储藏盖封住储藏区第 3 格，左侧留出 2 个空格。<span class="pg">p.5</span></li>
+  <li>各发 1 块商店刷新板块，置于仪表盘旁。<span class="pg">p.5</span></li>
+  <li>随机决定起始玩家，按人数与顺位发放起始资源并抽牌。<span class="pg">p.5</span></li>
+</ol>
+<table>
+  <tr><th>顺位</th><th>2 人局</th><th>3 人局</th><th>4 人局</th></tr>
+  <tr><td>第 1 家</td><td>2 信用点／抽 3 张</td><td>2 信用点／抽 3 张</td><td>2 信用点／抽 3 张</td></tr>
+  <tr><td>第 2 家</td><td>4 信用点／抽 4 张</td><td>3 信用点／抽 4 张</td><td>5 信用点／抽 3 张</td></tr>
+  <tr><td>第 3 家</td><td>—</td><td>5 信用点／抽 4 张</td><td>4 信用点／抽 4 张</td></tr>
+  <tr><td>第 4 家</td><td>—</td><td>—</td><td>7 信用点／抽 4 张</td></tr>
+</table>
+<div class="tip"><b>起始资源：</b>信用点与抽牌数并非同序递增。4 人局第 2 家获 5 信用点但只抽 3 张，第 3 家获 4 信用点却抽 4 张。原书两处表格口径一致，按版图印值发放。<span class="pg">p.5</span><span class="pg">p.20</span></div>
+</section>
+
+<section id="s2">
+<h2><span class="n">2</span>版图与组件速认</h2>
+<p>按一局中用到的先后次序介绍，不按配件表顺序。<span class="pg">p.2</span><span class="pg">p.6</span></p>
+<h3>2.1 矿坑主板</h3>
+<p>七层自上而下排列：地表、矿坑入口、五个地下层。每层左侧设坑道板块叠，叠上方标示该层挖开一块坑道所需的钻井点数。多数层印有起始矿物。最深的 4 层各覆盖 1 块障碍板块，板块数字即清除所需钻井点数。层卡指示标记指示该层是否放置深层卡。<span class="pg">p.4</span><span class="pg">p.7</span></p>
+<h3>2.2 仪表盘九区</h3>
+<table>
+  <tr><th>区域</th><th>作用</th><th>初始状态</th></tr>
+  <tr><td>燃料罐</td><td>记录燃料的获得与花费</td><td>指示物在 10；11、12 由燃料盖封锁</td></tr>
+  <tr><td>钻井表／移动表</td><td>记录尚未花费的钻井点与移动点</td><td>指示物在起点，维持阶段归零</td></tr>
+  <tr><td>进度轨</td><td>自左至右填入所获矿区板块，填满触发终局</td><td>空；印有 3 条里程碑线</td></tr>
+  <tr><td>里程碑</td><td>首位覆盖里程碑线者取得对应标记</td><td>无</td></tr>
+  <tr><td>溢流区</td><td>容纳列满后溢出的矿物，区内方块缩短进度轨</td><td>空</td></tr>
+  <tr><td>储藏区</td><td>容纳收集的矿物，位于储藏盖左侧</td><td>2 个空格</td></tr>
+  <tr><td>市场</td><td>按矿物种类分列出售，自下而上填格</td><td>空</td></tr>
+  <tr><td>无人机</td><td>正面朝上者可在操作阶段执行效果</td><td>3 枚，1 正 2 反</td></tr>
+  <tr><td>默认功能</td><td>三项固定兑换，印于仪表盘</td><td>常态可用</td></tr>
+</table>
+<div class="why"><span class="wt">溢流区与进度轨的联动</span>溢流区中的矿物以方块占位，方块与进度轨中的板块相接即判定进度轨填满。未卖出而进入溢流区的矿物仍按类型计分，信用点按列顶溢出售价结算，代价是终局提前临近。<span class="pg">p.6</span><span class="pg">p.13</span><span class="pg">p.18</span></div>
+<h3>2.3 卡牌与商店</h3>
+<p>共 66 张卡，按左上角图标分为损伤 14、钻井 12、移动 12、通用 12、高级 16。损伤卡独立成堆，其余四类各成一家商店，每家开局翻开 2 张现货。高级卡除信用点外另需支付电池。<span class="pg">p.2</span><span class="pg">p.4</span><span class="pg">p.11</span></p>
+<p>另有层卡 12 张（起始 3、深层 9）、信用点标记 43 枚（面值 1 共 25、面值 5 共 12、面值 10 共 6）、矿物 105 枚（银 13、金 21、蓝宝石 27、绿宝石 23、红宝石 21）、里程碑标记 4 枚、障碍板块 4 块、坑道板块 29 块（按层分 5／6／7／6／5）。<span class="pg">p.2</span></p>
+</section>
+
+<section id="s3">
+<h2><span class="n">3</span>核心引擎</h2>
+<p>全游戏可压成一条因果链：燃料驱动卡牌与默认功能，产生移动点与钻井点；两类点数驱动机甲动作；动作产出矿物与矿区板块；矿物在地表变现，板块推进进度轨；返回地表补满燃料并整理牌库，进入下一回合。<span class="pg">p.3</span><span class="pg">p.6</span><span class="pg">p.12</span></p>
+<div class="flow">
+<svg viewBox="0 0 900 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="钻探者核心引擎因果链">
+  <defs><marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#6b615c"/></marker></defs>
+  <rect x="10" y="24" width="150" height="60" rx="10" fill="#eaf0f9" stroke="#3b5b8c"/>
+  <text x="85" y="49" text-anchor="middle" font-size="16" font-weight="700" fill="#2f466c">燃料</text>
+  <text x="85" y="70" text-anchor="middle" font-size="12" fill="#3b5b8c">上浮阶段补满</text>
+  <rect x="196" y="24" width="164" height="60" rx="10" fill="#f1eaf7" stroke="#6b4a86"/>
+  <text x="278" y="49" text-anchor="middle" font-size="16" font-weight="700" fill="#563a6d">卡牌／默认功能</text>
+  <text x="278" y="70" text-anchor="middle" font-size="12" fill="#6b4a86">支付燃料以产出点数</text>
+  <rect x="396" y="24" width="164" height="60" rx="10" fill="#fbecec" stroke="#a2303c"/>
+  <text x="478" y="49" text-anchor="middle" font-size="16" font-weight="700" fill="#8c2631">移动点／钻井点</text>
+  <text x="478" y="70" text-anchor="middle" font-size="12" fill="#a2303c">仪表记录，回合末清零</text>
+  <rect x="596" y="24" width="164" height="60" rx="10" fill="#fbf1dc" stroke="#a9761c"/>
+  <text x="678" y="49" text-anchor="middle" font-size="16" font-weight="700" fill="#8a5d11">机甲动作</text>
+  <text x="678" y="70" text-anchor="middle" font-size="12" fill="#a9761c">移动／收矿／挖板块</text>
+  <rect x="790" y="24" width="100" height="60" rx="10" fill="#e9f4ec" stroke="#3d7a55"/>
+  <text x="840" y="49" text-anchor="middle" font-size="16" font-weight="700" fill="#2c5c3f">产出</text>
+  <text x="840" y="70" text-anchor="middle" font-size="12" fill="#3d7a55">矿物／板块</text>
+  <line x1="160" y1="54" x2="192" y2="54" stroke="#6b615c" stroke-width="2" marker-end="url(#ar)"/>
+  <line x1="360" y1="54" x2="392" y2="54" stroke="#6b615c" stroke-width="2" marker-end="url(#ar)"/>
+  <line x1="560" y1="54" x2="592" y2="54" stroke="#6b615c" stroke-width="2" marker-end="url(#ar)"/>
+  <line x1="760" y1="54" x2="786" y2="54" stroke="#6b615c" stroke-width="2" marker-end="url(#ar)"/>
+  <rect x="596" y="142" width="164" height="56" rx="10" fill="#fbf1dc" stroke="#a9761c"/>
+  <text x="678" y="166" text-anchor="middle" font-size="14" font-weight="700" fill="#8a5d11">上浮变现</text>
+  <text x="678" y="185" text-anchor="middle" font-size="12" fill="#a9761c">卖矿／购卡／修复／加油</text>
+  <rect x="396" y="142" width="164" height="56" rx="10" fill="#eaf0f9" stroke="#3b5b8c"/>
+  <text x="478" y="166" text-anchor="middle" font-size="14" font-weight="700" fill="#2f466c">维持整理</text>
+  <text x="478" y="185" text-anchor="middle" font-size="12" fill="#3b5b8c">留牌付费／清区／抽 3 张</text>
+  <rect x="196" y="142" width="164" height="56" rx="10" fill="#e9f4ec" stroke="#3d7a55"/>
+  <text x="278" y="166" text-anchor="middle" font-size="14" font-weight="700" fill="#2c5c3f">进度轨推进</text>
+  <text x="278" y="185" text-anchor="middle" font-size="12" fill="#3d7a55">板块入轨，触发终局</text>
+  <path d="M840,84 L840,112 L678,112 L678,138" fill="none" stroke="#6b615c" stroke-width="2" marker-end="url(#ar)"/>
+  <line x1="596" y1="170" x2="564" y2="170" stroke="#6b615c" stroke-width="2" marker-end="url(#ar)"/>
+  <path d="M396,170 L120,170 L120,88 L85,88" fill="none" stroke="#6b615c" stroke-width="2" marker-end="url(#ar)"/>
+  <path d="M840,112 L278,112 L278,138" fill="none" stroke="#6b615c" stroke-width="2" stroke-dasharray="5,4" marker-end="url(#ar)"/>
+</svg>
+</div>
+<div class="grid2">
+  <div class="card"><div class="t">燃料循环</div>燃料罐只在返回地表时补满。操作阶段内燃料单向递减，损伤换燃料与卡牌换燃料为两处例外补充。<span class="pg">p.9</span><span class="pg">p.11</span></div>
+  <div class="card blue"><div class="t">牌库循环</div>打出的牌进个人弃牌堆；牌库一空立即洗混弃牌堆，正面朝上放回牌架。牌库顶始终可见，抽牌结果可预期。<span class="pg">p.8</span><span class="pg">p.12</span><span class="pg">p.18</span></div>
+</div>
+</section>
+
+<section id="pick">
+<h2><span class="n">3.5</span>择一决策总表</h2>
+<p>原书标明另择或任选其一之处，逐处判定为互斥择一或可选前置。下表汇总全游戏的互斥选择：每行均为择一，不按先后顺序执行。正文中的<span class="pick">择一</span>标记均回指本表。<span class="pg">p.7</span><span class="pg">p.8</span><span class="pg">p.9</span><span class="pg">p.10</span><span class="pg">p.11</span></p>
+<table>
+  <tr><th>阶段</th><th>决策点</th><th>互斥选项</th><th>约束</th><th>依据</th></tr>
+  <tr><td>操作</td><td>每张手牌的用法</td><td>A 支付燃料执行主效果／B 打出换取燃料／C 留至下回合</td><td>三选一；C 仅第 1 张免费，其余每张在维持阶段支付 1 燃料</td><td><span class="pg">p.8</span><span class="pg">p.12</span></td></tr>
+  <tr><td>操作</td><td>钻井点的用途</td><td>A 收集 1 枚矿物／B 挖开坑道／C 清除障碍</td><td>三选一；B 按该层标示费用，C 按障碍板块数字</td><td><span class="pg">p.7</span></td></tr>
+  <tr><td>操作</td><td>移动方向</td><td>上移 1 层／下移 1 层</td><td>每次支付 1 移动点；仅可进入开放层</td><td><span class="pg">p.6</span></td></tr>
+  <tr><td>操作</td><td>正面无人机的用法</td><td>A 卖出 1 枚矿物／B 购买 1 张卡</td><td>二选一；使用后翻至背面</td><td><span class="pg">p.9</span></td></tr>
+  <tr><td>操作</td><td>操作阶段结束位置</td><td>停于地表：进入上浮阶段／停于矿内：跳过上浮，直接维持</td><td>条件分支，非玩家自主择一</td><td><span class="pg">p.10</span></td></tr>
+  <tr><td>上浮</td><td>修复对象</td><td>手牌／出牌区／弃牌堆／牌库顶</td><td>四选一；每次上浮限一次，支付 5 信用点</td><td><span class="pg">p.10</span></td></tr>
+  <tr><td>上浮</td><td>刷新对象</td><td>四家商店之一</td><td>每局一次；高级商店扩建后补 4 张</td><td><span class="pg">p.11</span></td></tr>
+  <tr><td>单人</td><td>机器人的回合类型</td><td>位于地表：行动回合／位于矿内：重置回合</td><td>条件分支，由机器人位置决定</td><td><span class="pg">p.14</span></td></tr>
+</table>
+<div class="warn"><b>非择一的两类表述：</b>操作阶段的移动、钻井、打牌、默认功能、无人机可任意顺序交替执行任意次数（以燃料为限），不构成互斥；上浮阶段的卖矿、弃牌、升级、购卡、加油亦为自由组合，除修复限一次外每项可重复。二者均不得误读为编号步骤依次执行。<span class="pg">p.6</span><span class="pg">p.10</span></div>
+</section>
+
+<section id="s4">
+<h2><span class="n">4</span>一个回合的三阶段</h2>
+<div class="flow">
+<svg viewBox="0 0 900 170" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="三阶段流程">
+  <defs><marker id="ar2" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#6b615c"/></marker></defs>
+  <rect x="12" y="30" width="252" height="96" rx="12" fill="#eaf0f9" stroke="#3b5b8c"/>
+  <text x="138" y="58" text-anchor="middle" font-size="17" font-weight="700" fill="#2f466c">1 操作阶段</text>
+  <text x="138" y="82" text-anchor="middle" font-size="12.5" fill="#3b5b8c">打牌产点数 → 移动／收矿／挖板块</text>
+  <text x="138" y="103" text-anchor="middle" font-size="12.5" fill="#3b5b8c">任意顺序、任意次数，主动结束</text>
+  <rect x="324" y="30" width="252" height="96" rx="12" fill="#fbf1dc" stroke="#a9761c"/>
+  <text x="450" y="58" text-anchor="middle" font-size="17" font-weight="700" fill="#8a5d11">2 上浮阶段</text>
+  <text x="450" y="82" text-anchor="middle" font-size="12.5" fill="#a9761c">仅结束操作阶段时位于地表才执行</text>
+  <text x="450" y="103" text-anchor="middle" font-size="12.5" fill="#a9761c">卖矿／弃牌／升级／修复／购卡／加油</text>
+  <rect x="636" y="30" width="252" height="96" rx="12" fill="#e9f4ec" stroke="#3d7a55"/>
+  <text x="762" y="58" text-anchor="middle" font-size="17" font-weight="700" fill="#2c5c3f">3 维持阶段</text>
+  <text x="762" y="82" text-anchor="middle" font-size="12.5" fill="#3d7a55">留牌付费 → 清出牌区 → 抽 3 张</text>
+  <text x="762" y="103" text-anchor="middle" font-size="12.5" fill="#3d7a55">补充商店；无论是否上浮均执行</text>
+  <line x1="264" y1="78" x2="320" y2="78" stroke="#6b615c" stroke-width="2" marker-end="url(#ar2)"/>
+  <path d="M576,78 L632,78" stroke="#6b615c" stroke-width="2" marker-end="url(#ar2)"/>
+  <path d="M450,126 L450,150 L138,150 L138,130" fill="none" stroke="#a2303c" stroke-width="2" stroke-dasharray="5,4" marker-end="url(#ar2)"/>
+  <text x="294" y="163" text-anchor="middle" font-size="11.5" fill="#a2303c">未在地表则跳过上浮</text>
+</svg>
+</div>
+<h3>4.1 操作阶段</h3>
+<p>在移动、钻井、打牌、机甲默认功能、无人机之间自由交替，顺序与次数均不限，以燃料与可用效果为限。不再执行任何效果时，操作阶段结束。<span class="pg">p.6</span></p>
+<h3>4.2 上浮阶段</h3>
+<p>仅当操作阶段结束时机甲位于地表（主板最上层）才执行，否则直接跳至维持阶段。六项效果任意顺序；除修复每次上浮限一次外，其余每项次数不限。<span class="pg">p.10</span></p>
+<h3>4.3 维持阶段</h3>
+<ol>
+  <li>保留未打出的手牌：第 1 张免费，其余每张支付 1 燃料。<span class="pg">p.12</span></li>
+  <li>清空出牌区：所有牌移入个人弃牌堆，钻井表与移动表归零；常驻卡不进弃牌堆，始终与出牌区分置。<span class="pg">p.12</span></li>
+  <li>从个人牌库抽 3 张，与保留手牌数量无关；牌库一空立即洗混弃牌堆组成新牌库，正面朝上放回牌架。<span class="pg">p.12</span><span class="pg">p.18</span></li>
+  <li>本回合购入过卡时，从各商店对应牌堆补足现货。<span class="pg">p.11</span><span class="pg">p.12</span></li>
+</ol>
+<div class="warn"><b>判定顺序：</b>先支付费用，再结算效果；燃料不足即无法执行该效果。卡牌的即时效果与独特效果同属主效果，彼此顺序可由玩家选定。上浮阶段开始后，剩余移动点与钻井点全部失效，且不得再打牌；默认功能仅可在打牌之前或之后使用，不得插入一张卡主效果的结算过程。<span class="pg">p.8</span><span class="pg">p.9</span><span class="pg">p.18</span></div>
+</section>
+
+<section id="s5">
+<h2><span class="n">5</span>操作阶段效果逐条深挖</h2>
+<h3 id="why">5.0 · 行动结构与格子差异</h3>
+<div class="why"><span class="wt">三种资源的作用</span>燃料是通用行动货币，决定本回合可产出的点数总量；移动点解决机甲在七层之间的位置，决定可触及的层；钻井点解决该层资源的提取方式，决定获得矿物、扩展版图还是打通新层。三者不可互换，钻井点与移动点在维持阶段归零，无法囤积至下回合。<span class="pg">p.6</span><span class="pg">p.7</span><span class="pg">p.12</span></div>
+<table>
+  <tr><th>位置</th><th>格子差异</th><th>影响范围</th><th>依据</th></tr>
+  <tr><td>矿坑各层</td><td>起始矿物种类与数量不同；坑道叠的钻井费用不同；障碍板块数字不同；部分层置有层卡</td><td>该层可收集的矿物、挖开坑道的代价、是否可继续向下开放</td><td><span class="pg">p.4</span><span class="pg">p.7</span></td></tr>
+  <tr><td>市场各列</td><td>五列对应五种矿物；每列容量有限，自下而上各格售价不同；列顶另印溢出售价</td><td>同种矿物售出越晚单价变化；列满后须进入溢流区按更低售价结算</td><td><span class="pg">p.10</span></td></tr>
+  <tr><td>进度轨</td><td>格位有限，印有 3 条里程碑线；溢流区方块占位</td><td>板块入轨推进终局；覆盖里程碑线者取得标记，其余玩家获标记所示补偿</td><td><span class="pg">p.6</span><span class="pg">p.12</span></td></tr>
+  <tr><td>矿区板块</td><td>坑道板块印有加入本层的矿物；障碍板块印有清除费用；每块右上角印分值，底部另有耗尽效果</td><td>挖开时本层矿物增加；耗尽后获得即时效果但终局分值降低</td><td><span class="pg">p.7</span><span class="pg">p.9</span><span class="pg">p.13</span></td></tr>
+  <tr><td>层卡</td><td>四类强制触发：翻开时、挖坑道时、收矿时、操作阶段结束时</td><td>该层此后每次对应动作均须结算卡面效果</td><td><span class="pg">p.12</span></td></tr>
+  <tr><td>四家商店</td><td>钻井、移动、通用、高级各 2 张现货；高级卡另需电池；第 4 层开放后高级店扩至 4 张</td><td>可购入的卡型、费用与刷新张数</td><td><span class="pg">p.4</span><span class="pg">p.11</span><span class="pg">p.12</span></td></tr>
+</table>
+<p>市场各格售价、各层深度扣分、层卡具体效果均印在实体版图与卡面，原书正文未逐项列出。结算时以版图与卡面印值为准，不代填数值。<span class="pg">p.10</span><span class="pg">p.13</span></p>
+
+<h3>5.1 · 移动</h3>
+<div class="why"><span class="wt">作用</span>把机甲移到目标层，决定本回合可提取资源所在的层，并决定操作阶段结束时是否位于地表。清除障碍后的下移不支付移动点，属钻探结果的附带位移。<span class="pg">p.6</span><span class="pg">p.7</span></div>
+<p>支付 1 移动点，机甲上移或下移 1 层；仅可进入开放层，即未覆盖障碍板块的层。<span class="pg">p.6</span></p>
+<div class="tip"><b>示例：</b>黄色玩家打出卡牌累计获得 3 移动点，全部支付后上移 3 层，停于地表。<span class="pg">p.6</span></div>
+
+<h3>5.2 · 钻井点的三种用途</h3>
+<div class="why"><span class="wt">作用与取舍</span>收集矿物把版图资源转为待售货物，不推进进度轨；挖开坑道把板块印制的矿物加入本层并取得一块板块，同时推进进度轨；清除障碍开放新层、揭示层卡并免费下移，同样推进进度轨。前一项换取分数与信用点，后两项同时换取资源与终局进度，构成钻探决策的主轴。<span class="pg">p.7</span></div>
+<div class="either">
+  <div class="hd">获得钻井点后 —— <span class="pick">择一</span>　三种用途互斥，按各自费用支付</div>
+  <div class="cols">
+    <div class="col"><div class="ct">A · 收集矿物</div><p>机甲所在层有矿物时，支付 1 钻井点收集 1 枚，置于储藏区。储藏区已满则不可再收集，且不得弃置储藏区矿物腾出空位。<span class="pg">p.7</span><span class="pg">p.18</span></p></div>
+    <div class="or">择一</div>
+    <div class="col"><div class="ct">B · 挖开坑道</div><p>机甲所在层有坑道板块时，支付该层标示费用挖开最上一块：把板块印制的矿物加入本层，再把板块正面朝上置于进度轨。<span class="pg">p.7</span></p></div>
+  </div>
+  <div class="efoot">C · 清除障碍：机甲位于障碍板块正上方一层时，支付障碍数字所示钻井点移除该板块，板块进入进度轨，揭示其下层卡并结算「翻开时」效果，随后机甲移动至新开放的层，此次移动不支付移动点。<span class="pg">p.7</span></div>
+</div>
+<p>钻井点与移动点由仪表记录，可在操作阶段任意时刻支付，二者亦可交错使用；上浮阶段开始后余额失效。<span class="pg">p.7</span><span class="pg">p.18</span></p>
+
+<h3>5.3 · 打牌</h3>
+<div class="why"><span class="wt">作用</span>卡牌同时是行动来源与燃料来源。同一张卡只能承担一种职能：执行主效果换取点数与特殊能力，或弃其效果换取燃料，或保留至下回合。牌库顶始终可见，保留决策具备可预期性。<span class="pg">p.8</span></div>
+<p>打出的牌置于仪表盘前方的出牌区，维持阶段统一移入个人弃牌堆。每张牌的七处信息：① 左上角卡型；② 右上角购买费用；③ 换取燃料所得数值；④ 主效果所需燃料；⑤ 即时效果；⑥ 产出的钻井点与移动点；⑦ 独特效果。即时效果与独特效果同属主效果，结算顺序由玩家选定。<span class="pg">p.8</span></p>
+<p>独特效果附两种时机标记：其一，本回合可结算任意次；其二，操作阶段内任意时机结算一次。<span class="pg">p.8</span></p>
+<div class="tip"><b>固体燃料：</b>部分卡的主效果须以固体燃料支付。执行时把储藏区任意 1 枚矿物移至溢流区，该矿物不卖出、不获得信用点，终局仍按类型计分。<span class="pg">p.8</span></div>
+<p>换取燃料时，把卡牌打出至出牌区并按卡面数值增加燃料；燃料不得超过燃料盖所示上限。保留手牌时，第 1 张免费，其余每张在维持阶段支付 1 燃料。<span class="pg">p.8</span><span class="pg">p.12</span></p>
+
+<h3>5.4 · 默认功能与无人机</h3>
+<div class="why"><span class="wt">作用</span>默认功能以燃料直接兑换点数，燃料效率低于卡牌，但可补足单次行动所差的点数或燃料；无人机把仅在上浮阶段开放的两项效果提前至操作阶段，代价是翻至背面，须由卡牌效果刷新。<span class="pg">p.9</span></div>
+<table>
+  <tr><th>默认功能</th><th>支付</th><th>所得</th></tr>
+  <tr><td>生成移动点</td><td>3 燃料</td><td>1 移动点</td></tr>
+  <tr><td>生成钻井点</td><td>4 燃料</td><td>1 钻井点</td></tr>
+  <tr><td>承受损伤</td><td>每回合限一次，取 1 张损伤卡置于弃牌堆</td><td>3 燃料</td></tr>
+</table>
+<p>三项默认功能彼此独立，可在打牌前后任意次数使用；不得插入一张卡主效果的结算过程。损伤卡堆耗尽时，改为从市场最右侧非空列取走最上面一枚矿物放回供应堆。<span class="pg">p.9</span><span class="pg">p.18</span></p>
+<p><span class="pick">择一</span>正面朝上的无人机可在操作阶段使用，翻至背面并选定一项：卖出 1 枚矿物，或购买 1 张卡。购入的卡置于牌库顶；以无人机购入的常驻卡当回合即可使用其效果。商店刷新板块不得在无人机购卡时使用。<span class="pg">p.9</span><span class="pg">p.18</span></p>
+
+<h3>5.5 · 耗尽矿区板块与电池</h3>
+<div class="why"><span class="wt">作用</span>已收集的矿区板块可翻面执行一次底部效果，把终局分值兑换为即时资源或费用支付能力。操作阶段与上浮阶段均可耗尽；上浮阶段常用于支付电池与信用点费用。<span class="pg">p.9</span><span class="pg">p.11</span></div>
+<p>耗尽时结算板块底部效果，随后翻至背面；已耗尽的板块终局按背面较低分值计分。电池用于购买高级卡，以耗尽带电池图标的矿区板块支付，且须在信用点之外另付。<span class="pg">p.9</span><span class="pg">p.11</span><span class="pg">p.13</span></p>
+<p>无人机相关的两类卡面效果：刷新无人机，把 1 枚背面朝上的无人机翻回正面，全部正面时跳过；耗尽无人机，把 1 枚正面朝上的无人机翻至背面。<span class="pg">p.9</span><span class="pg">p.20</span></p>
+</section>
+
+<section id="s6">
+<h2><span class="n">6</span>贯穿全局的系统</h2>
+<h3>6.1 层卡</h3>
+<p>矿坑多数层开局即置有层卡。开放新层时揭示该层层卡，置于该层右侧；揭示后持续生效至终局。层卡含四类强制效果，均须执行，不得选择略过：<span class="pg">p.12</span><span class="pg">p.18</span></p>
+<table>
+  <tr><th>触发类型</th><th>结算时机</th></tr>
+  <tr><td>翻开时</td><td>层卡揭示的瞬间，结算一次</td></tr>
+  <tr><td>挖坑道时</td><td>在该层挖开一块坑道之后结算</td></tr>
+  <tr><td>收矿时</td><td>每次从该层收集矿物时结算</td></tr>
+  <tr><td>操作阶段结束时</td><td>机甲在该层结束操作阶段时结算</td></tr>
+</table>
+<p>单人模式中机器人同样揭示层卡，但不受层卡文字影响，其回合内忽略层卡效果；揭示 JACKPOT 层卡时仅加入 1 枚矿物，且仅人类玩家可收集。<span class="pg">p.17</span></p>
+<h3>6.2 里程碑</h3>
+<p>进度轨印有 3 条里程碑线。首位以板块覆盖某条线的玩家取得对应里程碑标记，置于进度轨上方，终局按标记印值计分；其余每位玩家立即获得该标记所示的信用点或抽卡补偿。<span class="pg">p.6</span><span class="pg">p.12</span></p>
+<p>第 4 枚里程碑标记归属触发终局者，价值 18 分；其余玩家按标记指示各抽 1 张卡。<span class="pg">p.13</span></p>
+<h3>6.3 高级商店扩建</h3>
+<p>任一玩家开放矿坑第 4 层时，高级商店立即扩建：把设置时压在该层深层卡下的 2 张卡加入商店。此后高级商店常设 4 张现货，刷新时弃去 4 张并揭示 4 张新卡。<span class="pg">p.4</span><span class="pg">p.11</span><span class="pg">p.12</span></p>
+<h3>6.4 牌库循环与修复</h3>
+<p>起始牌库含多张终局负分卡。上浮阶段支付 5 信用点可修复 1 张卡，每次上浮限一次：从手牌、出牌区、弃牌堆或牌库顶选定 1 张并移除；损伤卡放回损伤堆顶，其余卡移出游戏；若移除手牌则补抽 1 张。<span class="pg">p.10</span></p>
+<p>牌库一空即洗混弃牌堆，正面朝上放回牌架组成新牌库，不等到下次需要抽牌时再洗。牌架中的牌库顶始终仅自己可见。<span class="pg">p.5</span><span class="pg">p.12</span><span class="pg">p.18</span></p>
+<h3>6.5 商店刷新板块</h3>
+<p>每局一次，仅可于上浮阶段使用：把板块翻至背面，选定一家商店，将其现有现货洗混置于该店牌库底，再揭示 2 张新卡；高级商店扩建后揭示 4 张。已在该店购卡之后仍可刷新。以无人机购卡时不得使用刷新板块。<span class="pg">p.11</span><span class="pg">p.18</span></p>
+</section>
+
+<section id="s7">
+<h2><span class="n">7</span>资源与费用</h2>
+<table>
+  <tr><th>资源</th><th>获取途径</th><th>花费去向</th><th>上限与限制</th></tr>
+  <tr><td>燃料</td><td>上浮阶段加满至燃料盖；卡牌换燃料；承受损伤换 3 燃料；部分卡效果</td><td>卡牌主效果、三项默认功能、保留额外手牌</td><td>不得超过燃料盖；升级燃料上限须支付燃料盖右侧格标示费用<span class="pg">p.8</span><span class="pg">p.10</span><span class="pg">p.11</span></td></tr>
+  <tr><td>移动点</td><td>卡牌主效果、默认功能 3 燃料</td><td>机甲上移或下移 1 层</td><td>仪表记录；维持阶段归零；上浮后失效<span class="pg">p.6</span><span class="pg">p.7</span></td></tr>
+  <tr><td>钻井点</td><td>卡牌主效果、默认功能 4 燃料</td><td>收集矿物、挖开坑道、清除障碍</td><td>仪表记录；维持阶段归零；上浮后失效<span class="pg">p.7</span><span class="pg">p.9</span></td></tr>
+  <tr><td>信用点</td><td>卖出矿物、弃牌每张 2 点、里程碑补偿</td><td>购卡、升级储藏 3 点、升级燃料、修复 5 点</td><td>终局每 5 点折 1 分；供应不足时以合适替代物充当<span class="pg">p.10</span><span class="pg">p.13</span><span class="pg">p.18</span></td></tr>
+  <tr><td>矿物</td><td>收集、挖开坑道时加入本层</td><td>卖出、转为固体燃料、进入溢流区</td><td>储藏区容量由储藏盖决定；不得主动弃置<span class="pg">p.7</span><span class="pg">p.8</span><span class="pg">p.18</span></td></tr>
+  <tr><td>电池</td><td>耗尽带电池图标的矿区板块</td><td>购买高级卡时于信用点之外另付</td><td>耗尽板块者终局分值降低<span class="pg">p.9</span><span class="pg">p.11</span></td></tr>
+</table>
+<div class="why"><span class="wt">固体燃料与溢流的差别</span>固体燃料把储藏区矿物直接移入溢流区，不产生信用点；常规卖出把矿物移入市场对应列，产生该格售价。两条路径均使矿物终局按类型计分，且均可能以方块缩短进度轨。固体燃料以分数与信用点换取一次主效果，属资源兑换，不属择一分支。<span class="pg">p.8</span><span class="pg">p.10</span></div>
+<h3>7.1 上浮阶段费用速查</h3>
+<table>
+  <tr><th>项目</th><th>费用</th><th>次数</th><th>依据</th></tr>
+  <tr><td>升级储藏上限</td><td>3 信用点，储藏盖右移 1 格</td><td>不限</td><td><span class="pg">p.10</span></td></tr>
+  <tr><td>升级燃料上限</td><td>燃料盖右侧格标示费用</td><td>不限</td><td><span class="pg">p.10</span></td></tr>
+  <tr><td>修复 1 张卡</td><td>5 信用点</td><td>每次上浮限一次</td><td><span class="pg">p.10</span></td></tr>
+  <tr><td>弃牌换信用点</td><td>弃 1 张牌，获得 2 信用点</td><td>不限</td><td><span class="pg">p.10</span></td></tr>
+  <tr><td>购买卡牌</td><td>右上角信用点；高级卡另付电池</td><td>不限</td><td><span class="pg">p.11</span></td></tr>
+  <tr><td>刷新商店</td><td>板块翻面</td><td>每局一次</td><td><span class="pg">p.11</span></td></tr>
+  <tr><td>加满燃料</td><td>无</td><td>不限</td><td><span class="pg">p.11</span></td></tr>
+</table>
+<div class="tip"><b>购入卡牌的去向：</b>普通卡置于牌库顶；常驻卡横向置于仪表盘旁，不加入牌库，且每个操作阶段可使用一次其效果。以无人机购入的常驻卡当回合即可使用。<span class="pg">p.11</span><span class="pg">p.18</span></div>
+</section>
+
+<section id="s8">
+<h2><span class="n">8</span>终局与计分链路</h2>
+<h3>8.1 触发与收尾</h3>
+<p>任一玩家完成进度轨即触发终局：轨内板块与溢流区方块相接时判定完成；溢流区无方块时，板块抵达仪表盘末端即判定完成。触发者取得第 4 枚里程碑标记（18 分），其余玩家各抽 1 张卡。<span class="pg">p.13</span></p>
+<p>触发者完成本回合后，其余玩家各执行一个最终回合，随即结束；触发者不再行动。最终回合结束时仍位于矿内的机甲按所在层扣分，扣分印在主板侧边。<span class="pg">p.13</span></p>
+<div class="flow">
+<svg viewBox="0 0 900 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="终局计分四步">
+  <defs><marker id="ar3" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#6b615c"/></marker></defs>
+  <rect x="10" y="40" width="196" height="86" rx="12" fill="#eaf0f9" stroke="#3b5b8c"/>
+  <text x="108" y="70" text-anchor="middle" font-size="15" font-weight="700" fill="#2f466c">1 板块分</text>
+  <text x="108" y="93" text-anchor="middle" font-size="12" fill="#3b5b8c">各块右上角印值</text>
+  <text x="108" y="112" text-anchor="middle" font-size="12" fill="#3b5b8c">耗尽者按背面较低值</text>
+  <rect x="232" y="40" width="196" height="86" rx="12" fill="#e9f4ec" stroke="#3d7a55"/>
+  <text x="330" y="70" text-anchor="middle" font-size="15" font-weight="700" fill="#2c5c3f">2 矿物分</text>
+  <text x="330" y="93" text-anchor="middle" font-size="12" fill="#3d7a55">市场／溢流区／储藏区</text>
+  <text x="330" y="112" text-anchor="middle" font-size="12" fill="#3d7a55">银 2 金 3 蓝 4 绿 5 红 6</text>
+  <rect x="454" y="40" width="196" height="86" rx="12" fill="#fbf1dc" stroke="#a9761c"/>
+  <text x="552" y="70" text-anchor="middle" font-size="15" font-weight="700" fill="#8a5d11">3 折算与标记</text>
+  <text x="552" y="93" text-anchor="middle" font-size="12" fill="#a9761c">每 5 信用点折 1 分</text>
+  <text x="552" y="112" text-anchor="middle" font-size="12" fill="#a9761c">里程碑与未用刷新板块</text>
+  <rect x="676" y="40" width="214" height="86" rx="12" fill="#fbecec" stroke="#a2303c"/>
+  <text x="783" y="70" text-anchor="middle" font-size="15" font-weight="700" fill="#8c2631">4 扣除</text>
+  <text x="783" y="93" text-anchor="middle" font-size="12" fill="#a2303c">机甲停留层的深度扣分</text>
+  <text x="783" y="112" text-anchor="middle" font-size="12" fill="#a2303c">牌库中负分卡逐张扣分</text>
+  <line x1="206" y1="83" x2="228" y2="83" stroke="#6b615c" stroke-width="2" marker-end="url(#ar3)"/>
+  <line x1="428" y1="83" x2="450" y2="83" stroke="#6b615c" stroke-width="2" marker-end="url(#ar3)"/>
+  <line x1="650" y1="83" x2="672" y2="83" stroke="#6b615c" stroke-width="2" marker-end="url(#ar3)"/>
+  <text x="450" y="158" text-anchor="middle" font-size="12.5" fill="#6b615c">平手时先比剩余信用点，仍平则比剩余燃料</text>
+</svg>
+</div>
+<p>矿物终局分值按第 13 页计分图标标示：银 2 分、金 3 分、蓝宝石 4 分、绿宝石 5 分、红宝石 6 分。各层深度扣分印在主板侧边，原书正文未逐层列出，结算时以主板印值为准。<span class="pg">p.13</span></p>
+<h3>8.2 原书计分算例逐行拆解</h3>
+<p>第 13 页计分表给出一组完整算例，分项合计 132 分。下表按「步骤／分项／数值／累计」列示。<span class="pg">p.13</span></p>
+<table>
+  <tr><th>步骤</th><th>分项</th><th>数值</th><th>累计</th></tr>
+  <tr><td>1</td><td>收集到的矿区板块，按右上角印值合计</td><td class="c">52</td><td class="c">52</td></tr>
+  <tr><td>2</td><td>银矿，每枚 2 分</td><td class="c">8</td><td class="c">60</td></tr>
+  <tr><td>3</td><td>金矿，每枚 3 分</td><td class="c">18</td><td class="c">78</td></tr>
+  <tr><td>4</td><td>蓝宝石，每枚 4 分</td><td class="c">16</td><td class="c">94</td></tr>
+  <tr><td>5</td><td>绿宝石，每枚 5 分</td><td class="c">10</td><td class="c">104</td></tr>
+  <tr><td>6</td><td>红宝石，每枚 6 分</td><td class="c">30</td><td class="c">134</td></tr>
+  <tr><td>7</td><td>里程碑与未用商店刷新板块，按各自印值</td><td class="c">18</td><td class="c">152</td></tr>
+  <tr><td>8</td><td>剩余信用点折算，每 5 点折 1 分</td><td class="c">1</td><td class="c">153</td></tr>
+  <tr><td>9</td><td>机甲最终位置，按所在层扣分</td><td class="c">−9</td><td class="c">144</td></tr>
+  <tr><td>10</td><td>牌库中负分卡逐张扣分</td><td class="c">−12</td><td class="c">132</td></tr>
+  <tr><td>合计</td><td>最终得分</td><td class="c">132</td><td class="c">132</td></tr>
+</table>
+<div class="warn"><b>算例口径：</b>第 7 项按原书计分表图标归为里程碑与刷新板块，第 8 项为信用点折算；分项名称以计分表印值与版图为准。原书未给出该局各矿物的具体枚数，不反推枚数。<span class="pg">p.13</span></div>
+</section>
+
+<section id="s9">
+<h2><span class="n">9</span>常见误读</h2>
+<ol>
+  <li>牌库一空立即洗混弃牌堆组成新牌库，不等到下次需要抽牌时再洗。<span class="pg">p.18</span></li>
+  <li>以无人机购入的常驻卡，同一操作阶段即可使用其效果。<span class="pg">p.18</span></li>
+  <li>默认功能仅可在打牌之前或之后使用，不得插入一张卡主效果的结算过程。<span class="pg">p.18</span></li>
+  <li>不得弃置储藏区矿物以腾出空位收集新矿物。<span class="pg">p.18</span></li>
+  <li>坑道板块用尽后，该层不可再挖开坑道；损伤卡用尽时改为从市场最右侧非空列取走最上面一枚矿物放回供应堆；某家商店牌堆用尽后不再补货；信用点与矿物不限量，不足时以合适替代物充当。<span class="pg">p.18</span></li>
+  <li>LAVA CAVE 与 SULFUR CAVE 的效果同属层卡强制效果，必须结算。<span class="pg">p.18</span></li>
+  <li>上浮阶段开始后，剩余移动点与钻井点全部失效，且不得再打牌。<span class="pg">p.18</span></li>
+  <li>商店刷新板块仅可于上浮阶段使用，以无人机购卡时不得使用。<span class="pg">p.18</span></li>
+  <li>进度轨填满后仍可继续挖开矿区板块，多出的板块置于仪表盘右侧。<span class="pg">p.18</span></li>
+  <li>溢流区填满后仍可继续卖出矿物，矿物不再缩短进度轨，信用点与分数仍按进入溢流区结算。<span class="pg">p.18</span></li>
+  <li>CLEANING BREAK、MINING DRONE、REFUELLING DRONE、SUPERHOT FURNACE 执行主效果时免费提升储藏或燃料上限一级；对应区段已升至满级则跳过该效果。<span class="pg">p.18</span></li>
+  <li>CURRENT-MINER 选定市场一个非空列，把该列最上面一枚矿物移至溢流区，不获得信用点。<span class="pg">p.18</span></li>
+  <li>操作阶段与上浮阶段的各项效果均为自由组合，除修复限一次外不按编号顺序依次全部执行。<span class="pg">p.6</span><span class="pg">p.10</span></li>
+  <li>清除障碍后的下移由钻探结果附带，不支付移动点，亦不计为一次自选移动。<span class="pg">p.7</span></li>
+  <li>上浮阶段仅在操作阶段结束时位于地表才执行；位于矿内直接跳至维持阶段。<span class="pg">p.10</span></li>
+  <li>常驻卡不进牌库、不进出牌区、不进弃牌堆，始终置于仪表盘旁。<span class="pg">p.11</span><span class="pg">p.12</span></li>
+  <li>维持阶段固定抽 3 张，与保留手牌数量无关。<span class="pg">p.12</span></li>
+  <li>层卡揭示后持续生效至终局，四类触发均为强制。<span class="pg">p.12</span></li>
+  <li>里程碑仅首位覆盖里程碑线者取得，其余玩家获得标记所示补偿，不取得标记。<span class="pg">p.12</span></li>
+  <li>高级商店在第 4 层开放时扩建，扩建后常设 4 张，刷新时弃 4 补 4。<span class="pg">p.11</span><span class="pg">p.12</span></li>
+  <li>触发终局者完成本回合后不再行动，其余玩家各执行一个最终回合。<span class="pg">p.13</span></li>
+  <li>所有矿物终局均计分，包含未卖出、置于溢流区与留在储藏区者。<span class="pg">p.10</span><span class="pg">p.13</span></li>
+  <li>已耗尽的矿区板块终局按背面较低分值计分。<span class="pg">p.9</span><span class="pg">p.13</span></li>
+  <li>固体燃料移入溢流区的矿物不卖出、不获得信用点，终局仍计分。<span class="pg">p.8</span></li>
+  <li>起始牌库含多张终局负分卡，修复时须按张移除，牌库内剩余者终局逐张扣分。<span class="pg">p.10</span></li>
+  <li>平手时先比剩余信用点，仍平再比剩余燃料。<span class="pg">p.13</span></li>
+  <li>市场各格售价、各层深度扣分与层卡具体效果均印在实体配件上，原书正文未逐项列出，不得以推测数值替代。<span class="pg">p.10</span><span class="pg">p.13</span></li>
+</ol>
+</section>
+
+<section id="s10">
+<h2><span class="n">10</span>示例回合拆解</h2>
+<h3>10.1 原书第 9 页操作示例</h3>
+<p>下表按「步骤／执行／支付／所得」列示：四步全部发生于同一操作阶段，体现打牌、默认功能与钻井点的交错使用。<span class="pg">p.9</span></p>
+<table>
+  <tr><th>步骤</th><th>执行</th><th>支付</th><th>所得</th></tr>
+  <tr><td>1</td><td>打出 GRABBER 执行主效果，以所得 2 钻井点挖开一块坑道</td><td>4 燃料、2 钻井点</td><td>坑道板块入进度轨，板块印制的矿物加入本层</td></tr>
+  <tr><td>2</td><td>使用默认功能生成 1 钻井点，收集上一步加入本层的矿物</td><td>4 燃料、1 钻井点</td><td>1 枚矿物进入储藏区</td></tr>
+  <tr><td>3</td><td>打出 SPIDER LEG 执行主效果</td><td>该卡主效果费用</td><td>2 移动点</td></tr>
+  <tr><td>4</td><td>打出 VINTAGE DRILL 换取燃料，再以默认功能生成 1 移动点</td><td>该卡换燃料所得 3 燃料</td><td>累计 3 移动点，机甲返回地表</td></tr>
+</table>
+<div class="tip"><b>示例所示关系：</b>3 燃料生成 1 移动点，4 燃料生成 1 钻井点；点数由仪表记录，可在同一操作阶段分次支付。<span class="pg">p.9</span></div>
+<h3>10.2 原书第 10 页卖矿示例</h3>
+<table>
+  <tr><th>情形</th><th>结算</th><th>依据</th></tr>
+  <tr><td>该玩家卖出的第一枚绿宝石</td><td>覆盖市场对应列最下方空格，获得 8 信用点</td><td><span class="pg">p.10</span></td></tr>
+  <tr><td>金矿对应列已满</td><td>该金矿进入溢流区最右侧空格，以 0 信用点卖出，终局仍值 3 分</td><td><span class="pg">p.10</span></td></tr>
+  <tr><td>溢出售价较低</td><td>各列上方另印溢出售价，列满后的矿物按该数值结算，仍按类型计分</td><td><span class="pg">p.10</span></td></tr>
+</table>
+<p>原书第 10 页括注中的矿物图标与中文版既定译法对溢出售价所指矿物的标注不完全一致；照录机制与数值，不裁定图标所指矿物。<span class="pg">p.10</span></p>
+</section>
+
+<section id="s11">
+<h2><span class="n">11</span>单人模式与变体</h2>
+<p>单人局对抗企业机器人，共 4 档难度，印在仪表盘背面，右下角星数越多难度越高。人类玩家先行，双方交替回合。人类开局获得 2 信用点并抽 3 张卡；机器人不抽卡、不获得信用点、不购入新卡、不重洗牌库。<span class="pg">p.14</span></p>
+<h3>11.1 设置差异</h3>
+<p>沿用常规设置的全部步骤，仅把「发放起始资源」替换为机器人准备：选定难度板与对应颜色模型置于地表；按玩家方式组装机器人起始牌库（含 1 张损伤卡），不发放牌架，躯干卡不置于牌库顶，整叠洗混后背面朝下放置。<span class="pg">p.14</span></p>
+<h3>11.2 行动回合与重置回合</h3>
+<div class="either">
+  <div class="hd">机器人回合开始 —— 按位置判定，条件分支</div>
+  <div class="cols">
+    <div class="col"><div class="ct">A · 位于地表：行动回合</div><p>翻开牌库顶一张卡，仅读取其主效果燃料费用；在行动板上取该费用对应行，与最左侧仍有空矿物槽的列相交，确定本回合钻井点数量与是否移动。<span class="pg">p.14</span><span class="pg">p.15</span></p></div>
+    <div class="or">按位置分支</div>
+    <div class="col"><div class="ct">B · 位于矿内：重置回合</div><p>不翻牌。收集所在层最值钱的 2 枚矿物，不足时每缺 1 枚自供应堆取 1 枚银矿；机甲移至地表并按所收矿物刷新商店。<span class="pg">p.16</span></p></div>
+  </div>
+</div>
+<h3>11.3 优先级与移动</h3>
+<p>机器人按优先级消费钻井点：下一块障碍板块 → 挖开对应坑道 → 收集对应矿物。每次取列表中首个可执行且钻井点足够的项目，重复至点数用尽。所翻卡费用对应行决定本回合钻井点数量。矿物轨自左至右填充，每格容纳 2 枚银矿或金矿、或 1 枚其他矿物；银矿与金矿总数为奇数时，多出一枚置于缓冲格，待下次获得同类矿物时合并填格。矿物轨填满后，后续矿物进入溢流区。<span class="pg">p.15</span></p>
+<p>点数用尽后，机器人自开放层中收集价值最高的一枚矿物；若行动含移动标记，则移至蓝宝石最多的开放层，平手时依次比较下一高价值矿物，全部平手则移至最深的平手层。<span class="pg">p.16</span></p>
+<h3>11.4 里程碑、层卡与终局差异</h3>
+<p>机器人先于人类取得里程碑时，取得标记与标记所示补偿，人类按常规获得信用点或抽卡；人类取得里程碑时，机器人自供应堆取 1 枚银矿替代补偿。机器人揭示层卡但忽略其全部效果；JACKPOT 层卡仅加入 1 枚矿物，且仅人类可收集。<span class="pg">p.17</span></p>
+<p>终局有两种触发：任一方完成进度轨，或机器人抽完牌库最后一张卡。触发方完成本回合后，另一方执行一个最终回合。机器人终局仅计矿物、矿区板块与里程碑分，不扣除深度分与牌库负分；人类按常规计分，分数高于机器人即获胜。<span class="pg">p.17</span></p>
+<p class="note">刷新商店时，每收集 1 枚银矿或金矿，弃去商店中主效果燃料费用最低的卡；每收集 1 枚蓝宝石、绿宝石或红宝石，弃去费用最高的卡，忽略电池费用；最低或最高费用并列时，弃去该费用的全部卡，随后补满商店。<span class="pg">p.16</span></p>
+</section>
+
+<section id="s12">
+<h2><span class="n">12</span>速查表与页码索引</h2>
+<h3>12.1 一页速查</h3>
+<table>
+  <tr><th>查考项</th><th>结论</th></tr>
+  <tr><td>回合三阶段</td><td>操作（自由交替）→ 上浮（仅地表触发）→ 维持（四步按序）</td></tr>
+  <tr><td>燃料初始</td><td>指示物在 10；燃料盖封锁 11、12；上浮时加满</td></tr>
+  <tr><td>默认功能</td><td>3 燃料→1 移动点；4 燃料→1 钻井点；每回合一次 1 损伤→3 燃料</td></tr>
+  <tr><td>钻井点三用途</td><td>收 1 矿物／挖坑道（按层费用）／清障碍（按板块数字）</td></tr>
+  <tr><td>卡牌三用途</td><td>付燃料执行主效果／打出换燃料／留至下回合</td></tr>
+  <tr><td>无人机两用途</td><td>卖 1 矿物／买 1 卡；用后翻面</td></tr>
+  <tr><td>上浮六项</td><td>卖矿、弃牌、升级、修复、购卡、加油；任意顺序，修复限一次</td></tr>
+  <tr><td>维持四步</td><td>留牌付费 → 清出牌区与仪表归零 → 抽 3 张 → 补充商店</td></tr>
+  <tr><td>核心费用</td><td>升级储藏 3 信用点；修复 5 信用点；弃牌每张 2 信用点；高级卡另付电池</td></tr>
+  <tr><td>终局触发</td><td>进度轨板块与溢流区方块相接，或板块抵达仪表盘末端</td></tr>
+  <tr><td>计分</td><td>板块分＋矿物分＋每 5 信用点 1 分＋里程碑与刷新板块−深度扣分−牌库负分卡</td></tr>
+  <tr><td>矿物分值</td><td>银 2／金 3／蓝宝石 4／绿宝石 5／红宝石 6</td></tr>
+  <tr><td>平局</td><td>先比剩余信用点，仍平比剩余燃料</td></tr>
+</table>
+<h3>12.2 章节 ↔ 原书页码</h3>
+<table class="idx">
+  <tr><th>章节</th><th>原书页</th><th>章节</th><th>原书页</th></tr>
+  <tr><td>0 游戏概要与目标</td><td>p.3、p.13</td><td>6 贯穿全局的系统</td><td>p.11–12、p.17</td></tr>
+  <tr><td>1 初局设置</td><td>p.2、p.4–5、p.20</td><td>7 资源与费用</td><td>p.6–11、p.18</td></tr>
+  <tr><td>2 版图与组件速认</td><td>p.2、p.4、p.6</td><td>8 终局与计分链路</td><td>p.13</td></tr>
+  <tr><td>3 核心引擎</td><td>p.3、p.6、p.12</td><td>9 常见误读</td><td>p.6–13、p.18</td></tr>
+  <tr><td>3.5 择一决策总表</td><td>p.6–11、p.14</td><td>10 示例回合拆解</td><td>p.9–10</td></tr>
+  <tr><td>4 一个回合的三阶段</td><td>p.3、p.6、p.10–12</td><td>11 单人模式与变体</td><td>p.14–17</td></tr>
+  <tr><td>5 操作阶段效果</td><td>p.6–9、p.11、p.18</td><td>12 速查表与页码索引</td><td>全册</td></tr>
+</table>
+<h3>12.3 原书页图对照</h3>
+<details>
+  <summary>展开原书页图（15 张，按页序）</summary>
+  <div class="pgs">
+    <figure><img src="images_drill/page_02.jpg" alt="原书第 2 页 配件" loading="lazy"><figcaption>p.2 配件总览</figcaption></figure>
+    <figure><img src="images_drill/page_04.jpg" alt="原书第 4 页 设置" loading="lazy"><figcaption>p.4 布置矿坑与地表</figcaption></figure>
+    <figure><img src="images_drill/page_05.jpg" alt="原书第 5 页 启动机甲" loading="lazy"><figcaption>p.5 仪表盘组装与起始资源</figcaption></figure>
+    <figure><img src="images_drill/page_06.jpg" alt="原书第 6 页 仪表盘与操作阶段" loading="lazy"><figcaption>p.6 仪表盘与移动</figcaption></figure>
+    <figure><img src="images_drill/page_07.jpg" alt="原书第 7 页 钻井三用法" loading="lazy"><figcaption>p.7 钻井点三种用途</figcaption></figure>
+    <figure><img src="images_drill/page_08.jpg" alt="原书第 8 页 卡牌" loading="lazy"><figcaption>p.8 卡牌七处信息与三种用法</figcaption></figure>
+    <figure><img src="images_drill/page_09.jpg" alt="原书第 9 页 无人机与默认功能" loading="lazy"><figcaption>p.9 默认功能、无人机、操作示例</figcaption></figure>
+    <figure><img src="images_drill/page_10.jpg" alt="原书第 10 页 上浮阶段" loading="lazy"><figcaption>p.10 卖矿、弃牌、升级、修复</figcaption></figure>
+    <figure><img src="images_drill/page_11.jpg" alt="原书第 11 页 购卡与刷新" loading="lazy"><figcaption>p.11 购卡、电池、常驻卡、刷新、加油</figcaption></figure>
+    <figure><img src="images_drill/page_12.jpg" alt="原书第 12 页 维持阶段" loading="lazy"><figcaption>p.12 维持四步、层卡、里程碑、商店扩建</figcaption></figure>
+    <figure><img src="images_drill/page_13.jpg" alt="原书第 13 页 终局与计分" loading="lazy"><figcaption>p.13 终局触发、计分表与算例</figcaption></figure>
+    <figure><img src="images_drill/page_14.jpg" alt="原书第 14 页 单人模式设置" loading="lazy"><figcaption>p.14 单人模式设置与行动回合</figcaption></figure>
+    <figure><img src="images_drill/page_15.jpg" alt="原书第 15 页 行动板" loading="lazy"><figcaption>p.15 机器人行动板与优先级</figcaption></figure>
+    <figure><img src="images_drill/page_16.jpg" alt="原书第 16 页 移动与重置回合" loading="lazy"><figcaption>p.16 机器人移动与重置回合</figcaption></figure>
+    <figure><img src="images_drill/page_20.jpg" alt="原书第 20 页 图标总表" loading="lazy"><figcaption>p.20 图标总表与起始资源表</figcaption></figure>
+  </div>
+</details>
+</section>
+
+<div class="foot">
+钻探者 · 学习版规则　｜　依据英文原书《Drillers》Rulebook（Czech Games Edition, 20 页）与中文版既定译法编写<br>
+按规则结构重排，非官方规则书；规则裁决以英文原书为准，实体配件印值以配件为准。
+</div>
+</main>
+</div>
+</body>
+</html>

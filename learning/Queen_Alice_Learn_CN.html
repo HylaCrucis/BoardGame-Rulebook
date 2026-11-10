@@ -17,9 +17,17 @@
   body{margin:0;background:var(--bg);color:var(--ink);
     font-family:"PingFang SC","Microsoft YaHei","Noto Sans SC",Arial,sans-serif;
     font-size:15.5px;line-height:1.85;}
+  .backbar{position:sticky;top:0;z-index:60;height:44px;box-sizing:border-box;
+    display:flex;align-items:center;gap:10px;padding:0 16px;
+    background:var(--paper);border-bottom:1px solid var(--line);font-size:13px;}
+  .backbar a{display:inline-flex;align-items:center;min-height:32px;padding:0 12px;
+    border:1px solid var(--line2);border-radius:8px;background:#fff;
+    color:var(--purple);text-decoration:none;white-space:nowrap;}
+  .backbar a:active{background:var(--purple-l);}
+  .backbar .bb-t{margin-left:auto;font-size:12px;color:var(--soft);}
   .layout{display:flex;align-items:flex-start;max-width:1280px;margin:0 auto;}
-  nav.toc{position:sticky;top:0;align-self:flex-start;width:238px;flex:0 0 238px;
-    height:100vh;overflow-y:auto;background:#fffdf9;border-right:1px solid var(--line);
+  nav.toc{position:sticky;top:44px;align-self:flex-start;width:238px;flex:0 0 238px;
+    height:calc(100vh - 44px);overflow-y:auto;background:#fffdf9;border-right:1px solid var(--line);
     padding:22px 14px 40px;font-size:13px;}
   nav.toc .brand{font-size:17px;font-weight:800;color:var(--red);margin:0 0 4px;}
   nav.toc .brand-s{font-size:11.5px;color:var(--soft);margin:0 0 16px;letter-spacing:.04em;}
@@ -126,7 +134,8 @@
     .layout{flex-direction:column;} nav.toc{position:static;width:100%;height:auto;flex-basis:auto;border-right:0;border-bottom:1px solid var(--line);}
     main{padding:0 18px 60px;} .grid2,.grid4{grid-template-columns:1fr 1fr;}
   }
-  @media(max-width:640px){.grid2,.grid4,.either .cols{grid-template-columns:1fr;} .either .or{padding:6px 0;} main{padding:0 12px 50px;} .hero{padding:28px 20px;} .hero h1{font-size:26px;}}
+  @media(max-width:640px){.backbar{height:40px;padding:0 10px;} .backbar a{min-height:30px;padding:0 9px;font-size:12.5px;} .backbar .bb-t{display:none;}
+  .grid2,.grid4,.either .cols{grid-template-columns:1fr;} .either .or{padding:6px 0;} main{padding:0 12px 50px;} .hero{padding:28px 20px;} .hero h1{font-size:26px;}}
 
   /* == 窄屏目录：横向胶囊，正文首屏可见 == */
   @media(max-width:960px){
@@ -144,6 +153,7 @@
 </style>
 </head>
 <body>
+<div class="backbar"><a href="index.html">← 学习版目录</a><span class="bb-t">爱丽丝女王 · 学习版规则</span></div>
 <div class="layout">
 <nav class="toc">
   <div class="brand">爱丽丝女王</div>
