@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>爱丽丝女王 · 学习版规则（Queen Alice）</title>
+<style>
+  :root{
+    --bg:#fbf7f0; --paper:#fffdf9; --ink:#2f2a28; --soft:#6b615c;
+    --line:#e3d8c8; --line2:#d3c4ae;
+    --red:#a2303c; --red-l:#fbecec; --blue:#3b5b8c; --blue-l:#eaf0f9;
+    --gold:#a9761c; --gold-l:#fbf1dc; --green:#3d7a55; --green-l:#e9f4ec;
+    --purple:#6b4a86; --purple-l:#f1eaf7;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"PingFang SC","Microsoft YaHei","Noto Sans SC",Arial,sans-serif;
+    font-size:15.5px;line-height:1.85;}
+  .layout{display:flex;align-items:flex-start;max-width:1280px;margin:0 auto;}
+  nav.toc{position:sticky;top:0;align-self:flex-start;width:238px;flex:0 0 238px;
+    height:100vh;overflow-y:auto;background:#fffdf9;border-right:1px solid var(--line);
+    padding:22px 14px 40px;font-size:13px;}
+  nav.toc .brand{font-size:17px;font-weight:800;color:var(--red);margin:0 0 4px;}
+  nav.toc .brand-s{font-size:11.5px;color:var(--soft);margin:0 0 16px;letter-spacing:.04em;}
+  nav.toc .grp{margin:16px 0 5px;font-size:11px;color:var(--gold);font-weight:700;letter-spacing:.12em;}
+  nav.toc a{display:block;color:#49403b;text-decoration:none;padding:4px 9px;border-radius:6px;}
+  nav.toc a:hover{background:var(--red-l);color:var(--red);}
+  main{flex:1 1 auto;min-width:0;padding:0 42px 90px;}
+  .hero{background:linear-gradient(150deg,#7c1f2b,#a2303c 55%,#bd5a4a);
+    color:#fff8f0;border-radius:0 0 20px 20px;padding:40px 42px 34px;margin-bottom:26px;
+    box-shadow:0 8px 26px rgba(124,31,43,.18);}
+  .hero h1{margin:0;font-size:34px;letter-spacing:.02em;}
+  .hero .en{font-size:14px;opacity:.8;margin:2px 0 12px;letter-spacing:.06em;}
+  .hero .desc{font-size:16px;max-width:760px;line-height:1.8;}
+  .hero .meta{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px;}
+  .hero .meta span{border:1px solid rgba(255,255,255,.5);border-radius:20px;padding:3px 13px;font-size:12.5px;}
+  .stand{margin-top:14px;background:#fff6e2;border:1px solid #e8d2a2;border-left:5px solid var(--gold);
+    border-radius:0 10px 10px 0;padding:12px 18px;font-size:14px;color:#5c4a26;}
+  section{padding:22px 0 14px;border-bottom:1px dashed var(--line2);scroll-margin-top:14px;}
+  h2{font-size:25px;color:var(--red);margin:8px 0 4px;line-height:1.4;}
+  h2 .n{display:inline-block;background:var(--red);color:#fff;font-size:14px;
+    min-width:30px;height:30px;line-height:30px;text-align:center;border-radius:8px;
+    margin-right:10px;vertical-align:3px;font-weight:700;}
+  h3{font-size:18.5px;color:#3a3230;margin:26px 0 6px;border-left:4px solid var(--gold);padding-left:10px;}
+  h4{font-size:16px;color:var(--blue);margin:18px 0 4px;}
+  p{margin:9px 0;}
+  ul,ol{margin:9px 0 9px 2px;padding-left:22px;}
+  li{margin:5px 0;}
+  b,strong{color:var(--red);}
+  .goal{background:var(--blue-l);border:1px solid #cfdcf0;border-radius:9px;
+    padding:8px 14px;font-size:13.5px;color:#2f466c;margin:8px 0 16px;}
+  .goal b{color:#2f466c;}
+  .pg{display:inline-block;background:#f0e7d8;color:#7d6231;border:1px solid #e2d2b6;
+    border-radius:5px;font-size:11px;padding:0 6px;line-height:18px;vertical-align:1px;
+    margin-left:4px;font-weight:600;white-space:nowrap;font-family:Arial,sans-serif;}
+  .key{background:var(--green-l);border:1px solid #c9e2d1;border-left:5px solid var(--green);
+    padding:11px 16px;border-radius:0 10px 10px 0;margin:13px 0;}
+  .key b{color:var(--green);}
+  .warn{background:var(--red-l);border:1px solid #eed3d3;border-left:5px solid var(--red);
+    padding:11px 16px;border-radius:0 10px 10px 0;margin:13px 0;}
+  .warn b{color:var(--red);}
+  .tip{background:var(--gold-l);border:1px solid #eddcb8;border-left:5px solid var(--gold);
+    padding:11px 16px;border-radius:0 10px 10px 0;margin:13px 0;}
+  .tip b{color:var(--gold);}
+  .note{background:#f4f1ec;border:1px solid var(--line);border-radius:9px;padding:10px 15px;
+    margin:12px 0;font-size:14px;color:#514844;}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px;background:var(--paper);}
+  th,td{border:1px solid var(--line2);padding:8px 11px;text-align:left;vertical-align:top;}
+  th{background:#f4e9dd;color:#5d4022;font-weight:700;}
+  tr:nth-child(even) td{background:#fdf9f3;}
+  td.c,th.c{text-align:center;}
+  .steps{list-style:none;padding:0;counter-reset:st;margin:14px 0;}
+  .steps>li{position:relative;padding:10px 14px 10px 50px;margin:9px 0;background:var(--paper);
+    border:1px solid var(--line);border-radius:10px;}
+  .steps>li::before{counter-increment:st;content:counter(st);position:absolute;left:12px;top:11px;
+    width:26px;height:26px;background:var(--red);color:#fff;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;}
+  .steps>li>ol{margin:6px 0;padding-left:20px;}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:11px;
+    padding:13px 17px;margin:11px 0;box-shadow:0 2px 6px rgba(80,60,40,.04);}
+  .card .t{font-weight:800;color:var(--red);font-size:16px;margin-bottom:3px;}
+  .card .t .s{display:inline-block;background:var(--red);color:#fff;border-radius:5px;
+    font-size:12px;padding:1px 7px;margin-right:8px;}
+  .card.blue .t{color:var(--blue);} .card.blue .t .s{background:var(--blue);}
+  .card.green .t{color:var(--green);} .card.green .t .s{background:var(--green);}
+  .card.gold .t{color:var(--gold);} .card.gold .t .s{background:var(--gold);}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+  .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;}
+  .mini{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:11px 13px;}
+  .mini .h{font-weight:800;font-size:14px;margin-bottom:4px;}
+  .mini .v{font-size:13px;color:var(--soft);line-height:1.7;}
+  .fig{margin:18px 0;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;}
+  .fig svg{display:block;width:100%;height:auto;}
+  .figcap{font-size:12.5px;color:var(--soft);margin-top:8px;text-align:center;}
+  details{margin:12px 0;background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:8px 14px;}
+  summary{cursor:pointer;font-size:13.5px;color:var(--blue);font-weight:600;}
+  details img{display:block;max-width:100%;margin:12px auto;border:1px solid var(--line);border-radius:8px;}
+  .pit{counter-reset:pit;list-style:none;padding:0;margin:14px 0;}
+  .pit li{position:relative;padding:9px 14px 9px 46px;margin:7px 0;background:var(--paper);
+    border:1px solid var(--line);border-radius:9px;font-size:14.5px;}
+  .pit li::before{counter-increment:pit;content:"✕ " counter(pit);position:absolute;left:10px;top:9px;
+    color:#fff;background:var(--red);border-radius:6px;font-size:11px;padding:1px 6px;font-weight:700;}
+  .bad{color:var(--red);text-decoration:line-through;}
+  .good{color:var(--green);font-weight:700;}
+  .tagR{color:var(--red);font-weight:700;} .tagB{color:var(--blue);font-weight:700;}
+  .tagG{color:var(--gold);font-weight:700;}
+  .pick{display:inline-block;background:#a2303c;color:#fff;border-radius:5px;
+    font-size:11px;padding:1px 7px;margin:0 3px;font-weight:700;letter-spacing:.04em;vertical-align:1px;}
+  .pick.b{background:#3b5b8c;} .pick.g{background:#a9761c;}
+  .either{border:2px dashed #c9a24a;background:#fffaf0;border-radius:12px;padding:14px 16px;margin:15px 0;}
+  .either>.hd{font-size:14px;font-weight:800;color:#7d5511;margin-bottom:10px;}
+  .either .cols{display:grid;grid-template-columns:1fr 46px 1fr;align-items:stretch;}
+  .either .opt{background:var(--paper);border:1px solid var(--line2);border-radius:10px;padding:11px 14px;font-size:14px;}
+  .either .opt .ot{font-weight:800;color:var(--red);margin-bottom:4px;}
+  .either .opt.b .ot{color:var(--blue);}
+  .either .or{display:flex;align-items:center;justify-content:center;font-weight:800;color:#a9761c;font-size:13px;}
+  .either .efoot{font-size:12.5px;color:#6b615c;margin-top:10px;text-align:left;}
+  .why{background:#eef3fa;border:1px solid #cddcee;border-left:5px solid var(--blue);
+    padding:12px 17px;border-radius:0 10px 10px 0;margin:13px 0;font-size:14.5px;}
+  .why b{color:#2f466c;}
+  .why .wt{font-weight:800;color:#2f466c;display:block;margin-bottom:3px;}
+  .idx{font-size:13.5px;}
+  .foot{margin-top:34px;font-size:12.5px;color:var(--soft);text-align:center;line-height:1.9;}
+  @media(max-width:960px){
+    .layout{flex-direction:column;} nav.toc{position:static;width:100%;height:auto;flex-basis:auto;border-right:0;border-bottom:1px solid var(--line);}
+    main{padding:0 18px 60px;} .grid2,.grid4{grid-template-columns:1fr 1fr;}
+  }
+  @media(max-width:640px){.grid2,.grid4,.either .cols{grid-template-columns:1fr;} .either .or{padding:6px 0;} main{padding:0 12px 50px;} .hero{padding:28px 20px;} .hero h1{font-size:26px;}}
+
+  /* == 窄屏目录：横向胶囊，正文首屏可见 == */
+  @media(max-width:960px){
+    nav.toc{display:flex;flex-wrap:nowrap;gap:6px;align-items:center;
+      height:auto;max-height:none;overflow-x:auto;overflow-y:hidden;
+      padding:10px 12px;border-right:0;border-bottom:1px solid var(--line);
+      -webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;}
+    nav.toc .brand,nav.toc .brand-s,nav.toc .grp{display:none;}
+    nav.toc a{flex:0 0 auto;white-space:nowrap;padding:6px 11px;
+      border:1px solid var(--line2);border-radius:16px;background:var(--paper);
+      font-size:12.5px;line-height:1.4;}
+    nav.toc a:hover{background:var(--red-l);}
+    nav.toc a[style]{padding-left:11px;}
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+<nav class="toc">
+  <div class="brand">爱丽丝女王</div>
+  <div class="brand-s">学习版规则 · Queen Alice</div>
+  <div class="grp">规则概要</div>
+  <a href="#s0">0 · 游戏概要</a>
+  <a href="#s1">1 · 初局设置：略过与关注</a>
+  <a href="#s2">2 · 版图与组件</a>
+  <div class="grp">回合与行动</div>
+  <a href="#s3">3 · 核心引擎</a>
+  <a href="#pick" style="padding-left:22px;color:var(--gold);font-weight:700;">↳ 3.5 择一决策总表</a>
+  <a href="#s4">4 · 回合结构</a>
+  <a href="#s5">5 · 四类行动</a>
+  <a href="#why" style="padding-left:22px;color:var(--blue);font-weight:700;">↳ 5.0 行动结构与格子差异</a>
+  <div class="grp">全局机制</div>
+  <a href="#s6">6 · 爱丽丝 / 皇冠 / 猫咪 / 市场</a>
+  <a href="#s7">7 · 资源与时间</a>
+  <a href="#s8">8 · 终局与计分链路</a>
+  <div class="grp">查考与附录</div>
+  <a href="#s9">9 · 常见误读（29 条）</a>
+  <a href="#s10">10 · 回合示例</a>
+  <a href="#s11">11 · 单人模式与变体</a>
+  <a href="#s12">12 · 速查表与页码索引</a>
+</nav>
+
+<main>
+<header class="hero">
+  <h1>爱丽丝女王 · 学习版规则</h1>
+  <div class="en">QUEEN ALICE　｜　按规则结构重排，不按原书章节顺序</div>
+  <div class="desc">以回合结构为主线，四类行动与全局机制分章列述；附速查表、常见误读及原书页码索引。</div>
+  <div class="meta"><span>1–4 人</span><span>60–90 分钟</span><span>引擎构筑 / 卡牌驱动 / 国际象棋棋子</span><span>依据英文原书 28 页</span></div>
+</header>
+
+<div class="stand">
+  <b>体例：</b>按学习顺序重排，章节与原书不对应；每条结论后的 <span class="pg">p.X</span> 为英文原书页码，供回查。
+  规则裁决以<b>英文原书页图</b>为准；术语沿用已上线中文版的既定译法。原书自相矛盾处只记录、不裁定。
+  第 12 节附章节与原书页码对照表。<br>
+  <b>标记体例：</b><span class="pick">择一</span>＝<b>互斥分支，只能选一个</b>，不按先后顺序全部执行；虚线框里的 A / B 两栏同样是择一。
+  <span style="display:inline-block;background:#eef3fa;border-left:4px solid #3b5b8c;border-radius:4px;padding:0 8px;font-weight:700;color:#2f466c;">机制</span> 蓝框＝<b>机制说明</b>，陈述该步骤的作用及各格差异。
+</div>
+
+<!-- ============ 0 ============ -->
+<section id="s0">
+  <h2><span class="n">0</span>游戏概要与目标</h2>
+  <p>玩家扮演镜中宫廷的廷臣，负责筹备爱丽丝的加冕宴席。<b>声望（IP）</b>最高者成为首席顾问并获胜。<span class="pg">p.2</span></p>
+  <p>本作为<b>引擎构筑</b>游戏：起始牌库仅含 10 张基础卡。打出卡牌移动棋子，落格决定所得资源与所执行的行动；行动产出新卡与奖励，逐步强化牌库。<span class="pg">p.7</span></p>
+
+  <div class="fig">
+    <svg viewBox="0 0 960 178" xmlns="http://www.w3.org/2000/svg" font-family="PingFang SC,Microsoft YaHei,Arial">
+      <rect x="0" y="0" width="960" height="178" fill="#fffdf9"/>
+      <g font-size="13" font-weight="700" text-anchor="middle">
+        <rect x="12" y="30" width="132" height="56" rx="10" fill="#eaf0f9" stroke="#3b5b8c"/><text x="78" y="52" fill="#2f466c">手牌里的卡</text><text x="78" y="72" fill="#6b615c" font-size="11" font-weight="400">决定所移动的棋子</text>
+        <rect x="166" y="30" width="132" height="56" rx="10" fill="#eaf0f9" stroke="#3b5b8c"/><text x="232" y="52" fill="#2f466c">移动棋子</text><text x="232" y="72" fill="#6b615c" font-size="11" font-weight="400">按国际象棋走法</text>
+        <rect x="320" y="30" width="132" height="56" rx="10" fill="#fbf1dc" stroke="#a9761c"/><text x="386" y="52" fill="#7d5511">棋子停在某一格</text><text x="386" y="72" fill="#6b615c" font-size="11" font-weight="400">行＝资源，列＝行动</text>
+        <rect x="474" y="30" width="132" height="56" rx="10" fill="#fbecec" stroke="#a2303c"/><text x="540" y="52" fill="#8f2632">执行一个行动</text><text x="540" y="72" fill="#6b615c" font-size="11" font-weight="400">♥ ♠ ♣ ♦ 四选一</text>
+        <rect x="628" y="30" width="132" height="56" rx="10" fill="#e9f4ec" stroke="#3d7a55"/><text x="694" y="52" fill="#2c6841">获得奖励</text><text x="694" y="72" fill="#6b615c" font-size="11" font-weight="400">卡 / 花 / 书 / 爪印 / IP</text>
+        <rect x="782" y="30" width="166" height="56" rx="10" fill="#f1eaf7" stroke="#6b4a86"/><text x="865" y="52" fill="#563a6d">皇冠与爱丽丝</text><text x="865" y="72" fill="#6b615c" font-size="11" font-weight="400">倍分、心愿、终局触发</text>
+      </g>
+      <g stroke="#a9761c" stroke-width="2" fill="none" marker-end="url(#ar)">
+        <path d="M146 58 H163"/><path d="M300 58 H317"/><path d="M454 58 H471"/><path d="M608 58 H625"/><path d="M762 58 H779"/>
+      </g>
+      <defs><marker id="ar" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#a9761c"/></marker></defs>
+      <text x="480" y="122" text-anchor="middle" font-size="13" fill="#3d7a55" font-weight="700">每回合均按此链结算；所得奖励转化为后续回合的卡牌</text>
+      <text x="480" y="148" text-anchor="middle" font-size="12" fill="#6b615c">声望主要来自爱丽丝路径、皇冠倍分与终局心愿结算</text>
+    </svg>
+    <div class="figcap">图 1 · 核心因果链（依据 p.7–p.19）</div>
+  </div>
+
+  <h3>声望的三类来源</h3>
+  <table>
+    <tr><th style="width:19%">类别</th><th>来源</th><th style="width:14%">结算时点</th></tr>
+    <tr><td><b>即时声望</b></td><td>爱丽丝路径每格的 IP、获得皇冠时该格 IP 的 <b>2 倍</b>、卡牌与行动里直接印的 IP、墙的同层奖励等</td><td>游戏进行中</td></tr>
+    <tr><td><b>终局加冕 + 心愿</b></td><td>加冕色的每个皇冠 8 IP；按猫咪轨道进度，每色计 0 / 1 / 2 个「爱丽丝的心愿」</td><td>终局</td></tr>
+    <tr><td><b>受邀卡 + 书签</b></td><td>被「邀请」裁掉的卡右上角 IP；终局计分书签</td><td>终局</td></tr>
+  </table>
+  <p><span class="pg">p.8</span><span class="pg">p.9</span><span class="pg">p.19</span></p>
+
+  <h3>终局触发</h3>
+  <div class="key"><b>终局由皇冠陈列区决定，与轮次无关。</b>陈列区的<b>最后一个皇冠被移除</b>时触发结束；但要<b>打完当前轮</b>，让所有人回合数相同，直到持有镜子标记玩家<b>右侧</b>那位完成回合为止。<span class="pg">p.9</span><span class="pg">p.19</span></div>
+  <div class="note">初局可暂缓心愿计分；回合按「弃除 → 打出 → 落格 → 行动 → 休整」五个环节执行。</div>
+</section>
+
+<!-- ============ 1 ============ -->
+<section id="s1">
+  <h2><span class="n">1</span>初局设置：略过部分内容，关注核心内容</h2>
+
+  <div class="warn"><b>初局可略过：</b>单人模式黛娜（p.20–22）、三种变体（p.28）、花的完整加成表（p.22）、书签全表（p.24）、16 种心愿全表（p.25）、车票卡全表（p.26）。
+  上述内容不影响开局，待第 5 节所述行动规则明确后查阅。</div>
+
+  <h3>设置步骤</h3>
+  <ol class="steps">
+    <li><b>摆中央区。</b>中央版图放中间，四块行动版图（<span class="tagR">♥</span> 花园、<span class="tagB">♠</span> 信使、<span class="tagG">♣</span> 双子树、<span class="tagR">♦</span> 墙）与卡牌市场版图围在四周，都用对应人数的一面（1–2 人 / 3–4 人）。<span class="pg">p.4</span></li>
+    <li><b>摆公共件。</b>按随机抽的玩家提示板块背面布阵图摆红白棋子；心愿板块按图标分四叠、各抽 1 块随机放到心愿格（<b>黄色面朝上</b>，第一局直接用说明书指定的 4 块）；皇冠放陈列区「×2」面朝上（4 人 8 个 / 3 人 7 个 / 2 人 6 个）；红白爱丽丝放各自路径起点；铜银金卡分堆洗好填市场。<span class="pg">p.4</span><span class="pg">p.5</span></li>
+    <li><b>摆个人区。</b>领取朝臣版图与时钟指针；3 个玩家色立方体放<b>银盘</b>；5 个黑立方体放<b>上锁储藏区</b>；10 张基础卡洗成牌库、抽 3 张手牌；IP 标记放轨道 0；红白爪印标记各放对应猫轨起点。<span class="pg">p.6</span><span class="pg">p.5</span></li>
+    <li><b>发车票卡。</b>每人 2 张选 1 张、定红面或白面，同时翻开按回合顺序获得卡上印制的奖励。<b>初局可直接发带星号的 4 张。</b>只获得卡上明确绘制的奖励，不按该地点的标准奖励另算。<span class="pg">p.6</span></li>
+    <li><b>定起始玩家。</b>最近照过镜子的人取得镜子标记并开始；有争议时随机决定。<span class="pg">p.5</span></li>
+    <li><b>开始循环。</b>每回合：弃 1 张 → 打 1 张移动棋子 → 落格获取资源并执行该列行动 → （可选）花 6 时间重复 → 休整补牌。详见第 4 节。<span class="pg">p.11</span><span class="pg">p.12</span></li>
+  </ol>
+
+  <div class="note"><b>3 人局额外一步：</b>用皇冠标记盖住红白爱丽丝路径上带 ③ 记号的格，并用未选用颜色的红心/方块标记盖住红心版图与方块版图上带相应记号的格。<span class="pg">p.5</span></div>
+
+  <h3>初局四项要点</h3>
+  <div class="grid4">
+    <div class="mini"><div class="h" style="color:var(--red)">① 手牌补充</div><div class="v">每回合休整补到 3 张；牌库耗尽时洗弃牌堆。<span class="pg">p.12</span></div></div>
+    <div class="mini"><div class="h" style="color:var(--blue)">② 费用的颜色对应</div><div class="v">打红棋 → 用樱桃蛋糕/茶付行动费；打白棋 → 用黄油吐司/茶。<span class="pg">p.13</span></div></div>
+    <div class="mini"><div class="h" style="color:var(--green)">③ 皇冠倍分</div><div class="v">放置皇冠立即结算该格 IP 的两倍，为即时声望的主要来源。<span class="pg">p.9</span></div></div>
+    <div class="mini"><div class="h" style="color:var(--gold)">④ 爱丽丝路径推进</div><div class="v">推进给 IP、触发心愿（全体计分），并决定终局哪色心愿翻白金。<span class="pg">p.8</span><span class="pg">p.19</span></div></div>
+  </div>
+</section>
+
+<!-- ============ 2 ============ -->
+<section id="s2">
+  <h2><span class="n">2</span>版图与组件</h2>
+
+  <h3>中央版图的 5 个区 <span class="pg">p.8</span></h3>
+  <table>
+    <tr><th style="width:8%">代号</th><th style="width:22%">区域</th><th>作用</th></tr>
+    <tr><td class="c"><b>A</b></td><td><b>棋盘</b>（5 列 × 8 行）</td><td>每次打牌移动棋子后，<b>落格的行</b>决定获取资源类型，<b>落格的列</b>决定执行行动类型。两项判定同时完成。</td></tr>
+    <tr><td class="c"><b>B</b></td><td><b>爱丽丝的两条路径</b>（左红 / 右白）</td><td>推进获得 IP；踩到心愿格触发全体计分；走到头的王座格决定加冕颜色。</td></tr>
+    <tr><td class="c"><b>C</b></td><td><b>皇冠陈列区</b>（版图底边一排）</td><td>剩余皇冠数 = 游戏剩余时间。陈列区取空的时点触发终局。</td></tr>
+    <tr><td class="c"><b>D</b></td><td><b>红猫 / 白猫轨道</b>（左右两侧爪印）</td><td>得爪印就前进；终局决定你能计几个心愿。</td></tr>
+    <tr><td class="c"><b>E</b></td><td><b>声望轨道</b>（版图外圈 0–99）</td><td>记你的 IP。</td></tr>
+  </table>
+
+  <h3>四块行动版图 <span class="pg">p.14</span><span class="pg">p.15</span><span class="pg">p.16</span><span class="pg">p.17</span></h3>
+  <div class="grid4">
+    <div class="mini"><div class="h" style="color:var(--red)">♥ 百花花园</div><div class="v">移动园丁 → 放红心 → 获得花（永久加成）。<b>唯一产花的地方。</b></div></div>
+    <div class="mini"><div class="h" style="color:var(--blue)">♠ 国王信使</div><div class="v">推信使 → 获得落格奖励 → <b>购卡或邀请</b>二选一。引擎的成长口。</div></div>
+    <div class="mini"><div class="h" style="color:var(--green)">♣ 双子之树</div><div class="v">爬树 → 获取书本 → 以书购买书签。</div></div>
+    <div class="mini"><div class="h" style="color:var(--gold)">♦ 矮胖子之墙</div><div class="v">砌砖 → 获取墙上被盖住的奖励 + IP。</div></div>
+  </div>
+
+  <h3>朝臣版图（个人版图）<span class="pg">p.10</span></h3>
+  <ul>
+    <li><b>上部：</b>时间时钟（0–10）、银盘（放未分配立方体）、三个资源区（樱桃蛋糕 / 茶 / 黄油吐司）、上锁储藏区（放 5 个黑立方体）、回合结构提示。</li>
+    <li><b>左右两半：</b>红王国 / 白王国各自的<b>红心标记</b>（从下往上取）、<b>方块标记</b>、<b>监狱</b>（关你俘获的对方棋子，并印着俘获奖励）。</li>
+    <li><b>底边：</b>放被「邀请」的卡（终局计分）。</li>
+  </ul>
+
+  <h3>卡牌市场（铜 / 银 / 金三层，每层 3 格）<span class="pg">p.9</span></h3>
+  <table>
+    <tr><th>格位</th><th class="c">费用</th><th>说明</th></tr>
+    <tr><td>左格</td><td class="c"><b>免费</b></td><td rowspan="3">设置时每层左两格各放 1 张卡，<b>最右格放该层牌库剩余的整叠</b>（顶牌也可选购）。购入的卡直接进手牌、可立即使用。<b>只在休整阶段</b>把卡向左滑补空位。</td></tr>
+    <tr><td>中格</td><td class="c">1 时间</td></tr>
+    <tr><td>右格（牌库顶）</td><td class="c">1 个自选资源</td></tr>
+  </table>
+
+  <details><summary>对照原书页图：配件（p.3）／中央版图（p.8）／朝臣版图（p.10）</summary>
+    <img src="images/page_03.jpg" alt="原书 p.3 配件" loading="lazy"><div class="figcap">p.3 · 配件一览</div>
+    <img src="images/page_08.jpg" alt="原书 p.8 中央版图" loading="lazy"><div class="figcap">p.8 · 中央版图结构（棋盘与两条路径）</div>
+    <img src="images/page_10.jpg" alt="原书 p.10 朝臣版图" loading="lazy"><div class="figcap">p.10 · 朝臣版图结构</div>
+  </details>
+</section>
+
+<!-- ============ 3 ============ -->
+<section id="s3">
+  <h2><span class="n">3</span>核心引擎：卡牌、棋子与落格</h2>
+
+  <h3>3.1 卡牌的四项信息 <span class="pg">p.7</span></h3>
+  <div class="grid2">
+    <div class="card blue"><div class="t"><span class="s">A</span>棋子（左上）</div>你能移动<b>哪种、哪色</b>棋子。百搭棋子卡可移动对应类型的任意颜色棋子。</div>
+    <div class="card"><div class="t"><span class="s">B</span>打出奖励（左下）</div>打出这张卡时<b>即时</b>获得。<b>基础卡没有打出奖励。</b>折扣每回合只生效一次。</div>
+    <div class="card green"><div class="t"><span class="s">C</span>弃除奖励（右下）</div>回合开始把它弃掉时获得。</div>
+    <div class="card gold"><div class="t"><span class="s">D</span>邀请奖励（右上）</div>终局时若这张卡被「邀请」裁出牌库，可得的 IP。</div>
+  </div>
+  <p><b>四个层级：</b>基础 → 铜 → 银 → 金，越往上奖励越强。起始牌库只有 10 张基础卡；更强的卡从卡牌市场买。<span class="pg">p.7</span></p>
+
+  <h3>3.2 棋盘：5 列 × 8 行 <span class="pg">p.8</span></h3>
+  <div class="fig">
+    <svg viewBox="0 0 900 400" xmlns="http://www.w3.org/2000/svg" font-family="PingFang SC,Microsoft YaHei,Arial">
+      <rect x="0" y="0" width="900" height="400" fill="#fffdf9"/>
+      <text x="30" y="30" font-size="14" font-weight="700" fill="#2f2a28">列头（决定行动）</text>
+      <g font-size="17" text-anchor="middle" font-weight="700">
+        <rect x="230" y="14" width="86" height="30" rx="6" fill="#fbecec" stroke="#a2303c"/><text x="273" y="36" fill="#a2303c">♥ 红心</text>
+        <rect x="320" y="14" width="86" height="30" rx="6" fill="#eaf0f9" stroke="#3b5b8c"/><text x="363" y="36" fill="#3b5b8c">♠ 黑桃</text>
+        <rect x="410" y="14" width="86" height="30" rx="6" fill="#fbf1dc" stroke="#a9761c"/><text x="453" y="36" fill="#a9761c">★ 通用</text>
+        <rect x="500" y="14" width="86" height="30" rx="6" fill="#e9f4ec" stroke="#3d7a55"/><text x="543" y="36" fill="#3d7a55">♣ 梅花</text>
+        <rect x="590" y="14" width="86" height="30" rx="6" fill="#fbf1dc" stroke="#a9761c"/><text x="633" y="36" fill="#a9761c">♦ 方块</text>
+      </g>
+      <g>
+        <rect x="230" y="50" width="90" height="38" fill="#f0e3cf" stroke="#d3c4ae"/><rect x="320" y="50" width="90" height="38" fill="#c9bba9" stroke="#d3c4ae"/><rect x="410" y="50" width="90" height="38" fill="#f0e3cf" stroke="#d3c4ae"/><rect x="500" y="50" width="90" height="38" fill="#c9bba9" stroke="#d3c4ae"/><rect x="590" y="50" width="90" height="38" fill="#f0e3cf" stroke="#d3c4ae"/>
+        <rect x="230" y="88" width="90" height="38" fill="#c9bba9" stroke="#d3c4ae"/><rect x="320" y="88" width="90" height="38" fill="#f0e3cf" stroke="#d3c4ae"/><rect x="410" y="88" width="90" height="38" fill="#c9bba9" stroke="#d3c4ae"/><rect x="500" y="88" width="90" height="38" fill="#f0e3cf" stroke="#d3c4ae"/><rect x="590" y="88" width="90" height="38" fill="#c9bba9" stroke="#d3c4ae"/>
+        <rect x="230" y="126" width="90" height="38" fill="#f0e3cf" stroke="#d3c4ae"/><rect x="320" y="126" width="90" height="38" fill="#c9bba9" stroke="#d3c4ae"/><rect x="410" y="126" width="90" height="38" fill="#f0e3cf" stroke="#d3c4ae"/><rect x="500" y="126" width="90" height="38" fill="#c9bba9" stroke="#d3c4ae"/><rect x="590" y="126" width="90" height="38" fill="#f0e3cf" stroke="#d3c4ae"/>
+        <rect x="230" y="164" width="450" height="76" fill="#fbf1dc" stroke="#a9761c" stroke-width="2"/>
+        <rect x="230" y="240" width="90" height="38" fill="#c9bba9" stroke="#d3c4ae"/><rect x="320" y="240" width="90" height="38" fill="#f0e3cf" stroke="#d3c4ae"/><rect x="410" y="240" width="90" height="38" fill="#c9bba9" stroke="#d3c4ae"/><rect x="500" y="240" width="90" height="38" fill="#f0e3cf" stroke="#d3c4ae"/><rect x="590" y="240" width="90" height="38" fill="#c9bba9" stroke="#d3c4ae"/>
+        <rect x="230" y="278" width="90" height="38" fill="#f0e3cf" stroke="#d3c4ae"/><rect x="320" y="278" width="90" height="38" fill="#c9bba9" stroke="#d3c4ae"/><rect x="410" y="278" width="90" height="38" fill="#f0e3cf" stroke="#d3c4ae"/><rect x="500" y="278" width="90" height="38" fill="#c9bba9" stroke="#d3c4ae"/><rect x="590" y="278" width="90" height="38" fill="#f0e3cf" stroke="#d3c4ae"/>
+        <rect x="230" y="316" width="90" height="38" fill="#c9bba9" stroke="#d3c4ae"/><rect x="320" y="316" width="90" height="38" fill="#f0e3cf" stroke="#d3c4ae"/><rect x="410" y="316" width="90" height="38" fill="#c9bba9" stroke="#d3c4ae"/><rect x="500" y="316" width="90" height="38" fill="#f0e3cf" stroke="#d3c4ae"/><rect x="590" y="316" width="90" height="38" fill="#c9bba9" stroke="#d3c4ae"/>
+      </g>
+      <text x="455" y="196" text-anchor="middle" font-size="15" font-weight="700" fill="#7d5511">中央两行 ＝ 百搭资源行：三种资源任选其一</text>
+      <text x="455" y="220" text-anchor="middle" font-size="12" fill="#6b615c">（★ 中央列 ＝ 通用行动：四种行动任选，但要多付 1 个任意资源）</text>
+      <g font-size="12.5" fill="#6b615c">
+        <text x="30" y="76">行 1–3</text><text x="30" y="100">资源区</text>
+        <text x="30" y="198" fill="#7d5511" font-weight="700">行 4–5</text><text x="30" y="218" fill="#7d5511">百搭</text>
+        <text x="30" y="290">行 6–8</text><text x="30" y="310">资源区</text>
+      </g>
+      <g font-size="13" font-weight="700">
+        <rect x="700" y="64" width="178" height="72" rx="9" fill="#eaf0f9" stroke="#3b5b8c"/><text x="789" y="90" text-anchor="middle" fill="#2f466c">行 → 资源类型</text><text x="789" y="114" text-anchor="middle" fill="#6b615c" font-size="11" font-weight="400">樱桃蛋糕 / 茶 / 黄油吐司</text>
+        <rect x="700" y="150" width="178" height="72" rx="9" fill="#fbecec" stroke="#a2303c"/><text x="789" y="176" text-anchor="middle" fill="#8f2632">列 → 行动类型</text><text x="789" y="200" text-anchor="middle" fill="#6b615c" font-size="11" font-weight="400">以「棋子的颜色」执行</text>
+        <rect x="700" y="250" width="178" height="78" rx="9" fill="#e9f4ec" stroke="#3d7a55"/><text x="789" y="276" text-anchor="middle" fill="#2c6841">顺序不可颠倒</text><text x="789" y="300" text-anchor="middle" fill="#6b615c" font-size="11" font-weight="400">先获取资源，再支付行动费用</text><text x="789" y="318" text-anchor="middle" fill="#6b615c" font-size="11" font-weight="400">再结算行动奖励 [p.11, p.13]</text>
+      </g>
+      <text x="230" y="378" font-size="12" fill="#6b615c">※ 8 行各自对应的资源种类以版图行首印的图标为准；本图只示意「行／列分工」与中央百搭区。</text>
+    </svg>
+    <div class="figcap">图 2 · 棋盘 5 列 × 8 行的行列分工（依据 p.8 页图与 p.13 文字）</div>
+  </div>
+
+  <h3>3.3 落格结算顺序 <span class="pg">p.11</span><span class="pg">p.13</span></h3>
+  <ol class="steps">
+    <li><b>获取资源：</b>棋子最终停驻格的<b>行</b>决定你获得哪种资源。普通行给予印定的那一种；落在<b>中央两行</b>时<span class="pick g">择一</span>三种资源<b>任选一种</b>。把 1 个立方体从银盘移到对应资源区。</li>
+    <li><b>再付行动费用：</b>普通列直接给印定的那个行动；落在 <b>★ 中央列</b>时<span class="pick g">择一</span>四种行动<b>任选一种</b>，且要<b>额外付 1 个任意资源</b>。<b>费用必须在获得任何奖励之前支付</b>。红色棋子只能用樱桃蛋糕和/或茶，白色棋子只能用黄油吐司和/或茶。</li>
+    <li><b>执行行动并结算奖励：</b>同一个行动里获得的多个奖励，<b>顺序由玩家决定</b>，但须<b>当场</b>结算完毕，不得延至重复行动。奖励一般可放弃，<b>爱丽丝推进与皇冠一经触发即须领取</b>。</li>
+    <li><b>辨认黑白数字：</b>卡面与版图上<b>黑色数字＋图标＝费用</b>；<b>白色数字＋图标（或光图标无数字）＝奖励</b>。这是原书全篇的读图语法。</li>
+  </ol>
+  <div class="key"><b>结算关系：</b>卡牌决定棋子，<b>行</b>决定资源，<b>列</b>决定行动，<b>棋子颜色</b>决定可用的支付资源。</div>
+
+  <h3>3.4 打出棋子：移动与营救的择一<span class="pg">p.11</span></h3>
+  <div class="either">
+    <div class="hd">打出一张棋子卡后 —— <span class="pick">择一</span>　这是<b>互斥的两条路</b>，不是先后两步</div>
+    <div class="cols">
+      <div class="opt">
+        <div class="ot">A · 移动棋子（正常路径）</div>
+        按标准国际象棋走法在棋盘上移动这枚棋子，停在某一格；由该格的<b>行</b>给资源、<b>列</b>给行动。<br>
+        · 兵永远只走 1 格；被堵住时原地打出，激活<b>当前所在格</b>。<br>
+        · 落到对方棋子所占的格 → 俘获。
+      </div>
+      <div class="or">或</div>
+      <div class="opt b">
+        <div class="ot">B · 营救棋子（替代路径）</div>
+        当想打的那枚棋子正被俘（在<b>任何玩家</b>的监狱里），改为把它放到其颜色的任一空<b>重生格</b>，并<b>激活该格效果</b>来结束移动。<br>
+        · <b>被营救的棋子本回合不能再移动</b>。<br>
+        · 被救来源监狱的玩家获得 1 时间作补偿；重生格全满则放任意空格。
+      </div>
+    </div>
+    <div class="efoot"><b>共同点：</b>两条路都结束于「激活某个格」，之后同样进入 3.3 的获取资源 → 支付费用 → 执行行动。<b>差别：</b>A 的落格由走法决定，B 的落格由你选定重生格决定。
+    <span class="bad">不能先营救再移动</span>；<span class="good">只能选一条</span>。落格之后还有<b>另一道独立的择一</b>：执行该列行动 / 跳过行动改为获得 2 时间并直接休整 <span class="pg">p.11</span>——那是下一层决策，不属于本层择一。</div>
+  </div>
+
+  <h4>其他特殊情形</h4>
+  <table>
+    <tr><th style="width:20%">情形</th><th>怎么处理</th></tr>
+    <tr><td><b>按国际象棋走</b></td><td>依棋子走法提示卡。<b>兵永远只走 1 格</b>（没有开局走 2 格）。</td></tr>
+    <tr><td><b>被堵住</b></td><td>原地打出该卡，激活它<b>当前所在格</b>的效果。即使别的兵还能动，你也可以打出被堵的兵。</td></tr>
+    <tr><td><b>俘获</b></td><td>落在对方颜色棋子所占的格即俘获，放进你版图对应监狱。<b>没有「将军」，王也可被俘</b>。奖励按被俘棋子价值累计：<b>兵</b> 1 时间；<b>马/象/车</b> 1 资源 + 1 时间；<b>王/后</b> 1 个被俘颜色爪印 + 1 资源 + 1 时间。</td></tr>
+    <tr><td><b>营救</b></td><td>欲打出的棋子被俘时（不论在谁的监狱），可把它放到其颜色的任一空<b>重生格</b>，激活该格效果来结束移动；<b>被营救的棋子当回合不能再移动</b>。被救来源监狱的玩家得 1 时间作补偿。重生格全满则放任意空格。</td></tr>
+    <tr><td><b>兵升变</b></td><td>兵走进最远一行 → 得 1 个该兵颜色爪印 → <b>立即把兵移至自己颜色的一个重生格</b>，并以激活这个新格（含其资源与行动）结束移动。</td></tr>
+    <tr><td><b>王的 ALL</b></td><td>附录 2：打出王时，<b>无论停在棋盘哪里，你都可以执行任意一种行动</b>。<span class="pg">p.23</span></td></tr>
+    <tr><td><b>不执行行动</b></td><td>跳过行动，改为获得 <b>2 时间</b>，直接进入休整。<span class="pg">p.11</span></td></tr>
+  </table>
+
+  <h3 id="pick">3.5 全游戏「择一」决策总表</h3>
+  <p>原书将分支分述于各页。下表汇总全游戏的互斥选择：<b>每行均为择一，不按先后顺序执行</b>。正文中的 <span class="pick">择一</span> 标记均回指本表。</p>
+  <table class="idx">
+    <tr><th style="width:9%">阶段</th><th style="width:17%">决策点</th><th style="width:30%">互斥选项</th><th style="width:36%">约束与后果</th><th style="width:8%">页码</th></tr>
+    <tr><td rowspan="7"><b>回合内</b></td><td>打出棋子卡后</td><td><b>A 移动棋子</b> / <b>B 营救棋子</b></td><td>A 依走法决定落格；B 由玩家选定重生格，当回合不再移动</td><td><span class="pg">p.11</span></td></tr>
+    <tr><td>落格后</td><td><b>执行该列行动</b> / <b>跳过行动获得 2 时间</b></td><td>另一道独立择一；跳过就直接进入休整，不再有行动奖励</td><td><span class="pg">p.11</span></td></tr>
+    <tr><td>落格在中央两行</td><td>樱桃蛋糕 / 茶 / 黄油吐司</td><td>三选一，立即收；普通行只能获取印定的那一种</td><td><span class="pg">p.8</span></td></tr>
+    <tr><td>落格在 ★ 中央列</td><td>♥ / ♠ / ♣ / ♦ 任一行动</td><td>四选一，但要额外付 1 个任意资源；粉玫瑰 1 朵可免这笔</td><td><span class="pg">p.8</span><span class="pg">p.13</span></td></tr>
+    <tr><td>打出「王」</td><td>四种行动任一</td><td>无视落格列（附录 2 的 ALL）</td><td><span class="pg">p.23</span></td></tr>
+    <tr><td>阶段 c</td><td>付 6 时间重复行动 / 不重复</td><td>可选，每回合限 1 次；同色、再付行动费用、不打卡</td><td><span class="pg">p.12</span></td></tr>
+    <tr><td>费用不足</td><td>支付 3 时间 / 退 1 黑立方体，替代 1 资源</td><td>可按资源个数多次替代；替代所得必须立即支付</td><td><span class="pg">p.10</span></td></tr>
+    <tr><td rowspan="4"><b>♥ 红心</b></td><td>园丁</td><td>付茶移动 / 不移动</td><td>可选前置；移动＝更换区域＝更换可获取的奖励组</td><td><span class="pg">p.14</span></td></tr>
+    <tr><td>园丁落位</td><td>4 个同色格 / 相邻同色格中选 1 个</td><td>决定园丁当前区域，即本回合可种植的片区</td><td><span class="pg">p.14</span></td></tr>
+    <tr><td>种玫瑰</td><td>园丁当前区域内任选 1 个空格</td><td>取得被覆盖格的奖励；空格随占位递减</td><td><span class="pg">p.14</span></td></tr>
+    <tr><td>取红心</td><td>严格取「编号最小」的一枚</td><td><b>此项为强制顺序，非择一</b>（迷你行动则是任一色最小的一枚）</td><td><span class="pg">p.14</span></td></tr>
+    <tr><td rowspan="5"><b>♠ 黑桃</b></td><td>信使步数</td><td>前进 1 / 2 / 3 格</td><td>费用不同；<b>只结算落格奖励</b>，步数决定落格</td><td><span class="pg">p.15</span></td></tr>
+    <tr><td>路径岔路</td><td>左 / 右</td><td>有些格可自选往哪走</td><td><span class="pg">p.15</span></td></tr>
+    <tr><td>卡牌奖励</td><td><b>购卡</b> / <b>邀请</b></td><td>二选一；前者给牌库加牌，后者减牌并折终局 IP</td><td><span class="pg">p.15</span></td></tr>
+    <tr><td>邀请来源</td><td>手牌 / 弃牌堆</td><td>二选一；不能让手牌在打牌前清空、不能让手牌+牌库 &lt; 3</td><td><span class="pg">p.7</span></td></tr>
+    <tr><td>购卡格位</td><td>市场左 / 中 / 右格（并在允许层级内）</td><td>费用依次免费 / 1 时间 / 1 自选资源</td><td><span class="pg">p.9</span></td></tr>
+    <tr><td rowspan="2"><b>♣ 梅花</b></td><td>双子路径</td><td>任一相邻箭头路径（黄 / 黑箭头）</td><td>最多穿过 1 个箭头；黄箭头按双子颜色收费，黑箭头统一收费</td><td><span class="pg">p.16</span></td></tr>
+    <tr><td>购买书签</td><td>检视全部可用书签后任选 1 枚</td><td>即时 / 每回合 / 终局计分三类，效果各异</td><td><span class="pg">p.16</span></td></tr>
+    <tr><td rowspan="2"><b>♦ 方块</b></td><td>墙格</td><td>与所打棋子颜色匹配的一侧任选 1 格</td><td>付行费用 + 列费用；但砖<b>必须</b>放该列最低空位，可选列因此受限</td><td><span class="pg">p.17</span></td></tr>
+    <tr><td>取方块</td><td>朝臣版图任选 1 枚方块标记</td><td>获取该格印制的奖励，与墙上盖住的奖励是两份</td><td><span class="pg">p.17</span></td></tr>
+    <tr><td rowspan="4"><b>跨行动 / 全局</b></td><td>迷你行动</td><td>任一颜色、对应版图上的一次迷你行动</td><td><b>无颜色限制</b>，红棋触发亦可作用于白色一侧，可跨版图形成连锁</td><td><span class="pg">p.13</span></td></tr>
+    <tr><td>营救 / 兵升变</td><td>任一空的重生格</td><td>择一，并以激活该格来结束移动</td><td><span class="pg">p.11</span></td></tr>
+    <tr><td>终局心愿（猫轨 ×1~×2）</td><td>该色两个心愿中自选 1 个</td><td>超过 ×2 才两个都计；未到 ×1 一个都不计</td><td><span class="pg">p.19</span></td></tr>
+    <tr><td>设置 · 车票卡</td><td>2 张选 1 张，再选红面 / 白面</td><td>第一局可直接发带星的 4 张代替</td><td><span class="pg">p.6</span></td></tr>
+  </table>
+
+  <details><summary>对照原书页图：卡牌结构（p.7）／回合与移动（p.11）／行动总则（p.13）</summary>
+    <img src="images/page_07.jpg" alt="原书 p.7 卡牌结构" loading="lazy"><div class="figcap">p.7 · 卡牌结构四要素</div>
+    <img src="images/page_11.jpg" alt="原书 p.11 回合结构" loading="lazy"><div class="figcap">p.11 · 回合结构与棋子移动</div>
+    <img src="images/page_13.jpg" alt="原书 p.13 行动总则" loading="lazy"><div class="figcap">p.13 · 费用/奖励配色、通用行动、迷你行动</div>
+  </details>
+</section>
+
+<!-- ============ 4 ============ -->
+<section id="s4">
+  <h2><span class="n">4</span>回合的四个阶段</h2>
+  <p>每回合依次经过 <b>a → b → c → d</b>，其中 a、b、d 必须执行，c 可选。<span class="pg">p.11</span><span class="pg">p.12</span></p>
+
+  <div class="fig">
+    <svg viewBox="0 0 940 216" xmlns="http://www.w3.org/2000/svg" font-family="PingFang SC,Microsoft YaHei,Arial">
+      <rect x="0" y="0" width="940" height="216" fill="#fffdf9"/>
+      <line x1="30" y1="70" x2="910" y2="70" stroke="#d3c4ae" stroke-width="3"/>
+      <g font-size="13" font-weight="700" text-anchor="middle">
+        <circle cx="110" cy="70" r="13" fill="#a2303c"/><text x="110" y="75" fill="#fff" font-size="13">a</text>
+        <circle cx="330" cy="70" r="13" fill="#a2303c"/><text x="330" y="75" fill="#fff" font-size="13">b</text>
+        <circle cx="600" cy="70" r="13" fill="#a9761c"/><text x="600" y="75" fill="#fff" font-size="13">c</text>
+        <circle cx="840" cy="70" r="13" fill="#3d7a55"/><text x="840" y="75" fill="#fff" font-size="13">d</text>
+      </g>
+      <g font-size="13">
+        <rect x="24" y="92" width="172" height="86" rx="9" fill="#fbecec" stroke="#a2303c"/>
+        <text x="110" y="114" text-anchor="middle" fill="#8f2632" font-weight="700">弃除一张牌</text>
+        <text x="110" y="136" text-anchor="middle" fill="#6b615c" font-size="11.5">从手牌选 1 张弃掉</text>
+        <text x="110" y="155" text-anchor="middle" fill="#6b615c" font-size="11.5">获取其「弃除奖励」</text>
+        <text x="110" y="172" text-anchor="middle" fill="#6b615c" font-size="11.5">面朝上放弃牌堆</text>
+        <rect x="220" y="92" width="220" height="86" rx="9" fill="#fbecec" stroke="#a2303c"/>
+        <text x="330" y="114" text-anchor="middle" fill="#8f2632" font-weight="700">打出一张牌</text>
+        <text x="330" y="136" text-anchor="middle" fill="#6b615c" font-size="11.5">另选 1 张叠在刚弃的牌上</text>
+        <text x="330" y="155" text-anchor="middle" fill="#6b615c" font-size="11.5">打出奖励 → 移动棋子 → 落格</text>
+        <text x="330" y="172" text-anchor="middle" fill="#6b615c" font-size="11.5">获取资源 → 支付费用 → 执行行动</text>
+        <rect x="470" y="92" width="260" height="86" rx="9" fill="#fbf1dc" stroke="#a9761c"/>
+        <text x="600" y="114" text-anchor="middle" fill="#7d5511" font-weight="700">重复行动（可选，每回合 1 次）</text>
+        <text x="600" y="136" text-anchor="middle" fill="#6b615c" font-size="11.5">付 6 时间，重复刚执行的行动</text>
+        <text x="600" y="155" text-anchor="middle" fill="#6b615c" font-size="11.5">必须同色，再付一次行动费用</text>
+        <text x="600" y="172" text-anchor="middle" fill="#6b615c" font-size="11.5">不打出新卡；★ 列附加费不用再付</text>
+        <rect x="756" y="92" width="168" height="86" rx="9" fill="#e9f4ec" stroke="#3d7a55"/>
+        <text x="840" y="114" text-anchor="middle" fill="#2c6841" font-weight="700">休整（整理）</text>
+        <text x="840" y="136" text-anchor="middle" fill="#6b615c" font-size="11.5">补/弃手牌至上限 3</text>
+        <text x="840" y="155" text-anchor="middle" fill="#6b615c" font-size="11.5">市场左滑补货、书签翻回</text>
+        <text x="840" y="172" text-anchor="middle" fill="#6b615c" font-size="11.5">若触发心愿：全体计分</text>
+      </g>
+      <text x="470" y="202" text-anchor="middle" font-size="12" fill="#6b615c">※ a 与 b 是两张不同的牌；打出的那张叠在刚弃除的那张之上，弃牌堆顺序由此确定。</text>
+    </svg>
+    <div class="figcap">图 3 · 回合四阶段时间轴（依据 p.11–p.12）</div>
+  </div>
+
+  <table>
+    <tr><th style="width:9%">阶段</th><th style="width:35%">操作</th><th>执行要点</th></tr>
+    <tr><td><b>a 弃牌</b></td><td>从手牌弃 1 张，获取其弃除奖励。</td><td>基础卡也有弃除奖励。弃掉的牌面朝上放弃牌堆。<span class="pg">p.11</span></td></tr>
+    <tr><td><b>b 打牌</b></td><td>再选 1 张打出，叠在刚弃的牌上；获取打出奖励；<span class="pick">择一</span><b>移动 / 营救</b>（见 §3.4，二选一）；结算落格；落格后再<span class="pick">择一</span><b>执行该列行动 / 跳过并获 2 时间</b>。</td><td>基础卡<b>没有</b>打出奖励；打出奖励里的折扣每回合只生效一次。<span class="pg">p.7</span><span class="pg">p.11</span></td></tr>
+    <tr><td><b>c 重复</b></td><td>付 <b>6 时间</b>，重复刚执行的行动。</td><td>每回合限 1 次；必须<b>同色</b>；<b>再付一次行动费用</b>；<b>不打新卡</b>；通用列那 1 个附加资源<b>不用再付</b>。<span class="pg">p.12</span><span class="pg">p.13</span></td></tr>
+    <tr><td><b>d 休整</b></td><td>① 补抽或弃到手牌上限（通常 3）② 市场左滑补货 ③ 用过的每回合书签翻回 ④ 若本回合爱丽丝踩到心愿格，<b>全体玩家</b>结算该心愿。</td><td>牌库耗尽时洗弃牌堆重组。结算心愿前确认陈列区已移除 1 个皇冠。<span class="pg">p.12</span></td></tr>
+  </table>
+
+  <div class="tip"><b>关于「手牌上限 3」：</b>休整时多于 3 要弃到 3，少于 3 补到 3。黄花的永久加成会把上限提到 <b>5</b>。<span class="pg">p.12</span><span class="pg">p.22</span></div>
+  <div class="warn"><b>易混淆处：</b>奖励必须在<b>产生它的那个行动里</b>当场结算，<b>不能留到 c 阶段重复行动时才激活</b>。<span class="pg">p.13</span></div>
+</section>
+
+<!-- ============ 5 ============ -->
+<section id="s5">
+  <h2><span class="n">5</span>四类行动</h2>
+  <p>四类行动共用同一结构：触发（落在对应列）→ 支付（按棋子颜色）→ 按固定步骤推进 → 结算奖励 → 检查里程碑 → 终点授予皇冠。差异见 §5.1–5.4。<span class="pg">p.13</span></p>
+
+  <h3 id="why">5.0 行动的共同结构与格子差异</h3>
+  <div class="why">
+    <span class="wt">四类行动的共同结构</span>
+    每类行动均以资源换取一次位移或放置，<b>落点决定所得奖励</b>。版图各格印制的奖励、费用与占用状态互不相同，构成实际的奖励表。
+    行动决策因而集中于落点选择；§3.5 所列择一分支，多数即落点或奖励的选择。
+  </div>
+  <h4>各版图格子差异</h4>
+  <table class="idx">
+    <tr><th style="width:17%">位置</th><th style="width:41%">差异项</th><th style="width:34%">影响</th><th style="width:8%">页码</th></tr>
+    <tr><td><b>棋盘 5×8 格</b></td><td><b>行</b>＝资源种类，<b>列</b>＝行动种类；中央两行是百搭资源行、中央 ★ 列是通用行动列；格子还可能被对方棋子占据</td><td>决定本回合所得资源与所执行的行动；落在对方格上触发俘获</td><td><span class="pg">p.8</span><span class="pg">p.11</span><span class="pg">p.13</span></td></tr>
+    <tr><td><b>花园格</b></td><td>各格印制奖励不同：四种花（黄 / 蓝 / 橙 / 粉）以及爪印、书、卡等非花图标；并分属 <b>4 个区域</b></td><td>园丁当前区域决定可覆盖的格子，进而决定所得永久加成的种类</td><td><span class="pg">p.14</span></td></tr>
+    <tr><td><b>朝臣版图<br>红心 / 方块格</b></td><td>每枚标记所在格印的奖励不同（银卡、爪印、时间、爱丽丝推进、迷你行动等都出现过）</td><td>移除的标记决定所得奖励；<b>红心须取编号最小者</b>，方块允许任选</td><td><span class="pg">p.14</span><span class="pg">p.17</span></td></tr>
+    <tr><td><b>信使路径格</b></td><td>格奖励各不相同；格后横幅颜色代表可购卡层级（铜 / 银 / 金）；另有印章格、中央金区、岔路、终点等特殊格</td><td>步数决定落格；<b>首位</b>越过印章与<b>后续</b>玩家所得奖励不同</td><td><span class="pg">p.15</span></td></tr>
+    <tr><td><b>双子之树格</b></td><td>印的书本颜色与其他奖励不同、高度不同（标在格下方的书签图标内）；部分格上还放着<b>实体书本标记</b></td><td>高度触发里程碑；实体书本标记被取走后，同一格后续到访获得的奖励会变</td><td><span class="pg">p.16</span></td></tr>
+    <tr><td><b>矮胖子墙格</b></td><td>左红右白各成一片；每格印不同奖励；每行费用不同（印在行首），部分列另加 1 茶</td><td>格位同时决定费用与所得奖励；与矮胖子同一行另有额外 IP</td><td><span class="pg">p.17</span></td></tr>
+    <tr><td><b>爱丽丝路径格</b></td><td>每格印不同 IP 数值；心愿格、王座格、被皇冠占住的格是特殊格</td><td>推进到哪格决定即时 IP、是否触发全体心愿、是否加冕；有皇冠的格要跳过</td><td><span class="pg">p.8</span><span class="pg">p.9</span></td></tr>
+    <tr><td><b>猫咪轨道格</b></td><td>沿途每格印不同奖励，×1 / ×2 是阈值格</td><td>落格＋跳过的所有格都给奖励；终局位置决定能算几个心愿</td><td><span class="pg">p.9</span><span class="pg">p.19</span></td></tr>
+    <tr><td><b>卡牌市场格</b></td><td>铜 / 银 / 金三层 × 左中右三格，费用依次免费 / 1 时间 / 1 自选资源</td><td>同一层级内格位决定成本；最右格为牌库顶牌</td><td><span class="pg">p.9</span></td></tr>
+  </table>
+
+  <table>
+    <tr><th style="width:12%">行动</th><th style="width:22%">费用</th><th style="width:24%">产出</th><th style="width:22%">里程碑（按每色各自计）</th><th>迷你行动</th></tr>
+    <tr><td><b class="tagR">♥ 红心</b></td><td>园丁移动 1 茶/格；放红心的费用（樱桃蛋糕 / 黄油吐司）</td><td><b>花（永久加成）</b>、版图与花园两处奖励</td><td>第 3 枚 → 爱丽丝 1 格<br>第 4 枚 → 迷你行动<br>第 5 枚 → 皇冠</td><td>免费移除任一色<b>编号最小</b>的红心，获得翻出的奖励，标记放一旁</td></tr>
+    <tr><td><b class="tagB">♠ 黑桃</b></td><td>1 格 = 1 资源；2 格 = 2 资源；3 格 = 2 资源 + 1 茶</td><td><b>购卡或邀请</b>、落格奖励、印章奖励</td><td>首过印章获得大印章奖励，后续获得小印章奖励；进中央金区 ≥1 次爱丽丝推进；中央穿越给免费迷你行动；<b>路径终点给皇冠</b></td><td>任一信使免费前进<b>恰好 1 格</b>，照常获得全部奖励</td></tr>
+    <tr><td><b class="tagG">♣ 梅花</b></td><td>箭头标示的费用（黄箭头分红白两色，黑箭头统一）</td><td><b>书本</b>、可选购书签</td><td>从第 2 层爬到第 3 层 → 对应色爱丽丝 1 格；<b>树顶给皇冠</b></td><td>任一双子沿相邻黑箭头免费移动，照常获得奖励 + 可购买书签</td></tr>
+    <tr><td><b class="tagR">♦ 方块</b></td><td>所选<b>行费用 + 列费用</b>（部分列另需 1 茶）</td><td>版图奖励 + 墙上被盖住的奖励 + IP</td><td>第 3 枚 → 爱丽丝 1 格<br>第 4 枚 → 迷你行动<br>第 5 枚 → 皇冠</td><td>免费移除任一色 1 枚方块，获得图示奖励，不放到墙上</td></tr>
+  </table>
+  <p><span class="pg">p.14</span><span class="pg">p.15</span><span class="pg">p.16</span><span class="pg">p.17</span></p>
+
+  <h3>5.1 <span class="tagR">♥</span> 红心 · 百花花园 <span class="pg">p.14</span></h3>
+  <div class="why">
+    <span class="wt">园丁移动的作用：选定种植区域</span>
+    花园版图由中间的红色小径分成<b>四片区域</b>（四角各有一朵大花作标识），每片里散布着若干圆形格；<b>各格印有奖励图标</b>，四种花（黄 / 蓝 / 橙 / 粉）与爪印、书本、卡牌等非花奖励混在一起。<span class="pg">p.14</span><br>
+    规则又规定：红心只能种在<b>园丁当前所在区域</b>的一个空格上，获得的是<b>被它盖住的那一格</b>奖励。移动园丁即<b>以茶换取更换奖励池的机会</b>：相邻格 1 茶、正对面 2 茶；<b>不移动</b>则不支付茶，并接受当前区域的剩余奖励。<br>
+    从休息位进花园<b>免费</b>，且可放到与其颜色匹配的 4 个格中的任意一个，据此可在每轮重新选定区域。区域内空格随红心覆盖而减少；区域填满后园丁返回休息位，占位顺序构成竞争。
+  </div>
+  <ol class="steps">
+    <li><b>移动园丁（可选，<span class="pick g">择一</span>）：</b>先决定<b>移动 / 不移动</b>；移动时再<b>选一个目标格</b>——让对应色园丁移到<b>该颜色的相邻格</b>，每次 1 茶，移到正对面要 2 茶。<b>从休息位进花园免费</b>，可放到该色 4 个格中的任意一个。<br><span style="font-size:13px;color:var(--soft)">此步骤决定本回合可种植的片区及所得花的种类。</span></li>
+    <li><b>放一枚红心（不是择一）：</b>从朝臣版图取对应色<b>编号最小</b>的那枚红心标记（强制顺序，不能挑选），支付它标示的费用（樱桃蛋糕或黄油吐司），获得<b>该标记原来那一格</b>印的奖励。红心格与红心格的奖励也不同，但因为只能取最小的，该奖励由固定顺序决定，不供选择。</li>
+    <li><b>种玫瑰丛（<span class="pick g">择一</span>）：</b>在<b>园丁当前区域</b>里<b>任选一个空格</b>放红心，获得<b>被它盖住</b>的奖励（多数是花）。花提供永久加成，可置于提示板块以便查核。<br><span style="font-size:13px;color:var(--soft)">此为本行动第二份奖励，由所选格位决定；与前一份来源不同，须分别结算。</span></li>
+    <li><b>检查里程碑与园丁休息：</b>按颜色各自数已放置的红心数（3 / 4 / 5 见上表）；若园丁所在区已无空格，园丁回休息位。</li>
+  </ol>
+  <div class="key"><b>行动定位：</b>红心行动是<b>全游戏唯一能获得花</b>的地方，而花是永久加成（例如手牌上限变 5、重复行动从 6 时间降到 5 时间）。<b>一次红心行动结算两份奖励</b>：朝臣版图上「取走红心」的那一份 + 花园里「盖住格子」的那一份。<span class="pg">p.14</span><span class="pg">p.22</span></div>
+
+  <h3>5.2 <span class="tagB">♠</span> 黑桃 · 国王信使 <span class="pg">p.15</span></h3>
+  <div class="why">
+    <span class="wt">信使步数的作用：选定落格</span>
+    路径上<b>各格印制的奖励不同</b>：格奖励、卡牌奖励（格后横幅颜色＝可购卡层级，铜 / 银 / 金）、印章、中央金区、岔路、终点皇冠，全都是<b>位置属性</b>。<span class="pg">p.15</span><br>
+    而规则<b>只给予落格的奖励，途经格一律不获取</b>。步数费用用于<b>换取落点</b>：支付越多，越过的格子越多，落格奖励随之改变。<br>
+    印章还分「<b>首个</b>通过的玩家获得大印章 / <b>后续</b>玩家获得小印章」，同一格对先手和后手价值不同；终点给对应色皇冠，为该路径的终点奖励。
+  </div>
+  <table>
+    <tr><th>移动格数</th><th>红信使（疯帽匠）</th><th>白信使（三月兔）</th></tr>
+    <tr><td>1 格</td><td>1 樱桃蛋糕</td><td>1 黄油吐司</td></tr>
+    <tr><td>2 格</td><td>2 樱桃蛋糕</td><td>2 黄油吐司</td></tr>
+    <tr><td>3 格</td><td>2 樱桃蛋糕 + 1 茶</td><td>2 黄油吐司 + 1 茶</td></tr>
+  </table>
+  <ol class="steps">
+    <li><b>付费并前进（<span class="pick b">择一</span>）：</b>在 <b>1 / 2 / 3 格</b>中选一个步数并付对应费用；遇到岔路再<b>择一</b>选左或右。部分格设有岔路，同一格可由多名玩家占据。<br><span style="font-size:13px;color:var(--soft)">步数决定落格，途经格不给奖励。</span></li>
+    <li><b>只获取落格的奖励</b>（不获取途经格），外加该格的<b>卡牌奖励</b>。</li>
+    <li><b>卡牌奖励（<span class="pick b">择一</span>）：</b>于购卡与邀请中择一，详见下表。</li>
+    <li><b>检查里程碑：</b>经过带印章的箭头时，<b>第一个</b>到达的玩家获得大印章里的全部奖励，<b>后续玩家</b>获得小印章里的全部奖励；进入中央金区至少给 1 次爱丽丝推进；穿越中央给 1 个免费迷你行动；抵达路径终点给<b>对应颜色的皇冠</b>。</li>
+  </ol>
+  <div class="either">
+    <div class="hd">卡牌奖励 —— <span class="pick b">择一</span>　同一个落格只能取其中一项 <span class="pg">p.15</span></div>
+    <div class="cols">
+      <div class="opt">
+        <div class="ot">A · 购卡（给牌库加牌）</div>
+        按落格背后横幅标示的<b>层级</b>购买一张卡，支付该格位的市场费用。卡<b>直接进手牌、可立即使用</b>。<br>
+        作用：扩充牌库。
+      </div>
+      <div class="or">或</div>
+      <div class="opt b">
+        <div class="ot">B · 邀请（给牌库减牌）</div>
+        从<b>手牌或弃牌堆</b>裁掉任意层级的一张卡，放到朝臣版图下方，终局按它的邀请奖励折 IP。<br>
+        作用：精简牌库并累积终局声望。
+      </div>
+    </div>
+    <div class="efoot"><b>两项互斥，同一次行动不得并取</b>。邀请有两个硬限制：不能让手牌在本回合打牌之前变空，也不能让手牌 + 牌库合计少于 3 张。<span class="pg">p.7</span></div>
+  </div>
+  <div class="tip"><b>邀请：</b>把弱基础卡永久移出牌库，同时把它右上角的 IP 记到终局。但有两个硬限制——不能让手牌在<b>本回合打牌之前</b>变空，也不能让手牌 + 牌库合计少于 3 张。<span class="pg">p.7</span></div>
+
+  <h3>5.3 <span class="tagG">♣</span> 梅花 · 双子之树 <span class="pg">p.16</span></h3>
+  <div class="why">
+    <span class="wt">树的层级：格子状态随到访顺序变化</span>
+    树上的格子带三个属性：<b>印着的书本颜色 / 其他奖励</b>、<b>高度</b>（印在格下方的书签图标内）、以及<b>格上是否还放着实体书本标记</b>。<span class="pg">p.16</span><br>
+    实体书本标记为一次性资源：首位落在有实体书的格上的玩家获得 <b>2 本</b>；书本标记被取走后，后续到访者获得 <b>1 本 + 另一个印制奖励</b>，而且<b>被实体书盖住的那份印制奖励不能获得</b>。路径选择同时决定费用与<b>该格剩余奖励</b>。<br>
+    高度本身是里程碑：从第 2 层爬到第 3 层推对应色爱丽丝、树顶给对应色皇冠。费用依所移动双子的颜色而定（黄箭头分色、黑箭头统一）。
+  </div>
+  <ol class="steps">
+    <li><b>选路并付费（<span class="pick g">择一</span>）：</b>在<b>相邻的箭头路径</b>中选一条，让对应色双子沿箭头移动，<b>最多穿过 1 个箭头</b>。黄色箭头标两种费用（红双子付樱桃蛋糕 / 白双子付黄油吐司）；黑色箭头只标一种费用，不分红白。</li>
+    <li><b>结算落格奖励：</b>取走落格上所有<b>实体书本标记</b>；若该格<b>印有</b>书本，再获得 1 本（印多色时任选一色），并可获得其他印制奖励。但<b>被实体书本标记盖住的印制奖励不能获得</b>。所以第一个到访有实体书本标记的格子的玩家会获得 2 本书；标记被取走后到访该格的后续玩家获得 1 本书 + 另一个印制奖励。</li>
+    <li><b>可选购书签（<span class="pick g">择一</span>）：</b>花书买 1 枚书签，可先检视全部可用书签再<b>任选 1 枚</b>。书签分即时 / 每回合 / 终局计分三类，效果各异。格子高度印在它下方的书签图标里；多个棋子可同格。</li>
+    <li><b>检查里程碑：</b>从第 2 层爬到第 3 层时，对应色爱丽丝前进 1 格；任一双子到树顶，给<b>对应颜色的皇冠</b>。</li>
+  </ol>
+
+  <h3>5.4 <span class="tagR">♦</span> 方块 · 矮胖子之墙 <span class="pg">p.17</span></h3>
+  <div class="why">
+    <span class="wt">格位选择：费用、奖励与位置分</span>
+    墙分成<b>左红 / 右白</b>两片，每片是一列列砖格；<b>各格印制奖励不同</b>（爪印、书本、黑色立方体、时间等），<b>每行印着不同的费用</b>，其中两列还要额外付 1 茶、另两列不用。<span class="pg">p.17</span><br>
+    格位同时决定三项：<b>支付费用</b>（行费用 + 列费用）、<b>获取奖励</b>（墙上被盖住的那份奖励）、<b>位置分判定</b>（与矮胖子半身件同一行得 2 IP；砌满他所在那一行得 4 IP 并让他上移一行）。<br>
+    放置规则构成约束：<b>砖必须放在所选列的最低空位</b>。实际选定的是列，行由该列已堆叠的高度决定；堆叠越高，可选行越少。同层奖励与整行完成奖励即据此设置。
+  </div>
+  <ol class="steps">
+    <li><b>选格并付费（<span class="pick">择一</span>）：</b>在<b>与所打棋子颜色匹配</b>的一侧<b>任选一个格</b>；同时支付该格的<b>行费用 + 列费用</b>。所有行都有费用；其中两列各另需 1 茶（格上有小图标提示），另两列无附加费用。</li>
+    <li><b>放置规则：</b>砖必须放在<b>所选列的最低空位</b>；砖<b>不必</b>与矮胖子半身件在同一行。</li>
+    <li><b>取方块（<span class="pick">择一</span>）：</b>从朝臣版图<b>任选 1 枚</b>方块标记移除，获得它那格印的奖励。<span style="font-size:13px;color:var(--soft)">此为本行动第一份奖励，可选择；红心则须取编号最小者。</span></li>
+    <li><b>放砖：</b>把砖放到墙上选定格，获得<b>被盖住</b>的奖励。<span style="font-size:13px;color:var(--soft)">第二份奖励由格位决定。一次方块行动共结算两份奖励。</span></li>
+    <li><b>结算 IP 与里程碑：</b>与对应矮胖子半身件<b>同一行</b>砌砖得 2 IP；若你的砖<b>砌满矮胖子所在那一行</b>，把半身件上移一行，改为得 <b>4 IP</b>。按颜色数已放置方块（3 / 4 / 5）给爱丽丝推进 / 迷你行动 / 皇冠。</li>
+  </ol>
+
+  <div class="note"><b>四行动的「里程碑」不是全局的：</b>红心、方块的第 3/4/5 枚是<b>按红、白各自分别累计</b>；黑桃、梅花的终点皇冠也是<b>对应颜色</b>的皇冠，终局加冕时只算获胜色。<span class="pg">p.14</span><span class="pg">p.17</span><span class="pg">p.19</span></div>
+
+  <details><summary>对照原书页图：四大行动各一页（p.14–p.17）</summary>
+    <img src="images/page_14.jpg" alt="p.14 红心" loading="lazy"><div class="figcap">p.14 · 红心 · 百花花园</div>
+    <img src="images/page_15.jpg" alt="p.15 黑桃" loading="lazy"><div class="figcap">p.15 · 黑桃 · 国王信使</div>
+    <img src="images/page_16.jpg" alt="p.16 梅花" loading="lazy"><div class="figcap">p.16 · 梅花 · 双子之树</div>
+    <img src="images/page_17.jpg" alt="p.17 方块" loading="lazy"><div class="figcap">p.17 · 方块 · 矮胖子之墙</div>
+  </details>
+</section>
+
+<!-- ============ 6 ============ -->
+<section id="s6">
+  <h2><span class="n">6</span>贯穿全局的四条线</h2>
+  <p>以下四项由各类行动共同触发，贯穿全局：爱丽丝路径与心愿、皇冠、猫咪轨道、卡牌市场。</p>
+
+  <h3>6.1 爱丽丝的两条路径与「心愿」<span class="pg">p.8</span><span class="pg">p.12</span></h3>
+  <ol class="steps">
+    <li><b>普通推进：</b>把红或白爱丽丝棋子<b>向上移到下一个空格</b>，获得该格标示的 IP；<b>跳过任何放有皇冠的格子</b>。</li>
+    <li><b>踩到心愿格（计分条件）：</b>① 先从陈列区移除 1 个皇冠放到心愿上作提醒 → ② 结算路径格上的 IP → ③ <b>把整个回合打完，包括可选的重复行动</b> → ④ 回合结束时（休整阶段）<b>所有玩家</b>按这块心愿的条件计分 → ⑤ 皇冠弃除。</li>
+    <li><b>王座格：</b>某色爱丽丝走到路径终点进入王座格，爱丽丝就以该色加冕；移除并弃除 1 个皇冠。<b>王座格只能被一个爱丽丝占据</b>，另一色仍可继续推进到自己路径终点。</li>
+    <li><b>无法推进：</b>某色爱丽丝已无法再推进时，该颜色的后续推进改为<b>获得 5 IP + 移除 1 个皇冠</b>。</li>
+  </ol>
+  <div class="warn"><b>心愿由全体玩家结算。</b>爱丽丝抵达心愿格后，<b>所有玩家</b>在触发者回合结束时按该心愿条件计分；推进时机因而影响全体。<span class="pg">p.8</span><span class="pg">p.12</span></div>
+
+  <h3>6.2 皇冠的三重作用 <span class="pg">p.9</span></h3>
+  <div class="fig">
+    <svg viewBox="0 0 940 268" xmlns="http://www.w3.org/2000/svg" font-family="PingFang SC,Microsoft YaHei,Arial">
+      <rect x="0" y="0" width="940" height="268" fill="#fffdf9"/>
+      <rect x="368" y="14" width="204" height="52" rx="11" fill="#f1eaf7" stroke="#6b4a86"/>
+      <text x="470" y="36" text-anchor="middle" font-size="15" font-weight="700" fill="#563a6d">获得 1 个皇冠</text>
+      <text x="470" y="55" text-anchor="middle" font-size="11.5" fill="#6b615c">从陈列区取 1 个皇冠标记</text>
+      <g stroke="#a9761c" stroke-width="2" fill="none" marker-end="url(#ar2)">
+        <path d="M400 66 C 300 90, 200 90, 160 104"/><path d="M470 66 V104"/><path d="M540 66 C 640 90, 740 90, 780 104"/>
+      </g>
+      <defs><marker id="ar2" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#a9761c"/></marker></defs>
+      <g font-size="12.5">
+        <rect x="18" y="108" width="286" height="122" rx="10" fill="#fbecec" stroke="#a2303c"/>
+        <text x="161" y="132" text-anchor="middle" font-size="14" font-weight="700" fill="#8f2632">① 即时倍分</text>
+        <text x="161" y="154" text-anchor="middle" fill="#6b615c">放到「活跃路径」上爱丽丝前方</text>
+        <text x="161" y="174" text-anchor="middle" fill="#6b615c">的下一个空格，马上结算该格 IP 的</text>
+        <text x="161" y="194" text-anchor="middle" font-weight="700" fill="#a2303c">2 倍</text>
+        <text x="161" y="216" text-anchor="middle" fill="#6b615c">之后爱丽丝推进会跳过这一格</text>
+        <rect x="326" y="108" width="288" height="122" rx="10" fill="#fbf1dc" stroke="#a9761c"/>
+        <text x="470" y="132" text-anchor="middle" font-size="14" font-weight="700" fill="#7d5511">② 终局倒计时</text>
+        <text x="470" y="154" text-anchor="middle" fill="#6b615c">陈列区每少 1 个皇冠，游戏就</text>
+        <text x="470" y="174" text-anchor="middle" fill="#6b615c">近一步；<tspan font-weight="700" fill="#a9761c">最后一个被移除</tspan></text>
+        <text x="470" y="194" text-anchor="middle" fill="#6b615c">触发结束，打完当前轮才停</text>
+        <text x="470" y="216" text-anchor="middle" fill="#6b615c">（到镜子标记右侧玩家结束）</text>
+        <rect x="636" y="108" width="286" height="122" rx="10" fill="#e9f4ec" stroke="#3d7a55"/>
+        <text x="779" y="132" text-anchor="middle" font-size="14" font-weight="700" fill="#2c6841">③ 终局计分</text>
+        <text x="779" y="154" text-anchor="middle" fill="#6b615c">加冕色：每个该色皇冠 8 IP</text>
+        <text x="779" y="174" text-anchor="middle" fill="#6b615c">持平：所有皇冠各 8 IP，不分色</text>
+        <text x="779" y="194" text-anchor="middle" fill="#6b615c">可用「皇冠计数卡」垫在版图下</text>
+        <text x="779" y="216" text-anchor="middle" fill="#6b615c">追踪你各色皇冠数（0–4）</text>
+      </g>
+      <text x="470" y="252" text-anchor="middle" font-size="12" fill="#6b615c">例外：皇冠不能放在心愿格上；无处可放或陈列区已空时改得 10 IP（路径已满但仍有皇冠则弃 1 个 + 10 IP）[p.9]</text>
+    </svg>
+    <div class="figcap">图 4 · 皇冠的三重作用（依据 p.9、p.19）</div>
+  </div>
+  <div class="tip"><b>皇冠的三项收益：</b>放置时结算该格 IP 的两倍、减少陈列区皇冠以推进终局、终局按加冕色每个 8 IP；放置位置另使爱丽丝跳过该格。<span class="pg">p.9</span><span class="pg">p.19</span></div>
+  <p class="note"><b>原书两处并列，照录不裁定：</b>p.9「皇冠奖励」段先写「路径无空格<b>或</b>陈列区已空 → 改得 10 IP」，紧接着又写「路径已满<b>但</b>陈列区仍有皇冠 → 移除并弃除 1 个 + 10 IP」。两句在「陈列区是否还有皇冠」上口径不完全一致，图 4 与上文并列呈现两条，对局以版图状态与出版方裁定为准。</p>
+
+  <h3>6.3 猫咪轨道：终局心愿计数上限 <span class="pg">p.9</span><span class="pg">p.19</span></h3>
+  <p>获得爪印时，沿对应红 / 白猫轨道前进标记，<b>获得落格以及跳过的所有格子的奖励</b>；多个标记可共用一格。</p>
+  <table>
+    <tr><th style="width:26%">你的标记位置</th><th>终局该颜色的心愿</th></tr>
+    <tr><td><b>未到 ×1</b></td><td><b>一个都不计分</b></td></tr>
+    <tr><td><b>×1 与 ×2 之间</b></td><td><span class="pick">择一</span>该色两个心愿中<b>自选 1 个</b>计分</td></tr>
+    <tr><td><b>超过 ×2</b></td><td>该色<b>两个心愿都</b>计分</td></tr>
+  </table>
+  <div class="tip"><b>猫轨的作用：</b>即时奖励有限，终局则决定可结算的心愿数量。<span class="pg">p.9</span></div>
+
+  <h3>6.4 卡牌市场与「邀请」共同构成引擎 <span class="pg">p.7</span><span class="pg">p.9</span></h3>
+  <p>市场负责<b>加牌</b>（黑桃的购卡、车票卡的赠卡），邀请负责<b>减牌</b>（把弱基础卡移出牌库并折成终局 IP）。一加一减，牌库里强卡的比例才越来越高。</p>
+  <ul>
+    <li>市场每层 3 格，费用依次是<b>免费 / 1 时间 / 1 个自选资源</b>；最右格是该层牌库顶牌。<span class="pg">p.9</span></li>
+    <li>购入的卡<b>直接进手牌、可立即使用</b>；市场<b>只在休整阶段</b>把卡左滑补空位。<span class="pg">p.9</span></li>
+    <li>邀请可从<b>手牌或弃牌堆</b>裁任意层级的卡，放到朝臣版图下；限制见 5.2。<span class="pg">p.7</span></li>
+    <li>持有<b>两朵黄花</b>后，购卡可跨层级：每升一层付 1 时间、每降一层得 1 时间；先定层级并结清时间，再购卡付其费用。<span class="pg">p.22</span></li>
+  </ul>
+
+  <h3>6.5 16 种「爱丽丝的心愿」速查 <span class="pg">p.25</span></h3>
+  <p>每局随机用 4 块（按图标四类各抽 1）。起始面为黄色；<b>加冕颜色的心愿在终局翻到白金面</b>，数值更高。所有条件都按<b>你自己版图/版图上的进度</b>计算，红白加总或配对时按说明。</p>
+  <table>
+    <tr><th style="width:6%">#</th><th>计分条件</th><th class="c" style="width:12%">起始</th><th class="c" style="width:12%">白金</th></tr>
+    <tr><td class="c">1</td><td>你移除的每枚红心（红白加总）</td><td class="c">2 IP</td><td class="c">4 IP</td></tr>
+    <tr><td class="c">2</td><td>你的双子走的每一步（红白加总，取各双子所在格底部数字）</td><td class="c">3 IP</td><td class="c">6 IP</td></tr>
+    <tr><td class="c">3</td><td>你移除的每枚方块（红白加总）</td><td class="c">2 IP</td><td class="c">4 IP</td></tr>
+    <tr><td class="c">4</td><td>你的信使走的每一步（红白加总）</td><td class="c">1 IP</td><td class="c">2 IP</td></tr>
+    <tr><td class="c">5</td><td>你的每对红白红心（已移除）</td><td class="c">5 IP</td><td class="c">9 IP</td></tr>
+    <tr><td class="c">6</td><td>红白双子配对同步走的每一步</td><td class="c">7 IP</td><td class="c">12 IP</td></tr>
+    <tr><td class="c">7</td><td>红白信使配对同步走的每一步</td><td class="c">2 IP</td><td class="c">4 IP</td></tr>
+    <tr><td class="c">8</td><td>你的每对红白方块（已移除）</td><td class="c">5 IP</td><td class="c">9 IP</td></tr>
+    <tr><td class="c">9</td><td>你的每对同类型花</td><td class="c">7 IP</td><td class="c">12 IP</td></tr>
+    <tr><td class="c">10</td><td>每本书：未支付的剩余书本 + 你拥有书签上印的书本数（上限 20 本）</td><td class="c">1 IP</td><td class="c">2 IP</td></tr>
+    <tr><td class="c">11</td><td>信使抵达的每个铜区与金区格（红白加总）</td><td class="c">2 IP</td><td class="c">3 IP</td></tr>
+    <tr><td class="c">12</td><td>你放在矮胖子所在层<b>或以下</b>的每枚方块（红白加总）</td><td class="c">3 IP</td><td class="c">5 IP</td></tr>
+    <tr><td class="c">13</td><td>每 3 朵不同类型的花</td><td class="c">11 IP</td><td class="c">16 IP</td></tr>
+    <tr><td class="c">14</td><td>你拥有的每枚即时或每回合书签</td><td class="c">3 IP</td><td class="c">5 IP</td></tr>
+    <tr><td class="c">15</td><td>你越过的每个印章</td><td class="c">5 IP</td><td class="c">8 IP</td></tr>
+    <tr><td class="c">16</td><td>墙的每一条含有你方块的列（红白加总）</td><td class="c">3 IP</td><td class="c">5 IP</td></tr>
+  </table>
+
+  <details><summary>对照原书页图：皇冠 / 猫轨 / 市场（p.9）、心愿（p.25）、书签（p.24）</summary>
+    <img src="images/page_09.jpg" alt="p.9" loading="lazy"><div class="figcap">p.9 · 皇冠陈列区、猫咪轨道、卡牌市场费用</div>
+    <img src="images/page_25.jpg" alt="p.25 心愿" loading="lazy"><div class="figcap">p.25 · 附录 4 爱丽丝的心愿</div>
+    <img src="images/page_24.jpg" alt="p.24 书签" loading="lazy"><div class="figcap">p.24 · 附录 3 书签</div>
+  </details>
+</section>
+
+<!-- ============ 7 ============ -->
+<section id="s7">
+  <h2><span class="n">7</span>资源与时间：支付、替代与上限</h2>
+
+  <h3>7.1 三种资源与银盘 <span class="pg">p.10</span></h3>
+  <table>
+    <tr><th style="width:18%">资源</th><th style="width:16%">阵营</th><th>用在哪</th></tr>
+    <tr><td><b>樱桃蛋糕</b></td><td><span class="tagR">红</span></td><td>红色棋子触发的行动费用</td></tr>
+    <tr><td><b>黄油吐司</b></td><td><span class="tagB">白</span></td><td>白色棋子触发的行动费用</td></tr>
+    <tr><td><b>茶</b></td><td>通用</td><td>红白两方都能用；园丁移动、部分行动附加费、3 格移动费</td></tr>
+  </table>
+  <ul>
+    <li><b>获得资源</b>＝把 1 个立方体从<b>银盘</b>移到对应资源区；<b>花费资源</b>＝把立方体从资源区放回银盘。</li>
+    <li><b>银盘已空仍需获取资源</b>：可以把<b>任意一个已分配</b>的立方体退回银盘，再重新分配它。</li>
+    <li><b>黑色立方体（额外容量）</b>：起始 5 个放在<b>上锁储藏区</b>；解锁后功能等同玩家色立方体。解锁与分配本身常作为奖励出现。<span class="pg">p.10</span></li>
+  </ul>
+
+  <h3>7.2 时间时钟 <span class="pg">p.10</span></h3>
+  <div class="key"><b>时间轨取值 0–10：</b>获得时间顺时针拨、花费时间逆时针回拨；<b>不能低于 0、不能超过 10</b>。将要超过 10 的时间改为获得 <b>1 IP</b>。时间用于：购卡中格（1 时间）、重复行动（6 时间）、兑换资源（3 时间/个）、跳过行动的补偿（2 时间）。</div>
+
+  <h3>7.3 资源不足时的两种替代（<span class="pick">择一</span>）<span class="pg">p.10</span></h3>
+  <p><b>每替代 1 个资源，于下列两种方式中择一</b>；可替代任意数量的资源，每次分别选择。两种方式不得并用。</p>
+  <table>
+    <tr><th style="width:24%">替代方式</th><th>规则</th></tr>
+    <tr><td><b>支付 3 时间</b></td><td>可替代 <b>1 个自选资源</b>；可按此方式替代<b>任意数量</b>的资源。</td></tr>
+    <tr><td><b>退回 1 个黑立方体</b></td><td>把 1 个已解锁的黑立方体放回上锁储藏区，替代 <b>1 个自选资源</b>；同样可替代任意数量。</td></tr>
+  </table>
+  <div class="warn"><b>三条硬限制：</b>① 用时间或黑立方体换来的资源<b>必须立即支付，不能储存</b>；② <b>同一次行动中</b>已经用作支付的黑立方体，不能再次用于兑换；③ 但执行<b>重复行动</b>时，初次行动里用掉（已退回银盘）的黑立方体<b>视为可用</b>于兑换。<span class="pg">p.10</span></div>
+  <div class="warn"><b>付款顺序不可颠倒：</b>行动费用必须<b>在获得任何奖励之前</b>支付；从落格获得的资源可立即用于支付本次行动费用（★ 通用列也允许这样用）。<span class="pg">p.13</span></div>
+
+  <h3>7.4 会改动上述数字的永久加成（花）<span class="pg">p.22</span></h3>
+  <table>
+    <tr><th style="width:14%">花</th><th style="width:40%">1 朵</th><th>2 朵</th></tr>
+    <tr><td><b>粉玫瑰</b></td><td>免费使用棋盘上的通用行动列（★ 不再多付 1 资源）</td><td>打出的棋子停在棋盘中央行时，除资源外再获得标示数量的时间</td></tr>
+    <tr><td><b>黄花</b></td><td>手牌上限永久提高到 <b>5</b></td><td>购卡可跨层级：升一层付 1 时间 / 降一层得 1 时间</td></tr>
+    <tr><td><b>蓝花</b></td><td>用时间购买资源的费用 <b>3 → 2 时间</b></td><td>可用 1 茶换 2 时间，次数不限</td></tr>
+    <tr><td><b>橙花</b></td><td>重复行动费用 <b>6 → 5 时间</b></td><td>重复行动的费用再减免 1 个任意资源</td></tr>
+  </table>
+  <p class="note">同类型第 2 朵提升加成；超过 2 朵不再额外受益。<b>书签</b>也能给折扣（如执行黑桃/方块/红心行动减免 1 樱桃蛋糕、1 黄油吐司或 1 茶），全表见原书 p.24。</p>
+
+  <h3>7.5 迷你行动的作用 <span class="pg">p.13</span><span class="pg">p.18</span></h3>
+  <p>迷你行动提供主行动的部分收益，作为奖励发放，<b>不受颜色限制</b>：红色棋子触发时可作用于白色一侧版图，因而可跨版图形成连锁。原书 p.18 示例中，红心行动所得的梅花迷你行动将白双子推至树顶并取得皇冠。<span class="pg">p.18</span></p>
+
+  <details><summary>对照原书页图：朝臣版图与资源管理（p.10）、花（p.22）、符号表（p.27）</summary>
+    <img src="images/page_10.jpg" alt="p.10" loading="lazy"><div class="figcap">p.10 · 朝臣版图与资源管理</div>
+    <img src="images/page_22.jpg" alt="p.22" loading="lazy"><div class="figcap">p.22 · 附录 1 花的永久加成 ／ 附录 2 卡牌</div>
+    <img src="images/page_27.jpg" alt="p.27" loading="lazy"><div class="figcap">p.27 · 附录 6 符号表（黑数字费用 / 白数字奖励图例）</div>
+  </details>
+</section>
+
+<!-- ============ 8 ============ -->
+<section id="s8">
+  <h2><span class="n">8</span>终局与计分链路</h2>
+
+  <h3>8.1 触发与收尾 <span class="pg">p.9</span><span class="pg">p.19</span></h3>
+  <p>陈列区<b>最后一个皇冠被移除</b> → 触发结束 → <b>继续打完当前轮</b>，保证每人回合数相同，直到<b>持有镜子标记玩家右侧</b>的那位完成回合。此时才进入计分。</p>
+
+  <h3>8.2 计分固定四步 <span class="pg">p.19</span></h3>
+  <div class="fig">
+    <svg viewBox="0 0 940 190" xmlns="http://www.w3.org/2000/svg" font-family="PingFang SC,Microsoft YaHei,Arial">
+      <rect x="0" y="0" width="940" height="190" fill="#fffdf9"/>
+      <g font-size="12.5">
+        <rect x="14" y="26" width="212" height="104" rx="10" fill="#f1eaf7" stroke="#6b4a86"/>
+        <text x="120" y="50" text-anchor="middle" font-size="14" font-weight="700" fill="#563a6d">① 爱丽丝的加冕</text>
+        <text x="120" y="72" text-anchor="middle" fill="#6b615c">推进更远的颜色加冕</text>
+        <text x="120" y="92" text-anchor="middle" fill="#6b615c">该色心愿翻到白金面</text>
+        <text x="120" y="112" text-anchor="middle" font-weight="700" fill="#563a6d">每个该色皇冠 8 IP</text>
+        <rect x="248" y="26" width="212" height="104" rx="10" fill="#e9f4ec" stroke="#3d7a55"/>
+        <text x="354" y="50" text-anchor="middle" font-size="14" font-weight="700" fill="#2c6841">② 猫咪轨道 → 心愿</text>
+        <text x="354" y="72" text-anchor="middle" fill="#6b615c">逐色看爪印位置，决定</text>
+        <text x="354" y="92" text-anchor="middle" fill="#6b615c">该色计 0 / 1 / 2 个心愿</text>
+        <text x="354" y="112" text-anchor="middle" fill="#6b615c">按心愿条件算 IP</text>
+        <rect x="482" y="26" width="212" height="104" rx="10" fill="#fbecec" stroke="#a2303c"/>
+        <text x="588" y="50" text-anchor="middle" font-size="14" font-weight="700" fill="#8f2632">③ 受邀宾客</text>
+        <text x="588" y="72" text-anchor="middle" fill="#6b615c">加总所有被邀请卡</text>
+        <text x="588" y="92" text-anchor="middle" fill="#6b615c">右上角的邀请奖励 IP</text>
+        <text x="588" y="112" text-anchor="middle" fill="#6b615c">（含按张数计的条件奖励）</text>
+        <rect x="716" y="26" width="212" height="104" rx="10" fill="#fbf1dc" stroke="#a9761c"/>
+        <text x="822" y="50" text-anchor="middle" font-size="14" font-weight="700" fill="#7d5511">④ 终局计分书签</text>
+        <text x="822" y="72" text-anchor="middle" fill="#6b615c">加总你拥有的</text>
+        <text x="822" y="92" text-anchor="middle" fill="#6b615c">标有「终局计分」的书签</text>
+        <text x="822" y="112" text-anchor="middle" fill="#6b615c">上的 IP</text>
+      </g>
+      <g stroke="#a9761c" stroke-width="2" fill="none" marker-end="url(#ar3)">
+        <path d="M228 78 H244"/><path d="M462 78 H478"/><path d="M696 78 H712"/>
+      </g>
+      <defs><marker id="ar3" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#a9761c"/></marker></defs>
+      <text x="470" y="158" text-anchor="middle" font-size="13" font-weight="700" fill="#3d7a55">四项相加 = 最终声望；最高者成为首席顾问获胜，平局共享胜利</text>
+      <text x="470" y="178" text-anchor="middle" font-size="11.5" fill="#6b615c">※ 若两色爱丽丝持平：两组心愿都不翻白金，每个皇冠（不分颜色）各 8 IP [p.19]</text>
+    </svg>
+    <div class="figcap">图 5 · 终局计分四步链路（依据 p.19）</div>
+  </div>
+
+  <h3>8.3 终局计分示例：Vera 的 100 IP<span class="pg">p.19</span></h3>
+  <table>
+    <tr><th style="width:6%">步</th><th style="width:42%">条件与计算</th><th class="c" style="width:12%">得分</th><th>依据</th></tr>
+    <tr><td class="c">①</td><td>加冕为<b>红女王</b>；Vera 有 2 个红皇冠、1 个白皇冠</td><td class="c"><b>16 IP</b></td><td>只有获胜色皇冠计分：2 × 8 = 16；白皇冠不计。同时红心愿翻白金面。</td></tr>
+    <tr><td class="c">②</td><td>红白猫轨均通过 ×1、均未到达 ×2 → 每色各选 1 个心愿；她选<b>方块心愿</b>（已翻白金）与<b>双子心愿</b></td><td class="c">—</td><td>介于 ×1 与 ×2 之间 = 自选 1 个。</td></tr>
+    <tr><td class="c">②a</td><td>方块心愿（白金）：10 枚方块 × 4 IP</td><td class="c"><b>40 IP</b></td><td>白金面每枚移除的方块 4 IP。</td></tr>
+    <tr><td class="c">②b</td><td>双子心愿：白双子第 4 层 + 红双子第 2 层 = 6 层 × 3 IP</td><td class="c"><b>18 IP</b></td><td>每层 3 IP，红白加总。</td></tr>
+    <tr><td class="c">③a</td><td>2 张基础兵卡，各 1 IP</td><td class="c">2 IP</td><td>固定 IP 型邀请奖励。</td></tr>
+    <tr><td class="c">③b</td><td>1 张银色白兵：每邀请 1 张白兵（含自身）2 IP；共 3 张白兵 + 1 张百搭兵 = 4 张</td><td class="c">8 IP</td><td>百搭兵可算作白色。</td></tr>
+    <tr><td class="c">③c</td><td>1 张金兵：每邀请 1 张任意色兵 2 IP；共 5 张兵</td><td class="c">10 IP</td><td>任意颜色不限。</td></tr>
+    <tr><td class="c">③d</td><td>1 张金兵：固定 6 IP</td><td class="c">6 IP</td><td>固定 IP 型。</td></tr>
+    <tr style="background:#e9f4ec"><td class="c"><b>合计</b></td><td><b>16 + 40 + 18 + 2 + 8 + 10 + 6</b></td><td class="c"><b>100 IP</b></td><td>受邀卡小计 26 IP，前两段小计 74 IP。</td></tr>
+  </table>
+  <div class="note"><b>算例说明：</b>邀请奖励有 5 类——固定 IP、同类型同色每张 ×2、同类型任意色每张 ×2、每张购入卡 ×1、每张受邀卡 ×1。算例里的银兵/金兵属于「按张数计」的类型，必须<b>数全场受邀卡</b>，不是只看自己那一张。<span class="pg">p.22</span></div>
+
+  <details><summary>对照原书页图：游戏结束与终局计分示例（p.19）、卡牌邀请奖励（p.23）</summary>
+    <img src="images/page_19.jpg" alt="p.19" loading="lazy"><div class="figcap">p.19 · 终局计分与完整示例</div>
+    <img src="images/page_23.jpg" alt="p.23" loading="lazy"><div class="figcap">p.23 · 附录 2 卡牌打出/弃除奖励与邀请奖励</div>
+  </details>
+</section>
+
+<!-- ============ 9 ============ -->
+<section id="s9">
+  <h2><span class="n">9</span>常见误读（29 条）</h2>
+  <ol class="pit">
+    <li>弃牌和打牌是<b>两张不同的卡</b>；打出的那张叠在刚弃除的那张之上。<span class="pg">p.11</span></li>
+    <li><b>基础卡没有打出奖励</b>，但有弃除奖励。<span class="pg">p.7</span></li>
+    <li>兵<b>永远只走 1 格</b>，没有国际象棋的开局走 2 格。<span class="pg">p.11</span></li>
+    <li>本游戏<b>不设「将军」</b>，国王可被俘获。<span class="pg">p.11</span></li>
+    <li>被营救的棋子<b>当回合不能移动</b>；从其他玩家监狱营救棋子，<b>该玩家获得 1 时间</b>。<span class="pg">p.11</span></li>
+    <li>落格结算是<b>先获取资源、再执行行动</b>；行动按<b>棋子的颜色</b>执行，不是按格子的颜色。<span class="pg">p.11</span><span class="pg">p.13</span></li>
+    <li><b>黑色数字＝费用</b>（先支付、在获取奖励之前），<b>白色数字或无数字图标＝奖励</b>。<span class="pg">p.13</span></li>
+    <li>同一行动里的多个奖励可<b>任意顺序</b>领，但必须<b>当场</b>结算完，不能留到重复行动。<span class="pg">p.13</span></li>
+    <li>奖励一般可以放弃，但<b>爱丽丝推进与皇冠一旦触发必须领取</b>。<span class="pg">p.13</span></li>
+    <li>落在 ★ <b>通用行动列</b>要额外付 1 个任意资源；但<b>重复行动时不用再付这笔</b>。<span class="pg">p.13</span></li>
+    <li><b>迷你行动不受颜色限制</b>，红棋触发亦可作用于白色一侧版图。<span class="pg">p.13</span><span class="pg">p.18</span></li>
+    <li>重复行动：每回合限 1 次、<b>6 时间</b>、必须同色、<b>再付一次行动费用</b>、不打出新卡。<span class="pg">p.12</span></li>
+    <li>邀请有两个限制：不能让手牌<b>在打牌之前</b>清空，也不能让<b>手牌 + 牌库合计少于 3 张</b>。<span class="pg">p.7</span></li>
+    <li>卡牌市场<b>只在休整阶段补货</b>；但购入的卡<b>直接进手牌、可立即使用</b>。<span class="pg">p.9</span></li>
+    <li>皇冠<b>不能放在心愿格</b>；放上后立即获得该格 IP 的 2 倍，之后爱丽丝推进会<b>跳过</b>它。<span class="pg">p.9</span></li>
+    <li>心愿是<b>全体玩家</b>在触发者回合结束时一起计分，不是触发者独享。<span class="pg">p.8</span><span class="pg">p.12</span></li>
+    <li>猫咪轨道要获取<b>落格 + 跳过的所有格</b>奖励；黑桃信使却<b>只获取落格</b>奖励。<span class="pg">p.9</span><span class="pg">p.15</span></li>
+    <li>梅花：<b>被实体书本标记盖住的印制奖励不能获得</b>，所以首位到访与后续到访获得的奖励不同。<span class="pg">p.16</span></li>
+    <li>方块的砖必须放在<b>所选列的最低空位</b>，且不必与矮胖子半身件同行。<span class="pg">p.17</span></li>
+    <li>用时间 / 黑立方体换来的资源<b>必须立即支付，不能储存</b>；同一次行动里已用于支付的黑立方体不能再兑换。<span class="pg">p.10</span></li>
+    <li>时间上限 <b>10</b>、下限 <b>0</b>；溢出部分改为获得 IP。<span class="pg">p.10</span></li>
+    <li>打出<b>王</b>时无视落格列，可执行<b>任意</b>一种行动（附录 2 的 ALL）。<span class="pg">p.23</span></li>
+    <li>终局并非即时中止：须完成当前轮次，<b>直到镜子标记持有者右侧玩家完成回合</b>。<span class="pg">p.9</span><span class="pg">p.19</span></li>
+    <li>里程碑（第 3/4/5 枚红心、方块）是<b>红白各自分别累计</b>；终点给的皇冠也带颜色，终局只算加冕色。<span class="pg">p.14</span><span class="pg">p.17</span><span class="pg">p.19</span></li>
+    <li><b>走子和营救是择一，不是先后两步。</b>选择营救后<b>不能</b>再移动这枚棋子；也不能先移动再营救。两条路都结束于「激活一个格」，之后照常获取资源、执行行动。<span class="pg">p.11</span></li>
+    <li>红心要取<b>编号最小</b>的那一枚，是强制顺序<b>不是挑选</b>；方块才允许从朝臣版图任选一枚。<span class="pg">p.14</span><span class="pg">p.17</span></li>
+    <li>一次红心 / 方块行动给<b>两份</b>奖励：朝臣版图「取走标记」的一份 ＋ 花园 / 墙上「被盖住格子」的一份。两者须分别结算。<span class="pg">p.14</span><span class="pg">p.17</span></li>
+    <li><b>移动园丁不是必须执行的步骤</b>，它是以花茶换取更换区域与奖励池的权利；不移动就只能种在园丁当前区域。各花园格印制奖励不同，先放置者占用格位。<span class="pg">p.14</span></li>
+    <li>黑桃的<b>购卡 / 邀请</b>是择一，同一次行动不得并取；信使<b>只结算落格</b>奖励，途经格不计，步数决定落格。<span class="pg">p.15</span></li>
+  </ol>
+</section>
+
+<!-- ============ 10 ============ -->
+<section id="s10">
+  <h2><span class="n">10</span>回合示例 <span class="pg">p.18</span></h2>
+  <p>原书 p.18 给出两个回合示例，下表按「步骤 / 支付 / 所得 / 依据」重列。</p>
+
+  <h3>示例 A · 推进爱丽丝并触发心愿</h3>
+  <table>
+    <tr><th style="width:6%">步</th><th style="width:34%">动作</th><th style="width:20%">支付</th><th style="width:24%">所得</th><th>依据</th></tr>
+    <tr><td class="c">a</td><td>弃除 1 张白兵卡</td><td>—</td><td>1 时间</td><td>弃除奖励 <span class="pg">p.11</span></td></tr>
+    <tr><td class="c">b1</td><td>打出并移动 1 枚红马，停在 ♥ 红心列</td><td>—</td><td>该行的 1 樱桃蛋糕</td><td>行 → 资源 <span class="pg">p.11</span></td></tr>
+    <tr><td class="c">b2</td><td>执行红心行动：<span class="pick">择一</span><b>选择不移动园丁</b>（省下茶，接受当前区域的奖励池），再放 1 枚红心</td><td>2 樱桃蛋糕</td><td>版图格的<b>红爱丽丝推进</b> + 盖住的蓝花（花园格奖励，<b>两份奖励</b>）</td><td><span class="pg">p.14</span></td></tr>
+    <tr><td class="c">b3</td><td>红爱丽丝前进 1 格</td><td>—</td><td>下一格有皇冠 → <b>跳过</b>；落到再下一格得 <b>8 IP</b></td><td>跳过皇冠格 <span class="pg">p.8</span></td></tr>
+    <tr><td class="c">b4</td><td>该格是心愿格</td><td>从陈列区移除 1 皇冠放上去</td><td>回合结束时<b>全体</b>结算该心愿，皇冠随后弃除</td><td><span class="pg">p.8</span><span class="pg">p.12</span></td></tr>
+    <tr><td class="c">c</td><td>时间不足，<b>不</b>重复行动</td><td>—</td><td>—</td><td><span class="pg">p.12</span></td></tr>
+    <tr><td class="c">d</td><td>休整：补手牌、补市场、翻书签、<b>结算心愿</b></td><td>—</td><td>全体玩家按心愿计分</td><td><span class="pg">p.12</span></td></tr>
+  </table>
+
+  <div class="note"><b>示例 A 中的择一决策：</b>① 打出红马时，她选的是<b>「移动棋子」</b>而不是营救或跳过；② 红心行动里，她选<b>不移动园丁</b>，于是只能在园丁当前区域种；③ 在该区域里她<b>选择盖住蓝花的那一格</b>，所以获得蓝花而不是黄花。三处分别对应 §3.5 表中的一行；原书合并叙述，实为三次独立选择。</div>
+
+  <h3>示例 B · 迷你行动衔接 + 皇冠倍分</h3>
+  <table>
+    <tr><th style="width:6%">步</th><th style="width:34%">动作</th><th style="width:20%">支付</th><th style="width:24%">所得</th><th>依据</th></tr>
+    <tr><td class="c">a</td><td>弃除 1 张银色白象卡</td><td>—</td><td>1 樱桃蛋糕 + 2 IP</td><td>弃除奖励 <span class="pg">p.23</span></td></tr>
+    <tr><td class="c">b1</td><td>打出并移动红马到 ♥ 列</td><td>—</td><td>1 樱桃蛋糕</td><td><span class="pg">p.11</span></td></tr>
+    <tr><td class="c">b2</td><td>付 2 樱桃蛋糕放 1 枚红心，盖住蓝花格</td><td>2 樱桃蛋糕</td><td>蓝花 + 该红心格翻出的<b>梅花迷你行动</b></td><td><span class="pg">p.14</span></td></tr>
+    <tr><td class="c">b3</td><td>用迷你行动沿黑色路径移动<b>白双子</b>（迷你行动不限色）</td><td>—</td><td>到树顶 → 得 1 皇冠 + 3 本书；以 2 蓝 + 1 白书即时兑换 1 枚终局计分书签</td><td><span class="pg">p.16</span><span class="pg">p.13</span></td></tr>
+    <tr><td class="c">b4</td><td>把皇冠放到白爱丽丝路径</td><td>从陈列区取 1 皇冠</td><td>下一格是心愿格（不能放）、再下一格已有皇冠 → 放到第三格，得该格 IP 的 <b>2 倍：7 × 2 = 14 IP</b></td><td><span class="pg">p.9</span></td></tr>
+  </table>
+  <div class="key"><b>示例 B 涉及两项规则：</b>① 同一行动里的奖励<b>顺序自选</b>（她先获得花再用迷你行动）；② 迷你行动能<b>跨颜色、跨版图</b>连锁，使红心行动衔接至树顶皇冠。</div>
+
+  <details><summary>对照原书页图：回合示例（p.18）</summary>
+    <img src="images/page_18.jpg" alt="p.18 回合示例" loading="lazy"><div class="figcap">p.18 · 原书两个回合示例的图示</div>
+  </details>
+</section>
+
+<!-- ============ 11 ============ -->
+<section id="s11">
+  <h2><span class="n">11</span>单人模式与变体</h2>
+
+  <h3>11.1 单人模式 · 黛娜 <span class="pg">p.20</span><span class="pg">p.21</span><span class="pg">p.22</span></h3>
+  <p>对手是自动化的黛娜，按难度选颜色（绿 简单 / 紫 普通 / 橙 困难 / 蓝 极难），用她的专属版图与 10 张黛娜卡。她<b>不支付资源费用、不累积时间</b>（每点时间按难度换 1 / 2 / 3 IP），终局也不用书签判定，改为按难度给每类收藏固定 IP。</p>
+  <table>
+    <tr><th style="width:6%">步</th><th>黛娜的一个回合</th></tr>
+    <tr><td class="c">1</td><td>翻开黛娜牌库顶卡。</td></tr>
+    <tr><td class="c">2</td><td>用资源轨道上立方体所在的红/白列<b>决定这张卡打红色还是白色</b>棋子，放颜色标记立方体示意。</td></tr>
+    <tr><td class="c">3</td><td>按优先级打棋子：<b>① 能俘获就俘获（取价值最高，并列时由你选定）→ ② 棋子在监狱就营救 → ③ 按卡上走法图从左上到右下选第一个可行方向移动</b>。车/象/后要走到边界、俘获或被同色挡住为止。</td></tr>
+    <tr><td class="c">4</td><td>获得落格行的资源（百搭行给茶）。</td></tr>
+    <tr><td class="c">5</td><td><b>无视落格列</b>，改为执行卡上印的行动。</td></tr>
+    <tr><td class="c">6</td><td>资源立方体在循环格 → 重复该行动；已打出 ≥6 张卡 → 洗弃牌堆回牌库。</td></tr>
+  </table>
+  <p class="note">黛娜各棋子卡对应的具体行动、资源轨道移动规则、书签优先级与「耗尽（行动结算完毕或无法执行时抽新卡，只执行其行动、不移动棋子）」见 p.21–p.22；模糊情形（例如同时能俘王和后）<b>由你决定</b>。<span class="pg">p.20</span></p>
+
+  <h3>11.2 三种变体 <span class="pg">p.28</span></h3>
+  <ul>
+    <li><b>隐藏目标：</b>每人发 1 张；带 ④ 记号的 2 张只在 4 人局加入，带 ③ 的只在 3 人局使用。多数给标示颜色的 2 个皇冠（终局照常计分）；3 人专属卡按红白爱丽丝的距离给 16 / 24 IP。</li>
+    <li><b>替代皇冠奖励：</b>把 ×2 皇冠与迷你行动皇冠交替摆满陈列区，移除时始终从左到右；获得迷你行动皇冠时结算覆盖格分数 + 该迷你行动，也可选择改为获取双倍分数。</li>
+    <li><b>强化起始卡：</b>每人抽 2 张强化卡、留 1 张把另 1 张传给左手边玩家；再从起始牌库换掉颜色和类型对应的 2 张基础卡，把 2 张强化卡洗进去。</li>
+  </ul>
+
+  <details><summary>对照原书页图：单人模式（p.20 / p.21）、车票卡（p.26）、变体所在页（p.27 符号表）</summary>
+    <img src="images/page_06.jpg" alt="p.6 玩家设置与车票卡" loading="lazy"><div class="figcap">p.6 · 玩家设置与车票卡（第一局用带星号的 4 张）</div>
+    <img src="images/page_26.jpg" alt="p.26 车票卡" loading="lazy"><div class="figcap">p.26 · 附录 5 车票卡全表</div>
+  </details>
+</section>
+
+<!-- ============ 12 ============ -->
+<section id="s12">
+  <h2><span class="n">12</span>速查表与页码索引</h2>
+
+  <h3>12.1 一页速查</h3>
+  <div class="grid2">
+    <div class="card"><div class="t"><span class="s">回合</span>四阶段</div><b>a</b> 弃 1 张获取弃除奖励 → <b>b</b> 打 1 张（打出奖励 → 移动/营救 → 落格：<b>行资源 → 列行动</b>）→ <b>c</b> 可选 6 时间重复（同色、再付费、不打卡）→ <b>d</b> 休整（补到 3 / 补市场 / 翻书签 / 结算心愿）。</div>
+    <div class="card blue"><div class="t"><span class="s">付费</span>颜色与顺序</div>红棋＝樱桃蛋糕 / 茶；白棋＝黄油吐司 / 茶。<b>先支付费用，再获取奖励</b>。费用不足时：每 1 个资源可用 <b>3 时间</b>或<b>退 1 黑立方体</b>替代，替代所得必须立即支付。</div>
+    <div class="card green"><div class="t"><span class="s">四行动</span>流程</div><b>♥</b> 移园丁 → 放红心 → 获得花；<b>♠</b> 推信使 → 落格奖励 → <b>购卡或邀请</b>；<b>♣</b> 爬树 → 获取书本 → 购买书签；<b>♦</b> 砌砖 → 版图奖励 + 墙上奖励 + IP。</div>
+    <div class="card gold"><div class="t"><span class="s">里程碑</span>共同节奏</div><b>红心 / 方块</b>：第 3 枚推爱丽丝、第 4 枚给迷你行动、第 5 枚给皇冠（红白各自算）。<b>黑桃 / 梅花</b>：到路径尽头 / 树顶给对应色皇冠。</div>
+    <div class="card"><div class="t"><span class="s">终局</span>触发</div>陈列区最后一个皇冠被移除 → 打完当前轮 → 到镜子标记持有者<b>右侧</b>玩家结束。</div>
+    <div class="card blue"><div class="t"><span class="s">计分</span>四步</div>① 加冕（获胜色心愿翻白金 + 每个该色皇冠 8 IP）→ ② 按猫轨每色计 0 / 1 / 2 个心愿 → ③ 受邀卡邀请奖励 → ④ 终局计分书签。</div>
+  </div>
+  <div class="key"><b>择一分支索引：</b>打出棋子 → <b>移动 / 营救</b>二选一；落格后 → <b>执行行动 / 跳过并获 2 时间</b>二选一；★ 列四选一；百搭行三选一；♥ <b>园丁移动与否、种植格位</b>；♠ <b>步数、购卡或邀请</b>；♣ <b>路径与书签</b>；♦ <b>列位与方块标记</b>；资源不足时 <b>3 时间或 1 黑立方体</b>。全表 24 行见 <a href="#pick" style="color:var(--green);font-weight:700;">§3.5 择一决策总表</a>；各格差异见 <a href="#why" style="color:var(--green);font-weight:700;">§5.0 格子差异总表</a>。</div>
+
+  <h3>12.2 术语对照（沿用中文版既定译法）</h3>
+  <table class="idx">
+    <tr><th>英文</th><th>中文</th><th>英文</th><th>中文</th></tr>
+    <tr><td>Influence Points (IP)</td><td>声望</td><td>Invitation / Invite</td><td>邀请</td></tr>
+    <tr><td>Courtier board</td><td>朝臣版图</td><td>Hearts / Spades / Clubs / Diamonds</td><td>红心 / 黑桃 / 梅花 / 方块</td></tr>
+    <tr><td>Cherry Cake / Tea / Buttered Toast</td><td>樱桃蛋糕 / 茶 / 黄油吐司</td><td>Mini-action</td><td>迷你行动</td></tr>
+    <tr><td>Crown</td><td>皇冠</td><td>Wild action</td><td>通用行动</td></tr>
+    <tr><td>Alice's Wishes</td><td>爱丽丝的心愿</td><td>Rest</td><td>休整（整理）</td></tr>
+    <tr><td>Cat tracks / paw-print</td><td>猫咪轨道 / 爪印</td><td>Bookmark</td><td>书签</td></tr>
+    <tr><td>Train cards</td><td>车票卡</td><td>Looking-glass token</td><td>镜子标记</td></tr>
+    <tr><td>Jail / respawn space</td><td>监狱 / 重生格</td><td>Throne space / platinum side</td><td>王座格 / 白金面</td></tr>
+  </table>
+
+  <h3>12.3 章节 ↔ 原书页码</h3>
+  <table class="idx">
+    <tr><th style="width:16%">原书页</th><th style="width:44%">内容</th><th>章节</th></tr>
+    <tr><td>p.2</td><td>简介、游戏目标</td><td>§0</td></tr>
+    <tr><td>p.3</td><td>配件一览</td><td>§2</td></tr>
+    <tr><td>p.4–5</td><td>公共设置、3 人局调整、起始玩家</td><td>§1</td></tr>
+    <tr><td>p.6</td><td>玩家设置、车票卡</td><td>§1 / §11</td></tr>
+    <tr><td>p.7</td><td>卡牌结构四要素、邀请</td><td>§3.1 / §5.2</td></tr>
+    <tr><td>p.8</td><td>中央版图、棋盘行列、爱丽丝路径、心愿格、王座格</td><td>§2 / §3.2 / §6.1</td></tr>
+    <tr><td>p.9</td><td>皇冠、猫咪轨道、卡牌市场费用</td><td>§2 / §6.2 / §6.3 / §6.4</td></tr>
+    <tr><td>p.10</td><td>朝臣版图、资源与时间、黑立方体替代</td><td>§2 / §7</td></tr>
+    <tr><td>p.11</td><td>回合结构、移动/俘获/营救/升变/跳过</td><td>§3.4 / §4</td></tr>
+    <tr><td>p.12</td><td>重复行动、休整四件事</td><td>§4</td></tr>
+    <tr><td>p.13</td><td>行动总则、费用/奖励配色、通用行动、迷你行动</td><td>§3.3 / §5 / §7.5</td></tr>
+    <tr><td>p.14</td><td>♥ 百花花园</td><td>§5.1</td></tr>
+    <tr><td>p.15</td><td>♠ 国王信使</td><td>§5.2</td></tr>
+    <tr><td>p.16</td><td>♣ 双子之树</td><td>§5.3</td></tr>
+    <tr><td>p.17</td><td>♦ 矮胖子之墙</td><td>§5.4</td></tr>
+    <tr><td>p.18</td><td>两个回合示例</td><td>§10</td></tr>
+    <tr><td>p.19</td><td>游戏结束、终局计分四步、完整算例</td><td>§8</td></tr>
+    <tr><td>p.20–22</td><td>单人模式黛娜（设置 / 回合 / 走法 / 计分）</td><td>§11.1</td></tr>
+    <tr><td>p.22–27</td><td>附录 1 花 / 2 卡牌 / 3 书签 / 4 心愿 / 5 车票卡 / 6 符号表</td><td>§6.5 / §7.4 / §11 / §12</td></tr>
+    <tr><td>p.28</td><td>变体规则、制作人员</td><td>§11.2</td></tr>
+  </table>
+
+  <div class="note"><b>编排：</b>按规则结构重排，章节顺序与英文原书不同；规则内容未作增删，裁决以英文原书为准。页码标注均为英文原书页码。</div>
+</section>
+
+
+<div class="foot">
+  爱丽丝女王 · 学习版规则　｜　依据英文原书《Queen Alice》Rulebook（Combo Games, 28 页）与中文版既定译法编写<br>
+  按规则结构重排，非官方规则书；规则裁决以英文原书为准。
+</div>
+</main>
+</div>
+</body>
+</html>

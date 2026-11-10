@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>学习版规则 · 目录</title>
+<style>
+  :root{
+    --bg:#f5f6f8; --panel:#ffffff; --ink:#222; --muted:#6b7280;
+    --accent:#6b4a86; --accent-soft:#f1eaf7; --border:#e3e6ea;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+    color:var(--ink);background:var(--bg);-webkit-text-size-adjust:100%;touch-action:manipulation;}
+  body{min-height:100vh;min-height:100dvh;
+    padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right);
+    padding-bottom:env(safe-area-inset-bottom);}
+  a{-webkit-tap-highlight-color:transparent;}
+  .top{height:56px;padding:0 max(16px,env(safe-area-inset-left)) 0 max(16px,env(safe-area-inset-right));
+    padding-top:env(safe-area-inset-top);box-sizing:content-box;
+    background:var(--panel);border-bottom:1px solid var(--border);
+    display:flex;align-items:center;gap:16px;}
+  .back{font-size:14px;color:var(--accent);text-decoration:none;white-space:nowrap;
+    min-height:40px;display:inline-flex;align-items:center;padding:0 10px;
+    border:1px solid var(--border);border-radius:8px;background:#fff;flex-shrink:0;}
+  .back:active{background:var(--accent-soft);}
+  .brand{font-size:15px;font-weight:700;}
+  main{max-width:1000px;margin:0 auto;padding:28px 20px 48px;}
+  .intro h1{margin:0 0 12px;font-size:26px;letter-spacing:.5px;}
+  .intro p{margin:0 0 10px;font-size:14px;line-height:1.85;color:#4b5563;max-width:760px;}
+  .intro .rule{margin-top:18px;padding:10px 14px;border-left:4px solid var(--accent);
+    background:var(--accent-soft);border-radius:0 8px 8px 0;font-size:13px;color:#563a6d;}
+  .sect{margin:30px 0 12px;font-size:13px;font-weight:700;color:var(--muted);letter-spacing:1px;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;}
+  .card{display:block;background:var(--panel);border:1px solid var(--border);border-radius:14px;
+    padding:20px;text-decoration:none;color:inherit;min-height:160px;
+    transition:border-color .15s,box-shadow .15s,transform .15s;}
+  .card:hover{border-color:var(--accent);box-shadow:0 6px 20px rgba(107,74,134,.10);transform:translateY(-2px);}
+  .card:active{transform:none;}
+  .card .cn{font-size:19px;font-weight:700;}
+  .card .en{font-size:12px;color:var(--muted);margin-top:3px;letter-spacing:.4px;}
+  .card .desc{font-size:13px;line-height:1.8;color:#4b5563;margin-top:14px;}
+  .card .go{font-size:13px;font-weight:700;color:var(--accent);margin-top:16px;}
+  .foot{margin-top:36px;padding-top:16px;border-top:1px solid var(--border);
+    font-size:12px;color:var(--muted);line-height:1.8;}
+  @media (max-width:600px){
+    .top{height:52px;gap:10px;padding-left:12px;padding-right:12px;}
+    .back{font-size:13px;padding:0 8px;}
+    .brand{font-size:14px;}
+    main{padding:20px 14px 36px;}
+    .intro h1{font-size:22px;}
+    .intro p{font-size:13.5px;line-height:1.8;}
+    .grid{grid-template-columns:1fr;gap:12px;}
+    .card{padding:18px;min-height:0;}
+    .card .desc{margin-top:12px;}
+  }
+  @media (max-height:480px) and (orientation:landscape){
+    .top{height:46px;}
+    main{padding-top:16px;}
+  }
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="back" href="../index.html">← 规则书总览</a>
+  <div class="brand">学习版规则</div>
+</header>
+<main>
+  <section class="intro">
+    <h1>学习版规则</h1>
+    <p>按规则结构重排原书内容：先立回合骨架，再展开行动与全局机制，末附速查表与原书页码索引。每条结论标注英文原书页码，规则内容未作增删，裁决以英文原书为准。</p>
+    <p>本目录独立于规则书总览；两处文档分列，互不并入。</p>
+    <div class="rule">体例：互斥分支统一标注「择一」；每类行动先述机制含义与各格差异，再列执行步骤。</div>
+  </section>
+  <div class="sect">已发布 · 1 本</div>
+  <section class="grid">
+    <a class="card" href="Queen_Alice_Learn_CN.html">
+      <div class="cn">爱丽丝女王</div>
+      <div class="en">Queen Alice</div>
+      <div class="desc">13 章 · 择一决策总表 · 四类行动机制含义 · 各版图格子差异 · 200 处页码溯源 · 22 张原书页图对照</div>
+      <div class="go">阅读 →</div>
+    </a>
+  </section>
+  <div class="foot">依据英文原书《Queen Alice》Rulebook（Combo Games, 28 页）与中文版既定译法编写。<br>学习版为按学习顺序重排的辅助文档，非官方规则书。</div>
+</main>
+</body>
+</html>
