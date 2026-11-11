@@ -113,17 +113,6 @@
   .good{color:var(--green);font-weight:700;}
   .tagR{color:var(--red);font-weight:700;} .tagB{color:var(--blue);font-weight:700;}
   .tagG{color:var(--gold);font-weight:700;}
-  .pick{display:inline-block;background:#a2303c;color:#fff;border-radius:5px;
-    font-size:11px;padding:1px 7px;margin:0 3px;font-weight:700;letter-spacing:.04em;vertical-align:1px;}
-  .pick.b{background:#3b5b8c;} .pick.g{background:#a9761c;}
-  .either{border:2px dashed #c9a24a;background:#fffaf0;border-radius:12px;padding:14px 16px;margin:15px 0;}
-  .either>.hd{font-size:14px;font-weight:800;color:#7d5511;margin-bottom:10px;}
-  .either .cols{display:grid;grid-template-columns:1fr 46px 1fr;align-items:stretch;}
-  .either .opt{background:var(--paper);border:1px solid var(--line2);border-radius:10px;padding:11px 14px;font-size:14px;}
-  .either .opt .ot{font-weight:800;color:var(--red);margin-bottom:4px;}
-  .either .opt.b .ot{color:var(--blue);}
-  .either .or{display:flex;align-items:center;justify-content:center;font-weight:800;color:#a9761c;font-size:13px;}
-  .either .efoot{font-size:12.5px;color:#6b615c;margin-top:10px;text-align:left;}
   .why{background:#eef3fa;border:1px solid #cddcee;border-left:5px solid var(--blue);
     padding:12px 17px;border-radius:0 10px 10px 0;margin:13px 0;font-size:14.5px;}
   .why b{color:#2f466c;}
@@ -135,7 +124,7 @@
     main{padding:0 18px 60px;} .grid2,.grid4{grid-template-columns:1fr 1fr;}
   }
   @media(max-width:640px){.backbar{height:40px;padding:0 10px;} .backbar a{min-height:30px;padding:0 9px;font-size:12.5px;} .backbar .bb-t{display:none;}
-  .grid2,.grid4,.either .cols{grid-template-columns:1fr;} .either .or{padding:6px 0;} main{padding:0 12px 50px;} .hero{padding:28px 20px;} .hero h1{font-size:26px;}}
+  .grid2,.grid4{grid-template-columns:1fr;} main{padding:0 12px 50px;} .hero{padding:28px 20px;} .hero h1{font-size:26px;}}
 
   /* == 窄屏目录：横向胶囊，正文首屏可见 == */
   @media(max-width:960px){
@@ -154,8 +143,6 @@
   /* == 学习版通用补充（各本共用） == */
   .flow{margin:18px 0;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;}
   .flow svg{display:block;width:100%;height:auto;}
-  .either .col{background:var(--paper);border:1px solid var(--line2);border-radius:10px;padding:11px 14px;font-size:14px;}
-  .either .col .ct{font-weight:800;color:var(--red);margin-bottom:4px;}
   .pgs{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin:14px 0;}
   .pgs figure{margin:0;background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:8px;}
   .pgs img{display:block;width:100%;height:auto;margin:0;border:1px solid var(--line);border-radius:6px;}
@@ -182,7 +169,6 @@
   <a href="#s2">2 · 版图与组件</a>
   <div class="grp">轮次与行动</div>
   <a href="#s3">3 · 核心引擎</a>
-  <a href="#pick" style="padding-left:22px;color:var(--gold);font-weight:700;">↳ 3.5 择一决策总表</a>
   <a href="#s4">4 · 一轮四阶段与三个轮</a>
   <a href="#s5">5 · 五个行动棋子</a>
   <a href="#why" style="padding-left:22px;color:var(--blue);font-weight:700;">↳ 5.0 行动结构与格子差异</a>
@@ -201,15 +187,14 @@
 <header class="hero">
   <h1>恶之滴 · 学习版规则</h1>
   <div class="en">DROPS OF EVIL　｜　按规则结构重排，不按原书章节顺序</div>
-  <div class="desc">以采集速度顺序与资源三类归属为主线，展开五个行动棋子、熬制器与蒸馏器的落点约束、毒性轨道与四阶段轮次；附择一决策总表、常见误读及原书页码索引。</div>
+  <div class="desc">以采集速度顺序与资源三类归属为主线，展开五个行动棋子、熬制器与蒸馏器的落点约束、毒性轨道与四阶段轮次；附常见误读、速查表及原书页码索引。</div>
   <div class="meta"><span>2–4 人</span><span>约 60 分钟</span><span>行动棋子放置 / 采集竞速 / 毒性轨道计分</span><span>依据英文原书 16 页</span></div>
 </header>
 
 <div class="stand">
   <b>体例：</b>按学习顺序重排，章节与原书不对应；每条结论后的 <span class="pg">p.X</span> 为英文原书页码。
-  规则裁决以<b>英文原书页图</b>为准；术语沿用已上线中文版的既定译法。原书未逐项列出之处只记录、不代填，实体版图采集格、药瓶格数、毒性起始值与面板印值以配件为准。第 12 节附页码对照与 16 张页图。<br>
-  <b>标记体例：</b><span class="pick">择一</span>＝<b>互斥分支，仅可选定其一</b>，不按先后顺序全部执行；虚线框里的 A / B 两栏同样是择一。
-  <span style="display:inline-block;background:#eef3fa;border-left:4px solid #3b5b8c;border-radius:4px;padding:0 8px;font-weight:700;color:#2f466c;">机制</span> 蓝框＝<b>机制说明</b>，陈述该步骤的作用及各格差异。
+  规则裁决以<b>英文原书页图</b>为准；术语沿用已上线中文版的既定译法。原书未逐项列出之处只记录、不代填，实体版图采集格、药瓶格数、毒性起始值与面板印值以配件为准。第 12 节附页码对照与 16 张页图。
+  正文按行动在规则中的作用展开，先述状态变化，再列执行步骤。
 </div>
 
 <section id="s0">
@@ -219,7 +204,7 @@
   <div class="card"><div class="t">计分来源</div>计分轨道上累积的毒分，加上已完成的药瓶、捕获鼠区里的鼠与遵循的配方，四项合计为终局毒分。<span class="pg">p.9</span><span class="pg">p.10</span></div>
   <div class="card blue"><div class="t">胜负判定</div>毒分最高者胜；平局时按最终轮更新后的回合顺序判定，顺序靠前者胜。<span class="pg">p.5</span><span class="pg">p.11</span></div>
 </div>
-<div class="why"><span class="wt">本作的核心取舍</span>四类使魔的采集范围与结算次序相反：乌鸦只取单一采集格却最先结算，蛇取整列采集格却最后结算，先结算者可能把后续使魔指向的格子清空。全员放完棋子后按各人蛇的左右位置重排回合顺序，故蛇的落点同时决定本轮的采集收益与下一轮的行动次序。钱袋用于雇用助手，挤占一个使魔位，构成放置阶段的另一道取舍。<span class="pg">p.4</span><span class="pg">p.5</span></div>
+<div class="why"><span class="wt">规则主线</span>每轮分放置、采集、调配、收入四阶段。放置阶段轮流放入 5 个行动棋子；采集阶段按乌鸦、猫、蟾蜍、蛇的次序取回并取得资源；调配阶段把材料、蘑菇与鼠分别填入熬制器、蒸馏器与鼠区；收入阶段按已揭示的收益图标与自由鼠格结算毒分。第 3 轮收入阶段后按完成药瓶、捕获鼠与配方汇总终局毒分。<span class="pg">p.4</span><span class="pg">p.5</span><span class="pg">p.6</span><span class="pg">p.9</span><span class="pg">p.10</span></div>
 <table>
   <tr><th>项目</th><th>取值</th><th>依据</th></tr>
   <tr><td>人数与时长</td><td>2–4 人；约 60 分钟</td><td><span class="pg">p.1</span><span class="pg">p.2</span></td></tr>
@@ -334,33 +319,6 @@
 </div>
 </section>
 
-<section id="pick">
-<h2><span class="n">3.5</span>择一决策总表</h2>
-<p>原书标明另择或任选其一之处，逐处判定为互斥择一或可选前置。下表分行列示互斥择一与条件分支；互斥各行仅可选定其一，不按先后顺序执行。正文中的<span class="pick">择一</span>标记均回指本表。<span class="pg">p.2</span><span class="pg">p.4</span><span class="pg">p.8</span><span class="pg">p.12</span></p>
-<table>
-  <tr><th>阶段</th><th>决策点</th><th>互斥选项</th><th>约束</th><th>依据</th></tr>
-  <tr><td>设置</td><td>2 人局森林板</td><td>A 面常规／B 面变体</td><td>布置前选定；两面设置不同</td><td><span class="pg">p.2</span></td></tr>
-  <tr><td>放置</td><td>每个放置回合的行动棋子</td><td>乌鸦／猫／蟾蜍／蛇／钱袋</td><td>五选一，每回合恰好放 1 个；棋子出场次序自定</td><td><span class="pg">p.4</span></td></tr>
-  <tr><td>放置</td><td>钱袋的落点</td><td>某一块已翻开的助手面板</td><td>每块助手面板仅容纳 1 个钱袋；助手效果按所属阶段激活</td><td><span class="pg">p.4</span><span class="pg">p.12</span></td></tr>
-  <tr><td>放置</td><td>助手能力的处置</td><td>激活助手能力／改为获得 1 虫或 1 奶酪</td><td>二选一；后者按助手位旁图标在虫与奶酪之间再择一，须在调配阶段结束前决定</td><td><span class="pg">p.12</span></td></tr>
-  <tr><td>采集</td><td>已空的采集格</td><td>取得该格资源／改自公共供应取得 1 虫</td><td>条件分支；每个空格各得 1 虫，与该格原有资源数量无关</td><td><span class="pg">p.5</span></td></tr>
-  <tr><td>调配</td><td>材料的落点</td><td>熬制器内任一合法空格</td><td>位置择一；每格 1 个材料，每药瓶仅容一种材料，蜘蛛除外</td><td><span class="pg">p.7</span></td></tr>
-  <tr><td>调配</td><td>蜘蛛的万能类型</td><td>六类材料之一</td><td>每只蜘蛛按其所在药瓶与配方的需要分别判定；禁止纯蜘蛛瓶</td><td><span class="pg">p.7</span><span class="pg">p.11</span></td></tr>
-  <tr><td>调配</td><td>填满蒸馏器药瓶的奖励</td><td>该瓶相邻的 1 个奖励标记／其下任一瓶相邻的 1 个奖励标记</td><td>选定其一；取走后揭示 1 个收益图标</td><td><span class="pg">p.8</span></td></tr>
-  <tr><td>调配</td><td>顶端药瓶每对蘑菇的奖励</td><td>蒸馏器中任一尚可用的奖励标记</td><td>选定其一；全部解锁后再得蘑菇无收益</td><td><span class="pg">p.8</span></td></tr>
-  <tr><td>调配</td><td>额外资源标记的虫图标</td><td>花费标记换取等量虫／不花费并于本轮末弃置</td><td>二选一；换得的虫作为材料放入熬制器</td><td><span class="pg">p.6</span><span class="pg">p.8</span></td></tr>
-  <tr><td>调配</td><td>额外资源标记的奶酪图标</td><td>按图标数捕获等量鼠／不使用并弃置</td><td>二选一；奶酪标记本轮末必须弃置，部分使用亦同</td><td><span class="pg">p.8</span></td></tr>
-  <tr><td>调配</td><td>额外资源标记的材料或蘑菇图标</td><td>当作普通材料放入熬制器／当作普通蘑菇放入蒸馏器</td><td>条件分支，由标记所示类型决定</td><td><span class="pg">p.8</span></td></tr>
-  <tr><td>助手</td><td>清灰工所选的列</td><td>熬制器中任一缺不超过 2 个材料的未完成列</td><td>选定其一，立即取得该列下方全部奖励标记</td><td><span class="pg">p.13</span></td></tr>
-  <tr><td>助手</td><td>拾荒者所选的采集格</td><td>采集阶段末仍含资源的任一采集格</td><td>选定其一，取走该格全部资源</td><td><span class="pg">p.14</span></td></tr>
-  <tr><td>助手</td><td>驯蛇人所选的采集格</td><td>蛇所在列中未被对手使魔认领的任一采集格</td><td>选定其一，取走该格全部资源</td><td><span class="pg">p.14</span></td></tr>
-  <tr><td>助手</td><td>驯兽师所选的格子</td><td>未被对手认领的任一采集格／其任一正交相邻格作目标</td><td>两处各择一；目标格是否被认领不影响</td><td><span class="pg">p.15</span></td></tr>
-  <tr><td>助手</td><td>阴森商人抽到鼠</td><td>放回袋中重抽／袋中仅余鼠时空置</td><td>条件分支；空置时该助手本轮无收益</td><td><span class="pg">p.13</span></td></tr>
-  <tr><td>终局</td><td>平局判定</td><td>回合顺序靠前者胜</td><td>最终轮仍须更新回合顺序，以供此判定</td><td><span class="pg">p.5</span><span class="pg">p.11</span></td></tr>
-</table>
-<div class="warn"><b>非择一的两类表述：</b>熬制器填满整列时取得该列下方全部奖励标记，不逐项选择；采集阶段四类使魔按乌鸦、猫、蟾蜍、蛇的固定次序取回，各玩家可同时结算。<span class="pg">p.5</span><span class="pg">p.7</span></div>
-</section>
-
 <section id="s4">
 <h2><span class="n">4</span>一轮四阶段与三个轮</h2>
 <div class="flow">
@@ -430,7 +388,7 @@
 <p>各采集格的初始资源、药瓶格数与火焰数量、毒性轨道起始毒分值、奖励标记与面板印值均以实体配件为准，原书正文未逐项列出。结算时不代填数值。<span class="pg">p.2</span><span class="pg">p.3</span><span class="pg">p.7</span></p>
 
 <h3>5.1 · 乌鸦</h3>
-<div class="why"><span class="wt">作用</span>以单格采集换取最先结算的次序，优先取走高价值资源，并可能清空对手后续使魔所指向的格子。乌鸦的落点同时影响对手猫、蟾蜍与蛇在该格的所得。<span class="pg">p.4</span><span class="pg">p.5</span></div>
+<div class="why"><span class="wt">作用</span>乌鸦取得单一采集格内的全部资源，且在四类使魔中最先结算。其落点若同时被猫、蟾蜍或蛇的箭头指向，该格在后续取回时已空，按空格补偿改取 1 虫。<span class="pg">p.4</span><span class="pg">p.5</span></div>
 <p>乌鸦只能置于林间空地的采集格，即浅绿色实线边框格；不可置于灌木丛的虚线边框格。取回时取得单一采集格内的全部资源，且在四类使魔中最先结算。<span class="pg">p.4</span></p>
 <h3>5.2 · 猫</h3>
 <div class="why"><span class="wt">作用</span>以双箭头格覆盖 2 个采集格，在乌鸦之后结算；若所指格已被乌鸦取空，则按空格数改取虫。<span class="pg">p.4</span><span class="pg">p.5</span></div>
@@ -445,23 +403,7 @@
 <div class="why"><span class="wt">作用</span>以一次放置回合雇用一位助手，换取该助手在指定阶段的一次能力，或改为取得 1 虫、1 奶酪。钱袋不采集资源，故雇用助手必然减少本轮一个使魔位；助手能力可改变放置、调配或收入阶段的判定。<span class="pg">p.4</span><span class="pg">p.12</span></div>
 <p>钱袋只能置于助手面板上，且每块助手面板仅容纳 1 个钱袋。助手能力在面板所标阶段激活：放置阶段激活的助手可在雇用后立即激活，也可在其后任一放置回合中、放置行动棋子之前或之后激活，此类面板左上角印有回合顺序图标。激活时把钱袋棋子横放，表示该能力已使用。<span class="pg">p.12</span></p>
 <p>调配阶段结束前也可选择不激活助手能力，改为按助手位旁图标获得 1 虫或 1 奶酪，同样把钱袋横放作为标记。收入阶段结束的清理步骤中，全员自森林版图取回钱袋。<span class="pg">p.9</span><span class="pg">p.12</span></p>
-<div class="either">
-    <div class="hd">雇用助手之后 —— <span class="pick">择一</span>　互斥的两个分支，不按先后两步执行 <span class="pg">p.12</span></div>
-    <div class="cols">
-      <div class="opt">
-        <div class="ot">A · 激活助手能力</div>
-        在面板所标阶段激活该能力；放置阶段类可在雇用后立即激活，也可在其后任一放置回合中、放置行动棋子之前或之后激活。<br>
-        · 激活时把钱袋棋子横放，表示该能力已使用。
-      </div>
-      <div class="or">或</div>
-      <div class="opt b">
-        <div class="ot">B · 改为取得 1 虫或 1 奶酪</div>
-        按助手位旁图标在虫与奶酪之间再择一；须在调配阶段结束前决定，同样把钱袋横放作为标记。<br>
-        · 分支 B 不执行该助手面板所印的任何能力。
-      </div>
-    </div>
-    <div class="efoot"><b>共同点：</b>两个分支均须横放钱袋，并在收入阶段结束的清理步骤中自森林版图取回钱袋。<b>差异：</b>A 换取一次能力，B 换取一个可直接使用的资源标记。每块助手面板仅容 1 个钱袋，故一次雇用只对应一次判定。</div>
-  </div>
+<p>雇用助手后，在激活助手能力与改为取得 1 虫或 1 奶酪之间选定其一。激活能力须在面板所标阶段进行；放置阶段类可在雇用后立即激活，也可在其后任一放置回合中、放置行动棋子之前或之后激活。改用替代所得须在调配阶段结束前决定，按助手位旁图标在虫与奶酪之间再选定其一，且不执行该助手面板所印的能力。两个分支均须把钱袋棋子横放，并在收入阶段结束的清理步骤中自森林版图取回钱袋。每块助手面板仅容 1 个钱袋。<span class="pg">p.12</span></p>
 <p>部分助手提到「被认领的采集格」：指在采集阶段中最先自该格取得资源的使魔所认领的采集格，指采集格本身，并非使魔所在的箭头格。<span class="pg">p.12</span></p>
 </section>
 
@@ -479,8 +421,8 @@
 <p>取得奖励标记后立即揭示其所示图标。解锁该标记的材料须随即翻至无三角面，自此不可再移动；此翻面规则亦适用于蒸馏器取得的奖励标记。<span class="pg">p.8</span><span class="pg">p.9</span></p>
 <h3>6.4 蒸馏器与蘑菇</h3>
 <div class="why"><span class="wt">作用与差异</span>蒸馏器以蘑菇换取收益图标，其药瓶自最低可用瓶向上依次填充，与熬制器的自由落点不同。顶端药瓶可反复填满，每对蘑菇另解锁 1 个奖励标记，故蘑菇的边际收益取决于蒸馏器内尚余多少可用标记。<span class="pg">p.8</span></div>
-<p>蘑菇必须放入蒸馏器，自最低的可用药瓶起向上填。填满一个药瓶时，立即自该瓶相邻或其下任一瓶相邻的奖励标记中<span class="pick">择一</span>取得；自蒸馏器取得的奖励标记揭示 1 个收益图标。<span class="pg">p.8</span></p>
-<p>顶端药瓶可反复填充：完成首对蘑菇后把后续蘑菇叠置于其上，每放满一对即自蒸馏器中任一尚可用的奖励标记中<span class="pick">择一</span>取得。蒸馏器奖励标记全部解锁后，再取得蘑菇不产生收益。<span class="pg">p.8</span></p>
+<p>蘑菇必须放入蒸馏器，自最低的可用药瓶起向上填。填满一个药瓶时，立即自该瓶相邻或其下任一瓶相邻的奖励标记中择一取得；自蒸馏器取得的奖励标记揭示 1 个收益图标。<span class="pg">p.8</span></p>
+<p>顶端药瓶可反复填充：完成首对蘑菇后把后续蘑菇叠置于其上，每放满一对即自蒸馏器中任一尚可用的奖励标记中择一取得。蒸馏器奖励标记全部解锁后，再取得蘑菇不产生收益。<span class="pg">p.8</span></p>
 <h3>6.5 鼠区、奶酪与额外资源标记</h3>
 <p>鼠必须放入实验室板左上鼠区的自由鼠格；收入阶段自由鼠格中每只鼠扣 1 毒分。奶酪不能自采集格取得，只能自额外资源标记或助手能力取得；每使用 1 个奶酪图标，把 1 只鼠自自由鼠格移入捕获鼠格。两格均无容量上限。<span class="pg">p.6</span><span class="pg">p.8</span></p>
 <table>
@@ -496,11 +438,11 @@
 <p>设置时随机弃置的卷轴可能使某一资源的两张卷轴中缺一张、甚至两张皆缺，故同种卷轴的额外推进并非每局均可达成。<span class="pg">p.3</span><span class="pg">p.9</span></p>
 <div class="why"><span class="wt">毒性值的作用</span>毒性轨道记录各资源当前的毒分值，卷轴只改变该值，不直接产生毒分。终局完成药瓶与捕获鼠均按结算时毒性标记所在格的当前值计分，故卷轴的实际收益要待终局方兑现，且对已填入的全部同类型材料同时生效。<span class="pg">p.3</span><span class="pg">p.9</span><span class="pg">p.10</span></div>
 <h3>6.7 收益图标与收入阶段</h3>
-<p>收入阶段按实验室板上每个已揭示的收益图标获得 1 毒分，按自由鼠格中每只鼠失去 1 毒分，据此移动计分轨道上的计分标记；计分标记不得低于 0 分。图标一经揭示即保留在板上，其后各轮收入阶段均计入，故尽早解锁整列可增加后续轮的累积毒分。<span class="pg">p.9</span><span class="pg">p.11</span></p>
+<p>收入阶段按实验室板上每个已揭示的收益图标获得 1 毒分，按自由鼠格中每只鼠失去 1 毒分，据此移动计分轨道上的计分标记；计分标记不得低于 0 分。图标一经揭示即保留在板上，其后各轮收入阶段均计入，解锁整列所在的轮次决定该图标可计入的收入阶段次数。<span class="pg">p.9</span><span class="pg">p.11</span></p>
 <p>收益图标的来源不限：熬制器整列下方的奖励标记、蒸馏器填满药瓶与顶端瓶成对蘑菇所取的奖励标记，均在调配阶段揭示后于收入阶段一并结算。小屋看守可使本轮收入阶段自蒸馏器收益图标所得的毒分翻倍。<span class="pg">p.7</span><span class="pg">p.8</span><span class="pg">p.12</span></p>
 <p>轮末全员自森林版图取回钱袋，自布袋为每个采集格补 1 个随机资源；上轮未被取走的采集格同样补入 1 个，故格内可能叠放多个资源。第 3 轮末可略过补充，直接进入终局计分。<span class="pg">p.9</span></p>
 <h3>6.8 助手与认领的采集格</h3>
-<p>助手共 18 块面板，能力在面板所标阶段激活，分放置、调配、收入三类。放置阶段激活的助手可在雇用后立即激活，也可在其后任一放置回合中、放置行动棋子之前或之后激活，此类面板左上角印有回合顺序图标。激活时把钱袋棋子横放；调配阶段结束前亦可不激活能力，<span class="pick">择一</span>改为按助手位旁图标取得 1 虫或 1 奶酪。<span class="pg">p.12</span></p>
+<p>助手共 18 块面板，能力在面板所标阶段激活，分放置、调配、收入三类。放置阶段激活的助手可在雇用后立即激活，也可在其后任一放置回合中、放置行动棋子之前或之后激活，此类面板左上角印有回合顺序图标。激活时把钱袋棋子横放；调配阶段结束前亦可不激活能力，择一改为按助手位旁图标取得 1 虫或 1 奶酪。<span class="pg">p.12</span></p>
 <p>部分助手以「被认领的采集格」为条件：采集阶段中最先自该格取得资源的使魔认领该格，所指为采集格本身，并非使魔所在的箭头格。<span class="pg">p.12</span></p>
 <table>
   <tr><th>序号</th><th>助手</th><th>阶段</th><th>能力</th><th>依据</th></tr>
@@ -685,12 +627,12 @@
   <tr><td>腐化纽带</td><td>7 对跨瓶连接处材料</td><td>14</td></tr>
   <tr><td>蜿蜒剧毒</td><td>16 个 L 形药瓶内材料</td><td>8</td></tr>
 </table>
-<div class="tip"><b>示例所示关系：</b>使魔的速度次序决定采集格是否已被清空，空格补偿的虫随即成为可填入熬制器的材料；材料落点进一步决定整列解锁、完成药瓶与配方图案，最终按毒性轨道的当前值兑现为毒分。<span class="pg">p.5</span><span class="pg">p.7</span><span class="pg">p.10</span></div>
+<div class="tip"><b>示例所示规则链：</b>使魔的速度次序决定采集格是否已被清空，空格补偿的虫随即成为可填入熬制器的材料；材料落点进一步决定整列解锁、完成药瓶与配方图案，最终按毒性轨道的当前值兑现为毒分。<span class="pg">p.5</span><span class="pg">p.7</span><span class="pg">p.10</span></div>
 </section>
 
 <section id="s11">
 <h2><span class="n">11</span>单人与变体</h2>
-<p>英文原书 16 页未列单人模式。人数差异、2 人局变体板面、原书第 11 页策略提示与产品版本差异分列于后。<span class="pg">p.2</span><span class="pg">p.11</span></p>
+<p>英文原书 16 页未列单人模式。人数差异、2 人局变体板面与产品版本差异分列于后。<span class="pg">p.2</span><span class="pg">p.11</span></p>
 <h3>11.1 人数差异</h3>
 <table>
   <tr><th>人数</th><th>森林版图</th><th>移除的资源标记</th><th>翻开的助手面板</th><th>依据</th></tr>
@@ -700,20 +642,8 @@
 </table>
 <p>移除的标记回盒，本局不再使用；各局均翻开 2 块配方面板并各置 1 个配方材料标记，全部虫标记置于版图旁形成公共供应。<span class="pg">p.2</span></p>
 <h3>11.2 2 人局变体板面</h3>
-<p>小板两面为 2 人局提供不同布置，须在设置前<span class="pick">择一</span>：A 面或 B 面。原书只标注 A 面为常规、B 面为变体，未在正文列出两面差异；两面的具体布置以实体板面为准。<span class="pg">p.2</span></p>
-<h3>11.3 原书第 11 页的策略提示</h3>
-<table>
-  <tr><th>阶段</th><th>原书提示</th><th>所依据的机制</th><th>依据</th></tr>
-  <tr><td>放置</td><td>尽可能在自取高价值资源的同时截断对手所得</td><td>采集范围小的使魔先结算</td><td><span class="pg">p.5</span><span class="pg">p.11</span></td></tr>
-  <tr><td>放置</td><td>森林各格价值不等，部分采集格仅蛇或蟾蜍可达，其资源较有保障</td><td>箭头格与采集格的对应关系</td><td><span class="pg">p.4</span><span class="pg">p.11</span></td></tr>
-  <tr><td>放置</td><td>留意对手已放出的棋子；乌鸦全部就位后，后放的猫不再被乌鸦抢先</td><td>速度次序与占位互斥</td><td><span class="pg">p.4</span><span class="pg">p.11</span></td></tr>
-  <tr><td>放置</td><td>先手可选位置较多，后手可据对手布点预判所得</td><td>回合顺序轨决定放置先后</td><td><span class="pg">p.5</span><span class="pg">p.11</span></td></tr>
-  <tr><td>调配</td><td>尽早填满整列解锁契合策略的奖励标记</td><td>收益图标在收入阶段逐轮计分</td><td><span class="pg">p.7</span><span class="pg">p.11</span></td></tr>
-  <tr><td>调配</td><td>把蜘蛛放入价值较高的药瓶，并借其万能性扩大配方得分</td><td>纯蜘蛛瓶禁止与三重计入</td><td><span class="pg">p.7</span><span class="pg">p.11</span></td></tr>
-  <tr><td>调配</td><td>避免终局留下过多未完成的药瓶</td><td>未完成的药瓶不得分</td><td><span class="pg">p.10</span><span class="pg">p.11</span></td></tr>
-  <tr><td>调配</td><td>优先凑齐同种两张卷轴</td><td>第二张卷轴额外推进 1 格</td><td><span class="pg">p.9</span><span class="pg">p.11</span></td></tr>
-</table>
-<h3>11.4 版本差异记录</h3>
+<p>小板两面为 2 人局提供不同布置，须在设置前择一：A 面或 B 面。原书只标注 A 面为常规、B 面为变体，未在正文列出两面差异；两面的具体布置以实体板面为准。<span class="pg">p.2</span></p>
+<h3>11.3 版本差异记录</h3>
 <div class="warn"><b>中文版与英文原书的冲突：</b>中文版写「虫与奶酪不放入实验室，它们作为资源留在资源池中／立即结算使用」；英文原书第 6 页资源类型图标表把虫列入材料，并注明材料一律放入熬制器，第 8 页另规定奶酪只用于把自由鼠移入捕获鼠格。按事实裁决顺序，学习版以英文原书为准：虫须放入熬制器，奶酪不进入实验室。中文版规则页不修改。<span class="pg">p.6</span><span class="pg">p.7</span><span class="pg">p.8</span></div>
 </section>
 
@@ -747,8 +677,7 @@
   <tr><td>1 初局设置</td><td>p.2–3</td><td>7 资源与费用</td><td>p.6、p.8–9</td></tr>
   <tr><td>2 版图与组件速认</td><td>p.1–3、p.6</td><td>8 终局与计分链路</td><td>p.10–11、p.15–16</td></tr>
   <tr><td>3 核心引擎</td><td>p.4、p.7、p.10</td><td>9 常见误读</td><td>p.2–16</td></tr>
-  <tr><td>3.5 择一决策总表</td><td>p.2、p.4–8、p.12–15</td><td>10 示例回合拆解</td><td>p.5–6、p.11、p.15–16</td></tr>
-  <tr><td>4 一轮四阶段与三个轮</td><td>p.4–5、p.9</td><td>11 单人与变体</td><td>p.2、p.11</td></tr>
+  <tr><td>4 一轮四阶段与三个轮</td><td>p.4–5、p.9</td><td>11 单人与变体</td><td>p.2</td></tr>
   <tr><td>5 五个行动棋子逐条深挖</td><td>p.4–6、p.12</td><td>12 速查表与页码索引</td><td>全册</td></tr>
 </table>
 <h3>12.3 原书页图对照</h3>
@@ -765,7 +694,7 @@
     <figure><img src="images_doe/page_08.jpg" alt="原书第 8 页 蘑菇、鼠区与奖励标记" loading="lazy"><figcaption>p.8 蘑菇、鼠区与奖励标记用法</figcaption></figure>
     <figure><img src="images_doe/page_09.jpg" alt="原书第 9 页 卷轴与收入阶段" loading="lazy"><figcaption>p.9 卷轴、收益图标与轮末清理</figcaption></figure>
     <figure><img src="images_doe/page_10.jpg" alt="原书第 10 页 终局计分" loading="lazy"><figcaption>p.10 终局计分、捕获鼠与配方</figcaption></figure>
-    <figure><img src="images_doe/page_11.jpg" alt="原书第 11 页 配方与蜘蛛" loading="lazy"><figcaption>p.11 配方图案、蜘蛛与策略提示</figcaption></figure>
+    <figure><img src="images_doe/page_11.jpg" alt="原书第 11 页 配方与蜘蛛" loading="lazy"><figcaption>p.11 配方图案、蜘蛛与提示与技巧</figcaption></figure>
     <figure><img src="images_doe/page_12.jpg" alt="原书第 12 页 助手 1 至 3" loading="lazy"><figcaption>p.12 助手通则与助手 1–3</figcaption></figure>
     <figure><img src="images_doe/page_13.jpg" alt="原书第 13 页 助手 4 至 9" loading="lazy"><figcaption>p.13 助手 4–9</figcaption></figure>
     <figure><img src="images_doe/page_14.jpg" alt="原书第 14 页 助手 10 至 15" loading="lazy"><figcaption>p.14 助手 10–15</figcaption></figure>

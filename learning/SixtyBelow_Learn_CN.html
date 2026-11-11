@@ -113,17 +113,6 @@
   .good{color:var(--green);font-weight:700;}
   .tagR{color:var(--red);font-weight:700;} .tagB{color:var(--blue);font-weight:700;}
   .tagG{color:var(--gold);font-weight:700;}
-  .pick{display:inline-block;background:#a2303c;color:#fff;border-radius:5px;
-    font-size:11px;padding:1px 7px;margin:0 3px;font-weight:700;letter-spacing:.04em;vertical-align:1px;}
-  .pick.b{background:#3b5b8c;} .pick.g{background:#a9761c;}
-  .either{border:2px dashed #c9a24a;background:#fffaf0;border-radius:12px;padding:14px 16px;margin:15px 0;}
-  .either>.hd{font-size:14px;font-weight:800;color:#7d5511;margin-bottom:10px;}
-  .either .cols{display:grid;grid-template-columns:1fr 46px 1fr;align-items:stretch;}
-  .either .opt{background:var(--paper);border:1px solid var(--line2);border-radius:10px;padding:11px 14px;font-size:14px;}
-  .either .opt .ot{font-weight:800;color:var(--red);margin-bottom:4px;}
-  .either .opt.b .ot{color:var(--blue);}
-  .either .or{display:flex;align-items:center;justify-content:center;font-weight:800;color:#a9761c;font-size:13px;}
-  .either .efoot{font-size:12.5px;color:#6b615c;margin-top:10px;text-align:left;}
   .why{background:#eef3fa;border:1px solid #cddcee;border-left:5px solid var(--blue);
     padding:12px 17px;border-radius:0 10px 10px 0;margin:13px 0;font-size:14.5px;}
   .why b{color:#2f466c;}
@@ -135,7 +124,7 @@
     main{padding:0 18px 60px;} .grid2,.grid4{grid-template-columns:1fr 1fr;}
   }
   @media(max-width:640px){.backbar{height:40px;padding:0 10px;} .backbar a{min-height:30px;padding:0 9px;font-size:12.5px;} .backbar .bb-t{display:none;}
-  .grid2,.grid4,.either .cols{grid-template-columns:1fr;} .either .or{padding:6px 0;} main{padding:0 12px 50px;} .hero{padding:28px 20px;} .hero h1{font-size:26px;}}
+  .grid2,.grid4{grid-template-columns:1fr;} main{padding:0 12px 50px;} .hero{padding:28px 20px;} .hero h1{font-size:26px;}}
 
   /* == 窄屏目录：横向胶囊，正文首屏可见 == */
   @media(max-width:960px){
@@ -154,8 +143,6 @@
   /* == 学习版通用补充（各本共用） == */
   .flow{margin:18px 0;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;}
   .flow svg{display:block;width:100%;height:auto;}
-  .either .col{background:var(--paper);border:1px solid var(--line2);border-radius:10px;padding:11px 14px;font-size:14px;}
-  .either .col .ct{font-weight:800;color:var(--red);margin-bottom:4px;}
   .pgs{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin:14px 0;}
   .pgs figure{margin:0;background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:8px;}
   .pgs img{display:block;width:100%;height:auto;margin:0;border:1px solid var(--line);border-radius:6px;}
@@ -182,7 +169,6 @@
   <a href="#s2">2 · 版图与组件</a>
   <div class="grp">轮次与行动</div>
   <a href="#s3">3 · 核心引擎</a>
-  <a href="#pick" style="padding-left:22px;color:var(--gold);font-weight:700;">↳ 3.5 择一决策总表</a>
   <a href="#s4">4 · 一个轮次与六个轮</a>
   <a href="#s5">5 · 六个行动</a>
   <a href="#why" style="padding-left:22px;color:var(--blue);font-weight:700;">↳ 5.0 行动结构与格子差异</a>
@@ -201,15 +187,14 @@
 <header class="hero">
   <h1>深寒之下 · 学习版规则</h1>
   <div class="en">SIXTY BELOW　｜　按规则结构重排，不按原书章节顺序</div>
-  <div class="desc">以准备阶段的抽牌取舍为主线，展开六个行动、四阶段轮次、三次里程碑与九类终局计分；附择一决策总表、常见误读及原书页码索引。</div>
+  <div class="desc">以准备、规划、行动三阶段为主线，展开六个行动、六轮推进、三次里程碑与九类终局计分；附常见误读、速查表及原书页码索引。</div>
   <div class="meta"><span>1–4 人 · 单人模式</span><span>60–90 分钟</span><span>牌库构筑 / 行动位占据 / 里程碑计分</span><span>依据英文原书 24 页</span></div>
 </header>
 
 <div class="stand">
   <b>体例：</b>按学习顺序重排，章节与原书不对应；每条结论后的 <span class="pg">p.X</span> 为英文原书页码。
-  规则裁决以<b>英文原书页图</b>为准；术语沿用已上线中文版的既定译法。原书自相矛盾处只记录、不裁定，实体版图、升级区印值与卡面数值以配件为准。第 12 节附页码对照与 24 张页图。<br>
-  <b>标记体例：</b><span class="pick">择一</span>＝<b>互斥分支，仅可选定其一</b>，不按先后顺序全部执行；虚线框里的 A / B 两栏同样是择一。
-  <span style="display:inline-block;background:#eef3fa;border-left:4px solid #3b5b8c;border-radius:4px;padding:0 8px;font-weight:700;color:#2f466c;">机制</span> 蓝框＝<b>机制说明</b>，陈述该步骤的作用及各格差异。
+  规则裁决以<b>英文原书页图</b>为准；术语沿用已上线中文版的既定译法。原书自相矛盾处只记录、不裁定，实体版图、升级区印值与卡面数值以配件为准。第 12 节附页码对照与 24 张页图。
+  正文按行动在规则中的作用展开，先述状态变化，再列执行步骤。
 </div>
 
 <section id="s0">
@@ -219,7 +204,7 @@
   <div class="card"><div class="t">计分来源</div>终局合计九类胜利点：专家、探险轨道、站点基地、站点、升级、升级负分、探险牌、项目牌与里程碑。<span class="pg">p.17</span></div>
   <div class="card blue"><div class="t">胜负判定</div>胜利点最高者胜；平局时金币较多者胜；仍平局则并列获胜。<span class="pg">p.17</span></div>
 </div>
-<div class="why"><span class="wt">本作的核心取舍</span>准备阶段逐张抽取个人探险牌堆，每抽一张都须在放置与终止之间取舍：风暴牌占据基地并削弱探险牌奖励，同时提供大量能量；放置越多，版图上的牌与基地覆盖越多，本轮可结算的奖励构成随之变化。规划阶段补给探险者与展示区卡牌，行动阶段每回合仅执行六个行动之一，直至全员跳过。风暴数量、基地覆盖与行动位占用共同构成每轮的主要取舍。<span class="pg">p.6</span><span class="pg">p.7</span><span class="pg">p.9</span></div>
+<div class="why"><span class="wt">规则主线</span>每轮依次经过准备、规划、行动三阶段，第 3、5、6 轮末增设里程碑阶段。准备阶段逐张抽取个人探险牌堆，抽到探险牌置于下行空位，抽到风暴牌置于顶行基地，每次放置后须决定继续抽牌或结束抽牌步骤。规划阶段补给探险者与展示区卡牌；行动阶段每回合执行六个行动之一或跳过，直至全员跳过。六轮结束按九类计分汇总。<span class="pg">p.6</span><span class="pg">p.9</span><span class="pg">p.16</span><span class="pg">p.17</span></div>
 <table>
   <tr><th>项目</th><th>取值</th><th>依据</th></tr>
   <tr><td>人数与时长</td><td>1–4 人，另含单人模式；60–90 分钟</td><td><span class="pg">p.2</span><span class="pg">p.19</span></td></tr>
@@ -340,28 +325,6 @@
 </div>
 </section>
 
-<section id="pick">
-<h2><span class="n">3.5</span>择一决策总表</h2>
-<p>原书标明另择或任选其一之处，逐处判定为互斥择一或可选前置。下表汇总全游戏的互斥选择：每行均为择一，不按先后顺序执行。正文中的<span class="pick">择一</span>标记均回指本表。<span class="pg">p.6</span><span class="pg">p.7</span><span class="pg">p.9</span><span class="pg">p.10</span></p>
-<table>
-  <tr><th>阶段</th><th>决策点</th><th>互斥选项</th><th>约束</th><th>依据</th></tr>
-  <tr><td>准备</td><td>每抽一张牌</td><td>A 面朝上置于版图／B 弃置并结束抽牌步骤</td><td>选 A 后可继续抽牌；无空位可放时必须选 B</td><td><span class="pg">p.6</span></td></tr>
-  <tr><td>准备</td><td>预报板块</td><td>A 弃置刚抽到的牌／B 弃置版图上一张牌</td><td>弃置预报板块触发，两处均可含风暴；不结束抽牌步骤</td><td><span class="pg">p.6</span></td></tr>
-  <tr><td>准备</td><td>探险牌奖励</td><td>顶部奖励／底部奖励／无奖励</td><td>条件分支，由版图风暴数量决定</td><td><span class="pg">p.7</span></td></tr>
-  <tr><td>准备</td><td>机库</td><td>购买站点／以 1 能量换 1 建材</td><td>二选一；后者次数等于版图工程师图标数</td><td><span class="pg">p.7</span></td></tr>
-  <tr><td>规划</td><td>保留抽到的 5 张牌</td><td>免费保留 1 张／支付 2 能量保留 2 张</td><td>二选一；保留牌置于个人展示区</td><td><span class="pg">p.9</span></td></tr>
-  <tr><td>行动</td><td>本回合的行动</td><td>A 激活行动位／B 建站点／C 升级站点／D 使用雷达板块／E 激活飞行员或机修师／F 跳过</td><td>六选一，每回合恰好执行其一，直至全员跳过</td><td><span class="pg">p.9</span></td></tr>
-  <tr><td>行动</td><td>港口常驻行动位</td><td>支付 2 金币购买 1 名专家／支付 6 金币购买 2 名专家</td><td>二选一；可购买列由轮次标记限定</td><td><span class="pg">p.10</span></td></tr>
-  <tr><td>行动</td><td>站点基地来源</td><td>个人 4 块双面站点基地之一／公共牌堆面朝下的站点基地</td><td>二选一；工程师图标数须不超过版图工程师数</td><td><span class="pg">p.11</span></td></tr>
-  <tr><td>行动</td><td>雷达板块免费行动</td><td>3 能量／2 金币／公共牌堆抽 3 张／1 个建材</td><td>四选一；回合内任意时机可弃置 1 枚或多枚雷达板块</td><td><span class="pg">p.15</span></td></tr>
-  <tr><td>行动</td><td>建站点附带奖励</td><td>相邻已探索冰原之一的齿轮效果</td><td>条件分支；存在多个相邻冰原时择一</td><td><span class="pg">p.11</span></td></tr>
-  <tr><td>里程碑</td><td>里程碑牌</td><td>两张公共里程碑之一／个人里程碑</td><td>首次评分三选一；已评过的牌不可再选</td><td><span class="pg">p.16</span></td></tr>
-  <tr><td>里程碑</td><td>里程碑板块面</td><td>低分面／高分面／回盒</td><td>由条件列满足情况决定，三档互斥</td><td><span class="pg">p.16</span></td></tr>
-  <tr><td>陨石</td><td>本局陨石</td><td>六块陨石之一</td><td>设置时择一，决定附加设置与行动</td><td><span class="pg">p.18</span></td></tr>
-</table>
-<div class="warn"><b>非择一的两类表述：</b>准备阶段的探险牌奖励、风暴能量与三个基地奖励按任意顺序结算，不构成互斥；雷达板块所附的「激活雷达效果」与「购买卡牌」按任意顺序执行，二者均可进行，不属编号步骤。各类奖励与两步动作均在同一结算窗口内结算，不受先后顺序约束。<span class="pg">p.7</span><span class="pg">p.13</span></div>
-</section>
-
 <section id="s4">
 <h2><span class="n">4</span>一个轮次与六个轮</h2>
 <div class="flow">
@@ -434,11 +397,7 @@
 <h3>5.1 · 激活行动位</h3>
 <div class="why"><span class="wt">作用</span>以 1 名探险者换取一次性位置奖励与齿轮效果，并把该行动位永久封锁。占据时点决定己方与对手后续可用的行动位，冰原探索与站点基地放置则持续扩展公共行动位池。<span class="pg">p.9</span><span class="pg">p.10</span></div>
 <p>自预备区取 1 名探险者置于空的行动位；脚印图标标示行动位，位置包括专家行动板块、港口板、冰原、陨石、站点基地与己方项目牌。放置后立即获得位置奖励，再执行齿轮图标所示行动；该行动位此后不再可用。港口常驻行动位面积较大且永不视为占据，任意数量探险者均可激活。<span class="pg">p.9</span><span class="pg">p.10</span></p>
-<div class="either"><div class="hd">港口常驻行动位 <span class="pick">择一</span></div><div class="cols">
-  <div class="opt"><div class="ot">A · 购买 1 名专家</div>支付 2 金币，自专家规划板当前开放的列中取 1 名专家。</div>
-  <div class="or">或</div>
-  <div class="opt b"><div class="ot">B · 购买 2 名专家</div>支付 6 金币，自当前开放的列中取 2 名专家。</div>
-</div><div class="efoot">第 1 轮仅开放前三列，此后每轮增开一列；任务协调员随时可购买且须额外支付 2 金币。自第一列取专家额外获得 1 金币，自第三列取专家额外支付 1 金币，中间列无附加。<span class="pg">p.10</span></div></div>
+<p>港口常驻行动位提供两种购买方式：支付 2 金币自专家规划板当前开放的列中取 1 名专家，或支付 6 金币自当前开放的列中取 2 名专家。该行动位永不视为占据。<span class="pg">p.10</span></p>
 <p>专家置于个人版图对应行；起始版图已印工程师、投资者与无线电操作员各 1 名。任务协调员为万能专家，可置于任意行并按该列额外图标计；飞行员与机修师可置于任意列，但不提供额外图标。规划板上三个放置奖励位分别提供 1 名探险者、按无线电图标数推进探险轨道、自公共牌堆抽 2 张牌。<span class="pg">p.10</span></p>
 <p>港口另有雷达板块行动位：激活后获得 1 个雷达板块，并执行一座已建成站点的行动。四个行动位组成的限制区内每人仅可放置 1 名探险者，全场共两处此类区域，故该行动整局至多执行两次；专家行动板块上亦有限制区。<span class="pg">p.11</span></p>
 <p>探索新冰原时，把 1 名探险者置于最近的未探索冰原，即设置时最先摆放的那一块，沿红色标记判定；获得 1 个雷达板块，把该冰原翻至已探索面，再把探险者移至带脚印图标的格子。新冰原的齿轮行动位自此刻起对全员开放。全部冰原探索完毕后，按设置步骤在末块冰原旁补放新冰原。陨石与已探索冰原相邻即视为已探索。<span class="pg">p.11</span></p>
@@ -501,7 +460,7 @@
   <tr><td>雷达板块</td><td>设置时 1 个；探索冰原、港口行动位、三级升级奖励、卡牌效果</td><td>激活雷达效果与购买卡牌；亦可作免费行动换取能量、金币、卡牌或建材</td><td><span class="pg">p.11</span><span class="pg">p.13</span><span class="pg">p.15</span></td></tr>
   <tr><td>预报板块</td><td>设置时 1 块；第 5 轮末各人 1 块；部分陨石与卡牌效果</td><td>抽牌步骤中弃置，把刚抽到或版图上的一张牌移入个人弃牌堆</td><td><span class="pg">p.5</span><span class="pg">p.6</span><span class="pg">p.16</span></td></tr>
 </table>
-<p>雷达板块激活的每轮一次限制以卡牌状态标记：探险牌用后进入个人弃牌堆，项目牌用后旋转 60°，下一轮恢复。预报板块弃置后不回收，故其使用时机构成抽牌步骤中的独立取舍。<span class="pg">p.13</span><span class="pg">p.14</span></p>
+<p>雷达板块激活的每轮一次限制以卡牌状态标记：探险牌用后进入个人弃牌堆，项目牌用后旋转 60°，下一轮恢复。预报板块弃置后不回收，亦不结束抽牌步骤。<span class="pg">p.13</span><span class="pg">p.14</span></p>
 <h3>6.6 项目牌的六类效果</h3>
 <table>
   <tr><th>效果</th><th>生效时机</th><th>状态标记</th><th>依据</th></tr>
@@ -739,7 +698,6 @@
   <tr><td>1 初局设置</td><td>p.4–5</td><td>7 资源与费用</td><td>p.2、p.7、p.9–15</td></tr>
   <tr><td>2 版图与组件速认</td><td>p.2–3、p.6</td><td>8 终局与计分链路</td><td>p.12、p.17、p.24</td></tr>
   <tr><td>3 核心引擎</td><td>p.6、p.9、p.24</td><td>9 常见误读</td><td>p.6–17</td></tr>
-  <tr><td>3.5 择一决策总表</td><td>p.6–10、p.13–16</td><td>10 示例回合拆解</td><td>p.7–8、p.11、p.13–14</td></tr>
   <tr><td>4 一个轮次与六个轮</td><td>p.6、p.9–10、p.16</td><td>11 单人与变体</td><td>p.18–21</td></tr>
   <tr><td>5 六个行动逐条深挖</td><td>p.9–16</td><td>12 速查表与页码索引</td><td>全册</td></tr>
 </table>

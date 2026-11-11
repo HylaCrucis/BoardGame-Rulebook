@@ -113,17 +113,6 @@
   .good{color:var(--green);font-weight:700;}
   .tagR{color:var(--red);font-weight:700;} .tagB{color:var(--blue);font-weight:700;}
   .tagG{color:var(--gold);font-weight:700;}
-  .pick{display:inline-block;background:#a2303c;color:#fff;border-radius:5px;
-    font-size:11px;padding:1px 7px;margin:0 3px;font-weight:700;letter-spacing:.04em;vertical-align:1px;}
-  .pick.b{background:#3b5b8c;} .pick.g{background:#a9761c;}
-  .either{border:2px dashed #c9a24a;background:#fffaf0;border-radius:12px;padding:14px 16px;margin:15px 0;}
-  .either>.hd{font-size:14px;font-weight:800;color:#7d5511;margin-bottom:10px;}
-  .either .cols{display:grid;grid-template-columns:1fr 46px 1fr;align-items:stretch;}
-  .either .opt{background:var(--paper);border:1px solid var(--line2);border-radius:10px;padding:11px 14px;font-size:14px;}
-  .either .opt .ot{font-weight:800;color:var(--red);margin-bottom:4px;}
-  .either .opt.b .ot{color:var(--blue);}
-  .either .or{display:flex;align-items:center;justify-content:center;font-weight:800;color:#a9761c;font-size:13px;}
-  .either .efoot{font-size:12.5px;color:#6b615c;margin-top:10px;text-align:left;}
   .why{background:#eef3fa;border:1px solid #cddcee;border-left:5px solid var(--blue);
     padding:12px 17px;border-radius:0 10px 10px 0;margin:13px 0;font-size:14.5px;}
   .why b{color:#2f466c;}
@@ -135,7 +124,7 @@
     main{padding:0 18px 60px;} .grid2,.grid4{grid-template-columns:1fr 1fr;}
   }
   @media(max-width:640px){.backbar{height:40px;padding:0 10px;} .backbar a{min-height:30px;padding:0 9px;font-size:12.5px;} .backbar .bb-t{display:none;}
-  .grid2,.grid4,.either .cols{grid-template-columns:1fr;} .either .or{padding:6px 0;} main{padding:0 12px 50px;} .hero{padding:28px 20px;} .hero h1{font-size:26px;}}
+  .grid2,.grid4{grid-template-columns:1fr;} main{padding:0 12px 50px;} .hero{padding:28px 20px;} .hero h1{font-size:26px;}}
 
   /* == 窄屏目录：横向胶囊，正文首屏可见 == */
   @media(max-width:960px){
@@ -154,8 +143,6 @@
   /* == 学习版通用补充（各本共用） == */
   .flow{margin:18px 0;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;}
   .flow svg{display:block;width:100%;height:auto;}
-  .either .col{background:var(--paper);border:1px solid var(--line2);border-radius:10px;padding:11px 14px;font-size:14px;}
-  .either .col .ct{font-weight:800;color:var(--red);margin-bottom:4px;}
   .pgs{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin:14px 0;}
   .pgs figure{margin:0;background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:8px;}
   .pgs img{display:block;width:100%;height:auto;margin:0;border:1px solid var(--line);border-radius:6px;}
@@ -182,7 +169,6 @@
   <a href="#s2">2 · 版图与组件</a>
   <div class="grp">回合与行动</div>
   <a href="#s3">3 · 核心引擎</a>
-  <a href="#pick" style="padding-left:22px;color:var(--gold);font-weight:700;">↳ 3.5 择一决策总表</a>
   <a href="#s4">4 · 回合与纪元</a>
   <a href="#s5">5 · 五种行动</a>
   <a href="#why" style="padding-left:22px;color:var(--blue);font-weight:700;">↳ 5.0 行动结构与格子差异</a>
@@ -201,15 +187,14 @@
 <header class="hero">
   <h1>布拉格秘境 · 学习版规则</h1>
   <div class="en">PRAGUE UNSEEN　｜　按规则结构重排，不按原书章节顺序</div>
-  <div class="desc">以工人与四个街区为主线，展开五种行动、四项街区小游戏、影响力与三个纪元的计分链路；附择一决策总表、常见误读及原书页码索引。</div>
+  <div class="desc">以工人与四个街区为主线，展开五种行动、四项街区小游戏、影响力与三个纪元的计分链路；附常见误读、速查表及原书页码索引。</div>
   <div class="meta"><span>1–4 人 · 单人模式</span><span>120 分钟</span><span>工人放置 / 街区小游戏 / 纪元计分</span><span>依据英文原书 16 页</span></div>
 </header>
 
 <div class="stand">
   <b>体例：</b>按学习顺序重排，章节与原书不对应；每条结论后的 <span class="pg">p.X</span> 为英文原书页码。
-  规则裁决以<b>英文原书页图</b>为准；术语沿用已上线中文版的既定译法。原书自相矛盾处只记录、不裁定，实体版图、长凳板与卡面印值以配件为准。第 12 节附页码对照与 16 张页图。<br>
-  <b>标记体例：</b><span class="pick">择一</span>＝<b>互斥分支，仅可选定其一</b>，不按先后顺序全部执行；虚线框里的 A / B 两栏同样是择一。
-  <span style="display:inline-block;background:#eef3fa;border-left:4px solid #3b5b8c;border-radius:4px;padding:0 8px;font-weight:700;color:#2f466c;">机制</span> 蓝框＝<b>机制说明</b>，陈述该步骤的作用及各格差异。
+  规则裁决以<b>英文原书页图</b>为准；术语沿用已上线中文版的既定译法。原书自相矛盾处只记录、不裁定，实体版图、长凳板与卡面印值以配件为准。第 12 节附页码对照与 16 张页图。
+  正文按行动在规则中的作用展开，先述状态变化，再列执行步骤。
 </div>
 
 <section id="s0">
@@ -219,7 +204,7 @@
   <div class="card"><div class="t">计分来源</div>每纪元末按人气轨道结算各街区影响力；第三纪元末结算四项街区小游戏、建筑价格标记与已认领的终局计分奖励。<span class="pg">p.10</span><span class="pg">p.11</span></div>
   <div class="card blue"><div class="t">胜负判定</div>分数最高者胜。平局先比建筑价格标记数量，仍平则比剩余资源，再平则并列获胜。<span class="pg">p.11</span></div>
 </div>
-<div class="why"><span class="wt">本作的核心取舍</span>每个纪元仅有 3 名工人可执行行动，第 4 名必须用于长凳行动。工人派往的街区决定所得资源与触发的小游戏，工人种类与街区一致时获得 3 谣言，不一致时获得该街区 1 个基础资源。留在广场的工人可后续进入建筑，未进入建筑者在跳过时每名折算 1 谣言。工人去向与留存时机构成每纪元的主要取舍。<span class="pg">p.6</span><span class="pg">p.10</span></div>
+<div class="why"><span class="wt">规则主线</span>每个纪元有 4 名工人，其中 3 名可执行行动，第 4 名置于长凳板。工人派往的街区决定所得资源与触发的小游戏；工人种类与街区一致时获得 3 谣言，不一致时获得该街区 1 个基础资源。留在广场的工人可后续进入建筑，未进入建筑者在跳过时每名折算 1 谣言。三个纪元结束时分别结算影响力与终局计分。<span class="pg">p.6</span><span class="pg">p.10</span><span class="pg">p.11</span></div>
 <table>
   <tr><th>项目</th><th>取值</th><th>依据</th></tr>
   <tr><td>人数与时长</td><td>1–4 人，另含单人模式；120 分钟</td><td><span class="pg">p.2</span><span class="pg">p.12</span></td></tr>
@@ -332,28 +317,6 @@
 </div>
 </section>
 
-<section id="pick">
-<h2><span class="n">3.5</span>择一决策总表</h2>
-<p>原书标明另择或任选其一之处，逐处判定为互斥择一或条件分支。下表汇总全游戏的互斥选择：每行均为择一，不按先后顺序执行。正文中的<span class="pick">择一</span>标记均回指本表。<span class="pg">p.6</span><span class="pg">p.7</span><span class="pg">p.8</span><span class="pg">p.10</span></p>
-<table>
-  <tr><th>阶段</th><th>决策点</th><th>互斥选项</th><th>约束</th><th>依据</th></tr>
-  <tr><td>回合</td><td>本回合的行动</td><td>A 放置工人／B 进入建筑／C 建造建筑／D 修建桥梁／E 长凳行动</td><td>五选一；无法或无意执行前四项时必须选 E</td><td><span class="pg">p.6</span><span class="pg">p.10</span></td></tr>
-  <tr><td>放置工人</td><td>广场所得</td><td>主街区工人 3 谣言／其他工人该街区 1 资源</td><td>条件分支，由工人种类与街区是否同名决定</td><td><span class="pg">p.6</span></td></tr>
-  <tr><td>放置工人</td><td>女巫奖励</td><td>印刷资源／女巫标记奖励</td><td>该街区已放置女巫标记时方可二选一</td><td><span class="pg">p.9</span></td></tr>
-  <tr><td>魔像小游戏</td><td>市集路径</td><td>正交移动的逐格方向</td><td>步数由工人优先级片决定；起点、经过格与终点奖励均结算</td><td><span class="pg">p.6</span><span class="pg">p.7</span></td></tr>
-  <tr><td>水妖小游戏</td><td>水车轮盘奖励</td><td>该段奖励标记上的全部奖励／该段印刷的 1 张酒杯卡</td><td>条件分支；段内有标记时印刷奖励被覆盖</td><td><span class="pg">p.7</span></td></tr>
-  <tr><td>水妖小游戏</td><td>河道末端</td><td>首位走完整条河道 12 分／其后抵达末端 10 分</td><td>条件分支，由抵达次序决定</td><td><span class="pg">p.7</span><span class="pg">p.11</span></td></tr>
-  <tr><td>角魔小游戏</td><td>外圈物品来源</td><td>问号物品／物品袋</td><td>二选一；问号物品可视为任意种类</td><td><span class="pg">p.7</span></td></tr>
-  <tr><td>角魔小游戏</td><td>修复图标结算</td><td>从袋中抽 1 枚物品置于修理槽／把修理槽 1 枚物品移入陈列柜</td><td>二选一；移入陈列柜仍按最左空格与同种行限制</td><td><span class="pg">p.7</span></td></tr>
-  <tr><td>机器人小游戏</td><td>板条箱结算</td><td>取对应段 1 枚板条箱的奖励并翻面／把所有背面标记翻回正面并按枚数获得谣言</td><td>二选一；谣言上限 6</td><td><span class="pg">p.8</span></td></tr>
-  <tr><td>里程碑</td><td>一次性效果</td><td>认领终局计分奖励／激活任一可见建筑卡全部效果／获得任意街区 1 点影响力／获得 1 枚石榴石</td><td>四选一；每街区每种里程碑仅可获得一次</td><td><span class="pg">p.8</span></td></tr>
-  <tr><td>终局计分奖励</td><td>放置标记的表</td><td>四个街区的终局计分表之一</td><td>每表仅可放 1 枚标记，且置于最左空格</td><td><span class="pg">p.8</span></td></tr>
-  <tr><td>修建桥梁</td><td>桥段去向</td><td>版图可用桥位并获得 1 点影响力／无空位时置于面板旁且不获得影响力</td><td>条件分支；两者均计终局分</td><td><span class="pg">p.10</span></td></tr>
-  <tr><td>单人</td><td>议员行动卡结算</td><td>卡上各行自上而下逐行尝试</td><td>成功执行一行即结束回合，其余行不再结算</td><td><span class="pg">p.13</span></td></tr>
-</table>
-<div class="warn"><b>非择一的两类表述：</b>五项自由行动可在回合内任意时机执行任意次数，不构成互斥；放置工人、进入建筑、建造建筑、修建桥梁分属不同回合的行动，彼此不是同一次选择。二者均不得误读为编号步骤依次执行。<span class="pg">p.9</span><span class="pg">p.10</span></div>
-</section>
-
 <section id="s4">
 <h2><span class="n">4</span>一个回合与三个纪元</h2>
 <div class="flow">
@@ -415,7 +378,7 @@
 <h3>5.1 · 放置工人</h3>
 <div class="why"><span class="wt">作用</span>把工人送到街区广场，确定本回合所得资源类型与触发的小游戏，并为后续进入建筑预留位置。同一街区广场不可重复放置己方工人。<span class="pg">p.6</span></div>
 <p>把 1 名工人置于任一街区广场。若女巫人物正在该街区，须把女巫移至另一街区的女巫位，并获得女巫所至街区的奖励；女巫不可停留在原街区。工人种类与该街区一致时获得 3 谣言，其余情况获得该街区 1 个基础资源，随后触发该街区小游戏。<span class="pg">p.6</span><span class="pg">p.7</span></p>
-<p><span class="pick">择一</span>该街区已放置女巫标记时，移动女巫者可在印刷资源与女巫标记奖励之间选定一项。<span class="pg">p.9</span></p>
+<p>该街区已放置女巫标记时，移动女巫者可在印刷资源与女巫标记奖励之间选定一项。<span class="pg">p.9</span></p>
 
 <h3>5.2 · 进入建筑</h3>
 <div class="why"><span class="wt">作用</span>把广场上等候的工人转为建筑卡效果，释放广场占用并支付卡面费用。完整的桥梁把相邻街区的广场连成同一可用范围，使工人的可送达位置不再受单一街区限制。<span class="pg">p.9</span></div>
@@ -453,13 +416,13 @@
 <h3>6.2 水妖小游戏：河道与水车轮盘</h3>
 <div class="why"><span class="wt">作用与差异</span>河道按小船推进距离给出终局分档，水车轮盘按所用工人所在段给出即时奖励。两部分按固定顺序结算：先移动小船，再取奖励标记。河道末端与首位抵达分档不同，漩涡与绿色计分格决定终局计分位置。<span class="pg">p.7</span><span class="pg">p.11</span></div>
 <p>把小船沿河道移至前方最近的、印有本次所用工人符号的格子；抵达末端时把标记置于 10 分格，首位走完整条河道者置于 12 分格，随后把小船移回起点，可再次沿河道行进。跨过河上水坝时可从河道里程碑标记列选取 1 枚。<span class="pg">p.7</span></p>
-<p><span class="pick">择一</span>水车轮盘上取所用工人段内全部奖励标记上的奖励，随后把该段任意 1 枚奖励标记顺时针移 1 格；该段无标记时取印刷的 1 张酒杯卡。段内有标记时印刷奖励被覆盖。酒杯卡可在玩家回合内任意时机弃置并立即结算效果，回合内可打出任意张数。<span class="pg">p.7</span></p>
+<p>水车轮盘上取所用工人段内全部奖励标记上的奖励，随后把该段任意 1 枚奖励标记顺时针移 1 格；该段无标记时取印刷的 1 张酒杯卡。段内有标记时印刷奖励被覆盖。酒杯卡可在玩家回合内任意时机弃置并立即结算效果，回合内可打出任意张数。<span class="pg">p.7</span></p>
 <h3>6.3 角魔小游戏：大锅与焰板</h3>
 <div class="why"><span class="wt">作用与差异</span>大锅把物品标记转入陈列柜，焰板在每次触发后顺时针旋转 90°，使同一工人对应的奖励段持续变化。陈列柜每行仅容同种物品，最右格上方印该行分值，覆盖奖励格即时结算；无法放置的物品进入修理槽。<span class="pg">p.7</span></div>
 <p>按所用工人从大锅外圈相邻段取 1 枚物品，并取得焰板对应段的附带奖励；从袋中抽 1 枚新物品补入外圈空格，焰板顺时针旋转 90°。物品置于陈列柜任意一行的最左空格，问号物品可视为任意种类。获得修复图标时，可从袋中抽 1 枚随机物品置于修理槽，或把修理槽 1 枚物品移入陈列柜；修理槽所余物品终局每枚计 1 分，但不计入终局计分奖励。<span class="pg">p.7</span><span class="pg">p.11</span></p>
 <h3>6.4 机器人小游戏：灵感轨道与板条箱</h3>
 <div class="why"><span class="wt">作用与差异</span>时钟标记按所用工人种类顺时针移至对应段，经过的灯泡段数决定灵感轨道推进量。板条箱一旦翻面即占位，累积到无法选取时改为整段翻回并折算谣言，两种结算方式互斥。<span class="pg">p.8</span></div>
-<p><span class="pick">择一</span>把时钟标记移至所用工人对应段，从该段 1 枚板条箱标记上取奖励并把该标记翻至背面；无法或不愿取奖励时，把全部背面标记翻回正面，每翻 1 枚获得 1 谣言。随后按时钟经过的灯泡段数在灵感轨道上前进；抵达末格时标记 1 枚里程碑，取新标记自「0」位继续推进剩余步数。所用工人若已在轨道端部被标记，时钟不移动，灵感轨道不前进。谣言上限 6。<span class="pg">p.8</span></p>
+<p>把时钟标记移至所用工人对应段，从该段 1 枚板条箱标记上取奖励并把该标记翻至背面；无法或不愿取奖励时，把全部背面标记翻回正面，每翻 1 枚获得 1 谣言。随后按时钟经过的灯泡段数在灵感轨道上前进；抵达末格时标记 1 枚里程碑，取新标记自「0」位继续推进剩余步数。所用工人若已在轨道端部被标记，时钟不移动，灵感轨道不前进。谣言上限 6。<span class="pg">p.8</span></p>
 <h3>6.5 里程碑与终局计分奖励</h3>
 <p>四项小游戏各在特定时刻给出里程碑，每种里程碑在每个街区仅可取得一次。四种一次性效果为：认领终局计分奖励、激活任一可见建筑卡的全部效果、获得任意街区 1 点影响力、获得 1 枚石榴石。取得方式分别为陈列柜每行第三格、灵感轨道末格、跨过河道水坝、每修建一对桥段。<span class="pg">p.8</span></p>
 <p>认领终局计分奖励时，把 1 枚己方标记置于四个街区终局计分表之一的最左空格；每表每人仅可放 1 枚。四表的计分条件分别为陈列柜物品、抵达灵感轨道末格的标记数、小船经过的漩涡数与已修建的桥段数。<span class="pg">p.8</span></p>
@@ -673,7 +636,6 @@
   <tr><td>1 初局设置</td><td>p.4–5</td><td>7 资源与费用</td><td>p.6、p.10、p.16</td></tr>
   <tr><td>2 版图与组件速认</td><td>p.2–3、p.6</td><td>8 终局与计分链路</td><td>p.10–11</td></tr>
   <tr><td>3 核心引擎</td><td>p.6、p.9、p.11</td><td>9 常见误读</td><td>p.6–11</td></tr>
-  <tr><td>3.5 择一决策总表</td><td>p.6–8、p.10、p.13</td><td>10 示例回合拆解</td><td>p.7–9</td></tr>
   <tr><td>4 一个回合与三个纪元</td><td>p.6、p.10–11</td><td>11 单人与变体</td><td>p.5、p.12–14</td></tr>
   <tr><td>5 五种行动</td><td>p.6–7、p.9–10</td><td>12 速查表与页码索引</td><td>全册</td></tr>
 </table>
