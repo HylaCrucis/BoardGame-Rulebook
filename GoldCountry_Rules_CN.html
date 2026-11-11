@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>黄金乡 Gold Country · 中文规则书</title>
+<style>
+  :root{
+    --bg:#f4ecdc; --paper:#fffdf7; --ink:#2b2116; --ink2:#5a4a34; --dim:#8d7d66;
+    --deep:#5b3d12; --gold:#a9761a; --rust:#9c4a1e; --olive:#5f6b33; --line:#e0d2b8;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Noto Sans SC","Microsoft YaHei",system-ui,sans-serif;font-size:16px;line-height:1.85}
+  .shell{max-width:1180px;margin:0 auto}
+
+  header.top{position:sticky;top:0;z-index:20;background:var(--deep);color:#f6ecd9;
+    box-shadow:0 2px 10px rgba(91,61,18,.3)}
+  header.top .bar{display:flex;align-items:center;gap:16px;padding:10px 20px}
+  header.top .logo{font-size:15px;letter-spacing:.14em;font-weight:700}
+  header.top .logo span{color:#e2c07f;font-weight:400;letter-spacing:.06em}
+  nav.tabs{display:flex;gap:2px;overflow-x:auto;padding:0 12px 8px;scrollbar-width:thin}
+  nav.tabs a{flex:0 0 auto;color:#dcc9a5;text-decoration:none;font-size:12.5px;padding:5px 9px;border-radius:4px;white-space:nowrap}
+  nav.tabs a:hover{background:rgba(255,255,255,.14);color:#fff}
+
+  main{padding:0 20px 90px;max-width:920px;margin:0 auto}
+
+  .cover{padding:52px 0 30px;border-bottom:3px solid var(--gold);margin-bottom:34px}
+  .cover .k{font-size:11.5px;letter-spacing:.26em;color:var(--rust);margin-bottom:10px}
+  .cover h1{font-size:46px;margin:0;letter-spacing:.06em;color:var(--deep)}
+  .cover .sub{font-size:15px;color:var(--gold);letter-spacing:.24em;margin:6px 0 16px}
+  .cover .meta{font-size:13.5px;color:var(--ink2);line-height:2}
+  .cover .meta b{color:var(--rust)}
+
+  section.sec{background:var(--paper);border:1px solid var(--line);border-radius:10px;
+    padding:26px 28px 30px;margin:0 0 26px;box-shadow:0 1px 3px rgba(91,61,18,.07);scroll-margin-top:96px}
+  h2{font-size:24px;margin:0 0 16px;color:var(--deep);display:flex;align-items:center;gap:12px}
+  h2 .num{font-size:12px;background:var(--deep);color:#fff;padding:3px 9px;border-radius:12px;letter-spacing:.08em}
+  h3{font-size:18.5px;margin:26px 0 8px;color:var(--rust);scroll-margin-top:96px}
+  h3::before{content:"";display:inline-block;width:8px;height:8px;background:var(--gold);
+    border-radius:50%;margin-right:9px;vertical-align:2px}
+  h4{font-size:16px;margin:18px 0 6px;color:var(--deep)}
+  p{margin:9px 0}
+  b,strong{color:#1d1610}
+  ul,ol{margin:9px 0;padding-left:24px}
+  li{margin:4px 0}
+  li::marker{color:var(--gold)}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.5px}
+  th,td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+  th{background:#f0e4c9;color:var(--deep);font-weight:700;font-size:13.5px}
+  tr:nth-child(even) td{background:#faf5ea}
+  td.n{color:var(--deep);white-space:nowrap;font-weight:700}
+  figure{margin:18px 0;background:#faf5ea;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+  figure img{display:block;width:100%;height:auto}
+  figcaption{font-size:12px;color:var(--dim);padding:7px 12px;border-top:1px solid var(--line)}
+  .box{background:#fbf3e0;border-left:4px solid var(--gold);border-radius:0 6px 6px 0;padding:11px 15px;margin:15px 0}
+  .box .label{display:block;font-size:11px;letter-spacing:.16em;color:var(--gold);font-weight:700;margin-bottom:4px}
+  .example{background:#f7efe6;border:1px solid #e8d6c2;border-left:4px solid var(--rust);border-radius:0 6px 6px 0;padding:11px 15px;margin:15px 0}
+  .example .label{display:block;font-size:11px;letter-spacing:.16em;color:var(--rust);font-weight:700;margin-bottom:4px}
+  .warn{background:#fff8e2;border-left:4px solid #c08a1a;padding:11px 15px;margin:15px 0;border-radius:0 6px 6px 0}
+  .warn .label{display:block;font-size:11px;letter-spacing:.16em;color:#96690f;font-weight:700;margin-bottom:4px}
+  .tn{background:#f1efe4;border:1px dashed #8a7b46;border-radius:6px;padding:11px 15px;margin:15px 0;font-size:14.5px}
+  .tn .label{display:block;font-size:11px;letter-spacing:.16em;color:#6b5f2a;font-weight:700;margin-bottom:4px}
+  .quote{font-style:italic;color:var(--ink2);border-left:3px solid var(--line);padding-left:14px;margin:16px 0}
+  .dim{color:var(--dim)}
+  footer{margin-top:20px;font-size:12px;color:var(--dim);line-height:1.9;border-top:1px solid var(--line);padding-top:14px}
+  @media(max-width:720px){
+    main{padding:0 12px 60px} .cover h1{font-size:32px}
+    section.sec{padding:18px 16px 22px;border-radius:8px}
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+<header class="top">
+  <div class="bar">
+    <div class="logo">黄金乡 <span>GOLD COUNTRY</span></div>
+  </div>
+  <nav class="tabs">
+    <a href="#s1">01 概览</a>
+    <a href="#s2">02 配件与名词</a>
+    <a href="#s3">03 设置</a>
+    <a href="#s4">04 回合流程</a>
+    <a href="#s5">05 放置索取标记</a>
+    <a href="#s6">06 矿卡交易</a>
+    <a href="#s7">07 行动卡</a>
+    <a href="#s8">08 游戏结束</a>
+    <a href="#s9">09 河流版图</a>
+    <a href="#s10">10 出版人手记</a>
+    <a href="#a1">A 术语</a>
+    <a href="#a2">B 名单</a>
+  </nav>
+</header>
+
+<main>
+<div class="cover">
+  <div class="k">REINER KNIZIA · BITEWING GAMES · 2–4 人 · 30–60 分钟 · 8 岁以上</div>
+  <h1>黄金乡</h1>
+  <div class="sub">G O L D &nbsp; C O U N T R Y</div>
+  <div class="meta">
+    加州的山林里黄金像海水一样涌出，无数想去淘金的人蜂拥而至，圈地、下注、押宝最富的矿<br>
+    设计：<b>Reiner Knizia</b>｜美术：Beth Sobel｜出版：Nick Murray、Kyle Spackman（Bitewing Games）<br>
+    本页为<b>非官方中译</b>，仅供对照实体规则书使用
+  </div>
+</div>
+
+<section class="sec" id="s1">
+  <h2><span class="num">01</span>游戏概览</h2>
+  <p>「找到了！」加州的丘陵与森林里，黄金像无边无际的海水一样流淌；数不清的准淘金客涌向这片肥沃的土地，抢着圈下自己的地盘，发一笔财。</p>
+  <p>拿起你的镐和淘金盘，勘探这片土地，把本钱投进最富的矿里——最后金子最多的人赢。</p>
+  <ul>
+    <li><b>2–4 人</b></li>
+    <li><b>30–60 分钟</b></li>
+    <li><b>8 岁以上</b></li>
+  </ul>
+  <p>《黄金乡》是经典作品《奇观》（Spectaculum）的演化版，在原有骨架上加了强盗标记、更清晰的终局触发、可换取的索取标记、行动卡、秘密矿卡，以及一张更进阶的<b>河流版图</b>。</p>
+</section>
+
+<section class="sec" id="s2">
+  <h2><span class="num">02</span>配件与名词</h2>
+  <p>游戏围绕「四座矿」展开：<b>红、蓝、黄、白</b>四色各对应一座矿，矿的<b>当前总值</b>由摆在它基地上的一叠板块决定，而玩家手里的<b>矿卡</b>就代表对该矿的一份所有权。</p>
+  <table>
+    <tr><th>配件</th><th>数量</th><th>说明</th></tr>
+    <tr><td class="n">版图</td><td>双面</td><td>一面是<b>森林</b>（基础版图），一面是<b>河流</b>（进阶版图）</td></tr>
+    <tr><td class="n">矿卡</td><td>四色各一叠</td><td>代表对某座矿的一份所有权；面值随该矿总值浮动</td></tr>
+    <tr><td class="n">秘密矿卡</td><td>4 张</td><td>开局每人 1 张，暗置到终局；不计入金块／塌方效果</td></tr>
+    <tr><td class="n">索取标记</td><td>四色</td><td>用来在版图上<b>延伸矿脉</b>；平时藏在屏风后</td></tr>
+    <tr><td class="n">强盗标记</td><td>若干</td><td>不属于任何矿，用来<b>堵路</b>和<b>抢走板块</b></td></tr>
+    <tr><td class="n">屏风</td><td>每人 1 个</td><td>挡住自己手上的索取标记</td></tr>
+    <tr><td class="n">金币</td><td>每人开局 20 枚</td><td>正面朝上摆在自己面前，人人可见</td></tr>
+    <tr><td class="n">五金店</td><td>1 个</td><td>摆一块可被换走的索取标记</td></tr>
+    <tr><td class="n">行动卡</td><td>9 张</td><td>花 3 枚金币激活其中 1 张，每回合最多 1 张</td></tr>
+    <tr><td class="n">板块</td><td>若干</td><td>基础版：矿脉、黄金、愚人金、金块、塌方；河流版另加宝石、船、炸药</td></tr>
+    <tr><td class="n">矿脉板块</td><td>7 块</td><td>压在密林格的强盗标记上：中央 1 块值 5，其余值 3</td></tr>
+    <tr><td class="n">船标记</td><td>河流版每人 1 个</td><td>用来渡河，只能用一次</td></tr>
+    <tr><td class="n">玩家提示卡</td><td>若干</td><td>发给需要的新手</td></tr>
+  </table>
+  <div class="tn">
+    <span class="label">译者注</span>
+    原书<b>没有单独的配件清单页</b>，数量散落在设置步骤与各条规则里。本表的数量都取自正文明确写出的数字；凡正文未给数量的（矿卡叠数、强盗标记总数、板块总数），本表不填，以免编造。
+  </div>
+</section>
+
+<section class="sec" id="s3">
+  <h2><span class="num">03</span>设置</h2>
+  <ol>
+    <li>把版图<b>森林面朝上</b>铺开。版图上是一片原野，有<b>四个彩色的基地</b>。在每个基地上放上对应颜色、<b>数值 5 的起始板块</b>。</li>
+    <li>版图上有<b>7 个密林格</b>。在每个这样的格子上，把<b>两枚强盗标记</b>侧放、摆成一个并排的形状。然后，在<b>中央</b>那两枚强盗标记上放<b>数值 5 的矿脉板块</b>，其余各格放<b>数值 3 的矿脉板块</b>。这样每个密林格上都是：两枚强盗标记 ＋ 一块压在上面的矿脉板块。</li>
+    <li>使用这一面版图时，把<b>炸药、宝石、船、船标记</b>板块留在盒里。其余板块背面朝下洗混，随机正面朝上放到<b>金色格</b>上。</li>
+    <li>把 <b>4 张秘密矿卡</b>洗混，每人发 <b>1 张</b>。没用到的秘密矿卡不看内容直接收回盒里。玩家可以看自己的秘密矿卡，但要<b>暗置到终局</b>。</li>
+    <li>把<b>矿卡按颜色分类</b>。每位玩家<b>每种颜色各拿 1 张</b>，正面朝上摆在自己面前，人人可见。剩下的矿卡按颜色在版图边、对应矿的旁边各叠成一堆，正面朝上。</li>
+    <li>每位玩家拿 <b>20 枚金币</b>，<b>正面朝上</b>摆在自己面前，让所有人都看得见。剩下的金币放在伸手可及处。</li>
+    <li>把<b>四座矿的索取标记</b>混进袋子里。每位玩家拿 1 个屏风，从袋里抽 <b>3 枚</b>索取标记，藏在屏风后面。</li>
+    <li>把<b>五金店</b>摆在版图旁。从袋里抽 <b>1 枚</b>索取标记，放在五金店上。</li>
+    <li>把 <b>9 张行动卡</b>正面朝上摆在版图旁。其中<b>4 张</b>卡上画着索取标记——从袋里抽出<b>对应颜色</b>的索取标记，各放 1 枚在这 4 张卡上。然后，在画着<b>强盗</b>的那张行动卡上放 <b>1 枚强盗标记</b>。</li>
+    <li>把<b>玩家提示卡</b>放在可能需要的新手之间。</li>
+  </ol>
+  <figure>
+    <img src="GoldCountry_Rules_images/page_04.jpg" alt="设置步骤">
+    <figcaption>原书第 4 页：设置 1–10 步</figcaption>
+  </figure>
+</section>
+
+<section class="sec" id="s4">
+  <h2><span class="num">04</span>回合流程</h2>
+  <p><b>最后一位碰过钱的玩家先手</b>（也可以随机决定起始玩家），之后<b>顺时针</b>进行。</p>
+  <p>轮到你时，先<b>抬起屏风</b>，亮出你的 3 枚索取标记。然后按<b>任意顺序</b>执行以下行动（每个行动都必须<b>全部做完</b>才能进行下一个）：</p>
+  <ol>
+    <li><b>把索取标记放到版图上，延伸矿脉</b>（<b>必做</b>）。可选：用其中一枚与<b>五金店</b>上的那枚交换。</li>
+    <li><b>进行至多两次矿卡交易</b>（可选）。每次交易是<b>买入或卖出 1 张</b>矿卡。</li>
+    <li><b>支付 3 枚金币，激活 1 张行动卡</b>（可选）。每张卡只能在你回合中的<b>特定时机</b>激活，见第 07 节。</li>
+  </ol>
+  <p>回合结束时，从袋里重新抽 <b>3 枚</b>索取标记，藏到屏风后面。</p>
+  <p class="dim">这三项行动底下还有细节，下面逐项说明。</p>
+</section>
+
+<section class="sec" id="s5">
+  <h2><span class="num">05</span>放置索取标记，延伸矿脉</h2>
+  <p>每枚索取标记都会<b>延伸同色的那座矿</b>。把它放到版图上<b>任意一格</b>，条件是这一格<b>与基地相邻</b>，或者<b>与同色的任意一枚索取标记相邻</b>。每格<b>只能有 1 枚</b>索取标记。<b>手上的索取标记必须全部放完。</b></p>
+  <div class="example">
+    <span class="label">示例</span>
+    红色箭头指出了下一枚红色索取标记可以放的格子。
+  </div>
+  <figure>
+    <img src="GoldCountry_Rules_images/page_06.jpg" alt="放置索取标记示例">
+    <figcaption>原书第 6 页：回合流程与红色索取标记的合法落点</figcaption>
+  </figure>
+
+  <h3>与五金店交换</h3>
+  <p>放置索取标记时，你可以用<b>其中一枚</b>与<b>五金店上的那枚</b>交换。</p>
+  <div class="box">
+    <span class="label">建议玩法</span>
+    翻开 3 枚标记时，顺手把五金店那枚也加进你的「3 枚」里一起考虑；然后把该放的都放上版图，只要注意<b>回合结束时留 1 枚</b>还给五金店即可。
+  </div>
+
+  <h3>格子上有板块时</h3>
+  <p>当你把索取标记放到一个<b>有板块的格子</b>上时，把板块<b>从格子上拿走</b>，然后按板块种类处理：</p>
+  <table>
+    <tr><th>板块</th><th>效果</th></tr>
+    <tr><td class="n">矿脉</td><td>太好了，发现新矿脉！把这块板块<b>放到该矿的基地上</b>。再把原本压在矿脉下面的<b>强盗标记放回袋里</b>——这些强盗标记从此<b>变成了索取标记</b>，玩家可以抽到并放置（见本节「强盗标记」）。</td></tr>
+    <tr><td class="n">黄金</td><td>漂亮，又找到金子了！把板块<b>放到该矿的基地上</b>。</td></tr>
+    <tr><td class="n">愚人金</td><td>坏消息：看着像金子，其实是没用的愚人金。把板块<b>放到该矿的基地上</b>。</td></tr>
+    <tr><td class="n">金块</td><td>发财了！金块分给<b>这座矿的所有者</b>：每持有 <b>1 张</b>该矿的矿卡，得 <b>2 枚金币</b>。然后把板块<b>弃入盒中</b>。<br><b>注意</b>：<b>秘密矿卡不计入</b>这块板块的效果。</td></tr>
+    <tr><td class="n">塌方</td><td>灾难！矿的所有者必须出钱修矿：每持有 <b>1 张</b>该矿的矿卡，<b>失去 2 枚金币</b>。然后把板块<b>弃入盒中</b>。<br>若某位玩家的金币不够，他必须按<b>半价（向下取整）</b>退回矿卡，直到付清全额、或者手上再没有矿卡为止（矿卡的价值见第 06 节）。<br><b>注意</b>：<b>秘密矿卡不计入</b>这块板块的效果。</td></tr>
+  </table>
+  <div class="example">
+    <span class="label">示例</span>
+    John 把一枚白色索取标记放到了<b>塌方</b>板块上。John 有 1 张白卡，失去 <b>2 枚</b>金币；Sam 和 Ben 各有 3 张白卡，各失去 <b>6 枚</b>金币。
+    接着 John 把第二枚白色索取标记放到<b>愚人金</b>板块上——这块板块被加到白色基地上。
+    最后，John 把一枚<b>强盗标记</b>放到红矿脉板块旁的那枚红色索取标记旁边：矿脉板块被弃入盒中，压在它下面的<b>两枚强盗标记放进袋里</b>。
+  </div>
+
+  <figure>
+    <img src="GoldCountry_Rules_images/page_07.jpg" alt="五种板块">
+    <figcaption>原书第 7 页：矿脉、黄金、愚人金、金块——前四种板块的效果与图示</figcaption>
+  </figure>
+  <h3>强盗标记</h3>
+  <p>放强盗标记时，把它放到版图上<b>任意一格</b>，条件是这一格<b>与任意基地相邻</b>，或者<b>与任意其他索取标记相邻</b>。强盗标记<b>不属于任何矿</b>。</p>
+  <p>如果强盗标记落在了<b>有板块的格子</b>上，把板块<b>弃掉且不产生任何效果</b>——不过如果那是<b>矿脉</b>，压在下面的强盗标记<b>仍然要放进袋里</b>。</p>
+
+  <figure>
+    <img src="GoldCountry_Rules_images/page_09.jpg" alt="实例">
+    <figcaption>原书第 9 页：一次放置同时踩到塌方、愚人金与强盗的完整示例</figcaption>
+  </figure>
+  <h3>补币规则</h3>
+  <p>如果某位玩家<b>手上没有任何矿卡</b>，且金币<b>少于 20 枚</b>，他可以<b>立刻</b>把金币补到 20 枚。<b>任何玩家都不会因为缺钱而被踢出游戏。</b></p>
+
+  <figure>
+    <img src="GoldCountry_Rules_images/page_08.jpg" alt="塌方与强盗">
+    <figcaption>原书第 8 页：塌方、补币规则、强盗标记与矿脉挖尽规则</figcaption>
+  </figure>
+  <h3>矿脉挖尽规则</h3>
+  <p>如果某座矿被<b>完全挖尽</b>——也就是再也无法延伸到任何<b>有板块的格子</b>上——就把该色的索取标记全部<b>弃掉</b>，并从袋里抽补新的。这条规则<b>立刻对所有玩家</b>（以及<b>五金店</b>）生效；此后本局中任何人抽到该矿的索取标记，也照此处理。</p>
+  <div class="tn">
+    <span class="label">译者注</span>
+    判定「挖尽」时看的是<b>还能不能延伸到有板块的格子</b>，而不是还能不能延伸到空格。也就是说：一座矿即使周边仍有空格，只要所有带板块的格子都接不上了，就按挖尽处理——该色标记全部换掉。这条规则正对应出版人手记里提到的「后期某色被堵死、玩家还在空抽废色」的老问题，是防止残局泄气的关键。
+  </div>
+</section>
+
+<section class="sec" id="s6">
+  <h2><span class="num">06</span>矿卡交易</h2>
+  <p>在放置索取标记之<b>前或之后</b>，你可以进行<b>至多两次</b>交易，每次交易是<b>买入或卖出 1 张</b>矿卡。<b>两次交易必须连着做</b>——不能拆开、一次放在标记之前、一次放在之后。</p>
+
+  <h3>买入</h3>
+  <p>从对应颜色的牌堆取 <b>1 张</b>矿卡，正面朝上摆在自己面前；支付的金币数＝<b>这座矿的总值</b>（印在基地上）：起始值是 <b>5</b>，之后由<b>矿脉、黄金、愚人金</b>板块相应增减。</p>
+
+  <h3>卖出</h3>
+  <p>把 <b>1 张</b>自己的矿卡退回对应颜色的牌堆，然后拿取金币，数量＝<b>这座矿的总值</b>。</p>
+  <div class="warn">
+    <span class="label">两条限制</span>
+    <ul>
+      <li><b>秘密矿卡</b>在游戏中<b>不能卖出</b>。</li>
+      <li>一座矿的总值<b>可能降到 0 以下</b>。这种情况下，买卖矿卡都<b>按 0 枚金币</b>算。</li>
+    </ul>
+  </div>
+  <p>如果某色矿卡堆<b>用完了</b>，这些矿卡暂时<b>拿不到</b>。能找零就找零，让每座矿的总值一眼看得出。如果基地上正负板块互相抵消，你可以<b>直接把它们弃入盒中</b>；也可以用金币帮忙把摆出来的数值简化。（各矿的<b>起始板块</b>在设置之后<b>没有特殊意义</b>。）</p>
+  <figure>
+    <img src="GoldCountry_Rules_images/page_10.jpg" alt="矿卡交易">
+    <figcaption>原书第 10 页：买入与卖出的定价逻辑</figcaption>
+  </figure>
+</section>
+
+<section class="sec" id="s7">
+  <h2><span class="num">07</span>行动卡：花 3 枚金币激活 1 张</h2>
+  <p>回合中你可以支付 <b>3 枚金币</b>激活 <b>1 张</b>行动卡。用完之后把这张卡<b>翻到背面朝上</b>（或退回盒里）。三种行动卡如下：</p>
+  <table>
+    <tr><th>卡面</th><th>效果</th><th>时机</th></tr>
+    <tr><td class="n">钱袋</td><td>从袋里重新抽 <b>3 枚</b>索取标记，然后把当前这 3 枚<b>退回袋里</b>。这一步必须<b>在</b>与五金店交换<b>之前</b>做完。</td><td>回合<b>最开始</b>，做任何事之前</td></tr>
+    <tr><td class="n">帐篷＋标记</td><td>放置索取标记时，把<b>这张卡上的那枚索取标记</b>也加进你的标记里一起放。<br><b>注意</b>：若这枚标记所属的矿已经<b>无法再延伸到有板块的格子</b>，就把它弃掉，另从袋里抽一枚补上。</td><td>放置索取标记时</td></tr>
+    <tr><td class="n">白牌＋十字</td><td>你可以在原有两次交易的<b>同时</b>，再做<b>第三次</b>矿卡交易。<br><b>注意</b>：如果你<b>没有做成三次交易</b>，就<b>不能</b>激活这张卡。</td><td>与两次交易同一时机</td></tr>
+  </table>
+  <figure>
+    <img src="GoldCountry_Rules_images/page_11.jpg" alt="三种行动卡">
+    <figcaption>原书第 11 页：三种行动卡，与游戏结束条件</figcaption>
+  </figure>
+</section>
+
+<section class="sec" id="s8">
+  <h2><span class="num">08</span>游戏结束与计分</h2>
+  <h3>结束条件</h3>
+  <ul>
+    <li>当 <b>7 块矿脉板块全部</b>从密林格上被取走时，在<b>那一回合结束时</b>游戏结束。</li>
+    <li>当袋里<b>最后一枚标记被抽走</b>时，游戏也<b>立刻</b>结束——此时还留在玩家屏风后的索取标记与强盗标记<b>不再放置</b>。</li>
+  </ul>
+  <h3>计分</h3>
+  <p>游戏结束时，所有玩家<b>亮出</b>自己的秘密矿卡，并把<b>手上所有</b>矿卡（<b>包括秘密矿卡</b>）按<b>当前总值</b>卖出换成金币。</p>
+  <p><b>最富的玩家获胜。</b>若并列，则<b>共享胜利</b>。</p>
+  <div class="box">
+    <span class="label">一句话理解</span>
+    你在游戏中赚到的金币当然是你的；矿卡是「还能卖多少钱」的凭证。所以最后一步不是数卡，而是<b>按当时的矿价把所有卡兑现</b>——矿的价越高，你手里的卡越值钱。
+  </div>
+</section>
+
+<section class="sec" id="s9">
+  <h2><span class="num">09</span>河流版图（进阶）</h2>
+  <p>河流版图提供更有挑战、更多变化的体验——<b>建议熟练后再玩</b>。</p>
+
+  <h3>设置变化</h3>
+  <ol>
+    <li>每位玩家拿 <b>1 个船标记</b>，摆在自己面前让所有人看得见；剩下的船标记放在伸手可及处。</li>
+    <li>在把板块随机正面朝上放到金色格之前，先把<b>宝石、船、炸药</b>板块背面朝下混进板块堆里。</li>
+  </ol>
+
+  <h3>三种新板块</h3>
+  <table>
+    <tr><th>板块</th><th>效果</th></tr>
+    <tr><td class="n">宝石</td><td>把宝石板块收下，和金币一起摆在自己面前，人人可见。终局时每块宝石<b>价值 5 枚金币</b>。游戏中<b>不能花掉</b>宝石。</td></tr>
+    <tr><td class="n">船</td><td>拿 <b>1 个船标记</b>摆在自己面前，然后把<b>船板块弃入盒中</b>。<br><span class="dim">（不要把船板块留着当凭证，否则渡河时会混淆——见本节「河流」。）</span></td></tr>
+    <tr><td class="n">炸药</td><td><b>立刻</b>从袋里抽 <b>2 枚</b>索取标记，加进你的标记里（这些标记也可以和五金店交换）。然后把板块<b>弃入盒中</b>。</td></tr>
+  </table>
+
+  <h3>隧道</h3>
+  <p>河流版图上有<b>4 个隧道格</b>。要使用隧道，你需要<b>同一座矿的两枚索取标记</b>，并且该色的<b>一枚索取标记已经与这个隧道格相邻</b>：</p>
+  <ul>
+    <li><b>进</b>：把第一枚索取标记放到隧道格上；</li>
+    <li><b>出</b>：把第二枚放到<b>另一个隧道格</b>的相邻格。</li>
+  </ul>
+  <p><b>进和出必须同时完成！</b></p>
+  <p>已经有索取标记的隧道格，此后<b>任何矿</b>都<b>不能</b>再用它进出；但同色的索取标记仍然可以放在这个格子的<b>相邻格</b>（当作普通放置）。<b>每座矿只能用一条隧道。</b></p>
+  <p><b>强盗标记不能放在隧道格上。</b></p>
+  <div class="example">
+    <span class="label">示例</span>
+    Sam 把一枚红色索取标记放在隧道格上，接着她必须把另一枚红色索取标记放到箭头指示的<b>任意一格</b>上。（右下角那个隧道格不能用来「出」，因为它已经被占用了。）
+  </div>
+  <div class="warn">
+    <span class="label">记住</span>
+    你<b>不能</b>只进隧道而不立刻从<b>另一个</b>隧道格出来。
+  </div>
+
+  <h3>河流与渡河</h3>
+  <p>这张版图中间有一条河。中央的<b>密林岛格</b>横跨两岸，这一格<b>可以照常</b>放索取标记；除此格之外，<b>河流格上不能放</b>索取标记。</p>
+  <p>轮到你的回合，你可以用一个<b>船标记</b>渡河：把船标记放在一个<b>空的河流格</b>上，条件是这一格<b>与一枚索取标记相邻</b>。然后<b>立刻</b>把一枚<b>同色</b>的索取标记（也可以是<b>强盗标记</b>）放到与你船标记相邻的<b>陆地格</b>上——<b>甚至可以是河的同一侧</b>。</p>
+  <p>每个船标记<b>只能用一次</b>渡河。用过之后，船标记<b>留在河上</b>，但<b>失去作用</b>。船标记<b>不属于任何矿</b>。<b>同一个河流格上不能放超过一个</b>船标记。</p>
+  <div class="example">
+    <span class="label">示例</span>
+    若 Sam 把船标记放在这里，她就必须把一枚蓝色索取标记（或强盗标记）放到箭头所指的、与之相邻的<b>陆地格</b>之一。
+  </div>
+  <figure>
+    <img src="GoldCountry_Rules_images/page_12.jpg" alt="河流版图设置与隧道">
+    <figcaption>原书第 12 页：河流版图的设置变化、三种新板块与隧道规则</figcaption>
+  </figure>
+  <figure>
+    <img src="GoldCountry_Rules_images/page_13.jpg" alt="隧道与渡河示意">
+    <figcaption>原书第 13 页：隧道的进出、被占用后不可再用，以及渡河落点</figcaption>
+  </figure>
+</section>
+
+<section class="sec" id="s10">
+  <h2><span class="num">10</span>出版人手记（节译）</h2>
+  <p class="quote">《黄金乡》的诞生过程，和我们与 Reiner Knizia 合作的其他 Crown Jewel 系列都不一样。前五款都是我翻他的旧目录、挖到一颗蒙尘的宝石，再带着改造想法去找他。这一款反过来——是 Reiner 的团队先找上我，带来一款股票操纵游戏的新版，原名《奇观》（Spectaculum）。</p>
+  <p>我早就知道《奇观》。几年前刚玩过几局时我写过：「设计扎实，不愧是大师手笔。但它过于战术化、过于细碎、过于程序化，也过于干。而且到了后期容易泄气——某个颜色已经接不上任何板块，玩家却还在从袋里抽那些废色……」</p>
+  <p>尽管我对它评价平平，这个提案还是立刻抓住了我：一是主题从「巡回马戏团」换成了更贴题的淘金热；二是 Reiner 重画了地图、换了更好的终局触发，还发明了阴险的<b>强盗标记</b>。让我好奇的是，他是在没人推动的情况下，自己回头改这款设计的。</p>
+  <p>玩过这个当时叫《California 1849》的新版本之后，它成了那批约十个原型里我们最喜欢的一个。强盗标记尤其出彩——它给游戏的第三幕带来了意外和戏剧性。</p>
+  <p>后来我们又带着意见回去找他，特别希望做一面更进阶的版图背面。Reiner 愿意继续开发，结果就是现在这个样子。《黄金乡》的改动包括：</p>
+  <ul>
+    <li>用不断进入袋子和玩家手上的<b>强盗标记</b>强化游戏弧线</li>
+    <li>改进终局触发，重画地图，把张力拉满</li>
+    <li>加入与五金店<b>交换索取标记</b>、<b>激活行动卡</b>，拓宽战术弹性</li>
+    <li>用<b>秘密矿卡</b>藏起一部分玩家得分</li>
+    <li>新增一张<b>河流版图</b>，带来新标记、新格位和更多战略选择</li>
+    <li>换上 Beth Sobel 绘制的淘金热主题，让游戏更亲民、更好上手</li>
+  </ul>
+  <p class="dim">——Nick Murray，Bitewing Games</p>
+</section>
+
+<section class="sec" id="a1">
+  <h2><span class="num">A</span>中英术语对照</h2>
+  <table>
+    <tr><th>English</th><th>中文</th><th>说明</th></tr>
+    <tr><td>claim token</td><td class="n">索取标记</td><td>延伸矿脉用的四色标记，平时藏在屏风后</td></tr>
+    <tr><td>base camp</td><td class="n">基地</td><td>版图上的四个彩色据点</td></tr>
+    <tr><td>mine card</td><td class="n">矿卡</td><td>一份矿权，价格＝该矿总值</td></tr>
+    <tr><td>secret mine card</td><td class="n">秘密矿卡</td><td>暗置到终局，不吃金块／塌方</td></tr>
+    <tr><td>gold vein</td><td class="n">矿脉</td><td>压在密林格强盗标记上的板块</td></tr>
+    <tr><td>fool's gold</td><td class="n">愚人金</td><td></td></tr>
+    <tr><td>nuggets</td><td class="n">金块</td><td>按矿卡发钱</td></tr>
+    <tr><td>cave-in</td><td class="n">塌方</td><td>按矿卡扣钱</td></tr>
+    <tr><td>bandit token</td><td class="n">强盗标记</td><td>不属于任何矿，堵路并抢板块</td></tr>
+    <tr><td>hardware store</td><td class="n">五金店</td><td>存放可交换的一枚索取标记</td></tr>
+    <tr><td>dense forest space</td><td class="n">密林格</td><td>共 7 个</td></tr>
+    <tr><td>gold-colored space</td><td class="n">金色格</td><td>摆放随机板块的位置</td></tr>
+    <tr><td>exploited mine</td><td class="n">矿脉挖尽</td><td>无法再延伸到有板块的格子</td></tr>
+    <tr><td>top up</td><td class="n">补币</td><td>无矿卡且不足 20 枚时补到 20</td></tr>
+    <tr><td>tunnel</td><td class="n">隧道</td><td>河流版图共 4 个</td></tr>
+  </table>
+</section>
+
+<section class="sec" id="a2">
+  <h2><span class="num">B</span>制作名单</h2>
+  <p>设计：Reiner Knizia｜美术：Beth Sobel｜平面设计：Alisha Giroux｜编辑：Scott Darrington｜出版：Nick Murray、Kyle Spackman（Bitewing Games）</p>
+  <p>Reiner Knizia 感谢所有参与《黄金乡》开发的淘金者，特别是 Iain Adams、Sebastian Bleasdale、Chris Bowyer、Chris Dearlove、Drak、Gavin Hamilton、Ross Inglis、Kevin Jacklin、Simon Kane、Chris Lawson、Dave Spring、Peter Wimmer。</p>
+  <p>© Dr. Reiner Knizia, 2026｜© Bitewing Games LLC, 2026｜www.bitewinggames.com</p>
+  <footer>
+    本页为《黄金乡》（Gold Country）中文<b>非官方</b>译本，依据 Bitewing Games 2026 年英文规则书翻译，仅供对照实体规则书使用，不作商业用途。<br>
+    原书无配件清单页，本页第 02 节的数量只取自正文明确写出的数字；未写明的一律留空。
+  </footer>
+</section>
+</main>
+</div>
+</body>
+</html>
