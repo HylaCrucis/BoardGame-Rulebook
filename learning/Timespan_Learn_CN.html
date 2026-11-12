@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>时代跨度 · 学习版规则（Timespan）</title>
+<style>
+  :root{
+    --bg:#fbf7f0; --paper:#fffdf9; --ink:#2f2a28; --soft:#6b615c;
+    --line:#e3d8c8; --line2:#d3c4ae;
+    --red:#a2303c; --red-l:#fbecec; --blue:#3b5b8c; --blue-l:#eaf0f9;
+    --gold:#a9761c; --gold-l:#fbf1dc; --green:#3d7a55; --green-l:#e9f4ec;
+    --purple:#6b4a86; --purple-l:#f1eaf7;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"PingFang SC","Microsoft YaHei","Noto Sans SC",Arial,sans-serif;
+    font-size:15.5px;line-height:1.85;}
+  .backbar{position:sticky;top:0;z-index:60;height:44px;box-sizing:border-box;
+    display:flex;align-items:center;gap:10px;padding:0 16px;
+    background:var(--paper);border-bottom:1px solid var(--line);font-size:13px;}
+  .backbar a{display:inline-flex;align-items:center;min-height:32px;padding:0 12px;
+    border:1px solid var(--line2);border-radius:8px;background:#fff;
+    color:var(--purple);text-decoration:none;white-space:nowrap;}
+  .backbar a:active{background:var(--purple-l);}
+  .backbar .bb-t{margin-left:auto;font-size:12px;color:var(--soft);}
+  .layout{display:flex;align-items:flex-start;max-width:1280px;margin:0 auto;}
+  nav.toc{position:sticky;top:44px;align-self:flex-start;width:238px;flex:0 0 238px;
+    height:calc(100vh - 44px);overflow-y:auto;background:#fffdf9;border-right:1px solid var(--line);
+    padding:22px 14px 40px;font-size:13px;}
+  nav.toc .brand{font-size:17px;font-weight:800;color:var(--red);margin:0 0 4px;}
+  nav.toc .brand-s{font-size:11.5px;color:var(--soft);margin:0 0 16px;letter-spacing:.04em;}
+  nav.toc .grp{margin:16px 0 5px;font-size:11px;color:var(--gold);font-weight:700;letter-spacing:.12em;}
+  nav.toc a{display:block;color:#49403b;text-decoration:none;padding:4px 9px;border-radius:6px;}
+  nav.toc a:hover{background:var(--red-l);color:var(--red);}
+  main{flex:1 1 auto;min-width:0;padding:0 42px 90px;}
+  .hero{background:linear-gradient(150deg,#7c1f2b,#a2303c 55%,#bd5a4a);
+    color:#fff8f0;border-radius:0 0 20px 20px;padding:40px 42px 34px;margin-bottom:26px;
+    box-shadow:0 8px 26px rgba(124,31,43,.18);}
+  .hero h1{margin:0;font-size:34px;letter-spacing:.02em;}
+  .hero .en{font-size:14px;opacity:.8;margin:2px 0 12px;letter-spacing:.06em;}
+  .hero .desc{font-size:16px;max-width:760px;line-height:1.8;}
+  .hero .meta{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px;}
+  .hero .meta span{border:1px solid rgba(255,255,255,.5);border-radius:20px;padding:3px 13px;font-size:12.5px;}
+  .stand{margin-top:14px;background:#fff6e2;border:1px solid #e8d2a2;border-left:5px solid var(--gold);
+    border-radius:0 10px 10px 0;padding:12px 18px;font-size:14px;color:#5c4a26;}
+  section{padding:22px 0 14px;border-bottom:1px dashed var(--line2);scroll-margin-top:14px;}
+  h2{font-size:25px;color:var(--red);margin:8px 0 4px;line-height:1.4;}
+  h2 .n{display:inline-block;background:var(--red);color:#fff;font-size:14px;
+    min-width:30px;height:30px;line-height:30px;text-align:center;border-radius:8px;
+    margin-right:10px;vertical-align:3px;font-weight:700;}
+  h3{font-size:18.5px;color:#3a3230;margin:26px 0 6px;border-left:4px solid var(--gold);padding-left:10px;}
+  h4{font-size:16px;color:var(--blue);margin:18px 0 4px;}
+  p{margin:9px 0;}
+  ul,ol{margin:9px 0 9px 2px;padding-left:22px;}
+  li{margin:5px 0;}
+  b,strong{color:var(--red);}
+  .goal{background:var(--blue-l);border:1px solid #cfdcf0;border-radius:9px;
+    padding:8px 14px;font-size:13.5px;color:#2f466c;margin:8px 0 16px;}
+  .goal b{color:#2f466c;}
+  .pg{display:inline-block;background:#f0e7d8;color:#7d6231;border:1px solid #e2d2b6;
+    border-radius:5px;font-size:11px;padding:0 6px;line-height:18px;vertical-align:1px;
+    margin-left:4px;font-weight:600;white-space:nowrap;font-family:Arial,sans-serif;}
+  .key{background:var(--green-l);border:1px solid #c9e2d1;border-left:5px solid var(--green);
+    padding:11px 16px;border-radius:0 10px 10px 0;margin:13px 0;}
+  .key b{color:var(--green);}
+  .warn{background:var(--red-l);border:1px solid #eed3d3;border-left:5px solid var(--red);
+    padding:11px 16px;border-radius:0 10px 10px 0;margin:13px 0;}
+  .warn b{color:var(--red);}
+  .tip{background:var(--gold-l);border:1px solid #eddcb8;border-left:5px solid var(--gold);
+    padding:11px 16px;border-radius:0 10px 10px 0;margin:13px 0;}
+  .tip b{color:var(--gold);}
+  .note{background:#f4f1ec;border:1px solid var(--line);border-radius:9px;padding:10px 15px;
+    margin:12px 0;font-size:14px;color:#514844;}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px;background:var(--paper);}
+  th,td{border:1px solid var(--line2);padding:8px 11px;text-align:left;vertical-align:top;}
+  th{background:#f4e9dd;color:#5d4022;font-weight:700;}
+  tr:nth-child(even) td{background:#fdf9f3;}
+  td.c,th.c{text-align:center;}
+  .steps{list-style:none;padding:0;counter-reset:st;margin:14px 0;}
+  .steps>li{position:relative;padding:10px 14px 10px 50px;margin:9px 0;background:var(--paper);
+    border:1px solid var(--line);border-radius:10px;}
+  .steps>li::before{counter-increment:st;content:counter(st);position:absolute;left:12px;top:11px;
+    width:26px;height:26px;background:var(--red);color:#fff;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;}
+  .steps>li>ol{margin:6px 0;padding-left:20px;}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:11px;
+    padding:13px 17px;margin:11px 0;box-shadow:0 2px 6px rgba(80,60,40,.04);}
+  .card .t{font-weight:800;color:var(--red);font-size:16px;margin-bottom:3px;}
+  .card .t .s{display:inline-block;background:var(--red);color:#fff;border-radius:5px;
+    font-size:12px;padding:1px 7px;margin-right:8px;}
+  .card.blue .t{color:var(--blue);} .card.blue .t .s{background:var(--blue);}
+  .card.green .t{color:var(--green);} .card.green .t .s{background:var(--green);}
+  .card.gold .t{color:var(--gold);} .card.gold .t .s{background:var(--gold);}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+  .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;}
+  .mini{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:11px 13px;}
+  .mini .h{font-weight:800;font-size:14px;margin-bottom:4px;}
+  .mini .v{font-size:13px;color:var(--soft);line-height:1.7;}
+  .fig{margin:18px 0;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;}
+  .fig svg{display:block;width:100%;height:auto;}
+  .figcap{font-size:12.5px;color:var(--soft);margin-top:8px;text-align:center;}
+  details{margin:12px 0;background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:8px 14px;}
+  summary{cursor:pointer;font-size:13.5px;color:var(--blue);font-weight:600;}
+  details img{display:block;max-width:100%;margin:12px auto;border:1px solid var(--line);border-radius:8px;}
+  .pit{counter-reset:pit;list-style:none;padding:0;margin:14px 0;}
+  .pit li{position:relative;padding:9px 14px 9px 46px;margin:7px 0;background:var(--paper);
+    border:1px solid var(--line);border-radius:9px;font-size:14.5px;}
+  .pit li::before{counter-increment:pit;content:"✕ " counter(pit);position:absolute;left:10px;top:9px;
+    color:#fff;background:var(--red);border-radius:6px;font-size:11px;padding:1px 6px;font-weight:700;}
+  .bad{color:var(--red);text-decoration:line-through;}
+  .good{color:var(--green);font-weight:700;}
+  .tagR{color:var(--red);font-weight:700;} .tagB{color:var(--blue);font-weight:700;}
+  .tagG{color:var(--gold);font-weight:700;}
+  .why{background:#eef3fa;border:1px solid #cddcee;border-left:5px solid var(--blue);
+    padding:12px 17px;border-radius:0 10px 10px 0;margin:13px 0;font-size:14.5px;}
+  .why b{color:#2f466c;}
+  .why .wt{font-weight:800;color:#2f466c;display:block;margin-bottom:3px;}
+  .idx{font-size:13.5px;}
+  .foot{margin-top:34px;font-size:12.5px;color:var(--soft);text-align:center;line-height:1.9;}
+  @media(max-width:960px){
+    .layout{flex-direction:column;} nav.toc{position:static;width:100%;height:auto;flex-basis:auto;border-right:0;border-bottom:1px solid var(--line);}
+    main{padding:0 18px 60px;} .grid2,.grid4{grid-template-columns:1fr 1fr;}
+  }
+  @media(max-width:640px){.backbar{height:40px;padding:0 10px;} .backbar a{min-height:30px;padding:0 9px;font-size:12.5px;} .backbar .bb-t{display:none;}
+  .grid2,.grid4{grid-template-columns:1fr;} main{padding:0 12px 50px;} .hero{padding:28px 20px;} .hero h1{font-size:26px;}}
+
+  /* == 窄屏目录：横向胶囊，正文首屏可见 == */
+  @media(max-width:960px){
+    nav.toc{display:flex;flex-wrap:nowrap;gap:6px;align-items:center;
+      height:auto;max-height:none;overflow-x:auto;overflow-y:hidden;
+      padding:10px 12px;border-right:0;border-bottom:1px solid var(--line);
+      -webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;}
+    nav.toc .brand,nav.toc .brand-s,nav.toc .grp{display:none;}
+    nav.toc a{flex:0 0 auto;white-space:nowrap;padding:6px 11px;
+      border:1px solid var(--line2);border-radius:16px;background:var(--paper);
+      font-size:12.5px;line-height:1.4;}
+    nav.toc a:hover{background:var(--red-l);}
+    nav.toc a[style]{padding-left:11px;}
+  }
+
+  /* == 学习版通用补充（各本共用） == */
+  .flow{margin:18px 0;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;}
+  .flow svg{display:block;width:100%;height:auto;}
+  .pgs{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin:14px 0;}
+  .pgs figure{margin:0;background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:8px;}
+  .pgs img{display:block;width:100%;height:auto;margin:0;border:1px solid var(--line);border-radius:6px;}
+  .pgs figcaption{font-size:12px;color:var(--soft);text-align:center;margin-top:6px;line-height:1.5;}
+  @media(max-width:640px){.pgs{grid-template-columns:1fr 1fr;gap:9px;}}
+  /* 窄屏压缩首屏：hero 与体例框收紧，第 0 节进入首屏 */
+  @media(max-width:640px){
+    .hero{padding:22px 18px 24px;margin-bottom:16px;}
+    .hero h1{font-size:24px;} .hero .desc{font-size:14px;line-height:1.65;margin-top:8px;}
+    .hero .meta{margin-top:12px;gap:6px;} .hero .meta span{font-size:11.5px;padding:2px 10px;}
+    .stand{margin-top:10px;padding:9px 12px;font-size:12.5px;line-height:1.6;}
+  }
+</style>
+</head>
+<body>
+<div class="backbar"><a href="index.html">← 学习版目录</a><span class="bb-t">时代跨度 · 学习版规则</span></div>
+<div class="layout">
+<nav class="toc">
+  <div class="brand">时代跨度</div>
+  <div class="brand-s">学习版规则 · Timespan</div>
+  <div class="grp">规则概要</div>
+  <a href="#s0">0 · 游戏概要</a>
+  <a href="#s1">1 · 初局设置</a>
+  <a href="#s2">2 · 版图与组件</a>
+  <div class="grp">阶段与行动</div>
+  <a href="#s3">3 · 核心引擎</a>
+  <a href="#s4">4 · 三个阶段与时代交替</a>
+  <a href="#s5">5 · 行动逐条深挖</a>
+  <a href="#why" style="padding-left:22px;color:var(--blue);font-weight:700;">↳ 5.0 行动结构与行动位差异</a>
+  <div class="grp">全局机制</div>
+  <a href="#s6">6 · 贯穿全局的系统</a>
+  <a href="#s7">7 · 资源与费用</a>
+  <a href="#s8">8 · 终局与计分链路</a>
+  <div class="grp">查考与附录</div>
+  <a href="#s9">9 · 常见误读（31 条）</a>
+  <a href="#s10">10 · 示例行动阶段拆解</a>
+  <a href="#s11">11 · 单人与变体</a>
+  <a href="#s12">12 · 速查表与页码索引</a>
+</nav>
+
+<main>
+<header class="hero">
+  <h1>时代跨度 · 学习版规则</h1>
+  <div class="en">TIMESPAN　｜　按规则结构重排，不按原书章节顺序</div>
+  <div class="desc">以三个时代与五个行动阶段为主线，展开收入、探索、行动三阶段的推进、时间线与墓地、卡面时机与叠压、轨道与科技解锁；附常见误读、速查表及原书页码索引。</div>
+  <div class="meta"><span>原书未列人数</span><span>三个时代 · 五个行动阶段</span><span>时间线 / 轨道推进 / 工人激活</span><span>依据英文原书 12 页</span></div>
+</header>
+
+<div class="stand">
+  <b>体例：</b>按学习顺序重排，章节与原书不对应；每条结论后的 <span class="pg">p.X</span> 为英文原书页码。
+  规则裁决以<b>英文原书页图</b>为准；术语沿用已上线中文版的既定译法。原书未列之处只记录、不代填，文明板印值、轨道格奖励与卡面数值以配件为准。第 12 节附页码对照与 12 张页图。
+  正文按行动在规则中的作用展开，先述状态变化，再列执行步骤。
+</div>
+
+<section id="s0">
+<h2><span class="n">0</span>游戏概要与目标</h2>
+<p>率领文明自石器时代推进至太空时代，把历史卡打入时间线、交付奢侈品板块、建造奇观、沿轨道前进，由此累积胜利分。第三个时代结束、第五个行动阶段结算完毕后，胜利分最高者获胜。<span class="pg">p.1</span><span class="pg">p.7</span></p>
+<div class="why"><span class="wt">规则主线</span>全局分三个时代、五个行动阶段。每个时代由收入、探索、行动三阶段交替组成，沙漏在时间轨上的位置同时标示当前时代与阶段；开局不设收入阶段，自探索阶段起。收入阶段与行动阶段全员同时执行，探索阶段按玩家顺序轮流。第五个行动阶段之后进入终局计分，按和平、收入、金币、乌穆利姆、卡牌、愿景卡六项依次汇总。<span class="pg">p.4</span><span class="pg">p.7</span></div>
+<div class="grid2">
+  <div class="card"><div class="t">得分来源</div>收入阶段的和平计分、轨道奖励与卡牌右上角的胜利分，加上终局按金币、已交付乌穆利姆、全部已打出卡牌与两张相邻愿景卡结算的分值。<span class="pg">p.4</span><span class="pg">p.7</span></div>
+  <div class="card blue"><div class="t">胜负判定</div>胜利分最高者胜；并列时取和平轨位置更靠前者，仍并列则取文明板编号最小者。<span class="pg">p.7</span></div>
+</div>
+<table>
+  <tr><th>项目</th><th>取值</th><th>依据</th></tr>
+  <tr><td>人数与时长</td><td>原书正文未列人数与时长；文明板与科技板各 6 块，探索阶段按人数加一摆放组合包</td><td><span class="pg">p.3</span><span class="pg">p.5</span></td></tr>
+  <tr><td>轮转</td><td>收入与行动阶段全员同时；探索阶段按和平轨由高至低依次</td><td><span class="pg">p.4</span></td></tr>
+  <tr><td>游戏长度</td><td>三个时代、五个行动阶段；第五个行动阶段后终局</td><td><span class="pg">p.4</span><span class="pg">p.7</span></td></tr>
+  <tr><td>终局触发</td><td>第五个行动阶段结算完毕，非分数门槛、非牌堆耗尽</td><td><span class="pg">p.7</span></td></tr>
+</table>
+<h3>0.1 时代与行动阶段的对应</h3>
+<p>原书以行动阶段的序号标记时代交替：第二个行动阶段结束进入时代 II，第四个行动阶段结束进入时代 III，第五个行动阶段结束即终局。<span class="pg">p.7</span></p>
+<table>
+  <tr><th>时代</th><th>行动阶段</th><th>该时代结束时的处理</th></tr>
+  <tr><td>时代 I</td><td>第 1、第 2 个</td><td>第 2 个行动阶段末，各人取热气球／飞船升级板块置于船只行动框，热气球面朝上</td></tr>
+  <tr><td>时代 II</td><td>第 3、第 4 个</td><td>第 4 个行动阶段末，把该升级板块翻至飞船面</td></tr>
+  <tr><td>时代 III</td><td>第 5 个</td><td>该阶段后进入终局计分</td></tr>
+</table>
+</section>
+
+<section id="s1">
+<h2><span class="n">1</span>初局设置</h2>
+<p>设置分公共布置与个人布置两组，数量全部取自原书设置一节的叙述。原书封面、设计师的话与制作名单不列入规则。<span class="pg">p.1</span><span class="pg">p.2</span><span class="pg">p.3</span><span class="pg">p.12</span></p>
+<h3>1.1 公共布置</h3>
+<ol>
+  <li>把游戏版图置于桌面中央。<span class="pg">p.2</span></li>
+  <li>按时代 I、II、III、IV 分出 144 张历史卡，分别洗匀，每叠放入对应牌架。<span class="pg">p.2</span></li>
+  <li>分别洗匀 16 张奇观卡与 12 张愿景卡，成两叠背面朝下放置。<span class="pg">p.2</span></li>
+  <li>抽 2 张奇观卡正面朝上放入版图中央的两个槽位，此为两张中立奇观。<span class="pg">p.2</span></li>
+  <li>把沙漏置于时间轨第一格。<span class="pg">p.2</span></li>
+  <li>按时代 I、II、III 分拣 56 块探索板块，分别洗匀成三叠背面朝下置于版图旁。<span class="pg">p.2</span></li>
+  <li>把 108 块奢侈品板块分类整理，作为公共供应置于版图旁；把 24 个齿轮标记与 36 个工人分成两堆。<span class="pg">p.2</span></li>
+  <li>把 21 块升级板块分类整理，置于版图旁。<span class="pg">p.2</span></li>
+</ol>
+<div class="note">桌面空间有限时改用版图背面所印的较小版图，两张中立奇观改置版图旁。<span class="pg">p.2</span></div>
+<h3>1.2 个人布置</h3>
+<ol start="9">
+  <li>取本色 4 个玩家标记：分数轨、文化轨、科技轨各起始格放 1 个，和平轨第 1 格放 1 个。<span class="pg">p.3</span></li>
+  <li>取 6 块文明板中的 1 块与 6 块科技板中的 1 块，自行选定或随机抽取，余板回盒；科技板置于文明板上方。<span class="pg">p.3</span></li>
+  <li>把 1 块储物板置于文明板右侧。<span class="pg">p.3</span></li>
+  <li>取 8 个资源方块，按文明板左上角所示起始资源各放 1 个，余者放入储物板底部仓库。<span class="pg">p.3</span></li>
+  <li>取本色船、热气球、飞船、骆驼各 1 个，置于储物板前。<span class="pg">p.3</span></li>
+  <li>把 3 张起始卡放入时间线：萨满、火、轮子分别正面朝上置于标 S、F、W 的格子，起始卡背面标有 S。<span class="pg">p.3</span></li>
+  <li>取 3 个工人置于文明板待命区。<span class="pg">p.3</span></li>
+  <li>抽 2 张奇观卡与 2 张愿景卡，各留 1 张入手牌，其余放回各自牌堆底部；手牌对其他玩家保密。<span class="pg">p.3</span></li>
+</ol>
+<h3>1.3 愿景卡的摆位</h3>
+<p>全体选定后同时翻出各自保留的愿景卡，正面朝上置于本人文明板左侧、与左手边玩家之间。由此每人面对两张愿景卡：左侧一张由本人选定，右侧一张由右手边玩家选定，终局时两张分别评估。<span class="pg">p.3</span><span class="pg">p.7</span></p>
+<h3>1.4 起始差异与简化设置</h3>
+<table>
+  <tr><th>条目</th><th>处理</th><th>依据</th></tr>
+  <tr><td>中国文明</td><td>自时代 I 卡堆随机抽 1 张卡加入手牌</td><td><span class="pg">p.3</span></td></tr>
+  <tr><td>维京文明</td><td>船只轨起始有 1 次移动，把船放在第一格，不领取该次移动的奖励</td><td><span class="pg">p.3</span></td></tr>
+  <tr><td>首次游戏设置</td><td>每位玩家随机发 1 张奇观卡，每两位玩家之间放 1 张随机愿景卡，替代抽二留一</td><td><span class="pg">p.3</span></td></tr>
+  <tr><td>首次游戏行动阶段</td><td>工人激活改为按玩家顺序逐个轮流，不作同时执行</td><td><span class="pg">p.5</span></td></tr>
+  <tr><td>单人游戏</td><td>原书注明改动写在参考表最后一页，本册正文未收录，不代填</td><td><span class="pg">p.3</span></td></tr>
+</table>
+<div class="key"><b>读图要点：</b>工人的开心面与难过面不影响规则，仅作版图印面区分。<span class="pg">p.3</span></div>
+</section>
+
+<section id="s2">
+<h2><span class="n">2</span>版图与组件速认</h2>
+<p>按使用先后认识版图与配件：先分公共区与个人区，再分轨道、行动框与卡面符号。配件数量取自设置一节，不作推算。<span class="pg">p.2</span><span class="pg">p.3</span></p>
+<h3>2.1 公共区</h3>
+<table>
+  <tr><th>位置</th><th>内容</th><th>作用</th></tr>
+  <tr><td>版图中央两槽</td><td>两张中立奇观</td><td>骆驼可访问，访问须支付 1 金币并激活其行动框</td></tr>
+  <tr><td>版图集市位</td><td>集市</td><td>访问免费，自三项收益中选定一项</td></tr>
+  <tr><td>时间轨</td><td>沙漏与其上方数字</td><td>数字标示当前时代，沙漏位置标示当前阶段</td></tr>
+  <tr><td>环绕版图的分数轨</td><td>分数标记与 0–50 格</td><td>累积胜利分</td></tr>
+  <tr><td>和平轨</td><td>和平标记</td><td>每个收入阶段重算，定分并决定下一探索阶段顺序</td></tr>
+  <tr><td>文化轨、科技轨</td><td>两条推进轨</td><td>经过与停留的格子奖励全部结算，共用蓝色奖励分</td></tr>
+  <tr><td>船只／热气球／飞船轨</td><td>同一条分段推进轨</td><td>首次移动把载具放第一格，其后沿轨右移</td></tr>
+  <tr><td>牌架与供应堆</td><td>四个时代历史卡叠、奇观卡叠、愿景卡叠、三叠探索板块、108 块奢侈品、24 个齿轮、36 个工人、21 块升级板块</td><td>按效果指定的时代与类型取用</td></tr>
+</table>
+<h3>2.2 个人区四件板</h3>
+<ol>
+  <li><b>文明板：</b>左上为待命区与起始资源格，中部为四格时间线，板面印有数个行动框；行动框供工人放置，每个框至多 1 个工人。<span class="pg">p.3</span><span class="pg">p.6</span></li>
+  <li><b>科技板：</b>置于文明板上方，印白色与黑色齿轮槽；放入匹配颜色的齿轮标记即解锁其下方科技。<span class="pg">p.3</span><span class="pg">p.10</span></li>
+  <li><b>储物板：</b>置于文明板右侧，分底部仓库、上部收入区与休息区三处；仓库中的方块不算资源，上部收入区的奢侈品板块在后续收入阶段产生收入，休息区的工人留至下一个行动阶段。<span class="pg">p.3</span><span class="pg">p.6</span><span class="pg">p.9</span></li>
+  <li><b>载具与骆驼：</b>船、热气球、飞船用于轨道推进，骆驼用于访问奇观与集市。<span class="pg">p.3</span><span class="pg">p.5</span><span class="pg">p.10</span></li>
+</ol>
+<h3>2.3 卡与板块</h3>
+<table>
+  <tr><th>类别</th><th>数量</th><th>印面与用法</th></tr>
+  <tr><td>历史卡</td><td>144 张，分时代 I–IV</td><td>左上角费用、卡类型、奢侈品需求、行动框、弃掉效果、右上角胜利分、和平符号、收入符号</td></tr>
+  <tr><td>奇观卡</td><td>16 张</td><td>费用、行动框、他人访问时给予所有者的胜利分、终局胜利分、和平符号</td></tr>
+  <tr><td>愿景卡</td><td>12 张</td><td>终局评估左右相邻两张，满足条件者按卡面给分</td></tr>
+  <tr><td>探索板块</td><td>56 块，分时代 I–III</td><td>组合包中正面朝上，取用时立即结算所示奖励；时代 III 部分板块带时钟符号</td></tr>
+  <tr><td>奢侈品板块</td><td>108 块，共六种</td><td>毛皮、陶器、丝绸、宝石、书籍、乌穆利姆；右下角印强化奖励</td></tr>
+  <tr><td>升级板块</td><td>21 块</td><td>置于文明板对应行动框以强化该行动；热气球／飞船板块时代交替时翻转</td></tr>
+  <tr><td>齿轮标记</td><td>24 个</td><td>按白色或黑色齿轮槽解锁科技</td></tr>
+  <tr><td>资源方块</td><td>每人 8 个</td><td>在文明板资源格与仓库之间移动，表示资源的取得与花费</td></tr>
+</table>
+<div class="key"><b>读图语法：</b>黑色资源图标与数字为费用；手形符号为收入效果，每个收入阶段结算；鸽子符号为和平符号，按当前可见数量计。卡面右上角的数字为终局胜利分。<span class="pg">p.4</span><span class="pg">p.8</span></div>
+</section>
+
+<section id="s3">
+<h2><span class="n">3</span>核心引擎</h2>
+<p>时间轨把全局切成三个阶段序列：收入、探索、行动。全体完成一个阶段后沙漏前进一格，进入下一格所印阶段。开局无收入阶段，自探索阶段起。三个时代内共出现五个行动阶段，第五个行动阶段之后终局。<span class="pg">p.4</span><span class="pg">p.7</span></p>
+<div class="flow">
+<svg viewBox="0 0 900 250" role="img" aria-label="阶段循环流程">
+  <rect x="0" y="0" width="900" height="250" fill="#ffffff"/>
+  <text x="450" y="24" text-anchor="middle" font-size="15" font-weight="700" fill="#2f466c">沙漏推进：探索 → 行动 → 收入 → 探索，至第五个行动阶段结束</text>
+  <g font-size="13" text-anchor="middle" fill="#25324a">
+    <rect x="24" y="52" width="180" height="60" rx="9" fill="#eef3fa" stroke="#cddcee"/>
+    <text x="114" y="78">探索阶段</text><text x="114" y="98">按玩家顺序轮流取组合包</text>
+    <rect x="248" y="52" width="180" height="60" rx="9" fill="#fdf1e6" stroke="#e8cdae"/>
+    <text x="338" y="78">行动阶段</text><text x="338" y="98">骆驼移动 → 工人激活</text>
+    <rect x="472" y="52" width="180" height="60" rx="9" fill="#eaf5ec" stroke="#c6e0cc"/>
+    <text x="562" y="78">收入阶段</text><text x="562" y="98">收入效果与和平重算</text>
+    <rect x="696" y="52" width="180" height="60" rx="9" fill="#f3eefb" stroke="#d8c9ee"/>
+    <text x="786" y="78">沙漏前进一格</text><text x="786" y="98">显示时代与下一阶段</text>
+  </g>
+  <g stroke="#7d5511" stroke-width="2" fill="none">
+    <path d="M204 82 H244"/><path d="M244 82 l-8 -5 v10 z" fill="#7d5511"/>
+    <path d="M428 82 H468"/><path d="M468 82 l-8 -5 v10 z" fill="#7d5511"/>
+    <path d="M652 82 H692"/><path d="M692 82 l-8 -5 v10 z" fill="#7d5511"/>
+    <path d="M786 112 V148 H114 V116"/><path d="M114 116 l-5 8 h10 z" fill="#7d5511"/>
+  </g>
+  <text x="450" y="170" text-anchor="middle" font-size="13" fill="#6b615c">开局跳过首个收入阶段，自探索阶段起；第五个行动阶段后不再推进沙漏</text>
+  <g font-size="12.5" fill="#2f466c">
+    <rect x="24" y="192" width="270" height="42" rx="8" fill="#f7f9fc" stroke="#d8e1ee"/>
+    <text x="159" y="218" text-anchor="middle">时代 I：第 1、第 2 个行动阶段</text>
+    <rect x="315" y="192" width="270" height="42" rx="8" fill="#f7f9fc" stroke="#d8e1ee"/>
+    <text x="450" y="218" text-anchor="middle">时代 II：第 3、第 4 个行动阶段</text>
+    <rect x="606" y="192" width="270" height="42" rx="8" fill="#f7f9fc" stroke="#d8e1ee"/>
+    <text x="741" y="218" text-anchor="middle">时代 III：第 5 个行动阶段，其后终局</text>
+  </g>
+</svg>
+</div>
+<h3>3.1 时代与取牌口径</h3>
+<p>沙漏上方的数字为当前时代。效果要求自当前时代取得历史卡或探索板块时，按该数字取用；要求自未来时代取得卡牌时，自下一个时代取用。开局当前时代为时代 I、未来时代为时代 II；时代 IV 的卡只能由特定效果取得，或在时代 III 期间作为未来卡取得。<span class="pg">p.4</span></p>
+<h3>3.2 阶段的同时性与顺序</h3>
+<table>
+  <tr><th>阶段</th><th>执行方式</th><th>完成标志</th></tr>
+  <tr><td>收入阶段</td><td>全员同时取得收入效果并重算和平</td><td>全员结算完毕，沙漏前进</td></tr>
+  <tr><td>探索阶段</td><td>按和平轨由高至低依次取组合包</td><td>全员各取一个，剩余组合包弃置，沙漏前进</td></tr>
+  <tr><td>行动阶段</td><td>骆驼移动全员同时；工人激活全员同时</td><td>全员完成工人激活，沙漏前进</td></tr>
+</table>
+<div class="key"><b>顺序来源：</b>和平轨顺序每个收入阶段重算一次，只决定其后的探索阶段；行动阶段与收入阶段不按该顺序执行。<span class="pg">p.4</span></div>
+</section>
+
+<section id="s4">
+<h2><span class="n">4</span>三个阶段与时代交替</h2>
+<h3>4.1 收入阶段</h3>
+<p>该阶段把个人区已印出的符号转为资源与分数，并按和平符号数量重定下一探索阶段的顺序。<span class="pg">p.4</span></p>
+<ol class="steps">
+  <li><b>结算收入：</b>全员同时取得游玩区内所有可见的收入效果，来源为文明板印值、时间线上的卡牌、墓地中的奢侈品板块与已激活的科技。<span class="pg">p.4</span></li>
+  <li><b>重算和平：</b>数出游玩区当前全部可见和平符号，把和平标记置于与其数量相符的格子，每个符号得 1 分，计分下限 0、上限 10。和平不逐阶段累积，超过 10 的符号忽略。<span class="pg">p.4</span></li>
+  <li><b>只数起始可见符号：</b>阶段开始时已可见的符号才计入；若某效果在收入阶段内打出卡牌，该卡上的收入与和平符号均不计入本次结算。<span class="pg">p.4</span></li>
+  <li><b>定序：</b>下一探索阶段按和平由高至低依次行动；并列或同超过 10 时，按文明板左上角编号由小到大。首个探索阶段全员均为 1 和平，顺序全由文明板编号决定。<span class="pg">p.4</span></li>
+</ol>
+<div class="note">游戏中任何动作引用和平数值时，按该时刻游玩区可见符号重新计数，上限仍为 10。<span class="pg">p.4</span></div>
+<h3>4.2 探索阶段</h3>
+<p>该阶段向手牌补充卡牌，并即时结算所选组合包中的探索板块奖励。<span class="pg">p.5</span></p>
+<ol class="steps">
+  <li>按当前时代的卡牌与探索板块摆放组合包，数量比玩家人数多 1；开局取用时代 I。<span class="pg">p.5</span></li>
+  <li>每个组合包含 1 张背面朝下的历史卡、1 张正面朝上的历史卡与 1 张正面朝上的探索板块；背面朝下卡牌的卡类型符号保持可见。<span class="pg">p.5</span></li>
+  <li>按玩家顺序各取一个组合包：两张卡加入手牌，立即取得探索板块所示奖励，随后把该板块放回其所属叠的底部。<span class="pg">p.5</span></li>
+  <li>全员取完后，把未被取走的那个组合包的卡牌与板块分别放回对应牌堆与叠的底部。<span class="pg">p.5</span></li>
+  <li>时代 III 部分探索板块带时钟符号，其奖励不必即时激活，可留至其后使用。<span class="pg">p.5</span></li>
+</ol>
+<h3>4.3 行动阶段之一：骆驼移动</h3>
+<p>骆驼移动把玩家自己的一次行动接到中立奇观、集市或他人奇观的动作框上，不占用工人。全员移动完毕后才进入工人激活。<span class="pg">p.5</span><span class="pg">p.6</span></p>
+<ol class="steps">
+  <li><b>移动一次：</b>每位玩家把骆驼移至两张中立奇观之一、集市或另一位玩家已建造的奇观；开局尚无他人已建造的奇观，故该选项当时不可用。<span class="pg">p.5</span></li>
+  <li><b>位置约束：</b>不得移至自己的奇观；必须与骆驼当前所在位置不同，同一处奇观不得连续访问两次；多只骆驼可同时位于同一处。<span class="pg">p.5</span></li>
+  <li><b>访问中立奇观：</b>支付 1 金币，随后取得该奇观行动框所示效果。<span class="pg">p.5</span></li>
+  <li><b>访问他人奇观：</b>该奇观的所有者取得 2 胜利分，访问者随后取得其行动框所示效果。<span class="pg">p.5</span></li>
+  <li><b>访问集市：</b>免费，按版图所示在 1 金币与 1 块毛皮、1 分与 1 块陶器、1 块丝绸之间选定一项取得。<span class="pg">p.5</span></li>
+</ol>
+<div class="key"><b>状态变化：</b>骆驼只改自身所在位置并触发目标行动框；工人、时间线与手牌在该步骤均不改动。<span class="pg">p.5</span></div>
+<h3>4.4 行动阶段之二：工人激活</h3>
+<p>工人激活把手牌中的卡牌与版图上的行动框转为资源、轨道推进与卡牌收益，两项主动作在同一阶段内可任意交错、重复执行。<span class="pg">p.6</span></p>
+<ol class="steps">
+  <li><b>收回工人：</b>把全部工人自卡牌、行动框与休息区取回，置于文明板待命区。<span class="pg">p.6</span></li>
+  <li><b>打出卡牌：</b>支付卡牌左上角所示资源，自手牌打出一张卡。<span class="pg">p.6</span></li>
+  <li><b>激活行动框：</b>自待命区取 1 个可用工人，置于文明板、时间线卡牌或本人已建造奇观的行动框上，取得该框所示奖励；每个行动框至多 1 个工人。<span class="pg">p.6</span></li>
+  <li><b>辅助动作随时执行：</b>弃掉卡牌、交付奢侈品板块、弃掉奢侈品板块、转化资源，四项在任意阶段的任意时点均开放。<span class="pg">p.6</span></li>
+</ol>
+<h3>4.5 阶段结束与时代交替</h3>
+<p>全员完成工人激活后沙漏前进一格。时代交替由两个固定的行动阶段序号触发，与卡牌、资源或分数状态无关。<span class="pg">p.7</span></p>
+<table>
+  <tr><th>时点</th><th>处理</th><th>依据</th></tr>
+  <tr><td>第 2 个行动阶段末，时代 II 起</td><td>各人取 1 块热气球／飞船升级板块置于自己的船只行动框，热气球面朝上</td><td><span class="pg">p.7</span></td></tr>
+  <tr><td>第 4 个行动阶段末，时代 III 起</td><td>把该升级板块翻至飞船面</td><td><span class="pg">p.7</span></td></tr>
+  <tr><td>第 5 个行动阶段末</td><td>进入终局计分，不再推进沙漏</td><td><span class="pg">p.7</span></td></tr>
+</table>
+</section>
+
+<section id="s5">
+<h2><span class="n">5</span>行动逐条深挖</h2>
+<p>工人激活阶段只有两项主动作：打出卡牌与激活行动框。二者的规则作用不同，前者改变时间线与个人区的卡位，后者把工人占用转为即时收益；四项辅助动作不改变阶段结构。<span class="pg">p.6</span></p>
+<h3 id="why">5.0 · 行动结构与行动位差异</h3>
+<div class="why"><span class="wt">规则作用</span>打出卡牌把卡自手牌移入时间线或奇观区，并触发右移与挤出；激活行动框把待命区工人占用到某一行动位，并按该行动位印值结算。两类动作共用同一批工人与同一批手牌，但互不作为对方的前置条件。辅助动作只改资源、奢侈品板块与手牌，不占用工人。<span class="pg">p.6</span></div>
+<table>
+  <tr><th>行动位</th><th>触发载体</th><th>占用</th><th>附带收益</th><th>限制</th></tr>
+  <tr><td>文明板行动框</td><td>工人</td><td>每框 1 个工人</td><td>框上印值；书籍板块可令其下方行动框再激活一次</td><td>工人取自待命区</td></tr>
+  <tr><td>时间线卡牌行动框</td><td>工人</td><td>每框 1 个工人</td><td>框上印值；卡上已交付奢侈品时另取其右下角奖励</td><td>墓地中的卡不可激活</td></tr>
+  <tr><td>本人已建造奇观行动框</td><td>工人</td><td>每框 1 个工人</td><td>框上印值</td><td>奇观卡留在储物板上方至终局</td></tr>
+  <tr><td>中立奇观行动框</td><td>骆驼</td><td>不占工人</td><td>框上印值</td><td>支付 1 金币，且不得连续访问同一处</td></tr>
+  <tr><td>他人已建造奇观行动框</td><td>骆驼</td><td>不占工人</td><td>访问者取框上印值，所有者另得 2 胜利分</td><td>不得移至自己的奇观</td></tr>
+  <tr><td>集市</td><td>骆驼</td><td>不占工人</td><td>三项收益中选定一项</td><td>免费，同样受位置变更约束</td></tr>
+</table>
+<h3>5.1 打出卡牌</h3>
+<ol class="steps">
+  <li><b>支付费用：</b>按卡牌左上角所示资源支付；费用只在打出时结算。<span class="pg">p.6</span><span class="pg">p.8</span></li>
+  <li><b>历史卡：</b>置于时间线最左格，时间线上其余各卡右移一格，最右格的卡被推入墓地。<span class="pg">p.6</span></li>
+  <li><b>奇观卡：</b>正面朝上置于储物板上方，留至终局；本人可用工人激活其行动框，其他玩家可用骆驼访问。<span class="pg">p.6</span></li>
+  <li><b>时机效果：</b>历史卡入时间线时结算打出时效果；奇观卡不进入时间线，故不引发右移与挤出。<span class="pg">p.8</span></li>
+</ol>
+<h3>5.2 激活行动框</h3>
+<ol class="steps">
+  <li>自待命区取 1 个工人置于所选行动框，取得框上印值；每框至多 1 个工人。<span class="pg">p.6</span><span class="pg">p.7</span></li>
+  <li>所激活的卡上若放有奢侈品板块，同时取得该板块右下角所示奖励。<span class="pg">p.7</span></li>
+  <li>框上各项效果均为可选，领取顺序由本人决定。<span class="pg">p.7</span></li>
+  <li>原书示例：激活「火」取得 1 木材；该卡放有毛皮板块，故另取得板块印值的 2 金币。<span class="pg">p.7</span></li>
+</ol>
+<h3>5.3 四项辅助动作</h3>
+<table>
+  <tr><th>动作</th><th>规则作用</th><th>依据</th></tr>
+  <tr><td>弃掉卡牌</td><td>取得卡面弃掉效果，卡牌放回对应牌堆底部</td><td><span class="pg">p.8</span></td></tr>
+  <tr><td>交付奢侈品板块</td><td>把待命区板块置于时间线上需求该奢侈品的卡，永久追加其右下角奖励</td><td><span class="pg">p.9</span></td></tr>
+  <tr><td>弃掉奢侈品板块</td><td>立即取得 1 个升级效果</td><td><span class="pg">p.9</span></td></tr>
+  <tr><td>转化资源</td><td>按第 7 节两条固定比值转换资源或换取升级效果</td><td><span class="pg">p.9</span></td></tr>
+</table>
+<h3>5.4 文明板上的行动</h3>
+<p>文明板行动框分通用与独特两组，均须以工人激活，执行时按框上印值结算。<span class="pg">p.11</span></p>
+<table>
+  <tr><th>通用行动</th><th>结算</th></tr>
+  <tr><td>金币</td><td>取得 2 金币</td></tr>
+  <tr><td>资源升级</td><td>升级 2 个资源</td></tr>
+  <tr><td>科技轨推进</td><td>科技轨前进一次，并取得 1 金币</td></tr>
+  <tr><td>文化轨推进</td><td>文化轨前进一次，分数轨前进一次</td></tr>
+  <tr><td>船只轨推进</td><td>支付 1 木材，船前进两次</td></tr>
+  <tr><td>按类型抽卡</td><td>在人物、建筑、发明三种卡类型中选定一种，自当前时代牌堆抽牌直至抽到该类型，其余卡放回牌堆底部</td></tr>
+</table>
+<table>
+  <tr><th>文明</th><th>独特行动</th></tr>
+  <tr><td>埃及</td><td>取得 3 金币</td></tr>
+  <tr><td>希腊</td><td>支付 1 金币，科技轨前进两次</td></tr>
+  <tr><td>维京</td><td>船只轨移动两次，不支付木材</td></tr>
+  <tr><td>巴比伦</td><td>按通用行动的方式抽一张卡，或改为移动骆驼一次，两者选定其一</td></tr>
+  <tr><td>墨西加</td><td>自未来牌堆抽 2 张卡，留 1 张、弃 1 张</td></tr>
+</table>
+<div class="key"><b>格子差异：</b>通用行动印在每块文明板上，独特行动随文明板不同；升级板块覆盖某行动框后，该框按板块新印值结算。<span class="pg">p.10</span><span class="pg">p.11</span></div>
+</section>
+
+<section id="s6">
+<h2><span class="n">6</span>贯穿全局的系统</h2>
+<p>跨阶段生效的四组结构分列于后：时间线与墓地、卡面时机与叠压、轨道推进、科技解锁。四组结构均不改变阶段序列，只在各自触发时改动个人区状态。<span class="pg">p.4</span><span class="pg">p.6</span><span class="pg">p.8</span><span class="pg">p.10</span></p>
+<h3>6.1 时间线与墓地</h3>
+<p>文明板上的四个卡位构成时间线。每次打出历史卡都自最左格插入，原有卡依次右移一格；最右格的卡被推出时间线后翻面朝下置于储物板的墓地。<span class="pg">p.6</span></p>
+<table>
+  <tr><th>对象</th><th>进入墓地后的状态</th><th>依据</th></tr>
+  <tr><td>历史卡</td><td>不提供收入、不可激活，终局仍按卡面右上角胜利分计入</td><td><span class="pg">p.6</span><span class="pg">p.7</span></td></tr>
+  <tr><td>卡上已交付的奢侈品板块</td><td>翻面朝下置于储物板上部，其后每个收入阶段产生收入</td><td><span class="pg">p.6</span><span class="pg">p.9</span></td></tr>
+  <tr><td>卡上的工人</td><td>置于储物板休息区，留至下一个行动阶段才随其他工人一并收回</td><td><span class="pg">p.6</span></td></tr>
+  <tr><td>叠压在卡下的卡牌</td><td>随上层卡一并移动或进入墓地，终局正常计分</td><td><span class="pg">p.8</span></td></tr>
+</table>
+<h3>6.2 历史卡卡面与四种时机</h3>
+<table>
+  <tr><th>印面</th><th>含义</th></tr>
+  <tr><td>左上角费用</td><td>工人激活期间打出该卡时支付的资源</td></tr>
+  <tr><td>卡类型</td><td>建筑、人物、发明、特殊、次世代；特殊与次世代带紫色横幅</td></tr>
+  <tr><td>奢侈品需求</td><td>可置于该卡的奢侈品板块种类，随时可交付</td></tr>
+  <tr><td>行动框</td><td>工人放置位，激活时取得框上印值</td></tr>
+  <tr><td>弃掉效果</td><td>弃掉该卡时取得的奖励，卡放回对应牌堆底部</td></tr>
+  <tr><td>右上角胜利分</td><td>终局计分</td></tr>
+  <tr><td>和平符号、收入符号</td><td>收入阶段分别用于和平重算与收入结算</td></tr>
+</table>
+<table>
+  <tr><th>时机效果</th><th>触发条件</th><th>不触发的情形</th></tr>
+  <tr><td>打出时</td><td>该卡被打入时间线，结算一次</td><td>卡牌被弃掉或被直接送入墓地</td></tr>
+  <tr><td>完成时</td><td>所需奢侈品板块全部放上该卡，结算一次</td><td>仅放上部分所需板块</td></tr>
+  <tr><td>移动时</td><td>该卡每次在时间线内移到新位置，含被推入墓地那次</td><td>卡牌建造时；由其他效果直接送入墓地</td></tr>
+  <tr><td>死亡效果</td><td>该卡以任何方式移入墓地，结算一次</td><td>卡牌仍留在时间线或手牌</td></tr>
+</table>
+<div class="note">新取得的历史卡先入手牌，手牌数量无上限；手牌中的卡不激活，须打入时间线后才提供主动效果与收入效果。<span class="pg">p.8</span></div>
+<h3>6.3 叠压卡</h3>
+<ol class="steps">
+  <li>部分效果允许把一张卡压入时间线上另一张卡之下，仅露出下层卡的行动框；两卡的行动框合并为一个大行动框。<span class="pg">p.8</span></li>
+  <li>在上层卡放置 1 个工人即同时激活两个行动框；下层卡不得单独放置工人。<span class="pg">p.8</span></li>
+  <li>下层卡被遮住的奢侈品需求、和平、收入、卡类型、死亡效果与打出时效果全部忽略。<span class="pg">p.8</span></li>
+  <li>两卡须属同一类型，范围为建筑、人物或发明；特殊与次世代带紫色横幅，永不可叠压；一张卡之下至多压 1 张。<span class="pg">p.8</span></li>
+  <li>叠压卡随上层卡一起移动位置或进入墓地，终局按卡面正常计分。<span class="pg">p.8</span></li>
+</ol>
+<h3>6.4 奇观卡</h3>
+<p>开局手中有 1 张奇观卡，文化轨推进可取得更多。打出时支付卡面费用并把卡置于储物板上方，留至终局；本人可用工人激活其行动框，其他玩家可用骆驼访问。卡面另印两项胜利分：他人访问时给予所有者的分值、终局计分的分值；和平符号只对所有者有效，对访问者无效。<span class="pg">p.8</span></p>
+<h3>6.5 轨道推进与蓝色奖励分</h3>
+<ol class="steps">
+  <li>沿文化轨、科技轨、船只／热气球／飞船轨推进时，停留格与途经格的奖励全部结算。<span class="pg">p.10</span></li>
+  <li>载具轨的首次移动把对应载具放在第一格，其后每次移动向右推进；部分格子要求自两三项奖励中选定一项。<span class="pg">p.10</span></li>
+  <li>船只轨首次移动时自三种奢侈品板块中选定一种；下一次移动在毛皮板块与科技轨推进一次之间选定其一。<span class="pg">p.10</span></li>
+  <li>棋子到达某轨终点后不再前进，其后在该轨的每次移动改为取得终点旁所印胜利分。<span class="pg">p.10</span></li>
+  <li>首位到达某轨终点的玩家，除末格的奢侈品板块与绿色分之外另取蓝色奖励分；同一阶段内、沙漏推进之前抵达同一终点的其他玩家同样取得该蓝色分。沙漏一旦推进，该轨蓝色分不再可得。<span class="pg">p.10</span></li>
+  <li>文化轨与科技轨共用蓝色奖励分：任一条终点被抵达的那一阶段结束，两条轨的蓝色分同时失效。<span class="pg">p.10</span></li>
+</ol>
+<div class="key"><b>状态变化：</b>蓝色奖励分按阶段归属，不按玩家累计；沙漏推进后以抵达终点的棋子覆盖该轨蓝色分印面，标示其失效。<span class="pg">p.10</span></div>
+<h3>6.6 科技板与升级板块</h3>
+<ol class="steps">
+  <li>科技轨推进至印有齿轮的格子时，自供应堆取 1 个齿轮标记，放入科技板上空的同色齿轮槽，白槽配白标记、黑槽配黑标记，由此解锁其下方科技。<span class="pg">p.10</span></li>
+  <li>多数科技为一次性效果；部分科技在解锁时另给齿轮槽右侧所印的奖励资源，部分科技自此在每个收入阶段提供收入。<span class="pg">p.10</span></li>
+  <li>部分科技提供升级板块，把所示板块置于文明板对应行动框以强化该行动；该框原放有工人时，把工人移入休息区。<span class="pg">p.10</span></li>
+  <li>祭祀葬仪提供永久持续效果，乌托邦主义解锁一个永久和平符号。<span class="pg">p.10</span></li>
+  <li>升级板块覆盖的格子在埃及与希腊文明板上印面略有差异，以实体板面为准。<span class="pg">p.10</span></li>
+</ol>
+<div class="note">原书示例：解锁货币立即取得 2 金币，并在文明板对应位置放一块金币升级板块。<span class="pg">p.10</span></div>
+</section>
+
+<section id="s7">
+<h2><span class="n">7</span>资源与费用</h2>
+<p>资源以文明板上的方块表示，仓库中的空方块不计为资源；升级效果把方块沿资源格向上移动，转化与上限规则决定方块能否继续存放。<span class="pg">p.9</span></p>
+<h3>7.1 资源的取得与花费</h3>
+<ol class="steps">
+  <li>取得资源时自仓库取 1 个方块置于该资源格；该方块自此代表 1 个该类型资源。<span class="pg">p.9</span></li>
+  <li>花费资源时把对应方块放回仓库；仓库中的方块视作空箱，代表未使用的储存容量。<span class="pg">p.9</span></li>
+  <li>取得 1 个升级效果时，把板上 1 个方块向上移动一格至正上方资源格；金币可升级为小麦、石头或木材。<span class="pg">p.9</span></li>
+</ol>
+<h3>7.2 两条转化与容量上限</h3>
+<table>
+  <tr><th>项目</th><th>规则</th><th>依据</th></tr>
+  <tr><td>金币换基础资源</td><td>花费 2 金币，取得 1 个小麦、石头或木材</td><td><span class="pg">p.9</span></td></tr>
+  <tr><td>已升级资源换升级效果</td><td>花费 1 个已升级资源，按储物板右侧所示取得 1–3 个升级效果；先把该方块放回仓库，再结算升级效果</td><td><span class="pg">p.9</span></td></tr>
+  <tr><td>容量上限</td><td>板上至多 8 个资源方块</td><td><span class="pg">p.9</span></td></tr>
+  <tr><td>超出上限时</td><td>在取得新资源前，先花费另一方块换取其升级效果，或把任意方块放回仓库；亦可放弃该新资源</td><td><span class="pg">p.9</span></td></tr>
+</table>
+<div class="note">原书示例：花费 1 个金属换取 2 个升级效果，把 1 个小麦升级为绵羊，并把仓库中 1 个方块升级为金币。<span class="pg">p.9</span></div>
+<h3>7.3 六种奢侈品板块</h3>
+<p>取得的奢侈品板块先奢侈品面朝上置于文明板待命区，其后在两项用途中选定一项：弃掉该板块立即取得 1 个升级效果，或交付到时间线上需求该奢侈品的卡上。<span class="pg">p.9</span></p>
+<table>
+  <tr><th>奢侈品</th><th>用途与终局</th></tr>
+  <tr><td>毛皮、陶器、丝绸、宝石、书籍、乌穆利姆</td><td>交付后永久追加板块右下角奖励；已交付的乌穆利姆在时间线与墓地中每块终局计 3 分</td></tr>
+</table>
+<ol class="steps">
+  <li>每张卡至多放 1 块奢侈品板块；卡面明确需求两块或更多时，可分别交付其中一块或多块，交付时点各自独立。<span class="pg">p.9</span></li>
+  <li>板块放上卡牌后不可再弃掉；其后每次以工人激活该卡行动框，同时取得板块右下角印值。<span class="pg">p.9</span></li>
+  <li>带有已交付板块的卡进入墓地时，把板块翻面朝下置于储物板上部，其后每个收入阶段产生收入。<span class="pg">p.9</span></li>
+  <li>激活放有书籍板块的卡时，同时激活该卡正下方文明板上的行动框，即使该框已由工人激活过；由此同一阶段内可多次激活文明板行动框。<span class="pg">p.9</span></li>
+  <li>每本进入墓地的书籍在此后全局额外提供 1 个和平符号。<span class="pg">p.9</span></li>
+</ol>
+</section>
+
+<section id="s8">
+<h2><span class="n">8</span>终局与计分链路</h2>
+<p>第五个行动阶段之后不再推进沙漏，全体按固定顺序结算六项终局计分。原书游戏目标页以「第三个时代结束」表述，与「第五个行动阶段之后」指同一时点。<span class="pg">p.1</span><span class="pg">p.7</span></p>
+<div class="flow">
+<svg viewBox="0 0 900 210" role="img" aria-label="终局计分链路">
+  <rect x="0" y="0" width="900" height="210" fill="#ffffff"/>
+  <text x="450" y="26" text-anchor="middle" font-size="15" font-weight="700" fill="#2f466c">第五个行动阶段 → 六项依次结算 → 判定胜负</text>
+  <g font-size="12.5" text-anchor="middle" fill="#25324a">
+    <rect x="18" y="48" width="136" height="58" rx="9" fill="#eef3fa" stroke="#cddcee"/>
+    <text x="86" y="72">和平</text><text x="86" y="92">每符号 1 分，上限 10</text>
+    <rect x="164" y="48" width="136" height="58" rx="9" fill="#eaf5ec" stroke="#c6e0cc"/>
+    <text x="232" y="72">收入</text><text x="232" y="92">轨道类改 1 分</text>
+    <rect x="310" y="48" width="136" height="58" rx="9" fill="#fdf1e6" stroke="#e8cdae"/>
+    <text x="378" y="72">金币</text><text x="378" y="92">每枚 2 分</text>
+    <rect x="456" y="48" width="136" height="58" rx="9" fill="#f3eefb" stroke="#d8c9ee"/>
+    <text x="524" y="72">乌穆利姆</text><text x="524" y="92">每块 3 分</text>
+    <rect x="602" y="48" width="136" height="58" rx="9" fill="#f7f9fc" stroke="#d8e1ee"/>
+    <text x="670" y="72">卡牌</text><text x="670" y="92">右上角胜利分</text>
+    <rect x="748" y="48" width="136" height="58" rx="9" fill="#fdf6e8" stroke="#e8d9ae"/>
+    <text x="816" y="72">愿景卡</text><text x="816" y="92">左右各一张</text>
+  </g>
+  <g stroke="#7d5511" stroke-width="2" fill="none">
+    <path d="M154 77 H160"/><path d="M300 77 H306"/><path d="M446 77 H452"/><path d="M592 77 H598"/><path d="M738 77 H744"/>
+  </g>
+  <text x="450" y="146" text-anchor="middle" font-size="13" fill="#6b615c">金币一步可先弃掉剩余卡牌与奢侈品板块、并按常规转化资源</text>
+  <text x="450" y="178" text-anchor="middle" font-size="13" fill="#2f466c">分最高者胜；并列取和平轨更靠前者，仍并列取文明板编号最小者</text>
+</svg>
+</div>
+<h3>8.1 六项计分顺序</h3>
+<table>
+  <tr><th>序</th><th>项目</th><th>结算口径</th><th>依据</th></tr>
+  <tr><td class="c">1</td><td>和平</td><td>更新和平轨，游玩区每个可见和平符号得 1 分，上限 10</td><td><span class="pg">p.7</span></td></tr>
+  <tr><td class="c">2</td><td>收入</td><td>取得全部收入符号的效果；原本会使文化、科技、船只、热气球轨前进的收入，每项改为 1 胜利分</td><td><span class="pg">p.7</span></td></tr>
+  <tr><td class="c">3</td><td>金币</td><td>储物中每 1 金币得 2 分；此时仍可弃掉剩余卡牌与奢侈品板块、转化资源</td><td><span class="pg">p.7</span></td></tr>
+  <tr><td class="c">4</td><td>乌穆利姆</td><td>时间线与墓地中每块已交付的乌穆利姆得 3 分</td><td><span class="pg">p.7</span></td></tr>
+  <tr><td class="c">5</td><td>卡牌</td><td>已打出的奇观卡、时间线与墓地中的全部历史卡，按各自右上角胜利分合计</td><td><span class="pg">p.7</span></td></tr>
+  <tr><td class="c">6</td><td>愿景卡</td><td>评估左右相邻两张愿景卡，每满足一张取其印值</td><td><span class="pg">p.7</span></td></tr>
+</table>
+<h3>8.2 算例</h3>
+<p>示例数值仅用于演算，非原书给定局面。<span class="pg">p.7</span></p>
+<table>
+  <tr><th>步</th><th>局面</th><th>计算</th><th>所得</th></tr>
+  <tr><td class="c">1</td><td>可见和平符号 6 个</td><td>6 × 1</td><td>6 分</td></tr>
+  <tr><td class="c">2</td><td>3 项收入，其中 2 项为轨道推进、1 项为金币</td><td>2 × 1，另取得 1 金币</td><td>2 分、1 金币</td></tr>
+  <tr><td class="c">3</td><td>储物共 4 金币</td><td>4 × 2</td><td>8 分</td></tr>
+  <tr><td class="c">4</td><td>时间线 1 块、墓地 1 块已交付乌穆利姆</td><td>2 × 3</td><td>6 分</td></tr>
+  <tr><td class="c">5</td><td>已打出卡牌右上角合计 11 分</td><td>按卡面合计</td><td>11 分</td></tr>
+  <tr><td class="c">6</td><td>左侧愿景卡满足 6 分、右侧未满足</td><td>6 + 0</td><td>6 分</td></tr>
+  <tr><td class="c">合</td><td>六项合计</td><td>6 + 2 + 8 + 6 + 11 + 6</td><td><b>39 分</b></td></tr>
+</table>
+<h3>8.3 平局判定</h3>
+<p>胜利分并列时，取和平轨位置更靠前的并列玩家；仍并列则取文明板编号最小的并列玩家。<span class="pg">p.7</span></p>
+</section>
+
+<section id="s9">
+<h2><span class="n">9</span>常见误读</h2>
+<p>以下各条按规则作用归类，均附原书页码。<span class="pg">p.4</span>–<span class="pg">p.11</span></p>
+<ol>
+  <li>开局不设收入阶段，自探索阶段起。<span class="pg">p.4</span></li>
+  <li>和平不逐阶段累积，每个收入阶段重新数符号并把标记放在对应格；上限 10，超出部分忽略。<span class="pg">p.4</span></li>
+  <li>收入阶段只计阶段开始时已可见的收入与和平符号，阶段内打出的卡不计入本次结算。<span class="pg">p.4</span></li>
+  <li>和平轨顺序只决定其后的探索阶段，收入与行动阶段仍为全员同时。<span class="pg">p.4</span></li>
+  <li>首个探索阶段全员均为 1 和平，顺序全由文明板左上角编号决定。<span class="pg">p.4</span></li>
+  <li>当前时代按沙漏上方数字判定；未来时代指下一个时代，时代 IV 的卡只能由特定效果或时代 III 的未来卡取得。<span class="pg">p.4</span></li>
+  <li>组合包数量比玩家人数多 1，全员取完后剩下的那个弃置。<span class="pg">p.5</span></li>
+  <li>组合包内背面朝下的历史卡，其卡背类型符号保持可见；两张卡均入手牌，探索板块奖励立即结算后板块回叠底。<span class="pg">p.5</span></li>
+  <li>时代 III 带时钟符号的探索板块可留至以后使用，不必即时激活。<span class="pg">p.5</span></li>
+  <li>骆驼不得移至自己的奇观，且必须与当前位置不同，同一处不得连续访问两次；多只骆驼可同处一地。<span class="pg">p.5</span></li>
+  <li>访问中立奇观须支付 1 金币；访问集市免费。<span class="pg">p.5</span></li>
+  <li>访问他人已建造奇观时，2 胜利分归奇观所有者，行动框效果归访问者。<span class="pg">p.5</span></li>
+  <li>工人激活前须把全部工人自卡牌、行动框与休息区收回待命区。<span class="pg">p.6</span></li>
+  <li>打出卡牌与激活行动框在同一阶段内可任意交错、重复执行，无先后顺序；每个行动框至多 1 个工人。<span class="pg">p.6</span></li>
+  <li>弃牌、交付奢侈品、弃奢侈品、转化资源四项在任意阶段的任意时点均开放。<span class="pg">p.6</span></li>
+  <li>奇观卡置于储物板上方留至终局，不进入时间线，故不引发右移与挤出。<span class="pg">p.6</span></li>
+  <li>墓地中的卡不提供收入、不可激活，终局仍按右上角胜利分计分。<span class="pg">p.6</span><span class="pg">p.7</span></li>
+  <li>卡上已交付的奢侈品板块随卡入墓地后翻面置于储物板上部，其后每个收入阶段产生收入。<span class="pg">p.6</span><span class="pg">p.9</span></li>
+  <li>休息区的工人留至下一个行动阶段，不在同一阶段内回到待命区。<span class="pg">p.6</span></li>
+  <li>打出时效果不因弃牌或直接送入墓地触发；死亡效果则不论以何种方式入墓地均触发一次。<span class="pg">p.8</span></li>
+  <li>移动时效果在卡每次移到时间线新位置时触发，含被推入墓地那次；建造与直接送入墓地不触发。<span class="pg">p.8</span></li>
+  <li>叠压卡须与上层卡同类，特殊与次世代不可叠压，一张卡之下至多压一张；下层被遮符号全部忽略。<span class="pg">p.8</span></li>
+  <li>书籍板块使该卡正下方的文明板行动框同时激活，即使该框已由工人激活过；每本入墓地的书籍额外提供 1 个和平符号。<span class="pg">p.9</span></li>
+  <li>板上至多 8 个资源方块；仓库中的方块不计为资源。<span class="pg">p.9</span></li>
+  <li>沿轨道推进时途经格与停留格的奖励全部结算；到达终点后，其后移动改为取得终点旁胜利分。<span class="pg">p.10</span></li>
+  <li>蓝色奖励分在沙漏推进后失效；文化轨与科技轨共用蓝色分，任一终点被抵达的那一阶段结束即同时失效。<span class="pg">p.10</span></li>
+  <li>科技解锁须把齿轮标记放入同色空槽；提供升级板块的科技若覆盖已有工人的行动框，须把该工人移入休息区。<span class="pg">p.10</span></li>
+  <li>时代交替由第 2 与第 4 个行动阶段末触发，与资源、卡牌或分数状态无关。<span class="pg">p.7</span></li>
+  <li>终局第 2 项中原本推进轨道的收入改为每项 1 胜利分，不再推进轨道。<span class="pg">p.7</span></li>
+  <li>金币按每枚 2 分计，乌穆利姆按每块 3 分计；愿景卡须分别评估左右相邻两张。<span class="pg">p.7</span></li>
+  <li>平局按和平轨位置判定，仍并列再按文明板编号判定，不以剩余资源判定。<span class="pg">p.7</span></li>
+</ol>
+</section>
+
+<section id="s10">
+<h2><span class="n">10</span>示例行动阶段拆解</h2>
+<p>按原书一个行动阶段的次序，把骆驼移动、工人激活与结算关系拆成步骤表。示例数值用于演示判定口径，非原书给定局面。<span class="pg">p.5</span><span class="pg">p.6</span><span class="pg">p.7</span></p>
+<table>
+  <tr><th>步</th><th>动作</th><th>支付</th><th>状态变化</th><th>依据</th></tr>
+  <tr><td class="c">a</td><td>骆驼自集市移至一张中立奇观</td><td>1 金币</td><td>取得该奇观行动框印值；下一阶段须再换位置</td><td><span class="pg">p.5</span></td></tr>
+  <tr><td class="c">b</td><td>全员移动完毕后收回全部工人至待命区</td><td>—</td><td>卡牌、行动框与休息区上的工人归位</td><td><span class="pg">p.6</span></td></tr>
+  <tr><td class="c">c1</td><td>打出 1 张历史卡，置于时间线最左格</td><td>卡面左上角 1 木材</td><td>原有四格卡右移一格，最右格卡进入墓地；结算该卡打出时效果</td><td><span class="pg">p.6</span><span class="pg">p.8</span></td></tr>
+  <tr><td class="c">c2</td><td>最右格卡带 1 块已交付毛皮，一并入墓地</td><td>—</td><td>毛皮翻面置于储物板上部，其后每个收入阶段产生收入</td><td><span class="pg">p.6</span><span class="pg">p.9</span></td></tr>
+  <tr><td class="c">d</td><td>工人激活「火」行动框</td><td>1 个待命区工人</td><td>取得 1 木材；该卡放有毛皮时另取得板块右下角的 2 金币</td><td><span class="pg">p.7</span></td></tr>
+  <tr><td class="c">e</td><td>工人激活文明板科技轨行动框</td><td>1 个待命区工人</td><td>科技轨前进一次、取得 1 金币；途经齿轮格时按同色空槽解锁科技</td><td><span class="pg">p.10</span><span class="pg">p.11</span></td></tr>
+  <tr><td class="c">f</td><td>弃掉待命区 1 块奢侈品板块</td><td>该板块</td><td>取得 1 个升级效果，把板上 1 个方块向上移一格</td><td><span class="pg">p.9</span></td></tr>
+  <tr><td class="c">g</td><td>全员完成工人激活</td><td>—</td><td>沙漏前进一格；若该阶段为第 2 或第 4 个行动阶段，按 4.5 处理升级板块</td><td><span class="pg">p.6</span><span class="pg">p.7</span></td></tr>
+</table>
+<div class="key"><b>结算关系：</b>骆驼移动不占工人；打出卡牌改变卡位与时机效果；激活行动框消耗待命区工人；辅助动作不占工人也不改变阶段。<span class="pg">p.5</span><span class="pg">p.6</span></div>
+</section>
+
+<section id="s11">
+<h2><span class="n">11</span>单人与变体</h2>
+<p>原书把单人游戏的改动写在参考表最后一页，规则书正文未收录，只记录，不代填。其余五项为独立变体，可单独采用，均不改三时代与五行动阶段的骨架。<span class="pg">p.3</span><span class="pg">p.11</span></p>
+<table>
+  <tr><th>变体</th><th>规则</th><th>依据</th></tr>
+  <tr><td>游荡的奇观</td><td>时代 I 与时代 II 结束时，把两张中立奇观洗回奇观卡堆并重发两张；原站在中立奇观上的骆驼归还主人，下一次骆驼移动可置于任意奇观</td><td><span class="pg">p.11</span></td></tr>
+  <tr><td>时间紧迫</td><td>工人激活开始时启动计时器：时代 I 与 II 设 5 分钟，时代 III 设 10 分钟；计时结束后全员另有 30 秒收尾，随后行动阶段结束</td><td><span class="pg">p.11</span></td></tr>
+  <tr><td>狡猾的骆驼</td><td>骆驼移动改为按和平轨顺序依次进行；把骆驼移到已有其他玩家骆驼的奇观时，那些骆驼的主人各得 1 分</td><td><span class="pg">p.11</span></td></tr>
+  <tr><td>文明轮抽</td><td>设置时翻开玩家人数加一块文明板与同等数量科技板；随机定起始玩家，顺时针各选一块文明板，再自末位起逆时针各选一块科技板</td><td><span class="pg">p.11</span></td></tr>
+  <tr><td>文明竞价</td><td>随机抽 5 块文明板，各配 1 块随机科技板；顺时针轮流竞价，把骆驼置于某组合旁并把分数标记后退相应格数表示出价，留在起始格为出价 0；竞同一组合须高于当前出价，被超过者标记回起始格并可再出价；直至全员各自竞得不同组合，随后按常规继续设置</td><td><span class="pg">p.11</span></td></tr>
+</table>
+<h3>11.1 首次游戏的设置与节奏</h3>
+<p>首次游戏或带新玩家时，奇观卡与愿景卡改按 1.4 的简化方式发放，工人激活改按玩家顺序逐个轮流。两项均只改设置与执行方式，不改收入、探索与行动的判定口径。<span class="pg">p.3</span><span class="pg">p.5</span></p>
+<h3>11.2 起始差异</h3>
+<p>中国文明自时代 I 卡堆随机抽 1 张卡入手牌，维京文明在船只轨第一格起始放置船且不领取该次移动奖励，详见 1.4。<span class="pg">p.3</span></p>
+</section>
+
+<section id="s12">
+<h2><span class="n">12</span>速查表与页码索引</h2>
+<h3>12.1 阶段与动作速查</h3>
+<table>
+  <tr><th>时点</th><th>可做</th><th>不可做</th></tr>
+  <tr><td>收入阶段</td><td>结算全部可见收入效果、重算和平并定序</td><td>计入阶段内新打出卡牌的符号</td></tr>
+  <tr><td>探索阶段</td><td>按玩家顺序取 1 个组合包，即时结算探索板块奖励</td><td>取走第二个组合包</td></tr>
+  <tr><td>骆驼移动</td><td>中立奇观、集市、他人已建奇观</td><td>自己的奇观、与当前相同的位置</td></tr>
+  <tr><td>工人激活</td><td>任意交错、重复打出卡牌与激活行动框</td><td>同一行动框放 2 个工人</td></tr>
+  <tr><td>任意时点</td><td>弃牌、交付奢侈品、弃奢侈品、转化资源</td><td>激活墓地中的卡牌</td></tr>
+  <tr><td>终局计分</td><td>按 8.1 六项顺序结算</td><td>再推进沙漏或推进轨道</td></tr>
+</table>
+<h3>12.2 章节与原书页码对照</h3>
+<table>
+  <tr><td>0 游戏概要与目标</td><td>p.1、p.7</td><td>7 资源与费用</td><td>p.9</td></tr>
+  <tr><td>1 初局设置</td><td>p.2、p.3</td><td>8 终局与计分链路</td><td>p.7</td></tr>
+  <tr><td>2 版图与组件速认</td><td>p.2、p.3、p.8</td><td>9 常见误读</td><td>p.4–11</td></tr>
+  <tr><td>3 核心引擎</td><td>p.4、p.7</td><td>10 示例行动阶段拆解</td><td>p.5–7、p.9、p.10</td></tr>
+  <tr><td>4 三个阶段与时代交替</td><td>p.4、p.5、p.6、p.7</td><td>11 单人与变体</td><td>p.3、p.11</td></tr>
+  <tr><td>5 行动逐条深挖</td><td>p.6、p.7、p.8、p.11</td><td>12 速查表与页码索引</td><td>全册</td></tr>
+  <tr><td>6 贯穿全局的系统</td><td>p.6、p.8、p.10</td><td>页图对照</td><td>12 张</td></tr>
+</table>
+<h3>12.3 原书页图对照</h3>
+<details>
+  <summary>展开原书页图（12 张，按页序）</summary>
+  <div class="pgs">
+    <figure><img src="images_ts/page_01.jpg" alt="原书第 1 页 游戏目标" loading="lazy"><figcaption>p.1 游戏目标</figcaption></figure>
+    <figure><img src="images_ts/page_02.jpg" alt="原书第 2 页 公共设置" loading="lazy"><figcaption>p.2 公共设置</figcaption></figure>
+    <figure><img src="images_ts/page_03.jpg" alt="原书第 3 页 个人设置" loading="lazy"><figcaption>p.3 个人设置</figcaption></figure>
+    <figure><img src="images_ts/page_04.jpg" alt="原书第 4 页 玩法概览与收入阶段" loading="lazy"><figcaption>p.4 玩法概览、收入阶段与玩家顺序</figcaption></figure>
+    <figure><img src="images_ts/page_05.jpg" alt="原书第 5 页 探索阶段与骆驼移动" loading="lazy"><figcaption>p.5 探索阶段、骆驼移动与集市</figcaption></figure>
+    <figure><img src="images_ts/page_06.jpg" alt="原书第 6 页 工人激活与时间线" loading="lazy"><figcaption>p.6 工人激活、时间线与墓地</figcaption></figure>
+    <figure><img src="images_ts/page_07.jpg" alt="原书第 7 页 行动框与终局计分" loading="lazy"><figcaption>p.7 行动框、时代交替与终局计分</figcaption></figure>
+    <figure><img src="images_ts/page_08.jpg" alt="原书第 8 页 历史卡与奇观卡" loading="lazy"><figcaption>p.8 历史卡与奇观卡卡面</figcaption></figure>
+    <figure><img src="images_ts/page_09.jpg" alt="原书第 9 页 资源与奢侈品板块" loading="lazy"><figcaption>p.9 资源与奢侈品板块</figcaption></figure>
+    <figure><img src="images_ts/page_10.jpg" alt="原书第 10 页 轨道与科技板" loading="lazy"><figcaption>p.10 轨道推进与科技板</figcaption></figure>
+    <figure><img src="images_ts/page_11.jpg" alt="原书第 11 页 变体与文明板行动" loading="lazy"><figcaption>p.11 变体与文明板行动</figcaption></figure>
+    <figure><img src="images_ts/page_12.jpg" alt="原书第 12 页 设计师的话与制作名单" loading="lazy"><figcaption>p.12 设计师的话与制作名单</figcaption></figure>
+  </div>
+</details>
+</section>
+
+<div class="foot">
+时代跨度 · 学习版规则　｜　依据英文原书《Timespan》Rulebook（12 页）与中文版既定译法编写<br>
+按规则结构重排，非官方规则书；规则裁决以英文原书为准，实体配件印值以配件为准。
+</div>
+</main>
+</div>
+</body>
+</html>
