@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高迪 · 学习版规则（Gaudí）</title>
+<style>
+  :root{
+    --bg:#fbf7f0; --paper:#fffdf9; --ink:#2f2a28; --soft:#6b615c;
+    --line:#e3d8c8; --line2:#d3c4ae;
+    --red:#a2303c; --red-l:#fbecec; --blue:#3b5b8c; --blue-l:#eaf0f9;
+    --gold:#a9761c; --gold-l:#fbf1dc; --green:#3d7a55; --green-l:#e9f4ec;
+    --purple:#6b4a86; --purple-l:#f1eaf7;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"PingFang SC","Microsoft YaHei","Noto Sans SC",Arial,sans-serif;
+    font-size:15.5px;line-height:1.85;}
+  .backbar{position:sticky;top:0;z-index:60;height:44px;box-sizing:border-box;
+    display:flex;align-items:center;gap:10px;padding:0 16px;
+    background:var(--paper);border-bottom:1px solid var(--line);font-size:13px;}
+  .backbar a{display:inline-flex;align-items:center;min-height:32px;padding:0 12px;
+    border:1px solid var(--line2);border-radius:8px;background:#fff;
+    color:var(--purple);text-decoration:none;white-space:nowrap;}
+  .backbar a:active{background:var(--purple-l);}
+  .backbar .bb-t{margin-left:auto;font-size:12px;color:var(--soft);}
+  .layout{display:flex;align-items:flex-start;max-width:1280px;margin:0 auto;}
+  nav.toc{position:sticky;top:44px;align-self:flex-start;width:238px;flex:0 0 238px;
+    height:calc(100vh - 44px);overflow-y:auto;background:#fffdf9;border-right:1px solid var(--line);
+    padding:22px 14px 40px;font-size:13px;}
+  nav.toc .brand{font-size:17px;font-weight:800;color:var(--red);margin:0 0 4px;}
+  nav.toc .brand-s{font-size:11.5px;color:var(--soft);margin:0 0 16px;letter-spacing:.04em;}
+  nav.toc .grp{margin:16px 0 5px;font-size:11px;color:var(--gold);font-weight:700;letter-spacing:.12em;}
+  nav.toc a{display:block;color:#49403b;text-decoration:none;padding:4px 9px;border-radius:6px;}
+  nav.toc a:hover{background:var(--red-l);color:var(--red);}
+  main{flex:1 1 auto;min-width:0;padding:0 42px 90px;}
+  .hero{background:linear-gradient(150deg,#7c1f2b,#a2303c 55%,#bd5a4a);
+    color:#fff8f0;border-radius:0 0 20px 20px;padding:40px 42px 34px;margin-bottom:26px;
+    box-shadow:0 8px 26px rgba(124,31,43,.18);}
+  .hero h1{margin:0;font-size:34px;letter-spacing:.02em;}
+  .hero .en{font-size:14px;opacity:.8;margin:2px 0 12px;letter-spacing:.06em;}
+  .hero .desc{font-size:16px;max-width:760px;line-height:1.8;}
+  .hero .meta{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px;}
+  .hero .meta span{border:1px solid rgba(255,255,255,.5);border-radius:20px;padding:3px 13px;font-size:12.5px;}
+  .stand{margin-top:14px;background:#fff6e2;border:1px solid #e8d2a2;border-left:5px solid var(--gold);
+    border-radius:0 10px 10px 0;padding:12px 18px;font-size:14px;color:#5c4a26;}
+  section{padding:22px 0 14px;border-bottom:1px dashed var(--line2);scroll-margin-top:14px;}
+  h2{font-size:25px;color:var(--red);margin:8px 0 4px;line-height:1.4;}
+  h2 .n{display:inline-block;background:var(--red);color:#fff;font-size:14px;
+    min-width:30px;height:30px;line-height:30px;text-align:center;border-radius:8px;
+    margin-right:10px;vertical-align:3px;font-weight:700;}
+  h3{font-size:18.5px;color:#3a3230;margin:26px 0 6px;border-left:4px solid var(--gold);padding-left:10px;}
+  h4{font-size:16px;color:var(--blue);margin:18px 0 4px;}
+  p{margin:9px 0;}
+  ul,ol{margin:9px 0 9px 2px;padding-left:22px;}
+  li{margin:5px 0;}
+  b,strong{color:var(--red);}
+  .goal{background:var(--blue-l);border:1px solid #cfdcf0;border-radius:9px;
+    padding:8px 14px;font-size:13.5px;color:#2f466c;margin:8px 0 16px;}
+  .goal b{color:#2f466c;}
+  .pg{display:inline-block;background:#f0e7d8;color:#7d6231;border:1px solid #e2d2b6;
+    border-radius:5px;font-size:11px;padding:0 6px;line-height:18px;vertical-align:1px;
+    margin-left:4px;font-weight:600;white-space:nowrap;font-family:Arial,sans-serif;}
+  .key{background:var(--green-l);border:1px solid #c9e2d1;border-left:5px solid var(--green);
+    padding:11px 16px;border-radius:0 10px 10px 0;margin:13px 0;}
+  .key b{color:var(--green);}
+  .warn{background:var(--red-l);border:1px solid #eed3d3;border-left:5px solid var(--red);
+    padding:11px 16px;border-radius:0 10px 10px 0;margin:13px 0;}
+  .warn b{color:var(--red);}
+  .tip{background:var(--gold-l);border:1px solid #eddcb8;border-left:5px solid var(--gold);
+    padding:11px 16px;border-radius:0 10px 10px 0;margin:13px 0;}
+  .tip b{color:var(--gold);}
+  .note{background:#f4f1ec;border:1px solid var(--line);border-radius:9px;padding:10px 15px;
+    margin:12px 0;font-size:14px;color:#514844;}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px;background:var(--paper);}
+  th,td{border:1px solid var(--line2);padding:8px 11px;text-align:left;vertical-align:top;}
+  th{background:#f4e9dd;color:#5d4022;font-weight:700;}
+  tr:nth-child(even) td{background:#fdf9f3;}
+  td.c,th.c{text-align:center;}
+  .steps{list-style:none;padding:0;counter-reset:st;margin:14px 0;}
+  .steps>li{position:relative;padding:10px 14px 10px 50px;margin:9px 0;background:var(--paper);
+    border:1px solid var(--line);border-radius:10px;}
+  .steps>li::before{counter-increment:st;content:counter(st);position:absolute;left:12px;top:11px;
+    width:26px;height:26px;background:var(--red);color:#fff;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;}
+  .steps>li>ol{margin:6px 0;padding-left:20px;}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:11px;
+    padding:13px 17px;margin:11px 0;box-shadow:0 2px 6px rgba(80,60,40,.04);}
+  .card .t{font-weight:800;color:var(--red);font-size:16px;margin-bottom:3px;}
+  .card .t .s{display:inline-block;background:var(--red);color:#fff;border-radius:5px;
+    font-size:12px;padding:1px 7px;margin-right:8px;}
+  .card.blue .t{color:var(--blue);} .card.blue .t .s{background:var(--blue);}
+  .card.green .t{color:var(--green);} .card.green .t .s{background:var(--green);}
+  .card.gold .t{color:var(--gold);} .card.gold .t .s{background:var(--gold);}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+  .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;}
+  .mini{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:11px 13px;}
+  .mini .h{font-weight:800;font-size:14px;margin-bottom:4px;}
+  .mini .v{font-size:13px;color:var(--soft);line-height:1.7;}
+  .fig{margin:18px 0;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;}
+  .fig svg{display:block;width:100%;height:auto;}
+  .figcap{font-size:12.5px;color:var(--soft);margin-top:8px;text-align:center;}
+  details{margin:12px 0;background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:8px 14px;}
+  summary{cursor:pointer;font-size:13.5px;color:var(--blue);font-weight:600;}
+  details img{display:block;max-width:100%;margin:12px auto;border:1px solid var(--line);border-radius:8px;}
+  .pit{counter-reset:pit;list-style:none;padding:0;margin:14px 0;}
+  .pit li{position:relative;padding:9px 14px 9px 46px;margin:7px 0;background:var(--paper);
+    border:1px solid var(--line);border-radius:9px;font-size:14.5px;}
+  .pit li::before{counter-increment:pit;content:"✕ " counter(pit);position:absolute;left:10px;top:9px;
+    color:#fff;background:var(--red);border-radius:6px;font-size:11px;padding:1px 6px;font-weight:700;}
+  .bad{color:var(--red);text-decoration:line-through;}
+  .good{color:var(--green);font-weight:700;}
+  .tagR{color:var(--red);font-weight:700;} .tagB{color:var(--blue);font-weight:700;}
+  .tagG{color:var(--gold);font-weight:700;}
+  .why{background:#eef3fa;border:1px solid #cddcee;border-left:5px solid var(--blue);
+    padding:12px 17px;border-radius:0 10px 10px 0;margin:13px 0;font-size:14.5px;}
+  .why b{color:#2f466c;}
+  .why .wt{font-weight:800;color:#2f466c;display:block;margin-bottom:3px;}
+  .idx{font-size:13.5px;}
+  .foot{margin-top:34px;font-size:12.5px;color:var(--soft);text-align:center;line-height:1.9;}
+  @media(max-width:960px){
+    .layout{flex-direction:column;} nav.toc{position:static;width:100%;height:auto;flex-basis:auto;border-right:0;border-bottom:1px solid var(--line);}
+    main{padding:0 18px 60px;} .grid2,.grid4{grid-template-columns:1fr 1fr;}
+  }
+  @media(max-width:640px){.backbar{height:40px;padding:0 10px;} .backbar a{min-height:30px;padding:0 9px;font-size:12.5px;} .backbar .bb-t{display:none;}
+  .grid2,.grid4{grid-template-columns:1fr;} main{padding:0 12px 50px;} .hero{padding:28px 20px;} .hero h1{font-size:26px;}}
+
+  /* == 窄屏目录：横向胶囊，正文首屏可见 == */
+  @media(max-width:960px){
+    nav.toc{display:flex;flex-wrap:nowrap;gap:6px;align-items:center;
+      height:auto;max-height:none;overflow-x:auto;overflow-y:hidden;
+      padding:10px 12px;border-right:0;border-bottom:1px solid var(--line);
+      -webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;}
+    nav.toc .brand,nav.toc .brand-s,nav.toc .grp{display:none;}
+    nav.toc a{flex:0 0 auto;white-space:nowrap;padding:6px 11px;
+      border:1px solid var(--line2);border-radius:16px;background:var(--paper);
+      font-size:12.5px;line-height:1.4;}
+    nav.toc a:hover{background:var(--red-l);}
+    nav.toc a[style]{padding-left:11px;}
+  }
+
+  /* == 学习版通用补充（各本共用） == */
+  .flow{margin:18px 0;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;}
+  .flow svg{display:block;width:100%;height:auto;}
+  .pgs{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin:14px 0;}
+  .pgs figure{margin:0;background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:8px;}
+  .pgs img{display:block;width:100%;height:auto;margin:0;border:1px solid var(--line);border-radius:6px;}
+  .pgs figcaption{font-size:12px;color:var(--soft);text-align:center;margin-top:6px;line-height:1.5;}
+  @media(max-width:640px){.pgs{grid-template-columns:1fr 1fr;gap:9px;}}
+  /* 窄屏压缩首屏：hero 与体例框收紧，第 0 节进入首屏 */
+  @media(max-width:640px){
+    .hero{padding:22px 18px 24px;margin-bottom:16px;}
+    .hero h1{font-size:24px;} .hero .desc{font-size:14px;line-height:1.65;margin-top:8px;}
+    .hero .meta{margin-top:12px;gap:6px;} .hero .meta span{font-size:11.5px;padding:2px 10px;}
+    .stand{margin-top:10px;padding:9px 12px;font-size:12.5px;line-height:1.6;}
+  }
+</style>
+</head>
+<body>
+<div class="backbar"><a href="index.html">← 学习版目录</a><span class="bb-t">高迪 · 学习版规则</span></div>
+<div class="layout">
+<nav class="toc">
+  <div class="brand">高迪</div>
+  <div class="brand-s">学习版规则 · Gaudí</div>
+  <div class="grp">规则概要</div>
+  <a href="#s0">0 · 游戏概要与目标</a>
+  <a href="#s1">1 · 初局设置</a>
+  <a href="#s2">2 · 版图与组件速认</a>
+  <div class="grp">轮次与行动</div>
+  <a href="#s3">3 · 核心引擎</a>
+  <a href="#s4">4 · 一轮的结构</a>
+  <a href="#s5">5 · 四类行动与万能行动</a>
+  <a href="#s6">6 · 特伦卡迪斯板块的领取、拥有与组合</a>
+  <div class="grp">全局机制</div>
+  <a href="#s7">7 · 支柱卡与三列结算</a>
+  <a href="#s8">8 · 烟囱与胜利分</a>
+  <a href="#s9">9 · 终局与计分链路</a>
+  <div class="grp">查考与附录</div>
+  <a href="#s10">10 · 常见误读与示例拆解</a>
+  <a href="#s11">11 · 专家模式与单人模式</a>
+  <a href="#s12">12 · 速查表与页码索引</a>
+</nav>
+
+<main>
+<header class="hero">
+  <h1>高迪 · 学习版规则</h1>
+  <div class="en">GAUDÍ　｜　按规则结构重排，不按原书章节顺序</div>
+  <div class="desc">以三轮与吊灯轨移动、铅笔锤子判定、四类行动为主线，展开三列结算、烟囱推进、终局四步计分与专家／单人模式；附常见误读、速查表及原书页码索引。</div>
+  <div class="meta"><span>二至四人 · 另有单人模式</span><span>三轮 · 三根支柱</span><span>吊灯轨 / 特伦卡迪斯板块 / 烟囱</span><span>依据英文原书 28 页</span></div>
+</header>
+
+<div class="stand">
+  <b>体例：</b>按学习顺序重排，章节与原书不对应；每条结论后的 <span class="pg">p.X</span> 为英文原书页码。
+  规则裁决以<b>英文原书页图</b>为准；术语沿用已上线中文版的既定译法。原书未列之处只记录、不代填，配件印值、烟囱板块与宗教卡编号以实体配件为准。第 12 节附 28 张页图。
+  正文按规则作用展开，先述状态变化，再列执行步骤。
+</div>
+
+<section id="s0">
+<h2><span class="n">0</span>游戏概要与目标</h2>
+<p>《高迪》以三根支柱——自然、加泰罗尼亚、宗教——为计分主线。玩家沿主版图中央的吊灯移动标记，在停留格取得行动，以行动收集特伦卡迪斯板块与支柱卡，再把板块用于打出卡牌与推进烟囱，由此累积三根支柱的胜利分。全局共三轮，第三轮结束后进入终局计分，总分最高者获胜。<span class="pg">p.2</span><span class="pg">p.15</span></p>
+<div class="why"><span class="wt">规则主线</span>每轮自起始玩家起顺时针轮流行动。一次行动先移动吊灯标记，再按停留格所示执行行动；行动把主版图上的板块与卡牌转为玩家版图上的板块、卡列与烟囱推进。三根支柱的 VP 由不同路径给出：自然分主要来自自然卡与自然烟囱，加泰罗尼亚分主要在轮次结束时结算，宗教分主要在终局结算。终局只取三根支柱中最低的两项相加，再计入特伦卡迪斯组合加分。<span class="pg">p.2</span><span class="pg">p.8</span><span class="pg">p.15</span></div>
+<div class="grid2">
+  <div class="card"><div class="t">均衡约束</div>三根支柱各有独立 VP 标记，终局只把数值最低的两项相加；单项冲高不进入总分。第 2 步加泰罗尼亚烟囱效果与专家被动效果可在计分前调整标记的分配。<span class="pg">p.2</span><span class="pg">p.14</span><span class="pg">p.15</span></div>
+  <div class="card blue"><div class="t">终局触发</div>三轮结束、中央吊灯板块叠的最后一块移除后进入终局计分；轮数固定，不设分数门槛，不追加轮次。<span class="pg">p.8</span><span class="pg">p.15</span></div>
+</div>
+<table>
+  <tr><th>项目</th><th>取值</th><th>依据</th></tr>
+  <tr><td>人数</td><td>二至四人；另有单人模式，与高迪及虚拟第三玩家对战</td><td><span class="pg">p.7</span><span class="pg">p.19</span></td></tr>
+  <tr><td>轮数</td><td>三轮；每轮对应中央吊灯板块叠的一块</td><td><span class="pg">p.2</span><span class="pg">p.8</span></td></tr>
+  <tr><td>支柱</td><td>自然、加泰罗尼亚、宗教，各一条 VP 轨</td><td><span class="pg">p.2</span><span class="pg">p.8</span></td></tr>
+  <tr><td>一次行动</td><td>先移动吊灯标记，再按停留格的铅笔与锤子执行行动</td><td><span class="pg">p.6</span><span class="pg">p.7</span></td></tr>
+  <tr><td>行动种类</td><td>取特伦卡迪斯板块、取卡、打出卡牌、推进烟囱标记，另有万能行动</td><td><span class="pg">p.9</span><span class="pg">p.15</span></td></tr>
+  <tr><td>模式</td><td>休闲模式为默认；专家模式、单人模式各按指定章节替换规则</td><td><span class="pg">p.4</span><span class="pg">p.17</span><span class="pg">p.19</span></td></tr>
+  <tr><td>胜负</td><td>总分最高者胜；平手取总分以外最领先的 VP 标记，仍平手则共享胜利</td><td><span class="pg">p.15</span></td></tr>
+</table>
+<h3>0.1 三根支柱的给分路径</h3>
+<table>
+  <tr><th>支柱</th><th>主要来源</th><th>结算时点</th></tr>
+  <tr><td>自然</td><td>自然卡横幅奖励、自然列上方印值、自然烟囱的即时奖励</td><td>打出自然卡后即时结算自然列<span class="pg">p.12</span></td></tr>
+  <tr><td>加泰罗尼亚</td><td>加泰罗尼亚列横幅奖励、加泰罗尼亚烟囱奖励</td><td>轮次结束时按中央吊灯板块所示次数结算<span class="pg">p.13</span></td></tr>
+  <tr><td>宗教</td><td>宗教卡的 VP 数值乘达成条件的次数</td><td>终局计分第一步结算宗教列<span class="pg">p.13</span><span class="pg">p.15</span></td></tr>
+</table>
+<h3>0.2 均衡约束</h3>
+<p>星形图标带数字时，把图标下方所示支柱的 VP 标记在轨道上前进相应格数。三条轨道各自独立；终局只取其中数值最低的两项相加，第三项不计入总分。宗教卡与烟囱的部分效果可指定 VP 标记的增减，因此三根支柱的相对高低在终局前仍可改变。<span class="pg">p.8</span><span class="pg">p.14</span><span class="pg">p.15</span></p>
+</section>
+
+<section id="s1">
+<h2><span class="n">1</span>初局设置</h2>
+<p>设置前先定休闲模式或专家模式，两者在版图选用面、供应格板块数、烟囱板块选用面与起始手牌发法上不同。下列为休闲模式的公共布置与玩家布置；专家模式改动见第 11 节。<span class="pg">p.4</span></p>
+<h3>1.1 公共布置</h3>
+<ol>
+  <li>把主版图置于桌面中央，白天面朝上。<span class="pg">p.4</span></li>
+  <li>把全部特伦卡迪斯板块放入布袋洗匀，自袋中随机取 5 块放在主版图 5 个特伦卡迪斯格中的每一格，共 25 块；格位由天花板漩涡边缘指示。布袋留在版图旁。<span class="pg">p.4</span></li>
+  <li>三叠支柱卡分别洗匀，按从左到右的顺序——自然、加泰罗尼亚、宗教——背面朝下置于主版图下方。<span class="pg">p.4</span></li>
+  <li>自每叠翻开 3 张，正面朝上置于该叠上方的 3 个窗口格；放卡时让卡顶部的横幅完整可见。<span class="pg">p.4</span></li>
+  <li>把 7 块中央吊灯板块背面朝下洗匀，随机取 3 块叠成一叠，整叠翻至正面朝上置于主版图吊灯中央；不得查看最上面一块以下的板块。余下 4 块不看内容直接回盒。<span class="pg">p.4</span></li>
+</ol>
+<h3>1.2 玩家布置</h3>
+<ol start="6">
+  <li>每位玩家取一块玩家版图与所选颜色的全部配件。<span class="pg">p.5</span></li>
+  <li>把 12 块烟囱板块按自然、加泰罗尼亚、宗教分开，每位玩家各得每类 1 块，白天面朝上置于玩家版图上方的对应槽位；3 个烟囱标记分别置于各条烟囱下方。<span class="pg">p.5</span></li>
+  <li>把自然、加泰罗尼亚、宗教 VP 标记置于主版图 VP 轨「0」格附近；吊灯标记与总分 VP 标记暂置玩家版图旁。<span class="pg">p.5</span></li>
+  <li>按人数取起始手牌：双人局取自然与加泰罗尼亚两叠的第一张；三人局取每叠的第一张；四人局取自然与加泰罗尼亚两叠的前 2 张。把这些卡洗匀，随机发给每位玩家 1 张。<span class="pg">p.5</span></li>
+  <li>双人局另取一个未参战颜色的吊灯标记置于主版图旁，该标记在回合顺序上始终视为最后一名玩家。<span class="pg">p.5</span><span class="pg">p.7</span></li>
+  <li>最近一次在巴塞罗那街头漫步过的玩家取得起始玩家标记；无法确定时随机选一人。<span class="pg">p.5</span></li>
+</ol>
+<div class="note">每位玩家的 4 个胜利分标记为自然 VP 标记、加泰罗尼亚 VP 标记、宗教 VP 标记与总分 VP 标记各 1 个；总分 VP 标记只在终局计分时使用。<span class="pg">p.3</span><span class="pg">p.15</span></div>
+<h3>1.3 人数差异</h3>
+<table>
+  <tr><th>项目</th><th>二人局</th><th>三人局</th><th>四人局</th></tr>
+  <tr><td>起始手牌来源</td><td>自然、加泰罗尼亚各 1 张</td><td>三叠各 1 张</td><td>自然、加泰罗尼亚各 2 张</td></tr>
+  <tr><td>发出手牌</td><td>洗匀后每人 1 张</td><td>洗匀后每人 1 张</td><td>洗匀后每人 1 张</td></tr>
+  <tr><td>未参战颜色吊灯标记</td><td>使用，始终最后行动</td><td>不使用</td><td>不使用</td></tr>
+</table>
+</section>
+
+<section id="s2">
+<h2><span class="n">2</span>版图与组件速认</h2>
+<p>按使用先后认识版图：先分主版图的吊灯轨、供应格与窗口，再分玩家版图的板块格、三列卡位与三条烟囱，最后认清标记与图标的对应关系。<span class="pg">p.3</span><span class="pg">p.4</span><span class="pg">p.7</span></p>
+<h3>2.1 配件</h3>
+<table>
+  <tr><th>类别</th><th>内容</th><th>依据</th></tr>
+  <tr><td>版图与板块</td><td>主版图 1 块（白天面／夜晚面）、玩家版图 4 块、烟囱板块 12 块（三根支柱各 4 块）、中央吊灯板块 7 块、布袋 1 个</td><td><span class="pg">p.3</span></td></tr>
+  <tr><td>卡牌</td><td>支柱卡 99 张（自然、加泰罗尼亚、宗教各 33 张）</td><td><span class="pg">p.3</span></td></tr>
+  <tr><td>板块</td><td>特伦卡迪斯板块 96 块，每种颜色与形状各 6 块</td><td><span class="pg">p.3</span></td></tr>
+  <tr><td>标记</td><td>吊灯标记 4 个、烟囱标记 12 个（每人 3 个）、胜利分标记 16 个（每人 4 个）、起始玩家标记 1 个</td><td><span class="pg">p.3</span></td></tr>
+</table>
+<h3>2.2 主版图</h3>
+<table>
+  <tr><th>位置</th><th>结构</th><th>规则作用</th></tr>
+  <tr><td>吊灯轨</td><td>环绕中央吊灯的一圈格子，每格印一个行动图标与若干铅笔、锤子；部分格子颜色偏深偏红</td><td>停留格决定可执行的行动种类与次数<span class="pg">p.7</span></td></tr>
+  <tr><td>中央吊灯板块位</td><td>叠放 3 块吊灯板块，每块印 2 个行动</td><td>到达吊灯轨终点时激活最上面一块<span class="pg">p.8</span></td></tr>
+  <tr><td>特伦卡迪斯供应格</td><td>5 格，每格放 5 块板块；格旁印有额外行动图标</td><td>取板块的来源；取走最后一格触发额外行动<span class="pg">p.4</span><span class="pg">p.10</span></td></tr>
+  <tr><td>窗口</td><td>三叠支柱卡上方各 3 格，每格 1 张正面朝上的卡；窗口上方木质格印有额外行动图标</td><td>取卡的来源；取走最后一张触发额外行动<span class="pg">p.4</span><span class="pg">p.11</span></td></tr>
+  <tr><td>VP 轨</td><td>三条支柱轨与总分标记位</td><td>记录三根支柱的即时 VP 与终局总分<span class="pg">p.8</span></td></tr>
+</table>
+<div class="key"><b>读图要点：</b>吊灯轨上的铅笔与锤子图标以数量表示行动次数，不表示行动种类；同一格可印多个铅笔或锤子。铅笔只执行该格所示行动，锤子在三类选项中选定其一。<span class="pg">p.7</span></div>
+<h3>2.3 玩家版图</h3>
+<table>
+  <tr><th>区域</th><th>结构</th><th>规则作用</th></tr>
+  <tr><td>特伦卡迪斯格</td><td>与板块形状相符的空格，格间印有细小连接线</td><td>放置取得的板块；连接线标明相邻关系<span class="pg">p.10</span></td></tr>
+  <tr><td>三列卡位</td><td>自然、加泰罗尼亚、宗教各一列，列上方印有奖励</td><td>打出卡牌的落点；结算列时取得列内全部横幅奖励<span class="pg">p.12</span></td></tr>
+  <tr><td>三条烟囱</td><td>自下而上分若干层级，各层印有数字与形状要求；烟囱板块置于版图上方对应槽位</td><td>烟囱标记推进的位置与条件<span class="pg">p.13</span><span class="pg">p.25</span></td></tr>
+</table>
+<h3>2.4 支柱卡与吊灯板块</h3>
+<p>支柱卡分自然、加泰罗尼亚、宗教三类，卡面含打牌条件、奖励、类别、支柱类型、图面；宗教卡另印编号，用于附录的计分方式对照。吊灯板块每块印 2 个行动，另可印加泰罗尼亚列的结算次数。<span class="pg">p.11</span><span class="pg">p.8</span><span class="pg">p.13</span></p>
+<div class="note">特伦卡迪斯板块的颜色与形状种类、各形状格位在玩家版图上的分布以实体版图印面为准；原书正文与图标一览只给出「每种颜色与形状各 6 块」的总数，不逐项列出名称。<span class="pg">p.3</span><span class="pg">p.28</span></div>
+</section>
+
+<section id="s3">
+<h2><span class="n">3</span>核心引擎</h2>
+<p>全局由三轮串接。每轮玩家顺时针轮流移动吊灯标记并执行停留格行动，全员把标记取下后本轮结束，移除最上面一块吊灯板块；第三块移除后进入终局计分。<span class="pg">p.6</span><span class="pg">p.8</span></p>
+<div class="flow">
+<svg viewBox="0 0 900 250" role="img" aria-label="三轮循环与终局链路">
+  <rect x="0" y="0" width="900" height="250" fill="#ffffff"/>
+  <text x="450" y="24" text-anchor="middle" font-size="15" font-weight="700" fill="#2f466c">移动吊灯标记 → 停留格行动 → 取下标记 → 移除吊灯板块 → 第三块后终局</text>
+  <g font-size="12.5" text-anchor="middle" fill="#25324a">
+    <rect x="16" y="48" width="164" height="62" rx="9" fill="#eef3fa" stroke="#cddcee"/>
+    <text x="98" y="72">移动吊灯标记</text><text x="98" y="93">顺时针，格数自选</text>
+    <rect x="194" y="48" width="164" height="62" rx="9" fill="#fdf1e6" stroke="#e8cdae"/>
+    <text x="276" y="72">停留格行动</text><text x="276" y="93">铅笔 / 锤子决定次数</text>
+    <rect x="372" y="48" width="164" height="62" rx="9" fill="#eaf5ec" stroke="#c6e0cc"/>
+    <text x="454" y="72">四类行动</text><text x="454" y="93">取板块 / 取卡 / 打牌 / 烟囱</text>
+    <rect x="550" y="48" width="164" height="62" rx="9" fill="#f3eefb" stroke="#d8c9ee"/>
+    <text x="632" y="72">三根支柱 VP</text><text x="632" y="93">自然 / 加泰罗尼亚 / 宗教</text>
+    <rect x="728" y="48" width="156" height="62" rx="9" fill="#fdf6e8" stroke="#e8d9ae"/>
+    <text x="806" y="72">终局四步</text><text x="806" y="93">宗教列 → 总分</text>
+  </g>
+  <g stroke="#7d5511" stroke-width="2" fill="none">
+    <path d="M180 79 H190"/><path d="M358 79 H368"/><path d="M536 79 H546"/><path d="M714 79 H724"/>
+    <path d="M276 114 V150 H98 V114"/><path d="M98 114 l-5 8 h10 z" fill="#7d5511"/>
+  </g>
+  <text x="450" y="172" text-anchor="middle" font-size="13" fill="#6b615c">标记取下后本轮不得再行动；全员取下即结束本轮</text>
+  <g font-size="12.5" fill="#2f466c">
+    <rect x="16" y="192" width="280" height="42" rx="8" fill="#f7f9fc" stroke="#d8e1ee"/>
+    <text x="156" y="218" text-anchor="middle">最领先者可并用铅笔与锤子；不领先者只能二选一</text>
+    <rect x="310" y="192" width="280" height="42" rx="8" fill="#f7f9fc" stroke="#d8e1ee"/>
+    <text x="450" y="218" text-anchor="middle">首个到达终点者执行吊灯板块的 2 个行动</text>
+    <rect x="604" y="192" width="280" height="42" rx="8" fill="#f7f9fc" stroke="#d8e1ee"/>
+    <text x="744" y="218" text-anchor="middle">终局只计三根支柱中最低的两项</text>
+  </g>
+</svg>
+</div>
+<h3>3.1 玩家回合内的顺序</h3>
+<ol class="steps">
+  <li>按顺时针轮到某位玩家；标记已取下者跳过回合。<span class="pg">p.6</span></li>
+  <li>把吊灯标记沿吊灯轨顺时针向前移动任意格数，不可停在已有其他玩家标记的格上。<span class="pg">p.6</span></li>
+  <li>按停留格的铅笔与锤子执行行动；最领先者可并用两类图标，不领先者只选其一。<span class="pg">p.7</span></li>
+  <li>到达吊灯轨终点时取下标记，激活中央吊灯板块；首个到达者另取得起始玩家标记。<span class="pg">p.6</span><span class="pg">p.8</span></li>
+  <li>全员取下标记后本轮结束，移除最上面一块吊灯板块；由持有起始玩家标记者开启下一轮。<span class="pg">p.8</span></li>
+</ol>
+<h3>3.2 行动与全局系统的关系</h3>
+<p>四类行动由停留格、锤子选项或卡牌奖励触发，一次行动只执行其中一项，同一回合可执行多项。特伦卡迪斯板块的领取与拥有、相邻与组合、三列结算、烟囱推进与三根支柱 VP 轨贯穿全部回合，其口径不随轮次改变。额外行动来自供应耗尽与烟囱奖励，不改变回合内行动的基本顺序。<span class="pg">p.9</span><span class="pg">p.10</span><span class="pg">p.11</span></p>
+</section>
+
+<section id="s4">
+<h2><span class="n">4</span>一轮的结构</h2>
+<p>一轮自持有起始玩家标记者起顺时针轮流进行。每名玩家在自身回合内先移动吊灯标记，再执行停留格行动；标记取下后本轮不再行动，全员取下后本轮结束。<span class="pg">p.6</span><span class="pg">p.8</span></p>
+<h3>4.1 移动吊灯标记</h3>
+<ol class="steps">
+  <li>本轮首次移动时，标记尚在玩家版图旁，须自吊灯轨最上方那一格起算；该格计为本次移动的第一格，且格位空着时可停在该格。<span class="pg">p.6</span></li>
+  <li>始终沿吊灯顺时针移动，向前格数自选；不可停在已有其他玩家标记的格上。<span class="pg">p.6</span></li>
+  <li>移动结束时若领先于场上其余全部标记，本回合取得额外行动，即并用停留格的铅笔与锤子。<span class="pg">p.6</span><span class="pg">p.7</span></li>
+  <li>绕完一整圈到达吊灯轨终点时，把标记自主版图取下置于玩家版图旁，随后激活中央吊灯板块。<span class="pg">p.6</span></li>
+  <li>轮到行动而标记已取下者，跳过回合。<span class="pg">p.6</span></li>
+</ol>
+<h3>4.2 铅笔、锤子与最领先判定</h3>
+<table>
+  <tr><th>图标</th><th>执行口径</th><th>依据</th></tr>
+  <tr><td>每个铅笔</td><td>把该格所示行动执行一次</td><td><span class="pg">p.7</span></td></tr>
+  <tr><td>每个锤子</td><td>在「执行该格行动一次」「推进 1 个烟囱标记」「自手牌打出 1 张卡」三类中选定其一</td><td><span class="pg">p.7</span></td></tr>
+  <tr><td>最领先时</td><td>并用该格印出的铅笔与锤子</td><td><span class="pg">p.7</span></td></tr>
+  <tr><td>不领先时</td><td>只用铅笔或只用锤子，类别自选</td><td><span class="pg">p.7</span></td></tr>
+  <tr><td>已取下的标记</td><td>始终视为最领先，因此场上其余标记均不属最领先</td><td><span class="pg">p.7</span></td></tr>
+</table>
+<div class="key"><b>状态变化：</b>最领先判定只看吊灯轨上顺时针方向的位置；标记一旦取下即退出比较，但按原文仍视为最领先，其余玩家自此只能选用铅笔或锤子中的一类。<span class="pg">p.7</span></div>
+<h3>4.3 中央吊灯板块</h3>
+<p>吊灯中央格不印铅笔与锤子，改由一块始终印有 2 个行动的吊灯板块占据。本轮第一个到达终点者执行两个行动，顺序自选；其后到达者只执行其中 1 个。首个到达者另取得起始玩家标记，该标记不影响本轮顺序，只决定下一轮的起始玩家。<span class="pg">p.8</span></p>
+<h3>4.4 深色格与轮次结束</h3>
+<ol class="steps">
+  <li>有玩家到达终点并取下标记后，其余玩家仍继续轮流行动。<span class="pg">p.8</span></li>
+  <li>此后凡把标记移到颜色偏深偏红的格子、或到达吊灯轨终点者，完成本回合行动后须取下标记。<span class="pg">p.8</span></li>
+  <li>已停在深色格上的标记不因另一名玩家到达终点而立即取下，须待其自身在有人到达终点之后再次移上深色格时才取下。<span class="pg">p.8</span></li>
+  <li>全员取下标记后本轮结束，自中央移除最上面一块吊灯板块；若这是最后一块，进入终局计分，否则由持有起始玩家标记者开启下一轮。<span class="pg">p.8</span></li>
+</ol>
+<h3>4.5 双人局的虚拟第三玩家</h3>
+<p>双人局另用一个未参战颜色的吊灯标记，无论起始玩家是谁，该标记在回合顺序上始终最后行动。轮到它时，把它移到第一个能使它成为最领先者的格子，它不执行任何行动，下一位玩家随即行动。该标记可能先到终点；此时两名人类玩家均不属首个到达者，因此都不能执行吊灯板块上的两个行动。该标记不取得起始玩家标记，首个到达终点的人类玩家取得。<span class="pg">p.7</span></p>
+</section>
+
+<section id="s5">
+<h2><span class="n">5</span>四类行动与万能行动</h2>
+<p>行动图标来自停留格、锤子选项、卡牌奖励与烟囱奖励；无论来源，执行方式完全一致。同一回合可按所得图标执行多次，行动可全部放弃。<span class="pg">p.9</span></p>
+<h3>5.1 取一块特伦卡迪斯板块</h3>
+<div class="why"><span class="wt">规则作用</span>把主版图供应格上的一块板块转入玩家版图的对应形状空格，扩充后续打牌条件与烟囱推进所需的板块存量，并可能形成同色组合以取得终局加分。<span class="pg">p.9</span><span class="pg">p.10</span></div>
+<ol class="steps">
+  <li>按图标所示取 1 块：指定形状与颜色者须两者相符；黑色形状者取该形状的任意颜色；彩色圆圈者取该颜色的任意形状；全色图标者形状与颜色均自选。<span class="pg">p.9</span></li>
+  <li>同一回合取多于 1 块时，可自同一供应格或不同供应格选取。<span class="pg">p.9</span></li>
+  <li>取得的板块须放入玩家版图上形状相符的空格，可翻面或旋转；无匹配空格时把该块退回原处并改取另一块。<span class="pg">p.10</span></li>
+  <li>取走某供应格的最后一块时，可额外执行 1 个行动；回合结束时自袋中抽 5 块补到该空格。<span class="pg">p.10</span><span class="pg">p.11</span></li>
+</ol>
+<h3>5.2 取一张卡</h3>
+<div class="why"><span class="wt">规则作用</span>把窗口内一张支柱卡加入手牌，供后续打出到对应列；手牌容量因此成为行动次数的上限条件。<span class="pg">p.9</span><span class="pg">p.11</span></div>
+<ol class="steps">
+  <li>按图标所示支柱类型自对应窗口取 1 张卡；「任意类型」图标可取自任一窗口，多次取卡时类型可同可异。<span class="pg">p.11</span></li>
+  <li>可取窗口内全部 3 张卡，不限于最上面一张；某窗口 3 张未取完前不补充新卡。<span class="pg">p.11</span></li>
+  <li>手牌上限 4 张；已达上限时可弃掉手牌腾出空间，专家模式禁止弃牌腾位。<span class="pg">p.11</span><span class="pg">p.17</span></li>
+  <li>取走某窗口最后一张时，执行该窗口上方木质格所示的额外行动；回合结束时自对应牌堆抽 3 张补满窗口。<span class="pg">p.11</span></li>
+</ol>
+<h3>5.3 打出一张卡</h3>
+<div class="why"><span class="wt">规则作用</span>把手牌转入玩家版图对应列的下端，累加该列的打牌条件并取得卡面横幅奖励；自然列的即时结算在此触发。<span class="pg">p.12</span></div>
+<ol class="steps">
+  <li>把卡置于对应列最下方，使每张卡顶部的横幅可见、下一张卡的颜色图标被遮住；每列卡数无上限。<span class="pg">p.12</span></li>
+  <li>把该列全部卡上的数字相加，总和为玩家版图上须拥有、与卡面颜色相符的板块最低数量；板块不消耗、不必相邻、形状不限。<span class="pg">p.12</span></li>
+  <li>卡面为黑色图标时可自选颜色，但计入的板块须全部同色。<span class="pg">p.12</span></li>
+  <li>条件不满足时把卡退回手牌。<span class="pg">p.12</span></li>
+  <li>在自然列打出卡后即时结算该列；在加泰罗尼亚列或宗教列打出卡不触发即时结算。<span class="pg">p.12</span></li>
+</ol>
+<h3>5.4 推进一个烟囱标记</h3>
+<div class="why"><span class="wt">规则作用</span>把 1 个烟囱标记沿其烟囱自下而上推进一格，按目标格所示取得即时奖励或取得一项终局效果；推进深度同时是部分宗教卡的计分对象。<span class="pg">p.13</span><span class="pg">p.28</span></div>
+<ol class="steps">
+  <li>该行动不出现在吊灯轨上，由锤子选项、烟囱板块或其他奖励提供。<span class="pg">p.13</span></li>
+  <li>按目标格印出的数字与形状，玩家版图上须拥有至少该数量、与该形状相符的板块；颜色不限，不必相邻。<span class="pg">p.13</span></li>
+  <li>推进后按所进烟囱取得即时奖励，或登记一项在游戏结束时生效的效果。<span class="pg">p.13</span></li>
+  <li>标记到达烟囱顶端后，该标记在余下全局中不可再移动。<span class="pg">p.13</span></li>
+</ol>
+<h3>5.5 万能行动</h3>
+<div class="why"><span class="wt">规则作用</span>把一次行动转为吊灯轨上任一其他行动，用于补足停留格未提供的行动类型；中央吊灯板块上的行动不在可选范围内。<span class="pg">p.15</span></div>
+<p>万能行动图标旁同时印有铅笔与锤子；两类图标都用于该格时，可选定吊灯轨上最多 2 个不同行动执行。<span class="pg">p.15</span></p>
+</section>
+
+<section id="s6">
+<h2><span class="n">6</span>特伦卡迪斯板块的领取、拥有与组合</h2>
+<p>板块既是打牌与烟囱推进的判定资源，也是终局组合加分的计数对象。图标中的数字区分「领取」与「拥有」两种口径，二者不可混用。<span class="pg">p.10</span><span class="pg">p.15</span></p>
+<h3>6.1 领取与拥有</h3>
+<table>
+  <tr><th>图标</th><th>规则口径</th><th>依据</th></tr>
+  <tr><td>黑色描边数字</td><td>自供应区领取该数量，取得后须放到玩家版图</td><td><span class="pg">p.10</span></td></tr>
+  <tr><td>红色描边数字</td><td>玩家版图上须至少拥有该数量方可执行行动，不消耗、可保留</td><td><span class="pg">p.10</span></td></tr>
+  <tr><td>指定自选颜色</td><td>计入的板块须全部同色，形状不限</td><td><span class="pg">p.10</span></td></tr>
+  <tr><td>指定特定形状</td><td>计入的板块须形状相符，不必同色</td><td><span class="pg">p.10</span></td></tr>
+</table>
+<div class="note">原书以「6 块同色」与「4 块该形状」作示例：前者可全部取蓝色，不可由 4 块绿加 2 块灰凑数；后者只要求形状相符。<span class="pg">p.10</span></div>
+<h3>6.2 板块的放置</h3>
+<ol class="steps">
+  <li>取得的全部板块须放入玩家版图上与板块形状相符的空格，可翻面或旋转以匹配格位。<span class="pg">p.10</span></li>
+  <li>无可匹配的空格时，把该块退回原处并改取另一块。<span class="pg">p.10</span></li>
+  <li>玩家版图已满时不可再取板块。<span class="pg">p.10</span></li>
+</ol>
+<h3>6.3 相邻与组合</h3>
+<table>
+  <tr><th>概念</th><th>判定</th><th>依据</th></tr>
+  <tr><td>相邻</td><td>两块板块有一条边相接即为相邻；仅角与角接触不算。相邻格之间印有细小连接线</td><td><span class="pg">p.10</span></td></tr>
+  <tr><td>组合</td><td>彼此相连、形成不间断相邻序列的任意数量板块</td><td><span class="pg">p.10</span></td></tr>
+  <tr><td>颜色区分</td><td>除规则另有说明，组合按颜色区分，多数判定针对某颜色的相连板块组合</td><td><span class="pg">p.10</span></td></tr>
+</table>
+<div class="key"><b>状态变化：</b>终局组合加分只取同色的单一组合，按板块数量排序取第二大与第三大；两个组合可属不同颜色。专家模式改按第二大的每块前进 1 格、第三大的每块前进 2 格。<span class="pg">p.15</span><span class="pg">p.18</span></div>
+<h3>6.4 供应耗尽</h3>
+<ol class="steps">
+  <li>特伦卡迪斯供应格旁与窗口上方均印有额外行动图标；取走该格最后一块板块或该窗口最后一张卡时，可在本回合任意时点触发。<span class="pg">p.11</span></li>
+  <li>同一回合清空多格或多个窗口时，可执行多个额外行动，但同一种行动每回合只触发一次。<span class="pg">p.11</span></li>
+  <li>回合结束、轮到下一位玩家之前须补满：空的特伦卡迪斯格自袋中随机抽 5 块，空的窗口自对应牌堆抽 3 张。<span class="pg">p.11</span></li>
+  <li>袋已空时尽可能多补，自最左侧格起顺时针逐格填充；某牌堆用尽时尽可能补满后继续游戏。<span class="pg">p.11</span></li>
+  <li>专家模式改为每格补 4 块。<span class="pg">p.17</span></li>
+</ol>
+</section>
+
+<section id="s7">
+<h2><span class="n">7</span>支柱卡与三列结算</h2>
+<p>支柱卡分自然、加泰罗尼亚、宗教三叠，各 33 张。卡面同时承载打牌条件、奖励与类别；三列的结算时点互不相同，类别则供宗教卡与烟囱效果计数。<span class="pg">p.11</span><span class="pg">p.12</span><span class="pg">p.13</span></p>
+<h3>7.1 卡牌构成与类别</h3>
+<table>
+  <tr><th>部位</th><th>内容</th><th>规则作用</th></tr>
+  <tr><td>打牌条件</td><td>卡上印出的颜色与数字</td><td>与该列数字累加后，决定须拥有的板块数量<span class="pg">p.11</span></td></tr>
+  <tr><td>奖励</td><td>横幅上印出的图标</td><td>结算该列时全部取得<span class="pg">p.12</span></td></tr>
+  <tr><td>类别</td><td>立面、门、花园、室内、天花板、塔楼、雕塑、铁艺、家具、高迪生平</td><td>宗教卡与烟囱效果按类别计数<span class="pg">p.11</span></td></tr>
+  <tr><td>支柱类型</td><td>自然、加泰罗尼亚、宗教，由颜色与卡背表示</td><td>决定卡所属列<span class="pg">p.11</span></td></tr>
+  <tr><td>编号</td><td>宗教卡独有</td><td>对应附录的计分方式<span class="pg">p.11</span><span class="pg">p.28</span></td></tr>
+</table>
+<div class="note">「高迪生平」为万能类别，可指派为任何其他类别；指派在触发烟囱效果与终局结算宗教卡时分别进行，两次可指派为不同类别。<span class="pg">p.11</span><span class="pg">p.18</span></div>
+<h3>7.2 打牌条件与结算列</h3>
+<ol class="steps">
+  <li>把卡置于对应列最下方，使每张卡顶部的横幅可见、下一张卡的颜色图标被遮住；每列卡数无上限。<span class="pg">p.12</span></li>
+  <li>把该列全部卡上的数字相加，总和为须拥有、与卡面颜色相符的板块最低数量；板块不消耗、不必相邻、形状不限。<span class="pg">p.12</span></li>
+  <li>结算某一列时，取得该列每张卡横幅上的全部奖励，以及玩家版图上该列上方印出的奖励，顺序自选。<span class="pg">p.12</span></li>
+  <li>条件不满足时把卡退回手牌；另有图标允许无视条件打出 1 张卡。<span class="pg">p.12</span><span class="pg">p.14</span></li>
+</ol>
+<h3>7.3 三列结算时点</h3>
+<table>
+  <tr><th>列</th><th>结算时点</th><th>规则口径</th></tr>
+  <tr><td>自然列</td><td>每次在该列打出卡后即时结算</td><td>取得列内全部横幅奖励，含玩家版图该列上方印出的 4 点自然 VP<span class="pg">p.12</span></td></tr>
+  <tr><td>加泰罗尼亚列</td><td>轮次结束时结算</td><td>结算次数按中央吊灯板块所示；须到达该格并选定该项奖励<span class="pg">p.13</span></td></tr>
+  <tr><td>宗教列</td><td>终局计分第一步</td><td>宗教卡不给直接奖励，按卡面 VP 数值乘达成条件的次数<span class="pg">p.12</span><span class="pg">p.15</span></td></tr>
+</table>
+<div class="key"><b>状态变化：</b>自然列每打出一张卡即把此前全部横幅奖励再结算一次，因此该列越长，单次结算所得越多；加泰罗尼亚列与宗教列不因打牌即时结算。<span class="pg">p.12</span></div>
+<h3>7.4 宗教卡的十五种计分方式</h3>
+<table>
+  <tr><th>编号</th><th>计分口径</th><th>编号</th><th>计分口径</th></tr>
+  <tr><td>01–04</td><td>玩家版图上每块所示颜色的板块得 1 点宗教 VP</td><td>19–21</td><td>每张已打出的所示支柱类型卡得 2 点宗教 VP</td></tr>
+  <tr><td>05–08</td><td>玩家版图上每块所示形状的板块得 1 点宗教 VP</td><td>22–30</td><td>玩家版图上每张所示类别的卡得 3 点宗教 VP</td></tr>
+  <tr><td>09</td><td>每完成一格烟囱推进得 1 点宗教 VP</td><td>31</td><td>自选一列中，已打出卡牌的每个不同类别得 2 点宗教 VP</td></tr>
+  <tr><td>10</td><td>每个位于顶端的烟囱标记得 5 点宗教 VP</td><td>32</td><td>每张已打出的卡得 1 点宗教 VP</td></tr>
+  <tr><td>11</td><td>推进最少的那条烟囱上每格推进得 4 点宗教 VP</td><td>33</td><td>玩家版图上每 3 块板块得 1 点宗教 VP</td></tr>
+  <tr><td>12–14</td><td>所示特定烟囱上每格推进得 2 点宗教 VP</td><td>15</td><td>每凑齐一组「每种颜色各 1 块」得 2 点宗教 VP</td></tr>
+  <tr><td>16</td><td>每凑齐一组「每种形状各 1 块」得 2 点宗教 VP</td><td>17</td><td>已打出卡牌中每个不同类别得 1 点宗教 VP</td></tr>
+  <tr><td>18</td><td>卡牌最少的那一列中每张已打出的卡得 4 点宗教 VP</td><td>—</td><td>—</td></tr>
+</table>
+<div class="note">编号与计分文字的对应关系按原书附录的排列顺序整理；卡面印值与实体卡牌不一致时以实体卡牌为准。另有图标允许结算宗教列中的 1 张卡而非整列。<span class="pg">p.28</span><span class="pg">p.12</span></div>
+</section>
+
+<section id="s8">
+<h2><span class="n">8</span>烟囱与胜利分</h2>
+<p>烟囱标记自下而上推进，其目标格给出板块条件与奖励；三根支柱的 VP 由星形图标即时推进标记。烟囱推进按目标格形状判定板块存量，星形图标按所示支柱与数字推进 VP 标记。<span class="pg">p.13</span><span class="pg">p.8</span></p>
+<h3>8.1 三条烟囱的结构与推进</h3>
+<table>
+  <tr><th>项目</th><th>规则口径</th><th>依据</th></tr>
+  <tr><td>结构</td><td>自然、加泰罗尼亚、宗教各一条，自下而上分若干层级，各层印有数字与形状；专家烟囱板块为四层，编号 5 至 2</td><td><span class="pg">p.13</span><span class="pg">p.25</span></td></tr>
+  <tr><td>板块条件</td><td>目标格所示数量的该形状板块，颜色不限、不必相邻，拥有即可不消耗</td><td><span class="pg">p.13</span></td></tr>
+  <tr><td>奖励类型</td><td>即时奖励，或一项在游戏结束时生效的效果</td><td><span class="pg">p.13</span></td></tr>
+  <tr><td>到顶</td><td>标记到达烟囱顶端后，余下全局不可再移动</td><td><span class="pg">p.13</span></td></tr>
+  <tr><td>烟囱板块</td><td>每人每类 1 块，白天面朝上置于玩家版图上方槽位；专家模式改用夜晚面随机分配</td><td><span class="pg">p.5</span><span class="pg">p.17</span></td></tr>
+</table>
+<h3>8.2 烟囱板块奖励一览</h3>
+<table>
+  <tr><th>类别</th><th>奖励</th></tr>
+  <tr><td>即时</td><td>立即结算自然列；立即自主版图取 1 块任意形状与颜色的板块；立即结算加泰罗尼亚列；立即获得 5 点加泰罗尼亚 VP；立即结算宗教列中的 1 张卡</td></tr>
+  <tr><td>即时</td><td>立即打出 1 张手牌，无视其条件；立即自主版图取任意 1 张卡；本回合结束后立即再进行一个回合，再次移动吊灯标记，已到达吊灯轨终点者除外</td></tr>
+  <tr><td>终局</td><td>游戏结束、宗教列结算完毕后，把 1 个 VP 标记恰好减 3 点，并把另一标记增加相同点数</td></tr>
+</table>
+<div class="note">上列八项即时奖励与一项终局效果为休闲模式烟囱板块的全部奖励；专家模式另有被动效果，见第 11 节。<span class="pg">p.14</span><span class="pg">p.18</span></div>
+<h3>8.3 三根支柱的 VP 轨</h3>
+<table>
+  <tr><th>项目</th><th>规则口径</th><th>依据</th></tr>
+  <tr><td>星形图标</td><td>带数字的星形图标按图标下方所示支柱类型给分</td><td><span class="pg">p.8</span></td></tr>
+  <tr><td>记录</td><td>把对应的自然、加泰罗尼亚或宗教 VP 标记在轨道上前进所示格数</td><td><span class="pg">p.8</span></td></tr>
+  <tr><td>总分标记</td><td>终局把最低两项之和置于总分标记，再按组合加分推进</td><td><span class="pg">p.15</span></td></tr>
+  <tr><td>均衡约束</td><td>三根支柱中数值最高的一项不计入总分</td><td><span class="pg">p.2</span><span class="pg">p.15</span></td></tr>
+</table>
+<h3>8.4 组合加分的计数对象</h3>
+<ol class="steps">
+  <li>把玩家版图上同色的相连板块组合按板块数量排序，取第二大与第三大两项。<span class="pg">p.15</span></li>
+  <li>按两项所含板块数量推进总分标记；两项可属不同颜色。<span class="pg">p.15</span></li>
+  <li>并列时由玩家指定其中一个为「最大」、另一个为「最小」，据此确定第二与第三项。<span class="pg">p.15</span></li>
+  <li>专家模式改为第二大组合每块前进 1 格、第三大组合每块前进 2 格。<span class="pg">p.18</span></li>
+</ol>
+</section>
+
+<section id="s9">
+<h2><span class="n">9</span>终局与计分链路</h2>
+<p>某位玩家移除中央吊灯板块叠最后一块的那一轮结束时，游戏结束，按四步顺序结算；总分最高者获胜，平手时取总分以外最领先的 VP 标记，仍平手则共享胜利。<span class="pg">p.15</span></p>
+<div class="flow">
+<svg viewBox="0 0 900 210" role="img" aria-label="终局四步计分链路">
+  <rect x="0" y="0" width="900" height="210" fill="#ffffff"/>
+  <text x="450" y="26" text-anchor="middle" font-size="15" font-weight="700" fill="#2f466c">第三块吊灯板块移除 → 四步依次结算 → 总分最高者胜</text>
+  <g font-size="12.5" text-anchor="middle" fill="#25324a">
+    <rect x="18" y="48" width="200" height="62" rx="9" fill="#eef3fa" stroke="#cddcee"/>
+    <text x="118" y="72">第一步 宗教列</text><text x="118" y="93">先指派高迪生平类别</text>
+    <rect x="232" y="48" width="200" height="62" rx="9" fill="#eaf5ec" stroke="#c6e0cc"/>
+    <text x="332" y="72">第二步 烟囱效果</text><text x="332" y="93">加泰罗尼亚烟囱第 2 步</text>
+    <rect x="446" y="48" width="200" height="62" rx="9" fill="#fdf1e6" stroke="#e8cdae"/>
+    <text x="546" y="72">第三步 最低两项</text><text x="546" y="93">两项之和置于总分标记</text>
+    <rect x="660" y="48" width="222" height="62" rx="9" fill="#f3eefb" stroke="#d8c9ee"/>
+    <text x="771" y="72">第四步 组合加分</text><text x="771" y="93">第二大与第三大同色组合</text>
+  </g>
+  <g stroke="#7d5511" stroke-width="2" fill="none">
+    <path d="M218 79 H228"/><path d="M432 79 H442"/><path d="M646 79 H656"/>
+  </g>
+  <text x="450" y="146" text-anchor="middle" font-size="13" fill="#6b615c">并列时由玩家指定最大与最小，以定第二、第三项</text>
+  <text x="450" y="176" text-anchor="middle" font-size="12.5" fill="#6b615c">总分平手取总分以外最领先的 VP 标记，仍平手则共享胜利</text>
+</svg>
+</div>
+<h3>9.1 四步结算</h3>
+<ol class="steps">
+  <li>每位玩家先结算宗教列；结算前把全部「高迪生平」卡最后一次指派到自选的一个类别，据此推进宗教 VP 标记。<span class="pg">p.15</span></li>
+  <li>已到达加泰罗尼亚烟囱第 2 步者，此时应用该步效果。<span class="pg">p.15</span></li>
+  <li>把数值最低的两个 VP 标记相加，总分标记置于该总值。<span class="pg">p.15</span></li>
+  <li>按第二大与第三大同色单一组合所含板块数量推进总分标记，两项可属不同颜色。<span class="pg">p.15</span></li>
+</ol>
+<h3>9.2 并列与胜负</h3>
+<table>
+  <tr><th>情形</th><th>处理</th></tr>
+  <tr><td>两个或更多 VP 标记并列</td><td>由玩家指定其中一个为「最大」、另一个为「最小」，以定第二、第三项<span class="pg">p.15</span></td></tr>
+  <tr><td>两个或更多板块组合并列</td><td>同上，据此确定第二大与第三大组合<span class="pg">p.15</span></td></tr>
+  <tr><td>总分平手</td><td>总分以外最领先的 VP 标记所属者胜<span class="pg">p.15</span></td></tr>
+  <tr><td>仍平手</td><td>并列玩家共享胜利<span class="pg">p.15</span></td></tr>
+</table>
+<h3>9.3 原书终局算例</h3>
+<table>
+  <tr><th>步骤</th><th>计算</th><th>结果</th></tr>
+  <tr><td>宗教列</td><td>天花板卡 3 张加 1 张指派为天花板的「高迪生平」共 4 张乘 3 点；宗教烟囱 3 步乘 2 点；已打出加泰罗尼亚卡 4 张乘 2 点</td><td>12＋6＋8＝26 点宗教 VP，加到原有 4 点上<span class="pg">p.16</span></td></tr>
+  <tr><td>烟囱第 2 步</td><td>加泰罗尼亚标记后退 3 格，宗教标记前进 3 格</td><td>三根支柱的相对高低改变<span class="pg">p.16</span></td></tr>
+  <tr><td>最低两项</td><td>自然与宗教两项相加</td><td>64 VP，置于总分标记<span class="pg">p.16</span></td></tr>
+  <tr><td>组合加分</td><td>绿色与黄色组合并列第一、第二，取其一为第二大得 6 分，灰色第三大得 4 分</td><td>最终 74 VP<span class="pg">p.16</span></td></tr>
+</table>
+</section>
+
+<section id="s10">
+<h2><span class="n">10</span>常见误读与示例拆解</h2>
+<p>下列条目按规则口径逐条对照，页码指向英文原书。原书未列或存在歧义之处只记录、不代填；中文版中的译者注属译者判断，不列入规则口径。<span class="pg">p.10</span><span class="pg">p.17</span></p>
+<h3>10.1 常见误读逐条对照</h3>
+<table>
+  <tr><th>误读</th><th>规则口径</th><th>依据</th></tr>
+  <tr><td>三根支柱全部计入总分</td><td>只取数值最低的两项相加，最高一项不计</td><td><span class="pg">p.15</span></td></tr>
+  <tr><td>轮数由分数门槛决定</td><td>固定三轮，第三块吊灯板块移除后终局</td><td><span class="pg">p.2</span><span class="pg">p.8</span></td></tr>
+  <tr><td>首次移动可自吊灯轨任意格起算</td><td>须自最上方那一格起算，且该格计为第一格</td><td><span class="pg">p.6</span></td></tr>
+  <tr><td>可停在已有他人标记的格上</td><td>不可停在已被占据的格</td><td><span class="pg">p.6</span></td></tr>
+  <tr><td>标记可逆时针移动</td><td>始终顺时针</td><td><span class="pg">p.6</span></td></tr>
+  <tr><td>铅笔与锤子可无条件下并用</td><td>仅最领先者并用；不领先者只选一类</td><td><span class="pg">p.7</span></td></tr>
+  <tr><td>已取下的标记退出领先比较，他人可称最领先</td><td>已取下的标记始终视为最领先，场上其余标记均不属最领先</td><td><span class="pg">p.7</span></td></tr>
+  <tr><td>每个锤子固定推进烟囱</td><td>锤子在执行该格行动、推进烟囱、打出卡牌三类中选定其一</td><td><span class="pg">p.7</span></td></tr>
+  <tr><td>中央吊灯板块的行动数随人数变化</td><td>每块始终印 2 个行动；首个到达者执行 2 个，其后各 1 个</td><td><span class="pg">p.8</span></td></tr>
+  <tr><td>首个到达终点者立即改变本轮顺序</td><td>只取得起始玩家标记，本轮顺序不变</td><td><span class="pg">p.6</span></td></tr>
+  <tr><td>有人到达终点后深色格上的标记立即取下</td><td>须待其自身在此之后移上深色格时才取下</td><td><span class="pg">p.8</span></td></tr>
+  <tr><td>标记取下后仍可继续行动</td><td>轮到该玩家时跳过回合</td><td><span class="pg">p.6</span></td></tr>
+  <tr><td>双人局虚拟第三玩家会执行行动</td><td>不执行任何行动，且始终最后行动</td><td><span class="pg">p.7</span></td></tr>
+  <tr><td>虚拟第三玩家可取得起始玩家标记</td><td>不可取得，首个到达终点的人类玩家取得</td><td><span class="pg">p.7</span></td></tr>
+  <tr><td>红色描边数字表示消耗板块</td><td>表示须拥有该数量，不消耗、可保留</td><td><span class="pg">p.10</span></td></tr>
+  <tr><td>黑色描边数字表示拥有条件</td><td>表示自供应区领取该数量</td><td><span class="pg">p.10</span></td></tr>
+  <tr><td>自选颜色的板块可混色凑数</td><td>须全部同色，形状不限</td><td><span class="pg">p.10</span></td></tr>
+  <tr><td>指定形状的板块须同色</td><td>形状相符即可，不必同色</td><td><span class="pg">p.10</span></td></tr>
+  <tr><td>板块角与角接触即为相邻</td><td>须有一条边相接，仅角接触不算</td><td><span class="pg">p.10</span></td></tr>
+  <tr><td>组合不区分颜色</td><td>除规则另有说明，组合按颜色区分</td><td><span class="pg">p.10</span></td></tr>
+  <tr><td>板块可放到任意空格</td><td>须放到与板块形状相符的空格，可翻面或旋转</td><td><span class="pg">p.10</span></td></tr>
+  <tr><td>玩家版图已满仍可取板块</td><td>不可再取</td><td><span class="pg">p.10</span></td></tr>
+  <tr><td>窗口内只能取最上面一张卡</td><td>可取窗口内全部 3 张，未取完前不补充</td><td><span class="pg">p.11</span></td></tr>
+  <tr><td>手牌上限可随意突破</td><td>上限 4 张；可弃牌腾位，专家模式禁止弃牌腾位</td><td><span class="pg">p.11</span><span class="pg">p.17</span></td></tr>
+  <tr><td>打牌条件只看新卡上的数字</td><td>把该列全部卡上的数字相加</td><td><span class="pg">p.12</span></td></tr>
+  <tr><td>打牌条件须消耗对应板块</td><td>拥有即可，不消耗、不必相邻</td><td><span class="pg">p.12</span></td></tr>
+  <tr><td>任意列打牌都即时结算</td><td>仅自然列即时结算</td><td><span class="pg">p.12</span></td></tr>
+  <tr><td>加泰罗尼亚列在打牌时结算</td><td>轮次结束时按中央吊灯板块所示次数结算</td><td><span class="pg">p.13</span></td></tr>
+  <tr><td>宗教卡给直接奖励</td><td>不给直接奖励，按 VP 数值乘达成条件的次数在终局结算</td><td><span class="pg">p.12</span></td></tr>
+  <tr><td>烟囱推进要求同色板块</td><td>要求所示形状，颜色不限、不必相邻</td><td><span class="pg">p.13</span></td></tr>
+  <tr><td>烟囱标记到顶后仍可推进</td><td>到顶后余下全局不可再移动</td><td><span class="pg">p.13</span></td></tr>
+  <tr><td>供应耗尽的额外行动每格可重复触发</td><td>同一种行动每回合只触发一次</td><td><span class="pg">p.11</span></td></tr>
+  <tr><td>空格补给可延到下一位玩家之后</td><td>须在本回合结束、轮到下一位玩家之前补满</td><td><span class="pg">p.11</span></td></tr>
+  <tr><td>万能行动可选中央吊灯板块上的行动</td><td>只可选吊灯轨上的其他行动</td><td><span class="pg">p.15</span></td></tr>
+  <tr><td>终局组合加分取最大与第二大</td><td>取第二大与第三大同色单一组合</td><td><span class="pg">p.15</span></td></tr>
+  <tr><td>总分平手按剩余资源裁定</td><td>按总分以外最领先的 VP 标记裁定</td><td><span class="pg">p.15</span></td></tr>
+  <tr><td>专家模式每格补 5 块</td><td>每格补 4 块</td><td><span class="pg">p.17</span></td></tr>
+  <tr><td>专家模式打牌条件只看数量</td><td>所需板块须属同一相连组合且颜色相符</td><td><span class="pg">p.17</span></td></tr>
+  <tr><td>单人模式可用休闲模式设置</td><td>按专家模式两人局设置</td><td><span class="pg">p.19</span></td></tr>
+</table>
+<h3>10.2 原书示例拆解</h3>
+<table>
+  <tr><th>示例</th><th>步骤</th><th>结果</th><th>依据</th></tr>
+  <tr><td>打自然卡</td><td>Xavier 须拥有 4 块绿色板块，随后结算自然列</td><td>自然 VP 标记前进 7 格，并自主版图取 1 块任意形状的蓝色板块</td><td><span class="pg">p.12</span></td></tr>
+  <tr><td>加泰罗尼亚列</td><td>轮次结束时按中央吊灯板块结算两次</td><td>取得 18 点加泰罗尼亚 VP 与 2 张自然卡</td><td><span class="pg">p.13</span></td></tr>
+  <tr><td>烟囱到顶</td><td>Neus 须拥有 5 块梯形板块，把标记推进到加泰罗尼亚烟囱最后一格</td><td>结算加泰罗尼亚列共 7 点，并取 1 块任选形状与颜色的板块；此后该标记不可再动</td><td><span class="pg">p.14</span></td></tr>
+  <tr><td>高迪选格</td><td>以最领先者执行「取绿色板块」须主版图上有 3 块绿色板块；不领先时须 2 块</td><td>不足则跳过该格，顺时针检查下一格</td><td><span class="pg">p.20</span></td></tr>
+</table>
+</section>
+
+<section id="s11">
+<h2><span class="n">11</span>专家模式与单人模式</h2>
+<p>专家模式以基础规则为底，替换指定章节；单人模式以专家模式两人局为底，另加入高迪与虚拟第三玩家。三种模式的移动、行动与终局骨架一致，差异集中在设置、板块条件与计分公式。<span class="pg">p.17</span><span class="pg">p.19</span></p>
+<h3>11.1 专家设置改动</h3>
+<table>
+  <tr><th>条目</th><th>休闲模式</th><th>专家模式</th></tr>
+  <tr><td>主版图</td><td>白天面朝上</td><td>夜晚面朝上<span class="pg">p.17</span></td></tr>
+  <tr><td>特伦卡迪斯供应格</td><td>每格 5 块，共 25 块</td><td>每格 4 块，共 20 块；此后补给也改为每格 4 块<span class="pg">p.17</span></td></tr>
+  <tr><td>烟囱板块</td><td>按支柱分类，白天面朝上置于对应槽位</td><td>每套背面朝下洗匀后随机分配，夜晚面朝上<span class="pg">p.17</span></td></tr>
+  <tr><td>起始手牌</td><td>按人数取卡洗匀后随机发 1 张</td><td>自起始玩家右手边玩家起逆时针轮抽，各留 1 张后把余卡传给下一位<span class="pg">p.17</span></td></tr>
+</table>
+<h3>11.2 专家规则改动</h3>
+<table>
+  <tr><th>条目</th><th>专家口径</th><th>依据</th></tr>
+  <tr><td>取卡行动</td><td>不可弃掉手牌为新卡腾出空间</td><td><span class="pg">p.17</span></td></tr>
+  <tr><td>供应耗尽</td><td>回合结束补满空格时每格抽 4 块</td><td><span class="pg">p.17</span></td></tr>
+  <tr><td>打牌条件</td><td>所需板块须属同一相连组合，且颜色与卡面所示一致</td><td><span class="pg">p.17</span></td></tr>
+  <tr><td>推进烟囱</td><td>所需板块须属同一相连组合，形状与所示一致；组合可含不同颜色与形状，只须含所需形状</td><td><span class="pg">p.17</span></td></tr>
+  <tr><td>形状判定</td><td>除蓝色三角形外，全部三角形在判定特定形状时属同一组合；若放入方块把蓝色三角形接入组合，该三角形亦计入</td><td><span class="pg">p.17</span></td></tr>
+</table>
+<h3>11.3 专家烟囱的被动效果</h3>
+<ol class="steps">
+  <li>专家烟囱具有被动效果，一经激活，在余下全局中每逢所示条件满足即生效；即时奖励只取得一次。<span class="pg">p.18</span></li>
+  <li>烟囱标记已走到或经过的终局效果始终可用。<span class="pg">p.18</span></li>
+  <li>部分被动效果在打出某类别卡时给予奖励；「高迪生平」卡在触发该类效果时可当作任意其他类别。<span class="pg">p.18</span></li>
+  <li>可用多个「打出某类别卡时触发」的烟囱奖励时，只选定其中 1 个。<span class="pg">p.18</span></li>
+  <li>终局结算宗教卡时重新指派这些卡的类别，可与打牌时选定的类别不同。<span class="pg">p.18</span></li>
+</ol>
+<div class="note">专家烟囱板块按自然、加泰罗尼亚、宗教各 4 块排列，每块自下而上印 5、4、3、2 四个层级；效果分即时、被动与终局三类，条目按原书附录的三根支柱分组列出，各条所属板块以实体板块印面为准。<span class="pg">p.25</span><span class="pg">p.26</span><span class="pg">p.27</span></div>
+<h3>11.4 专家终局计分</h3>
+<ol class="steps">
+  <li>全体玩家先结算宗教列；结算前把「高迪生平」卡指派到自选类别。烟囱标记已到达或经过的终局效果各应用一次，部分在计分开始前、部分在计分过程中生效。<span class="pg">p.18</span></li>
+  <li>把第二低的 VP 标记数值，加上最低标记数值的两倍，总分标记置于所得值。<span class="pg">p.18</span></li>
+  <li>第二大组合每块板块使总分标记前进 1 格，第三大组合每块前进 2 格；两项可属不同颜色。<span class="pg">p.18</span></li>
+  <li>平手判定与休闲模式相同。<span class="pg">p.18</span></li>
+</ol>
+<h3>11.5 单人模式设置</h3>
+<ol class="steps">
+  <li>按专家模式两人局设置，含第三个吊灯标记；高迪不使用玩家版图、烟囱与烟囱标记，只用总分 VP 标记。<span class="pg">p.19</span></li>
+  <li>玩家为起始玩家，并自设置时翻出的起始卡中先选 1 张；未选的那张置于高迪专属区域。<span class="pg">p.19</span></li>
+  <li>开局前选定难度：简单、普通、困难、疯狂。<span class="pg">p.19</span></li>
+</ol>
+<h3>11.6 高迪与虚拟第三玩家的回合</h3>
+<table>
+  <tr><th>项目</th><th>规则口径</th><th>依据</th></tr>
+  <tr><td>第一轮顺序</td><td>玩家先行动，随后高迪，再虚拟第三玩家，之后回到玩家；第一轮后按上一轮取得起始玩家标记者开始</td><td><span class="pg">p.19</span></td></tr>
+  <tr><td>高迪选格</td><td>移到第一个能完整执行该格行动的格子；最领先时须能执行「铅笔数＋锤子数」次，不领先时须能执行两者中较大者次数；不能完整执行则顺时针检查下一格</td><td><span class="pg">p.19</span></td></tr>
+  <tr><td>高迪跳格</td><td>回合开始时其标记为吊灯上最后一个，且与顺时针下一个标记间隔 3 格以上时，跳过空格移到第一个既成为最领先、又能完整执行行动的格子</td><td><span class="pg">p.19</span></td></tr>
+  <tr><td>虚拟第三玩家</td><td>始终第三个行动；移到第一个使其成为最领先者的格子，并把该格行动执行尽可能多次，上限为铅笔与锤子之和</td><td><span class="pg">p.20</span></td></tr>
+  <tr><td>共同限制</td><td>忽略因耗尽供应或卡牌触发的行动，从不激活所取卡牌上的图标，且不可取得起始玩家标记</td><td><span class="pg">p.20</span></td></tr>
+  <tr><td>存放</td><td>所取板块与卡牌置于高迪区域；卡牌按三叠分三列，板块按颜色横排、形状纵排</td><td><span class="pg">p.20</span></td></tr>
+</table>
+<h3>11.7 高迪的行动细则</h3>
+<table>
+  <tr><th>行动</th><th>处理</th></tr>
+  <tr><td>取指定形状板块</td><td>在可选板块中取高迪该形状数量最少的颜色；取指定颜色板块时取该颜色中数量最少的形状。满足条件的板块多于 1 块时，自最左侧格起顺时针取第一个所在格；同格有多块时由玩家指定</td></tr>
+  <tr><td>取卡</td><td>取该叠最下方那张；「任意类型」取高迪数量最少的类型，并列时取并列项中最左侧一列</td></tr>
+  <tr><td>打出卡牌／万能行动</td><td>两者均视为「取一张任意类型的卡」</td></tr>
+  <tr><td>中央吊灯板块</td><td>只取得 1 次「取一张任意类型的卡」，不论板块图标，也不论是否为首个到达者</td></tr>
+</table>
+<h3>11.8 高迪终局计分</h3>
+<ol class="steps">
+  <li>玩家按常规完成终局计分后，按开局难度自高迪每列移除最前面 3／2／1 张卡，依次对应简单、普通、困难；原文未列疯狂难度的移除张数。<span class="pg">p.21</span></li>
+  <li>把高迪全部卡上的 VP 数值相加，含宗教 VP，全部倍率按 1 计；总和乘以 3，疯狂难度乘以 4，所得为其总分 VP。<span class="pg">p.21</span></li>
+  <li>再加上高迪第二多颜色的板块数量，以及第三多颜色板块数量的 2 倍。<span class="pg">p.21</span></li>
+  <li>玩家总分高于高迪即获胜。<span class="pg">p.21</span></li>
+</ol>
+<h3>11.9 版本差异记录</h3>
+<table>
+  <tr><th>条目</th><th>英文原书</th><th>已上线中文版</th><th>处理</th></tr>
+  <tr><td>专家烟囱板块 5→2 层级</td><td>按「板块 01–04」图示分组，层级编号 5 至 2</td><td>按文字出现顺序分三根支柱列出，附译者注说明归属无法可靠判定</td><td>只记四块板块、四个层级与效果类别，各条归属以实体板块印面为准</td></tr>
+  <tr><td>宗教卡编号与计分文字</td><td>编号加图示排版</td><td>按排列顺序整理为 15 种计分方式，附译者注</td><td>沿用 15 种口径，卡面印值以实体卡牌为准</td></tr>
+  <tr><td>单人终局计分量级</td><td>卡牌 VP 总和乘 3 或 4 后，再加第二多与两倍第三多颜色的板块数量</td><td>照字面直译，未改为倍数</td><td>照原文列出两步，不合并、不调和量级</td></tr>
+  <tr><td>双人局第三方先到终点</td><td>双方均不能执行吊灯板块的两个行动</td><td>照原文并列陈述</td><td>按原文写为首个到达者判定，不追加例外</td></tr>
+  <tr><td>原文背景专文与制作名单</td><td>背景专文见第 22 至 24 页；两者均不属规则叙述</td><td>全文译出</td><td>不属规则内容，不列入</td></tr>
+</table>
+<div class="key"><b>裁决口径：</b>英文原书页图为最终裁决；中文版只用于定位章节与沿用既定译法。<span class="pg">p.3</span><span class="pg">p.28</span></div>
+</section>
+
+<section id="s12">
+<h2><span class="n">12</span>速查表与页码索引</h2>
+<h3>12.1 一个回合速查</h3>
+<table>
+  <tr><th>环节</th><th>执行内容</th><th>禁止</th></tr>
+  <tr><td>移动</td><td>顺时针移动吊灯标记任意格；首次移动自最上方格起算</td><td>停在已被占据的格</td></tr>
+  <tr><td>行动次数</td><td>最领先者并用铅笔与锤子；不领先者只选一类</td><td>不领先者并用两类</td></tr>
+  <tr><td>行动</td><td>取板块、取卡、打牌、推进烟囱、万能行动，按所得图标执行</td><td>强制执行已放弃的行动</td></tr>
+  <tr><td>终点</td><td>取下标记并激活中央吊灯板块；首个到达者取得起始玩家标记</td><td>取下标记后继续执行行动</td></tr>
+  <tr><td>轮次结束</td><td>全员取下标记后移除最上面一块吊灯板块</td><td>第三块移除后追加第四轮</td></tr>
+  <tr><td>终局四步</td><td>宗教列、烟囱第 2 步、最低两项、组合加分</td><td>把最高一项计入总分</td></tr>
+</table>
+<h3>12.2 中英术语对照</h3>
+<table>
+  <tr><th>中文</th><th>英文</th><th>口径</th></tr>
+  <tr><td>支柱</td><td>Pillar</td><td>自然、加泰罗尼亚、宗教三根</td></tr>
+  <tr><td>特伦卡迪斯板块</td><td>Trencadís tile</td><td>96 块，每种颜色与形状各 6 块</td></tr>
+  <tr><td>吊灯轨</td><td>Chandelier track</td><td>环绕中央吊灯，每格印行动与铅笔锤子</td></tr>
+  <tr><td>铅笔</td><td>Pencil</td><td>每个执行该格行动一次</td></tr>
+  <tr><td>锤子</td><td>Hammer</td><td>每个在三选项或该格行动中选定其一</td></tr>
+  <tr><td>中央吊灯板块</td><td>Chandelier tile</td><td>每块印 2 个行动，共 7 块</td></tr>
+  <tr><td>窗口</td><td>Window</td><td>三叠支柱卡上方各 3 格</td></tr>
+  <tr><td>组合</td><td>Group</td><td>同色相连板块构成的序列</td></tr>
+  <tr><td>烟囱板块</td><td>Chimney tile</td><td>三根支柱各 4 块，分即时、被动、终局效果</td></tr>
+  <tr><td>高迪生平</td><td>Life of Gaudí</td><td>万能类别，可指派为任意其他类别</td></tr>
+  <tr><td>总分标记</td><td>Grand Total VP marker</td><td>终局记录最低两项与组合加分</td></tr>
+  <tr><td>万能行动</td><td>Wild action</td><td>执行吊灯轨上任一其他行动</td></tr>
+  <tr><td>虚拟第三玩家</td><td>Virtual third player</td><td>双人局与单人局的第三方标记</td></tr>
+  <tr><td>胜利分</td><td>VP</td><td>三根支柱轨道上的即时分与终局分</td></tr>
+</table>
+<h3>12.3 章节与原书页码对照</h3>
+<table>
+  <tr><td>0 游戏概要与目标</td><td>p.2、p.8、p.15</td><td>7 支柱卡与三列结算</td><td>p.11–13、p.28</td></tr>
+  <tr><td>1 初局设置</td><td>p.4、p.5</td><td>8 烟囱与胜利分</td><td>p.8、p.13–15</td></tr>
+  <tr><td>2 版图与组件速认</td><td>p.3、p.4、p.7</td><td>9 终局与计分链路</td><td>p.15、p.16</td></tr>
+  <tr><td>3 核心引擎</td><td>p.6、p.8</td><td>10 常见误读与示例拆解</td><td>p.6–20</td></tr>
+  <tr><td>4 一轮的结构</td><td>p.6–8</td><td>11 专家模式与单人模式</td><td>p.17–21、p.25–27</td></tr>
+  <tr><td>5 四类行动与万能行动</td><td>p.9–15</td><td>12 速查表与页码索引</td><td>全册</td></tr>
+  <tr><td>6 板块的领取、拥有与组合</td><td>p.9–11</td><td>页图对照</td><td>28 张</td></tr>
+</table>
+<h3>12.4 原书页图对照</h3>
+<details>
+  <summary>展开原书页图（28 张，按页序）</summary>
+  <div class="pgs">
+    <figure><img src="images_gaudi/page_01.jpg" alt="原书第 1 页 封面" loading="lazy"><figcaption>p.1 封面</figcaption></figure>
+    <figure><img src="images_gaudi/page_02.jpg" alt="原书第 2 页 简介与游戏目标" loading="lazy"><figcaption>p.2 简介与游戏目标</figcaption></figure>
+    <figure><img src="images_gaudi/page_03.jpg" alt="原书第 3 页 配件" loading="lazy"><figcaption>p.3 配件一览</figcaption></figure>
+    <figure><img src="images_gaudi/page_04.jpg" alt="原书第 4 页 公共设置" loading="lazy"><figcaption>p.4 公共设置</figcaption></figure>
+    <figure><img src="images_gaudi/page_05.jpg" alt="原书第 5 页 玩家设置" loading="lazy"><figcaption>p.5 玩家设置</figcaption></figure>
+    <figure><img src="images_gaudi/page_06.jpg" alt="原书第 6 页 移动吊灯标记" loading="lazy"><figcaption>p.6 移动吊灯标记</figcaption></figure>
+    <figure><img src="images_gaudi/page_07.jpg" alt="原书第 7 页 双人局与吊灯格" loading="lazy"><figcaption>p.7 双人局与吊灯格</figcaption></figure>
+    <figure><img src="images_gaudi/page_08.jpg" alt="原书第 8 页 中央吊灯板块与轮次结束" loading="lazy"><figcaption>p.8 中央板块与轮次结束</figcaption></figure>
+    <figure><img src="images_gaudi/page_09.jpg" alt="原书第 9 页 行动总述与取板块" loading="lazy"><figcaption>p.9 行动总述与取板块</figcaption></figure>
+    <figure><img src="images_gaudi/page_10.jpg" alt="原书第 10 页 领取与拥有、相邻与组合" loading="lazy"><figcaption>p.10 领取与拥有、组合</figcaption></figure>
+    <figure><img src="images_gaudi/page_11.jpg" alt="原书第 11 页 取卡与卡牌构成" loading="lazy"><figcaption>p.11 取卡与卡牌构成</figcaption></figure>
+    <figure><img src="images_gaudi/page_12.jpg" alt="原书第 12 页 打牌条件与结算列" loading="lazy"><figcaption>p.12 打牌条件与结算列</figcaption></figure>
+    <figure><img src="images_gaudi/page_13.jpg" alt="原书第 13 页 三列结算与推进烟囱" loading="lazy"><figcaption>p.13 三列结算与烟囱</figcaption></figure>
+    <figure><img src="images_gaudi/page_14.jpg" alt="原书第 14 页 烟囱推进示例与奖励" loading="lazy"><figcaption>p.14 烟囱示例与奖励</figcaption></figure>
+    <figure><img src="images_gaudi/page_15.jpg" alt="原书第 15 页 万能行动与终局计分" loading="lazy"><figcaption>p.15 万能行动与终局计分</figcaption></figure>
+    <figure><img src="images_gaudi/page_16.jpg" alt="原书第 16 页 终局计分示例" loading="lazy"><figcaption>p.16 终局计分示例</figcaption></figure>
+    <figure><img src="images_gaudi/page_17.jpg" alt="原书第 17 页 专家设置与规则改动" loading="lazy"><figcaption>p.17 专家设置与规则改动</figcaption></figure>
+    <figure><img src="images_gaudi/page_18.jpg" alt="原书第 18 页 被动效果与专家终局" loading="lazy"><figcaption>p.18 被动效果与专家终局</figcaption></figure>
+    <figure><img src="images_gaudi/page_19.jpg" alt="原书第 19 页 单人模式设置与流程" loading="lazy"><figcaption>p.19 单人设置与流程</figcaption></figure>
+    <figure><img src="images_gaudi/page_20.jpg" alt="原书第 20 页 高迪与虚拟第三玩家" loading="lazy"><figcaption>p.20 高迪与第三方回合</figcaption></figure>
+    <figure><img src="images_gaudi/page_21.jpg" alt="原书第 21 页 高迪终局计分与行动细则" loading="lazy"><figcaption>p.21 高迪终局与行动细则</figcaption></figure>
+    <figure><img src="images_gaudi/page_22.jpg" alt="原书第 22 页 背景专文一" loading="lazy"><figcaption>p.22 背景专文一</figcaption></figure>
+    <figure><img src="images_gaudi/page_23.jpg" alt="原书第 23 页 背景专文二" loading="lazy"><figcaption>p.23 背景专文二</figcaption></figure>
+    <figure><img src="images_gaudi/page_24.jpg" alt="原书第 24 页 背景专文三" loading="lazy"><figcaption>p.24 背景专文三</figcaption></figure>
+    <figure><img src="images_gaudi/page_25.jpg" alt="原书第 25 页 专家自然烟囱板块" loading="lazy"><figcaption>p.25 专家自然烟囱板块</figcaption></figure>
+    <figure><img src="images_gaudi/page_26.jpg" alt="原书第 26 页 专家加泰罗尼亚烟囱板块" loading="lazy"><figcaption>p.26 专家加泰罗尼亚烟囱板块</figcaption></figure>
+    <figure><img src="images_gaudi/page_27.jpg" alt="原书第 27 页 专家宗教烟囱板块" loading="lazy"><figcaption>p.27 专家宗教烟囱板块</figcaption></figure>
+    <figure><img src="images_gaudi/page_28.jpg" alt="原书第 28 页 图标一览与宗教卡详解" loading="lazy"><figcaption>p.28 图标一览与宗教卡详解</figcaption></figure>
+  </div>
+</details>
+</section>
+
+<div class="foot">
+高迪 · 学习版规则　｜　依据英文原书《Gaudí》Rulebook（28 页）与中文版既定译法编写<br>
+按规则结构重排，非官方规则书；规则裁决以英文原书为准，实体配件印值以配件为准。
+</div>
+</main>
+</div>
+</body>
+</html>
