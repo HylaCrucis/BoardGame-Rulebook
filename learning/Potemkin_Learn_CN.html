@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>波将金村庄 · 学习版规则（Potemkin Villages）</title>
+<style>
+  :root{
+    --bg:#fbf7f0; --paper:#fffdf9; --ink:#2f2a28; --soft:#6b615c;
+    --line:#e3d8c8; --line2:#d3c4ae;
+    --red:#a2303c; --red-l:#fbecec; --blue:#3b5b8c; --blue-l:#eaf0f9;
+    --gold:#a9761c; --gold-l:#fbf1dc; --green:#3d7a55; --green-l:#e9f4ec;
+    --purple:#6b4a86; --purple-l:#f1eaf7;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"PingFang SC","Microsoft YaHei","Noto Sans SC",Arial,sans-serif;
+    font-size:15.5px;line-height:1.85;}
+  .backbar{position:sticky;top:0;z-index:60;height:44px;box-sizing:border-box;
+    display:flex;align-items:center;gap:10px;padding:0 16px;
+    background:var(--paper);border-bottom:1px solid var(--line);font-size:13px;}
+  .backbar a{display:inline-flex;align-items:center;min-height:32px;padding:0 12px;
+    border:1px solid var(--line2);border-radius:8px;background:#fff;
+    color:var(--purple);text-decoration:none;white-space:nowrap;}
+  .backbar a:active{background:var(--purple-l);}
+  .backbar .bb-t{margin-left:auto;font-size:12px;color:var(--soft);}
+  .layout{display:flex;align-items:flex-start;max-width:1280px;margin:0 auto;}
+  nav.toc{position:sticky;top:44px;align-self:flex-start;width:238px;flex:0 0 238px;
+    height:calc(100vh - 44px);overflow-y:auto;background:#fffdf9;border-right:1px solid var(--line);
+    padding:22px 14px 40px;font-size:13px;}
+  nav.toc .brand{font-size:17px;font-weight:800;color:var(--red);margin:0 0 4px;}
+  nav.toc .brand-s{font-size:11.5px;color:var(--soft);margin:0 0 16px;letter-spacing:.04em;}
+  nav.toc .grp{margin:16px 0 5px;font-size:11px;color:var(--gold);font-weight:700;letter-spacing:.12em;}
+  nav.toc a{display:block;color:#49403b;text-decoration:none;padding:4px 9px;border-radius:6px;}
+  nav.toc a:hover{background:var(--red-l);color:var(--red);}
+  main{flex:1 1 auto;min-width:0;padding:0 42px 90px;}
+  .hero{background:linear-gradient(150deg,#7c1f2b,#a2303c 55%,#bd5a4a);
+    color:#fff8f0;border-radius:0 0 20px 20px;padding:40px 42px 34px;margin-bottom:26px;
+    box-shadow:0 8px 26px rgba(124,31,43,.18);}
+  .hero h1{margin:0;font-size:34px;letter-spacing:.02em;}
+  .hero .en{font-size:14px;opacity:.8;margin:2px 0 12px;letter-spacing:.06em;}
+  .hero .desc{font-size:16px;max-width:760px;line-height:1.8;}
+  .hero .meta{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px;}
+  .hero .meta span{border:1px solid rgba(255,255,255,.5);border-radius:20px;padding:3px 13px;font-size:12.5px;}
+  .stand{margin-top:14px;background:#fff6e2;border:1px solid #e8d2a2;border-left:5px solid var(--gold);
+    border-radius:0 10px 10px 0;padding:12px 18px;font-size:14px;color:#5c4a26;}
+  section{padding:22px 0 14px;border-bottom:1px dashed var(--line2);scroll-margin-top:14px;}
+  h2{font-size:25px;color:var(--red);margin:8px 0 4px;line-height:1.4;}
+  h2 .n{display:inline-block;background:var(--red);color:#fff;font-size:14px;
+    min-width:30px;height:30px;line-height:30px;text-align:center;border-radius:8px;
+    margin-right:10px;vertical-align:3px;font-weight:700;}
+  h3{font-size:18.5px;color:#3a3230;margin:26px 0 6px;border-left:4px solid var(--gold);padding-left:10px;}
+  h4{font-size:16px;color:var(--blue);margin:18px 0 4px;}
+  p{margin:9px 0;}
+  ul,ol{margin:9px 0 9px 2px;padding-left:22px;}
+  li{margin:5px 0;}
+  b,strong{color:var(--red);}
+  .goal{background:var(--blue-l);border:1px solid #cfdcf0;border-radius:9px;
+    padding:8px 14px;font-size:13.5px;color:#2f466c;margin:8px 0 16px;}
+  .goal b{color:#2f466c;}
+  .pg{display:inline-block;background:#f0e7d8;color:#7d6231;border:1px solid #e2d2b6;
+    border-radius:5px;font-size:11px;padding:0 6px;line-height:18px;vertical-align:1px;
+    margin-left:4px;font-weight:600;white-space:nowrap;font-family:Arial,sans-serif;}
+  .key{background:var(--green-l);border:1px solid #c9e2d1;border-left:5px solid var(--green);
+    padding:11px 16px;border-radius:0 10px 10px 0;margin:13px 0;}
+  .key b{color:var(--green);}
+  .warn{background:var(--red-l);border:1px solid #eed3d3;border-left:5px solid var(--red);
+    padding:11px 16px;border-radius:0 10px 10px 0;margin:13px 0;}
+  .warn b{color:var(--red);}
+  .tip{background:var(--gold-l);border:1px solid #eddcb8;border-left:5px solid var(--gold);
+    padding:11px 16px;border-radius:0 10px 10px 0;margin:13px 0;}
+  .tip b{color:var(--gold);}
+  .note{background:#f4f1ec;border:1px solid var(--line);border-radius:9px;padding:10px 15px;
+    margin:12px 0;font-size:14px;color:#514844;}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px;background:var(--paper);}
+  th,td{border:1px solid var(--line2);padding:8px 11px;text-align:left;vertical-align:top;}
+  th{background:#f4e9dd;color:#5d4022;font-weight:700;}
+  tr:nth-child(even) td{background:#fdf9f3;}
+  td.c,th.c{text-align:center;}
+  .steps{list-style:none;padding:0;counter-reset:st;margin:14px 0;}
+  .steps>li{position:relative;padding:10px 14px 10px 50px;margin:9px 0;background:var(--paper);
+    border:1px solid var(--line);border-radius:10px;}
+  .steps>li::before{counter-increment:st;content:counter(st);position:absolute;left:12px;top:11px;
+    width:26px;height:26px;background:var(--red);color:#fff;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;}
+  .steps>li>ol{margin:6px 0;padding-left:20px;}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:11px;
+    padding:13px 17px;margin:11px 0;box-shadow:0 2px 6px rgba(80,60,40,.04);}
+  .card .t{font-weight:800;color:var(--red);font-size:16px;margin-bottom:3px;}
+  .card .t .s{display:inline-block;background:var(--red);color:#fff;border-radius:5px;
+    font-size:12px;padding:1px 7px;margin-right:8px;}
+  .card.blue .t{color:var(--blue);} .card.blue .t .s{background:var(--blue);}
+  .card.green .t{color:var(--green);} .card.green .t .s{background:var(--green);}
+  .card.gold .t{color:var(--gold);} .card.gold .t .s{background:var(--gold);}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+  .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;}
+  .mini{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:11px 13px;}
+  .mini .h{font-weight:800;font-size:14px;margin-bottom:4px;}
+  .mini .v{font-size:13px;color:var(--soft);line-height:1.7;}
+  .fig{margin:18px 0;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;}
+  .fig svg{display:block;width:100%;height:auto;}
+  .figcap{font-size:12.5px;color:var(--soft);margin-top:8px;text-align:center;}
+  details{margin:12px 0;background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:8px 14px;}
+  summary{cursor:pointer;font-size:13.5px;color:var(--blue);font-weight:600;}
+  details img{display:block;max-width:100%;margin:12px auto;border:1px solid var(--line);border-radius:8px;}
+  .pit{counter-reset:pit;list-style:none;padding:0;margin:14px 0;}
+  .pit li{position:relative;padding:9px 14px 9px 46px;margin:7px 0;background:var(--paper);
+    border:1px solid var(--line);border-radius:9px;font-size:14.5px;}
+  .pit li::before{counter-increment:pit;content:"✕ " counter(pit);position:absolute;left:10px;top:9px;
+    color:#fff;background:var(--red);border-radius:6px;font-size:11px;padding:1px 6px;font-weight:700;}
+  .bad{color:var(--red);text-decoration:line-through;}
+  .good{color:var(--green);font-weight:700;}
+  .tagR{color:var(--red);font-weight:700;} .tagB{color:var(--blue);font-weight:700;}
+  .tagG{color:var(--gold);font-weight:700;}
+  .why{background:#eef3fa;border:1px solid #cddcee;border-left:5px solid var(--blue);
+    padding:12px 17px;border-radius:0 10px 10px 0;margin:13px 0;font-size:14.5px;}
+  .why b{color:#2f466c;}
+  .why .wt{font-weight:800;color:#2f466c;display:block;margin-bottom:3px;}
+  .idx{font-size:13.5px;}
+  .foot{margin-top:34px;font-size:12.5px;color:var(--soft);text-align:center;line-height:1.9;}
+  @media(max-width:960px){
+    .layout{flex-direction:column;} nav.toc{position:static;width:100%;height:auto;flex-basis:auto;border-right:0;border-bottom:1px solid var(--line);}
+    main{padding:0 18px 60px;} .grid2,.grid4{grid-template-columns:1fr 1fr;}
+  }
+  @media(max-width:640px){.backbar{height:40px;padding:0 10px;} .backbar a{min-height:30px;padding:0 9px;font-size:12.5px;} .backbar .bb-t{display:none;}
+  .grid2,.grid4{grid-template-columns:1fr;} main{padding:0 12px 50px;} .hero{padding:28px 20px;} .hero h1{font-size:26px;}}
+
+  /* == 窄屏目录：横向胶囊，正文首屏可见 == */
+  @media(max-width:960px){
+    nav.toc{display:flex;flex-wrap:nowrap;gap:6px;align-items:center;
+      height:auto;max-height:none;overflow-x:auto;overflow-y:hidden;
+      padding:10px 12px;border-right:0;border-bottom:1px solid var(--line);
+      -webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;}
+    nav.toc .brand,nav.toc .brand-s,nav.toc .grp{display:none;}
+    nav.toc a{flex:0 0 auto;white-space:nowrap;padding:6px 11px;
+      border:1px solid var(--line2);border-radius:16px;background:var(--paper);
+      font-size:12.5px;line-height:1.4;}
+    nav.toc a:hover{background:var(--red-l);}
+    nav.toc a[style]{padding-left:11px;}
+  }
+
+  /* == 学习版通用补充（各本共用） == */
+  .flow{margin:18px 0;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;}
+  .flow svg{display:block;width:100%;height:auto;}
+  .pgs{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin:14px 0;}
+  .pgs figure{margin:0;background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:8px;}
+  .pgs img{display:block;width:100%;height:auto;margin:0;border:1px solid var(--line);border-radius:6px;}
+  .pgs figcaption{font-size:12px;color:var(--soft);text-align:center;margin-top:6px;line-height:1.5;}
+  @media(max-width:640px){.pgs{grid-template-columns:1fr 1fr;gap:9px;}}
+  /* 窄屏压缩首屏：hero 与体例框收紧，第 0 节进入首屏 */
+  @media(max-width:640px){
+    .hero{padding:22px 18px 24px;margin-bottom:16px;}
+    .hero h1{font-size:24px;} .hero .desc{font-size:14px;line-height:1.65;margin-top:8px;}
+    .hero .meta{margin-top:12px;gap:6px;} .hero .meta span{font-size:11.5px;padding:2px 10px;}
+    .stand{margin-top:10px;padding:9px 12px;font-size:12.5px;line-height:1.6;}
+  }
+</style>
+</head>
+<body>
+<div class="backbar"><a href="index.html">← 学习版目录</a><span class="bb-t">波将金村庄 · 学习版规则</span></div>
+<div class="layout">
+<nav class="toc">
+  <div class="brand">波将金村庄</div>
+  <div class="brand-s">学习版规则 · Potemkin Villages</div>
+  <div class="grp">规则概要</div>
+  <a href="#s0">0 · 游戏概要</a>
+  <a href="#s1">1 · 初局设置</a>
+  <a href="#s2">2 · 组件与河面</a>
+  <div class="grp">一墩与能力</div>
+  <a href="#s3">3 · 核心引擎</a>
+  <a href="#s4">4 · 一墩的六个环节</a>
+  <a href="#s5">5 · 赢墩后的结算与角色能力</a>
+  <div class="grp">全局机制</div>
+  <a href="#s6">6 · 贯穿全局的系统</a>
+  <a href="#s7">7 · 牌的归属与流转</a>
+  <a href="#s8">8 · 胜负判定</a>
+  <div class="grp">查考与附录</div>
+  <a href="#s9">9 · 常见误读（33 条）</a>
+  <a href="#s10">10 · 示例墩拆解</a>
+  <a href="#s11">11 · 人数变体与角色组</a>
+  <a href="#s12">12 · 速查表与页码索引</a>
+</nav>
+
+<main>
+<header class="hero">
+  <h1>波将金村庄 · 学习版规则</h1>
+  <div class="en">POTEMKIN VILLAGES　｜　按规则结构重排，不按原书章节顺序</div>
+  <div class="desc">以一墩的六个环节与四组共 16 名角色能力为主线，展开船的推进、上下游与村庄建造、将牌设定、牌的四种归属、三人局与两人局调整；附常见误读、速查表及原书页码索引。</div>
+  <div class="meta"><span>四人局为主 · 2–4 人</span><span>共同胜负 · 无计分</span><span>吃墩 / 角色能力 / 河面推进</span><span>依据英文原书 12 页</span></div>
+</header>
+
+<div class="stand">
+  <b>体例：</b>按学习顺序重排，章节与原书不对应；每条结论后的 <span class="pg">p.X</span> 为英文原书页码。
+  规则裁决以<b>英文原书页图</b>为准；术语沿用已上线中文版的既定译法。原书未列之处只记录、不代填，辅助卡用途、五种颜色全名与角色卡多色背景的配色以配件为准。第 12 节附页码对照与 12 张页图。
+  正文按规则作用展开，先述状态变化，再列执行步骤。
+</div>
+
+<section id="s0">
+<h2><span class="n">0</span>游戏概要与目标</h2>
+<p>《波将金村庄》是完全合作型吃墩游戏。全体玩家共同打光手牌，并在叶卡捷琳娜大帝的船抵达之前把村庄建在河岸各处。全员一同获胜，或一同失败；原书不含分数与计分表。<span class="pg">p.2</span><span class="pg">p.5</span></p>
+<div class="why"><span class="wt">规则主线</span>每名玩家各打出一张数字牌构成一墩，赢家收拢该墩并结算本人角色能力；船随后向下游推进一格。全员完成完整的一回合且无人留有手牌时共同获胜；船每次移动到上排没有村庄的空位时立即共同失败。角色能力改变河上村庄的位置与数量，由此决定船继续推进时能否见到村庄。<span class="pg">p.4</span><span class="pg">p.5</span><span class="pg">p.9</span></div>
+<div class="grid2">
+  <div class="card"><div class="t">共同获胜</div>完成完整的一回合，且没有任何玩家手中留有牌，全员立即获胜。胜利条件按全体手牌判定，不按个人先后。<span class="pg">p.5</span></div>
+  <div class="card blue"><div class="t">共同失败</div>船移动到上排没有村庄的空位，叶卡捷琳娜看穿骗局，全员立即失败；船被移过最左侧上游村庄时同样失败。<span class="pg">p.5</span></div>
+</div>
+<table>
+  <tr><th>项目</th><th>取值</th><th>依据</th></tr>
+  <tr><td>人数</td><td>原书按四人局撰写，三人局与两人局的调整见第 11 节</td><td><span class="pg">p.3</span><span class="pg">p.6</span><span class="pg">p.7</span></td></tr>
+  <tr><td>数字牌</td><td>45 张，五种颜色各九张，编号 1–9</td><td><span class="pg">p.2</span></td></tr>
+  <tr><td>角色卡</td><td>16 张，分 A、B、C、D 四组，每组四张；A 组为入门组</td><td><span class="pg">p.2</span><span class="pg">p.3</span></td></tr>
+  <tr><td>轮转</td><td>一墩即一个回合；每回合船向下游推进一格</td><td><span class="pg">p.4</span></td></tr>
+  <tr><td>终局触发</td><td>全员手牌清空并完成该回合，或船落到无村庄的空位；不设固定轮数</td><td><span class="pg">p.5</span></td></tr>
+  <tr><td>计分</td><td>原书全篇不含分数、分数轨与分数结算；结果只有共同获胜与共同失败两种</td><td>全册</td></tr>
+</table>
+<h3>0.1 一局的结构</h3>
+<p>开局河上有四座正面朝上的村庄，船是一张背面朝下的牌，位于最左侧村庄下方。船沿河的移动以格为单位，村庄之间的空位与两端空位均计入格。村庄由赢家以获胜墩建造，也可由角色能力弃置或迁移；船推进时，其新位置上方必须有村庄。<span class="pg">p.3</span><span class="pg">p.5</span><span class="pg">p.9</span></p>
+<h3>0.2 触发结构</h3>
+<p>四组共 16 名角色的能力全部以赢下一墩为触发条件，一墩只触发赢家本人的能力。能力改变河面状态，船每回合推进一格，胜负判定随之进行。<span class="pg">p.4</span><span class="pg">p.9</span></p>
+</section>
+
+<section id="s1">
+<h2><span class="n">1</span>初局设置</h2>
+<p>设置按四人局撰写。四步依次为选定角色组、分发角色卡、分发手牌、布置河面与船。<span class="pg">p.3</span></p>
+<h3>1.1 四个步骤</h3>
+<ol>
+  <li>选定一组角色卡。四组分别标 A、B、C、D，A 组为入门组。<span class="pg">p.3</span></li>
+  <li>每名玩家自行挑选或随机抽取一张角色卡，白色一面朝上置于本人面前。另一面带多色背景，供三人局与两人局使用。<span class="pg">p.3</span><span class="pg">p.6</span></li>
+  <li>洗匀全部 45 张数字牌，给每名玩家发十张作为手牌，对其他玩家保密。<span class="pg">p.3</span></li>
+  <li>自剩余牌中正面朝上发四张，在桌面中央排成一行，代表第聂伯河沿岸最初的村庄；把最后一张牌背面朝下置于最左侧村庄下方，代表叶卡捷琳娜大帝的船。<span class="pg">p.3</span></li>
+</ol>
+<h3>1.2 起始牌数核对</h3>
+<table>
+  <tr><th>去向</th><th>张数</th><th>状态</th></tr>
+  <tr><td>四名玩家手牌</td><td>40</td><td>背面保密</td></tr>
+  <tr><td>河上村庄</td><td>4</td><td>正面朝上，排成一行</td></tr>
+  <tr><td>船</td><td>1</td><td>背面朝下，位于最左侧村庄下方</td></tr>
+  <tr><td>合计</td><td>45</td><td>与数字牌总数相符</td></tr>
+</table>
+<div class="note">游戏过程中会有更多牌加到船上，船始终是一叠背面朝下的牌，开局只含一张。<span class="pg">p.3</span><span class="pg">p.4</span></div>
+<h3>1.3 起始玩家标记</h3>
+<p>由控制带 ♠ 黑桃标记角色的玩家领出第一墩。每组各有一名带 ♠ 标记的角色：A 组工兵、B 组木匠、C 组车队总管、D 组建筑师。<span class="pg">p.4</span><span class="pg">p.9</span><span class="pg">p.10</span><span class="pg">p.11</span><span class="pg">p.12</span></p>
+<div class="key"><b>版本差异：</b>已上线中文版把该标记写作「♛ 王冠符号」。英文原书 p.4、p.9、p.10、p.11、p.12 页图均为 ♠ 黑桃标记，按英文原书记述。<span class="pg">p.4</span></div>
+<h3>1.4 设置阶段的保密范围</h3>
+<p>保密原则自设置阶段即生效：不得向其他玩家透露本人手牌的数字或颜色，也不得传递直接指向这些信息的内容；其余讨论不受限制。<span class="pg">p.3</span><span class="pg">p.4</span></p>
+</section>
+
+<section id="s2">
+<h2><span class="n">2</span>组件与河面速认</h2>
+<p>按使用先后认识配件：先分角色卡与数字牌，再分河面各位置，最后分清牌的四种归属。<span class="pg">p.2</span><span class="pg">p.3</span><span class="pg">p.5</span></p>
+<h3>2.1 配件</h3>
+<table>
+  <tr><th>配件</th><th>数量</th><th>印面与用途</th></tr>
+  <tr><td>角色卡</td><td>16 张，分四组</td><td>正面白色底，印角色名与能力；背面多色底，用于三人局与两人局判定能力归属</td></tr>
+  <tr><td>数字牌</td><td>45 张</td><td>五种颜色各九张，编号 1–9；颜色即花色，数字用于比大小与部分能力判定</td></tr>
+  <tr><td>辅助卡</td><td>2 张</td><td>原书配件页只列名称与数量，正文未述用途，只记录，不代填</td></tr>
+  <tr><td>规则书</td><td>1 本</td><td>英文原书 12 页</td></tr>
+</table>
+<div class="note">原书正文未逐个列出五种颜色的名称；颜色全名以实体配件为准。<span class="pg">p.2</span><span class="pg">p.7</span><span class="pg">p.10</span></div>
+<h3>2.2 河面的位置</h3>
+<table>
+  <tr><th>位置</th><th>定义</th><th>规则作用</th></tr>
+  <tr><td>村庄行</td><td>上排正面朝上的一叠叠牌，开局四座</td><td>船上方须有村庄；村庄数量与位置决定船能否继续推进</td></tr>
+  <tr><td>船</td><td>下排一叠背面朝下的牌</td><td>标记叶卡捷琳娜大帝当前位置；每回合向下游推进一格</td></tr>
+  <tr><td>上游</td><td>船左侧的村庄与村庄之间的空位，含最左侧空位</td><td>部分角色能力限定在上游建造或自上游迁移村庄</td></tr>
+  <tr><td>下游</td><td>船右侧方向，含最右侧空位与村庄之间的空位</td><td>船每回合推进的方向；部分角色能力限定在下游建造</td></tr>
+  <tr><td>船正上方</td><td>与船处于同一位的那座村庄</td><td>既不算上游村庄，也不算下游村庄</td></tr>
+  <tr><td>将牌位</td><td>船下方压着的牌堆</td><td>最上面一张的颜色决定当前将牌花色</td></tr>
+  <tr><td>玩家区域</td><td>本人角色卡旁</td><td>木匠、车队总管、哥萨克等角色在此存放村庄或调遣牌</td></tr>
+</table>
+<div class="key"><b>读图要点：</b>p.5 页图以船为界画出两支箭头，左箭头标上游、右箭头标下游；右侧空格上方没有村庄，页图在该格标出败局，船一旦移入即失败。<span class="pg">p.5</span></div>
+<h3>2.3 牌的四种归属</h3>
+<table>
+  <tr><th>归属</th><th>状态</th><th>可否查看</th></tr>
+  <tr><td>手牌</td><td>玩家手中，保密</td><td>仅本人可见；不得向他人透露数字与颜色</td></tr>
+  <tr><td>墩</td><td>本回合各人打出的一张牌</td><td>全部正面朝上，可自由查看</td></tr>
+  <tr><td>村庄</td><td>上排的一叠牌，以获胜牌为「正面」</td><td>正面朝上，可自由查看</td></tr>
+  <tr><td>船堆</td><td>背面朝下的船牌堆</td><td>只可经部分角色能力查看</td></tr>
+</table>
+<h3>2.4 村庄的「正面」</h3>
+<p>角色能力要求建造新村庄时，赢家取走整个获胜墩，把获胜牌置于最上面作为该村庄的正面。村庄因此是一叠牌，而非单张牌；村庄的数字取正面的数字，颜色取正面的颜色。<span class="pg">p.9</span><span class="pg">p.10</span></p>
+</section>
+
+<section id="s3">
+<h2><span class="n">3</span>核心引擎</h2>
+<p>全局由一墩接一墩推进。每墩把一张牌自各人手牌移入墩，赢家把整墩转为村庄、将牌或船堆上的牌，船随后推进一格并判定胜负。<span class="pg">p.4</span><span class="pg">p.5</span><span class="pg">p.9</span></p>
+<div class="flow">
+<svg viewBox="0 0 900 250" role="img" aria-label="一墩的因果链">
+  <rect x="0" y="0" width="900" height="250" fill="#ffffff"/>
+  <text x="450" y="24" text-anchor="middle" font-size="15" font-weight="700" fill="#2f466c">领出 → 跟牌 → 判定赢家 → 角色能力 → 船推进一格 → 判定胜负</text>
+  <g font-size="12.5" text-anchor="middle" fill="#25324a">
+    <rect x="16" y="48" width="132" height="62" rx="9" fill="#eef3fa" stroke="#cddcee"/>
+    <text x="82" y="72">领出</text><text x="82" y="93">首家出手牌一张</text>
+    <rect x="162" y="48" width="132" height="62" rx="9" fill="#fdf1e6" stroke="#e8cdae"/>
+    <text x="228" y="72">跟牌</text><text x="228" y="93">顺时针各出一张</text>
+    <rect x="308" y="48" width="132" height="62" rx="9" fill="#eaf5ec" stroke="#c6e0cc"/>
+    <text x="374" y="72">判定赢家</text><text x="374" y="93">领出花色或将牌</text>
+    <rect x="454" y="48" width="132" height="62" rx="9" fill="#f3eefb" stroke="#d8c9ee"/>
+    <text x="520" y="72">角色能力</text><text x="520" y="93">整墩转为村庄等</text>
+    <rect x="600" y="48" width="132" height="62" rx="9" fill="#f7f9fc" stroke="#d8e1ee"/>
+    <text x="666" y="72">船推进</text><text x="666" y="93">向下游一格</text>
+    <rect x="746" y="48" width="138" height="62" rx="9" fill="#fdf6e8" stroke="#e8d9ae"/>
+    <text x="815" y="72">判定胜负</text><text x="815" y="93">空位即失败</text>
+  </g>
+  <g stroke="#7d5511" stroke-width="2" fill="none">
+    <path d="M148 79 H158"/><path d="M294 79 H304"/><path d="M440 79 H450"/><path d="M586 79 H596"/><path d="M732 79 H742"/>
+    <path d="M815 114 V150 H82 V114"/><path d="M82 114 l-5 8 h10 z" fill="#7d5511"/>
+  </g>
+  <text x="450" y="172" text-anchor="middle" font-size="13" fill="#6b615c">以 9 或 1 赢墩时另有一次即时移动，与回合末推进各自独立</text>
+  <g font-size="12.5" fill="#2f466c">
+    <rect x="16" y="192" width="280" height="42" rx="8" fill="#f7f9fc" stroke="#d8e1ee"/>
+    <text x="156" y="218" text-anchor="middle">手牌逐墩减少 → 全员清空并完整结算一回合即胜</text>
+    <rect x="310" y="192" width="280" height="42" rx="8" fill="#f7f9fc" stroke="#d8e1ee"/>
+    <text x="450" y="218" text-anchor="middle">村庄数量随能力增减 → 决定船能否见到村庄</text>
+    <rect x="604" y="192" width="280" height="42" rx="8" fill="#f7f9fc" stroke="#d8e1ee"/>
+    <text x="744" y="218" text-anchor="middle">船每次移动之后均判定失败条件</text>
+  </g>
+</svg>
+</div>
+<h3>3.1 两次船移动的独立性</h3>
+<p>船的常规推进在角色能力结算之后发生，每次一格，方向为下游。以 9 赢墩时，船在赢下该墩的当下立即向下游移动一格；以 1 赢墩时立即向上游移动一格。即时移动与常规推进各自独立，以 9 赢墩的回合船共移动两次。<span class="pg">p.4</span><span class="pg">p.5</span><span class="pg">p.6</span></p>
+<div class="note">原书未按编号列出「即时移动」与「角色能力」的先后，只在 p.5 写「立即」。即时移动按赢墩当下处理，原书未列更细的顺序，不代填。<span class="pg">p.5</span></div>
+<h3>3.2 信息边界</h3>
+<table>
+  <tr><th>对象</th><th>可否查看</th><th>依据</th></tr>
+  <tr><td>村庄与其他正面朝上的牌</td><td>玩家可自由查看</td><td><span class="pg">p.4</span></td></tr>
+  <tr><td>船堆</td><td>只可经部分角色能力查看，因其背面朝下</td><td><span class="pg">p.4</span><span class="pg">p.9</span></td></tr>
+  <tr><td>本人手牌的数字与颜色</td><td>不得说出，也不得传递直接指向该信息的内容</td><td><span class="pg">p.4</span></td></tr>
+  <tr><td>讨论</td><td>自由进行，但不得借讨论透露手牌信息</td><td><span class="pg">p.4</span></td></tr>
+</table>
+</section>
+
+<section id="s4">
+<h2><span class="n">4</span>一墩的六个环节</h2>
+<p>原书 p.4 与 p.5 按叙述给出一墩的流程，未逐项编号。下列六个环节按叙述顺序排列，不新增规则。<span class="pg">p.4</span><span class="pg">p.5</span></p>
+<h3>4.1 领出</h3>
+<p>首家自手中打出一张牌，其颜色即本墩的领出花色。第一墩由控制带 ♠ 黑桃标记角色的玩家领出；其后由上一墩赢家领出，除非角色能力另行指定下一回合首家。<span class="pg">p.4</span><span class="pg">p.12</span></p>
+<h3>4.2 依次跟牌</h3>
+<p>其他玩家按顺时针方向各打出一张牌。手中持有与领出牌同色的牌时必须跟该花色，具体数字自行选定；手中无同色牌时可打出任意一张牌。<span class="pg">p.4</span></p>
+<h3>4.3 判定赢家</h3>
+<table>
+  <tr><th>情形</th><th>获胜牌</th><th>依据</th></tr>
+  <tr><td>无人打出将牌花色</td><td>领出花色中数字最大的一张</td><td><span class="pg">p.4</span></td></tr>
+  <tr><td>有人打出将牌花色</td><td>将牌花色中数字最大的一张</td><td><span class="pg">p.4</span></td></tr>
+  <tr><td>军需官能力生效的下一墩</td><td>数字 1 为全场最大，胜过 9 与其余数字</td><td><span class="pg">p.11</span></td></tr>
+</table>
+<div class="key"><b>状态变化：</b>赢家收走整墩，把获胜牌置于最上面；其余各人的牌随该墩一并移出手牌。<span class="pg">p.9</span></div>
+<h3>4.4 数字牌的即时效果</h3>
+<table>
+  <tr><th>获胜牌</th><th>船的移动</th><th>依据</th></tr>
+  <tr><td>9</td><td>立即向下游移动一格</td><td><span class="pg">p.5</span></td></tr>
+  <tr><td>1</td><td>立即向上游移动一格</td><td><span class="pg">p.5</span></td></tr>
+  <tr><td>其余数字</td><td>无即时移动</td><td><span class="pg">p.5</span></td></tr>
+</table>
+<p>即时效果只在「赢下一墩」时触发，跟牌打出 9 或 1 而未能赢墩时不触发。每次船移动之后均判定失败条件。<span class="pg">p.5</span></p>
+<h3>4.5 结算角色能力</h3>
+<p>赢家用整墩结算本人角色能力。除能力文字明确写出可选择之处，能力一律强制执行。能力可令整墩成为新村庄、成为船下方的将牌、弃到船堆，或迁移河上既有村庄。<span class="pg">p.4</span><span class="pg">p.9</span></p>
+<h3>4.6 常规推进与胜负判定</h3>
+<ol class="steps">
+  <li>把船向下游移动一格。<span class="pg">p.4</span></li>
+  <li>判定失败条件：船新位置上方须有村庄，移到无村庄的空位即全员失败；移过最左侧上游村庄同样失败。<span class="pg">p.5</span></li>
+  <li>判定胜利条件：本回合完整结算且全员手牌清空，即全员获胜。<span class="pg">p.5</span></li>
+  <li>由上一墩赢家领出下一墩，角色能力另有指定时从其指定。<span class="pg">p.4</span><span class="pg">p.12</span></li>
+</ol>
+</section>
+
+<section id="s5">
+<h2><span class="n">5</span>赢墩后的结算与角色能力</h2>
+<p>16 名角色的能力全部以「赢下一墩」为触发条件。能力的规则作用在于改变河上村庄的数量与位置、设定或更换将牌、改动船的位置，以及把牌交给其他玩家；一墩只触发赢家本人的角色能力。<span class="pg">p.9</span><span class="pg">p.10</span><span class="pg">p.11</span><span class="pg">p.12</span></p>
+<h3>5.0 赢墩后的通用处理</h3>
+<div class="why"><span class="wt">规则作用</span>赢家收拢整墩并把获胜牌置于最上面，随后以该墩结算本人能力。能力要求建造新村庄时，整墩整体成为村庄，获胜牌作为正面。能力未限定方向时，上游与下游均可建造；船是分界线，船正上方的村庄既不算上游村庄，也不算下游村庄。整墩插入两座既有村庄之间时，依船的位置向左或向右挪动村庄；自河上弃掉村庄时，其余村庄朝船靠拢，村庄之间不留空位。<span class="pg">p.9</span></div>
+<table>
+  <tr><th>处理</th><th>规则口径</th><th>依据</th></tr>
+  <tr><td>能力的强制性</td><td>除明确写出可选择之处，能力必须执行</td><td><span class="pg">p.9</span></td></tr>
+  <tr><td>建村庄的用牌</td><td>取整个获胜墩，获胜牌作村庄正面</td><td><span class="pg">p.9</span></td></tr>
+  <tr><td>建造方向</td><td>能力指定上游或下游时从其指定；未指定时两个方向均可</td><td><span class="pg">p.9</span></td></tr>
+  <tr><td>船正上方村庄</td><td>既不计入上游村庄，也不计入下游村庄</td><td><span class="pg">p.9</span></td></tr>
+  <tr><td>插入两村庄之间</td><td>下游建造时把牌向右挪，上游建造时把牌向左挪</td><td><span class="pg">p.9</span></td></tr>
+  <tr><td>弃掉村庄</td><td>其余村庄朝船方向挪动，不留空位</td><td><span class="pg">p.9</span></td></tr>
+  <tr><td>船不能消失</td><td>船堆至少保留一张牌，任何令船堆变空的行动不得执行</td><td><span class="pg">p.4</span></td></tr>
+</table>
+<h3>5.1 将牌的设定与更换</h3>
+<p>开局不设将牌。部分角色能力把一墩或若干张牌置于船下方，由此设定将牌颜色；自该时刻起，该颜色的全部牌为将牌，胜过其他花色。船下方可能压有多张牌，只有最上面一张决定将牌颜色。<span class="pg">p.4</span><span class="pg">p.9</span></p>
+<div class="key"><b>位置区分：</b>船堆即船本身那叠牌，背面朝下，弃牌置于其最上方；将牌位在船堆下方，牌正面朝上压放。两处不是同一叠。<span class="pg">p.4</span><span class="pg">p.9</span></div>
+<h3>5.2 A 组 · 入门组</h3>
+<table>
+  <tr><th>角色</th><th>赢墩后的状态变化</th><th>依据</th></tr>
+  <tr><td>工兵　♠</td><td>自河上取任意两座村庄弃到船堆，再以获胜墩在任意位置建一座新村庄；若被迫弃掉船正上方的村庄，全员立即失败</td><td><span class="pg">p.9</span></td></tr>
+  <tr><td>舞台布景师</td><td>船堆至少两张牌时，自该堆选一张放到船下方成为新将牌；所选牌与本墩颜色相符则可在任意位置建一座新村庄，否则把整墩弃到船上。船堆不足两张时不设定将牌</td><td><span class="pg">p.9</span></td></tr>
+  <tr><td>大臣</td><td>以获胜墩建一座上游村庄；若凭将牌赢下该墩，全体玩家各从手中弃一张牌到船上</td><td><span class="pg">p.9</span></td></tr>
+  <tr><td>侦察兵</td><td>场上至少两座上游村庄时，选其中一座移到下游，把获胜墩弃到船上；不足两座时只弃掉获胜墩</td><td><span class="pg">p.9</span></td></tr>
+</table>
+<h3>5.3 B 组</h3>
+<table>
+  <tr><th>角色</th><th>赢墩后的状态变化</th><th>依据</th></tr>
+  <tr><td>木匠　♠</td><td>以获胜墩在本人玩家区域建一座村庄，其后可把本人任意数量村庄移到河上任意位置；被迁移的村庄须与其左侧所有村庄花色相同。自玩家区域迁移与将牌花色相符的村庄时，可视为具备全部花色</td><td><span class="pg">p.10</span></td></tr>
+  <tr><td>艺术家</td><td>把获胜墩中的牌逐张放到任意村庄之上，含木匠玩家区域的村庄，同一村庄可放多张；已设将牌时，可改为把获胜墩弃到船上，并把整叠将牌作为一个新村庄移到河上任意位置</td><td><span class="pg">p.10</span></td></tr>
+  <tr><td>书记官</td><td>尚未设将牌时，以获胜墩设新将牌，置于船下方；已有将牌时，把一座数字小于获胜墩的上游村庄移到下游成为新的下游村庄，再以获胜墩在空出的位置建村庄；无数字更小的村庄时只把获胜墩弃到船上</td><td><span class="pg">p.10</span></td></tr>
+  <tr><td>哥萨克</td><td>设置时自手中选一张调遣牌置于玩家区域，该牌在所有用途上仍视为在手牌中。赢墩时可把获胜墩中的一张牌交给另一名玩家，该玩家随后自手中弃一张牌到船堆最上方，可弃刚收到的那张牌，获胜墩余牌弃到船上；以调遣牌赢墩时，把船移到数字相同的村庄下方，同数字村庄有多座时任选其一，再弃掉获胜墩与河上所有同花色村庄</td><td><span class="pg">p.10</span></td></tr>
+</table>
+<h3>5.4 C 组</h3>
+<table>
+  <tr><th>角色</th><th>赢墩后的状态变化</th><th>依据</th></tr>
+  <tr><td>军需官</td><td>把获胜墩交给车队总管，后者作为村庄存于玩家区域供后续迁移；下一墩中数字 1 为全场最大，1 的即时移动效果仍适用</td><td><span class="pg">p.11</span></td></tr>
+  <tr><td>宫廷内侍</td><td>查看船堆，至少两张牌时选一张设为新将牌，可与原将牌同色；把获胜墩弃到船上，并一并弃掉河上与车队总管玩家区域内所有匹配将牌颜色的村庄。不能设定新将牌时只弃掉获胜墩</td><td><span class="pg">p.11</span></td></tr>
+  <tr><td>军官</td><td>选一座上游村庄送给车队总管；凭将牌赢墩时另把获胜墩一并送交，一次可送两座村庄。无上游村庄而凭将牌赢墩时只送获胜墩；获胜墩与将牌颜色不符时把它弃到船上</td><td><span class="pg">p.11</span></td></tr>
+  <tr><td>车队总管　♠</td><td>接收军需官与军官送来的获胜墩或上游村庄，存于玩家区域；赢墩时可把其中任意数量村庄迁到河上任意位置，再把获胜墩放到任意村庄之上。玩家区域无村庄时只把获胜墩放到任意村庄之上</td><td><span class="pg">p.11</span></td></tr>
+</table>
+<h3>5.5 D 组</h3>
+<table>
+  <tr><th>角色</th><th>赢墩后的状态变化</th><th>依据</th></tr>
+  <tr><td>建筑师　♠</td><td>以获胜墩在河上建一座新村庄，可置于牌与牌之间或两端空位，新村庄的数字须大于其左侧所有村庄；也可改为把获胜墩放到任意既有村庄之上</td><td><span class="pg">p.12</span></td></tr>
+  <tr><td>画师</td><td>把获胜墩置于船下方，最上面的牌决定新将牌花色；已有将牌堆时把它移到任意下游空位形成一座新村庄。随后指定另一名玩家为下一回合首家</td><td><span class="pg">p.12</span></td></tr>
+  <tr><td>总督</td><td>洗匀所有上游村庄的牌，给每名玩家发一张，余牌弃到船上；牌不足时全部弃掉。随后以获胜墩在任意空位建一座下游村庄，不限建造条件，并指定另一名玩家为下一回合首家</td><td><span class="pg">p.12</span></td></tr>
+  <tr><td>指挥官</td><td>获胜牌与最左侧上游村庄颜色相同时，以获胜墩在任意空位建一座新村庄；颜色不符时，把获胜墩与最左侧上游村庄一并弃到船上</td><td><span class="pg">p.12</span></td></tr>
+</table>
+<h3>5.6 下一回合首家</h3>
+<table>
+  <tr><th>情形</th><th>首家</th><th>依据</th></tr>
+  <tr><td>通常情形</td><td>上一墩赢家</td><td><span class="pg">p.4</span></td></tr>
+  <tr><td>画师或总督能力结算后</td><td>由赢家指定另一名玩家，不得指定本人</td><td><span class="pg">p.12</span></td></tr>
+  <tr><td>两人局中画师或总督能力结算后</td><td>由赢家指定一个角色作为下一回合首家，可为本人第二个角色或对方任一角色</td><td><span class="pg">p.12</span></td></tr>
+  <tr><td>第一墩</td><td>控制带 ♠ 黑桃标记角色的玩家</td><td><span class="pg">p.4</span></td></tr>
+</table>
+<div class="note">四组角色各含一名带 ♠ 标记的起始角色；每组内部角色能力互不重复，跨组混用不在原书规则之内。<span class="pg">p.3</span><span class="pg">p.9</span><span class="pg">p.10</span><span class="pg">p.11</span><span class="pg">p.12</span></div>
+</section>
+
+<section id="s6">
+<h2><span class="n">6</span>贯穿全局的系统</h2>
+<p>跨墩生效的结构分列于后：上下游与船的位置、船堆与弃牌、村庄的建造与移位、将牌的持续、能力中的可选措辞。五组结构均不改变一墩的六个环节，只在各自触发时改动河面与牌的归属。<span class="pg">p.4</span><span class="pg">p.5</span><span class="pg">p.9</span></p>
+<h3>6.1 上下游与船的位置</h3>
+<table>
+  <tr><th>位置</th><th>范围</th><th>后果</th></tr>
+  <tr><td>上游</td><td>船左侧的村庄与其间空位，含最左侧空位</td><td>大臣、书记官、侦察兵、军官、总督、指挥官的能力按上游村庄计数或取用</td></tr>
+  <tr><td>下游</td><td>船右侧方向，含最右侧空位与村庄间空位</td><td>船每回合推进的方向；画师、总督、侦察兵等能力按下游空位建造或迁移</td></tr>
+  <tr><td>船正上方</td><td>与船同位的那座村庄</td><td>既不计入上游村庄，也不计入下游村庄；工兵被迫弃掉它时全员立即失败</td></tr>
+  <tr><td>无村庄的空位</td><td>上排没有村庄的任一格</td><td>船移入即全员失败</td></tr>
+</table>
+<div class="key"><b>状态变化：</b>船每次移动后，上游与下游的范围随之重定；原属上游的村庄可能转为船正上方的村庄。<span class="pg">p.5</span><span class="pg">p.9</span></div>
+<h3>6.2 失败判定的时点</h3>
+<ol class="steps">
+  <li>以 9 赢墩后船立即向下游移动一格，随即判定失败条件。<span class="pg">p.5</span></li>
+  <li>以 1 赢墩后船立即向上游移动一格，随即判定失败条件；船移过最左侧上游村庄时同样失败。<span class="pg">p.5</span></li>
+  <li>角色能力令船移动时，移动后随即判定；哥萨克的调遣牌能力把船移到同数字村庄下方，亦在其后判定。<span class="pg">p.10</span></li>
+  <li>回合末常规推进一格之后判定；该回合完整结算且全员手牌清空时改判胜利。<span class="pg">p.4</span><span class="pg">p.5</span></li>
+  <li>工兵被迫弃掉船正上方的村庄时立即失败，不必等待船移动。<span class="pg">p.9</span></li>
+</ol>
+<h3>6.3 船堆与弃牌</h3>
+<p>本作不设常规弃牌堆。游戏要求弃掉任何牌时，把牌背面朝下置于船堆最上方；船堆在任何时刻至少保留一张牌，任何令船堆变空的行动不得执行。船堆只可经部分角色能力查看，因其牌背面朝下。<span class="pg">p.4</span></p>
+<table>
+  <tr><th>动作</th><th>牌的去向</th><th>依据</th></tr>
+  <tr><td>角色能力要求弃掉获胜墩</td><td>整墩背面朝下置于船堆最上方</td><td><span class="pg">p.9</span></td></tr>
+  <tr><td>能力弃掉河上村庄</td><td>村庄全部牌背面朝下置于船堆</td><td><span class="pg">p.9</span><span class="pg">p.12</span></td></tr>
+  <tr><td>大臣能力令全体弃牌</td><td>各人自手中弃一张牌到船上</td><td><span class="pg">p.9</span></td></tr>
+  <tr><td>设定或更换将牌</td><td>牌置于船下方，不进入船堆</td><td><span class="pg">p.10</span><span class="pg">p.12</span></td></tr>
+</table>
+<h3>6.4 村庄的建造与移位</h3>
+<ol class="steps">
+  <li>以整墩建村庄时，获胜牌作正面，其余牌压在下方；村庄的数字与颜色均取正面。<span class="pg">p.9</span></li>
+  <li>整墩置于两座既有村庄之间时，按船的位置挪动村庄：下游建造向右挪，上游建造向左挪。<span class="pg">p.9</span></li>
+  <li>自河上弃掉一座村庄时，其余村庄朝船的方向挪动，村庄之间不留空位。<span class="pg">p.9</span></li>
+  <li>把牌放到既有村庄之上时，村庄不变动位置，其正面仍为原来的获胜牌；建筑师、艺术家、车队总管的能力按该口径执行。<span class="pg">p.10</span><span class="pg">p.11</span><span class="pg">p.12</span></li>
+  <li>建筑师新建村庄时，新村庄的数字须大于其左侧所有村庄。<span class="pg">p.12</span></li>
+  <li>木匠迁移村庄时，被迁移的村庄须与其左侧所有村庄花色相同。<span class="pg">p.10</span></li>
+</ol>
+<h3>6.5 将牌的持续与覆盖</h3>
+<p>将牌一经设定即持续生效，直至新牌压到船下方将其更换。船下方压有多张牌时，只有最上面一张决定将牌花色；宫廷内侍可选与原将牌同色的牌设定，此时花色不变而牌堆增加。将牌花色胜过其他花色，跟牌义务仍按领出花色判定。<span class="pg">p.4</span><span class="pg">p.9</span><span class="pg">p.11</span></p>
+<h3>6.6 能力中的可选措辞</h3>
+<p>能力文字写明「可」「可以」「或」之处，赢家在所列处理之间选定其一，不得同时执行；未写可选措辞之处，能力按文字全部执行。舞台布景师在船堆不足两张时不设定将牌，书记官在无数字更小的上游村庄时只弃掉获胜墩，军官在无上游村庄时不送出村庄，车队总管在玩家区域无村庄时只把获胜墩放到村庄之上，均属条件不成立时的处理，不属可选。<span class="pg">p.9</span><span class="pg">p.10</span><span class="pg">p.11</span></p>
+</section>
+
+<section id="s7">
+<h2><span class="n">7</span>牌的归属与流转</h2>
+<p>本作不设资源与费用。牌在手牌、墩、村庄、船堆、将牌位与玩家区域之间流转，胜负只由船的位置与剩余手牌决定。<span class="pg">p.4</span><span class="pg">p.5</span><span class="pg">p.9</span></p>
+<h3>7.1 流转路径</h3>
+<table>
+  <tr><th>起点</th><th>动作</th><th>终点</th></tr>
+  <tr><td>手牌</td><td>领出或跟牌</td><td>本墩</td></tr>
+  <tr><td>本墩</td><td>赢家收拢并结算能力</td><td>村庄、将牌位、船堆或玩家区域</td></tr>
+  <tr><td>河上村庄</td><td>能力弃置或迁移</td><td>船堆、河上另一位置或玩家区域</td></tr>
+  <tr><td>船堆</td><td>舞台布景师、宫廷内侍选取</td><td>船下方的将牌位</td></tr>
+  <tr><td>将牌位整叠</td><td>艺术家或画师能力</td><td>河上一座新村庄</td></tr>
+  <tr><td>玩家区域村庄</td><td>木匠或车队总管迁移</td><td>河上任意位置</td></tr>
+</table>
+<h3>7.2 三种人数的牌数核对</h3>
+<table>
+  <tr><th>人数</th><th>手牌</th><th>河上村庄</th><th>船</th><th>角色牌叠</th><th>移除</th><th>合计</th></tr>
+  <tr><td>四人局</td><td>40</td><td>4</td><td>1</td><td>0</td><td>0</td><td>45</td></tr>
+  <tr><td>三人局</td><td>30</td><td>4</td><td>2</td><td>0</td><td>白色 9 张</td><td>45</td></tr>
+  <tr><td>两人局</td><td>20</td><td>4</td><td>1</td><td>20</td><td>0</td><td>45</td></tr>
+</table>
+<div class="note">三人局移除的是白色花色的九张数字牌，并非全部数字为 9 的牌；移除后余 36 张，与 30 张手牌、4 座村庄、2 张船牌相符。<span class="pg">p.6</span></div>
+<h3>7.3 数字 1 与 9 的规则作用</h3>
+<table>
+  <tr><th>数字</th><th>赢墩时的效果</th><th>军需官能力生效的下一墩</th><th>依据</th></tr>
+  <tr><td>1</td><td>船立即向上游移动一格</td><td>数字 1 为全场最大，胜过 9 与其余数字</td><td><span class="pg">p.5</span><span class="pg">p.11</span></td></tr>
+  <tr><td>9</td><td>船立即向下游移动一格，与回合末推进叠加</td><td>仍按常规比大小，1 胜过 9</td><td><span class="pg">p.5</span><span class="pg">p.11</span></td></tr>
+</table>
+<p>即时效果只在赢下该墩时触发。跟牌时打出 1 或 9 而未能赢墩，不触发船的移动。<span class="pg">p.5</span></p>
+<h3>7.4 白色的两处用法</h3>
+<table>
+  <tr><th>场景</th><th>白色的处理</th><th>依据</th></tr>
+  <tr><td>三人局设置</td><td>白色花色九张数字牌全部移除，不参与该局</td><td><span class="pg">p.6</span></td></tr>
+  <tr><td>两人局判定获胜角色</td><td>判定能力归属角色时，白色视为万能色</td><td><span class="pg">p.7</span></td></tr>
+  <tr><td>跟牌义务</td><td>白色仍是一种花色，跟牌按领出花色判定，不作万能花色</td><td><span class="pg">p.4</span><span class="pg">p.7</span></td></tr>
+</table>
+</section>
+
+<section id="s8">
+<h2><span class="n">8</span>胜负判定</h2>
+<p>原书全篇不含分数、分数轨与分数结算。结果只有共同获胜与共同失败两种，判定对象为船的位置与全体剩余手牌。<span class="pg">p.5</span></p>
+<div class="flow">
+<svg viewBox="0 0 900 210" role="img" aria-label="胜负判定链路">
+  <rect x="0" y="0" width="900" height="210" fill="#ffffff"/>
+  <text x="450" y="26" text-anchor="middle" font-size="15" font-weight="700" fill="#2f466c">每次船移动之后判定 → 回合完整结算之后判定 → 继续下一墩</text>
+  <g font-size="12.5" text-anchor="middle" fill="#25324a">
+    <rect x="24" y="50" width="200" height="60" rx="9" fill="#eef3fa" stroke="#cddcee"/>
+    <text x="124" y="76">船移动</text><text x="124" y="96">9 或 1 即时 / 回合末推进</text>
+    <rect x="248" y="50" width="200" height="60" rx="9" fill="#fdf1e6" stroke="#e8cdae"/>
+    <text x="348" y="76">上方有村庄</text><text x="348" y="96">继续结算本回合</text>
+    <rect x="472" y="50" width="200" height="60" rx="9" fill="#eaf5ec" stroke="#c6e0cc"/>
+    <text x="572" y="76">全员手牌清空</text><text x="572" y="96">共同获胜</text>
+    <rect x="696" y="50" width="180" height="60" rx="9" fill="#f3eefb" stroke="#d8c9ee"/>
+    <text x="786" y="76">上方无村庄</text><text x="786" y="96">共同失败</text>
+  </g>
+  <g stroke="#7d5511" stroke-width="2" fill="none">
+    <path d="M224 80 H244"/><path d="M448 80 H468"/><path d="M672 80 H692"/>
+    <path d="M244 82 l-8 -5 v10 z" fill="#7d5511"/><path d="M468 82 l-8 -5 v10 z" fill="#7d5511"/><path d="M692 82 l-8 -5 v10 z" fill="#7d5511"/>
+  </g>
+  <text x="450" y="146" text-anchor="middle" font-size="13" fill="#6b615c">工兵被迫弃掉船正上方村庄时立即失败，不必等待船移动</text>
+  <text x="450" y="176" text-anchor="middle" font-size="12.5" fill="#6b615c">进展指标只有两项：船在河上的位置、各人手中剩余牌数</text>
+</svg>
+</div>
+<h3>8.1 共同获胜</h3>
+<p>玩家完成完整的一回合，且没有任何玩家手中留有牌，全员立即获胜。判定要求两点同时成立：该回合按六个环节完整结算，全体手牌清空。<span class="pg">p.5</span><span class="pg">p.8</span></p>
+<h3>8.2 共同失败</h3>
+<table>
+  <tr><th>触发</th><th>判定时点</th><th>依据</th></tr>
+  <tr><td>船移动到上排没有村庄的空位</td><td>该次移动之后立即判定</td><td><span class="pg">p.5</span></td></tr>
+  <tr><td>船被移过最左侧上游村庄</td><td>该次移动之后立即判定</td><td><span class="pg">p.5</span></td></tr>
+  <tr><td>工兵被迫弃掉船正上方的村庄</td><td>弃置时立即判定</td><td><span class="pg">p.9</span></td></tr>
+</table>
+<div class="note">以 9 赢墩时船即时向下游移动一格，回合末再常规推进一格，两次移动各自判定失败条件。<span class="pg">p.5</span><span class="pg">p.6</span></div>
+<h3>8.3 无计分机制</h3>
+<p>原书全篇不含分数、分数轨与分数结算，故不设计分表。游戏的进展由船在河上的位置与各人手中剩余牌数两项指标衡量；船每回合推进一格，全员手牌清空并完成该回合即为终点。<span class="pg">p.5</span></p>
+</section>
+
+<section id="s9">
+<h2><span class="n">9</span>常见误读</h2>
+<p>下列条目按规则口径逐条对照，页码指向英文原书。原书第 6 页关于 9 与 1 的注记不列入规则口径。<span class="pg">p.4</span><span class="pg">p.5</span><span class="pg">p.6</span></p>
+<table>
+  <tr><th>误读</th><th>规则口径</th><th>依据</th></tr>
+  <tr><td>起始玩家标记是王冠符号</td><td>英文原书页图为 ♠ 黑桃标记，四组各有一名带该标记的角色</td><td><span class="pg">p.4</span></td></tr>
+  <tr><td>三人局移除全部数字 9</td><td>移除的是白色花色九张数字牌，其余花色的 9 仍在局中</td><td><span class="pg">p.6</span></td></tr>
+  <tr><td>以 9 赢墩时船只移动一次</td><td>即时向下游一格与回合末常规推进叠加，该回合共移动两次</td><td><span class="pg">p.5</span><span class="pg">p.6</span></td></tr>
+  <tr><td>跟牌打出 9 也触发即时移动</td><td>即时效果只在赢下该墩时触发</td><td><span class="pg">p.5</span></td></tr>
+  <tr><td>9 与 1 的即时移动不判失败</td><td>每次船移动之后均判定失败条件</td><td><span class="pg">p.5</span></td></tr>
+  <tr><td>船移过最左侧上游村庄仍可继续</td><td>该情形与移到无村庄空位同样立即失败</td><td><span class="pg">p.5</span></td></tr>
+  <tr><td>船正上方的村庄计入上游</td><td>船是分界线，该村庄既不计入上游，也不计入下游</td><td><span class="pg">p.9</span></td></tr>
+  <tr><td>上游只指船左侧的村庄</td><td>上游含村庄之间的空位与最左侧空位</td><td><span class="pg">p.5</span></td></tr>
+  <tr><td>下游不含最右侧空位</td><td>下游含最右侧空位与村庄之间的空位</td><td><span class="pg">p.5</span></td></tr>
+  <tr><td>将牌位与船堆是同一叠牌</td><td>船堆是背面朝下的船牌，将牌位是船堆下方正面朝上的牌</td><td><span class="pg">p.4</span><span class="pg">p.9</span></td></tr>
+  <tr><td>船下方压着的多张牌全部生效</td><td>只有最上面一张决定将牌花色</td><td><span class="pg">p.4</span></td></tr>
+  <tr><td>设定将牌后跟牌义务改按将牌花色</td><td>跟牌义务仍按领出花色判定，将牌只影响赢墩判定</td><td><span class="pg">p.4</span></td></tr>
+  <tr><td>开局已有将牌</td><td>开局不设将牌，须由角色能力设定</td><td><span class="pg">p.4</span></td></tr>
+  <tr><td>本作设有常规弃牌堆</td><td>弃牌一律背面朝下置于船堆最上方，不另设弃牌堆</td><td><span class="pg">p.4</span></td></tr>
+  <tr><td>船堆可以清空</td><td>船堆至少保留一张牌，令船消失的行动不得执行</td><td><span class="pg">p.4</span></td></tr>
+  <tr><td>船堆可自由查看</td><td>只可经部分角色能力查看，村庄与正面朝上牌才可自由查看</td><td><span class="pg">p.4</span></td></tr>
+  <tr><td>角色能力可由赢家自行决定是否执行</td><td>除能力写明可选之外，能力必须执行</td><td><span class="pg">p.9</span></td></tr>
+  <tr><td>建村庄只取获胜牌一张</td><td>取整个获胜墩，获胜牌置于最上面作正面</td><td><span class="pg">p.9</span></td></tr>
+  <tr><td>建造方向必须由能力指定</td><td>能力未限定方向时，上游与下游均可建造</td><td><span class="pg">p.9</span></td></tr>
+  <tr><td>整墩插入两村庄之间时其余村庄不动</td><td>下游建造向右挪，上游建造向左挪</td><td><span class="pg">p.9</span></td></tr>
+  <tr><td>弃掉村庄后河上留下空位</td><td>其余村庄朝船方向挪动，村庄之间不留空位</td><td><span class="pg">p.9</span></td></tr>
+  <tr><td>工兵弃掉船正上方村庄仍可继续</td><td>被迫弃掉该村庄时全员立即失败</td><td><span class="pg">p.9</span></td></tr>
+  <tr><td>下一回合首家恒为上一墩赢家</td><td>画师与总督能力结算后须指定另一名玩家为首家</td><td><span class="pg">p.12</span></td></tr>
+  <tr><td>画师可指定本人为下一回合首家</td><td>指定对象为另一名玩家；两人局改为指定一个角色</td><td><span class="pg">p.12</span></td></tr>
+  <tr><td>白色在两人局中可作任意花色跟牌</td><td>白色只在判定能力归属角色时视为万能色，跟牌仍按领出花色</td><td><span class="pg">p.7</span></td></tr>
+  <tr><td>两人局角色上方的牌算作手牌</td><td>胜利条件不把角色上方的牌视为手牌，须打光手中全部牌并完成该回合</td><td><span class="pg">p.8</span></td></tr>
+  <tr><td>两人局第二墩起可自手牌领出</td><td>第一张牌须来自上一墩获胜角色的牌叠，其后另一名玩家与本人才各从手中出牌</td><td><span class="pg">p.7</span><span class="pg">p.8</span></td></tr>
+  <tr><td>一人控制两角色时两个能力都触发</td><td>按获胜墩颜色判定，只触发背景颜色相符的那个角色</td><td><span class="pg">p.6</span></td></tr>
+  <tr><td>三人局船起始只有一张牌</td><td>三人局船起始为两张牌</td><td><span class="pg">p.6</span></td></tr>
+  <tr><td>保密原则只约束游戏进行中</td><td>设置阶段同样适用</td><td><span class="pg">p.3</span><span class="pg">p.4</span></td></tr>
+  <tr><td>无计分即无胜负判定</td><td>胜负由船的位置与全体剩余手牌判定，与分数无关</td><td><span class="pg">p.5</span></td></tr>
+  <tr><td>四组角色可混用</td><td>设置时选定一组，各组内部能力配套，跨组混用不在原书规则之内</td><td><span class="pg">p.3</span></td></tr>
+  <tr><td>军需官能力令 1 失去即时移动效果</td><td>1 仍会把船向上游移动一格，同时在下一墩成为最大数字</td><td><span class="pg">p.11</span></td></tr>
+</table>
+</section>
+
+<section id="s10">
+<h2><span class="n">10</span>示例墩拆解</h2>
+<p>原书在三人局、两人局与角色能力三处给出示例。下表按「步骤／付出／得到／依据」拆开，示例中的人名与牌面数字均照原书。<span class="pg">p.7</span><span class="pg">p.8</span><span class="pg">p.10</span><span class="pg">p.11</span></p>
+<h3>10.1 三人局示例 · 跟牌与角色归属</h3>
+<table>
+  <tr><th>步骤</th><th>付出</th><th>得到</th><th>依据</th></tr>
+  <tr><td>安娜以橙色 2 领出</td><td>手牌一张</td><td>本墩领出花色为橙色</td><td><span class="pg">p.7</span></td></tr>
+  <tr><td>托马斯手中无橙色牌</td><td>打出一张 9</td><td>无同色牌时可出任意一张</td><td><span class="pg">p.4</span><span class="pg">p.7</span></td></tr>
+  <tr><td>查尔斯以橙色 7 赢墩</td><td>手牌一张</td><td>收拢整墩并结算能力</td><td><span class="pg">p.7</span></td></tr>
+  <tr><td>查尔斯控制两个角色</td><td>核对两角色背景颜色</td><td>舞台布景师背景为橙色，触发其能力；工兵需蓝色或红色方可触发</td><td><span class="pg">p.7</span></td></tr>
+</table>
+<h3>10.2 两人局示例 · 角色牌叠领出</h3>
+<table>
+  <tr><th>步骤</th><th>付出</th><th>得到</th><th>依据</th></tr>
+  <tr><td>查尔斯以上墩获胜角色总督牌叠顶端的蓝色 5 领出</td><td>角色牌叠一张</td><td>本墩领出花色为蓝色</td><td><span class="pg">p.8</span></td></tr>
+  <tr><td>安娜跟出蓝色 1</td><td>手牌中唯一一张蓝色牌</td><td>完成跟牌义务</td><td><span class="pg">p.8</span></td></tr>
+  <tr><td>查尔斯自手中打出蓝色 8</td><td>手牌一张</td><td>赢下该墩，两张牌同属查尔斯</td><td><span class="pg">p.8</span></td></tr>
+  <tr><td>按蓝色判定获胜角色</td><td>核对两角色背景颜色</td><td>建筑师为获胜角色，其能力触发；下一墩首张牌自建筑师牌叠取</td><td><span class="pg">p.8</span></td></tr>
+</table>
+<div class="note">原书示例末尾注明建筑师牌叠顶端为白色 9。白色 9 领出后若赢下该墩，船即时向下游移动一格，回合末再常规推进一格。<span class="pg">p.8</span><span class="pg">p.5</span></div>
+<h3>10.3 艺术家示例 · 分牌到村庄</h3>
+<p>艺术家以蓝色 8 赢墩。将牌尚未设定，故把该墩中的三张蓝色牌逐张放到河沿岸的村庄上，最后一张放到木匠玩家区域的村庄上。把牌放到村庄之上不改变村庄位置，也不设定将牌。<span class="pg">p.10</span></p>
+<h3>10.4 车队总管示例 · 迁移村庄</h3>
+<p>车队总管以橙色 7 赢墩。此前自军需官收到一座村庄，自凭将牌赢墩的军官收到两座村庄，玩家区域共存三座村庄。他可把三座村庄迁到河上任意位置，再把获胜墩放到任意一座村庄之上。<span class="pg">p.11</span></p>
+</section>
+
+<section id="s11">
+<h2><span class="n">11</span>人数变体与角色组</h2>
+<p>原书按四人局撰写，三人局与两人局的调整集中在第 6–8 页。两种人数下，一名玩家可控制两个角色，能力归属改按获胜墩颜色判定。<span class="pg">p.3</span><span class="pg">p.6</span><span class="pg">p.7</span></p>
+<h3>11.1 三人局</h3>
+<ol class="steps">
+  <li>一名玩家控制两个角色，另外两名玩家各控制一个角色；能力按获胜墩颜色触发，背景颜色相符的角色视为赢家。<span class="pg">p.6</span></li>
+  <li>设置时把全部角色翻到多色一面，选出两个背景颜色不同的角色交由同一名玩家控制，其余角色翻回白色一面。<span class="pg">p.6</span></li>
+  <li>移除白色花色九张数字牌；洗匀余下 36 张，给每名玩家发十张。<span class="pg">p.6</span></li>
+  <li>以余牌按四人局方式布置四座村庄与船，船起始为两张牌。<span class="pg">p.6</span></li>
+  <li>回合末船仍照常向下游移动一格；以 9 赢墩时该回合船移动两次。<span class="pg">p.6</span></li>
+</ol>
+<h3>11.2 两人局</h3>
+<ol class="steps">
+  <li>每名玩家控制两个背景颜色不同的角色。<span class="pg">p.7</span></li>
+  <li>洗匀全部数字牌，给每名玩家发十张作为手牌；再给每名玩家发十张，各自随机分成两叠、每叠五张，正面朝上置于两张角色卡上方，只露出上角小数字。<span class="pg">p.7</span></li>
+  <li>第二墩及其后各墩的第一张牌须来自上一墩获胜角色的牌叠，不得自手牌领出。<span class="pg">p.7</span></li>
+  <li>该角色领出后，另一名玩家自手中出一张牌，随后该角色的控制者自手中出一张牌；两张牌同属该控制者。<span class="pg">p.8</span></li>
+  <li>某角色应当出牌而其牌叠已空时，取该玩家第二个角色牌叠最上面一张。<span class="pg">p.8</span></li>
+  <li>获胜角色按获胜墩颜色判定；判定能力归属角色时，白色视为万能色。<span class="pg">p.7</span></li>
+  <li>胜利条件不把角色上方的牌视为手牌；两名玩家须打光手中全部牌并完成该回合。<span class="pg">p.8</span></li>
+  <li>画师与总督指定下一回合首家时，改为指定一个角色，可为本人第二个角色或对方任一角色。<span class="pg">p.12</span></li>
+</ol>
+<h3>11.3 角色组与起始角色</h3>
+<table>
+  <tr><th>组别</th><th>四名角色</th><th>带 ♠ 标记的起始角色</th><th>依据</th></tr>
+  <tr><td>A 组 · 入门组</td><td>工兵、舞台布景师、大臣、侦察兵</td><td>工兵</td><td><span class="pg">p.9</span></td></tr>
+  <tr><td>B 组</td><td>木匠、艺术家、书记官、哥萨克</td><td>木匠</td><td><span class="pg">p.10</span></td></tr>
+  <tr><td>C 组</td><td>军需官、宫廷内侍、军官、车队总管</td><td>车队总管</td><td><span class="pg">p.11</span></td></tr>
+  <tr><td>D 组</td><td>建筑师、画师、总督、指挥官</td><td>建筑师</td><td><span class="pg">p.12</span></td></tr>
+</table>
+<div class="note">D 组原为免费打印即玩版本的角色组，其后收入盒中；该组能力按原书 p.12 文字执行。<span class="pg">p.12</span></div>
+<h3>11.4 版本差异记录</h3>
+<table>
+  <tr><th>条目</th><th>英文原书</th><th>已上线中文版</th><th>处理</th></tr>
+  <tr><td>起始玩家标记</td><td>♠ 黑桃标记，见 p.4 与四组角色页</td><td>写作「♛ 王冠符号」</td><td>按英文原书</td></tr>
+  <tr><td>一墩的流程划分</td><td>p.4 与 p.5 按叙述给出，未逐项编号</td><td>整理为六个阶段并编号</td><td>按该顺序排列，不新增规则</td></tr>
+  <tr><td>第 6 页关于 9 与 1 的注记</td><td>属技巧性提示</td><td>单列「提示」一节</td><td>不纳入规则口径</td></tr>
+  <tr><td>辅助卡用途</td><td>配件页只列名称与数量</td><td>未述用途</td><td>只记录，不代填</td></tr>
+</table>
+<div class="key"><b>裁决口径：</b>英文原书页图为最终裁决；中文版只用于定位章节与沿用既定译名，不以其中文措辞反推规则含义。原书第 8 页历史说明与第 12 页制作名单不属规则内容，不列入。<span class="pg">p.8</span><span class="pg">p.12</span></div>
+</section>
+
+<section id="s12">
+<h2><span class="n">12</span>速查表与页码索引</h2>
+<h3>12.1 一墩速查</h3>
+<table>
+  <tr><th>环节</th><th>执行内容</th><th>禁止</th></tr>
+  <tr><td>领出</td><td>首家自手中出一张，首墩由带 ♠ 标记角色的控制者领出</td><td>两人局第二墩起自手牌领出</td></tr>
+  <tr><td>跟牌</td><td>顺时针各出一张，有同色牌须跟该花色</td><td>有同色牌而改出其他花色</td></tr>
+  <tr><td>赢墩</td><td>领出花色最大者；有将牌则最大将牌</td><td>以非将牌的异色大牌压过将牌</td></tr>
+  <tr><td>即时效果</td><td>以 9 赢墩船右移一格；以 1 赢墩船左移一格</td><td>跟牌打出的 9 或 1 触发移动</td></tr>
+  <tr><td>能力</td><td>赢家以整墩结算本人能力</td><td>条件成立时不执行强制能力</td></tr>
+  <tr><td>推进</td><td>船向下游一格，随后判定胜负</td><td>让船堆变空</td></tr>
+  <tr><td>胜负</td><td>全员手牌清空并完成该回合即胜；船入无村庄空位即败</td><td>以分数判定胜负</td></tr>
+</table>
+<h3>12.2 中英术语对照</h3>
+<table>
+  <tr><th>中文</th><th>英文</th><th>口径</th></tr>
+  <tr><td>墩</td><td>Trick</td><td>各人各出一张牌构成的一叠与其结算结果</td></tr>
+  <tr><td>回合</td><td>Round</td><td>自领出起，至结算完毕、船推进一格止</td></tr>
+  <tr><td>跟花色</td><td>Follow suit</td><td>有同色牌须打出，数字自行选定</td></tr>
+  <tr><td>将牌</td><td>Trump</td><td>船下方最上面一张牌的颜色</td></tr>
+  <tr><td>角色卡</td><td>Character card</td><td>16 张分四组，白色面用于四人局</td></tr>
+  <tr><td>数字牌</td><td>Numbered card</td><td>45 张，五种颜色各 1–9</td></tr>
+  <tr><td>辅助卡</td><td>Aid card</td><td>2 张，原书正文未述用途</td></tr>
+  <tr><td>村庄</td><td>Village</td><td>上排一叠牌，获胜牌为正面</td></tr>
+  <tr><td>船</td><td>Boat</td><td>下排背面朝下的一叠牌</td></tr>
+  <tr><td>上游</td><td>Upstream</td><td>船左侧的村庄与空位</td></tr>
+  <tr><td>下游</td><td>Downstream</td><td>船右侧方向与空位</td></tr>
+  <tr><td>调遣牌</td><td>Redeployment card</td><td>哥萨克设置时自手中选出的牌</td></tr>
+  <tr><td>万能色</td><td>Wild</td><td>两人局判定获胜角色时白色的处理</td></tr>
+</table>
+<h3>12.3 章节与原书页码对照</h3>
+<table>
+  <tr><td>0 游戏概要与目标</td><td>p.2、p.5</td><td>7 牌的归属与流转</td><td>p.4–p.9</td></tr>
+  <tr><td>1 初局设置</td><td>p.3</td><td>8 胜负判定</td><td>p.5、p.9</td></tr>
+  <tr><td>2 组件与河面速认</td><td>p.2、p.3、p.5</td><td>9 常见误读</td><td>p.3–p.12</td></tr>
+  <tr><td>3 核心引擎</td><td>p.4、p.5</td><td>10 示例墩拆解</td><td>p.7、p.8、p.10、p.11</td></tr>
+  <tr><td>4 一墩的六个环节</td><td>p.4、p.5</td><td>11 人数变体与角色组</td><td>p.6–p.8、p.9–p.12</td></tr>
+  <tr><td>5 赢墩后的结算与角色能力</td><td>p.9–p.12</td><td>12 速查表与页码索引</td><td>全册</td></tr>
+  <tr><td>6 贯穿全局的系统</td><td>p.4、p.5、p.9–p.12</td><td>页图对照</td><td>12 张</td></tr>
+</table>
+<h3>12.4 原书页图对照</h3>
+<details>
+  <summary>展开原书页图（12 张，按页序）</summary>
+  <div class="pgs">
+    <figure><img src="images_pot/page_01.jpg" alt="原书第 1 页 封面" loading="lazy"><figcaption>p.1 封面</figcaption></figure>
+    <figure><img src="images_pot/page_02.jpg" alt="原书第 2 页 游戏简介与配件" loading="lazy"><figcaption>p.2 游戏简介与配件</figcaption></figure>
+    <figure><img src="images_pot/page_03.jpg" alt="原书第 3 页 设置" loading="lazy"><figcaption>p.3 四人局设置与河面布置</figcaption></figure>
+    <figure><img src="images_pot/page_04.jpg" alt="原书第 4 页 玩法概览与吃墩规则" loading="lazy"><figcaption>p.4 玩法概览、跟牌、将牌与弃牌</figcaption></figure>
+    <figure><img src="images_pot/page_05.jpg" alt="原书第 5 页 上下游与胜负" loading="lazy"><figcaption>p.5 上下游、胜负与 1、9 即时效果</figcaption></figure>
+    <figure><img src="images_pot/page_06.jpg" alt="原书第 6 页 三人局规则" loading="lazy"><figcaption>p.6 三人局设置与船起始两张牌</figcaption></figure>
+    <figure><img src="images_pot/page_07.jpg" alt="原书第 7 页 两人局规则" loading="lazy"><figcaption>p.7 两人局布局与角色牌叠</figcaption></figure>
+    <figure><img src="images_pot/page_08.jpg" alt="原书第 8 页 两人局出牌顺序与示例" loading="lazy"><figcaption>p.8 两人局出牌顺序与示例</figcaption></figure>
+    <figure><img src="images_pot/page_09.jpg" alt="原书第 9 页 角色能力通用规则与 A 组" loading="lazy"><figcaption>p.9 能力通用规则、设定将牌与 A 组</figcaption></figure>
+    <figure><img src="images_pot/page_10.jpg" alt="原书第 10 页 B 组角色能力" loading="lazy"><figcaption>p.10 B 组角色与艺术家示例</figcaption></figure>
+    <figure><img src="images_pot/page_11.jpg" alt="原书第 11 页 C 组角色能力" loading="lazy"><figcaption>p.11 C 组角色与车队总管示例</figcaption></figure>
+    <figure><img src="images_pot/page_12.jpg" alt="原书第 12 页 D 组角色能力" loading="lazy"><figcaption>p.12 D 组角色与制作名单</figcaption></figure>
+  </div>
+</details>
+</section>
+
+<div class="foot">
+波将金村庄 · 学习版规则　｜　依据英文原书《Potemkin Villages》Rulebook（12 页）与中文版既定译法编写<br>
+按规则结构重排，非官方规则书；规则裁决以英文原书为准，实体配件印值以配件为准。
+</div>
+</main>
+</div>
+</body>
+</html>
