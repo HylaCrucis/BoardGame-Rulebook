@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>灰烬：停电协议 · 学习版规则（A.S.H.E.S.: Blackout Protocol）</title>
+<style>
+  :root{
+    --bg:#fbf7f0; --paper:#fffdf9; --ink:#2f2a28; --soft:#6b615c;
+    --line:#e3d8c8; --line2:#d3c4ae;
+    --red:#a2303c; --red-l:#fbecec; --blue:#3b5b8c; --blue-l:#eaf0f9;
+    --gold:#a9761c; --gold-l:#fbf1dc; --green:#3d7a55; --green-l:#e9f4ec;
+    --purple:#6b4a86; --purple-l:#f1eaf7;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"PingFang SC","Microsoft YaHei","Noto Sans SC",Arial,sans-serif;
+    font-size:15.5px;line-height:1.85;}
+  .backbar{position:sticky;top:0;z-index:60;height:44px;box-sizing:border-box;
+    display:flex;align-items:center;gap:10px;padding:0 16px;
+    background:var(--paper);border-bottom:1px solid var(--line);font-size:13px;}
+  .backbar a{display:inline-flex;align-items:center;min-height:32px;padding:0 12px;
+    border:1px solid var(--line2);border-radius:8px;background:#fff;
+    color:var(--purple);text-decoration:none;white-space:nowrap;}
+  .backbar a:active{background:var(--purple-l);}
+  .backbar .bb-t{margin-left:auto;font-size:12px;color:var(--soft);}
+  .layout{display:flex;align-items:flex-start;max-width:1280px;margin:0 auto;}
+  nav.toc{position:sticky;top:44px;align-self:flex-start;width:238px;flex:0 0 238px;
+    height:calc(100vh - 44px);overflow-y:auto;background:#fffdf9;border-right:1px solid var(--line);
+    padding:22px 14px 40px;font-size:13px;}
+  nav.toc .brand{font-size:17px;font-weight:800;color:var(--red);margin:0 0 4px;}
+  nav.toc .brand-s{font-size:11.5px;color:var(--soft);margin:0 0 16px;letter-spacing:.04em;}
+  nav.toc .grp{margin:16px 0 5px;font-size:11px;color:var(--gold);font-weight:700;letter-spacing:.12em;}
+  nav.toc a{display:block;color:#49403b;text-decoration:none;padding:4px 9px;border-radius:6px;}
+  nav.toc a:hover{background:var(--red-l);color:var(--red);}
+  main{flex:1 1 auto;min-width:0;padding:0 42px 90px;}
+  .hero{background:linear-gradient(150deg,#7c1f2b,#a2303c 55%,#bd5a4a);
+    color:#fff8f0;border-radius:0 0 20px 20px;padding:40px 42px 34px;margin-bottom:26px;
+    box-shadow:0 8px 26px rgba(124,31,43,.18);}
+  .hero h1{margin:0;font-size:34px;letter-spacing:.02em;}
+  .hero .en{font-size:14px;opacity:.8;margin:2px 0 12px;letter-spacing:.06em;}
+  .hero .desc{font-size:16px;max-width:760px;line-height:1.8;}
+  .hero .meta{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px;}
+  .hero .meta span{border:1px solid rgba(255,255,255,.5);border-radius:20px;padding:3px 13px;font-size:12.5px;}
+  .stand{margin-top:14px;background:#fff6e2;border:1px solid #e8d2a2;border-left:5px solid var(--gold);
+    border-radius:0 10px 10px 0;padding:12px 18px;font-size:14px;color:#5c4a26;}
+  section{padding:22px 0 14px;border-bottom:1px dashed var(--line2);scroll-margin-top:14px;}
+  h2{font-size:25px;color:var(--red);margin:8px 0 4px;line-height:1.4;}
+  h2 .n{display:inline-block;background:var(--red);color:#fff;font-size:14px;
+    min-width:30px;height:30px;line-height:30px;text-align:center;border-radius:8px;
+    margin-right:10px;vertical-align:3px;font-weight:700;}
+  h3{font-size:18.5px;color:#3a3230;margin:26px 0 6px;border-left:4px solid var(--gold);padding-left:10px;}
+  h4{font-size:16px;color:var(--blue);margin:18px 0 4px;}
+  p{margin:9px 0;}
+  ul,ol{margin:9px 0 9px 2px;padding-left:22px;}
+  li{margin:5px 0;}
+  b,strong{color:var(--red);}
+  .goal{background:var(--blue-l);border:1px solid #cfdcf0;border-radius:9px;
+    padding:8px 14px;font-size:13.5px;color:#2f466c;margin:8px 0 16px;}
+  .goal b{color:#2f466c;}
+  .pg{display:inline-block;background:#f0e7d8;color:#7d6231;border:1px solid #e2d2b6;
+    border-radius:5px;font-size:11px;padding:0 6px;line-height:18px;vertical-align:1px;
+    margin-left:4px;font-weight:600;white-space:nowrap;font-family:Arial,sans-serif;}
+  .key{background:var(--green-l);border:1px solid #c9e2d1;border-left:5px solid var(--green);
+    padding:11px 16px;border-radius:0 10px 10px 0;margin:13px 0;}
+  .key b{color:var(--green);}
+  .warn{background:var(--red-l);border:1px solid #eed3d3;border-left:5px solid var(--red);
+    padding:11px 16px;border-radius:0 10px 10px 0;margin:13px 0;}
+  .warn b{color:var(--red);}
+  .tip{background:var(--gold-l);border:1px solid #eddcb8;border-left:5px solid var(--gold);
+    padding:11px 16px;border-radius:0 10px 10px 0;margin:13px 0;}
+  .tip b{color:var(--gold);}
+  .note{background:#f4f1ec;border:1px solid var(--line);border-radius:9px;padding:10px 15px;
+    margin:12px 0;font-size:14px;color:#514844;}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px;background:var(--paper);}
+  th,td{border:1px solid var(--line2);padding:8px 11px;text-align:left;vertical-align:top;}
+  th{background:#f4e9dd;color:#5d4022;font-weight:700;}
+  tr:nth-child(even) td{background:#fdf9f3;}
+  td.c,th.c{text-align:center;}
+  .steps{list-style:none;padding:0;counter-reset:st;margin:14px 0;}
+  .steps>li{position:relative;padding:10px 14px 10px 50px;margin:9px 0;background:var(--paper);
+    border:1px solid var(--line);border-radius:10px;}
+  .steps>li::before{counter-increment:st;content:counter(st);position:absolute;left:12px;top:11px;
+    width:26px;height:26px;background:var(--red);color:#fff;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;}
+  .steps>li>ol{margin:6px 0;padding-left:20px;}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:11px;
+    padding:13px 17px;margin:11px 0;box-shadow:0 2px 6px rgba(80,60,40,.04);}
+  .card .t{font-weight:800;color:var(--red);font-size:16px;margin-bottom:3px;}
+  .card .t .s{display:inline-block;background:var(--red);color:#fff;border-radius:5px;
+    font-size:12px;padding:1px 7px;margin-right:8px;}
+  .card.blue .t{color:var(--blue);} .card.blue .t .s{background:var(--blue);}
+  .card.green .t{color:var(--green);} .card.green .t .s{background:var(--green);}
+  .card.gold .t{color:var(--gold);} .card.gold .t .s{background:var(--gold);}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+  .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;}
+  .mini{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:11px 13px;}
+  .mini .h{font-weight:800;font-size:14px;margin-bottom:4px;}
+  .mini .v{font-size:13px;color:var(--soft);line-height:1.7;}
+  .fig{margin:18px 0;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;}
+  .fig svg{display:block;width:100%;height:auto;}
+  .figcap{font-size:12.5px;color:var(--soft);margin-top:8px;text-align:center;}
+  details{margin:12px 0;background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:8px 14px;}
+  summary{cursor:pointer;font-size:13.5px;color:var(--blue);font-weight:600;}
+  details img{display:block;max-width:100%;margin:12px auto;border:1px solid var(--line);border-radius:8px;}
+  .pit{counter-reset:pit;list-style:none;padding:0;margin:14px 0;}
+  .pit li{position:relative;padding:9px 14px 9px 46px;margin:7px 0;background:var(--paper);
+    border:1px solid var(--line);border-radius:9px;font-size:14.5px;}
+  .pit li::before{counter-increment:pit;content:"✕ " counter(pit);position:absolute;left:10px;top:9px;
+    color:#fff;background:var(--red);border-radius:6px;font-size:11px;padding:1px 6px;font-weight:700;}
+  .bad{color:var(--red);text-decoration:line-through;}
+  .good{color:var(--green);font-weight:700;}
+  .tagR{color:var(--red);font-weight:700;} .tagB{color:var(--blue);font-weight:700;}
+  .tagG{color:var(--gold);font-weight:700;}
+  .why{background:#eef3fa;border:1px solid #cddcee;border-left:5px solid var(--blue);
+    padding:12px 17px;border-radius:0 10px 10px 0;margin:13px 0;font-size:14.5px;}
+  .why b{color:#2f466c;}
+  .why .wt{font-weight:800;color:#2f466c;display:block;margin-bottom:3px;}
+  .idx{font-size:13.5px;}
+  .foot{margin-top:34px;font-size:12.5px;color:var(--soft);text-align:center;line-height:1.9;}
+  @media(max-width:960px){
+    .layout{flex-direction:column;} nav.toc{position:static;width:100%;height:auto;flex-basis:auto;border-right:0;border-bottom:1px solid var(--line);}
+    main{padding:0 18px 60px;} .grid2,.grid4{grid-template-columns:1fr 1fr;}
+  }
+  @media(max-width:640px){.backbar{height:40px;padding:0 10px;} .backbar a{min-height:30px;padding:0 9px;font-size:12.5px;} .backbar .bb-t{display:none;}
+  .grid2,.grid4{grid-template-columns:1fr;} main{padding:0 12px 50px;} .hero{padding:28px 20px;} .hero h1{font-size:26px;}}
+
+  /* == 窄屏目录：横向胶囊，正文首屏可见 == */
+  @media(max-width:960px){
+    nav.toc{display:flex;flex-wrap:nowrap;gap:6px;align-items:center;
+      height:auto;max-height:none;overflow-x:auto;overflow-y:hidden;
+      padding:10px 12px;border-right:0;border-bottom:1px solid var(--line);
+      -webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;}
+    nav.toc .brand,nav.toc .brand-s,nav.toc .grp{display:none;}
+    nav.toc a{flex:0 0 auto;white-space:nowrap;padding:6px 11px;
+      border:1px solid var(--line2);border-radius:16px;background:var(--paper);
+      font-size:12.5px;line-height:1.4;}
+    nav.toc a:hover{background:var(--red-l);}
+    nav.toc a[style]{padding-left:11px;}
+  }
+
+  /* == 学习版通用补充（各本共用） == */
+  .flow{margin:18px 0;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;}
+  .flow svg{display:block;width:100%;height:auto;}
+  .pgs{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin:14px 0;}
+  .pgs figure{margin:0;background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:8px;}
+  .pgs img{display:block;width:100%;height:auto;margin:0;border:1px solid var(--line);border-radius:6px;}
+  .pgs figcaption{font-size:12px;color:var(--soft);text-align:center;margin-top:6px;line-height:1.5;}
+  @media(max-width:640px){.pgs{grid-template-columns:1fr 1fr;gap:9px;}}
+  /* 窄屏压缩首屏：hero 与体例框收紧，第 0 节进入首屏 */
+  @media(max-width:640px){
+    .hero{padding:22px 18px 24px;margin-bottom:16px;}
+    .hero h1{font-size:24px;} .hero .desc{font-size:14px;line-height:1.65;margin-top:8px;}
+    .hero .meta{margin-top:12px;gap:6px;} .hero .meta span{font-size:11.5px;padding:2px 10px;}
+    .stand{margin-top:10px;padding:9px 12px;font-size:12.5px;line-height:1.6;}
+  }
+</style>
+</head>
+<body>
+<div class="backbar"><a href="index.html">← 学习版目录</a><span class="bb-t">灰烬：停电协议 · 学习版规则</span></div>
+<div class="layout">
+<nav class="toc">
+  <div class="brand">灰烬：停电协议</div>
+  <div class="brand-s">学习版规则 · Blackout Protocol</div>
+  <div class="grp">规则概要</div>
+  <a href="#s0">0 · 游戏概要与目标</a>
+  <a href="#s1">1 · 初局设置</a>
+  <a href="#s2">2 · 版图与组件速认</a>
+  <div class="grp">轮次与行动</div>
+  <a href="#s3">3 · 核心引擎</a>
+  <a href="#s4">4 · 一轮的结构</a>
+  <a href="#s5">5 · 三种协议</a>
+  <a href="#s6">6 · 四项主要行动</a>
+  <a href="#s7">7 · 两类额外行动</a>
+  <div class="grp">全局机制</div>
+  <a href="#s8">8 · 贯穿全局的系统</a>
+  <a href="#s9">9 · 终局与计分链路</a>
+  <div class="grp">查考与附录</div>
+  <a href="#s10">10 · 常见误读与示例拆解</a>
+  <a href="#s11">11 · 人数变体与单人模式</a>
+  <a href="#s12">12 · 速查表与页码索引</a>
+</nav>
+
+<main>
+<header class="hero">
+  <h1>灰烬：停电协议 · 学习版规则</h1>
+  <div class="en">ASHES　｜　按规则结构重排，不按原书章节顺序</div>
+  <div class="desc">以三轮与每轮的轮次设置、玩家轮替为主线，展开三种协议、四项主要行动、两类额外行动、殖民地升级五条轨道与终局四步计分；附常见误读、速查表及原书跨页页码索引。</div>
+  <div class="meta"><span>二至四人 · 另有单人模式</span><span>三轮 · 三种协议</span><span>撤离车 / 激活幸存者 / 凤凰计划</span><span>依据英文跨页版 13 张页图</span></div>
+</header>
+
+<div class="stand">
+  <b>体例：</b>按学习顺序重排，章节与原书不对应；每条结论后的 <span class="pg">跨页 N</span> 为英文原书跨页编号，一张页图含两个单页。
+  规则裁决以<b>英文原书页图</b>为准；术语沿用已上线中文版的既定译法。原书未列之处只记录、不代填，配件印值、避难所圆片计价与里程碑格数以实体配件为准。第 12 节附两种编号对照与 13 张页图。
+  正文按规则作用展开，先述状态变化，再列执行步骤。
+</div>
+
+<section id="s0">
+<h2><span class="n">0</span>游戏概要与目标</h2>
+<p>《灰烬：停电协议》以地下殖民地的重建为主题。玩家营救幸存者、建造避难所、向凤凰计划安装升级，由此累积胜利分。全局共三轮，三轮之后进入终局计分，分数最高者获胜；并列时取回合顺序轨上位置更靠前者。<span class="pg">跨页 5</span><span class="pg">跨页 9</span></p>
+<div class="why"><span class="wt">规则主线</span>每轮由轮次设置与玩家轮替两步组成。轮次设置把幸存者放到主版图、结算辐射并重设卡牌展示；玩家轮替中，每名玩家按回合顺序轨依次行动，每次行动执行一个协议与任意数量的额外行动。协议与主要行动把幸存者、材料与强度转为避难所、科技与胜利分。全员停手后结束本轮，第三轮之后结算四步终局计分。<span class="pg">跨页 5</span><span class="pg">跨页 9</span></div>
+<div class="grid2">
+  <div class="card"><div class="t">得分来源</div>即时计分图标、殖民地计分、里程碑、凤凰计划安装升级、终局的幸福与殖民地板计分，以及凤凰计划三行的相乘计分。<span class="pg">跨页 5</span><span class="pg">跨页 7</span><span class="pg">跨页 9</span></div>
+  <div class="card blue"><div class="t">胜负判定</div>第三轮后按辐射、幸福计分、殖民地板计分、凤凰计划计分四步结算；分数最高者胜，并列时按回合顺序轨位置裁定。<span class="pg">跨页 5</span><span class="pg">跨页 9</span></div>
+</div>
+<table>
+  <tr><th>项目</th><th>取值</th><th>依据</th></tr>
+  <tr><td>人数</td><td>二至四人；另有单人模式，由对手依行动卡行动</td><td><span class="pg">跨页 3</span><span class="pg">跨页 9</span></td></tr>
+  <tr><td>轮数</td><td>三轮，之后直接终局；不设分数门槛，不追加轮次</td><td><span class="pg">跨页 5</span><span class="pg">跨页 8</span></td></tr>
+  <tr><td>一轮两步</td><td>轮次设置、玩家轮替</td><td><span class="pg">跨页 5</span></td></tr>
+  <tr><td>轮次设置四步</td><td>辐射、弃两张任务卡、重置区域板块、幸存者出现；首轮只执行第四步</td><td><span class="pg">跨页 5</span></td></tr>
+  <tr><td>三种协议</td><td>停手、移动撤离车、激活幸存者</td><td><span class="pg">跨页 5</span></td></tr>
+  <tr><td>四项主要行动</td><td>建造避难所、营救幸存者、在凤凰计划安装升级、休息</td><td><span class="pg">跨页 7</span></td></tr>
+  <tr><td>两类额外行动</td><td>即时额外行动四项、受限额外行动三项</td><td><span class="pg">跨页 8</span></td></tr>
+</table>
+<h3>0.1 页码体例</h3>
+<p>英文原书为跨页版，13 张页图各由两个单页拼合。页码一律写「跨页 N」，N 与页图文件名中的序号一致；跨页 2 对应原书单页 2–3，跨页 12 对应单页 22–23。第 12 节附完整对照与 13 张页图。跨页 1 为封面，跨页 13 为封底，两者不含规则。<span class="pg">跨页 2</span><span class="pg">跨页 12</span></p>
+<h3>0.2 触发结构</h3>
+<p>一个协议构成一个玩家回合的执行主体。停手、移动撤离车、激活幸存者三者在同一回合内选定其一；激活幸存者的生产面板位置四与移动撤离车的区域板块奖励可令玩家执行一项主要行动。额外行动按即时与受限两类各自的时点约束穿插其间。<span class="pg">跨页 5</span><span class="pg">跨页 6</span><span class="pg">跨页 7</span></p>
+</section>
+
+<section id="s1">
+<h2><span class="n">1</span>初局设置</h2>
+<p>设置分公共布置、玩家布置、起始组合三步。人数差异集中在主版图与凤凰计划版图的选用面、封锁板块的放置以及成就板块的翻面。<span class="pg">跨页 3</span><span class="pg">跨页 4</span></p>
+<h3>1.1 公共布置</h3>
+<ol>
+  <li>把主版图置于桌面中央，轮次标记放第一格。三人与四人局使用不带辐射带的一面；双人与单人模式使用带辐射带的一面。<span class="pg">跨页 3</span></li>
+  <li>洗匀场址板块，主版图中央每个空位放一块，余者回盒。三人局另在图示空位放封锁场址板块；单人与二、四人局不使用。<span class="pg">跨页 3</span></li>
+  <li>按等级分出区域板块，各叠洗匀，按等级放入对应空位且主面朝上，余者回盒。三人局另在图示空位放封锁区域板块。<span class="pg">跨页 3</span></li>
+  <li>把凤凰计划版图按人数选用的一面朝上置于主版图旁。I 级与 III 级各格随机放计分科技，II 级各格随机放生产技术；三人局在图示空位放封锁科技。<span class="pg">跨页 3</span></li>
+  <li>三个知识圆片置于知识轨起始位置，位置按人数所对应的图标选定，圆片颜色须与其所在行一致。<span class="pg">跨页 3</span></li>
+  <li>三个成就板块放在凤凰计划版图左侧对应位置，并按人数翻面：双人局三块均显示一格，三人局两块显示两格，四人局三块均显示两格。每块旁放一个里程碑，余者回盒。<span class="pg">跨页 3</span></li>
+  <li>洗匀十二块终局计分板块，随机在凤凰计划版图左右两侧各放三块，余者回盒。板块两面分别对应左侧与右侧的用途。<span class="pg">跨页 3</span></li>
+  <li>洗匀三十六张避难所卡成背面朝下牌堆，翻三张正面朝上；洗匀六十四张任务卡成背面朝下牌堆，翻四张正面朝上。<span class="pg">跨页 3</span></li>
+  <li>燃料、数据、抗辐射剂与材料方块置于公共供应；活跃幸存者与关键幸存者放入布袋。<span class="pg">跨页 3</span></li>
+</ol>
+<h3>1.2 玩家布置</h3>
+<ol start="10">
+  <li>分数标记置于胜利分轨第 20 格，一个圆片置于 +0 胜利分格，殖民地强度标记置于图示格，一辆撤离车置于起始避难所，另一辆暂置一旁。<span class="pg">跨页 3</span></li>
+  <li>放好殖民地板；殖民地板每个避难所圆片位叠放两个圆片，按图示面朝上；放好十块升级板块。<span class="pg">跨页 4</span></li>
+  <li>余下四个圆片：一个放幸福轨第 3 格，另三个各放一条生产轨的第一格；玩家提示卡置于殖民地板旁，起始避难所卡置于幸福轨旁。<span class="pg">跨页 4</span></li>
+  <li>首次游戏取背面带星的特殊角色卡洗匀，每人随机发一张；其后各局洗匀全部特殊角色卡，每人发两张并自选一张，另一张回盒。<span class="pg">跨页 4</span></li>
+  <li>洗匀起始资源卡，翻出比玩家人数多一张；随机各配一块起始生产技术，形成组合。<span class="pg">跨页 4</span></li>
+  <li>起始玩家为最近用微波炉加热过物品者。其第二辆撤离车置于回合顺序轨第一格，其余玩家按座位顺时针依次放置；第二、第三、第四位分别取得一、二、三个数据。三人局回合顺序轨最右侧格以未使用颜色的撤离车封锁。<span class="pg">跨页 4</span></li>
+  <li>按回合顺序轨的逆序，各人选一组起始资源卡与起始生产技术的组合：取得卡面资源，把科技放入自选槽位，自袋中抽出指定幸存者置于殖民地入口；特殊角色所给予的特殊科技与幸存者同样处理；起始资源卡回盒。<span class="pg">跨页 4</span></li>
+</ol>
+<div class="note">资源图标的含义见第 8 节。原书设置处只写明按其 5.1 与 5.3 节理解符号，未另列数量核对。<span class="pg">跨页 4</span></div>
+</section>
+
+<section id="s2">
+<h2><span class="n">2</span>版图与组件速认</h2>
+<p>按使用先后认识版图：先分主版图与凤凰计划版图，再分殖民地板各区，最后认清材料与幸存者的存放位。<span class="pg">跨页 2</span><span class="pg">跨页 3</span><span class="pg">跨页 4</span></p>
+<h3>2.1 配件</h3>
+<table>
+  <tr><th>类别</th><th>内容</th><th>依据</th></tr>
+  <tr><td>版图与板块</td><td>主版图 1 块、场址板块 12 块、封锁场址板块 5 块、区域板块 29 块分四级、封锁区域板块 6 块、凤凰计划版图 1 块、轮次标记 1 个</td><td><span class="pg">跨页 2</span></td></tr>
+  <tr><td>资源与幸存者</td><td>抗辐射剂 28 个、数据 24 个、燃料 32 个、材料方块 50 个、活跃幸存者 50 个、关键幸存者 25 个、布袋 1 个</td><td><span class="pg">跨页 2</span></td></tr>
+  <tr><td>卡牌</td><td>任务卡 64 张、避难所卡 36 张、起始资源卡 5 张、特殊角色卡 12 张、对手行动卡 12 张、对手难度卡 3 张</td><td><span class="pg">跨页 2</span></td></tr>
+  <tr><td>科技与计分</td><td>知识圆片 3 个、终局计分板块 12 块、成就板块 3 块、里程碑 6 块、生产技术 14 块、计分科技 12 块、封锁科技 6 块、起始生产技术 6 块、特殊科技 6 块</td><td><span class="pg">跨页 2</span></td></tr>
+  <tr><td>每色玩家配件</td><td>殖民地板 1 块、避难所圆片 6 个、升级板块 10 块、圆片 5 个、撤离车 2 辆、分数标记 1 个、殖民地强度标记 1 个、起始避难所卡 1 张、玩家提示卡 1 张</td><td><span class="pg">跨页 2</span></td></tr>
+</table>
+<h3>2.2 主版图</h3>
+<table>
+  <tr><th>位置</th><th>结构</th><th>规则作用</th></tr>
+  <tr><td>四个区段</td><td>编号 1、2、3、4，辐射等级依次为 1、2、3、4</td><td>辐射结算按区段等级取数量；幸存者出现按轮次覆盖相邻两个区段</td></tr>
+  <tr><td>区域</td><td>每区段分若干区域，相邻区域共享一段边界线</td><td>撤离车逐区域移动；区域板块提供奖励</td></tr>
+  <tr><td>区域板块</td><td>主面与次面两面，按四级分区</td><td>激活时取可见面奖励；主面朝上则激活后翻面</td></tr>
+  <tr><td>场址板块</td><td>印有建造格，部分建造格底部带蓝灯</td><td>建造避难所的落点；带蓝灯者为地标建造格</td></tr>
+  <tr><td>展示区</td><td>四张任务卡、三张避难所卡</td><td>取走或弃掉后立即右移补位并翻出新卡</td></tr>
+  <tr><td>回合顺序轨</td><td>上下两行；上行用于第 1、3 轮，下行用于第 2 轮</td><td>停手时为下一轮选位并取得该格奖励</td></tr>
+</table>
+<div class="key"><b>读图要点：</b>主版图上的红线不可通行；两个区域共享一段边界线即为相邻。三人局设置时放置的封锁区域板块、封锁场址板块与封锁科技一律视为不存在。<span class="pg">跨页 5</span><span class="pg">跨页 6</span></div>
+<h3>2.3 凤凰计划版图</h3>
+<p>版图自左向右分为 I、II、III 三级，另有三条横行，每行对应一个知识圆片且行末置一块计分板块。计分板块印金、银、铜三值，取值由该行知识圆片在知识轨上的位置决定。版图左侧放成就板块与里程碑。I 级与 III 级格位放计分科技，II 级格位放生产技术。<span class="pg">跨页 3</span><span class="pg">跨页 9</span></p>
+<h3>2.4 殖民地板</h3>
+<table>
+  <tr><th>区域</th><th>结构</th><th>规则作用</th></tr>
+  <tr><td>材料金字塔</td><td>九个独立存储格，按上下三排分 I、II、III 级</td><td>每格存一种材料；开局每格至多一个方块</td></tr>
+  <tr><td>生产面板</td><td>四个位置与三条生产轨</td><td>激活幸存者时按位置取卡或生产；生产量按对应轨圆片高度</td></tr>
+  <tr><td>激活区与槽位</td><td>四个激活区，各对应一个科技槽位与生产面板的一个位置</td><td>同一轮同一激活区不可重复选用</td></tr>
+  <tr><td>五个计分区</td><td>三个避难所列、一个材料区、一个幸存者区</td><td>停手时按升级允许的上限选区结算</td></tr>
+  <tr><td>幸福轨与避难所卡位</td><td>幸福轨 0 至 9，旁置三张避难所卡</td><td>净化舱收入与殖民地计分的载体</td></tr>
+  <tr><td>殖民地入口</td><td>四个空位，升级后可增至五个</td><td>每名幸存者占一格，营救与回收的上限</td></tr>
+</table>
+<div class="note">九种材料的名称以殖民地板印面为准；原书正文与示例列出塑料、金属、蘑菇、线缆、工具、电路板等称谓，其余以印面为准。<span class="pg">跨页 4</span><span class="pg">跨页 8</span><span class="pg">跨页 11</span></div>
+</section>
+
+<section id="s3">
+<h2><span class="n">3</span>核心引擎</h2>
+<p>全局由三轮串接。每轮先完成四步轮次设置，再由玩家轮流执行协议与额外行动，全员停手后推进轮次标记；第三轮结束直接进入终局计分。<span class="pg">跨页 5</span><span class="pg">跨页 8</span></p>
+<div class="flow">
+<svg viewBox="0 0 900 250" role="img" aria-label="三轮循环与终局链路">
+  <rect x="0" y="0" width="900" height="250" fill="#ffffff"/>
+  <text x="450" y="24" text-anchor="middle" font-size="15" font-weight="700" fill="#2f466c">轮次设置 → 玩家轮替 → 全部停手 → 下一轮，第三轮后终局</text>
+  <g font-size="12.5" text-anchor="middle" fill="#25324a">
+    <rect x="16" y="48" width="164" height="62" rx="9" fill="#eef3fa" stroke="#cddcee"/>
+    <text x="98" y="72">轮次设置</text><text x="98" y="93">四步，首轮只做第四步</text>
+    <rect x="194" y="48" width="164" height="62" rx="9" fill="#fdf1e6" stroke="#e8cdae"/>
+    <text x="276" y="72">玩家轮替</text><text x="276" y="93">一协议 + 额外行动</text>
+    <rect x="372" y="48" width="164" height="62" rx="9" fill="#eaf5ec" stroke="#c6e0cc"/>
+    <text x="454" y="72">三种协议</text><text x="454" y="93">停手 / 移动 / 激活</text>
+    <rect x="550" y="48" width="164" height="62" rx="9" fill="#f3eefb" stroke="#d8c9ee"/>
+    <text x="632" y="72">主要行动</text><text x="632" y="93">建造 / 营救 / 升级 / 休息</text>
+    <rect x="728" y="48" width="156" height="62" rx="9" fill="#fdf6e8" stroke="#e8d9ae"/>
+    <text x="806" y="72">终局四步</text><text x="806" y="93">辐射 → 三次计分</text>
+  </g>
+  <g stroke="#7d5511" stroke-width="2" fill="none">
+    <path d="M180 79 H190"/><path d="M358 79 H368"/><path d="M536 79 H546"/><path d="M714 79 H724"/>
+    <path d="M276 114 V150 H98 V114"/><path d="M98 114 l-5 8 h10 z" fill="#7d5511"/>
+  </g>
+  <text x="450" y="172" text-anchor="middle" font-size="13" fill="#6b615c">全员停手后推进轮次标记；第三轮后不再推进，转入终局</text>
+  <g font-size="12.5" fill="#2f466c">
+    <rect x="16" y="192" width="280" height="42" rx="8" fill="#f7f9fc" stroke="#d8e1ee"/>
+    <text x="156" y="218" text-anchor="middle">幸存者出现区段：轮 1 为 1+2，轮 2 为 2+3，轮 3 为 3+4</text>
+    <rect x="310" y="192" width="280" height="42" rx="8" fill="#f7f9fc" stroke="#d8e1ee"/>
+    <text x="450" y="218" text-anchor="middle">停手后本轮不得再执行任何行动，含额外行动</text>
+    <rect x="604" y="192" width="280" height="42" rx="8" fill="#f7f9fc" stroke="#d8e1ee"/>
+    <text x="744" y="218" text-anchor="middle">分数最高者胜，平局按回合顺序轨位置</text>
+  </g>
+</svg>
+</div>
+<h3>3.1 玩家回合内的顺序</h3>
+<ol class="steps">
+  <li>按回合顺序轨轮到某位玩家；此前已停手者不再行动。<span class="pg">跨页 5</span></li>
+  <li>执行一次协议，随后可执行任意数量额外行动；即时额外行动须待当前行动或单项奖励结算完毕再插入，受限额外行动只能在协议之前或之后执行。<span class="pg">跨页 5</span><span class="pg">跨页 8</span></li>
+  <li>停手协议是本轮最后一次协议，其四步按固定顺序结算，之后本轮不得再执行主要行动与额外行动。<span class="pg">跨页 6</span><span class="pg">跨页 8</span></li>
+  <li>全员停手后轮次结束，轮次标记前进一格并开始新一轮。<span class="pg">跨页 8</span></li>
+</ol>
+<h3>3.2 两类行动的关系</h3>
+<p>主要行动由激活幸存者的生产面板位置四或区域板块奖励触发，每次执行其中一项；额外行动不由协议触发，按自身时点约束自行插入。受限额外行动每种每回合至多一次，即时额外行动次数不限。<span class="pg">跨页 6</span><span class="pg">跨页 7</span><span class="pg">跨页 8</span></p>
+</section>
+
+<section id="s4">
+<h2><span class="n">4</span>一轮的结构</h2>
+<p>一轮分轮次设置与玩家轮替两步。轮次设置按四步顺序执行，首轮只执行第四步；玩家轮替按回合顺序轨逐个进行，全员停手后结束本轮。<span class="pg">跨页 5</span><span class="pg">跨页 8</span></p>
+<h3>4.1 辐射</h3>
+<ol class="steps">
+  <li>对主版图上所有含幸存者的区域结算辐射；至少有一辆撤离车的区域提供防护，跳过该区域。<span class="pg">跨页 5</span></li>
+  <li>每区域把数量等于其所在区段辐射等级的幸存者退回布袋；每名玩家失去的幸福等于退回袋中的幸存者数量。<span class="pg">跨页 5</span></li>
+  <li>每区域先移除活跃幸存者；活跃幸存者全部移除后仍有余额，才移除关键幸存者。<span class="pg">跨页 5</span></li>
+</ol>
+<div class="note">原书未写明扣幸福按区域即时结算还是整轮统一结算；辐射结算按区段等级移除幸存者，并按退回袋中的数量扣幸福。<span class="pg">跨页 5</span></div>
+<h3>4.2 弃两张任务卡与重置区域板块</h3>
+<p>把展示区右侧两张任务卡弃置回盒并翻出两张新卡；把主版图上所有面朝下的区域板块翻至主面可见。两步在首轮均不执行。<span class="pg">跨页 5</span></p>
+<h3>4.3 幸存者出现</h3>
+<p>每个标有布袋图标的区域自袋中抽两名幸存者置入。该步覆盖当前轮次编号及其上一编号的两个区段：第 1 轮为区段 1 与 2，第 2 轮为区段 2 与 3，第 3 轮为区段 3 与 4。放置自辐射等级最低的区段起，在该区段内自上而下逐格进行，一个区段完成后转入下一区段；袋中无幸存者时，其余区域不再放置。首轮只执行本步。<span class="pg">跨页 5</span></p>
+<div class="key"><b>状态变化：</b>辐射先按区段等级移除幸存者并扣幸福，幸存者出现随后按轮次覆盖的区段补入；两步都作用于主版图上的区域，不改变玩家殖民地入口。<span class="pg">跨页 5</span></div>
+<h3>4.4 玩家轮替与轮次结束</h3>
+<table>
+  <tr><th>环节</th><th>执行口径</th><th>依据</th></tr>
+  <tr><td>行动顺序</td><td>按回合顺序轨；上行用于第 1、3 轮，下行用于第 2 轮</td><td><span class="pg">跨页 6</span></td></tr>
+  <tr><td>单次行动</td><td>此前未停手者执行一个协议与任意数量额外行动</td><td><span class="pg">跨页 5</span></td></tr>
+  <tr><td>停手之后</td><td>本轮不再执行任何主要行动或额外行动</td><td><span class="pg">跨页 6</span><span class="pg">跨页 8</span></td></tr>
+  <tr><td>轮次结束</td><td>全员停手后轮次标记前进一格；第三轮之后直接终局</td><td><span class="pg">跨页 8</span><span class="pg">跨页 9</span></td></tr>
+</table>
+</section>
+
+<section id="s5">
+<h2><span class="n">5</span>三种协议</h2>
+<p>三种协议印在殖民地板顶部，每次行动选定其一。停手以四步收束本轮行动，移动撤离车把车与幸存者带到新区域并激活区域板块，激活幸存者把入口的活跃幸存者转为槽位奖励与生产。<span class="pg">跨页 5</span><span class="pg">跨页 6</span></p>
+<h3>5.1 停手</h3>
+<p>停手是本轮最后一次协议。把玩家提示卡翻到停手面，按四步顺序结算后翻回；此后本轮不得再执行主要行动与额外行动。<span class="pg">跨页 6</span></p>
+<ol class="steps">
+  <li><b>回收幸存者：</b>为每名希望自激活区回收的幸存者支付一个抗辐射剂，把回收者置于殖民地入口；未回收者退回布袋，每名失去一点幸福。殖民地入口无空位而须弃掉已在入口的幸存者时，每弃一名失去一点幸福。<span class="pg">跨页 6</span></li>
+  <li><b>幸福轨收入：</b>避难所卡上带收入标记的净化舱须放有幸存者，且其等级不高于幸福轨圆片位置，方可取得该舱收入。收入自下而上结算；一项「一名活跃幸存者」的收入始终可取，先结算该项，再按圆片新位置结算其余收入。<span class="pg">跨页 6</span></li>
+  <li><b>殖民地计分：</b>在殖民地板与升级允许的上限内选择计分区，初始上限为两个。三个避难所列区每区按所选列中每张已封闭避难所卡得三分；材料区按每个 II 级材料得二分、每个 III 级材料得四分并受上限约束；幸存者区按入口每名活跃幸存者得零、一或二分，取值随升级而定。<span class="pg">跨页 6</span></li>
+  <li><b>回合顺序：</b>为下一轮在回合顺序轨选一个新位置并取得该格奖励，不得占据已被其他玩家占据的格。上行用于第 1、3 轮，下行用于第 2 轮。<span class="pg">跨页 6</span></li>
+</ol>
+<div class="note">原书未单独定义「净化舱的等级」；收入判定以净化舱放有幸存者、且其等级不高于幸福轨圆片位置为准。<span class="pg">跨页 6</span></div>
+<h3>5.2 移动撤离车</h3>
+<ol class="steps">
+  <li>支付两个燃料，按殖民地板与升级所示的格数上限移动撤离车，并激活目的地区域板块。一个区域可同时容纳两辆或更多撤离车。<span class="pg">跨页 6</span></li>
+  <li>移动一格指自一个区域进入相邻区域；相邻区域共享一段边界线，红线不可通行；移动可结束于起点格。离开起始避难所计为一次移动。<span class="pg">跨页 6</span></li>
+  <li>载量上限按版面与升级所示，初始为两名，升级后可至三或四名。移动途中每格可上落幸存者，任何时刻不得超出载量。<span class="pg">跨页 6</span><span class="pg">跨页 11</span></li>
+  <li>到达后激活区域板块，取可见面所示奖励：获得材料、取得一张任务卡、立即触发殖民地计分，或执行一项主要行动。主面朝上的板块激活后翻至次面；次面朝上则不翻。<span class="pg">跨页 6</span></li>
+</ol>
+<h3>5.3 激活幸存者</h3>
+<ol class="steps">
+  <li>殖民地入口须有一名活跃幸存者。取该幸存者置于自选激活区；同一轮同一激活区不可重复选用。开局每轮限三次，升级后可增至四次。<span class="pg">跨页 6</span><span class="pg">跨页 11</span></li>
+  <li>激活槽位：自上而下取得该槽位全部科技板块所示奖励。<span class="pg">跨页 6</span></li>
+  <li>生产面板按幸存者所在位置结算：位置一自四张可见任务卡取一张加入手牌并立即补充展示；位置二、三、四分别生产燃料、数据、强度，产量按对应生产轨圆片高度；圆片位于该轨最高位时另得二分。<span class="pg">跨页 7</span></li>
+  <li>执行一项自选主要行动，四项主要行动见第 6 节。<span class="pg">跨页 7</span></li>
+  </ol>
+<div class="key"><b>状态变化：</b>激活幸存者把入口的一名活跃幸存者移入激活区，该名幸存者须经停手协议第一步支付抗辐射剂方可回收；未回收者退回布袋并扣幸福。<span class="pg">跨页 6</span></div>
+</section>
+
+<section id="s6">
+<h2><span class="n">6</span>四项主要行动</h2>
+<p>四项主要行动由激活幸存者的生产面板位置四、区域板块奖励或任务卡效果触发，每次执行其中一项。建造避难所改动主版图与生产轨，营救幸存者补充殖民地入口，安装升级把材料与数据转为科技与知识轨推进，休息补充幸福与燃料。<span class="pg">跨页 7</span></p>
+<h3>6.1 建造避难所</h3>
+<ol class="steps">
+  <li>避难所圆片按殖民地板自上而下的顺序建造。原书列出前两枚各支付两点强度、后两枚各支付四点强度；配件表为六枚圆片且每格叠两枚，第三组两枚的计价原文未载，以实体版图印值为准。<span class="pg">跨页 7</span></li>
+  <li>支付圆片旁所示强度，把圆片放到任一场址板块的空闲建造格；已有避难所圆片的建造格不可再建。<span class="pg">跨页 7</span></li>
+  <li>取得该建造格所示奖励。所有建造格都带「取一张避难所卡」图标：自三张可见避难所卡取一张置于幸福轨旁，立即补充展示。<span class="pg">跨页 7</span></li>
+  <li>避难所卡在幸福轨旁自下而上放置，仅三个位置。无空位时可替换最上面一张，被替换卡放回牌堆底部；该卡上指派的幸存者每人失去一点幸福并退回布袋。<span class="pg">跨页 7</span></li>
+  <li>每个建造格附带生产轨修正：每有一个修正，把对应生产轨圆片上移一格；因该轨已满而无法上移的每格得二分。<span class="pg">跨页 7</span></li>
+  <li>地标建造格按常规建造，其地标属性只在结算计分板块时起作用。<span class="pg">跨页 7</span></li>
+</ol>
+<h3>6.2 营救幸存者</h3>
+<p>自与本人任一避难所相邻的单一区域营救幸存者，置于殖民地入口；所有幸存者须来自同一区域，活跃与关键幸存者均可营救，且不得超出入口空位。殖民地入口初始四格，升级后可增至五格。起始避难所同样可作为营救的相邻依据。<span class="pg">跨页 7</span></p>
+<h3>6.3 在凤凰计划安装升级</h3>
+<ol class="steps">
+  <li><b>支付费用：</b>I 级支付一个 I 级材料与一、二或三个数据；II 级支付两个 II 级材料与一、二或三个数据；III 级支付两个 III 级材料与二、三或四个数据。数据数额按该等级上由全体玩家安装的第 1、第 2、第三个及其后各升级判定。<span class="pg">跨页 7</span></li>
+  <li><b>取科技：</b>把所选格上的生产技术或计分科技指派到一个槽位。开局每槽至多叠两块科技，升级可提高上限；各槽均无空位时弃掉所得科技，或以其替换某槽最上面一块。<span class="pg">跨页 7</span></li>
+  <li><b>放升级板块：</b>取一块本人升级板块置于所选格。选择 II 级升级须已建造或弃掉 I 级升级，且至少一个圆片到达某条生产轨第三格。<span class="pg">跨页 7</span></li>
+  <li><b>取得奖励：</b>I、II、III 级分别得二、六、十二分，并把该行对应的知识圆片右移一格。<span class="pg">跨页 7</span></li>
+</ol>
+<h3>6.4 休息</h3>
+<p>把幸福轨圆片上移两格，并取得一个燃料。<span class="pg">跨页 7</span></p>
+</section>
+
+<section id="s7">
+<h2><span class="n">7</span>两类额外行动</h2>
+<p>即时额外行动可在回合内任意时刻插入，次数不限；受限额外行动只能在协议之前或之后执行，每种每回合至多一次。两类行动在停手协议进行中或之后均不可执行。<span class="pg">跨页 8</span></p>
+<h3>7.1 四项即时额外行动</h3>
+<table>
+  <tr><th>行动</th><th>规则作用</th><th>依据</th></tr>
+  <tr><td>净化幸存者</td><td>自殖民地入口取一名活跃或关键幸存者，放入幸福轨旁某张避难所卡的一个净化舱，取得该舱内印制的奖励</td><td><span class="pg">跨页 8</span></td></tr>
+  <tr><td>封闭避难所</td><td>把一张所有净化舱均已占满的避难所卡翻面，置于殖民地板下方某一列；卡上幸存者退回布袋。开局每列上限两张</td><td><span class="pg">跨页 8</span></td></tr>
+  <tr><td>制造材料</td><td>用紧下一级的两种不同材料制造一个高一级材料，组合按殖民地板上的连线判定。不得在一项奖励的结算途中插入</td><td><span class="pg">跨页 4</span><span class="pg">跨页 8</span></td></tr>
+  <tr><td>轮换避难所卡</td><td>支付一个数据，把展示区三张避难所卡置于牌堆底部并翻出三张新卡</td><td><span class="pg">跨页 8</span></td></tr>
+</table>
+<div class="key"><b>时点约束：</b>即时额外行动须待当前行动或单项奖励结算完毕再执行。原书示例指明，一项允许在强度树上前进多格的奖励，其途中不可插入制造材料。<span class="pg">跨页 8</span></div>
+<h3>7.2 三项受限额外行动</h3>
+<ol class="steps">
+  <li><b>侦察：</b>支付两点强度，自袋中抽出殖民地板与升级所示数量的幸存者，置于撤离车所在区域；殖民地入口有空位时，抽到的关键幸存者可直接置于入口。袋空则不可侦察；部分卡牌允许免付强度侦察。撤离车在起始避难所时仍可侦察，幸存者改放与其相邻的区域。<span class="pg">跨页 8</span></li>
+  <li><b>达成里程碑：</b>满足里程碑条件且成就板块尚有空位时，第一个达成的玩家支付两个数据、第二个支付三个数据，取一块升级板块置于成就板块对应格。选择 II 级升级须已建造或弃掉 I 级升级，且至少一个圆片到达某条生产轨第三格。奖励按两步结算：先按计分板块所示元素数量乘以金、银或铜值计分，每项计分上限十二分；再把对应知识圆片右移一格。计分结果为零分仍可达成。同一里程碑不可达成两次，双人局每个里程碑仅容一名玩家。<span class="pg">跨页 8</span><span class="pg">跨页 12</span></li>
+  <li><b>完成任务卡：</b>自手牌取一张卡，满足所示要求并支付费用后取得奖励，卡背面朝下置于殖民地板旁。任务卡有两类位置要求：加强避难所指翻面一枚所在区段编号不高于当前轮次的避难所圆片，之后仍可自该避难所营救，同一避难所不可加强两次；撤离车位置指撤离车须位于区段编号不高于当前轮次的区域，起始避难所计入其内。<span class="pg">跨页 8</span></li>
+</ol>
+<h3>7.3 六项里程碑条件</h3>
+<table>
+  <tr><th>条件</th><th>口径</th></tr>
+  <tr><td>幸福轨</td><td>圆片到达第 8 格</td></tr>
+  <tr><td>凤凰计划</td><td>至少安装两块升级</td></tr>
+  <tr><td>避难所</td><td>至少建造三个避难所圆片，是否加强均计入</td></tr>
+  <tr><td>任务卡</td><td>至少完成三张任务卡</td></tr>
+  <tr><td>已封闭避难所卡</td><td>各列中至少有两张</td></tr>
+  <tr><td>材料</td><td>至少拥有三个 II 级材料</td></tr>
+</table>
+<div class="note">条件与计分板块的印值以实体配件为准；原书附录 IV 只列条件文字，条件对应的成就板块格数以配件为准。<span class="pg">跨页 12</span></div>
+</section>
+
+<section id="s8">
+<h2><span class="n">8</span>贯穿全局的系统</h2>
+<p>跨阶段生效的结构分列于后：三类资源与强度、材料金字塔、胜利分与幸福轨、卡补充与组件上限、可放弃范围的边界、殖民地升级五条轨道、六种计分科技。七组结构均不改变一轮的两步骨架。<span class="pg">跨页 4</span><span class="pg">跨页 5</span><span class="pg">跨页 11</span><span class="pg">跨页 12</span></p>
+<h3>8.1 资源与强度</h3>
+<table>
+  <tr><th>对象</th><th>取得</th><th>支付</th><th>依据</th></tr>
+  <tr><td>燃料、数据、抗辐射剂</td><td>绿圈图标：自公共供应取得所示数量，放入个人供应</td><td>红圈图标：自个人供应支付所示数量，退回公共供应</td><td><span class="pg">跨页 4</span></td></tr>
+  <tr><td>殖民地强度</td><td>强度树标记每得一点上移一格，上行时选路径并取得途经每格奖励</td><td>每支付一点下移一格，下行时选路径且不取得奖励</td><td><span class="pg">跨页 4</span></td></tr>
+  <tr><td>粉色禁止通行路径</td><td>仅拥有对应特殊角色方可在上行或下行时使用</td><td>不适用</td><td><span class="pg">跨页 4</span><span class="pg">跨页 11</span></td></tr>
+</table>
+<h3>8.2 材料金字塔</h3>
+<ol class="steps">
+  <li>九个独立存储格分 I、II、III 三排，每格对应一种材料；取得材料时把方块自公共供应放入对应格，带红色叉号的图标表示支付该材料。<span class="pg">跨页 4</span></li>
+  <li>开局每格至多一个方块；格位已满时不可再取得同种材料，容量可经殖民地升级提高。<span class="pg">跨页 5</span><span class="pg">跨页 11</span></li>
+  <li>用紧下一级的两种不同材料制造一个高一级材料，组合按殖民地板上的连线判定。<span class="pg">跨页 5</span></li>
+</ol>
+<h3>8.3 胜利分与幸福轨</h3>
+<table>
+  <tr><th>项目</th><th>规则口径</th><th>依据</th></tr>
+  <tr><td>立即计分与扣分</td><td>按图标所示格数在胜利分轨前进或后退，即时结算</td><td><span class="pg">跨页 5</span></td></tr>
+  <tr><td>终局计分图标</td><td>只在游戏结束时结算</td><td><span class="pg">跨页 5</span></td></tr>
+  <tr><td>分数下限</td><td>胜利分轨上的分数不低于零</td><td><span class="pg">跨页 5</span></td></tr>
+  <tr><td>跨圈</td><td>跑完第一圈把圆片移至 +100 位，跑完第二圈移至 +200 位</td><td><span class="pg">跨页 5</span></td></tr>
+  <tr><td>幸福轨范围</td><td>零至九，首尾两格均为有效位置</td><td><span class="pg">跨页 5</span></td></tr>
+  <tr><td>幸福上限溢出</td><td>已达最高位后每无法上移一步得一分</td><td><span class="pg">跨页 5</span></td></tr>
+  <tr><td>幸福下限溢出</td><td>已达最低位后每无法下移一步失二分</td><td><span class="pg">跨页 5</span></td></tr>
+</table>
+<h3>8.4 卡补充、组件上限与可放弃范围</h3>
+<ol class="steps">
+  <li>任务卡与避难所卡按同一口径补充：取走或弃掉一张正面朝上的卡后，其余卡立即右移补位，自对应牌堆翻出一张新卡。<span class="pg">跨页 5</span></li>
+  <li>除幸存者外全部组件不限量；某项公共供应耗尽时以其他物件代替。布袋中幸存者耗尽时，幸存者出现的其余区域不再放置，侦察不可执行。<span class="pg">跨页 5</span><span class="pg">跨页 8</span></li>
+  <li>可放弃任何已取得的奖励或任何行动的执行，结算时略去该项；不得放弃支付资源、材料或幸福，也不得忽略所需的前置条件。<span class="pg">跨页 5</span></li>
+</ol>
+<h3>8.5 殖民地升级五条轨道</h3>
+<table>
+  <tr><th>类别</th><th>初始</th><th>I 级</th><th>II 级</th></tr>
+  <tr><td>激活区</td><td>每轮可选用四个激活区中的三个</td><td>殖民地入口增至五格</td><td>每轮可选用全部四个激活区</td></tr>
+  <tr><td>科技与计分</td><td>每槽至多叠两块科技或已封闭避难所卡，可结算两个计分区</td><td>堆叠上限仍为两块，可结算三个计分区</td><td>堆叠上限增至三块，可结算四个计分区</td></tr>
+  <tr><td>侦察与幸存者计分</td><td>侦察抽两名，入口每名幸存者零分</td><td>侦察抽三名，入口每名幸存者一分</td><td>侦察抽四名，入口每名幸存者二分</td></tr>
+  <tr><td>材料</td><td>每格至多一个方块，材料计分上限二分</td><td>每格至多两个方块，材料计分上限六分</td><td>每格至多三个方块，材料计分上限十二分</td></tr>
+  <tr><td>撤离车</td><td>移动至多两格、载量至多两名，不可进入区段 IV</td><td>移动至多三格、载量至多三名，不可进入区段 IV</td><td>移动至多四格、载量至多四名，可进入区段 IV</td></tr>
+</table>
+<div class="note">升级类别与数值取自原书附录 II；特殊角色可改写其中一项上限，改写范围见附录 I。<span class="pg">跨页 11</span></div>
+<h3>8.6 六种计分科技</h3>
+<table>
+  <tr><th>科技</th><th>每次激活对应槽位时的结算</th></tr>
+  <tr><td>其一</td><td>各列中每张已封闭避难所卡得一分</td></tr>
+  <tr><td>其二</td><td>每处已建造的避难所得一分，起始避难所不计</td></tr>
+  <tr><td>其三</td><td>每张已完成的任务卡得一分</td></tr>
+  <tr><td>其四</td><td>存储格中每个 II 级材料得一分</td></tr>
+  <tr><td>其五</td><td>凤凰计划中每块已安装的升级得一分</td></tr>
+  <tr><td>其六</td><td>获得二分</td></tr>
+</table>
+</section>
+
+<section id="s9">
+<h2><span class="n">9</span>终局与计分链路</h2>
+<p>第三轮结束后直接进入终局，按辐射、幸福计分、殖民地板计分、凤凰计划计分四步顺序结算；分数最高者获胜，并列时取回合顺序轨上位置更靠前者。<span class="pg">跨页 8</span><span class="pg">跨页 9</span></p>
+<div class="flow">
+<svg viewBox="0 0 900 210" role="img" aria-label="终局四步计分链路">
+  <rect x="0" y="0" width="900" height="210" fill="#ffffff"/>
+  <text x="450" y="26" text-anchor="middle" font-size="15" font-weight="700" fill="#2f466c">第三轮结束 → 四步依次结算 → 分数最高者胜</text>
+  <g font-size="12.5" text-anchor="middle" fill="#25324a">
+    <rect x="18" y="48" width="200" height="62" rx="9" fill="#eef3fa" stroke="#cddcee"/>
+    <text x="118" y="72">第一步 辐射</text><text x="118" y="93">按轮次设置第一步执行</text>
+    <rect x="232" y="48" width="200" height="62" rx="9" fill="#eaf5ec" stroke="#c6e0cc"/>
+    <text x="332" y="72">第二步 幸福计分</text><text x="332" y="93">每三点资源换一点幸福</text>
+    <rect x="446" y="48" width="200" height="62" rx="9" fill="#fdf1e6" stroke="#e8cdae"/>
+    <text x="546" y="72">第三步 殖民地板</text><text x="546" y="93">避难所圆片格内印值</text>
+    <rect x="660" y="48" width="222" height="62" rx="9" fill="#f3eefb" stroke="#d8c9ee"/>
+    <text x="771" y="72">第四步 凤凰计划</text><text x="771" y="93">三值相乘，每行上限 24 分</text>
+  </g>
+  <g stroke="#7d5511" stroke-width="2" fill="none">
+    <path d="M218 79 H228"/><path d="M432 79 H442"/><path d="M646 79 H656"/>
+  </g>
+  <text x="450" y="146" text-anchor="middle" font-size="13" fill="#6b615c">每行相乘：该行已安装升级数 × 满足计分板块要求的次数 × 金银铜值</text>
+  <text x="450" y="176" text-anchor="middle" font-size="12.5" fill="#6b615c">并列时按回合顺序轨位置裁定，不按剩余资源裁定</text>
+</svg>
+</div>
+<h3>9.1 四步结算</h3>
+<ol class="steps">
+  <li>按第 4 节所述执行一次辐射步骤。<span class="pg">跨页 9</span></li>
+  <li>把剩余的全部燃料、数据与抗辐射剂换成幸福，每三个资源换一点幸福，资源种类不限；终局每有一点幸福得一分。<span class="pg">跨页 9</span></li>
+  <li>结算殖民地板上避难所圆片格内可见的胜利分。<span class="pg">跨页 9</span></li>
+  <li>逐行结算凤凰计划：把该行已安装的升级数量、满足该行计分板块要求的次数、以及知识圆片位置所对应的金、银或铜值三者相乘，每行上限二十四分。<span class="pg">跨页 9</span></li>
+</ol>
+<h3>9.2 计分板块的判定对象</h3>
+<table>
+  <tr><th>对象</th><th>口径</th></tr>
+  <tr><td>指定颜色的生产修正</td><td>放有本人避难所圆片的建造格上该颜色修正的总数，起始避难所对应的格计入</td></tr>
+  <tr><td>指定等级的材料</td><td>存储格中该等级材料的数量</td></tr>
+  <tr><td>II 级升级</td><td>已安装或已弃掉的 II 级升级数量</td></tr>
+  <tr><td>已封闭避难所卡</td><td>各列中已封闭避难所卡的数量</td></tr>
+  <tr><td>已完成任务卡</td><td>背面朝下置于殖民地板旁的任务卡数量</td></tr>
+  <tr><td>已安装升级</td><td>凤凰计划中已安装的升级数量</td></tr>
+  <tr><td>彼此相连的避难所</td><td>由主版图两区域之间的边界线相连者视为相连，是否加强均计入，起始避难所不计</td></tr>
+  <tr><td>地标建造格上的避难所</td><td>建在底部带蓝灯建造格上的避难所，是否加强均计入</td></tr>
+</table>
+<div class="note">每块计分板块的判定对象以其印面为准，原书附录 III 按图标成组列出；金、银、铜三值由该行知识圆片终局位置决定。<span class="pg">跨页 11</span><span class="pg">跨页 12</span></div>
+</section>
+
+<section id="s10">
+<h2><span class="n">10</span>常见误读与示例拆解</h2>
+<p>下列条目按规则口径逐条对照，页码指向英文跨页版。原书未列或存在歧义之处只记录，不代填；中文版中的译者注属译者判断，不列入规则口径。<span class="pg">跨页 4</span><span class="pg">跨页 5</span></p>
+<h3>10.1 常见误读逐条对照</h3>
+<table>
+  <tr><th>误读</th><th>规则口径</th><th>依据</th></tr>
+  <tr><td>全局共四轮</td><td>三轮之后直接终局</td><td><span class="pg">跨页 5</span></td></tr>
+  <tr><td>首轮也执行辐射</td><td>首轮只执行幸存者出现，其余三步跳过</td><td><span class="pg">跨页 5</span></td></tr>
+  <tr><td>首轮不放置幸存者</td><td>首轮唯一执行的正是幸存者出现</td><td><span class="pg">跨页 5</span></td></tr>
+  <tr><td>有撤离车的区域仍结算辐射</td><td>至少一辆撤离车即跳过该区域</td><td><span class="pg">跨页 5</span></td></tr>
+  <tr><td>辐射先移除关键幸存者</td><td>先移除活跃幸存者，无活跃时才移除关键幸存者</td><td><span class="pg">跨页 5</span></td></tr>
+  <tr><td>幸存者出现覆盖全部四个区段</td><td>第 1、2、3 轮依次为区段 1+2、2+3、3+4</td><td><span class="pg">跨页 5</span></td></tr>
+  <tr><td>袋空时以其他组件代替幸存者</td><td>袋空时剩余区域不再放置</td><td><span class="pg">跨页 5</span></td></tr>
+  <tr><td>停手后仍可执行即时额外行动</td><td>停手协议进行中或之后两类额外行动均不可执行</td><td><span class="pg">跨页 6</span><span class="pg">跨页 8</span></td></tr>
+  <tr><td>停手四步顺序可自行调整</td><td>按回收幸存者、幸福轨收入、殖民地计分、回合顺序依次结算</td><td><span class="pg">跨页 6</span></td></tr>
+  <tr><td>未回收的幸存者留在激活区</td><td>退回布袋，每名失去一点幸福</td><td><span class="pg">跨页 6</span></td></tr>
+  <tr><td>幸福轨收入自上而下结算</td><td>自下而上结算，先取一名活跃幸存者，再按圆片新位置结算其余</td><td><span class="pg">跨页 6</span></td></tr>
+  <tr><td>殖民地计分五个区全部结算</td><td>按殖民地板与升级允许的上限选区，初始为两个</td><td><span class="pg">跨页 6</span></td></tr>
+  <tr><td>材料计分没有上限</td><td>材料计分有上限，可经殖民地升级提高</td><td><span class="pg">跨页 6</span><span class="pg">跨页 11</span></td></tr>
+  <tr><td>回合顺序轨两行可任选</td><td>上行用于第 1、3 轮，下行用于第 2 轮</td><td><span class="pg">跨页 6</span></td></tr>
+  <tr><td>可占据已被他人占据的顺序轨格</td><td>不可占据</td><td><span class="pg">跨页 6</span></td></tr>
+  <tr><td>撤离车可穿越红线</td><td>红线不可通行</td><td><span class="pg">跨页 6</span></td></tr>
+  <tr><td>移动不可结束于起点</td><td>可结束于起点格</td><td><span class="pg">跨页 6</span></td></tr>
+  <tr><td>载量只在到达时判定</td><td>移动途中任何时刻均不得超出载量</td><td><span class="pg">跨页 6</span></td></tr>
+  <tr><td>主面朝上的区域板块激活后不翻面</td><td>主面激活后翻至次面；次面朝上则不翻</td><td><span class="pg">跨页 6</span></td></tr>
+  <tr><td>离开起始避难所不计移动</td><td>计为一次移动</td><td><span class="pg">跨页 6</span></td></tr>
+  <tr><td>关键幸存者可用于激活协议</td><td>须为活跃幸存者</td><td><span class="pg">跨页 6</span></td></tr>
+  <tr><td>同一轮可重复选用同一激活区</td><td>同一轮不可重复</td><td><span class="pg">跨页 6</span></td></tr>
+  <tr><td>生产面板位置一也生产资源</td><td>位置一取自四张可见任务卡并补充展示，位置二至四才生产</td><td><span class="pg">跨页 7</span></td></tr>
+  <tr><td>生产轨圆片到顶无额外奖励</td><td>圆片位于最高位时另得二分</td><td><span class="pg">跨页 7</span></td></tr>
+  <tr><td>六枚避难所圆片的价格全部列出</td><td>原书只列前两枚与后两枚的价格，第三组两枚计价未载</td><td><span class="pg">跨页 7</span></td></tr>
+  <tr><td>已建避难所的建造格可再建</td><td>只可置于空闲建造格</td><td><span class="pg">跨页 7</span></td></tr>
+  <tr><td>营救可自多个区域取幸存者</td><td>全部幸存者须来自同一相邻区域</td><td><span class="pg">跨页 7</span></td></tr>
+  <tr><td>营救不受殖民地入口空位限制</td><td>不得超出入口空位，初始四格</td><td><span class="pg">跨页 7</span></td></tr>
+  <tr><td>凤凰计划的数据费用固定</td><td>按该等级上全体玩家安装的第 1、第 2、第三个及其后各升级递增</td><td><span class="pg">跨页 7</span></td></tr>
+  <tr><td>II 级升级无前置条件</td><td>须已建造或弃掉 I 级升级，且某生产轨圆片到达第三格</td><td><span class="pg">跨页 7</span></td></tr>
+  <tr><td>安装升级只在终局计分</td><td>安装时即得二、六或十二分并推进知识圆片</td><td><span class="pg">跨页 7</span></td></tr>
+  <tr><td>即时额外行动可打断奖励结算</td><td>须待当前行动或单项奖励结算完毕</td><td><span class="pg">跨页 8</span></td></tr>
+  <tr><td>受限额外行动可在协议中执行</td><td>只能在协议之前或之后</td><td><span class="pg">跨页 8</span></td></tr>
+  <tr><td>里程碑计分为零分则不可达成</td><td>零分仍可达成</td><td><span class="pg">跨页 8</span></td></tr>
+  <tr><td>任务卡的区段要求可高于当前轮次</td><td>区段编号不得高于当前轮次</td><td><span class="pg">跨页 8</span></td></tr>
+  <tr><td>可放弃支付费用以保留资源</td><td>奖励与行动可放弃，支付与前置条件不得放弃</td><td><span class="pg">跨页 5</span></td></tr>
+  <tr><td>终局不执行辐射</td><td>终局第一步按轮次设置的辐射执行一次</td><td><span class="pg">跨页 9</span></td></tr>
+  <tr><td>凤凰计划每行计分无上限</td><td>每行上限二十四分</td><td><span class="pg">跨页 9</span></td></tr>
+  <tr><td>平局按剩余资源裁定</td><td>按回合顺序轨位置裁定</td><td><span class="pg">跨页 5</span><span class="pg">跨页 9</span></td></tr>
+  <tr><td>跨页编号等同原书单页编号</td><td>一张跨页图含两个单页，跨页 N 不可按单页 N 查中文版</td><td><span class="pg">跨页 2</span><span class="pg">跨页 12</span></td></tr>
+  <tr><td>中文版译者注属原书规则</td><td>属译者判断，以实体配件与英文原书为准</td><td><span class="pg">跨页 11</span></td></tr>
+</table>
+<h3>10.2 原书示例拆解</h3>
+<table>
+  <tr><th>示例</th><th>步骤</th><th>结果</th><th>依据</th></tr>
+  <tr><td>停手收入</td><td>Elio 自下而上结算幸福轨收入：先取一名活跃幸存者置于入口，再把圆片上移两格幸福</td><td>按圆片新位置取得另一项收入，把一个材料方块放入电路板存储格</td><td><span class="pg">跨页 6</span></td></tr>
+  <tr><td>殖民地计分</td><td>Elio 可结算两个计分区，选择两个已封闭避难所列</td><td>得六分与三分，共九分；材料区虽有四分材料，该区当时上限为二分，未计入所选计分区</td><td><span class="pg">跨页 6</span></td></tr>
+  <tr><td>移动撤离车</td><td>Angela 经升级可移动至多三格、载量至多三名；自起点带两名幸存者移动一格后留下，再取三名移至目的地</td><td>到达后激活目的地区域板块，途中任何时刻未超出载量</td><td><span class="pg">跨页 6</span></td></tr>
+  <tr><td>安装升级</td><td>Angela 支付一个数据与一个 I 级材料，在 I 级安装该等级第一个升级，取走计分科技并放入自选槽位，再放升级板块</td><td>得二分，对应知识圆片右移一格</td><td><span class="pg">跨页 7</span></td></tr>
+  <tr><td>终局相乘</td><td>Angela 在浅蓝行按 II 级材料计分：材料数四、该行已安装升级数三、知识圆片对应金值三</td><td>四乘三乘三得三十六，按每行上限截为二十四分</td><td><span class="pg">跨页 9</span></td></tr>
+</table>
+</section>
+
+<section id="s11">
+<h2><span class="n">11</span>人数变体与单人模式</h2>
+<p>二至四人局的规则相同，差异集中在设置；单人模式按双人局设置，另加入由行动卡驱动的对手。<span class="pg">跨页 3</span><span class="pg">跨页 9</span></p>
+<h3>11.1 人数差异</h3>
+<table>
+  <tr><th>项目</th><th>二人局</th><th>三人局</th><th>四人局</th></tr>
+  <tr><td>主版图与凤凰计划版图</td><td>带辐射带的一面</td><td>不带辐射带的一面</td><td>不带辐射带的一面</td></tr>
+  <tr><td>封锁场址、区域板块与科技</td><td>不放置</td><td>按图示空位放置，视为不存在</td><td>不放置</td></tr>
+  <tr><td>成就板块翻面</td><td>三块均显示一格</td><td>两块显示两格</td><td>三块均显示两格</td></tr>
+  <tr><td>起始资源卡组合</td><td>三组</td><td>四组</td><td>五组</td></tr>
+  <tr><td>回合顺序轨</td><td>正常使用前两格</td><td>最右侧格以未使用颜色撤离车封锁</td><td>四格全部使用</td></tr>
+  <tr><td>里程碑达成位</td><td>每个里程碑仅容一名玩家</td><td>按成就板块所示格数</td><td>按成就板块所示格数</td></tr>
+</table>
+<h3>11.2 对手设置</h3>
+<ol class="steps">
+  <li>按双人局完成全部设置，玩家自身设置不作改动。<span class="pg">跨页 9</span></li>
+  <li>自三张对手难度卡选一张，辐射符号越多难度越高；把卡置于对手区，并把一个材料方块放在对手轨起始格作为对手标记。<span class="pg">跨页 9</span></li>
+  <li>洗匀十二张对手行动卡成牌堆置于难度卡旁；为对手选一个颜色，取其殖民地板并按常规放好升级板块、避难所圆片与分数标记，另放一个该色圆片于 +0 胜利分格；强度标记与余下四个圆片回盒。<span class="pg">跨页 9</span></li>
+  <li>对手一辆撤离车置于回合顺序轨第二格，另一辆置于起始避难所。<span class="pg">跨页 9</span></li>
+  <li>玩家按常规选取特殊角色：洗匀特殊角色卡抽二选一，首局可自背面带星者中随机取一张。洗匀起始资源卡翻出两张，各配一块起始生产技术，玩家选其中一组。<span class="pg">跨页 9</span></li>
+</ol>
+<h3>11.3 对手的回合</h3>
+<ol class="steps">
+  <li>对手标记位于对手轨顶格时，对手停手：标记移至底格、重洗全部行动卡、撤离车置于回合顺序轨首个空位。<span class="pg">跨页 10</span></li>
+  <li>标记位于其余格时翻开一张对手行动卡；仅当卡面出现箭头且颜色符合难度档位时，把标记上移一格。普通档任意颜色均上移，进阶档仅粉或蓝，专家档仅蓝。<span class="pg">跨页 9</span><span class="pg">跨页 10</span></li>
+  <li>按撤离车位于回合顺序轨第一行或第二行，判定本回合采用第 1、3 轮的主行动还是第 2 轮的主行动。<span class="pg">跨页 9</span></li>
+  <li>按区段、序数、数值三个参数定位行动目标：区段参数按当前轮次或轮次加一，序数参数定起点方向，数值参数自起点计数；数值超出可行情形数时自第一个情形续数。安装升级时不套用区段参数。<span class="pg">跨页 10</span></li>
+  <li>执行主行动与卡面所示次要行动；无可执行情形时，对手取得难度卡所示的直接分数。部分行动卡另要求立即翻新一张卡作为额外回合。<span class="pg">跨页 10</span></li>
+</ol>
+<div class="note">原书未写明数值参数续数时起点是否重复计入，判定细节以原书为准。<span class="pg">跨页 10</span></div>
+<h3>11.4 对手行动与终局计分</h3>
+<table>
+  <tr><th>项目</th><th>口径</th><th>依据</th></tr>
+  <tr><td>资源与幸福</td><td>对手不花费也不累积资源，每回合只执行卡面行动；对手无幸福轨圆片，涉及对手的幸福效果一律忽略</td><td><span class="pg">跨页 9</span></td></tr>
+  <tr><td>建造避难所</td><td>在参数定位的空闲建造格放一枚避难所圆片，取展示区最右侧避难所卡背面朝下放入行动卡所示颜色的已封闭避难所列；只计该区段空闲格</td><td><span class="pg">跨页 10</span></td></tr>
+  <tr><td>营救幸存者</td><td>取目标区域全部幸存者退回布袋，每名得一分；只计含幸存者的区域</td><td><span class="pg">跨页 10</span></td></tr>
+  <tr><td>安装升级</td><td>把目标格上的科技回盒并放入对手升级，按等级得二、六或十二分并推进对应知识圆片；只计未安装升级的格</td><td><span class="pg">跨页 10</span></td></tr>
+  <tr><td>移动撤离车</td><td>把撤离车移至目标区域并翻面该区域板块，起始区域全部幸存者随行；只计主面朝上的区域板块</td><td><span class="pg">跨页 10</span></td></tr>
+  <tr><td>达成里程碑</td><td>安装 II 级升级后立即达成，无视里程碑条件，按行动卡颜色取对应行的成就板块格，并按难度得二、四或六分；成就板块无空位时不达成</td><td><span class="pg">跨页 10</span></td></tr>
+  <tr><td>次要行动</td><td>弃展示区右侧两张任务卡并补充；或按对手三列中每列已封闭避难所卡数，每卡得三分</td><td><span class="pg">跨页 10</span></td></tr>
+  <tr><td>终局计分</td><td>不计幸福分；计殖民地板避难所圆片格内分数；翻难度卡按知识圆片位置计每个已安装升级的分，普通档铜银金为二、四、六分，进阶档四、六、十分，专家档六、八、十二分</td><td><span class="pg">跨页 11</span></td></tr>
+</table>
+<div class="note">单人模式同为三轮，其后按常规终局步骤结算；轮次结束以玩家与对手二者中最后停手者为准。<span class="pg">跨页 9</span><span class="pg">跨页 10</span></div>
+<h3>11.5 版本差异记录</h3>
+<table>
+  <tr><th>条目</th><th>英文原书</th><th>已上线中文版</th><th>处理</th></tr>
+  <tr><td>页码体例</td><td>13 张跨页图，各含两个单页</td><td>图注按「原书第 2–3 页」等单页区间标注</td><td>页码统一写「跨页 N」，第 12 节附两种编号对照</td></tr>
+  <tr><td>六枚避难所圆片的价格</td><td>只列前两枚与后两枚，共四项</td><td>照原文译出并附译者注</td><td>只记录原文缺项，第三组计价以实体版图印值为准</td></tr>
+  <tr><td>特殊角色卡数量</td><td>配件表 12 张，附录 I 按卡面顺序列出 13 条效果</td><td>附译者注推定多出一条为同卡第二段能力</td><td>按配件表记十二张，不采纳推定</td></tr>
+  <tr><td>其余歧义</td><td>辐射扣幸福的结算粒度、净化舱等级定义、里程碑计分板块元素范围、参数续数起点</td><td>各附译者注</td><td>视为译者判断，只列原文所述条件，不反推规则</td></tr>
+</table>
+<div class="key"><b>裁决口径：</b>英文跨页版页图为最终裁决；中文版只用于定位章节与沿用既定译法。原书简介、历史背景与制作名单不属规则内容，不列入。<span class="pg">跨页 2</span><span class="pg">跨页 12</span></div>
+</section>
+
+<section id="s12">
+<h2><span class="n">12</span>速查表与页码索引</h2>
+<h3>12.1 一个回合速查</h3>
+<table>
+  <tr><th>环节</th><th>执行内容</th><th>禁止</th></tr>
+  <tr><td>轮次设置</td><td>辐射、弃两张任务卡、重置区域板块、幸存者出现；首轮只做第四步</td><td>首轮执行辐射</td></tr>
+  <tr><td>协议</td><td>停手、移动撤离车、激活幸存者三者选定其一</td><td>同一行动执行两个协议</td></tr>
+  <tr><td>额外行动</td><td>即时行动结算完毕即可插入；受限行动只在协议前后，每种每回合一次</td><td>停手协议进行中或之后执行</td></tr>
+  <tr><td>主要行动</td><td>建造避难所、营救幸存者、安装升级、休息，按触发来源执行一项</td><td>无触发来源时自行执行</td></tr>
+  <tr><td>停手四步</td><td>回收幸存者、幸福轨收入、殖民地计分、回合顺序</td><td>停手后继续执行行动</td></tr>
+  <tr><td>轮次结束</td><td>全员停手后推进轮次标记；第三轮后终局</td><td>第三轮后追加第四轮</td></tr>
+  <tr><td>终局四步</td><td>辐射、幸福计分、殖民地板计分、凤凰计划计分</td><td>跳过终局辐射</td></tr>
+</table>
+<h3>12.2 中英术语对照</h3>
+<table>
+  <tr><th>中文</th><th>英文</th><th>口径</th></tr>
+  <tr><td>轮次设置</td><td>Round setup</td><td>每轮第一步，含四个子步骤</td></tr>
+  <tr><td>协议</td><td>Protocol</td><td>停手、移动撤离车、激活幸存者三者</td></tr>
+  <tr><td>停手</td><td>Pass</td><td>四步固定顺序，本轮最后一次协议</td></tr>
+  <tr><td>撤离车</td><td>Evacuation vehicle</td><td>主版图上移动的载具，兼作回合顺序轨标记</td></tr>
+  <tr><td>激活区</td><td>Activation zone</td><td>四个，各对应一个科技槽位与生产面板位置</td></tr>
+  <tr><td>净化舱</td><td>Decontamination pod</td><td>避难所卡上容纳幸存者的格位</td></tr>
+  <tr><td>材料金字塔</td><td>Materials pyramid</td><td>九个存储格，分 I、II、III 三排</td></tr>
+  <tr><td>强度树</td><td>Strength tree</td><td>以标记位置表示殖民地强度</td></tr>
+  <tr><td>幸福轨</td><td>Happiness track</td><td>零至九，首尾均为有效位</td></tr>
+  <tr><td>凤凰计划</td><td>Phoenix Project</td><td>三等级、三行，每行对应一个知识圆片</td></tr>
+  <tr><td>知识圆片</td><td>Knowledge disc</td><td>位置决定金、银、铜取值</td></tr>
+  <tr><td>里程碑</td><td>Milestone</td><td>六项条件，达成时按计分板块结算</td></tr>
+  <tr><td>对手</td><td>Rival</td><td>单人模式由行动卡驱动的对手</td></tr>
+  <tr><td>胜利分</td><td>VP</td><td>分数轨上的即时分与终局分</td></tr>
+</table>
+<h3>12.3 章节与跨页页码对照</h3>
+<table>
+  <tr><td>0 游戏概要与目标</td><td>跨页 2、5、9</td><td>7 两类额外行动</td><td>跨页 8、12</td></tr>
+  <tr><td>1 初局设置</td><td>跨页 3、4</td><td>8 贯穿全局的系统</td><td>跨页 4、5、11、12</td></tr>
+  <tr><td>2 版图与组件速认</td><td>跨页 2、3、4、6</td><td>9 终局与计分链路</td><td>跨页 8、9、11、12</td></tr>
+  <tr><td>3 核心引擎</td><td>跨页 5、8</td><td>10 常见误读与示例拆解</td><td>跨页 4–9</td></tr>
+  <tr><td>4 一轮的结构</td><td>跨页 5、6、8</td><td>11 人数变体与单人模式</td><td>跨页 3、9、10、11</td></tr>
+  <tr><td>5 三种协议</td><td>跨页 6、7、11</td><td>12 速查表与页码索引</td><td>全册</td></tr>
+  <tr><td>6 四项主要行动</td><td>跨页 7、11</td><td>页图对照</td><td>13 张</td></tr>
+</table>
+<table>
+  <tr><th>跨页</th><th>原书单页</th><th>内容</th><th>跨页</th><th>原书单页</th><th>内容</th></tr>
+  <tr><td>跨页 1</td><td>封面</td><td>无规则</td><td>跨页 7</td><td>12–13</td><td>生产面板与主要行动</td></tr>
+  <tr><td>跨页 2</td><td>2–3</td><td>简介与配件</td><td>跨页 8</td><td>14–15</td><td>额外行动与任务卡</td></tr>
+  <tr><td>跨页 3</td><td>4–5</td><td>公共设置与玩家设置</td><td>跨页 9</td><td>16–17</td><td>终局计分与单人设置</td></tr>
+  <tr><td>跨页 4</td><td>6–7</td><td>开始游戏前与通用概念</td><td>跨页 10</td><td>18–19</td><td>对手回合、参数与行动</td></tr>
+  <tr><td>跨页 5</td><td>8–9</td><td>胜利分、幸福轨、轮次设置</td><td>跨页 11</td><td>20–21</td><td>特殊角色与殖民地升级</td></tr>
+  <tr><td>跨页 6</td><td>10–11</td><td>停手、移动、激活</td><td>跨页 12</td><td>22–23</td><td>里程碑、计分科技与图标</td></tr>
+  <tr><td>跨页 13</td><td>封底</td><td>无规则</td><td>—</td><td>—</td><td>—</td></tr>
+</table>
+<h3>12.4 原书页图对照</h3>
+<details>
+  <summary>展开原书页图（13 张，按跨页序）</summary>
+  <div class="pgs">
+    <figure><img src="images_ashes/page_01.jpg" alt="跨页 1 封面" loading="lazy"><figcaption>跨页 1 封面</figcaption></figure>
+    <figure><img src="images_ashes/page_02.jpg" alt="跨页 2 简介与配件" loading="lazy"><figcaption>跨页 2 · 单页 2–3 简介与配件</figcaption></figure>
+    <figure><img src="images_ashes/page_03.jpg" alt="跨页 3 公共设置与玩家设置" loading="lazy"><figcaption>跨页 3 · 单页 4–5 游戏设置</figcaption></figure>
+    <figure><img src="images_ashes/page_04.jpg" alt="跨页 4 开始游戏前与通用概念" loading="lazy"><figcaption>跨页 4 · 单页 6–7 资源、强度与材料</figcaption></figure>
+    <figure><img src="images_ashes/page_05.jpg" alt="跨页 5 胜利分与轮次设置" loading="lazy"><figcaption>跨页 5 · 单页 8–9 游戏流程与轮次设置</figcaption></figure>
+    <figure><img src="images_ashes/page_06.jpg" alt="跨页 6 停手与移动激活" loading="lazy"><figcaption>跨页 6 · 单页 10–11 三种协议</figcaption></figure>
+    <figure><img src="images_ashes/page_07.jpg" alt="跨页 7 生产面板与主要行动" loading="lazy"><figcaption>跨页 7 · 单页 12–13 主要行动与凤凰计划</figcaption></figure>
+    <figure><img src="images_ashes/page_08.jpg" alt="跨页 8 额外行动" loading="lazy"><figcaption>跨页 8 · 单页 14–15 额外行动与任务卡</figcaption></figure>
+    <figure><img src="images_ashes/page_09.jpg" alt="跨页 9 终局计分与单人设置" loading="lazy"><figcaption>跨页 9 · 单页 16–17 终局计分与对手设置</figcaption></figure>
+    <figure><img src="images_ashes/page_10.jpg" alt="跨页 10 对手回合与行动" loading="lazy"><figcaption>跨页 10 · 单页 18–19 对手参数与行动</figcaption></figure>
+    <figure><img src="images_ashes/page_11.jpg" alt="跨页 11 特殊角色与殖民地升级" loading="lazy"><figcaption>跨页 11 · 单页 20–21 特殊角色与升级</figcaption></figure>
+    <figure><img src="images_ashes/page_12.jpg" alt="跨页 12 里程碑与通用图标" loading="lazy"><figcaption>跨页 12 · 单页 22–23 附录与图标</figcaption></figure>
+    <figure><img src="images_ashes/page_13.jpg" alt="跨页 13 封底" loading="lazy"><figcaption>跨页 13 封底</figcaption></figure>
+  </div>
+</details>
+</section>
+
+<div class="foot">
+灰烬：停电协议 · 学习版规则　｜　依据英文原书《A.S.H.E.S.: Blackout Protocol》Rulebook（13 张跨页图）与中文版既定译法编写<br>
+按规则结构重排，非官方规则书；规则裁决以英文原书为准，实体配件印值以配件为准。
+</div>
+</main>
+</div>
+</body>
+</html>
