@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>尼哈尔 · 学习版规则（Nijar）</title>
+<style>
+  :root{
+    --bg:#fbf7f0; --paper:#fffdf9; --ink:#2f2a28; --soft:#6b615c;
+    --line:#e3d8c8; --line2:#d3c4ae;
+    --red:#a2303c; --red-l:#fbecec; --blue:#3b5b8c; --blue-l:#eaf0f9;
+    --gold:#a9761c; --gold-l:#fbf1dc; --green:#3d7a55; --green-l:#e9f4ec;
+    --purple:#6b4a86; --purple-l:#f1eaf7;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"PingFang SC","Microsoft YaHei","Noto Sans SC",Arial,sans-serif;
+    font-size:15.5px;line-height:1.85;}
+  .backbar{position:sticky;top:0;z-index:60;height:44px;box-sizing:border-box;
+    display:flex;align-items:center;gap:10px;padding:0 16px;
+    background:var(--paper);border-bottom:1px solid var(--line);font-size:13px;}
+  .backbar a{display:inline-flex;align-items:center;min-height:32px;padding:0 12px;
+    border:1px solid var(--line2);border-radius:8px;background:#fff;
+    color:var(--purple);text-decoration:none;white-space:nowrap;}
+  .backbar a:active{background:var(--purple-l);}
+  .backbar .bb-t{margin-left:auto;font-size:12px;color:var(--soft);}
+  .layout{display:flex;align-items:flex-start;max-width:1280px;margin:0 auto;}
+  nav.toc{position:sticky;top:44px;align-self:flex-start;width:238px;flex:0 0 238px;
+    height:calc(100vh - 44px);overflow-y:auto;background:#fffdf9;border-right:1px solid var(--line);
+    padding:22px 14px 40px;font-size:13px;}
+  nav.toc .brand{font-size:17px;font-weight:800;color:var(--red);margin:0 0 4px;}
+  nav.toc .brand-s{font-size:11.5px;color:var(--soft);margin:0 0 16px;letter-spacing:.04em;}
+  nav.toc .grp{margin:16px 0 5px;font-size:11px;color:var(--gold);font-weight:700;letter-spacing:.12em;}
+  nav.toc a{display:block;color:#49403b;text-decoration:none;padding:4px 9px;border-radius:6px;}
+  nav.toc a:hover{background:var(--red-l);color:var(--red);}
+  main{flex:1 1 auto;min-width:0;padding:0 42px 90px;}
+  .hero{background:linear-gradient(150deg,#7c1f2b,#a2303c 55%,#bd5a4a);
+    color:#fff8f0;border-radius:0 0 20px 20px;padding:40px 42px 34px;margin-bottom:26px;
+    box-shadow:0 8px 26px rgba(124,31,43,.18);}
+  .hero h1{margin:0;font-size:34px;letter-spacing:.02em;}
+  .hero .en{font-size:14px;opacity:.8;margin:2px 0 12px;letter-spacing:.06em;}
+  .hero .desc{font-size:16px;max-width:760px;line-height:1.8;}
+  .hero .meta{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px;}
+  .hero .meta span{border:1px solid rgba(255,255,255,.5);border-radius:20px;padding:3px 13px;font-size:12.5px;}
+  .stand{margin-top:14px;background:#fff6e2;border:1px solid #e8d2a2;border-left:5px solid var(--gold);
+    border-radius:0 10px 10px 0;padding:12px 18px;font-size:14px;color:#5c4a26;}
+  section{padding:22px 0 14px;border-bottom:1px dashed var(--line2);scroll-margin-top:14px;}
+  h2{font-size:25px;color:var(--red);margin:8px 0 4px;line-height:1.4;}
+  h2 .n{display:inline-block;background:var(--red);color:#fff;font-size:14px;
+    min-width:30px;height:30px;line-height:30px;text-align:center;border-radius:8px;
+    margin-right:10px;vertical-align:3px;font-weight:700;}
+  h3{font-size:18.5px;color:#3a3230;margin:26px 0 6px;border-left:4px solid var(--gold);padding-left:10px;}
+  h4{font-size:16px;color:var(--blue);margin:18px 0 4px;}
+  p{margin:9px 0;}
+  ul,ol{margin:9px 0 9px 2px;padding-left:22px;}
+  li{margin:5px 0;}
+  b,strong{color:var(--red);}
+  .goal{background:var(--blue-l);border:1px solid #cfdcf0;border-radius:9px;
+    padding:8px 14px;font-size:13.5px;color:#2f466c;margin:8px 0 16px;}
+  .goal b{color:#2f466c;}
+  .pg{display:inline-block;background:#f0e7d8;color:#7d6231;border:1px solid #e2d2b6;
+    border-radius:5px;font-size:11px;padding:0 6px;line-height:18px;vertical-align:1px;
+    margin-left:4px;font-weight:600;white-space:nowrap;font-family:Arial,sans-serif;}
+  .key{background:var(--green-l);border:1px solid #c9e2d1;border-left:5px solid var(--green);
+    padding:11px 16px;border-radius:0 10px 10px 0;margin:13px 0;}
+  .key b{color:var(--green);}
+  .warn{background:var(--red-l);border:1px solid #eed3d3;border-left:5px solid var(--red);
+    padding:11px 16px;border-radius:0 10px 10px 0;margin:13px 0;}
+  .warn b{color:var(--red);}
+  .tip{background:var(--gold-l);border:1px solid #eddcb8;border-left:5px solid var(--gold);
+    padding:11px 16px;border-radius:0 10px 10px 0;margin:13px 0;}
+  .tip b{color:var(--gold);}
+  .note{background:#f4f1ec;border:1px solid var(--line);border-radius:9px;padding:10px 15px;
+    margin:12px 0;font-size:14px;color:#514844;}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px;background:var(--paper);}
+  th,td{border:1px solid var(--line2);padding:8px 11px;text-align:left;vertical-align:top;}
+  th{background:#f4e9dd;color:#5d4022;font-weight:700;}
+  tr:nth-child(even) td{background:#fdf9f3;}
+  td.c,th.c{text-align:center;}
+  .steps{list-style:none;padding:0;counter-reset:st;margin:14px 0;}
+  .steps>li{position:relative;padding:10px 14px 10px 50px;margin:9px 0;background:var(--paper);
+    border:1px solid var(--line);border-radius:10px;}
+  .steps>li::before{counter-increment:st;content:counter(st);position:absolute;left:12px;top:11px;
+    width:26px;height:26px;background:var(--red);color:#fff;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;}
+  .steps>li>ol{margin:6px 0;padding-left:20px;}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:11px;
+    padding:13px 17px;margin:11px 0;box-shadow:0 2px 6px rgba(80,60,40,.04);}
+  .card .t{font-weight:800;color:var(--red);font-size:16px;margin-bottom:3px;}
+  .card .t .s{display:inline-block;background:var(--red);color:#fff;border-radius:5px;
+    font-size:12px;padding:1px 7px;margin-right:8px;}
+  .card.blue .t{color:var(--blue);} .card.blue .t .s{background:var(--blue);}
+  .card.green .t{color:var(--green);} .card.green .t .s{background:var(--green);}
+  .card.gold .t{color:var(--gold);} .card.gold .t .s{background:var(--gold);}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+  .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;}
+  .mini{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:11px 13px;}
+  .mini .h{font-weight:800;font-size:14px;margin-bottom:4px;}
+  .mini .v{font-size:13px;color:var(--soft);line-height:1.7;}
+  .fig{margin:18px 0;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;}
+  .fig svg{display:block;width:100%;height:auto;}
+  .figcap{font-size:12.5px;color:var(--soft);margin-top:8px;text-align:center;}
+  details{margin:12px 0;background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:8px 14px;}
+  summary{cursor:pointer;font-size:13.5px;color:var(--blue);font-weight:600;}
+  details img{display:block;max-width:100%;margin:12px auto;border:1px solid var(--line);border-radius:8px;}
+  .pit{counter-reset:pit;list-style:none;padding:0;margin:14px 0;}
+  .pit li{position:relative;padding:9px 14px 9px 46px;margin:7px 0;background:var(--paper);
+    border:1px solid var(--line);border-radius:9px;font-size:14.5px;}
+  .pit li::before{counter-increment:pit;content:"✕ " counter(pit);position:absolute;left:10px;top:9px;
+    color:#fff;background:var(--red);border-radius:6px;font-size:11px;padding:1px 6px;font-weight:700;}
+  .bad{color:var(--red);text-decoration:line-through;}
+  .good{color:var(--green);font-weight:700;}
+  .tagR{color:var(--red);font-weight:700;} .tagB{color:var(--blue);font-weight:700;}
+  .tagG{color:var(--gold);font-weight:700;}
+  .why{background:#eef3fa;border:1px solid #cddcee;border-left:5px solid var(--blue);
+    padding:12px 17px;border-radius:0 10px 10px 0;margin:13px 0;font-size:14.5px;}
+  .why b{color:#2f466c;}
+  .why .wt{font-weight:800;color:#2f466c;display:block;margin-bottom:3px;}
+  .idx{font-size:13.5px;}
+  .foot{margin-top:34px;font-size:12.5px;color:var(--soft);text-align:center;line-height:1.9;}
+  @media(max-width:960px){
+    .layout{flex-direction:column;} nav.toc{position:static;width:100%;height:auto;flex-basis:auto;border-right:0;border-bottom:1px solid var(--line);}
+    main{padding:0 18px 60px;} .grid2,.grid4{grid-template-columns:1fr 1fr;}
+  }
+  @media(max-width:640px){.backbar{height:40px;padding:0 10px;} .backbar a{min-height:30px;padding:0 9px;font-size:12.5px;} .backbar .bb-t{display:none;}
+  .grid2,.grid4{grid-template-columns:1fr;} main{padding:0 12px 50px;} .hero{padding:28px 20px;} .hero h1{font-size:26px;}}
+
+  /* == 窄屏目录：横向胶囊，正文首屏可见 == */
+  @media(max-width:960px){
+    nav.toc{display:flex;flex-wrap:nowrap;gap:6px;align-items:center;
+      height:auto;max-height:none;overflow-x:auto;overflow-y:hidden;
+      padding:10px 12px;border-right:0;border-bottom:1px solid var(--line);
+      -webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;}
+    nav.toc .brand,nav.toc .brand-s,nav.toc .grp{display:none;}
+    nav.toc a{flex:0 0 auto;white-space:nowrap;padding:6px 11px;
+      border:1px solid var(--line2);border-radius:16px;background:var(--paper);
+      font-size:12.5px;line-height:1.4;}
+    nav.toc a:hover{background:var(--red-l);}
+    nav.toc a[style]{padding-left:11px;}
+  }
+
+  /* == 学习版通用补充（各本共用） == */
+  .flow{margin:18px 0;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;}
+  .flow svg{display:block;width:100%;height:auto;}
+  .pgs{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin:14px 0;}
+  .pgs figure{margin:0;background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:8px;}
+  .pgs img{display:block;width:100%;height:auto;margin:0;border:1px solid var(--line);border-radius:6px;}
+  .pgs figcaption{font-size:12px;color:var(--soft);text-align:center;margin-top:6px;line-height:1.5;}
+  @media(max-width:640px){.pgs{grid-template-columns:1fr 1fr;gap:9px;}}
+  /* 窄屏压缩首屏：hero 与体例框收紧，第 0 节进入首屏 */
+  @media(max-width:640px){
+    .hero{padding:22px 18px 24px;margin-bottom:16px;}
+    .hero h1{font-size:24px;} .hero .desc{font-size:14px;line-height:1.65;margin-top:8px;}
+    .hero .meta{margin-top:12px;gap:6px;} .hero .meta span{font-size:11.5px;padding:2px 10px;}
+    .stand{margin-top:10px;padding:9px 12px;font-size:12.5px;line-height:1.6;}
+  }
+</style>
+</head>
+<body>
+<div class="backbar"><a href="index.html">← 学习版目录</a><span class="bb-t">尼哈尔 · 学习版规则</span></div>
+<div class="layout">
+<nav class="toc">
+  <div class="brand">尼哈尔</div>
+  <div class="brand-s">学习版规则 · Nijar</div>
+  <div class="grp">规则概要</div>
+  <a href="#s0">0 · 游戏概要与目标</a>
+  <a href="#s1">1 · 初局设置</a>
+  <a href="#s2">2 · 版图、组件与资源状态</a>
+  <div class="grp">轮次与回合</div>
+  <a href="#s3">3 · 核心引擎</a>
+  <a href="#s4">4 · 一轮的三阶段</a>
+  <a href="#s5">5 · 玩家回合与女匠人放置</a>
+  <div class="grp">生产链与行动</div>
+  <a href="#s6">6 · 卡牌取得与资源行动</a>
+  <a href="#s7">7 · 陶器生产链</a>
+  <a href="#s8">8 · 清理、收草编与起始玩家行动</a>
+  <a href="#s9">9 · 奖励体系</a>
+  <div class="grp">终局与查考</div>
+  <a href="#s10">10 · 终局与计分链路</a>
+  <a href="#s11">11 · 单人模式与难度</a>
+  <a href="#s12">12 · 常见误读、速查表与页码索引</a>
+</nav>
+
+<main>
+<header class="hero">
+  <h1>尼哈尔 · 学习版规则</h1>
+  <div class="en">NIJAR　｜　按规则结构重排，不按原书章节顺序</div>
+  <div class="desc">以三轮循环为主线，展开女匠人放置与行动位、四项回合选项与关店、卡牌与资源行动、陶器生产链、八类奖励与六项终局计分；附单人模式、常见误读、速查表与原书页码索引。</div>
+  <div class="meta"><span>一至四人 · 三轮</span><span>女匠人放置 · 关店闸门</span><span>陶轮 / 窑 / 市场</span><span>依据英文原书 20 页</span></div>
+</header>
+
+<div class="stand">
+  <b>体例：</b>按学习顺序重排，章节与原书不对应；每条结论后的 <span class="pg">p.N</span> 为英文原书页码。
+  规则裁决以<b>英文原书页图</b>为准；术语沿用已上线中文版的既定译法。原书未列之处只记录、不代填，市场分值与图标摆位以实体配件印值为准。第 12 节附 20 张原书页图。
+  正文按规则作用展开，先述状态变化，再列执行步骤。
+</div>
+
+<section id="s0">
+<h2><span class="n">0</span>游戏概要与目标</h2>
+<p>《尼哈尔》以制陶工坊为题材。玩家放置女匠人取得行动与奖励，以资源打出卡牌、塑形与烧制陶器，再向市场出售换取胜利分。一局固定三轮，每轮依次经过更新市场、玩家回合、回合结束三个阶段。第三轮回合结束步骤完成后进入终局计分，胜利分最高者获胜；平手时回合顺序轨上位置最左者获胜。<span class="pg">p.2</span><span class="pg">p.7</span><span class="pg">p.15</span><span class="pg">p.16</span></p>
+<div class="why"><span class="wt">规则主线</span>女匠人是每轮内可再用的行动资源：放置到行动位后取得同一行的行动与同一列的奖励，被后来者替换时归还主人并恢复可用。店铺卡自打开面翻到关闭面即退出本轮的主动行动，其后每次轮到只取得一个自选奖励；全员关闭且回合数相同则本轮结束。生产链自拉坯与塑形起，经晾坯区、烧窑、上釉工坊与釉窑，陶器进入任一窑方可出售。<span class="pg">p.8</span><span class="pg">p.9</span><span class="pg">p.12</span><span class="pg">p.14</span></div>
+<div class="grid2">
+  <div class="card"><div class="t">轮次结构</div>三轮固定，不设分数门槛，不追加轮次。每轮的女匠人数量自 7 递减为 6、5；轮与轮之间收回全部女匠人并把其中 1 个退回盒中。<span class="pg">p.7</span><span class="pg">p.14</span></div>
+  <div class="card blue"><div class="t">终局触发</div>第三轮回合结束四步完成后进入终局计分。计分含窑中剩余陶器、终局计分卡、草编套组、裂纹扣分、起始玩家标记与剩余资源六项。<span class="pg">p.15</span><span class="pg">p.16</span></div>
+</div>
+<table>
+  <tr><th>项目</th><th>取值</th><th>依据</th></tr>
+  <tr><td>人数</td><td>一至四人，含单人模式</td><td><span class="pg">p.2</span><span class="pg">p.16</span></td></tr>
+  <tr><td>轮数与阶段</td><td>三轮；每轮更新市场、玩家回合、回合结束</td><td><span class="pg">p.7</span></td></tr>
+  <tr><td>女匠人</td><td>每人 7 个；第 1／2／3 轮开始分别为 7／6／5 个</td><td><span class="pg">p.3</span><span class="pg">p.14</span></td></tr>
+  <tr><td>游戏卡</td><td>80 张，按三种牌背分成三堆；六类卡各有专属放置位</td><td><span class="pg">p.3</span><span class="pg">p.11</span></td></tr>
+  <tr><td>陶器</td><td>盘、壶、罐三类，合称陶器；每类按人数取 4 件／人</td><td><span class="pg">p.2</span><span class="pg">p.5</span></td></tr>
+  <tr><td>选牌区</td><td>三堆各翻 5 张，排成 3×5</td><td><span class="pg">p.5</span></td></tr>
+  <tr><td>资源</td><td>胖狗币、釉料、黏土、裂纹、木瓶</td><td><span class="pg">p.6</span><span class="pg">p.11</span></td></tr>
+  <tr><td>胜负</td><td>终局计分后胜利分最高者获胜；平手时回合顺序轨最左者胜</td><td><span class="pg">p.7</span><span class="pg">p.16</span></td></tr>
+</table>
+<h3>0.1 胜利分的两个时点</h3>
+<p>即时计分图标要求立即把玩家标记在主版图分数轨上推进所示格数；终局计分图标留到游戏结束时结算。首次绕分数轨一圈时把自己的 +50 VP 标记按图示放置，第二次绕圈时把它翻到 +100 VP 面。<span class="pg">p.7</span></p>
+<h3>0.2 一局的边界</h3>
+<p>配件有限，某种配件的公共供应耗尽时无法再获得该配件。行动一律以白圈表示，执行时可以部分结算或全部结算，不能执行或不愿执行时均不强制。工坊版图上已印有一张草编卡，开局即计入玩家拥有的草编卡。<span class="pg">p.7</span><span class="pg">p.10</span></p>
+</section>
+
+<section id="s1">
+<h2><span class="n">1</span>初局设置</h2>
+<p>设置分通用设置、玩家设置与开局前三段。通用设置建立主版图、选牌区与公共供应；玩家设置配齐工坊版图、起始卡与个人标记；开局前分配起始资源组合与驴的位置。<span class="pg">p.4</span><span class="pg">p.5</span><span class="pg">p.6</span></p>
+<h3>1.1 通用设置一至五</h3>
+<ol>
+  <li>把主版图放在桌面中央，多人面朝上，按图示随机放置 9 块行动板块。多人面由分数轨旁塔楼边上的图标标识；首次游戏按设置图示原样摆放行动板块。<span class="pg">p.4</span></li>
+  <li>按人数封锁主版图上的女匠人位置：用未参战颜色的女匠人背面朝上盖住。三人局封锁标有一组图标的位置，二人局封锁标有两组图标的位置，四人局不封锁。<span class="pg">p.4</span></li>
+  <li>二、三、四人局中，「回合顺序」与「打出一张卡」两块行动板块不得置于同一行。该限制直接印在版图上作为提醒。<span class="pg">p.4</span></li>
+  <li>取出全部游戏卡，按牌背分成三堆并各自洗混，三堆背面朝上，各翻开 5 张，摆成 3×5 的选牌区。三种牌背分别对应陶轮卡与草编卡、清理卡与上釉工坊卡、釉窑卡与烧窑卡。<span class="pg">p.3</span><span class="pg">p.5</span></li>
+  <li>按人数取盘、壶、罐各 4 件／人，按类型分成三堆；二人局时每堆 8 件同类陶器。把胖狗币、釉料、裂纹与木瓶置于桌面组成公共供应区。<span class="pg">p.5</span></li>
+</ol>
+<h3>1.2 通用设置六至九</h3>
+<ol start="6">
+  <li>把起始玩家标记放在版图旁。该标记在每轮结束时才交给起始玩家，第一轮没有玩家持有它。<span class="pg">p.5</span></li>
+  <li>取奖励板块：二人局把标有两种符号的板块收回盒中，三人局只收回标有一种符号的板块，四人局全部使用。随机取 2 块放到特殊行动位，其余放到图示的奖励位；三人局在 A 位额外放 1 块，四人局 A、B 两位各放 1 块，二人局 A、B 两位都不放。<span class="pg">p.5</span></li>
+  <li>随机摆放 9 块需求板块，颜色与版图印色对应；把 3 个市场标记放在版图旁。市场共三行，每行三块需求板块，数值为 2、1、0，三行依次对应第 1、2、3 轮。<span class="pg">p.5</span><span class="pg">p.7</span></li>
+  <li>把 3 颗市场骰放在版图旁。<span class="pg">p.2</span><span class="pg">p.5</span></li>
+</ol>
+<h3>1.3 玩家设置</h3>
+<ol type="a">
+  <li>取一张工坊版图，按图示与工坊扩展拼装。<span class="pg">p.5</span></li>
+  <li>每种起始卡各取 1 张放到图示位置：起始清理卡、起始烧窑卡、起始釉窑卡、起始上釉工坊卡。四张卡的牌背为玩家颜色。<span class="pg">p.3</span><span class="pg">p.5</span></li>
+  <li>取自己颜色的店铺卡，打开面朝上放到图示位置。<span class="pg">p.5</span></li>
+  <li>洗混终局计分卡，发给每位玩家 3 张，再从每堆游戏卡各发 1 张。这 6 张构成起始手牌，可查看但须对其他玩家保密。<span class="pg">p.5</span></li>
+  <li>取自己颜色的玩家帮助卡与 +50 VP 标记，放在工坊版图旁。<span class="pg">p.5</span></li>
+  <li>取 5 个玩家标记：1 个放在主版图分数轨 0 格，1 个放在自己科技轨第一格，1 个放在黏土轨 0 格，剩余 2 个放在工坊版图旁。<span class="pg">p.5</span></li>
+  <li>取自己颜色的 7 个女匠人与 1 头驴，放在工坊版图旁。<span class="pg">p.5</span></li>
+</ol>
+<h3>1.4 开局前</h3>
+<ol>
+  <li>最近手上沾过泥的玩家成为起始玩家。把该玩家方才置于一旁的 2 个玩家标记叠放在回合顺序轨第一格（最左格），随后自该玩家起按顺时针方向，各玩家依次把自己的玩家标记自左向右放上回合顺序轨。<span class="pg">p.6</span></li>
+  <li>洗混起始陶轮卡，翻开比玩家人数多 1 张；在每张翻开的陶轮卡旁放 1 张起始资源卡，形成若干组合。<span class="pg">p.6</span></li>
+  <li>自最后一位玩家起，按回合顺序轨的反向依次选定一组组合：取走起始资源卡上标示的资源并把该卡收回盒中；把选定的起始陶轮卡放在工坊版图中央，并在第一个位置放 1 个木瓶。<span class="pg">p.6</span></li>
+  <li>把自己的驴放到选牌区中任意一张正面朝上的卡上。同一张卡上不得有超过一头驴。<span class="pg">p.6</span></li>
+</ol>
+<div class="note">起始资源卡的示例为 5 点黏土、5 枚胖狗币、2 个釉料与 3 个裂纹，裂纹放入待清理区。起始资源卡在开局前逐张收回盒中，不进入后续牌堆。<span class="pg">p.6</span></div>
+<h3>1.5 人数差异</h3>
+<table>
+  <tr><th>项目</th><th>二人局</th><th>三人局</th><th>四人局</th></tr>
+  <tr><td>封锁的行动位</td><td>标有两组图标的位置</td><td>标有一组图标的位置</td><td>不封锁</td></tr>
+  <tr><td>奖励板块 A／B 位</td><td>都不放</td><td>A 位放 1 块</td><td>A、B 各放 1 块</td></tr>
+  <tr><td>退回盒中的奖励板块</td><td>标有两种符号的板块</td><td>标有一种符号的板块</td><td>无</td></tr>
+  <tr><td>买卡奖励</td><td>不启用</td><td>启用</td><td>不启用</td></tr>
+  <tr><td>胖狗币或釉料奖励</td><td>不启用</td><td>不启用</td><td>启用</td></tr>
+</table>
+<div class="note">每类陶器按 4 件／人取用，故二人局每堆 8 件、四人局每堆 16 件。设置图示与图标对应关系以原书第 4 至 5 页页图为准。<span class="pg">p.4</span><span class="pg">p.5</span></div>
+</section>
+
+<section id="s2">
+<h2><span class="n">2</span>版图、组件与资源状态</h2>
+<p>先分主版图上的市场、行动位、奖励位与两条轨道，再分工坊版图上六类卡的专属位置，最后分四种资源的记录方式。图示语言一律转为文字：黑数字表示自公共供应区获得，红数字表示自个人供应区支付。<span class="pg">p.5</span><span class="pg">p.6</span><span class="pg">p.11</span></p>
+<h3>2.1 主版图</h3>
+<table>
+  <tr><th>区域</th><th>结构</th><th>规则作用</th></tr>
+  <tr><td>市场</td><td>三行各三块需求板块（2、1、0），三行对应第 1、2、3 轮；三列对应盘、壶、罐</td><td>决定每轮的市场标记起始行、本轮下移格数与出售分值<span class="pg">p.7</span><span class="pg">p.9</span></td></tr>
+  <tr><td>市场标记</td><td>3 个，分别对应三列陶器</td><td>市场更新时上移，出售陶器时按本轮需求数值下移<span class="pg">p.7</span><span class="pg">p.9</span></td></tr>
+  <tr><td>行动位</td><td>9 块行动板块随机摆放在主版图上，按行与列定位行动与奖励</td><td>放置女匠人时，行动取自同一行的三个行动之一，奖励取自同一列下方的板块<span class="pg">p.4</span><span class="pg">p.8</span></td></tr>
+  <tr><td>特殊行动位</td><td>随机放 2 块奖励板块，另有印在版图上的收草编奖励；回合概要记为三项奖励</td><td>只放 1 个女匠人，按自选顺序取得该处各项奖励<span class="pg">p.5</span><span class="pg">p.9</span><span class="pg">p.20</span></td></tr>
+  <tr><td>奖励位</td><td>图示的奖励板块位，另有 A、B 两位按人数启用</td><td>关店或店铺已关闭时自选奖励的来源<span class="pg">p.5</span><span class="pg">p.14</span></td></tr>
+  <tr><td>回合顺序轨</td><td>左轨排本轮顺序，右轨供起始玩家行动占位</td><td>决定回合先后、下一轮顺序重排与起始玩家标记归属<span class="pg">p.6</span><span class="pg">p.13</span><span class="pg">p.15</span></td></tr>
+  <tr><td>分数轨</td><td>环绕主版图的计分格</td><td>记录即时胜利分；绕圈触发 +50／+100 VP 标记<span class="pg">p.7</span></td></tr>
+</table>
+<h3>2.2 工坊版图与六类卡</h3>
+<p>工坊版图与工坊扩展拼装后，六类卡各有专属放置位，卡面右下角的图标标明归属位置：陶轮卡、草编卡、清理卡、烧窑卡、上釉工坊卡、釉窑卡。陶轮卡位置附带木瓶推进的轮盘；烧窑与釉窑存放已完成、可供出售的陶器；上釉工坊存放上釉中的陶器；晾坯区位于烧窑正上方，存放塑形后待烧制的陶器。<span class="pg">p.11</span><span class="pg">p.12</span></p>
+<table>
+  <tr><th>卡类</th><th>数量与牌背分组</th><th>打出时的规则作用</th></tr>
+  <tr><td>陶轮卡</td><td>16 张，与草编卡同组牌背</td><td>放到陶轮卡位，额外取 1 个木瓶置于轮盘第一个灰色位置并获得标示胜利分<span class="pg">p.3</span><span class="pg">p.11</span></td></tr>
+  <tr><td>草编卡</td><td>16 张，与陶轮卡同组牌背</td><td>放到草编卡位，提供两项可选奖励；工坊版图上印有的一张计入其中<span class="pg">p.3</span><span class="pg">p.7</span><span class="pg">p.13</span></td></tr>
+  <tr><td>清理卡</td><td>12 张，与上釉工坊卡同组牌背</td><td>放到清理卡位，提供裂纹空格与填满后的奖励<span class="pg">p.3</span><span class="pg">p.13</span></td></tr>
+  <tr><td>上釉工坊卡</td><td>12 张，与清理卡同组牌背</td><td>放到上釉工坊位，提供 1 个陶器位与上釉费用<span class="pg">p.3</span><span class="pg">p.12</span></td></tr>
+  <tr><td>釉窑卡</td><td>12 张，与烧窑卡同组牌背</td><td>放到釉窑位，提供 1 个陶器位<span class="pg">p.3</span><span class="pg">p.12</span></td></tr>
+  <tr><td>烧窑卡</td><td>12 张，与釉窑卡同组牌背</td><td>放到烧窑位，提供 1 个陶器位<span class="pg">p.3</span><span class="pg">p.12</span></td></tr>
+</table>
+<h3>2.3 选牌区与驴</h3>
+<p>选牌区由三堆各 5 张正面朝上的卡组成，每行对应一个牌堆。驴所在的那张卡对其主人免费，其余卡按与驴相隔的正交格数计费；驴的位置同时封锁该卡，其他玩家不得购买。购买后驴移到另一张可用卡上，空位由对应牌堆补齐。<span class="pg">p.5</span><span class="pg">p.10</span></p>
+<h3>2.4 四种资源的记录方式</h3>
+<table>
+  <tr><th>资源</th><th>记录方式</th><th>上限与限制</th></tr>
+  <tr><td>胖狗币</td><td>实物标记，自公共供应区取得后放入个人供应区；另有面值 5 的标记</td><td>公共供应耗尽时无法再获得<span class="pg">p.2</span><span class="pg">p.6</span><span class="pg">p.7</span></td></tr>
+  <tr><td>釉料</td><td>实物标记，取得后放入个人供应区；另有面值 5 的标记</td><td>公共供应耗尽时无法再获得<span class="pg">p.2</span><span class="pg">p.6</span><span class="pg">p.7</span></td></tr>
+  <tr><td>黏土</td><td>不用标记，以黏土轨上的玩家标记记录：每获得 1 点前进 1 格，每花费 1 点后退 1 格</td><td>不得超过 7 点，超出部分直接损失<span class="pg">p.6</span></td></tr>
+  <tr><td>裂纹</td><td>实物标记，以工坊版图上的待清理区管理，共 8 格</td><td>空位不足时不得执行需获得裂纹的行动或打出这样的卡<span class="pg">p.6</span></td></tr>
+  <tr><td>木瓶</td><td>实物标记，置于陶轮卡的轮盘格位上</td><td>拉坯时按科技标记所示格数推进<span class="pg">p.11</span></td></tr>
+</table>
+<div class="why"><span class="wt">颜色的规则作用</span>图标上的数字为黑色时，自公共供应区取得标示数量的资源并放入个人供应区；数字为红色时，自个人供应区支付标示数量给公共供应区。裂纹按同一规则处理：黑色数字取标示数量的裂纹放入待清理区，红色数字自待清理区取标示数量的裂纹逐一放到清理卡的空格上；放到清理卡上的裂纹不再占用待清理区格位。<span class="pg">p.6</span></div>
+<h3>2.5 图示语言转文字</h3>
+<p>奖励一律以黄色方块背景上的图标表示，草编类为蓝色。因达洛图标是万能图标，表示可执行主版图上的任意行动。行动本身以白圈表示，与奖励的黄底方块分属两类图示。<span class="pg">p.9</span><span class="pg">p.10</span><span class="pg">p.14</span></p>
+</section>
+
+<section id="s3">
+<h2><span class="n">3</span>核心引擎</h2>
+<p>全游戏的因果链为：放置女匠人取得行动与奖励，行动把资源与卡牌转为工坊版图上的生产能力，生产能力沿拉坯、塑形、烧制与上釉把陶器送入窑中，出售陶器把成品转为即时胜利分与终局计分卡的素材。三轮的边界由店铺卡与女匠人数量共同决定。<span class="pg">p.7</span><span class="pg">p.8</span><span class="pg">p.12</span><span class="pg">p.14</span></p>
+<div class="flow">
+<svg viewBox="0 0 900 268" role="img" aria-label="尼哈尔核心引擎与三轮循环链路">
+  <rect x="0" y="0" width="900" height="268" fill="#ffffff"/>
+  <text x="450" y="24" text-anchor="middle" font-size="15" font-weight="700" fill="#2f466c">三轮循环：市场定价 → 女匠人行动 → 工坊生产 → 出售 → 终局计分</text>
+  <g font-size="12.5" text-anchor="middle" fill="#25324a">
+    <rect x="16" y="46" width="164" height="62" rx="9" fill="#eef3fa" stroke="#cddcee"/>
+    <text x="98" y="70">更新市场</text><text x="98" y="91">需求板块与三颗市场骰</text>
+    <rect x="194" y="46" width="164" height="62" rx="9" fill="#fdf1e6" stroke="#e8cdae"/>
+    <text x="276" y="70">放置女匠人</text><text x="276" y="91">同行行动 / 同列奖励</text>
+    <rect x="372" y="46" width="164" height="62" rx="9" fill="#eaf5ec" stroke="#c6e0cc"/>
+    <text x="454" y="70">卡牌与资源</text><text x="454" y="91">选牌区 / 黏土 / 釉料</text>
+    <rect x="550" y="46" width="164" height="62" rx="9" fill="#f3eefb" stroke="#d8c9ee"/>
+    <text x="632" y="70">陶器生产链</text><text x="632" y="91">塑形 / 烧制 / 上釉</text>
+    <rect x="728" y="46" width="156" height="62" rx="9" fill="#fdf6e8" stroke="#e8d9ae"/>
+    <text x="806" y="70">出售陶器</text><text x="806" y="91">即时胜利分</text>
+  </g>
+  <g stroke="#7d5511" stroke-width="2" fill="none">
+    <path d="M180 77 H190"/><path d="M358 77 H368"/><path d="M536 77 H546"/><path d="M714 77 H724"/>
+    <path d="M806 112 V146 H98 V112"/><path d="M98 112 l-5 8 h10 z" fill="#7d5511"/>
+  </g>
+  <text x="450" y="166" text-anchor="middle" font-size="13" fill="#6b615c">全员关店且回合数相同 → 回合结束四步 → 开店并弃 1 个女匠人 → 下一轮</text>
+  <g font-size="12.5" fill="#2f466c">
+    <rect x="16" y="188" width="280" height="42" rx="8" fill="#f7f9fc" stroke="#d8e1ee"/>
+    <text x="156" y="214" text-anchor="middle">市场标记位置决定出售分值</text>
+    <rect x="310" y="188" width="280" height="42" rx="8" fill="#f7f9fc" stroke="#d8e1ee"/>
+    <text x="450" y="214" text-anchor="middle">本轮需求板块决定出售后的下移格数</text>
+    <rect x="604" y="188" width="280" height="42" rx="8" fill="#f7f9fc" stroke="#d8e1ee"/>
+    <text x="744" y="214" text-anchor="middle">终局计分卡只在回合结束阶段打出</text>
+  </g>
+  <text x="450" y="254" text-anchor="middle" font-size="12" fill="#6b615c">第三轮回合结束步骤完成后，六项终局计分一次结算</text>
+</svg>
+</div>
+<h3>3.1 两条相互独立的链</h3>
+<p>女匠人链决定每轮可执行的行动次数：放置数量按行动位上已有女匠人数加一，归还后本轮内恢复可用；每轮结束收回全部女匠人并弃掉 1 个，三轮依次为 7、6、5 个。陶器链决定即时胜利分：陶器须自晾坯区经烧窑，或自上釉工坊经釉窑，进入任一窑后方可出售。<span class="pg">p.8</span><span class="pg">p.12</span><span class="pg">p.14</span></p>
+<h3>3.2 店铺卡作为回合闸门</h3>
+<p>店铺卡打开面时，回合可选放置女匠人、弃一张终局计分卡、出售最多 2 件陶器或关店；关闭面时，回合只可取得一个自选奖励。只有没有可用女匠人时才能关店，关店立即附带一个自选奖励。全员关闭且回合数相同时本轮结束。<span class="pg">p.8</span><span class="pg">p.9</span><span class="pg">p.14</span></p>
+</section>
+
+<section id="s4">
+<h2><span class="n">4</span>一轮的三阶段</h2>
+<p>每轮按更新市场、玩家回合、回合结束的顺序结算，次序不可调换。玩家帮助卡上印有一轮的流程概要。<span class="pg">p.7</span><span class="pg">p.20</span></p>
+<h3>4.1 阶段一：更新市场</h3>
+<ol>
+  <li>按玩家人数把 3 个市场标记放到对应的起始行，起始行由版图上的图标标示。<span class="pg">p.7</span></li>
+  <li>按本轮需求板块调整位置：需求板块显示 2 的列，市场标记上移 2 格；显示 1 的列，上移 1 格；显示 0 的列不动。<span class="pg">p.7</span></li>
+  <li>起始玩家投掷 3 颗市场骰，把点数最高的骰子分配给本轮需求为 2 的列、次高分配给需求为 1 的列、最低分配给需求为 0 的列，各列市场标记按所分配点数上移。<span class="pg">p.7</span></li>
+  <li>除第一轮之外，起始玩家可选择把市场骰重投一次并保留新结果。该能力标在起始玩家标记上，标记在每轮结束更新回合顺序轨之后才交给起始玩家。<span class="pg">p.8</span></li>
+</ol>
+<div class="note">市场三行的需求板块数值均为 2、1、0 各一块，颜色与版图印色对应；每轮只使用与该轮对应的那一行。原书第 7 页的三人局示例展示一次完整的市场更新。<span class="pg">p.5</span><span class="pg">p.7</span><span class="pg">p.8</span></div>
+<h3>4.2 阶段二：玩家回合</h3>
+<p>自回合顺序轨最左位置的玩家起，按该顺序依次进行回合，直到本轮结束。店铺打开时从四项回合选项中选定一项执行；店铺关闭时只能取得一个自选奖励。<span class="pg">p.8</span></p>
+<h3>4.3 阶段三：回合结束的触发</h3>
+<p>所有玩家的店铺卡都处于关闭面，且所有玩家进行的回合数相同时，本轮结束。最后关店的玩家不是回合顺序轨最后一位时，各玩家继续轮流直到回合数相同；最后关店的玩家正是回合顺序轨最后一位时，本轮立即结束。回合顺序轨可用来核对各方回合数。<span class="pg">p.8</span><span class="pg">p.14</span></p>
+<h3>4.4 回合结束的四步</h3>
+<table>
+  <tr><th>步</th><th>内容</th><th>依据</th></tr>
+  <tr><td>1 开店</td><td>各玩家收回自己的全部女匠人，并把其中 1 个退回盒中；店铺卡翻回打开面。第 1／2／3 轮开始时分别拥有 7／6／5 个女匠人</td><td><span class="pg">p.14</span></td></tr>
+  <tr><td>2 打出终局计分卡</td><td>可选。自手牌取 1 张终局计分卡，面朝下置于工坊版图下方。只有本阶段打出的终局计分卡才在游戏结束时计分</td><td><span class="pg">p.15</span></td></tr>
+  <tr><td>3 翻需求板块</td><td>把本轮的需求板块翻面</td><td><span class="pg">p.15</span></td></tr>
+  <tr><td>4 更新回合顺序轨</td><td>把标记位于右侧轨的玩家排到最前，其余回合顺序标记保持相对顺序右移；本轮无人执行起始玩家行动时轨道不调整。把起始玩家标记交给最左位置的玩家，并把各方第二个回合顺序标记重新叠回第一个之上</td><td><span class="pg">p.15</span></td></tr>
+</table>
+<div class="note">回合中弃掉一张终局计分卡可执行主版图上任意一个行动；回合结束阶段打出的终局计分卡才计分。两处用途不同，分别见第 5.4 节与第 4.4 节。<span class="pg">p.9</span><span class="pg">p.15</span></div>
+</section>
+
+<section id="s5">
+<h2><span class="n">5</span>玩家回合与女匠人放置</h2>
+<p>店铺打开时，回合从放置女匠人、弃掉一张终局计分卡、向市场出售陶器、关店四项中选定一项执行；店铺关闭时，回合只可取得一个自选奖励。<span class="pg">p.8</span><span class="pg">p.10</span></p>
+<h3>5.1 放置女匠人的两种落点</h3>
+<p>回合中可把一个或多个女匠人放到主版图的行动位，或把一个女匠人放到特殊行动位，两种落点选定其一，不得同时执行。前者按行动位上已有女匠人数加一放置，后者固定只放 1 个。<span class="pg">p.8</span></p>
+<h3>5.2 行动位的放置与结算</h3>
+<ol>
+  <li>选定一个主版图上的行动位，放置的女匠人数量为该位上已有女匠人数加一。<span class="pg">p.8</span></li>
+  <li>按自选顺序结算行动，并取得与所放女匠人数量相同次数的奖励。<span class="pg">p.8</span></li>
+  <li>执行的行动必须是所选行动位同一行的三个行动之一；取得的奖励必须是所选行动位同一列下方的那一个。<span class="pg">p.8</span></li>
+  <li>奖励须在行动之前或之后结算，包括由该行动触发的后续行动，不得在行动进行中结算。<span class="pg">p.8</span></li>
+  <li>把该行动位上原有的女匠人归还其主人，由主人放回工坊版图旁；这些女匠人在本轮内重新可用。<span class="pg">p.8</span></li>
+</ol>
+<div class="why"><span class="wt">规则作用</span>行动位以行与列把一次放置拆成两件事：行决定可执行的行动，列决定附带的奖励。放置数量随该位已有女匠人数递增，同时把原有女匠人退回主人，使同一行动位在一轮内可被反复占用，而每轮可放置的女匠人总数受手上存量约束。<span class="pg">p.8</span><span class="pg">p.14</span></div>
+<table>
+  <tr><th>限制</th><th>内容</th><th>依据</th></tr>
+  <tr><td>额外放置</td><td>任何情况下，在选定的行动位上只能额外放 1 个女匠人</td><td><span class="pg">p.8</span></td></tr>
+  <tr><td>同色禁止</td><td>不得把女匠人放到已有自己颜色女匠人的行动位</td><td><span class="pg">p.8</span></td></tr>
+  <tr><td>封锁位</td><td>设置时为二人局与三人局封锁的行动位不可用</td><td><span class="pg">p.4</span><span class="pg">p.8</span></td></tr>
+  <tr><td>奖励时点</td><td>奖励在行动之前或之后结算，不得插入行动进行中</td><td><span class="pg">p.8</span></td></tr>
+</table>
+<div class="note">原书第 8 页给出两例：往空行动位放 1 个女匠人，执行黏土行动并取得 1 张卡；往已有 1 个女匠人的行动位放 2 个，执行黏土行动并取得 2 张卡，同时把原有女匠人归还其主人。放置数量与奖励次数按所放女匠人数对应。<span class="pg">p.8</span></div>
+<h3>5.3 特殊行动位</h3>
+<p>与版图上的行动位不同，特殊行动位只放 1 个女匠人，放置时不归还其他玩家的女匠人；这些女匠人一直叠放在该处直到本轮结束。玩家可在不同回合多次往特殊行动位放女匠人，每次按自选顺序取得该处各项奖励。<span class="pg">p.9</span></p>
+<div class="note">原书第 9 页的示例为收 1 份草编、获得 1 点黏土、购买 1 张卡，三项按自选顺序结算；回合概要把特殊行动记作该处的三项奖励。特殊行动位上的 2 块奖励板块在设置时随机摆放，另有印在版图上的收草编奖励。<span class="pg">p.5</span><span class="pg">p.9</span><span class="pg">p.20</span></div>
+<h3>5.4 弃掉一张终局计分卡</h3>
+<p>自手牌把一张终局计分卡退回盒中，然后执行主版图上任意一个选定的行动。因达洛图标为万能图标，表示可执行主版图上的任意行动。<span class="pg">p.9</span></p>
+<h3>5.5 向市场出售陶器</h3>
+<ol>
+  <li>每次出售行动最多卖 2 件任意类型的陶器。盘、壶、罐统称陶器。<span class="pg">p.9</span></li>
+  <li>可售的只有位于烧窑或釉窑中的陶器，它们被视为已完成；晾坯区与上釉工坊中的陶器不得出售。<span class="pg">p.9</span><span class="pg">p.12</span></li>
+  <li>市场每列对应一种陶器。市场左侧的分值按已上釉与未上釉分别标示，由各自的图标区分。<span class="pg">p.9</span></li>
+  <li>每卖出一件，立即按陶器类型与是否上釉取得市场上标示的胜利分，再把对应的市场标记下移，格数等于本轮需求板块上显示的数值。回合内每卖一件均重复此流程。<span class="pg">p.9</span></li>
+  <li>把售出的陶器放在工坊版图旁。这些陶器按终局计分卡在游戏结束时提供额外胜利分。<span class="pg">p.9</span><span class="pg">p.15</span></li>
+</ol>
+<div class="note">原书第 9 页的示例：卖出一件已上釉的盘得 8 分，盘列市场标记按本轮需求下移 2 格；再卖出一件未上釉的罐得 3 分，罐列需求为 0 故市场标记不动，合计 11 分。原书页图上的分值列按陶器类型与是否上釉区分，具体数值以市场区印值为准。<span class="pg">p.9</span></div>
+<h3>5.6 关店与关店后</h3>
+<p>店铺卡有打开与关闭两面。店铺关闭后不得再放置女匠人、出售陶器或弃掉终局计分卡；只有没有可用女匠人时才能关店。关店时把店铺卡翻到关闭面，并立即自版图上的奖励板块或特殊行动位选定一个奖励取得，不得选择特殊行动位上印着的收草编奖励，可选其他任何可用奖励。<span class="pg">p.9</span></p>
+<p>关店之后，每次再次轮到自己，可自版图或特殊行动位选定一个奖励取得，同样不得选择特殊行动位上印着的收草编奖励。若关店后有一个或多个女匠人归还，把每个归还的女匠人放到店铺卡上，并立即自关闭面所示三项奖励中选定一项取得：2 点黏土、3 枚胖狗币或 3 个釉料；每归还一个女匠人取得一次，各次可相同也可不同。<span class="pg">p.10</span></p>
+<div class="why"><span class="wt">规则作用</span>关店把该玩家本轮的剩余回合转为固定的奖励收入，同时让归还的女匠人不再进入手上存量，改为按个数换取店铺卡关闭面的三项奖励之一。关店是回合结束的必要条件之一，与全员回合数相同共同构成本轮边界。<span class="pg">p.9</span><span class="pg">p.10</span><span class="pg">p.14</span></div>
+</section>
+
+<section id="s6">
+<h2><span class="n">6</span>卡牌取得与资源行动</h2>
+<p>主版图上的行动以白圈表示，执行时可部分结算或全部结算，不能执行或不愿执行时均不强制。下列四项为购买卡牌、打出一张卡、挖黏土与推进科技标记，陶器生产相关的行动见第 7 节。<span class="pg">p.10</span><span class="pg">p.11</span></p>
+<h3>6.1 购买卡牌</h3>
+<ol>
+  <li>自选牌区最多购买 2 张卡加入手牌。购买费用由驴的位置决定：驴下方的卡免费，其他每张卡按其与驴相隔的正交格数，每格支付 1 枚胖狗币。<span class="pg">p.10</span></li>
+  <li>不得购买位于其他玩家驴下方的卡。<span class="pg">p.10</span></li>
+  <li>购买之后把驴移到选牌区另一张可用卡上，随即用对应牌堆的卡补满空位。不购买任何卡时，仍可把驴移到另一张可用卡上的新位置。<span class="pg">p.10</span></li>
+</ol>
+<div class="why"><span class="wt">规则作用</span>驴把选牌区的空间距离转为购买费用，并在每次购买后重新定位，使同一张卡在下一回合的费用随之变动。驴所在的那张卡对其他玩家封锁，仅对其主人免费。<span class="pg">p.10</span></div>
+<h3>6.2 整行同类型的重洗</h3>
+<p>购买卡牌行动开始时，若选牌区某一行的所有可用卡都是同一类型，可把它们全部退回对应牌堆、洗混，再用该牌堆补满空位。补出的卡仍是同一类型时，不得再做一次。即使之后决定不从该行购买任何卡，也可执行此操作。牌堆的卡不足以补满选牌区时，自左向右填补，剩余空格留空。<span class="pg">p.10</span></p>
+<h3>6.3 打出一张卡</h3>
+<ol>
+  <li>六类卡各有专属放置位，卡面右下角的图标标明归属。打出一张卡须以胖狗币、黏土、釉料或裂纹支付卡面左上角标示的费用，付清后按类型放到对应位置。<span class="pg">p.11</span></li>
+  <li>打出烧窑卡、釉窑卡或上釉工坊卡时，立即取得两个新行动，对应卡牌两侧的图标，按自选顺序结算；不能执行或不愿执行时不强制。<span class="pg">p.11</span></li>
+  <li>把陶轮卡或草编卡打到工坊版图上时，立即取得放置位置所印图标的一个新行动并立刻结算；同样不强制执行。<span class="pg">p.11</span></li>
+  <li>打出陶轮卡时，额外自公共供应区取 1 个木瓶放在轮盘第一个灰色位置，并取得卡面标示的胜利分。<span class="pg">p.11</span></li>
+</ol>
+<h3>6.4 挖黏土</h3>
+<p>一次挖黏土最多获得 3 点：1 点免费，2 点支付 1 枚胖狗币，3 点支付 3 枚胖狗币。费用提醒印在工坊扩展上。取得的黏土以黏土轨记录，累计不得超过 7 点，超出部分损失。<span class="pg">p.6</span><span class="pg">p.11</span></p>
+<h3>6.5 推进科技标记</h3>
+<p>把自己的科技标记在科技轨上推进 1 格；到达最后一格时立即取得 2 分。科技标记决定执行拉坯行动时木瓶可推进的格数：位于第 1、2、3 位时分别可推进至多 1、2、3 格。<span class="pg">p.11</span></p>
+<div class="why"><span class="wt">规则作用</span>科技轨不直接产出资源，只限定一次拉坯中木瓶可推进的总格数；木瓶经过的格位才决定具体取得的行动或好处。费用与产出分属两条链，打牌、挖黏土与推进科技标记分别建立工坊能力、黏土存量与木瓶行程上限。<span class="pg">p.11</span></div>
+</section>
+
+<section id="s7">
+<h2><span class="n">7</span>陶器生产链</h2>
+<p>陶器自塑形起进入工坊，依次经过晾坯区、烧窑、上釉工坊与釉窑。只有位于烧窑或釉窑中的陶器可供出售。拉坯负责把木瓶推过陶轮卡的格位，塑形是其中唯一只能由木瓶移动触发的行动。<span class="pg">p.11</span><span class="pg">p.12</span></p>
+<div class="flow">
+<svg viewBox="0 0 900 262" role="img" aria-label="尼哈尔陶器生产链与窑位状态">
+  <rect x="0" y="0" width="900" height="262" fill="#ffffff"/>
+  <text x="450" y="24" text-anchor="middle" font-size="15" font-weight="700" fill="#2f466c">拉坯 → 塑形 → 晾坯区 → 烧制 → 上釉 → 釉窑 → 出售</text>
+  <g font-size="12.5" text-anchor="middle" fill="#25324a">
+    <rect x="16" y="46" width="152" height="62" rx="9" fill="#eef3fa" stroke="#cddcee"/>
+    <text x="92" y="70">拉坯</text><text x="92" y="91">木瓶按科技标记推进</text>
+    <rect x="182" y="46" width="152" height="62" rx="9" fill="#fdf1e6" stroke="#e8cdae"/>
+    <text x="258" y="70">塑形</text><text x="258" y="91">支付黏土，取未上釉陶器</text>
+    <rect x="348" y="46" width="152" height="62" rx="9" fill="#eaf5ec" stroke="#c6e0cc"/>
+    <text x="424" y="70">晾坯区</text><text x="424" y="91">烧窑正上方的待烧区</text>
+    <rect x="514" y="46" width="152" height="62" rx="9" fill="#f3eefb" stroke="#d8c9ee"/>
+    <text x="590" y="70">烧制</text><text x="590" y="91">移入烧窑，每窑 1 件</text>
+    <rect x="680" y="46" width="204" height="62" rx="9" fill="#fdf6e8" stroke="#e8d9ae"/>
+    <text x="782" y="70">出售或上釉</text><text x="782" y="91">烧窑内可售，亦可移入上釉工坊</text>
+  </g>
+  <g stroke="#7d5511" stroke-width="2" fill="none">
+    <path d="M168 77 H178"/><path d="M334 77 H344"/><path d="M500 77 H510"/><path d="M666 77 H676"/>
+  </g>
+  <g font-size="12.5" text-anchor="middle" fill="#25324a">
+    <rect x="182" y="140" width="152" height="54" rx="9" fill="#f7f9fc" stroke="#d8e1ee"/>
+    <text x="258" y="162">上釉工坊</text><text x="258" y="181">每坊 1 件，支付费用</text>
+    <rect x="348" y="140" width="152" height="54" rx="9" fill="#f7f9fc" stroke="#d8e1ee"/>
+    <text x="424" y="162">釉窑</text><text x="424" y="181">每窑 1 件，已上釉</text>
+    <rect x="514" y="140" width="152" height="54" rx="9" fill="#fdf6e8" stroke="#e8d9ae"/>
+    <text x="590" y="162">市场出售</text><text x="590" y="181">立即取得胜利分</text>
+  </g>
+  <g stroke="#7d5511" stroke-width="2" fill="none">
+    <path d="M782 112 V126 H258 V136"/><path d="M258 136 l-5 8 h10 z" fill="#7d5511"/>
+    <path d="M334 167 H344"/><path d="M500 167 H510"/>
+  </g>
+  <text x="450" y="222" text-anchor="middle" font-size="13" fill="#6b615c">烧制一次可同时把晾坯区的陶器移入烧窑、把上釉工坊的陶器移入釉窑</text>
+  <text x="450" y="246" text-anchor="middle" font-size="12" fill="#6b615c">晾坯区与上釉工坊中的陶器永不出售；终局把窑中剩余陶器按是否上釉折分</text>
+</svg>
+</div>
+<h3>7.1 拉坯</h3>
+<ol>
+  <li>在一张或多张自己的陶轮卡上推进木瓶，总格数不超过科技标记所示数值；格数可由一个木瓶一次用完，也可分摊给多个木瓶，且不必把指示格数全部用完。<span class="pg">p.11</span></li>
+  <li>取得木瓶所经过每一格上标示的好处。好处可不结算，结算时须按木瓶推进的先后顺序执行。<span class="pg">p.11</span></li>
+  <li>推进到某张陶轮卡的最后一格时，在取得该格好处之后把木瓶放到黑色下槽并取得对应胜利分；木瓶留在该槽表示该陶轮已完成。<span class="pg">p.11</span></li>
+</ol>
+<div class="note">原书第 12 页的示例：科技标记位于第 2 位时推进 2 格，分给两个木瓶，取得一次打出一张卡行动与一次挖黏土行动。木瓶的行程上限由科技标记给出，具体取得的好处由所经过的格位给出。<span class="pg">p.11</span><span class="pg">p.12</span></div>
+<h3>7.2 塑形</h3>
+<p>塑形是陶轮卡上唯一只能通过木瓶移动触发的行动，塑形取得的陶器一律未上釉，自公共供应区取出后放进晾坯区。晾坯区是烧窑正上方的空间，陶器在烧制前停留于此。<span class="pg">p.12</span></p>
+<table>
+  <tr><th>选项</th><th>费用</th><th>结果</th></tr>
+  <tr><td>塑 1 件</td><td>花费 1 点黏土</td><td>自公共供应区取 1 件自选陶器放进晾坯区<span class="pg">p.12</span></td></tr>
+  <tr><td>塑 2 件</td><td>花费 2 点黏土，并在待清理区放 2 个裂纹</td><td>自公共供应区取 2 件自选陶器放进晾坯区<span class="pg">p.12</span></td></tr>
+</table>
+<div class="note">待清理区空位不足时不得执行需获得裂纹的行动或打出这样的卡。塑 2 件附带的 2 个裂纹同样受此限制。<span class="pg">p.6</span><span class="pg">p.12</span></div>
+<h3>7.3 烧制</h3>
+<p>一次烧制行动可把任意数量的陶器自晾坯区移入烧窑，并把任意数量的陶器自上釉工坊移入釉窑，两类移动在同一次行动内完成。每个窑至多放 1 件陶器。烧制没有费用，唯一限制是窑所提供的空间。<span class="pg">p.12</span></p>
+<div class="why"><span class="wt">规则作用</span>烧制把未上釉的陶器从晾坯区转入烧窑，也把上釉工坊中已翻面的陶器转入釉窑，使两类陶器同时取得可售状态。陶器进入任一窑即可出售；晾坯区与上釉工坊中的陶器永不出售。<span class="pg">p.12</span></div>
+<h3>7.4 上釉</h3>
+<p>把一个或多个陶器自烧窑移到上釉工坊，并翻面表示已成为已上釉的陶器。每个上釉工坊至多放 1 件陶器，须支付每张上釉工坊卡上标示的上釉费用。<span class="pg">p.12</span></p>
+<div class="note">原书第 12 页的示例：以 2 个釉料在起始上釉工坊给罐上釉，再取 2 个裂纹放进待清理区，在另一上釉工坊给壶上釉。上釉费用的资源类型由上釉工坊卡面给出，黑色数字与红色数字的通则见第 2.4 节。<span class="pg">p.6</span><span class="pg">p.12</span></div>
+<h3>7.5 状态流转速查</h3>
+<table>
+  <tr><th>所在位置</th><th>陶器状态</th><th>可否出售</th></tr>
+  <tr><td>晾坯区</td><td>塑形后、烧制前，未上釉</td><td>否<span class="pg">p.12</span></td></tr>
+  <tr><td>烧窑</td><td>已完成，未上釉</td><td>可<span class="pg">p.9</span><span class="pg">p.12</span></td></tr>
+  <tr><td>上釉工坊</td><td>翻面为已上釉，待烧制</td><td>否<span class="pg">p.9</span><span class="pg">p.12</span></td></tr>
+  <tr><td>釉窑</td><td>已完成，已上釉</td><td>可<span class="pg">p.9</span><span class="pg">p.12</span></td></tr>
+  <tr><td>工坊版图旁</td><td>已售出</td><td>不再出售，供终局计分卡计分<span class="pg">p.9</span><span class="pg">p.15</span></td></tr>
+</table>
+</section>
+
+<section id="s8">
+<h2><span class="n">8</span>清理、收草编与起始玩家行动</h2>
+<p>三项行动分别处理裂纹存量、草编卡的多项奖励与下一轮的回合顺序。清理与收草编作用于工坊版图，起始玩家行动作用于主版图的回合顺序轨。<span class="pg">p.13</span></p>
+<h3>8.1 清理</h3>
+<ol>
+  <li>可清理的裂纹数等于游戏区中清理卡的数量加一。<span class="pg">p.13</span></li>
+  <li>自待清理区取该数量的裂纹，分配到自选清理卡的空格上；没有可用空格时，把这些裂纹退回公共供应区。<span class="pg">p.13</span></li>
+  <li>此后把每张已完成清理卡上的裂纹全部退回公共供应区，并按自选顺序取得其上标示的奖励。<span class="pg">p.13</span></li>
+</ol>
+<div class="note">原书第 13 页的示例：拥有 2 张清理卡时可清理 3 个裂纹，分配后剩余的裂纹退回公共供应区；两张清理卡因此完成，退回卡上裂纹并取得 3 分与 2 分。裂纹放到清理卡上之后不再占用待清理区格位。<span class="pg">p.6</span><span class="pg">p.13</span></div>
+<h3>8.2 收草编</h3>
+<p>每张草编卡提供两项可能的奖励。收草编时，自工坊版图上每张草编卡各选定一项奖励取得，包含印在工坊版图上的起始草编卡。<span class="pg">p.13</span></p>
+<table>
+  <tr><th>草编卡奖励</th><th>规则作用</th></tr>
+  <tr><td>获得胖狗币、釉料或黏土</td><td>取得卡面所示数量的该资源<span class="pg">p.13</span></td></tr>
+  <tr><td>烧制 1 件</td><td>把晾坯区的 1 件陶器移入某个烧窑，或把上釉工坊的 1 件陶器移入某个釉窑<span class="pg">p.13</span></td></tr>
+  <tr><td>上釉 1 件</td><td>照常支付费用，把烧窑中的 1 件陶器上釉并放进上釉工坊，翻面表示已上釉<span class="pg">p.13</span></td></tr>
+  <tr><td>清理 1 个裂纹</td><td>把待清理区的 1 个裂纹放到某张清理卡上；因此完成该卡时，照常退回其裂纹并取得奖励<span class="pg">p.13</span></td></tr>
+</table>
+<h3>8.3 起始玩家行动</h3>
+<ol>
+  <li>自回合顺序轨取自己的两个回合顺序标记之一，放到右侧轨的任一空格，并支付或取得该格标示的胖狗币。<span class="pg">p.13</span></li>
+  <li>然后执行主版图上任意一个选定的行动；因达洛图标表示可执行任意主版图行动。<span class="pg">p.13</span></li>
+  <li>每位玩家每轮限执行此行动一次。回合结束时按右侧轨上标记的位置重排回合顺序轨。<span class="pg">p.13</span><span class="pg">p.15</span></li>
+</ol>
+<div class="why"><span class="wt">规则作用</span>右侧轨上的标记位置决定下一轮回合顺序轨的前段次序，起始玩家标记随之交给最左位置的玩家。本轮无人执行起始玩家行动时，回合顺序轨不调整。原书第 13 页的示例中，葆拉先取得该列的 1 点黏土奖励，再把一个回合顺序标记放到右侧轨取得 2 枚胖狗币，随后执行打出一张卡。<span class="pg">p.13</span><span class="pg">p.15</span></div>
+</section>
+
+<section id="s9">
+<h2><span class="n">9</span>奖励体系</h2>
+<p>奖励以黄色方块背景上的图标表示，草编类为蓝色。三种途径可取得奖励：在行动位放置女匠人、关店、店铺已关闭时的回合行动。<span class="pg">p.14</span></p>
+<h3>9.1 三种途径</h3>
+<table>
+  <tr><th>途径</th><th>取得方式</th><th>限制</th></tr>
+  <tr><td>放置女匠人</td><td>按所放女匠人数量取得奖励，奖励为所选行动位同一列下方的那一个</td><td>奖励须在行动之前或之后结算<span class="pg">p.8</span><span class="pg">p.14</span></td></tr>
+  <tr><td>关店</td><td>立即自版图上的奖励板块或特殊行动位自选一个奖励</td><td>不得选特殊行动位上印着的收草编奖励<span class="pg">p.9</span><span class="pg">p.14</span></td></tr>
+  <tr><td>店铺已关闭时</td><td>每次轮到时自选一个奖励作为回合行动</td><td>不得选特殊行动位上印着的收草编奖励<span class="pg">p.10</span><span class="pg">p.14</span></td></tr>
+</table>
+<h3>9.2 八类奖励</h3>
+<table>
+  <tr><th>奖励</th><th>规则作用</th><th>适用</th></tr>
+  <tr><td>黏土奖励</td><td>取得 1 点黏土，把黏土标记在黏土轨上推进 1 格</td><td>通用<span class="pg">p.14</span></td></tr>
+  <tr><td>烧制奖励</td><td>把 1 件陶器自晾坯区移入某个烧窑，或自上釉工坊移入某个釉窑</td><td>通用<span class="pg">p.14</span></td></tr>
+  <tr><td>上釉奖励</td><td>照常支付费用，把烧窑中的 1 件陶器上釉并放进上釉工坊，翻面表示已上釉</td><td>通用<span class="pg">p.14</span></td></tr>
+  <tr><td>拉坯奖励</td><td>把 1 个木瓶在某张陶轮卡上推进 1 格并取得对应奖励；多次取得时可把移动分摊给多个木瓶</td><td>通用<span class="pg">p.14</span></td></tr>
+  <tr><td>清理奖励</td><td>把待清理区的 1 个裂纹放到某张清理卡上；补齐该卡时照常退回裂纹并取得奖励</td><td>通用<span class="pg">p.14</span></td></tr>
+  <tr><td>买卡奖励</td><td>支付费用买 1 张卡加入手牌、移动驴并补满空位；多次取得时可买至多等于所放女匠人数量的卡，每张分别付费</td><td>仅三人局<span class="pg">p.14</span></td></tr>
+  <tr><td>胖狗币或釉料奖励</td><td>在 2 枚胖狗币与 2 个釉料之间选定其一取得</td><td>仅四人局<span class="pg">p.14</span></td></tr>
+  <tr><td>收草编奖励</td><td>自一张草编卡收取一项奖励；只出现在特殊行动位</td><td>仅特殊行动位<span class="pg">p.14</span></td></tr>
+</table>
+<div class="why"><span class="wt">规则作用</span>奖励是行动位放置的附带产出，也是店铺关闭后唯一保留的回合内容。买卡奖励与胖狗币或釉料奖励分别对应三人局与四人局额外启用的奖励板块，设置时按人数取用；收草编奖励只印在特殊行动位上，关店与店铺已关闭时均不得选取。<span class="pg">p.5</span><span class="pg">p.9</span><span class="pg">p.14</span></div>
+<h3>9.3 店铺卡关闭面的三项奖励</h3>
+<p>关店之后归还的女匠人不回到手上，而是放到店铺卡上。每放 1 个，自 2 点黏土、3 枚胖狗币、3 个釉料三项中选定一项取得；归还多个时各次可相同也可不同。此三项不属第 9.2 节的八类奖励，来源为店铺卡关闭面。<span class="pg">p.10</span></p>
+</section>
+
+<section id="s10">
+<h2><span class="n">10</span>终局与计分链路</h2>
+<p>第三轮回合结束四步完成后游戏结束，进入终局计分。主版图上印有终局计分的提醒，玩家帮助卡上另列计分项目。<span class="pg">p.15</span><span class="pg">p.20</span></p>
+<h3>10.1 六项计分</h3>
+<table>
+  <tr><th>项目</th><th>结算方式</th><th>依据</th></tr>
+  <tr><td>窑中剩余陶器</td><td>全部售出：已上釉每件 2 分，未上釉每件 1 分；售出的陶器照常放在工坊版图旁</td><td><span class="pg">p.15</span></td></tr>
+  <tr><td>终局计分卡</td><td>仅结算回合结束阶段面朝下打到工坊版图下方的卡</td><td><span class="pg">p.15</span></td></tr>
+  <tr><td>草编套组</td><td>工坊版图上互不相同的草编卡逐档计分</td><td><span class="pg">p.15</span></td></tr>
+  <tr><td>裂纹</td><td>待清理区中每剩 1 个裂纹扣 1 分</td><td><span class="pg">p.16</span></td></tr>
+  <tr><td>起始玩家标记</td><td>持有者取得 2 分</td><td><span class="pg">p.16</span></td></tr>
+  <tr><td>剩余资源</td><td>胖狗币、釉料与黏土合计，每 5 个取得 1 分</td><td><span class="pg">p.16</span></td></tr>
+</table>
+<h3>10.2 终局计分卡的两类</h3>
+<table>
+  <tr><th>类型</th><th>计分档位</th><th>计入范围</th></tr>
+  <tr><td>按同类卡的数量</td><td>拥有标示类型的 1／2／3／4／5 张时分别得 0／1／3／6／10 分，超过第五张不再加分</td><td>起始清理卡、窑卡与上釉工坊卡都计入<span class="pg">p.15</span></td></tr>
+  <tr><td>按售出陶器的类型</td><td>卡面指定类型的每件已售陶器得 1 分</td><td>放在工坊版图旁的已售陶器<span class="pg">p.15</span></td></tr>
+  <tr><td>草编计分卡</td><td>拥有 1／2／3／4 张草编卡时分别得 0／1／5／10 分</td><td>工坊版图上印制的草编卡算作一张，与草编套组相互独立<span class="pg">p.15</span></td></tr>
+</table>
+<h3>10.3 草编套组</h3>
+<p>工坊版图上互不相同的草编卡为 1／2／3／4 张时，分别得 0／1／3／6 分。版图上印制的草编卡算作一张，并印有此项计分的提醒。此项与草编计分卡的分档相互独立。<span class="pg">p.15</span></p>
+<h3>10.4 计分顺序与平手</h3>
+<p>第三轮回合结束步骤完成后，先售出窑中剩余陶器，再结算终局计分卡、草编套组、裂纹扣分、起始玩家标记与剩余资源。胜利分相同时，回合顺序轨上位置最左的玩家获胜。<span class="pg">p.15</span><span class="pg">p.16</span></p>
+<div class="note">回合中弃掉一张终局计分卡可执行一个主版图行动，被弃掉的卡不计分；只有回合结束阶段打出的终局计分卡参与终局计分。<span class="pg">p.9</span><span class="pg">p.15</span></div>
+</section>
+
+<section id="s11">
+<h2><span class="n">11</span>单人模式与难度</h2>
+<p>单人模式按二人局设置，玩家对抗竞争对手。竞争对手不执行行动、不积累资源，只取其卡所示的陶器、上釉与出售，并用女匠人占据主版图上的行动位、移动自己的驴。<span class="pg">p.16</span></p>
+<h3>11.1 设置差异</h3>
+<table>
+  <tr><th>项目</th><th>单人模式设置</th></tr>
+  <tr><td>主版图</td><td>单人面朝上；不在行动位上放女匠人作为封锁<span class="pg">p.16</span></td></tr>
+  <tr><td>行动板块</td><td>随机摆放，但「起始玩家行动」与「打出一张卡」须位于同一行，两项已印在版图上作为提醒<span class="pg">p.16</span></td></tr>
+  <tr><td>陶器</td><td>盘、壶、罐各 8 件，按类型分成三堆<span class="pg">p.16</span></td></tr>
+  <tr><td>需求板块与市场标记</td><td>需求板块随机摆放并按行匹配颜色；市场标记放在单人模式的起始位置<span class="pg">p.16</span></td></tr>
+  <tr><td>起始组合</td><td>只翻开 2 组起始陶轮卡与起始资源卡<span class="pg">p.16</span></td></tr>
+  <tr><td>起始手牌</td><td>照常取 3 张终局计分卡与每堆游戏卡各 1 张，共 6 张<span class="pg">p.16</span></td></tr>
+  <tr><td>竞争对手配件</td><td>指定一种颜色，除 7 个女匠人、驴与 +50 VP 标记外，该颜色其余配件全部收回盒中<span class="pg">p.16</span></td></tr>
+  <tr><td>竞赛卡与店铺卡</td><td>竞争对手的店铺卡打开面朝上置于其游戏区，9 张竞赛卡置于旁<span class="pg">p.16</span></td></tr>
+  <tr><td>回合顺序</td><td>按图示摆放双方的回合顺序标记；第一轮玩家为起始玩家<span class="pg">p.16</span></td></tr>
+  <tr><td>竞争对手的驴</td><td>洗混竞赛卡逐张翻开，直到出现指示放置位置的卡，之后把竞赛卡重新洗混成堆<span class="pg">p.16</span></td></tr>
+</table>
+<div class="note">多人局设置限制「回合顺序」与「打出一张卡」两块行动板块不得同行，单人局设置要求「起始玩家行动」与「打出一张卡」同行。两处表述按各自原书页面执行，版图上均印有对应提醒。<span class="pg">p.4</span><span class="pg">p.16</span></div>
+<h3>11.2 竞争对手的回合</h3>
+<ol>
+  <li>轮到时自牌堆翻开 1 张竞赛卡。竞争对手须有至少 1 张牌背朝上的卡才能执行回合；无法翻牌时关店并取得 1 分，即使仍有女匠人未用，此后本轮每次轮到都取得 1 分。<span class="pg">p.17</span></li>
+  <li>翻开卡时一张保持背面、另一张翻面，随后按放置女匠人、激活驴、结算陶器行动的顺序应用效果。<span class="pg">p.17</span></li>
+  <li>放置女匠人：按图示的行动位放置。该位没有女匠人时放 1 个；已有玩家的女匠人时放 2 个并把玩家的女匠人照常退回，另取得 3 分；已有玩家的女匠人但女匠人不足以退回时，改为在特殊行动位放 1 个；没有可用女匠人时关店并取得 1 分，此后本轮每次轮到都取得 1 分。<span class="pg">p.17</span></li>
+  <li>激活驴：移动图标把竞争对手的驴移到玩家驴右边紧邻的那张卡上，不可行则改为往左移，此图标有四个版本，各指示一个首选位置与一个备选位置；弃卡图标按图示弃掉竞争对手驴左与右、或上与下的卡，再用对应牌堆补满空位，无法弃掉的卡不弃，玩家驴下方的卡被封锁不得这样弃掉；不动图标使驴留在原位且不弃任何卡。<span class="pg">p.17</span></li>
+  <li>结算陶器行动：每张竞赛卡的牌背有三行不同颜色，按颜色对应三轮，轮到时结算当前轮对应那一行。所示陶器不在其游戏区时自公共供应区取该陶器、未上釉放入，该类型已无剩余时取得 1 分；已在游戏区且未上釉时给它上釉并翻面；已上釉时出售，照常取得分数并下移对应市场标记，再把该陶器收回盒中。<span class="pg">p.18</span></li>
+</ol>
+<div class="note">竞争对手游戏区中每种陶器至多 1 件，轮到时只出售已上釉的陶器。竞争对手为起始玩家时由它投掷市场骰并应用结果，不得重投。玩家回合照常执行。<span class="pg">p.16</span><span class="pg">p.18</span></div>
+<h3>11.3 起始玩家行动与回合结束</h3>
+<p>单人模式中，右侧回合顺序轨只有一个可用空格，另一个始终被竞争对手的回合顺序标记占据；该空格的费用为 2 枚胖狗币。未支付该费用把标记放上去时，不得执行起始玩家行动；本轮未执行起始玩家行动时，下一轮竞争对手成为起始玩家。<span class="pg">p.18</span></p>
+<p>回合结束时玩家照常结算。竞争对手打开店铺、收回全部女匠人并把其中 1 个退回盒中，第 1／2／3 轮开始时分别拥有 7／6／5 个女匠人；把全部竞赛卡重新洗混成堆；不打出任何终局计分卡；照常更新回合顺序轨，并把一个标记放到图示位置。玩家把女匠人退还竞争对手时，其店铺仍打开则女匠人重新可用，已关闭则把女匠人放到其店铺卡上，每放 1 个竞争对手取得 1 分。<span class="pg">p.18</span><span class="pg">p.19</span></p>
+<h3>11.4 竞争对手的终局分与难度</h3>
+<p>竞争对手自起始玩家标记与剩余陶器取得胜利分，不自终局计分卡、草编套组、剩余资源或裂纹取得胜利分。<span class="pg">p.19</span></p>
+<table>
+  <tr><th>难度</th><th>调整内容</th></tr>
+  <tr><td>普通</td><td>单人模式规则不作改动<span class="pg">p.19</span></td></tr>
+  <tr><td>高级</td><td>竞争对手每次把一个或多个女匠人退还给玩家时取得 5 分，而非 3 分<span class="pg">p.19</span></td></tr>
+  <tr><td>专家</td><td>在高级规则之上，因缺少女匠人或缺少卡而无法执行回合、玩家退还 1 个女匠人给已关店的竞争对手、要取某件陶器但公共供应中已无该类型，三种情形各取得 2 分而非 1 分；可查阅已翻开的竞赛卡，掌握尚未翻开的卡的信息<span class="pg">p.19</span></td></tr>
+</table>
+</section>
+
+<section id="s12">
+<h2><span class="n">12</span>常见误读、速查表与页码索引</h2>
+<p>下列内容汇总高频误读、一局速查、中英术语对照、章节与原书页码对照，并附 20 张原书页图。每条结论按学习顺序重排，与原书章节不对应。<span class="pg">p.20</span></p>
+<h3>12.1 常见误读逐条对照</h3>
+<table>
+  <tr><th>常见误读</th><th>规则陈述</th><th>依据</th></tr>
+  <tr><td>第一轮有人持有起始玩家标记</td><td>标记在每轮结束时才交给起始玩家，第一轮没有玩家持有它；重投市场骰的能力同样自第二轮起可用</td><td><span class="pg">p.5</span><span class="pg">p.8</span></td></tr>
+  <tr><td>特殊行动位会退回他人女匠人</td><td>特殊行动位只放 1 个女匠人，不归还其他玩家的女匠人，叠放至本轮结束；版图上的行动位才归还</td><td><span class="pg">p.8</span><span class="pg">p.9</span></td></tr>
+  <tr><td>关店后仍能放置女匠人或出售陶器</td><td>关店后不得放置女匠人、出售陶器或弃掉终局计分卡，每次轮到只取得一个自选奖励</td><td><span class="pg">p.9</span><span class="pg">p.10</span></td></tr>
+  <tr><td>晾坯区或上釉工坊中的陶器可售</td><td>可售的只有烧窑与釉窑中的陶器，进入任一窑方可出售</td><td><span class="pg">p.9</span><span class="pg">p.12</span></td></tr>
+  <tr><td>关店路径可选收草编奖励</td><td>关店与店铺已关闭时均不得选择特殊行动位上印着的收草编奖励，可选其他任何可用奖励</td><td><span class="pg">p.9</span><span class="pg">p.10</span><span class="pg">p.14</span></td></tr>
+  <tr><td>奖励可插入行动进行中结算</td><td>奖励须在行动之前或之后结算，包括由该行动触发的后续行动，不得在行动进行中结算</td><td><span class="pg">p.8</span></td></tr>
+  <tr><td>弃掉的终局计分卡也计分</td><td>只有回合结束阶段面朝下打到工坊版图下方的终局计分卡参与终局计分；回合中弃掉的卡用于换取一个主版图行动</td><td><span class="pg">p.9</span><span class="pg">p.15</span></td></tr>
+  <tr><td>黏土可超过 7 点</td><td>黏土不得超过 7 点，超出部分直接损失；待清理区只有 8 格，空位不足时不得执行需获得裂纹的行动</td><td><span class="pg">p.6</span></td></tr>
+  <tr><td>烧制一次只能移动一类陶器</td><td>一次烧制可同时把晾坯区的陶器移入烧窑、把上釉工坊的陶器移入釉窑，唯一限制是窑位</td><td><span class="pg">p.12</span></td></tr>
+  <tr><td>草编计分卡与草编套组为同一项</td><td>草编计分卡按张数分 0／1／5／10 分，草编套组按互不相同的张数分 0／1／3／6 分，两项相互独立</td><td><span class="pg">p.15</span></td></tr>
+  <tr><td>起始玩家标记与起始玩家行动混淆</td><td>起始玩家标记在每轮结束按回合顺序轨最左位置交付，并附带重投市场骰的能力；起始玩家行动是主版图上的一个行动，每轮每人限一次</td><td><span class="pg">p.8</span><span class="pg">p.13</span><span class="pg">p.15</span></td></tr>
+</table>
+<h3>12.2 中英术语对照</h3>
+<table>
+  <tr><th>中文</th><th>英文</th><th>中文</th><th>英文</th></tr>
+  <tr><td>女匠人</td><td>Craftswoman</td><td>驴</td><td>Donkey</td></tr>
+  <tr><td>陶器 / 盘 / 壶 / 罐</td><td>Piece / Plate / Jug / Pot</td><td>木瓶</td><td>Wooden Vase</td></tr>
+  <tr><td>胖狗币</td><td>Perra Gorda</td><td>釉料</td><td>Glaze</td></tr>
+  <tr><td>黏土 / 裂纹</td><td>Clay / Crack</td><td>胜利分</td><td>VP</td></tr>
+  <tr><td>陶轮卡</td><td>Potter's Wheel Card</td><td>草编卡</td><td>Esparto Card</td></tr>
+  <tr><td>清理卡</td><td>Cleanup Card</td><td>烧窑卡</td><td>Firing Kiln Card</td></tr>
+  <tr><td>上釉工坊卡</td><td>Glazing Workshop Card</td><td>釉窑卡</td><td>Glaze Kiln Card</td></tr>
+  <tr><td>起始卡</td><td>Starting Card</td><td>终局计分卡</td><td>Endgame Scoring Card</td></tr>
+  <tr><td>主版图</td><td>Main Board</td><td>工坊版图</td><td>Workshop Board</td></tr>
+  <tr><td>工坊扩展</td><td>Workshop Extension</td><td>店铺卡</td><td>Shop Card</td></tr>
+  <tr><td>行动板块 / 行动位</td><td>Action Tile / Action Space</td><td>特殊行动位</td><td>Special Action Space</td></tr>
+  <tr><td>奖励板块 / 奖励</td><td>Bonus Tile / Bonus</td><td>需求板块</td><td>Demand Tile</td></tr>
+  <tr><td>市场标记 / 市场骰</td><td>Market Marker / Market Dice</td><td>选牌区</td><td>Draft Area</td></tr>
+  <tr><td>分数轨 / 黏土轨</td><td>Score Track / Clay Track</td><td>科技轨 / 科技标记</td><td>Technology Track / Technology Marker</td></tr>
+  <tr><td>回合顺序轨</td><td>Turn Order Track</td><td>起始玩家标记</td><td>First Player Token</td></tr>
+  <tr><td>公共供应区 / 个人供应区</td><td>General Supply / Personal Supply</td><td>待清理区 / 晾坯区</td><td>Cleaning Area / Drying Area</td></tr>
+  <tr><td>烧窑 / 釉窑</td><td>Firing Kiln / Glaze Kiln</td><td>上釉工坊</td><td>Glazing Workshop</td></tr>
+  <tr><td>购买卡牌 / 打出一张卡</td><td>Acquire Cards / Play a Card</td><td>挖黏土</td><td>Extract Clay</td></tr>
+  <tr><td>拉坯 / 塑形</td><td>Throw / Shape</td><td>烧制 / 上釉</td><td>Fire / Paint</td></tr>
+  <tr><td>清理 / 收草编</td><td>Clean / Collect Esparto</td><td>因达洛图标</td><td>Indalo</td></tr>
+  <tr><td>竞争对手 / 竞赛卡</td><td>Competition / Competition Card</td><td>草编套组</td><td>Esparto Set</td></tr>
+  <tr><td>即时计分 / 终局计分</td><td>Immediate Scoring / Endgame Scoring</td><td>玩家帮助卡</td><td>Player Aid Card</td></tr>
+  <tr><td>普通 / 高级 / 专家</td><td>Normal / Advanced / Expert</td><td>规则书</td><td>Rulebook</td></tr>
+</table>
+<h3>12.3 一局速查</h3>
+<table>
+  <tr><th>阶段</th><th>步骤</th><th>依据</th></tr>
+  <tr><td>更新市场</td><td>按人数放市场标记到起始行；按本轮需求 2／1／0 上移 2／1／0 格；投 3 颗市场骰，最高／次高／最低依次分配给需求 2／1／0 的列并按点数上移；除第一轮外可重投一次</td><td><span class="pg">p.7</span><span class="pg">p.8</span></td></tr>
+  <tr><td>玩家回合 · 店铺打开</td><td>放置女匠人 / 弃一张终局计分卡 / 出售最多 2 件陶器 / 关店，四项选定其一</td><td><span class="pg">p.8</span></td></tr>
+  <tr><td>玩家回合 · 店铺关闭</td><td>取得一个自选奖励，不得选特殊行动位上的收草编奖励</td><td><span class="pg">p.10</span></td></tr>
+  <tr><td>出售一件陶器</td><td>按类型与是否上釉取得市场标示的胜利分；对应市场标记下移本轮需求板块所示格数</td><td><span class="pg">p.9</span></td></tr>
+  <tr><td>关店</td><td>无可用女匠人时把店铺卡翻到关闭面，立即取得一个自选奖励；归还的女匠人置于店铺卡并各换一项关闭面奖励</td><td><span class="pg">p.9</span><span class="pg">p.10</span></td></tr>
+  <tr><td>回合结束</td><td>收回全部女匠人并弃 1 个、店铺翻回打开面；可选打出 1 张终局计分卡；翻本轮需求板块；更新回合顺序轨并交付起始玩家标记</td><td><span class="pg">p.14</span><span class="pg">p.15</span></td></tr>
+  <tr><td>终局计分</td><td>第三轮回合结束后，结算窑中剩余陶器、终局计分卡、草编套组、裂纹扣分、起始玩家标记与剩余资源</td><td><span class="pg">p.15</span><span class="pg">p.16</span></td></tr>
+</table>
+<h3>12.4 章节与原书页码对照</h3>
+<table>
+  <tr><td>0 游戏概要与目标</td><td>p.2、p.7、p.15</td><td>7 陶器生产链</td><td>p.11、p.12</td></tr>
+  <tr><td>1 初局设置</td><td>p.4–6</td><td>8 清理、收草编与起始玩家行动</td><td>p.13</td></tr>
+  <tr><td>2 版图、组件与资源状态</td><td>p.2、p.3、p.5、p.6、p.11</td><td>9 奖励体系</td><td>p.9、p.10、p.14</td></tr>
+  <tr><td>3 核心引擎</td><td>p.7、p.8、p.12、p.14</td><td>10 终局与计分链路</td><td>p.15、p.16</td></tr>
+  <tr><td>4 一轮的三阶段</td><td>p.7、p.8、p.14、p.15</td><td>11 单人模式与难度</td><td>p.16–19</td></tr>
+  <tr><td>5 玩家回合与女匠人放置</td><td>p.8–10</td><td>12 常见误读、速查表与页码索引</td><td>全册</td></tr>
+  <tr><td>6 卡牌取得与资源行动</td><td>p.10、p.11</td><td>页图对照</td><td>20 张</td></tr>
+</table>
+<div class="note">页码写作 p.N，指英文原书 20 页的页序。图标语义、市场分值与需求板块的具体摆位以原书页图及实体配件印值为准；正文已把图示语言转为文字。<span class="pg">p.20</span></div>
+<h3>12.5 原书页图对照</h3>
+<details>
+  <summary>展开原书页图（20 张，按页序）</summary>
+  <div class="pgs">
+    <figure><img src="images_nijar/page_01.jpg" alt="原书第 1 页 封面" loading="lazy"><figcaption>p.1 封面</figcaption></figure>
+    <figure><img src="images_nijar/page_02.jpg" alt="原书第 2 页 简介与通用配件" loading="lazy"><figcaption>p.2 简介与通用配件</figcaption></figure>
+    <figure><img src="images_nijar/page_03.jpg" alt="原书第 3 页 玩家配件与三类牌背" loading="lazy"><figcaption>p.3 玩家配件与三类牌背</figcaption></figure>
+    <figure><img src="images_nijar/page_04.jpg" alt="原书第 4 页 通用游戏设置" loading="lazy"><figcaption>p.4 通用游戏设置</figcaption></figure>
+    <figure><img src="images_nijar/page_05.jpg" alt="原书第 5 页 选牌区与玩家设置" loading="lazy"><figcaption>p.5 选牌区与玩家设置</figcaption></figure>
+    <figure><img src="images_nijar/page_06.jpg" alt="原书第 6 页 开局前与资源图标" loading="lazy"><figcaption>p.6 开局前与资源图标</figcaption></figure>
+    <figure><img src="images_nijar/page_07.jpg" alt="原书第 7 页 游戏流程与市场" loading="lazy"><figcaption>p.7 游戏流程与市场</figcaption></figure>
+    <figure><img src="images_nijar/page_08.jpg" alt="原书第 8 页 玩家回合与放置女匠人" loading="lazy"><figcaption>p.8 玩家回合与放置女匠人</figcaption></figure>
+    <figure><img src="images_nijar/page_09.jpg" alt="原书第 9 页 特殊行动、出售与关店" loading="lazy"><figcaption>p.9 特殊行动、出售与关店</figcaption></figure>
+    <figure><img src="images_nijar/page_10.jpg" alt="原书第 10 页 购买卡牌与关店后奖励" loading="lazy"><figcaption>p.10 购买卡牌与关店后奖励</figcaption></figure>
+    <figure><img src="images_nijar/page_11.jpg" alt="原书第 11 页 打出一张卡与陶轮行动" loading="lazy"><figcaption>p.11 打出一张卡与陶轮行动</figcaption></figure>
+    <figure><img src="images_nijar/page_12.jpg" alt="原书第 12 页 塑形、烧制与上釉" loading="lazy"><figcaption>p.12 塑形、烧制与上釉</figcaption></figure>
+    <figure><img src="images_nijar/page_13.jpg" alt="原书第 13 页 清理、收草编与起始玩家行动" loading="lazy"><figcaption>p.13 清理、收草编与起始玩家行动</figcaption></figure>
+    <figure><img src="images_nijar/page_14.jpg" alt="原书第 14 页 奖励与回合结束" loading="lazy"><figcaption>p.14 奖励与回合结束</figcaption></figure>
+    <figure><img src="images_nijar/page_15.jpg" alt="原书第 15 页 回合结束步骤与终局计分" loading="lazy"><figcaption>p.15 回合结束步骤与终局计分</figcaption></figure>
+    <figure><img src="images_nijar/page_16.jpg" alt="原书第 16 页 终局余项与单人设置" loading="lazy"><figcaption>p.16 终局余项与单人设置</figcaption></figure>
+    <figure><img src="images_nijar/page_17.jpg" alt="原书第 17 页 竞争对手回合" loading="lazy"><figcaption>p.17 竞争对手回合</figcaption></figure>
+    <figure><img src="images_nijar/page_18.jpg" alt="原书第 18 页 陶器行动与玩家回合" loading="lazy"><figcaption>p.18 陶器行动与玩家回合</figcaption></figure>
+    <figure><img src="images_nijar/page_19.jpg" alt="原书第 19 页 回合结束与难度等级" loading="lazy"><figcaption>p.19 回合结束与难度等级</figcaption></figure>
+    <figure><img src="images_nijar/page_20.jpg" alt="原书第 20 页 玩家帮助卡与回合概要" loading="lazy"><figcaption>p.20 玩家帮助卡与回合概要</figcaption></figure>
+  </div>
+</details>
+</section>
+
+<div class="foot">
+尼哈尔 · 学习版规则　｜　依据英文原书《Nijar》Rulebook（20 页）与中文版既定译法编写<br>
+按规则结构重排，非官方规则书；规则裁决以英文原书为准，市场分值与配件印值以实体配件为准。
+</div>
+</main>
+</div>
+</body>
+</html>
