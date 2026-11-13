@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>灰月镇 · 学习版规则（Greylune）</title>
+<style>
+  :root{
+    --bg:#fbf7f0; --paper:#fffdf9; --ink:#2f2a28; --soft:#6b615c;
+    --line:#e3d8c8; --line2:#d3c4ae;
+    --red:#a2303c; --red-l:#fbecec; --blue:#3b5b8c; --blue-l:#eaf0f9;
+    --gold:#a9761c; --gold-l:#fbf1dc; --green:#3d7a55; --green-l:#e9f4ec;
+    --purple:#6b4a86; --purple-l:#f1eaf7;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"PingFang SC","Microsoft YaHei","Noto Sans SC",Arial,sans-serif;
+    font-size:15.5px;line-height:1.85;}
+  .backbar{position:sticky;top:0;z-index:60;height:44px;box-sizing:border-box;
+    display:flex;align-items:center;gap:10px;padding:0 16px;
+    background:var(--paper);border-bottom:1px solid var(--line);font-size:13px;}
+  .backbar a{display:inline-flex;align-items:center;min-height:32px;padding:0 12px;
+    border:1px solid var(--line2);border-radius:8px;background:#fff;
+    color:var(--purple);text-decoration:none;white-space:nowrap;}
+  .backbar a:active{background:var(--purple-l);}
+  .backbar .bb-t{margin-left:auto;font-size:12px;color:var(--soft);}
+  .layout{display:flex;align-items:flex-start;max-width:1280px;margin:0 auto;}
+  nav.toc{position:sticky;top:44px;align-self:flex-start;width:238px;flex:0 0 238px;
+    height:calc(100vh - 44px);overflow-y:auto;background:#fffdf9;border-right:1px solid var(--line);
+    padding:22px 14px 40px;font-size:13px;}
+  nav.toc .brand{font-size:17px;font-weight:800;color:var(--red);margin:0 0 4px;}
+  nav.toc .brand-s{font-size:11.5px;color:var(--soft);margin:0 0 16px;letter-spacing:.04em;}
+  nav.toc .grp{margin:16px 0 5px;font-size:11px;color:var(--gold);font-weight:700;letter-spacing:.12em;}
+  nav.toc a{display:block;color:#49403b;text-decoration:none;padding:4px 9px;border-radius:6px;}
+  nav.toc a:hover{background:var(--red-l);color:var(--red);}
+  main{flex:1 1 auto;min-width:0;padding:0 42px 90px;}
+  .hero{background:linear-gradient(150deg,#7c1f2b,#a2303c 55%,#bd5a4a);
+    color:#fff8f0;border-radius:0 0 20px 20px;padding:40px 42px 34px;margin-bottom:26px;
+    box-shadow:0 8px 26px rgba(124,31,43,.18);}
+  .hero h1{margin:0;font-size:34px;letter-spacing:.02em;}
+  .hero .en{font-size:14px;opacity:.8;margin:2px 0 12px;letter-spacing:.06em;}
+  .hero .desc{font-size:16px;max-width:760px;line-height:1.8;}
+  .hero .meta{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px;}
+  .hero .meta span{border:1px solid rgba(255,255,255,.5);border-radius:20px;padding:3px 13px;font-size:12.5px;}
+  .stand{margin-top:14px;background:#fff6e2;border:1px solid #e8d2a2;border-left:5px solid var(--gold);
+    border-radius:0 10px 10px 0;padding:12px 18px;font-size:14px;color:#5c4a26;}
+  section{padding:22px 0 14px;border-bottom:1px dashed var(--line2);scroll-margin-top:14px;}
+  h2{font-size:25px;color:var(--red);margin:8px 0 4px;line-height:1.4;}
+  h2 .n{display:inline-block;background:var(--red);color:#fff;font-size:14px;
+    min-width:30px;height:30px;line-height:30px;text-align:center;border-radius:8px;
+    margin-right:10px;vertical-align:3px;font-weight:700;}
+  h3{font-size:18.5px;color:#3a3230;margin:26px 0 6px;border-left:4px solid var(--gold);padding-left:10px;}
+  h4{font-size:16px;color:var(--blue);margin:18px 0 4px;}
+  p{margin:9px 0;}
+  ul,ol{margin:9px 0 9px 2px;padding-left:22px;}
+  li{margin:5px 0;}
+  b,strong{color:var(--red);}
+  .goal{background:var(--blue-l);border:1px solid #cfdcf0;border-radius:9px;
+    padding:8px 14px;font-size:13.5px;color:#2f466c;margin:8px 0 16px;}
+  .goal b{color:#2f466c;}
+  .pg{display:inline-block;background:#f0e7d8;color:#7d6231;border:1px solid #e2d2b6;
+    border-radius:5px;font-size:11px;padding:0 6px;line-height:18px;vertical-align:1px;
+    margin-left:4px;font-weight:600;white-space:nowrap;font-family:Arial,sans-serif;}
+  .key{background:var(--green-l);border:1px solid #c9e2d1;border-left:5px solid var(--green);
+    padding:11px 16px;border-radius:0 10px 10px 0;margin:13px 0;}
+  .key b{color:var(--green);}
+  .warn{background:var(--red-l);border:1px solid #eed3d3;border-left:5px solid var(--red);
+    padding:11px 16px;border-radius:0 10px 10px 0;margin:13px 0;}
+  .warn b{color:var(--red);}
+  .tip{background:var(--gold-l);border:1px solid #eddcb8;border-left:5px solid var(--gold);
+    padding:11px 16px;border-radius:0 10px 10px 0;margin:13px 0;}
+  .tip b{color:var(--gold);}
+  .note{background:#f4f1ec;border:1px solid var(--line);border-radius:9px;padding:10px 15px;
+    margin:12px 0;font-size:14px;color:#514844;}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px;background:var(--paper);}
+  th,td{border:1px solid var(--line2);padding:8px 11px;text-align:left;vertical-align:top;}
+  th{background:#f4e9dd;color:#5d4022;font-weight:700;}
+  tr:nth-child(even) td{background:#fdf9f3;}
+  td.c,th.c{text-align:center;}
+  .steps{list-style:none;padding:0;counter-reset:st;margin:14px 0;}
+  .steps>li{position:relative;padding:10px 14px 10px 50px;margin:9px 0;background:var(--paper);
+    border:1px solid var(--line);border-radius:10px;}
+  .steps>li::before{counter-increment:st;content:counter(st);position:absolute;left:12px;top:11px;
+    width:26px;height:26px;background:var(--red);color:#fff;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;}
+  .steps>li>ol{margin:6px 0;padding-left:20px;}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:11px;
+    padding:13px 17px;margin:11px 0;box-shadow:0 2px 6px rgba(80,60,40,.04);}
+  .card .t{font-weight:800;color:var(--red);font-size:16px;margin-bottom:3px;}
+  .card .t .s{display:inline-block;background:var(--red);color:#fff;border-radius:5px;
+    font-size:12px;padding:1px 7px;margin-right:8px;}
+  .card.blue .t{color:var(--blue);} .card.blue .t .s{background:var(--blue);}
+  .card.green .t{color:var(--green);} .card.green .t .s{background:var(--green);}
+  .card.gold .t{color:var(--gold);} .card.gold .t .s{background:var(--gold);}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+  .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;}
+  .mini{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:11px 13px;}
+  .mini .h{font-weight:800;font-size:14px;margin-bottom:4px;}
+  .mini .v{font-size:13px;color:var(--soft);line-height:1.7;}
+  .fig{margin:18px 0;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;}
+  .fig svg{display:block;width:100%;height:auto;}
+  .figcap{font-size:12.5px;color:var(--soft);margin-top:8px;text-align:center;}
+  details{margin:12px 0;background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:8px 14px;}
+  summary{cursor:pointer;font-size:13.5px;color:var(--blue);font-weight:600;}
+  details img{display:block;max-width:100%;margin:12px auto;border:1px solid var(--line);border-radius:8px;}
+  .pit{counter-reset:pit;list-style:none;padding:0;margin:14px 0;}
+  .pit li{position:relative;padding:9px 14px 9px 46px;margin:7px 0;background:var(--paper);
+    border:1px solid var(--line);border-radius:9px;font-size:14.5px;}
+  .pit li::before{counter-increment:pit;content:"✕ " counter(pit);position:absolute;left:10px;top:9px;
+    color:#fff;background:var(--red);border-radius:6px;font-size:11px;padding:1px 6px;font-weight:700;}
+  .bad{color:var(--red);text-decoration:line-through;}
+  .good{color:var(--green);font-weight:700;}
+  .tagR{color:var(--red);font-weight:700;} .tagB{color:var(--blue);font-weight:700;}
+  .tagG{color:var(--gold);font-weight:700;}
+  .why{background:#eef3fa;border:1px solid #cddcee;border-left:5px solid var(--blue);
+    padding:12px 17px;border-radius:0 10px 10px 0;margin:13px 0;font-size:14.5px;}
+  .why b{color:#2f466c;}
+  .why .wt{font-weight:800;color:#2f466c;display:block;margin-bottom:3px;}
+  .idx{font-size:13.5px;}
+  .foot{margin-top:34px;font-size:12.5px;color:var(--soft);text-align:center;line-height:1.9;}
+  @media(max-width:960px){
+    .layout{flex-direction:column;} nav.toc{position:static;width:100%;height:auto;flex-basis:auto;border-right:0;border-bottom:1px solid var(--line);}
+    main{padding:0 18px 60px;} .grid2,.grid4{grid-template-columns:1fr 1fr;}
+  }
+  @media(max-width:640px){.backbar{height:40px;padding:0 10px;} .backbar a{min-height:30px;padding:0 9px;font-size:12.5px;} .backbar .bb-t{display:none;}
+  .grid2,.grid4{grid-template-columns:1fr;} main{padding:0 12px 50px;} .hero{padding:28px 20px;} .hero h1{font-size:26px;}}
+
+  /* == 窄屏目录：横向胶囊，正文首屏可见 == */
+  @media(max-width:960px){
+    nav.toc{display:flex;flex-wrap:nowrap;gap:6px;align-items:center;
+      height:auto;max-height:none;overflow-x:auto;overflow-y:hidden;
+      padding:10px 12px;border-right:0;border-bottom:1px solid var(--line);
+      -webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;}
+    nav.toc .brand,nav.toc .brand-s,nav.toc .grp{display:none;}
+    nav.toc a{flex:0 0 auto;white-space:nowrap;padding:6px 11px;
+      border:1px solid var(--line2);border-radius:16px;background:var(--paper);
+      font-size:12.5px;line-height:1.4;}
+    nav.toc a:hover{background:var(--red-l);}
+    nav.toc a[style]{padding-left:11px;}
+  }
+
+  /* == 学习版通用补充（各本共用） == */
+  .flow{margin:18px 0;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;}
+  .flow svg{display:block;width:100%;height:auto;}
+  .pgs{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin:14px 0;}
+  .pgs figure{margin:0;background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:8px;}
+  .pgs img{display:block;width:100%;height:auto;margin:0;border:1px solid var(--line);border-radius:6px;}
+  .pgs figcaption{font-size:12px;color:var(--soft);text-align:center;margin-top:6px;line-height:1.5;}
+  @media(max-width:640px){.pgs{grid-template-columns:1fr 1fr;gap:9px;}}
+  /* 窄屏压缩首屏：hero 与体例框收紧，第 0 节进入首屏 */
+  @media(max-width:640px){
+    .hero{padding:22px 18px 24px;margin-bottom:16px;}
+    .hero h1{font-size:24px;} .hero .desc{font-size:14px;line-height:1.65;margin-top:8px;}
+    .hero .meta{margin-top:12px;gap:6px;} .hero .meta span{font-size:11.5px;padding:2px 10px;}
+    .stand{margin-top:10px;padding:9px 12px;font-size:12.5px;line-height:1.6;}
+  }
+</style>
+</head>
+<body>
+<div class="backbar"><a href="index.html">← 学习版目录</a><span class="bb-t">灰月镇 · 学习版规则</span></div>
+<div class="layout">
+<nav class="toc">
+  <div class="brand">灰月镇</div>
+  <div class="brand-s">学习版规则 · Greylune</div>
+  <div class="grp">规则概要</div>
+  <a href="#s0">0 · 游戏概要与目标</a>
+  <a href="#s1">1 · 初局设置</a>
+  <a href="#s2">2 · 版图与组件速认</a>
+  <div class="grp">年度与行动</div>
+  <a href="#s3">3 · 核心引擎</a>
+  <a href="#s4">4 · 五年与四季的结构</a>
+  <a href="#s5">5 · 春季：村民放置</a>
+  <a href="#s6">6 · 夏季：六项行动</a>
+  <div class="grp">全局机制</div>
+  <a href="#s7">7 · 冒险、遭遇与英雄任务</a>
+  <a href="#s8">8 · 讲故事与酒馆</a>
+  <a href="#s9">9 · 标记、技能与卡牌状态</a>
+  <a href="#s10">10 · 秋季、终局与计分链路</a>
+  <div class="grp">查考与附录</div>
+  <a href="#s11">11 · 常见误读与随书问答</a>
+  <a href="#s12">12 · 速查表与页码索引</a>
+</nav>
+
+<main>
+<header class="hero">
+  <h1>灰月镇 · 学习版规则</h1>
+  <div class="en">GREYLUNE　｜　按规则结构重排，不按原书章节顺序</div>
+  <div class="desc">以五年三时期与四季为主线，展开村民放置与取回、夏季六项行动、冒险与讲故事、封印与奖励标记及终局计分；附常见误读、随书问答裁定、速查表与原书页码索引。</div>
+  <div class="meta"><span>二至四人 · 五年</span><span>冬春夏秋 · 营地</span><span>村庄卡 / 遭遇卡 / 酒馆</span><span>依据英文原书 20 页及问答 2 页</span></div>
+</header>
+
+<div class="stand">
+  <b>体例：</b>按学习顺序重排，章节与原书不对应；每条结论后的 <span class="pg">p.N</span> 为英文原书页码，<span class="pg">问答 p.N</span> 为随书两页常见问答。
+  规则裁决以<b>英文原书页图</b>为准；术语沿用已上线中文版的既定译法。原书未列之处只记录、不代填，附录卡名以卡面字形为准，任务板块分值以实体板块为准。第 12 节附 20 张原书页图与 2 张问答页图。
+  正文按规则作用展开，先述状态变化，再列执行步骤。
+</div>
+
+<section id="s0">
+<h2><span class="n">0</span>游戏概要与目标</h2>
+<p>《灰月镇》以工人放置与工人取回为底，全局共五年，分三个时期：第一时期两年、第二时期两年、第三时期一年。每年分冬、春、夏、秋四季。春季把活跃村民放到主版图三乘三村庄卡之间的空隙；夏季取回村民，以激活村庄卡、获得金币、使用物品或参加事件；秋季收回全部村民、扶正卡牌并取得收入。冒险者另沿主版图的路线移动，结算遭遇卡，返镇后在酒馆把这些遭遇卡讲成故事。第五年秋季结算完毕后，分数轨上的胜利分加上任务、伙伴、物品与技能所得，总分最高者获胜，平手则共享胜利。<span class="pg">p.4</span><span class="pg">p.5</span><span class="pg">p.13</span></p>
+<div class="why"><span class="wt">规则主线</span>村民在一年内的流转决定可用行动次数：自活跃村民区进入村庄，被取回或花费后进入营地，秋季再回到活跃村民区。村民所停的位置同时决定两项数值：激活相邻村庄卡时每个其他相邻村民各增加 1 金币费用，取得金币时则按该卡相邻的其他村民数各得 1 金币。冒险与故事把遭遇卡转为胜利分与资源，力量与魔法两条技能轨决定遭遇卡与英雄任务的条件能否满足。<span class="pg">p.4</span><span class="pg">p.7</span><span class="pg">p.8</span><span class="pg">p.11</span></div>
+<div class="grid2">
+  <div class="card"><div class="t">年度循环</div>每年自冬季设置起，春季放置、夏季行动、秋季维护与收入。玩家各自处于自己的季节，按顺时针轮流行动，全员进入秋季才结束该年。夏季不可返回春季，进入秋季后该年不再行动。<span class="pg">p.5</span><span class="pg">p.9</span></div>
+  <div class="card blue"><div class="t">终局触发</div>第五年的秋季照常执行，其后结算终局计分；不设分数门槛，不追加年数。终局计分开始前弃掉未用的奖励标记，计分过程中达到 8 分或 20 分不再取得奖励标记。<span class="pg">p.10</span><span class="pg">p.13</span></div>
+</div>
+<table>
+  <tr><th>项目</th><th>取值</th><th>依据</th></tr>
+  <tr><td>人数</td><td>二至四人</td><td><span class="pg">p.2</span></td></tr>
+  <tr><td>年数与时期</td><td>五年；第一时期两年、第二时期两年、第三时期一年</td><td><span class="pg">p.5</span></td></tr>
+  <tr><td>季节</td><td>冬季设置、春季村民放置、夏季行动、秋季维护与收入</td><td><span class="pg">p.5</span></td></tr>
+  <tr><td>玩家初始</td><td>3 个活跃村民、8 金币、3 个任务标记、3 个奖励标记；另有 4 个村民暂置主版图旁</td><td><span class="pg">p.3</span></td></tr>
+  <tr><td>村庄卡</td><td>49 张，分伙伴、物品、建筑三类；每次摆出 3×3 共 9 张</td><td><span class="pg">p.2</span><span class="pg">p.4</span></td></tr>
+  <tr><td>遭遇卡</td><td>41 张；按人数翻出 5／6／7 张，依距离排在主版图右侧</td><td><span class="pg">p.2</span></td></tr>
+  <tr><td>胜负</td><td>总分最高者获胜；平手共享胜利</td><td><span class="pg">p.13</span></td></tr>
+</table>
+<h3>0.1 胜利分的来源</h3>
+<table>
+  <tr><th>来源</th><th>结算时点</th><th>依据</th></tr>
+  <tr><td>卡牌奖励、封印标记、奖励标记、技能到顶替代分</td><td>游戏过程中即时推进分数标记</td><td><span class="pg">p.5</span><span class="pg">p.12</span></td></tr>
+  <tr><td>英雄任务</td><td>终局按任务标记所在格计分</td><td><span class="pg">p.11</span><span class="pg">p.13</span></td></tr>
+  <tr><td>伙伴与物品</td><td>终局按卡面终局分相加</td><td><span class="pg">p.4</span><span class="pg">p.13</span></td></tr>
+  <tr><td>技能</td><td>终局力量与魔法均至少 3 得 2 分，两项均达 5 则改为 5 分</td><td><span class="pg">p.5</span><span class="pg">p.13</span></td></tr>
+</table>
+<h3>0.2 季节不可逆</h3>
+<p>同一时点可有玩家分别处于春、夏、秋三季，各按自身季节的可选行动行动，不因他人换季而改变。进入夏季当年不得返回春季；进入秋季当年不再执行行动，只结算秋季步骤。年度结束的判定只有一条：全员进入秋季。<span class="pg">p.5</span></p>
+</section>
+
+<section id="s1">
+<h2><span class="n">1</span>初局设置</h2>
+<p>设置分公共设置与玩家设置两段。公共设置建立村庄牌堆、遭遇牌堆、事件堆、任务板块、封印标记与金币供应；玩家设置配齐个人版图、村民、标记与起始金币。第一年跳过冬季，下列公共设置即第一年的冬季内容。<span class="pg">p.2</span><span class="pg">p.3</span><span class="pg">p.6</span></p>
+<h3>1.1 公共设置一至六</h3>
+<ol>
+  <li>把主版图与季节版图置于桌面中央。<span class="pg">p.2</span></li>
+  <li>建立村庄牌堆：自两组时期卡中各随机移除 2 张且不看卡面，把第三时期的 9 张洗匀置于底部，第二时期 18 张洗匀置于其上，第一时期 18 张洗匀置于最上；牌堆背面朝下放主版图旁，翻开顶部 9 张排成 3×3 网格，卡间留出空隙。<span class="pg">p.2</span></li>
+  <li>建立遭遇牌堆：二／三／四人局分别取 5／6／7 张第三时期卡置底，第二时期 10／12／14 张置其上，第一时期 10／12／14 张置最上；余卡不看内容回盒。翻开顶部 5／6／7 张，按卡面距离图标排在主版图右侧。<span class="pg">p.2</span></li>
+  <li>建立事件堆：随机移除 1 块事件板块且不看内容，余下 5 块洗匀背面朝下叠放，翻开最上一块作为本年事件。<span class="pg">p.2</span></li>
+  <li>随机抽 3 块英雄任务板块，正面朝上置于主版图对应位置；余下板块回盒。<span class="pg">p.2</span></li>
+  <li>收入标记背面朝上置于主版图旁；翻出的遭遇卡若带收入图标，把对应收入标记正面朝上置于该卡。<span class="pg">p.2</span></li>
+</ol>
+<h3>1.2 公共设置七至九</h3>
+<ol start="7">
+  <li>封印标记背面朝下置于主版图旁；摆出的卡若要求放置封印标记，立即改为正面朝上置于该卡。建筑按玩家人数减 1 放置，物品无论人数固定 1 个。<span class="pg">p.3</span><span class="pg">p.12</span></li>
+  <li>金币置于公共供应，数量视为无限。<span class="pg">p.3</span></li>
+  <li>最近一次外出冒险的玩家取得起始玩家标记。<span class="pg">p.3</span></li>
+</ol>
+<h3>1.3 玩家设置</h3>
+<ol type="a">
+  <li>各选一种颜色，取个人版图与该色全部配件；其中 4 个村民暂置主版图旁，尚不可使用。<span class="pg">p.3</span></li>
+  <li>力量标记与魔法标记置于各自技能轨最低格。<span class="pg">p.3</span></li>
+  <li>3 个任务标记置于个人版图的对应格位。<span class="pg">p.3</span></li>
+  <li>3 个村民置于活跃村民区。<span class="pg">p.3</span></li>
+  <li>季节标记置于季节版图春季格，冒险者置于主版图村庄处，分数标记置于分数轨 0 格，25／50 与 75／100 标记置于分数轨下方。<span class="pg">p.3</span></li>
+  <li>3 个奖励标记正面朝上置于个人版图旁。<span class="pg">p.3</span></li>
+  <li>各取得起始 8 金币。<span class="pg">p.3</span></li>
+</ol>
+<h3>1.4 人数差异</h3>
+<table>
+  <tr><th>项目</th><th>二人局</th><th>三人局</th><th>四人局</th></tr>
+  <tr><td>遭遇牌堆各层张数</td><td>5＋10＋10</td><td>6＋12＋12</td><td>7＋14＋14</td></tr>
+  <tr><td>翻出的遭遇卡</td><td>5 张</td><td>6 张</td><td>7 张</td></tr>
+  <tr><td>每个建筑的封印标记</td><td>1 个</td><td>2 个</td><td>3 个</td></tr>
+  <tr><td>每个物品的封印标记</td><td>1 个</td><td>1 个</td><td>1 个</td></tr>
+</table>
+<div class="note">村庄牌堆经移除后共 45 张，遭遇牌堆按人数最多 35 张；金币共 50 枚，供应仍按无限处理。配件总数与牌堆构成见原书第 2 页。<span class="pg">p.2</span></div>
+</section>
+
+<section id="s2">
+<h2><span class="n">2</span>版图与组件速认</h2>
+<p>按使用先后认识版图：先分主版图的村庄网格、冒险路线与遭遇卡列，再分季节版图与营地，最后分个人版图的村民区、故事区、技能轨与标记位。三类村庄卡与遭遇卡的字段决定后续全部判定。<span class="pg">p.3</span><span class="pg">p.4</span><span class="pg">p.5</span></p>
+<h3>2.1 主版图</h3>
+<table>
+  <tr><th>位置</th><th>结构</th><th>规则作用</th></tr>
+  <tr><td>村庄网格</td><td>主版图左侧 3×3 共 9 张村庄卡，卡间留空隙</td><td>春季村民放置的落点；空隙可放任意数量村民，不限归属<span class="pg">p.6</span></td></tr>
+  <tr><td>冒险路线</td><td>自村庄向外延伸的路线，格位分距离段，另设金币格、胜利分格与三个任务格</td><td>冒险者移动与结算遭遇卡、其他奖励、英雄任务的场所<span class="pg">p.11</span></td></tr>
+  <tr><td>遭遇卡列</td><td>主版图右侧按距离排列的 5／6／7 张遭遇卡</td><td>冒险者停留格对应的可结算卡<span class="pg">p.2</span></td></tr>
+  <tr><td>事件与任务位</td><td>事件板块 1 块、英雄任务板块 3 块</td><td>本年事件与该局三项英雄任务<span class="pg">p.2</span></td></tr>
+  <tr><td>分数轨</td><td>环绕版图的计分格，另有 25／50 与 75／100 标记</td><td>记录即时胜利分与终局总分<span class="pg">p.13</span></td></tr>
+</table>
+<h3>2.2 季节版图与营地</h3>
+<p>季节版图分冬、春、夏、秋四季格，各玩家以季节标记标示自身所处季节。版图左侧的营地存放自村庄取回或被花费的村民；营地中的村民本年度不可再用，秋季统一回到活跃村民区。<span class="pg">p.3</span><span class="pg">p.4</span></p>
+<h3>2.3 个人版图</h3>
+<table>
+  <tr><th>区域</th><th>内容</th><th>规则作用</th></tr>
+  <tr><td>活跃村民区</td><td>年初全部可用村民</td><td>春季放置、参加事件与特殊行动的来源<span class="pg">p.3</span></td></tr>
+  <tr><td>技能轨</td><td>力量与魔法各 1 至 5 格</td><td>判定遭遇卡与英雄任务的条件；终局另计分<span class="pg">p.5</span></td></tr>
+  <tr><td>故事区</td><td>版图上方分未讲述与已讲述两栏</td><td>结算后的遭遇卡插入未讲述栏，讲故事后移入已讲述栏<span class="pg">p.11</span><span class="pg">p.12</span></td></tr>
+  <tr><td>卡牌区</td><td>伙伴置于版图左侧，物品置于右侧</td><td>伙伴与物品的能力与终局分所在<span class="pg">p.8</span></td></tr>
+  <tr><td>标记位</td><td>3 个任务标记、3 个奖励标记、特殊行动格</td><td>任务完成记录、8 分与 20 分奖励、每年一次的特殊行动<span class="pg">p.3</span><span class="pg">p.9</span></td></tr>
+</table>
+<h3>2.4 三类村庄卡</h3>
+<table>
+  <tr><th>类型</th><th>费用与取得</th><th>卡面内容</th></tr>
+  <tr><td>伙伴</td><td>7 金币招募，置于个人版图左侧；立即取得 1 个活跃村民，全局至多 3 名</td><td>反应能力须横置触发，永久效果横置后仍生效，另有各自的终局计分方式<span class="pg">p.4</span><span class="pg">p.8</span></td></tr>
+  <tr><td>物品</td><td>费用 2 至 7 金币，置于个人版图右侧；每人至多 3 件，超出须弃 1 件</td><td>可作为夏季行动横置使用，部分提供即时技能或胜利分，药水用后弃掉<span class="pg">p.4</span><span class="pg">p.8</span></td></tr>
+  <tr><td>建筑</td><td>无卡面费用，启用后留在村庄原位</td><td>逐次取得效果；带封印标记者须选弃 1 个标记决定费用或效果<span class="pg">p.4</span><span class="pg">p.8</span></td></tr>
+</table>
+<h3>2.5 遭遇卡字段</h3>
+<p>遭遇卡左上角为距离，右上角为故事值，左下为要求，右下为奖励。部分卡印两组要求与两组奖励。图标含义、卡名字形与附录数值以原书页图与实体卡牌为准；附录卡名为艺术字，文本层不含卡名。<span class="pg">p.5</span><span class="pg">p.18</span></p>
+</section>
+
+<section id="s3">
+<h2><span class="n">3</span>核心引擎</h2>
+<p>全局由五年串接，每年沿村民循环推进。村民投入村庄后既占用位置，也构成相邻村民的额外费用或金币来源；夏季把村民自村庄取回时一并触发行动；冒险与故事在村庄之外并行，最终把遭遇卡转为分数轨上的胜利分与终局分。<span class="pg">p.4</span><span class="pg">p.5</span></p>
+<div class="flow">
+<svg viewBox="0 0 900 250" role="img" aria-label="村民循环与季节推进链路">
+  <rect x="0" y="0" width="900" height="250" fill="#ffffff"/>
+  <text x="450" y="24" text-anchor="middle" font-size="15" font-weight="700" fill="#2f466c">活跃村民 → 村庄卡间 → 取回至营地 → 秋季回活跃区 → 下一年</text>
+  <g font-size="12.5" text-anchor="middle" fill="#25324a">
+    <rect x="16" y="48" width="164" height="62" rx="9" fill="#eef3fa" stroke="#cddcee"/>
+    <text x="98" y="72">春季放置村民</text><text x="98" y="93">卡间空隙，数量不限</text>
+    <rect x="194" y="48" width="164" height="62" rx="9" fill="#fdf1e6" stroke="#e8cdae"/>
+    <text x="276" y="72">夏季取回村民</text><text x="276" y="93">激活卡 / 得金币 / 事件</text>
+    <rect x="372" y="48" width="164" height="62" rx="9" fill="#eaf5ec" stroke="#c6e0cc"/>
+    <text x="454" y="72">冒险与遭遇</text><text x="454" y="93">移动 / 结算 / 讲故事</text>
+    <rect x="550" y="48" width="164" height="62" rx="9" fill="#f3eefb" stroke="#d8c9ee"/>
+    <text x="632" y="72">秋季维护</text><text x="632" y="93">收村民 / 扶正 / 收入</text>
+    <rect x="728" y="48" width="156" height="62" rx="9" fill="#fdf6e8" stroke="#e8d9ae"/>
+    <text x="806" y="72">第五年秋后</text><text x="806" y="93">终局计分</text>
+  </g>
+  <g stroke="#7d5511" stroke-width="2" fill="none">
+    <path d="M180 79 H190"/><path d="M358 79 H368"/><path d="M536 79 H546"/><path d="M714 79 H724"/>
+    <path d="M632 114 V150 H98 V114"/><path d="M98 114 l-5 8 h10 z" fill="#7d5511"/>
+  </g>
+  <text x="450" y="172" text-anchor="middle" font-size="13" fill="#6b615c">村民一年只流转一次；秋季回到活跃区后方可用于下一年</text>
+  <g font-size="12.5" fill="#2f466c">
+    <rect x="16" y="192" width="280" height="42" rx="8" fill="#f7f9fc" stroke="#d8e1ee"/>
+    <text x="156" y="218" text-anchor="middle">相邻村民数决定额外费用与金币收入</text>
+    <rect x="310" y="192" width="280" height="42" rx="8" fill="#f7f9fc" stroke="#d8e1ee"/>
+    <text x="450" y="218" text-anchor="middle">技能轨决定遭遇与任务条件能否满足</text>
+    <rect x="604" y="192" width="280" height="42" rx="8" fill="#f7f9fc" stroke="#d8e1ee"/>
+    <text x="744" y="218" text-anchor="middle">故事值决定酒馆奖励的累进档位</text>
+  </g>
+</svg>
+</div>
+<h3>3.1 村民的年度流转</h3>
+<ol class="steps">
+  <li>年初玩家版图活跃村民区中的村民即为该年可用的全部村民。<span class="pg">p.5</span></li>
+  <li>春季把活跃村民逐个放入村庄卡之间的空隙，或卡与空卡位之间。<span class="pg">p.6</span></li>
+  <li>夏季取回村庄中的村民时，该村民移入营地，本年度不可再用；被效果花费的村民同样移入营地。<span class="pg">p.4</span><span class="pg">p.7</span></li>
+  <li>事件板块与特殊行动格上的村民亦在营地之外占住位置，秋季一并取回。<span class="pg">p.9</span></li>
+  <li>秋季把营地、事件板块、特殊行动格上的全部村民放回活跃村民区，扶正全部卡牌并取得收入。<span class="pg">p.9</span></li>
+</ol>
+<h3>3.2 位置与两项数值</h3>
+<table>
+  <tr><th>动作</th><th>计数对象</th><th>结果</th></tr>
+  <tr><td>激活相邻村庄卡</td><td>该卡相邻的其他村民，不论归属</td><td>每个额外支付 1 金币，建筑无卡面费用<span class="pg">p.8</span></td></tr>
+  <tr><td>自村庄取得金币</td><td>指定卡相邻的其他村民，不论归属</td><td>每个自银行取得 1 金币<span class="pg">p.7</span></td></tr>
+</table>
+<div class="key"><b>状态变化：</b>村民放置不改变卡牌，只改变卡牌的相邻村民数；取回村民时该村民进入营地，相邻村民数随之减少。建筑启用后留在原位，因此可被后续相邻村民再次启用。<span class="pg">p.6</span><span class="pg">p.8</span></div>
+<h3>3.3 与全局系统的衔接</h3>
+<p>冒险者移动由物品、建筑、特殊行动或遭遇奖励提供；遭遇卡结算后进入未讲述的故事栏，讲故事后进入已讲述栏并全局不再使用。力量与魔法轨的推进决定后续条件判定，到顶后继续提升改为即时胜利分。封印标记随村庄卡与酒馆的启用而消耗，奖励标记随分数轨经过 8 分与 20 分而结算。<span class="pg">p.5</span><span class="pg">p.11</span><span class="pg">p.12</span></p>
+</section>
+
+<section id="s4">
+<h2><span class="n">4</span>五年与四季的结构</h2>
+<p>全局五年分三个时期，时期编号与村庄牌堆、遭遇牌堆的分层对应。每年自起始玩家起顺时针轮流行动，玩家按自身所处季节选择行动，直到全员进入秋季。<span class="pg">p.5</span></p>
+<h3>4.1 年与时期</h3>
+<table>
+  <tr><th>时期</th><th>年数</th><th>对应卡牌层</th></tr>
+  <tr><td>第一时期</td><td>第 1 至 2 年</td><td>村庄卡第一组 18 张、遭遇卡第一组 10／12／14 张<span class="pg">p.2</span></td></tr>
+  <tr><td>第二时期</td><td>第 3 至 4 年</td><td>村庄卡第二组 18 张、遭遇卡第二组 10／12／14 张<span class="pg">p.2</span></td></tr>
+  <tr><td>第三时期</td><td>第 5 年</td><td>村庄卡第三组 9 张、遭遇卡第三组 5／6／7 张<span class="pg">p.2</span></td></tr>
+</table>
+<div class="note">牌堆按层自顶向下抽取，时期与卡牌组的对应按牌堆顺序成立；逐年弃掉上一年摆出的卡牌后翻开新卡。<span class="pg">p.2</span><span class="pg">p.6</span></div>
+<h3>4.2 各季节可选行动</h3>
+<table>
+  <tr><th>季节</th><th>可选行动</th><th>依据</th></tr>
+  <tr><td>冬季</td><td>按设置步骤执行，不由玩家逐项选择；第一年跳过</td><td><span class="pg">p.6</span></td></tr>
+  <tr><td>春季</td><td>放置一个村民；参加事件；进入夏季并立即执行一个夏季行动</td><td><span class="pg">p.5</span><span class="pg">p.6</span></td></tr>
+  <tr><td>夏季</td><td>获得金币；激活一张卡；参加事件；使用一件物品；使用个人版图特殊行动；进入秋季并立即结算秋季步骤</td><td><span class="pg">p.5</span><span class="pg">p.7</span></td></tr>
+  <tr><td>秋季</td><td>停手，每年仅一次</td><td><span class="pg">p.5</span></td></tr>
+</table>
+<h3>4.3 季节独立与不可逆</h3>
+<ol class="steps">
+  <li>玩家可分别处于春季、夏季或秋季，各按自身季节行动，不因对手换季而改变。<span class="pg">p.5</span></li>
+  <li>进入夏季者当年不得返回春季。<span class="pg">p.5</span></li>
+  <li>进入秋季者当年不再执行行动，其余玩家继续正常行动。<span class="pg">p.5</span><span class="pg">p.9</span></li>
+  <li>全员进入秋季后该年结束；第五年秋季照常执行，其后进入终局计分。<span class="pg">p.10</span><span class="pg">p.13</span></li>
+</ol>
+<h3>4.4 第一年与第五年</h3>
+<p>第一年的冬季已在初始设置中完成，直接进入春季。第五年的秋季不跳过：玩家仍取回村民、扶正卡牌并取得最后一次收入，随后弃掉未用的奖励标记并结算终局计分。<span class="pg">p.6</span><span class="pg">p.10</span><span class="pg">p.13</span></p>
+</section>
+
+<section id="s5">
+<h2><span class="n">5</span>春季：村民放置</h2>
+<p>春季把活跃村民投入村庄，为夏季的取回行动预备位置。村民落在两张相邻村庄卡之间或卡与空卡位之间，同一空隙可放任意数量村民，不限归属。<span class="pg">p.6</span></p>
+<h3>5.1 放置一个村民</h3>
+<div class="why"><span class="wt">规则作用</span>把一个活跃村民从玩家版图移到村庄卡间空隙；该村民此后可被取回以触发夏季行动，也计入两张相邻卡的相邻村民数，改变这两张卡后续激活费用与金币收入。<span class="pg">p.6</span><span class="pg">p.7</span><span class="pg">p.8</span></div>
+<ol class="steps">
+  <li>取 1 个活跃村民，置于两张相邻村庄卡之间，或一张卡与一个空卡位之间。<span class="pg">p.6</span></li>
+  <li>同一空隙放置的村民数量不限，可属不同玩家。<span class="pg">p.6</span></li>
+  <li>村民放置后留在村庄，直到被夏季行动取回或被效果花费。<span class="pg">p.4</span></li>
+</ol>
+<h3>5.2 参加事件</h3>
+<div class="why"><span class="wt">规则作用</span>把 1 个活跃村民直接放到本年事件板块上并立即激活事件效果，以该村民占用事件位为代价取得事件所列奖励。<span class="pg">p.6</span></div>
+<ol class="steps">
+  <li>每名玩家每年只可参加事件一次，春季或夏季均可。<span class="pg">p.6</span><span class="pg">p.7</span></li>
+  <li>放置 1 个活跃村民到事件板块，须能立即激活事件并支付相应费用。<span class="pg">p.6</span></li>
+  <li>参加事件后该村民留在事件板块，秋季取回。<span class="pg">p.9</span></li>
+</ol>
+<h3>5.3 进入夏季</h3>
+<p>把季节标记移到夏季格，并立即执行一个夏季行动。换季本身不消耗村民，但当季不可再执行春季行动。<span class="pg">p.5</span><span class="pg">p.6</span></p>
+<div class="note">若村庄中仍有自己的村民，玩家可继续留在春季放置更多村民；进入秋季则以村庄中不再有自己的村民为条件，见第 6.6 节。<span class="pg">p.9</span></div>
+</section>
+
+<section id="s6">
+<h2><span class="n">6</span>夏季：六项行动</h2>
+<p>夏季每次轮到行动，从六项中选定一项执行。前五项以村民、物品或特殊行动格为代价取得资源、卡牌或效果，第六项为换季。各行动轮到时均可再次选择，次数以各项自身限制为准。<span class="pg">p.5</span><span class="pg">p.7</span></p>
+<h3>6.1 参加事件</h3>
+<div class="why"><span class="wt">规则作用</span>以 1 个村民占住事件板块并立即激活本年事件；夏季可改用村庄中自己的村民，因此该村民同时自村庄移除。<span class="pg">p.7</span></div>
+<ol class="steps">
+  <li>取 1 个活跃村民，或村庄中自己的 1 个村民，置于事件板块。<span class="pg">p.7</span></li>
+  <li>须能立即激活事件并支付相应费用，否则不可参加。<span class="pg">p.7</span></li>
+  <li>每名玩家每年只可参加事件一次；自村庄取用的村民置于事件板块，秋季一并取回。<span class="pg">p.4</span><span class="pg">p.7</span></li>
+</ol>
+<h3>6.2 获得金币</h3>
+<div class="why"><span class="wt">规则作用</span>以村庄中自己的 1 个村民为代价，按指定卡相邻的其他村民人数自银行取得金币；该村民移入营地，本年不可再用。<span class="pg">p.7</span></div>
+<ol class="steps">
+  <li>选定村庄中自己的 1 个村民，指定与其相邻的一张村庄卡。<span class="pg">p.7</span></li>
+  <li>按该卡相邻的其他村民数，每个自银行取得 1 金币，村民归属不限。<span class="pg">p.7</span></li>
+  <li>该村民移入营地；此动作计为一次行动。<span class="pg">p.7</span></li>
+  <li>两张相邻卡均已移离时无金币可得，村民仍移入营地，动作仍计一次行动。<span class="pg">p.7</span></li>
+</ol>
+<h3>6.3 激活一张卡</h3>
+<div class="why"><span class="wt">规则作用</span>以村庄中自己的 1 个村民为代价，指定相邻的一张村庄卡并按卡型执行：建筑留在使用、物品进入个人版图右侧、伙伴进入左侧；支出为卡面价格加相邻村民附加费用。<span class="pg">p.8</span></div>
+<ol class="steps">
+  <li>选定村庄中自己的 1 个村民，指定与其相邻的一张村庄卡。<span class="pg">p.8</span></li>
+  <li>向银行支付该卡卡面价格；建筑无卡面费用。该卡每有 1 个其他相邻村民，额外支付 1 金币，村民归属不限。<span class="pg">p.8</span></li>
+  <li>该村民移入营地，随后按卡型执行对应效果。<span class="pg">p.8</span></li>
+</ol>
+<table>
+  <tr><th>卡型</th><th>执行口径</th><th>依据</th></tr>
+  <tr><td>建筑</td><td>立即取得一次效果，卡牌留在村庄原位，可被后续相邻村民再次启用；带封印标记者须选定并弃掉 1 个标记以决定费用或效果，无标记时不可启用</td><td><span class="pg">p.8</span><span class="pg">p.12</span></td></tr>
+  <tr><td>物品</td><td>置于个人版图右侧；超出 3 件上限时弃 1 件，可含新购物品，须先结算其即时胜利分；带封印标记者按标记数值立即取得胜利分并弃掉标记</td><td><span class="pg">p.8</span><span class="pg">p.12</span></td></tr>
+  <tr><td>伙伴</td><td>置于个人版图左侧，立即取得 1 个活跃村民并直接放入活跃村民区；全局至多招募 3 名，每名使秋季收入减少 1 金币</td><td><span class="pg">p.4</span><span class="pg">p.8</span><span class="pg">p.9</span></td></tr>
+</table>
+<h3>6.4 使用一件物品</h3>
+<div class="why"><span class="wt">规则作用</span>把 1 张已扶正且带效果的物品横置，取得其能力；横置后该物品本年不可再用，除非被卡牌效果扶正。<span class="pg">p.7</span></div>
+<ol class="steps">
+  <li>选定 1 张已扶正且带效果的物品；有多个效果时须选定其中一个。<span class="pg">p.7</span></li>
+  <li>横置该物品；效果要求花费村民时，把这些村民移入营地。<span class="pg">p.7</span></li>
+  <li>效果要求弃掉物品时，把该物品立即放回盒中；药水多属此类。<span class="pg">p.7</span></li>
+  <li>随后结算该效果。<span class="pg">p.7</span></li>
+</ol>
+<h3>6.5 个人版图特殊行动</h3>
+<div class="why"><span class="wt">规则作用</span>以 1 个活跃村民占住个人版图特殊行动格，在三项效果中选定其一，补足当年未由村庄卡提供的能力。<span class="pg">p.9</span></div>
+<ol class="steps">
+  <li>每年只可使用一次，且只在夏季；须放置 1 个活跃村民，不可用营地或村庄中的村民。<span class="pg">p.9</span><span class="pg">问答 p.2</span></li>
+  <li>三项效果选定其一：以总故事值至多 3 的遭遇卡讲故事，取得 2 金币、1 力量与 2 胜利分；或使冒险者移动 1 格；或取得 1 魔法。<span class="pg">p.9</span></li>
+  <li>该村民留在特殊行动格，秋季取回。<span class="pg">p.9</span></li>
+</ol>
+<h3>6.6 进入秋季</h3>
+<div class="why"><span class="wt">规则作用</span>结束本人当年的行动阶段，立即按顺序结算秋季全部步骤；进入秋季的先决条件是村庄中不再有自己的村民。<span class="pg">p.9</span></div>
+<ol class="steps">
+  <li>确认村庄中不再有自己的村民，否则不可进入秋季。<span class="pg">p.9</span></li>
+  <li>把季节标记移到秋季格，立即结算秋季四步。<span class="pg">p.9</span></li>
+  <li>此后该年不再执行行动，其余玩家继续按自身季节行动。<span class="pg">p.5</span></li>
+</ol>
+</section>
+
+<section id="s7">
+<h2><span class="n">7</span>冒险、遭遇与英雄任务</h2>
+<p>冒险者沿主版图路线移动，在停留格结算遭遇卡、取得其他奖励或完成英雄任务。同年之内冒险者自上次停留格继续移动，每年秋季返回村庄。遭遇卡结算后进入个人版图上方的未讲述故事栏，供酒馆讲故事使用。<span class="pg">p.4</span><span class="pg">p.11</span></p>
+<h3>7.1 移动行动</h3>
+<div class="why"><span class="wt">规则作用</span>按图标所示把冒险者沿路线推进至多该格数，以改变可结算的遭遇卡、其他奖励或英雄任务所在格；移动本身不消耗村民。<span class="pg">p.11</span></div>
+<ol class="steps">
+  <li>触发移动图标时，按所示格数上限移动，方向自选，亦可原地不动。<span class="pg">p.11</span></li>
+  <li>到达目标格后可结算该格的遭遇卡；多个冒险者可处于同一格。<span class="pg">p.11</span></li>
+  <li>同一年内下一次移动自本次停留格起算；每年秋季冒险者返回村庄。<span class="pg">p.4</span><span class="pg">p.9</span></li>
+</ol>
+<h3>7.2 结算遭遇卡</h3>
+<table>
+  <tr><th>卡面</th><th>判定口径</th><th>依据</th></tr>
+  <tr><td>单要求单奖励</td><td>满足左下要求，取得右下奖励</td><td><span class="pg">p.11</span></td></tr>
+  <tr><td>双要求双奖励</td><td>至少满足一项即可结算并取得对应侧奖励；两项奖励都取得须在结算开始时同时满足两项要求</td><td><span class="pg">p.11</span></td></tr>
+  <tr><td>结算开始声明</td><td>双要求遭遇卡须在开始时声明欲满足的要求，不得以其中一项奖励取得的资源补满足另一项</td><td><span class="pg">问答 p.2</span></td></tr>
+  <tr><td>忽略一项要求</td><td>可无视遭遇卡的一项要求；双要求卡仍须满足另一项方可取得两项奖励；此效果不作用于英雄任务</td><td><span class="pg">问答 p.2</span></td></tr>
+</table>
+<div class="key"><b>状态变化：</b>结算后的遭遇卡插入个人版图上方的未讲述故事栏，卡面故事值保留；当前遭遇卡的全部奖励须结算完毕或明确放弃，方可移动到另一张遭遇卡。<span class="pg">p.11</span><span class="pg">问答 p.2</span></div>
+<h3>7.3 其他奖励与英雄任务</h3>
+<ol class="steps">
+  <li>到达金币格时，可不结算遭遇卡而取得 1 金币；到达胜利分格时，可不结算遭遇卡而取得 1 胜利分。<span class="pg">p.11</span></li>
+  <li>到达三个英雄任务格之一时，可不结算遭遇卡而改为结算该处任务，须满足任务要求。<span class="pg">p.11</span></li>
+  <li>首位完成某任务者把 1 个任务标记置于该任务板块第一格，其余完成者置于第二格；第一格终局分较高。<span class="pg">p.11</span></li>
+  <li>每名玩家每项任务只可完成一次；无论该格是否有遭遇卡，均可选其他奖励或任务。<span class="pg">p.11</span></li>
+</ol>
+<div class="note">原书第 11 页示例出现首格 8 胜利分；9 块英雄任务板块的分值未在原文与附录中逐项列出，以实体板块印面为准。<span class="pg">p.11</span><span class="pg">p.20</span></div>
+<h3>7.4 收入标记</h3>
+<p>翻出的遭遇卡若带收入图标，设置时把对应收入标记正面朝上置于该卡。结算该卡时把收入标记置于个人版图，立即取得其奖励，其后每年秋季再取得一次。冬季弃掉上一年摆出的卡牌时，仍留在卡上的标记一并弃置。<span class="pg">p.2</span><span class="pg">p.6</span><span class="pg">问答 p.1</span></p>
+</section>
+
+<section id="s8">
+<h2><span class="n">8</span>讲故事与酒馆</h2>
+<p>激活酒馆或使用个人版图特殊行动时，以已结算的遭遇卡讲故事，总故事值至多 3。酒馆奖励按故事值累进给出；讲过的遭遇卡移入已讲述故事栏，全局不可再用。<span class="pg">p.12</span></p>
+<h3>8.1 故事值与累进奖励</h3>
+<div class="why"><span class="wt">规则作用</span>把未讲述故事栏中的遭遇卡按故事值组合为一次讲述，以取得酒馆所列的前一、前二或全部三项奖励；讲述后卡牌移入已讲述栏，退出后续所有讲述。<span class="pg">p.12</span></div>
+<table>
+  <tr><th>总故事值</th><th>取得的奖励</th><th>依据</th></tr>
+  <tr><td>1</td><td>只取得酒馆第一项奖励</td><td><span class="pg">p.12</span></td></tr>
+  <tr><td>2</td><td>取得前两项奖励</td><td><span class="pg">p.12</span></td></tr>
+  <tr><td>3</td><td>取得全部三项奖励</td><td><span class="pg">p.12</span></td></tr>
+</table>
+<h3>8.2 多张卡组合的限制</h3>
+<ol class="steps">
+  <li>每张用于同一次讲述的遭遇卡都须对奖励有贡献。<span class="pg">p.12</span><span class="pg">问答 p.2</span></li>
+  <li>故事值 3 的卡只可单独讲述；故事值 0 的卡不可用于讲述，除非由魅力药水或吟游诗人塞伦把其值改为 3。<span class="pg">p.12</span><span class="pg">问答 p.2</span></li>
+  <li>允许以两张故事值 2 的卡组成总故事值 3 的讲述。<span class="pg">p.12</span></li>
+  <li>特殊行动的讲故事同样以总故事值至多 3 为限，另固定取得 2 金币、1 力量与 2 胜利分。<span class="pg">p.9</span></li>
+</ol>
+<h3>8.3 已讲述故事栏</h3>
+<p>讲述完成后把所用遭遇卡移到个人版图右侧的已讲述故事栏，此后全局不可再用于讲述。未讲述栏中的卡不受年度影响，可留待后续年度使用。<span class="pg">p.12</span></p>
+<h3>8.4 酒馆上的封印标记</h3>
+<p>酒馆奖励中带封印标记符号者，只在故事值达到该档奖励时弃掉标记，按其数值得胜利分或金币。标记用尽后仍可用该酒馆讲故事并取得其余奖励；未达到对应档位时标记不弃掉。<span class="pg">p.12</span><span class="pg">问答 p.2</span></p>
+</section>
+
+<section id="s9">
+<h2><span class="n">9</span>标记、技能与卡牌状态</h2>
+<p>封印标记、奖励标记、收入标记与技能轨贯穿五年。封印标记随卡牌启用而消耗，奖励标记随分数轨跨过阈值而结算，技能轨决定遭遇与任务的条件判定，横置与扶正决定卡牌当年是否仍可使用。<span class="pg">p.5</span><span class="pg">p.12</span></p>
+<h3>9.1 封印标记的放置</h3>
+<table>
+  <tr><th>情形</th><th>放置数量</th><th>依据</th></tr>
+  <tr><td>设置与冬季摆出的建筑</td><td>玩家人数减 1 个，正面朝上</td><td><span class="pg">p.3</span><span class="pg">p.6</span><span class="pg">p.12</span></td></tr>
+  <tr><td>设置与冬季摆出的物品</td><td>无论人数固定 1 个，正面朝上</td><td><span class="pg">p.3</span><span class="pg">p.12</span></td></tr>
+  <tr><td>标记不足</td><td>洗匀弃置的封印标记，重建背面朝上的标记堆</td><td><span class="pg">p.6</span></td></tr>
+</table>
+<h3>9.2 封印标记的四类符号</h3>
+<table>
+  <tr><th>所在位置</th><th>处理</th></tr>
+  <tr><td>物品上的即时胜利分符号</td><td>购买该物品时按标记数值立即取得胜利分，并弃掉标记<span class="pg">p.12</span></td></tr>
+  <tr><td>建筑上的费用符号</td><td>弃掉 1 个标记，支付与其数值相等的金币以执行建筑效果；无标记时不可执行<span class="pg">p.12</span></td></tr>
+  <tr><td>建筑上的效果符号</td><td>弃掉 1 个标记，以其数值作为效果数值；无标记时不可执行<span class="pg">p.12</span></td></tr>
+  <tr><td>酒馆上的奖励符号</td><td>故事值达到该档奖励时弃掉标记，按其数值得胜利分或金币<span class="pg">p.12</span></td></tr>
+</table>
+<h3>9.3 奖励标记</h3>
+<ol class="steps">
+  <li>分数标记达到或越过 8 胜利分时，自 3 个奖励标记中选定 1 个结算并放回盒中。<span class="pg">p.12</span></li>
+  <li>达到或越过 20 胜利分时，自剩余 2 个中选定 1 个结算，并把全部奖励标记放回盒中。<span class="pg">p.12</span></li>
+  <li>三种效果分别为取得 1 个村民、取得 1 力量与 1 魔法、取得 5 金币；取得的村民直接进入活跃村民区。<span class="pg">p.12</span><span class="pg">问答 p.1</span></li>
+  <li>终局计分开始前弃掉未用的奖励标记；计分过程中达到 8 分或 20 分不再取得奖励标记。<span class="pg">p.13</span><span class="pg">问答 p.2</span></li>
+</ol>
+<h3>9.4 力量与魔法</h3>
+<table>
+  <tr><th>项目</th><th>规则口径</th><th>依据</th></tr>
+  <tr><td>轨道</td><td>力量与魔法各 1 至 5 格，设置时标记置于最低格</td><td><span class="pg">p.3</span><span class="pg">p.5</span></td></tr>
+  <tr><td>到顶后继续提升</td><td>标记停在 5，改为立即取得 1 胜利分</td><td><span class="pg">p.5</span><span class="pg">问答 p.2</span></td></tr>
+  <tr><td>终局计分</td><td>两项均至少 3 取得 2 胜利分；两项均达 5 改为 5 胜利分，不叠加</td><td><span class="pg">p.5</span><span class="pg">p.13</span><span class="pg">问答 p.2</span></td></tr>
+  <tr><td>临时提升</td><td>药水可把技能临时提升到 5 以上；临时提升不产生胜利分</td><td><span class="pg">问答 p.2</span></td></tr>
+</table>
+<h3>9.5 反应、永久效果与横置扶正</h3>
+<ol class="steps">
+  <li>伙伴卡底部的反应能力须把该卡横置方可触发，且只在执行图示动作时可用。<span class="pg">p.4</span><span class="pg">问答 p.1</span></li>
+  <li>伙伴的永久效果不要求横置，卡牌横置后仍持续生效。<span class="pg">p.4</span><span class="pg">问答 p.2</span></li>
+  <li>物品作为夏季行动使用后横置，当年不可再用；卡牌效果可将其扶正。<span class="pg">p.7</span></li>
+  <li>秋季扶正全部卡牌。<span class="pg">p.9</span></li>
+</ol>
+<h3>9.6 事件与随书问答裁定</h3>
+<p>事件堆每年翻开 1 块，参加事件每名玩家每年只可一次。节庆事件的空格即使曾被占用，之后仍可选用；同一事件取得多项奖励时顺序自选，唯冒险移动须置于最后。伙伴内里斯的两项能力分别对应自村庄取回村民的两种动作：取得金币时额外得 2 金币，激活卡牌时不支付相邻村民附加费用，参加事件不触发。米拉的能力可在遭遇奖励提供的额外移动之后使用，但仍只能把活跃村民放入村庄。塞莉娅改动封印标记数值后，该标记照常弃掉。<span class="pg">p.6</span><span class="pg">p.7</span><span class="pg">问答 p.1</span><span class="pg">问答 p.2</span></p>
+</section>
+
+<section id="s10">
+<h2><span class="n">10</span>秋季、终局与计分链路</h2>
+<p>玩家进入秋季时立即按顺序结算秋季四步，其后该年不再行动。第五年秋季照常结算，随后弃掉未用的奖励标记并进入终局计分。<span class="pg">p.9</span><span class="pg">p.13</span></p>
+<h3>10.1 秋季四步</h3>
+<div class="flow">
+<svg viewBox="0 0 900 190" role="img" aria-label="秋季四步结算链路">
+  <rect x="0" y="0" width="900" height="190" fill="#ffffff"/>
+  <text x="450" y="26" text-anchor="middle" font-size="15" font-weight="700" fill="#2f466c">进入秋季 → 四步依次结算 → 该年不再行动</text>
+  <g font-size="12.5" text-anchor="middle" fill="#25324a">
+    <rect x="16" y="46" width="200" height="62" rx="9" fill="#eef3fa" stroke="#cddcee"/>
+    <text x="116" y="70">第一步 冒险者返镇</text><text x="116" y="91">回到主版图村庄处</text>
+    <rect x="230" y="46" width="200" height="62" rx="9" fill="#eaf5ec" stroke="#c6e0cc"/>
+    <text x="330" y="70">第二步 取回村民</text><text x="330" y="91">营地 / 事件 / 特殊行动</text>
+    <rect x="444" y="46" width="200" height="62" rx="9" fill="#fdf1e6" stroke="#e8cdae"/>
+    <text x="544" y="70">第三步 扶正卡牌</text><text x="544" y="91">全部横置卡恢复</text>
+    <rect x="658" y="46" width="226" height="62" rx="9" fill="#f3eefb" stroke="#d8c9ee"/>
+    <text x="771" y="70">第四步 取得收入</text><text x="771" y="91">3 金币减伙伴数加收入标记</text>
+  </g>
+  <g stroke="#7d5511" stroke-width="2" fill="none">
+    <path d="M216 77 H226"/><path d="M430 77 H440"/><path d="M644 77 H654"/>
+  </g>
+  <text x="450" y="142" text-anchor="middle" font-size="13" fill="#6b615c">全员进入秋季后该年结束；第五年秋季仍取得最后一次收入</text>
+  <text x="450" y="168" text-anchor="middle" font-size="12.5" fill="#6b615c">收入公式：3 金币 − 伙伴数 ＋ 收入标记所示金币</text>
+</svg>
+</div>
+<ol class="steps">
+  <li>冒险者返回主版图村庄处。<span class="pg">p.9</span></li>
+  <li>把营地、事件板块与特殊行动格上的全部村民放回活跃村民区。<span class="pg">p.9</span></li>
+  <li>扶正全部卡牌。<span class="pg">p.9</span></li>
+  <li>取得收入：基础 3 金币，每名伙伴减少 1 金币，再加收入标记所示金币。<span class="pg">p.9</span></li>
+</ol>
+<h3>10.2 终局计分</h3>
+<table>
+  <tr><th>项目</th><th>计入内容</th><th>依据</th></tr>
+  <tr><td>分数轨</td><td>五年内取得的全部即时胜利分</td><td><span class="pg">p.13</span></td></tr>
+  <tr><td>英雄任务</td><td>任务标记所在格的终局分</td><td><span class="pg">p.11</span><span class="pg">p.13</span></td></tr>
+  <tr><td>伙伴与物品</td><td>各卡卡面所列终局分</td><td><span class="pg">p.4</span><span class="pg">p.13</span></td></tr>
+  <tr><td>技能</td><td>两项均至少 3 得 2 分，两项均达 5 改为 5 分</td><td><span class="pg">p.5</span><span class="pg">p.13</span></td></tr>
+  <tr><td>胜负</td><td>总分最高者获胜，平手共享胜利</td><td><span class="pg">p.13</span></td></tr>
+</table>
+<h3>10.3 原书终局算例</h3>
+<table>
+  <tr><th>项目</th><th>计算</th><th>结果</th></tr>
+  <tr><td>分数轨</td><td>五年累计即时胜利分</td><td>26 分<span class="pg">p.13</span></td></tr>
+  <tr><td>英雄任务</td><td>两项任务分别 5 分与 9 分</td><td>14 分<span class="pg">p.13</span></td></tr>
+  <tr><td>伙伴</td><td>两名伙伴各 4 分</td><td>8 分<span class="pg">p.13</span></td></tr>
+  <tr><td>物品</td><td>三件物品分别 1 分、1 分、9 分</td><td>11 分<span class="pg">p.13</span></td></tr>
+  <tr><td>技能</td><td>力量未达 5，只按两项均至少 3 计</td><td>2 分<span class="pg">p.13</span></td></tr>
+  <tr><td>合计</td><td>26＋14＋8＋11＋2</td><td>61 分<span class="pg">p.13</span></td></tr>
+</table>
+</section>
+
+<section id="s11">
+<h2><span class="n">11</span>常见误读与随书问答</h2>
+<p>下列条目按英文原书与随书两页常见问答逐条对照。原书未列或存在歧义之处只记录、不代填；中文版中的译者注属译者判断，不列入规则口径。<span class="pg">p.11</span><span class="pg">问答 p.2</span></p>
+<h3>11.1 常见误读逐条对照</h3>
+<table>
+  <tr><th>误读</th><th>规则口径</th><th>依据</th></tr>
+  <tr><td>夏季可返回春季</td><td>当年不可返回春季</td><td><span class="pg">p.5</span></td></tr>
+  <tr><td>进入秋季仍可行动</td><td>当年不再执行行动</td><td><span class="pg">p.5</span></td></tr>
+  <tr><td>部分玩家进入秋季即结束该年</td><td>全员进入秋季才结束该年</td><td><span class="pg">p.5</span></td></tr>
+  <tr><td>第一年仍执行冬季</td><td>初始设置已完成，第一年跳过冬季</td><td><span class="pg">p.6</span></td></tr>
+  <tr><td>第五年跳过秋季</td><td>第五年秋季照常结算并取得最后一次收入</td><td><span class="pg">p.10</span><span class="pg">问答 p.2</span></td></tr>
+  <tr><td>村庄卡间只能放 1 个村民</td><td>数量不限，且不限归属</td><td><span class="pg">p.6</span></td></tr>
+  <tr><td>额外费用只计自己的村民</td><td>相邻的其他村民不论归属，每个加 1 金币</td><td><span class="pg">p.8</span></td></tr>
+  <tr><td>取得金币按自己村民数计算</td><td>按指定卡相邻的其他村民数计算，不论归属</td><td><span class="pg">p.7</span></td></tr>
+  <tr><td>相邻卡都移离时该动作可撤销</td><td>无金币可得，村民仍入营地，动作仍计一次</td><td><span class="pg">p.7</span></td></tr>
+  <tr><td>建筑启用后移出村庄</td><td>卡牌留在原位，可被后续相邻村民再次启用</td><td><span class="pg">p.8</span></td></tr>
+  <tr><td>封印标记用尽仍可启用该建筑</td><td>费用或效果依赖封印标记时，无标记即不可执行</td><td><span class="pg">p.8</span><span class="pg">p.12</span></td></tr>
+  <tr><td>物品可无限持有</td><td>至多 3 件，超出须弃 1 件</td><td><span class="pg">p.8</span></td></tr>
+  <tr><td>伙伴可无限招募</td><td>全局至多 3 名</td><td><span class="pg">p.8</span></td></tr>
+  <tr><td>招募伙伴不增加村民</td><td>立即取得 1 个活跃村民</td><td><span class="pg">p.8</span></td></tr>
+  <tr><td>收入固定 3 金币</td><td>3 金币减伙伴数，再加收入标记</td><td><span class="pg">p.9</span></td></tr>
+  <tr><td>村庄中仍有自己的村民也可进入秋季</td><td>须先取回村庄中自己的全部村民</td><td><span class="pg">p.9</span></td></tr>
+  <tr><td>特殊行动每年可用多次</td><td>每年一次，且只在夏季</td><td><span class="pg">p.9</span><span class="pg">问答 p.2</span></td></tr>
+  <tr><td>特殊行动可用营地或村庄中的村民</td><td>只可放置 1 个活跃村民</td><td><span class="pg">问答 p.2</span></td></tr>
+  <tr><td>参加事件每年可多次</td><td>每名玩家每年只可一次，春季或夏季</td><td><span class="pg">p.6</span><span class="pg">p.7</span></td></tr>
+  <tr><td>冒险移动方向固定</td><td>方向自选，格数至多图标所示，可原地不动</td><td><span class="pg">p.11</span></td></tr>
+  <tr><td>多个冒险者不可同格</td><td>可处于同一格</td><td><span class="pg">p.11</span></td></tr>
+  <tr><td>双要求卡可用前一项奖励补满足后一项</td><td>须在结算开始时声明并同时满足两项</td><td><span class="pg">p.11</span><span class="pg">问答 p.2</span></td></tr>
+  <tr><td>忽略一项要求可作用于英雄任务</td><td>只对遭遇卡有效，对任务无效</td><td><span class="pg">问答 p.2</span></td></tr>
+  <tr><td>故事值 0 的卡可用于讲故事</td><td>不可，除非由药水或伙伴把其值改为 3</td><td><span class="pg">p.12</span></td></tr>
+  <tr><td>故事值 3 的卡可与其他卡组合</td><td>只可单独讲述</td><td><span class="pg">p.12</span></td></tr>
+  <tr><td>讲过的遭遇卡可再用</td><td>移入已讲述栏，全局不可再用</td><td><span class="pg">p.12</span></td></tr>
+  <tr><td>酒馆封印标记在每次讲述时都弃掉</td><td>只在故事值达到该档奖励时弃掉</td><td><span class="pg">p.12</span><span class="pg">问答 p.2</span></td></tr>
+  <tr><td>技能到顶后继续提升不产生分数</td><td>标记停在 5，改为立即取得 1 胜利分</td><td><span class="pg">p.5</span></td></tr>
+  <tr><td>临时技能提升也产生胜利分</td><td>临时提升不产生胜利分</td><td><span class="pg">问答 p.2</span></td></tr>
+  <tr><td>技能 2 分与 5 分可叠加</td><td>两项均达 5 时以 5 分替代 2 分</td><td><span class="pg">p.5</span><span class="pg">问答 p.2</span></td></tr>
+  <tr><td>终局计分中仍可结算奖励标记</td><td>计分开始前弃掉未用标记，计分中不再取得</td><td><span class="pg">p.13</span><span class="pg">问答 p.2</span></td></tr>
+  <tr><td>每项英雄任务可重复完成</td><td>每名玩家每项任务只可完成一次</td><td><span class="pg">p.11</span></td></tr>
+</table>
+<h3>11.2 随书两页问答的裁定</h3>
+<table>
+  <tr><th>条目</th><th>裁定</th><th>依据</th></tr>
+  <tr><td>双要求遭遇卡</td><td>结算开始时声明欲满足的要求，不得以奖励补满足另一项</td><td><span class="pg">问答 p.2</span></td></tr>
+  <tr><td>遭遇卡提供的额外移动</td><td>须先结算完当前遭遇卡的全部奖励或明确放弃，再移动</td><td><span class="pg">问答 p.2</span></td></tr>
+  <tr><td>伙伴永久效果</td><td>伙伴横置时永久效果仍持续生效</td><td><span class="pg">问答 p.2</span></td></tr>
+  <tr><td>内里斯的两种能力</td><td>取金币时额外得 2 金币，激活卡时不付相邻附加费，参加事件不触发</td><td><span class="pg">问答 p.2</span></td></tr>
+  <tr><td>米拉的额外移动</td><td>可在遭遇奖励提供的额外移动后使用，仍只可放入活跃村民</td><td><span class="pg">问答 p.2</span></td></tr>
+  <tr><td>节庆事件空格</td><td>曾被占用的空格释放后仍可选用</td><td><span class="pg">问答 p.2</span></td></tr>
+  <tr><td>节庆事件多项奖励</td><td>顺序自选，唯冒险移动须置于最后</td><td><span class="pg">问答 p.2</span></td></tr>
+  <tr><td>封印标记改值</td><td>改动数值后，标记照常弃掉</td><td><span class="pg">问答 p.2</span></td></tr>
+  <tr><td>技能到顶</td><td>标记停在 5，立即取得 1 胜利分</td><td><span class="pg">问答 p.2</span></td></tr>
+  <tr><td>收入标记</td><td>取得时立即结算奖励，其后每年秋季再结算一次</td><td><span class="pg">问答 p.1</span></td></tr>
+</table>
+</section>
+
+<section id="s12">
+<h2><span class="n">12</span>速查表与页码索引</h2>
+<h3>12.1 一年速查</h3>
+<table>
+  <tr><th>季节</th><th>执行内容</th><th>禁止</th></tr>
+  <tr><td>冬季</td><td>季节标记置春季，传递起始玩家标记，弃上一年卡与事件，摆 9 张村庄卡、放封印标记、翻事件与遭遇卡</td><td>第一年重复执行</td></tr>
+  <tr><td>春季</td><td>放置村民、参加事件、进入夏季并立即执行一个夏季行动</td><td>取回已进入营地的村民</td></tr>
+  <tr><td>夏季</td><td>获得金币、激活卡、参加事件、使用物品、特殊行动、进入秋季</td><td>返回春季</td></tr>
+  <tr><td>秋季</td><td>冒险者返镇、取回村民、扶正卡牌、取得收入，其后停手</td><td>该年继续执行行动</td></tr>
+  <tr><td>年度结束</td><td>全员进入秋季后结束该年，第五年秋后终局计分</td><td>追加第六年</td></tr>
+</table>
+<h3>12.2 中英术语对照</h3>
+<table>
+  <tr><th>中文</th><th>英文</th><th>口径</th></tr>
+  <tr><td>村民</td><td>Villager</td><td>工人放置与取回的对象</td></tr>
+  <tr><td>活跃村民</td><td>Active Villager</td><td>年初玩家版图上可用的村民</td></tr>
+  <tr><td>营地</td><td>Campsite</td><td>取回或花费后本年不可再用的村民所在处</td></tr>
+  <tr><td>冒险者</td><td>Adventurer</td><td>沿主版图路线移动的标记</td></tr>
+  <tr><td>遭遇卡</td><td>Encounter card</td><td>含距离、故事值、要求与奖励</td></tr>
+  <tr><td>故事值</td><td>Story value</td><td>遭遇卡用于讲故事的数值，0 至 3</td></tr>
+  <tr><td>讲故事值</td><td>Storytelling value</td><td>一次讲述所用卡的故事值总和，至多 3</td></tr>
+  <tr><td>未讲述的故事</td><td>Untold Stories</td><td>结算后插在个人版图上方的遭遇卡</td></tr>
+  <tr><td>已讲述的故事</td><td>Told Stories</td><td>讲故事后移入、全局不可再用的遭遇卡</td></tr>
+  <tr><td>伙伴</td><td>Companion</td><td>7 金币招募，至多 3 名，减少秋季收入</td></tr>
+  <tr><td>物品</td><td>Item</td><td>至多 3 件，可横置使用</td></tr>
+  <tr><td>建筑</td><td>Building</td><td>启用后留在村庄原位</td></tr>
+  <tr><td>酒馆</td><td>Tavern</td><td>按故事值累进给出奖励</td></tr>
+  <tr><td>封印标记</td><td>Seal token</td><td>按所在卡的符号决定费用、效果或奖励</td></tr>
+  <tr><td>奖励标记</td><td>Bonus token</td><td>分数轨经过 8 分与 20 分时结算</td></tr>
+  <tr><td>收入标记</td><td>Income token</td><td>取得时与每年秋季各结算一次</td></tr>
+  <tr><td>英雄任务</td><td>Heroic Quest</td><td>首位完成者占据分值较高的第一格</td></tr>
+  <tr><td>横置 / 扶正</td><td>Exhaust / Ready</td><td>卡牌当年不可用与恢复可用</td></tr>
+  <tr><td>反应 / 永久效果</td><td>Reaction / Permanent effect</td><td>须横置触发与横置后仍生效</td></tr>
+  <tr><td>特殊行动</td><td>Special Action</td><td>每年夏季一次，放置 1 个活跃村民</td></tr>
+  <tr><td>季节版图</td><td>Season board</td><td>标示各玩家当年所处季节</td></tr>
+  <tr><td>胜利分</td><td>VP</td><td>分数轨即时分与终局分</td></tr>
+</table>
+<h3>12.3 章节与原书页码对照</h3>
+<table>
+  <tr><td>0 游戏概要与目标</td><td>p.4、p.5、p.13</td><td>7 冒险、遭遇与英雄任务</td><td>p.11、p.20</td></tr>
+  <tr><td>1 初局设置</td><td>p.2、p.3</td><td>8 讲故事与酒馆</td><td>p.12</td></tr>
+  <tr><td>2 版图与组件速认</td><td>p.3–5</td><td>9 标记、技能与卡牌状态</td><td>p.5、p.12</td></tr>
+  <tr><td>3 核心引擎</td><td>p.4、p.7、p.8</td><td>10 秋季、终局与计分链路</td><td>p.9、p.13</td></tr>
+  <tr><td>4 五年与四季的结构</td><td>p.5、p.6</td><td>11 常见误读与随书问答</td><td>p.5–13、问答 p.1–2</td></tr>
+  <tr><td>5 春季：村民放置</td><td>p.6</td><td>12 速查表与页码索引</td><td>全册</td></tr>
+  <tr><td>6 夏季：六项行动</td><td>p.7–9</td><td>页图对照</td><td>20 张＋问答 2 张</td></tr>
+</table>
+<div class="note">主书页码写作 p.N，随书两页常见问答写作「问答 p.N」。问答页另附玩家帮助卡，列出费用、卡面符号与常见效果的图标释义；正文已把图示语言转为文字。<span class="pg">问答 p.1</span></div>
+<h3>12.4 原书页图对照</h3>
+<details>
+  <summary>展开原书页图（20 张，按页序；另附问答 2 张）</summary>
+  <div class="pgs">
+    <figure><img src="images_grey/page_01.jpg" alt="原书第 1 页 简介与目标" loading="lazy"><figcaption>p.1 简介与目标</figcaption></figure>
+    <figure><img src="images_grey/page_02.jpg" alt="原书第 2 页 配件与公共设置" loading="lazy"><figcaption>p.2 配件与公共设置</figcaption></figure>
+    <figure><img src="images_grey/page_03.jpg" alt="原书第 3 页 玩家设置与公共设置续" loading="lazy"><figcaption>p.3 玩家设置</figcaption></figure>
+    <figure><img src="images_grey/page_04.jpg" alt="原书第 4 页 核心概念与村庄卡" loading="lazy"><figcaption>p.4 核心概念与村庄卡</figcaption></figure>
+    <figure><img src="images_grey/page_05.jpg" alt="原书第 5 页 技能、遭遇卡与游戏流程" loading="lazy"><figcaption>p.5 技能与游戏流程</figcaption></figure>
+    <figure><img src="images_grey/page_06.jpg" alt="原书第 6 页 冬季与春季" loading="lazy"><figcaption>p.6 冬季与春季</figcaption></figure>
+    <figure><img src="images_grey/page_07.jpg" alt="原书第 7 页 夏季行动前段" loading="lazy"><figcaption>p.7 夏季行动前段</figcaption></figure>
+    <figure><img src="images_grey/page_08.jpg" alt="原书第 8 页 激活卡与三类卡牌" loading="lazy"><figcaption>p.8 激活卡与三类卡牌</figcaption></figure>
+    <figure><img src="images_grey/page_09.jpg" alt="原书第 9 页 特殊行动与秋季" loading="lazy"><figcaption>p.9 特殊行动与秋季</figcaption></figure>
+    <figure><img src="images_grey/page_10.jpg" alt="原书第 10 页 秋季示例" loading="lazy"><figcaption>p.10 秋季示例</figcaption></figure>
+    <figure><img src="images_grey/page_11.jpg" alt="原书第 11 页 冒险、故事与英雄任务" loading="lazy"><figcaption>p.11 冒险与英雄任务</figcaption></figure>
+    <figure><img src="images_grey/page_12.jpg" alt="原书第 12 页 讲故事、封印与奖励标记" loading="lazy"><figcaption>p.12 讲故事与标记</figcaption></figure>
+    <figure><img src="images_grey/page_13.jpg" alt="原书第 13 页 游戏结束与计分示例" loading="lazy"><figcaption>p.13 终局与计分示例</figcaption></figure>
+    <figure><img src="images_grey/page_14.jpg" alt="原书第 14 页 附录事件与第一组村庄卡" loading="lazy"><figcaption>p.14 事件与第一组村庄卡</figcaption></figure>
+    <figure><img src="images_grey/page_15.jpg" alt="原书第 15 页 第一组村庄卡续" loading="lazy"><figcaption>p.15 第一组村庄卡续</figcaption></figure>
+    <figure><img src="images_grey/page_16.jpg" alt="原书第 16 页 第二组村庄卡" loading="lazy"><figcaption>p.16 第二组村庄卡</figcaption></figure>
+    <figure><img src="images_grey/page_17.jpg" alt="原书第 17 页 第二组村庄卡续" loading="lazy"><figcaption>p.17 第二组村庄卡续</figcaption></figure>
+    <figure><img src="images_grey/page_18.jpg" alt="原书第 18 页 第一组遭遇卡" loading="lazy"><figcaption>p.18 第一组遭遇卡</figcaption></figure>
+    <figure><img src="images_grey/page_19.jpg" alt="原书第 19 页 第二组遭遇卡" loading="lazy"><figcaption>p.19 第二组遭遇卡</figcaption></figure>
+    <figure><img src="images_grey/page_20.jpg" alt="原书第 20 页 第三组遭遇卡与英雄任务" loading="lazy"><figcaption>p.20 第三组遭遇卡与任务</figcaption></figure>
+    <figure><img src="images_grey/faq_page_01.jpg" alt="随书问答第 1 页 玩家帮助卡" loading="lazy"><figcaption>问答 p.1 玩家帮助卡</figcaption></figure>
+    <figure><img src="images_grey/faq_page_02.jpg" alt="随书问答第 2 页 常见问题" loading="lazy"><figcaption>问答 p.2 常见问题</figcaption></figure>
+  </div>
+</details>
+</section>
+
+<div class="foot">
+灰月镇 · 学习版规则　｜　依据英文原书《Greylune》Rulebook（20 页）与随书 2 页常见问答、中文版既定译法编写<br>
+按规则结构重排，非官方规则书；规则裁决以英文原书为准，实体配件印值以配件为准。
+</div>
+</main>
+</div>
+</body>
+</html>
