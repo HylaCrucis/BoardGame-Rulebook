@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>无线时代 · 学习版规则（Wireless）</title>
+<style>
+  :root{
+    --bg:#fbf7f0; --paper:#fffdf9; --ink:#2f2a28; --soft:#6b615c;
+    --line:#e3d8c8; --line2:#d3c4ae;
+    --red:#a2303c; --red-l:#fbecec; --blue:#3b5b8c; --blue-l:#eaf0f9;
+    --gold:#a9761c; --gold-l:#fbf1dc; --green:#3d7a55; --green-l:#e9f4ec;
+    --purple:#6b4a86; --purple-l:#f1eaf7;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"PingFang SC","Microsoft YaHei","Noto Sans SC",Arial,sans-serif;
+    font-size:15.5px;line-height:1.85;}
+  .backbar{position:sticky;top:0;z-index:60;height:44px;box-sizing:border-box;
+    display:flex;align-items:center;gap:10px;padding:0 16px;
+    background:var(--paper);border-bottom:1px solid var(--line);font-size:13px;}
+  .backbar a{display:inline-flex;align-items:center;min-height:32px;padding:0 12px;
+    border:1px solid var(--line2);border-radius:8px;background:#fff;
+    color:var(--purple);text-decoration:none;white-space:nowrap;}
+  .backbar a:active{background:var(--purple-l);}
+  .backbar .bb-t{margin-left:auto;font-size:12px;color:var(--soft);}
+  .layout{display:flex;align-items:flex-start;max-width:1280px;margin:0 auto;}
+  nav.toc{position:sticky;top:44px;align-self:flex-start;width:238px;flex:0 0 238px;
+    height:calc(100vh - 44px);overflow-y:auto;background:#fffdf9;border-right:1px solid var(--line);
+    padding:22px 14px 40px;font-size:13px;}
+  nav.toc .brand{font-size:17px;font-weight:800;color:var(--red);margin:0 0 4px;}
+  nav.toc .brand-s{font-size:11.5px;color:var(--soft);margin:0 0 16px;letter-spacing:.04em;}
+  nav.toc .grp{margin:16px 0 5px;font-size:11px;color:var(--gold);font-weight:700;letter-spacing:.12em;}
+  nav.toc a{display:block;color:#49403b;text-decoration:none;padding:4px 9px;border-radius:6px;}
+  nav.toc a:hover{background:var(--red-l);color:var(--red);}
+  main{flex:1 1 auto;min-width:0;padding:0 42px 90px;}
+  .hero{background:linear-gradient(150deg,#7c1f2b,#a2303c 55%,#bd5a4a);
+    color:#fff8f0;border-radius:0 0 20px 20px;padding:40px 42px 34px;margin-bottom:26px;
+    box-shadow:0 8px 26px rgba(124,31,43,.18);}
+  .hero h1{margin:0;font-size:34px;letter-spacing:.02em;}
+  .hero .en{font-size:14px;opacity:.8;margin:2px 0 12px;letter-spacing:.06em;}
+  .hero .desc{font-size:16px;max-width:760px;line-height:1.8;}
+  .hero .meta{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px;}
+  .hero .meta span{border:1px solid rgba(255,255,255,.5);border-radius:20px;padding:3px 13px;font-size:12.5px;}
+  .stand{margin-top:14px;background:#fff6e2;border:1px solid #e8d2a2;border-left:5px solid var(--gold);
+    border-radius:0 10px 10px 0;padding:12px 18px;font-size:14px;color:#5c4a26;}
+  section{padding:22px 0 14px;border-bottom:1px dashed var(--line2);scroll-margin-top:14px;}
+  h2{font-size:25px;color:var(--red);margin:8px 0 4px;line-height:1.4;}
+  h2 .n{display:inline-block;background:var(--red);color:#fff;font-size:14px;
+    min-width:30px;height:30px;line-height:30px;text-align:center;border-radius:8px;
+    margin-right:10px;vertical-align:3px;font-weight:700;}
+  h3{font-size:18.5px;color:#3a3230;margin:26px 0 6px;border-left:4px solid var(--gold);padding-left:10px;}
+  h4{font-size:16px;color:var(--blue);margin:18px 0 4px;}
+  p{margin:9px 0;}
+  ul,ol{margin:9px 0 9px 2px;padding-left:22px;}
+  li{margin:5px 0;}
+  b,strong{color:var(--red);}
+  .goal{background:var(--blue-l);border:1px solid #cfdcf0;border-radius:9px;
+    padding:8px 14px;font-size:13.5px;color:#2f466c;margin:8px 0 16px;}
+  .goal b{color:#2f466c;}
+  .pg{display:inline-block;background:#f0e7d8;color:#7d6231;border:1px solid #e2d2b6;
+    border-radius:5px;font-size:11px;padding:0 6px;line-height:18px;vertical-align:1px;
+    margin-left:4px;font-weight:600;white-space:nowrap;font-family:Arial,sans-serif;}
+  .key{background:var(--green-l);border:1px solid #c9e2d1;border-left:5px solid var(--green);
+    padding:11px 16px;border-radius:0 10px 10px 0;margin:13px 0;}
+  .key b{color:var(--green);}
+  .warn{background:var(--red-l);border:1px solid #eed3d3;border-left:5px solid var(--red);
+    padding:11px 16px;border-radius:0 10px 10px 0;margin:13px 0;}
+  .warn b{color:var(--red);}
+  .tip{background:var(--gold-l);border:1px solid #eddcb8;border-left:5px solid var(--gold);
+    padding:11px 16px;border-radius:0 10px 10px 0;margin:13px 0;}
+  .tip b{color:var(--gold);}
+  .note{background:#f4f1ec;border:1px solid var(--line);border-radius:9px;padding:10px 15px;
+    margin:12px 0;font-size:14px;color:#514844;}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px;background:var(--paper);}
+  th,td{border:1px solid var(--line2);padding:8px 11px;text-align:left;vertical-align:top;}
+  th{background:#f4e9dd;color:#5d4022;font-weight:700;}
+  tr:nth-child(even) td{background:#fdf9f3;}
+  td.c,th.c{text-align:center;}
+  .steps{list-style:none;padding:0;counter-reset:st;margin:14px 0;}
+  .steps>li{position:relative;padding:10px 14px 10px 50px;margin:9px 0;background:var(--paper);
+    border:1px solid var(--line);border-radius:10px;}
+  .steps>li::before{counter-increment:st;content:counter(st);position:absolute;left:12px;top:11px;
+    width:26px;height:26px;background:var(--red);color:#fff;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;}
+  .steps>li>ol{margin:6px 0;padding-left:20px;}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:11px;
+    padding:13px 17px;margin:11px 0;box-shadow:0 2px 6px rgba(80,60,40,.04);}
+  .card .t{font-weight:800;color:var(--red);font-size:16px;margin-bottom:3px;}
+  .card .t .s{display:inline-block;background:var(--red);color:#fff;border-radius:5px;
+    font-size:12px;padding:1px 7px;margin-right:8px;}
+  .card.blue .t{color:var(--blue);} .card.blue .t .s{background:var(--blue);}
+  .card.green .t{color:var(--green);} .card.green .t .s{background:var(--green);}
+  .card.gold .t{color:var(--gold);} .card.gold .t .s{background:var(--gold);}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+  .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;}
+  .mini{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:11px 13px;}
+  .mini .h{font-weight:800;font-size:14px;margin-bottom:4px;}
+  .mini .v{font-size:13px;color:var(--soft);line-height:1.7;}
+  .fig{margin:18px 0;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;}
+  .fig svg{display:block;width:100%;height:auto;}
+  .figcap{font-size:12.5px;color:var(--soft);margin-top:8px;text-align:center;}
+  details{margin:12px 0;background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:8px 14px;}
+  summary{cursor:pointer;font-size:13.5px;color:var(--blue);font-weight:600;}
+  details img{display:block;max-width:100%;margin:12px auto;border:1px solid var(--line);border-radius:8px;}
+  .pit{counter-reset:pit;list-style:none;padding:0;margin:14px 0;}
+  .pit li{position:relative;padding:9px 14px 9px 46px;margin:7px 0;background:var(--paper);
+    border:1px solid var(--line);border-radius:9px;font-size:14.5px;}
+  .pit li::before{counter-increment:pit;content:"✕ " counter(pit);position:absolute;left:10px;top:9px;
+    color:#fff;background:var(--red);border-radius:6px;font-size:11px;padding:1px 6px;font-weight:700;}
+  .bad{color:var(--red);text-decoration:line-through;}
+  .good{color:var(--green);font-weight:700;}
+  .tagR{color:var(--red);font-weight:700;} .tagB{color:var(--blue);font-weight:700;}
+  .tagG{color:var(--gold);font-weight:700;}
+  .why{background:#eef3fa;border:1px solid #cddcee;border-left:5px solid var(--blue);
+    padding:12px 17px;border-radius:0 10px 10px 0;margin:13px 0;font-size:14.5px;}
+  .why b{color:#2f466c;}
+  .why .wt{font-weight:800;color:#2f466c;display:block;margin-bottom:3px;}
+  .idx{font-size:13.5px;}
+  .foot{margin-top:34px;font-size:12.5px;color:var(--soft);text-align:center;line-height:1.9;}
+  @media(max-width:960px){
+    .layout{flex-direction:column;} nav.toc{position:static;width:100%;height:auto;flex-basis:auto;border-right:0;border-bottom:1px solid var(--line);}
+    main{padding:0 18px 60px;} .grid2,.grid4{grid-template-columns:1fr 1fr;}
+  }
+  @media(max-width:640px){.backbar{height:40px;padding:0 10px;} .backbar a{min-height:30px;padding:0 9px;font-size:12.5px;} .backbar .bb-t{display:none;}
+  .grid2,.grid4{grid-template-columns:1fr;} main{padding:0 12px 50px;} .hero{padding:28px 20px;} .hero h1{font-size:26px;}}
+
+  /* == 窄屏目录：横向胶囊，正文首屏可见 == */
+  @media(max-width:960px){
+    nav.toc{display:flex;flex-wrap:nowrap;gap:6px;align-items:center;
+      height:auto;max-height:none;overflow-x:auto;overflow-y:hidden;
+      padding:10px 12px;border-right:0;border-bottom:1px solid var(--line);
+      -webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;}
+    nav.toc .brand,nav.toc .brand-s,nav.toc .grp{display:none;}
+    nav.toc a{flex:0 0 auto;white-space:nowrap;padding:6px 11px;
+      border:1px solid var(--line2);border-radius:16px;background:var(--paper);
+      font-size:12.5px;line-height:1.4;}
+    nav.toc a:hover{background:var(--red-l);}
+    nav.toc a[style]{padding-left:11px;}
+  }
+
+  /* == 学习版通用补充（各本共用） == */
+  .flow{margin:18px 0;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;}
+  .flow svg{display:block;width:100%;height:auto;}
+  .pgs{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin:14px 0;}
+  .pgs figure{margin:0;background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:8px;}
+  .pgs img{display:block;width:100%;height:auto;margin:0;border:1px solid var(--line);border-radius:6px;}
+  .pgs figcaption{font-size:12px;color:var(--soft);text-align:center;margin-top:6px;line-height:1.5;}
+  @media(max-width:640px){.pgs{grid-template-columns:1fr 1fr;gap:9px;}}
+  /* 窄屏压缩首屏：hero 与体例框收紧，第 0 节进入首屏 */
+  @media(max-width:640px){
+    .hero{padding:22px 18px 24px;margin-bottom:16px;}
+    .hero h1{font-size:24px;} .hero .desc{font-size:14px;line-height:1.65;margin-top:8px;}
+    .hero .meta{margin-top:12px;gap:6px;} .hero .meta span{font-size:11.5px;padding:2px 10px;}
+    .stand{margin-top:10px;padding:9px 12px;font-size:12.5px;line-height:1.6;}
+  }
+</style>
+</head>
+<body>
+<div class="backbar"><a href="index.html">← 学习版目录</a><span class="bb-t">无线时代 · 学习版规则</span></div>
+<div class="layout">
+<nav class="toc">
+  <div class="brand">无线时代</div>
+  <div class="brand-s">学习版规则 · Wireless</div>
+  <div class="grp">规则概要</div>
+  <a href="#s0">0 · 游戏概要与目标</a>
+  <a href="#s1">1 · 初局设置</a>
+  <a href="#s2">2 · 版图、玩家版图与标记</a>
+  <div class="grp">引擎与回合</div>
+  <a href="#s3">3 · 核心引擎</a>
+  <a href="#s4">4 · 回合结构与五种行动</a>
+  <div class="grp">版图行动</div>
+  <a href="#s5">5 · 架设</a>
+  <a href="#s6">6 · 传输</a>
+  <a href="#s7">7 · 调制</a>
+  <div class="grp">版图行动与加码</div>
+  <a href="#s8">8 · 融资</a>
+  <a href="#s9">9 · 补给</a>
+  <a href="#s10">10 · 专利的使用</a>
+  <a href="#s11">11 · 合同板块</a>
+  <div class="grp">收尾与查考</div>
+  <a href="#s12">12 · 终局与计分</a>
+  <a href="#s13">13 · 单人局：自动机</a>
+  <a href="#s14">14 · 常见误读与速查</a>
+</nav>
+
+<main>
+<header class="hero">
+  <h1>无线时代 · 学习版规则</h1>
+  <div class="en">WIRELESS　｜　按规则结构重排，不按原书章节顺序</div>
+  <div class="desc">以一条「没有板块就没有行动」的资源链为主线，展开五种行动、三栏行动格与覆盖代价、大亨与工厂与科学家三种加码、专利作为第三个行动格、合同翻面、四条发展线的乘法计分与单人自动机。</div>
+  <div class="meta"><span>一至四人 · 单人局附自动机</span><span>行动板块既是许可也是代价</span><span>四条发展线的乘法计分</span><span>依据英文原书 28 页</span></div>
+</header>
+
+<div class="stand">
+  <b>体例：</b>按学习顺序重排，章节与原书不对应；每条结论后的 <span class="pg">p.N</span> 为英文原书页码。
+  规则裁决以<b>英文原书页图</b>为准；术语沿用已上线中文版的既定译法。原书未列之处只记录、不代填，板块印值与配件数量以实体配件为准。第 14 节附 28 张原书页图。
+  正文按规则作用展开，先述状态变化，再列执行步骤。
+</div>
+
+<section id="s0">
+<h2><span class="n">0</span>游戏概要与目标</h2>
+<p>《无线时代》以十九世纪末、二十世纪初的通信技术竞赛为背景。玩家扮演那个时代的科学家，争取资金与支持、开发专利、架设基站，在不同地点之间建立永久链路，最终以最完整的网络赢得分数。一至四人，规则书 28 页。<span class="pg">p.2</span></p>
+<div class="why"><span class="wt">规则主线</span>全游戏只有一种资源循环：行动板块既是行动的种类，也是行动的代价。每执行一次行动，就从对应栏取走一块板块放回个人供应，该栏因此变薄，下一次同一行动就更贵；补给行动把板块送回栏内，代价是一枚信用标记。信用标记同时是融资与补给的入场券，也是个人目标板块的计分倍数。四条线索最终在终局汇合：旗帜、永久链路、专利、目标位各自按进度区已移除的信号标记数换算出倍数。<span class="pg">p.7</span><span class="pg">p.8</span><span class="pg">p.18</span></div>
+<div class="grid2">
+  <div class="card"><div class="t">四条发展线</div>抵达国家（旗帜）、建立永久链路、取得专利、推进版图上的目标位。终局把每条线上累计的图标数量乘以对应轨道的分值。<span class="pg">p.8</span><span class="pg">p.19</span></div>
+  <div class="card blue"><div class="t">一条负分项</div>待发区里每剩 1 个信号标记扣 1 分。待发区是传输与调制的弹药库，留得越多，扣得越多。<span class="pg">p.19</span></div>
+</div>
+<table>
+  <tr><th>项目</th><th>取值</th><th>依据</th></tr>
+  <tr><td>人数</td><td>一至四人；单人局由自动机扮演对手</td><td><span class="pg">p.2</span><span class="pg">p.23</span></td></tr>
+  <tr><td>回合结构</td><td>若干轮，每轮每位玩家各行动一次，起始玩家不变</td><td><span class="pg">p.7</span><span class="pg">p.12</span></td></tr>
+  <tr><td>每回合行动数</td><td>恰好 1 个，从五种行动中选</td><td><span class="pg">p.12</span></td></tr>
+  <tr><td>地点</td><td>版图上 52 个大型格位</td><td><span class="pg">p.4</span></td></tr>
+  <tr><td>胜负</td><td>分数最高者胜；并列则共享胜利</td><td><span class="pg">p.8</span><span class="pg">p.18</span></td></tr>
+</table>
+<h3>0.1 行动板块的双重身份</h3>
+<p>行动板块既是「可执行何种行动」的清单，也是「还能执行几次」的存量。板块放在栏内时可作为代价被取走，也可作为覆盖物让行动格变得可达；取走后回到栏下方的个人供应，只能靠补给行动重新放回栏内。因此同一栏的板块越少，同一行动越难执行，代价也越高。<span class="pg">p.7</span><span class="pg">p.9</span></p>
+<h3>0.2 三种标记的固定含义</h3>
+<table>
+  <tr><th>标记</th><th>代表</th><th>规则作用</th></tr>
+  <tr><td>无线电基站</td><td>发射信号的站点，分未调制面与调制面</td><td>架设后取得传输或调制的发射起点<span class="pg">p.8</span><span class="pg">p.12</span></td></tr>
+  <tr><td>信号标记</td><td>基站发出的信号，分未调制与调制</td><td>传输与调制的燃料；也用于进度区记录进展<span class="pg">p.8</span><span class="pg">p.12</span></td></tr>
+  <tr><td>信用标记</td><td>新科学发现的承诺</td><td>融资与补给的入场券；也是个人目标板块的计分倍数<span class="pg">p.8</span><span class="pg">p.15</span></td></tr>
+</table>
+</section>
+
+<section id="s1">
+<h2><span class="n">1</span>初局设置</h2>
+<p>设置分公共准备、个人准备、起始玩家、起始位置四段，二人与三人局另有补充步骤。所有板块的分类都按背面完成，正面只在需要选取时才翻看。<span class="pg">p.4</span><span class="pg">p.5</span></p>
+<h3>1.1 公共准备</h3>
+<ol>
+  <li>版图展开在桌面中央。52 个大型格位代表世界各地的地点。<span class="pg">p.4</span></li>
+  <li>洗混 20 块地点板块，背面朝下随机放在地点区左上角所有空白未印刷的格位上，再全部翻到图标面。20 块刚好用完，不剩余。<span class="pg">p.4</span></li>
+  <li>大亨板块按背面礼帽数量分成 4 个等级，逐级洗混背面朝下，沿版图上缘叠在大亨区对应格位外侧。每叠抽 2 块正面朝上放在其下方专属格位。<span class="pg">p.4</span></li>
+  <li>合同板块按背面分成 4 叠，逐叠洗混背面朝下，放在版图左下合同区外侧对应格位左侧。每叠抽 1 块正面朝上放在版图上紧邻该叠的格位。<span class="pg">p.4</span></li>
+  <li>专利板块按正面类型分成 6 叠，放在版图旁、所有玩家都能取到的位置。<span class="pg">p.4</span></li>
+  <li>技术板块按类型正面朝上分成 4 叠；超级技术板块同样处理。<span class="pg">p.4</span></li>
+  <li>钞票按面值分叠放在版图旁。版图旁的全部板块与钞票构成公共供应。<span class="pg">p.4</span></li>
+</ol>
+<div class="note">原书插图中许多地点格位不画地点板块，是刻意省略，以免图标过多导致误读。实际游戏中每个地点格位都应有板块。<span class="pg">p.4</span></div>
+<h3>1.2 个人准备</h3>
+<ol>
+  <li>每人取同色的 2 块玩家版图，按图示摆在面前。<span class="pg">p.5</span></li>
+  <li>12 块行动板块先按正面类型分类，每类取 1 块放在对应栏的起始格——起始格永远是最下方一格，旁边标 5 元或黑色礼帽图标。每类剩下 2 块作为个人供应放在该栏下方。<span class="pg">p.5</span></li>
+  <li>7 枚信用标记放在右侧版图右缘的专属格位。<span class="pg">p.5</span></li>
+  <li>9 个基站中取 8 个放在右侧版图编号 2 至 9 的格位，最后一个放在该区域下方、版图旁。此步不指定基站朝上的面。<span class="pg">p.5</span></li>
+  <li>30 枚信号标记中取 2 枚放在待发区；其余 28 枚放进进度区，4 条轨道各 7 枚。<span class="pg">p.5</span></li>
+  <li>12 块旗帜板块以任意顺序放在版图旁。<span class="pg">p.5</span></li>
+  <li>从公共供应给每人 8 元，作为个人资金。<span class="pg">p.5</span></li>
+  <li>个人目标板块按背面分成 A、B、C 三类，每人每类随机抽 1 块，共 3 块；以自选顺序正面朝上放进版图右下角槽位。其余放回盒中。<span class="pg">p.5</span></li>
+  <li>1 枚永久链路标记放在版图下缘永久链路轨道的 0 格。<span class="pg">p.5</span></li>
+</ol>
+<h3>1.3 起始玩家与起始位置</h3>
+<p>随机决定起始玩家并发给起始玩家标记。<span class="pg">p.6</span></p>
+<ol>
+  <li>随机取与人数相同的地点起始板块，全部翻到同一面（美洲面或欧洲面，由全体玩家商定）。不足四人时，剩余的放回盒中。这些板块决定围绕美国国旗或德国国旗的 4 个起始地点，板块上的图标与对应地点左上角的图标一致。<span class="pg">p.6</span></li>
+  <li>随机取与人数相同的大亨起始板块与技术起始板块，全部翻到正面。<span class="pg">p.6</span></li>
+  <li>把选出的板块随机组成若干组，每组 3 块：1 块地点、1 块大亨、1 块技术。<span class="pg">p.6</span></li>
+  <li>从回合顺序最后一位玩家开始，按逆时针每人选 1 组，然后依次完成三件事：把版图旁的基站放到地点起始板块指定的地点、未调制面朝上；从进度区中与该起始地点图标相符的轨道取 3 枚信号标记放进待发区；把大亨起始板块与技术起始板块放到自己版图对应栏的最低可用格位。<span class="pg">p.6</span></li>
+</ol>
+<h3>1.4 二人局与三人局的补充</h3>
+<table>
+  <tr><th>人数</th><th>补充做法</th></tr>
+  <tr><td>二人局</td><td>在左下角印有旗帜图标、或印有合同图标的地点格位上，各放 1 枚中立信号标记（用未使用的颜色）<span class="pg">p.7</span></td></tr>
+  <tr><td>三人局</td><td>在左下角印有技术或超级技术图标的地点格位上，各放 1 枚中立信号标记<span class="pg">p.7</span></td></tr>
+</table>
+<div class="note">中立信号标记不是任何玩家的标记，作用是让这些地点从一开始就不算空位，从而影响架设的「是否为空」判定与传输的基本／进阶选择。<span class="pg">p.7</span><span class="pg">p.12</span></div>
+<h3>1.5 老手变体：目标板块轮抽</h3>
+<p>这一变体替代个人准备中的目标板块发牌步骤。把 A、B、C 三类个人目标板块各按人数摆成一列，旗帜面朝上。从起始玩家右手边开始按逆时针每人选 1 块；再从起始玩家开始按顺时针每人选第 2 块；最后再按逆时针每人选第 3 块。选择结果必须是每人各得 1 块 A、1 块 B、1 块 C。<span class="pg">p.7</span></p>
+<div class="why"><span class="wt">规则作用</span>起始位置这一段同时给出三项初始资产：一个已建好的基站、3 枚待发信号、以及一块大亨与一块技术板块。三者叠加决定第一条链路的方向：起始地点的图标决定第一批信号取自对应图标的进度轨道，大亨与技术板块则决定该栏的高位行动格是否从一开始就可达。<span class="pg">p.6</span><span class="pg">p.9</span></div>
+</section>
+
+<section id="s2">
+<h2><span class="n">2</span>版图、玩家版图与标记</h2>
+<p>游戏版图由地点格位、大亨区、合同区、信用区与永久链路轨道组成；玩家版图由 8 栏与 3 个附加区域组成。两套版图之间靠图标与轨道对应。<span class="pg">p.9</span><span class="pg">p.10</span></p>
+<h3>2.1 配件数量</h3>
+<table>
+  <tr><th>配件</th><th>数量</th><th>说明</th></tr>
+  <tr><td>钞票</td><td>30 张</td><td>1 元 20 张、5 元 8 张、10 元 2 张<span class="pg">p.2</span></td></tr>
+  <tr><td>大亨板块</td><td>28 块</td><td>1 级 12、2 级 8、3 级 4、4 级 4；另有 4 块大亨起始板块<span class="pg">p.2</span></td></tr>
+  <tr><td>技术板块</td><td>24 块</td><td>四类各 6 块；另有 8 块超级技术板块，四类各 2 块<span class="pg">p.2</span></td></tr>
+  <tr><td>专利板块</td><td>24 块</td><td>双面，正面按 6 类分叠<span class="pg">p.2</span></td></tr>
+  <tr><td>个人目标板块</td><td>15 块</td><td>双面，三类各 5 块<span class="pg">p.2</span></td></tr>
+  <tr><td>合同板块</td><td>40 块</td><td>四类各 10 块，背面按类分叠<span class="pg">p.3</span></td></tr>
+  <tr><td>地点板块</td><td>20 块</td><td>五类各 5 块；另有 4 块双面地点起始板块<span class="pg">p.3</span></td></tr>
+  <tr><td>信号标记</td><td>120 枚</td><td>每色 30 枚<span class="pg">p.3</span></td></tr>
+  <tr><td>信用标记</td><td>28 枚</td><td>每色 7 枚<span class="pg">p.3</span></td></tr>
+  <tr><td>行动板块</td><td>48 块</td><td>每色 12 块，背面同色<span class="pg">p.3</span></td></tr>
+  <tr><td>旗帜板块</td><td>48 块</td><td>每色 12 块<span class="pg">p.3</span></td></tr>
+  <tr><td>基站</td><td>36 个</td><td>双面，每色 9 个<span class="pg">p.3</span></td></tr>
+  <tr><td>其他</td><td>玩家版图 8 块、永久链路标记 4 枚、起始玩家标记 1 个、记分纸 1 本</td><td>每人 2 块版图<span class="pg">p.3</span></td></tr>
+</table>
+<h3>2.2 玩家版图的栏位</h3>
+<table>
+  <tr><th>栏位</th><th>结构</th><th>规则作用</th></tr>
+  <tr><td>架设、传输、调制</td><td>各 6 个板块位与 2 个行动格，板块从下往上填</td><td>在版图上执行对应行动；行动格分基本（下）与进阶（上）<span class="pg">p.9</span></td></tr>
+  <tr><td>融资</td><td>同样有板块位与行动格</td><td>换钱并吸引大亨<span class="pg">p.15</span></td></tr>
+  <tr><td>合同栏</td><td>按合同板块，不回退、不移除</td><td>存放奖励取得的合同；正面条件、背面完成<span class="pg">p.9</span><span class="pg">p.17</span></td></tr>
+  <tr><td>国家栏</td><td>按国旗板块，不回退、不移除</td><td>记录抵达的国家<span class="pg">p.9</span></td></tr>
+  <tr><td>进度区</td><td>4 条独立轨道，各 7 枚信号标记</td><td>按已移除的标记数在终局换算分数<span class="pg">p.9</span><span class="pg">p.18</span></td></tr>
+</table>
+<p>补给行动不占独立栏位，它只在各栏与个人供应之间搬运板块。待发区位于基站与信用标记上方的矩形区域，是信号标记的临时集散地。版图右缘另有 7 个信用标记专属格位。<span class="pg">p.5</span><span class="pg">p.9</span></p>
+<h3>2.3 栏外的四个图标</h3>
+<p>国家栏与融资栏左侧印有四种图标：大亨、工厂、科学家、目标位。这些图标只有在它们右侧有板块时才生效；而印在板块上的图标永远生效。<span class="pg">p.9</span></p>
+<h3>2.4 行动格与覆盖</h3>
+<p>每栏两个行动格，下格为基本行动，上格为进阶行动。要执行某一格，该格以下的全部空间必须被覆盖——实物用行动板块覆盖，或者按空格上印的金额付钱当作覆盖。因此同一栏内板块越少，通往上方行动格的钱就付得越多。<span class="pg">p.9</span></p>
+<div class="grid2">
+  <div class="card"><div class="t"><span class="s">取板块</span>翻面亮出</div>执行前先从该栏顶部翻面亮出所选行动，执行后把这块板块放回栏下方的个人供应。</div>
+  <div class="card blue"><div class="t"><span class="s">付差额</span>覆盖空格</div>未覆盖的空格按印值付钱，付过钱即视为覆盖。</div>
+  <div class="card green"><div class="t"><span class="s">两格</span>基本与进阶</div>下格为基本行动，上格为进阶行动，两者的执行条件相同，只是代价与效果不同。</div>
+</div>
+<h3>2.5 信用区与永久链路轨道</h3>
+<p>信用区位于游戏版图上，按行分列：2+ 格在二人局即可用，3+ 格只在三人与四人局可用，4 格只在四人局可用。融资与补给都把信用标记放在这里的空格上，并从左到右填。<span class="pg">p.15</span></p>
+<p>永久链路轨道沿版图下缘，每位玩家一枚标记，从 0 格起步。轨道每格上方可能印有即时奖励，推进后立即结算。<span class="pg">p.5</span><span class="pg">p.22</span></p>
+</section>
+
+<section id="s3">
+<h2><span class="n">3</span>核心引擎</h2>
+<p>规则的枢轴是一句原书反复强调的话：没有板块，就没有行动。行动板块同时承担「许可」与「代价」两种角色，整局的节奏因此由板块在栏与个人供应之间的往返决定。<span class="pg">p.9</span><span class="pg">p.12</span></p>
+<svg viewBox="0 0 900 292" role="img" aria-label="无线时代的行动与板块循环">
+  <rect x="0" y="0" width="900" height="292" fill="#ffffff"/>
+  <text x="450" y="26" text-anchor="middle" font-size="15" font-weight="700" fill="#1f3f5a">行动板块在栏与个人供应之间往返，信用标记换取补给，补给再把板块送回栏内</text>
+  <g font-size="12.5" text-anchor="middle" fill="#1f3a4a">
+    <rect x="10" y="46" width="164" height="64" rx="9" fill="#eef3f7" stroke="#bcd2de"/>
+    <text x="92" y="70">选一种行动</text><text x="92" y="92">从对应栏取板块</text>
+    <rect x="182" y="46" width="164" height="64" rx="9" fill="#f4f1e6" stroke="#d8cfa8"/>
+    <text x="264" y="70">付空格金额</text><text x="264" y="92">通往上方行动格</text>
+    <rect x="354" y="46" width="164" height="64" rx="9" fill="#eaf1f5" stroke="#b8cfda"/>
+    <text x="436" y="70">结算行动</text><text x="436" y="92">架设 / 传输 / 调制</text>
+    <rect x="526" y="46" width="164" height="64" rx="9" fill="#f6efe4" stroke="#dcc9a6"/>
+    <text x="608" y="70">板块回个人供应</text><text x="608" y="92">该栏变薄</text>
+    <rect x="698" y="46" width="192" height="64" rx="9" fill="#f2eef7" stroke="#cfc2e2"/>
+    <text x="794" y="70">补给行动</text><text x="794" y="92">付信用标记，2 块起</text>
+  </g>
+  <g stroke="#3f6b85" stroke-width="2" fill="none">
+    <path d="M174 78 H178"/><path d="M346 78 H350"/><path d="M518 78 H522"/><path d="M690 78 H694"/>
+    <path d="M794 110 V148 H92 V110"/><path d="M92 110 l-5 8 h10 z" fill="#3f6b85"/>
+  </g>
+  <text x="450" y="170" text-anchor="middle" font-size="13" fill="#3d5566">板块回栏后，同一行动的代价与可达行动格同时恢复</text>
+  <g font-size="12.5" text-anchor="middle" fill="#1f3f5a">
+    <rect x="10" y="190" width="212" height="44" rx="8" fill="#fbfafa" stroke="#dcd6cf"/>
+    <text x="116" y="217">每栏最多 6 块板块</text>
+    <rect x="236" y="190" width="212" height="44" rx="8" fill="#fbfafa" stroke="#dcd6cf"/>
+    <text x="342" y="217">信用标记换行动次数</text>
+    <rect x="462" y="190" width="212" height="44" rx="8" fill="#fbfafa" stroke="#dcd6cf"/>
+    <text x="568" y="217">大亨 / 工厂 / 科学家加码</text>
+    <rect x="688" y="190" width="202" height="44" rx="8" fill="#fbfafa" stroke="#dcd6cf"/>
+    <text x="789" y="217">专利改写行动格</text>
+  </g>
+  <text x="450" y="264" text-anchor="middle" font-size="12" fill="#3d5566">四种发展线在终局按进度区剩余标记换算倍数</text>
+</svg>
+<h3>3.1 板块的两种身份</h3>
+<p>作为许可，板块覆盖行动格下方的空格，使该格可达；作为代价，板块在执行后被取走，回到个人供应。同一块板块在同一回合只能扮演其中一种角色：先覆盖、后取走。<span class="pg">p.9</span></p>
+<p>技术板块与超级技术板块的作用与行动板块相同。差别只有一处：超级技术板块同时覆盖两格，且这两格都视为已付费。<span class="pg">p.10</span></p>
+<h3>3.2 金钱与差距</h3>
+<p>空格上印的金额是「虚拟覆盖」的价格。执行所选行动格时，凡是没有板块覆盖的空格都要按印值付钱。因此板块存量与现金是两条可以互相替代的路径：板块多则省钱，钱多则可以越过空缺。<span class="pg">p.9</span></p>
+<h3>3.3 三种加码</h3>
+<table>
+  <tr><th>加码</th><th>来源</th><th>效果</th></tr>
+  <tr><td>大亨</td><td>融资时取得，放进对应栏，永不移除</td><td>提升融资所得；决定可取得的大亨等级<span class="pg">p.15</span></td></tr>
+  <tr><td>工厂</td><td>大亨板块、国家栏中紧邻旗帜的图标、信用区中自己信用标记所在行</td><td>补给时每有一个生效工厂多取 1 块板块<span class="pg">p.16</span></td></tr>
+  <tr><td>科学家</td><td>大亨板块等来源</td><td>决定可取得的专利数量：第 1 件专利需 1 名，第 2 件需 2 名<span class="pg">p.17</span></td></tr>
+</table>
+<h3>3.4 四条发展线与倍数</h3>
+<p>进度区有四条轨道，分别对应目标位、旗帜、专利、永久链路。每移除 1 枚信号标记，该轨道的进度就前进一格，轨道的分值随之提高。终局时先读出该轨道当前的分值，再乘以自己在这条线上累计的图标数量。这是本作唯一的乘法计分结构。<span class="pg">p.8</span><span class="pg">p.18</span></p>
+<div class="why"><span class="wt">规则作用</span>乘法结构把「广度」与「深度」绑在一起：只堆图标而不推进度，分值是 1 倍；只推进度而不堆图标，被乘数是 0。信号标记因此有两种相反用途——放进待发区用于传输与调制，留在进度区用于抬高倍数；而待发区剩余的标记在终局要扣分，于是「用掉」比「攒着」更划算。<span class="pg">p.12</span><span class="pg">p.18</span><span class="pg">p.19</span></div>
+</section>
+
+<section id="s4">
+<h2><span class="n">4</span>回合结构与五种行动</h2>
+<p>游戏按轮进行，每轮每位玩家各行动一次。起始玩家先手，其后顺时针；起始玩家在整局中不改变。<span class="pg">p.12</span></p>
+<h3>4.1 五种行动</h3>
+<table>
+  <tr><th>行动</th><th>目的</th><th>是否消耗行动板块</th></tr>
+  <tr><td>架设</td><td>在地点格位放置基站，取得传输或调制的发射起点<span class="pg">p.12</span></td><td>消耗架设栏 1 块<span class="pg">p.12</span></td></tr>
+  <tr><td>传输</td><td>从未调制基站发出未调制信号，抵达相邻地点<span class="pg">p.13</span></td><td>消耗传输栏 1 块<span class="pg">p.13</span></td></tr>
+  <tr><td>调制</td><td>从调制基站发出调制信号，并推进永久链路<span class="pg">p.15</span></td><td>消耗调制栏 1 块<span class="pg">p.15</span></td></tr>
+  <tr><td>融资</td><td>换钱并吸引大亨<span class="pg">p.15</span></td><td>消耗融资栏 1 块<span class="pg">p.15</span></td></tr>
+  <tr><td>补给</td><td>把行动板块放回栏内，并取得专利<span class="pg">p.16</span></td><td>不消耗板块，改为支付 1 枚信用标记<span class="pg">p.16</span></td></tr>
+</table>
+<h3>4.2 执行前四栏行动的四个步骤</h3>
+<ol>
+  <li>选定行动，把该栏最上面那块行动板块翻面，让所有人看见所取的行动；栏内板块可随时重排。<span class="pg">p.9</span></li>
+  <li>为所选行动格以下的空格付钱。<span class="pg">p.9</span></li>
+  <li>执行所选行动格上的行动。<span class="pg">p.9</span></li>
+  <li>把这块行动板块正面朝上放回该栏下方的个人供应。<span class="pg">p.9</span></li>
+</ol>
+<div class="note">各栏的行动板块互不通用，颜色与图标已作区分，不能把板块从一栏移到另一栏。合同栏与国家栏的板块放上去之后不再移动，也不会被取走。<span class="pg">p.9</span></div>
+<h3>4.3 回合与终局的衔接</h3>
+<p>一旦触发结束条件，游戏不立即停止：先让所有人把当前这一轮走完，直到起始玩家右手边那位玩家结束回合；随后再进行一整轮，每人各行动一次。这样所有人的回合数相同，然后进入终局计分。<span class="pg">p.12</span><span class="pg">p.18</span></p>
+<div class="why"><span class="wt">规则作用</span>把「取板块」放在执行之前、「回板块」放在执行之后，使每次行动都必须先付一次结构性代价。因此一个回合能做的事不取决于手上有多少钱，而取决于该栏还剩多少板块：板块多的栏可以做进阶行动，板块少的栏只能做基本行动或付高价。<span class="pg">p.9</span><span class="pg">p.12</span></div>
+</section>
+
+<section id="s5">
+<h2><span class="n">5</span>架设</h2>
+<p>架设是唯一能在版图上新建基站的行动，也是传输与调制的前置。没有基站，就没有发射起点。<span class="pg">p.12</span></p>
+<h3>5.1 代价</h3>
+<p>从架设栏取 1 块板块（行动、技术或超级技术均可）放回该栏下方个人供应，并支付到所选行动格为止的空格金额（若有）。<span class="pg">p.12</span></p>
+<h3>5.2 效果</h3>
+<ul>
+  <li>把 1 个基站放到一个与「已有自己基站或信号标记的地点格位」正交相邻的地点格位上。<span class="pg">p.12</span></li>
+  <li>选基本行动（下格）时，基站未调制面朝上；选进阶行动（上格）时，调制面朝上。<span class="pg">p.12</span></li>
+  <li>基站必须从自己版图上由下往上取第一个可用的。<span class="pg">p.12</span></li>
+  <li>每个地点格位上每位玩家只能有 1 个基站。<span class="pg">p.12</span></li>
+  <li>不能架设在标有禁用记号的海洋格位上。<span class="pg">p.12</span></li>
+</ul>
+<h3>5.3 后续效果</h3>
+<table>
+  <tr><th>情形</th><th>结算</th></tr>
+  <tr><td>该格左下角有奖励图标，且你在这里还没有信号标记</td><td>获得地点奖励<span class="pg">p.12</span><span class="pg">p.11</span></td></tr>
+  <tr><td>任何情形</td><td>从进度区中与该格奖励图标相符的轨道取最低的 2 枚信号标记进待发区；不足 2 枚则取走现有的<span class="pg">p.12</span></td></tr>
+  <tr><td>该格没有任何其他标记</td><td>再从同一条轨道多取 1 枚信号标记进待发区<span class="pg">p.12</span></td></tr>
+  <tr><td>该格已有自己的信号标记</td><td>只取 2 枚信号标记，不获得地点奖励<span class="pg">p.13</span></td></tr>
+</table>
+<div class="note">原书在「该格是否为空」的判定上没有明写中立信号标记是否算占用。单人规则中「该地点已被中立信号标记占据时只移 2 枚」采用同一口径，多人局按同一方式处理：中立标记视为占用。<span class="pg">p.12</span><span class="pg">p.25</span></div>
+<h3>5.4 架设与信号的关系</h3>
+<p>架设本身不消耗待发区的信号，反而补入信号：每架一个基站，最多可从进度区取 3 枚信号标记进待发区。这使架设成为传输与调制的燃料来源，而非单纯的地盘扩张。<span class="pg">p.12</span></p>
+<div class="why"><span class="wt">规则作用</span>架设同时推进两件事：基站在版图上的覆盖，与进度区信号标记的搬移。前者决定可发射的起点数量，后者决定可发射的次数。由于基站必须由下往上取，第 6 个与第 9 个基站还各自带来一次目标位图标，架设的节奏因此与终局的目标位计分直接挂钩。<span class="pg">p.12</span><span class="pg">p.19</span></div>
+</section>
+
+<section id="s6">
+<h2><span class="n">6</span>传输</h2>
+<p>传输把待发区的未调制信号送到与基站正交相邻的两个地点。它是抵达国家、取得地点奖励的主要手段。<span class="pg">p.13</span></p>
+<h3>6.1 代价与效果</h3>
+<p>从传输栏取 1 块板块放回个人供应，并支付到所选行动格为止的空格金额。效果是从待发区取 2 枚信号标记，放到与所选基站正交相邻的两个地点格位上，且沿同一条线延伸。<span class="pg">p.13</span></p>
+<h3>6.2 基本与进阶的判定</h3>
+<table>
+  <tr><th>两个目标格的状态</th><th>可执行的行动</th></tr>
+  <tr><td>都为空，既无基站也无信号标记</td><td>可选基本行动或进阶行动，支付对应代价<span class="pg">p.14</span></td></tr>
+  <tr><td>至少一格不空</td><td>必须执行进阶行动<span class="pg">p.14</span></td></tr>
+</table>
+<h3>6.3 线的规则</h3>
+<ul>
+  <li>信号标记必须放在从基站延伸出去的直线上，横向或纵向。<span class="pg">p.14</span></li>
+  <li>因版面设计，线在图上未必画得笔直，但玩家必须沿同一条线。<span class="pg">p.14</span></li>
+  <li>不得拐弯，也不得把一个标记放在一个方向、另一个放在另一个方向。专利另有说明的除外。<span class="pg">p.14</span></li>
+  <li>V 形连接：同一种线（白色点线或黑色横线）从同一侧进入又离开某个地点格位时，传输不得在同一回合从该侧进出该格，即不得走「之」字。<span class="pg">p.14</span></li>
+</ul>
+<h3>6.4 只能放一个的情形</h3>
+<p>线到某处为止、第二个标记无处可放时，第二个信号标记直接弃掉并移出游戏。即便只放下 1 个，玩家仍必须在待发区有至少 2 枚信号标记，并把这 2 枚都放下或弃掉。<span class="pg">p.13</span></p>
+<p>另有一种记号标在可用区域的边界上，表示信号在此离开可被接收的范围。此时信号视为丢失，放不下的那枚信号标记弃掉，不再回到任何地方。<span class="pg">p.14</span></p>
+<h3>6.5 地点奖励与每格上限</h3>
+<ul>
+  <li>每个目标格只要左下角有对应图标、且你在那里还没有另一个标记，就取得该格的地点奖励。<span class="pg">p.13</span></li>
+  <li>每位玩家在任一地点格位上最多 2 个标记：1 个基站加 1 枚信号标记。<span class="pg">p.13</span></li>
+</ul>
+<div class="why"><span class="wt">规则作用</span>传输一次消耗待发区 2 枚信号标记，而待发区的补充只有两个来源：架设时从进度区搬入，或某些地点奖励与合同效果。因此传输的可持续性取决于架设的频率。而架设搬入的信号出自进度区：进度区越空，倍率越高；待发区越满，罚分越重。<span class="pg">p.12</span><span class="pg">p.13</span><span class="pg">p.18</span></div>
+</section>
+
+<section id="s7">
+<h2><span class="n">7</span>调制</h2>
+<p>调制与传输共用同一套放置规则，差别有两处：发射的必须是调制面朝上的基站，且每次调制都推进永久链路。<span class="pg">p.15</span></p>
+<h3>7.1 代价与效果</h3>
+<p>从调制栏翻出 1 块板块，支付到所选行动格为止的空格金额，然后把板块放回该栏下方个人供应。效果与传输相同：从待发区取 2 枚信号标记，放到与所选调制基站正交相邻的两个地点格位，沿同一条线。<span class="pg">p.15</span></p>
+<p>在此之上追加一步：把自己的永久链路标记推进 1 格，并取得该格上方的即时奖励（若有）。<span class="pg">p.15</span><span class="pg">p.22</span></p>
+<h3>7.2 与传输的对照</h3>
+<table>
+  <tr><th>项目</th><th>传输</th><th>调制</th></tr>
+  <tr><td>发射基站</td><td>未调制面朝上<span class="pg">p.13</span></td><td>调制面朝上<span class="pg">p.15</span></td></tr>
+  <tr><td>信号标记放置</td><td>2 枚，沿同一条线<span class="pg">p.13</span></td><td>同左<span class="pg">p.15</span></td></tr>
+  <tr><td>基本／进阶判定</td><td>目标格是否为空<span class="pg">p.14</span></td><td>同左<span class="pg">p.15</span></td></tr>
+  <tr><td>额外结算</td><td>无<span class="pg">p.13</span></td><td>永久链路推进 1 格并取即时奖励<span class="pg">p.15</span></td></tr>
+</table>
+<h3>7.3 调制面的两个来源</h3>
+<p>调制基站有两个来源：架设时选择进阶行动，直接以调制面朝上放置；或通过合同栏图标的效果，把已架设的基站翻到调制面。<span class="pg">p.12</span><span class="pg">p.22</span></p>
+<div class="why"><span class="wt">规则作用</span>调制是五种行动中唯一能推进永久链路的行动。永久链路轨道既是终局四条线之一，也是专利与即时奖励的来源；轨道上的某些格位可以直接取得专利，绕过科学家数量的限制。因此调制不只是发射，它同时是专利的旁路。<span class="pg">p.15</span><span class="pg">p.22</span></div>
+</section>
+
+<section id="s8">
+<h2><span class="n">8</span>融资</h2>
+<p>融资是五栏行动中唯一直接产出现金的行动，也是大亨板块的唯一来源。它同时消耗信用标记，而信用标记既是补给的入场券，也是个人目标板块的倍数。<span class="pg">p.15</span></p>
+<h3>8.1 代价</h3>
+<p>从融资栏翻出 1 块板块（行动、技术或超级技术均可），支付到所选行动格为止的空格金额，随后把板块放回该栏下方的个人供应。接着从自己版图上取 1 枚信用标记——任选一枚，没有顺序要求——放到游戏版图信用区的空格上，从左到右填，任意一行均可。<span class="pg">p.15</span></p>
+<table>
+  <tr><th>格位标记</th><th>可用人数</th></tr>
+  <tr><td>2+</td><td>二人、三人、四人局均可<span class="pg">p.15</span></td></tr>
+  <tr><td>3+</td><td>三人与四人局<span class="pg">p.15</span></td></tr>
+  <tr><td>4</td><td>仅四人局<span class="pg">p.15</span></td></tr>
+</table>
+<h3>8.2 第一个效果：取得大亨</h3>
+<p>判定依据是生效大亨图标的数量，玩家版图上的大亨与信用区里的大亨要合起来数。合计有 1 个以上即可从版图展示区取 1 块大亨板块，可取的等级不超过生效大亨数。<span class="pg">p.15</span></p>
+<table>
+  <tr><th>生效大亨数</th><th>可取的等级</th></tr>
+  <tr><td>1 个</td><td>只能取 1 级<span class="pg">p.15</span></td></tr>
+  <tr><td>2 个</td><td>1 级或 2 级<span class="pg">p.15</span></td></tr>
+  <tr><td>3 个</td><td>1 级至 3 级<span class="pg">p.15</span></td></tr>
+  <tr><td>n 个</td><td>1 级至 n 级<span class="pg">p.15</span></td></tr>
+</table>
+<p>也可以改从牌堆取一块背面朝下的，但那样必须留下这块板块，不能退回。取来的板块正面朝上放到对应栏最下方的格位，栏内原有板块整体上移，展示区随即从对应牌堆补一块。示例中的 3 级大亨板块进入调制栏。<span class="pg">p.15</span></p>
+<div class="note">大亨板块一旦进入栏内就永不移除，也永远不能当作行动板块被取走去执行行动。它占据该栏最下方的一格，等于永久覆盖该栏的一处空格：每进入一块大亨，该栏的行动格就更靠近，到达同一行动格的代价随之下降。它因此既是图标来源，也是一次永久的覆盖。<span class="pg">p.15</span></div>
+<h3>8.3 第二个效果：现金</h3>
+<p>获得 2 元，再加每个生效大亨 1 元。本次新取的大亨立刻计入，因此行动结束时的现金总是比行动开始时的生效大亨数多算 1 个。<span class="pg">p.15</span></p>
+<h3>8.4 示例</h3>
+<p>亨宁在玩家版图上有 2 个生效大亨，信用区里还有 1 个，合计 3 个，因此可取 3 级大亨板块。他把这块板块放进调制栏，随后获得 8 元。<span class="pg">p.16</span></p>
+<div class="note">8 元对应 6 个生效大亨：版图 2 个、信用区 1 个，加上新取的板块自身 3 个（1 个基础图标加 2 个追加，属加倍型）。因此新取的板块计入时按板块上实际印的图标数计算，而不是固定按 1 个计算。<span class="pg">p.15</span><span class="pg">p.16</span></div>
+<h3>8.5 大亨板块的三类内容</h3>
+<table>
+  <tr><th>类别</th><th>板面</th><th>规则作用</th></tr>
+  <tr><td>图标型</td><td>印旗帜、永久链路、专利、目标位之一</td><td>终局四项图标的来源之一<span class="pg">p.21</span></td></tr>
+  <tr><td>生效型</td><td>印科学家或工厂</td><td>决定补给时的取块数与可取专利的数量<span class="pg">p.21</span></td></tr>
+  <tr><td>加倍型</td><td>印 2 个同一图标</td><td>该项图标数量加 2<span class="pg">p.21</span></td></tr>
+</table>
+<p>所有大亨板块都带大亨图标。板块刚进栏就立刻提高融资所得与可取的等级上限，因此融资本身会自我加速：取得的大亨越多，下一次融资进门越快、进账越多。<span class="pg">p.15</span><span class="pg">p.21</span></p>
+<div class="why"><span class="wt">规则作用</span>融资与补给共用信用区同一批格位，而每位玩家的信用标记固定为 7 枚。融资把标记换成现金与大亨，补给把标记换成板块与专利。两条路都减少终局个人目标板块的倍数，因为倍数正是按板块左侧剩余的信用标记数计算。信用区因此同时是三样东西：两个行动的代价槽、大亨与工厂的计数区、以及个人目标板块的倍数尺。<span class="pg">p.15</span><span class="pg">p.16</span><span class="pg">p.19</span></div>
+</section>
+
+<section id="s9">
+<h2><span class="n">9</span>补给</h2>
+<p>补给是唯一把行动板块送回栏内的行动，也是唯一不以板块为代价的行动。它决定后续回合还能做多少次高位行动。<span class="pg">p.16</span></p>
+<h3>9.1 代价</h3>
+<p>补给不从栏内取板块，代价是 1 枚信用标记：从自己版图任选 1 枚，放到信用区的空格上，从左到右填，任意一行均可。格位的人数限制与融资相同。<span class="pg">p.16</span></p>
+<h3>9.2 第一个效果：把板块放回栏内</h3>
+<p>从个人供应取任意 2 块行动板块，技术与超级技术板块也可以算在内，放进各自对应的栏。此外每有 1 个生效工厂，可再多取 1 块。<span class="pg">p.16</span></p>
+<h3>9.3 生效工厂的三个来源</h3>
+<table>
+  <tr><th>来源</th><th>计数方式</th></tr>
+  <tr><td>玩家版图上的大亨板块</td><td>按板块上印的工厂图标计<span class="pg">p.16</span></td></tr>
+  <tr><td>玩家版图国家栏中的工厂</td><td>只有紧邻旗帜的工厂才算生效<span class="pg">p.16</span></td></tr>
+  <tr><td>信用区中自己信用标记所在行的工厂</td><td>该行有自己几枚信用标记，就算几个工厂<span class="pg">p.16</span></td></tr>
+</table>
+<p>三处相加即生效工厂总数。示例中亨宁把版图第二个格位上的信用标记放进信用区某一行，他那一行只有 1 枚自己的标记，生效工厂恰为 1，因此共取 3 块板块。<span class="pg">p.16</span></p>
+<h3>9.4 第二个效果：取得专利</h3>
+<p>按生效科学家的数量（生效规则与工厂相同），从可用的专利板块中取 1 块，放在自己版图外侧、对应栏的上方。此时不看专利朝上的面。<span class="pg">p.16</span></p>
+<table>
+  <tr><th>限制</th><th>内容</th></tr>
+  <tr><td>每栏上方</td><td>同时只能有 1 块专利板块<span class="pg">p.16</span></td></tr>
+  <tr><td>同类型同等级</td><td>每位玩家每种专利类型、每个等级只能有 1 块<span class="pg">p.16</span></td></tr>
+  <tr><td>第 1 块专利</td><td>需 1 个生效科学家<span class="pg">p.17</span></td></tr>
+  <tr><td>第 2 块专利</td><td>需 2 个生效科学家<span class="pg">p.17</span></td></tr>
+  <tr><td>第 n 块专利</td><td>需 n 个生效科学家<span class="pg">p.17</span></td></tr>
+</table>
+<p>专利的数量门槛与已取的数量同步提高。科学家与工厂的兑现场景不同：工厂直接增加一次补给能取回的板块数，科学家则把可取专利的上限抬高一级，且门槛随已取数量同步上移。<span class="pg">p.17</span></p>
+<div class="why"><span class="wt">规则作用</span>补给在整条资源链上处于收口位置。没有补给，栏只会越用越薄，行动格逐级失守；有补给，板块从个人供应回到栏内，行动格的代价回落。代价落在信用标记上，而信用标记同时是终局倍数，于是补给把「现在能做几次行动」与「终局能得多少分」摆在同一枚标记上。这也是本作唯一一处两个目标直接对冲的设计。<span class="pg">p.16</span><span class="pg">p.19</span></div>
+</section>
+
+<section id="s10">
+<h2><span class="n">10</span>专利的使用</h2>
+<p>专利用来强化行动的效力，并抬高所在栏的行动上限。取得时放在栏上方、版图之外；使用时才真正进入栏内。<span class="pg">p.17</span></p>
+<h3>10.1 第三个行动格</h3>
+<p>只要专利板块位于栏上方、玩家版图之外，它就等效为该栏的第三个行动格。执行方式与其他行动格相同：把从下方到该格为止的空格用板块覆盖，或按空格印值付钱虚拟覆盖。示例中玩家付 8 元即可执行专利行动。<span class="pg">p.17</span></p>
+<h3>10.2 激活</h3>
+<p>第一次使用该专利时，玩家决定使用的一面，并把它移到对应的行动格——印基本行动的一面移到下格，印进阶行动的一面移到上格。这一步即激活。激活后不能再改面，此后按普通行动格使用。<span class="pg">p.17</span></p>
+<h3>10.3 终局价值</h3>
+<table>
+  <tr><th>面</th><th>专利图标数</th></tr>
+  <tr><td>基础面（印基本行动）</td><td>2 个<span class="pg">p.21</span></td></tr>
+  <tr><td>进阶面（印进阶行动）</td><td>1 个<span class="pg">p.21</span></td></tr>
+</table>
+<p>只有已激活的专利才在终局提供专利图标，仍留在版图外侧的不算。<span class="pg">p.19</span></p>
+<h3>10.4 专利改写的内容</h3>
+<ul>
+  <li>架设：执行时允许跳过 1 个空格，按图案所示。<span class="pg">p.21</span></li>
+  <li>传输与调制：可在图案标示的格位上放 2 枚信号标记，每格 1 枚。<span class="pg">p.21</span></li>
+  <li>传输与调制：第二种图案只要求实际落点为空，图案里其余格位空或满都不影响放置。<span class="pg">p.21</span></li>
+  <li>架设、传输、调制：执行时还可从个人供应顺带取 1 块行动板块放进对应栏，等同一次小幅补给。<span class="pg">p.21</span></li>
+</ul>
+<div class="note">图案只表示相邻关系，不表示方向，可以任意旋转或镜像。「第一个抵达该地点的玩家」「永久链路推进」等其余规则照旧不变。<span class="pg">p.21</span></div>
+<h3>10.5 专利的来源</h3>
+<p>常规来源是补给的第二个效果。另一条途径是永久链路轨道上的即时奖励：某些格位直接给予专利，且不需要满足生效科学家的数量要求。<span class="pg">p.16</span><span class="pg">p.22</span></p>
+<div class="why"><span class="wt">规则作用</span>专利把一栏的行动格从两个抬到三个，而第三个格的代价由空格印值决定，栏内板块越薄，这个格就越贵。它同时把补给的产出延伸到后续回合：补给取得的专利不立刻给分，要先激活，才在终局提供 1 至 2 个专利图标。因此专利既是行动容量的扩张，也是四条发展线中唯一需要二次操作才兑现的一条。<span class="pg">p.17</span><span class="pg">p.19</span></div>
+</section>
+
+<section id="s11">
+<h2><span class="n">11</span>合同板块</h2>
+<p>完成的合同板块是终局图标的第二个来源，与大亨板块并列。合同把前期的布局转成图标数，本身不产生新的行动能力。<span class="pg">p.17</span></p>
+<h3>11.1 结构与翻面</h3>
+<p>合同板块正面印一个条件，背面为完成面。玩家版图上板块左侧的数字表示该条件需完成多少次，取值为 1 至 8。达到次数即把板块翻到背面。<span class="pg">p.17</span><span class="pg">p.22</span></p>
+<p>条件一旦满足即刻翻面，与是否轮到自己行动无关。翻面之后板块留在原位，不再移动，也不会被取走。<span class="pg">p.9</span><span class="pg">p.17</span></p>
+<h3>11.2 取得与放置</h3>
+<p>合同主要来自地点奖励。当玩家在左下角印有合同图标的地点格位落子时，取与该地点奖励图标相符的合同板块，展示区立刻补一块。板块正面朝上放到合同栏最低的可用格位，并取得该格位印的即时奖励。<span class="pg">p.11</span></p>
+<h3>11.3 合同栏图标的三种效果</h3>
+<table>
+  <tr><th>图标</th><th>效果</th></tr>
+  <tr><td>行动板块</td><td>从个人供应取图案所示的那一块，放进对应栏<span class="pg">p.22</span></td></tr>
+  <tr><td>弃信号标记</td><td>从自己版图弃 1 枚：进度区任选一轨取最低的一枚（该轨因此前进一格，分值随之提高），或从待发区取。弃掉的标记放回盒中<span class="pg">p.22</span></td></tr>
+  <tr><td>翻面基站</td><td>把 1 座已架设的基站翻到调制面<span class="pg">p.22</span></td></tr>
+</table>
+<h3>11.4 六类条件</h3>
+<table>
+  <tr><th>条件</th><th>判定</th></tr>
+  <tr><td>指定类型的地点</td><td>该类型地点格位上有 1 个自己的标记，基站或信号均可<span class="pg">p.22</span></td></tr>
+  <tr><td>两个地点标记</td><td>2 枚信号标记位于地点格位上<span class="pg">p.22</span></td></tr>
+  <tr><td>调制基站</td><td>1 座调制面朝上的基站位于地点格位上<span class="pg">p.22</span></td></tr>
+  <tr><td>科学家或工厂</td><td>1 名生效科学家，或 1 座生效工厂<span class="pg">p.22</span></td></tr>
+  <tr><td>大亨</td><td>2 个生效大亨<span class="pg">p.22</span></td></tr>
+  <tr><td>技术图标</td><td>1 个技术图标；每块超级技术板块提供 2 个<span class="pg">p.22</span></td></tr>
+</table>
+<div class="why"><span class="wt">规则作用</span>合同的作用是回顾型：条件几乎全是「已有几个某物」，因此它奖励的是已经发生的布局，而不是新的选择。它对四条线的贡献落在图标数上——完成的合同在大亨之外再叠一层旗帜、专利与目标位图标。合同栏图标里的「弃信号标记」一项还有反向作用：从进度区取走最低的一枚，等于把该轨道的每图标分值抬高一格。<span class="pg">p.22</span><span class="pg">p.19</span></div>
+</section>
+
+<section id="s12">
+<h2><span class="n">12</span>终局与计分</h2>
+<p>终局由五个条件之一触发。触发后先走完当前轮，再进行一整轮，随后按四条发展线、个人目标板块与待发区罚分结算。<span class="pg">p.18</span></p>
+<h3>12.1 五个结束条件</h3>
+<table>
+  <tr><th>条件</th><th>位置</th></tr>
+  <tr><td>架设第 8 座基站</td><td>游戏版图<span class="pg">p.18</span></td></tr>
+  <tr><td>国家栏放第 8 面旗帜</td><td>玩家版图国家栏<span class="pg">p.18</span></td></tr>
+  <tr><td>合同栏放第 7 块合同板块</td><td>玩家版图合同栏<span class="pg">p.18</span></td></tr>
+  <tr><td>永久链路轨道到达第 7 格</td><td>游戏版图下缘<span class="pg">p.18</span></td></tr>
+  <tr><td>信用区被信用标记填满</td><td>游戏版图信用区<span class="pg">p.18</span></td></tr>
+</table>
+<h3>12.2 收尾流程</h3>
+<p>任一条件满足，终局即被触发，但游戏不立刻停止：先继续到起始玩家右手边那位玩家结束回合，使所有人回合数相同；随后再进行一整轮，每人各行动一次；之后进入计分。<span class="pg">p.18</span></p>
+<div class="note">信用区填满之后，融资与补给仍可执行。用于这两个行动的信用标记直接放在信用区之外的版图旁，不再提供任何图标。因此终局不会因为信用区满而封住这两条行动。<span class="pg">p.18</span></div>
+<h3>12.3 六项计分与倍率</h3>
+<p>四个发展线各对应进度区的一条轨道。每条轨道先按已移除的信号标记数确定「每图标分值」，再乘以自己在该线上的图标总数。乘法是唯一的计分方式，加法只出现在轨道之间与罚分之上。<span class="pg">p.18</span></p>
+<svg viewBox="0 0 900 300" role="img" aria-label="无线时代终局计分构成">
+  <rect x="0" y="0" width="900" height="300" fill="#ffffff"/>
+  <text x="450" y="24" text-anchor="middle" font-size="15" font-weight="700" fill="#1f3f5a">示例局：四项发展线、个人目标板块与待发区罚分</text>
+  <g font-size="12" fill="#3d5566">
+    <text x="34" y="52">项目</text>
+    <text x="214" y="52">图标数</text>
+    <text x="296" y="52">倍率</text>
+    <text x="392" y="52">得分</text>
+  </g>
+  <g font-size="12.5" fill="#1f3a4a">
+    <rect x="22" y="60" width="856" height="24" rx="5" fill="#f4f7f9" stroke="#dbe5eb"/>
+    <text x="34" y="77">旗帜</text><text x="222" y="77">8</text><text x="304" y="77">×2</text>
+    <rect x="392" y="64" width="96" height="16" rx="3" fill="#cfdde7"/><text x="498" y="77">16</text>
+    <rect x="22" y="88" width="856" height="24" rx="5" fill="#ffffff" stroke="#dbe5eb"/>
+    <text x="34" y="105">永久链路</text><text x="222" y="105">8</text><text x="304" y="105">×4</text>
+    <rect x="392" y="92" width="192" height="16" rx="3" fill="#c7d5e2"/><text x="594" y="105">32</text>
+    <rect x="22" y="116" width="856" height="24" rx="5" fill="#f4f7f9" stroke="#dbe5eb"/>
+    <text x="34" y="133">专利</text><text x="222" y="133">3</text><text x="304" y="133">×3</text>
+    <rect x="392" y="120" width="54" height="16" rx="3" fill="#cfdde7"/><text x="456" y="133">9</text>
+    <rect x="22" y="144" width="856" height="24" rx="5" fill="#ffffff" stroke="#dbe5eb"/>
+    <text x="34" y="161">目标位</text><text x="222" y="161">5</text><text x="304" y="161">×2</text>
+    <rect x="392" y="148" width="60" height="16" rx="3" fill="#c7d5e2"/><text x="462" y="161">10</text>
+    <rect x="22" y="172" width="856" height="24" rx="5" fill="#f4f7f9" stroke="#dbe5eb"/>
+    <text x="34" y="189">个人目标板块</text><text x="222" y="189">4</text><text x="304" y="189">×7</text>
+    <rect x="392" y="176" width="168" height="16" rx="3" fill="#cfdde7"/><text x="570" y="189">28</text>
+    <rect x="22" y="200" width="856" height="24" rx="5" fill="#fbf5f4" stroke="#e6cfcb"/>
+    <text x="34" y="217">待发区信号标记</text><text x="222" y="217">2</text><text x="304" y="217">每枚 −1</text>
+    <rect x="392" y="204" width="12" height="16" rx="3" fill="#e3c8c2"/><text x="414" y="217">−2</text>
+  </g>
+  <line x1="22" y1="234" x2="878" y2="234" stroke="#c9d6de"/>
+  <text x="34" y="256" font-size="13" font-weight="700" fill="#1f3f5a">合计 93 分</text>
+  <text x="34" y="282" font-size="12" fill="#3d5566">倍率取自进度区各轨道已移除的信号标记数；轨道越空，每图标分值越高</text>
+</svg>
+<table>
+  <tr><th>项目</th><th>图标来源</th></tr>
+  <tr><td>旗帜</td><td>国家栏中的旗帜数，加上已完成合同板块与大亨板块上的旗帜图标<span class="pg">p.19</span></td></tr>
+  <tr><td>永久链路</td><td>永久链路轨道上走过的格数<span class="pg">p.19</span></td></tr>
+  <tr><td>专利</td><td>已激活专利板块上的专利图标，加上已完成合同板块与大亨板块上的专利图标<span class="pg">p.19</span></td></tr>
+  <tr><td>目标位</td><td>架设、传输、调制三栏已到达的目标位图标（板块覆盖或付钱虚拟覆盖均可）；融资、国家、合同三栏与永久链路轨道上已到达的目标位图标；已完成合同板块与大亨板块上的目标位图标；架设第 6 与第 9 座基站时到达的目标位图标<span class="pg">p.19</span></td></tr>
+  <tr><td>个人目标板块</td><td>按板块印值乘以其左侧的信用标记数，见 12.4<span class="pg">p.19</span></td></tr>
+  <tr><td>待发区信号标记</td><td>每剩 1 枚扣 1 分<span class="pg">p.19</span></td></tr>
+</table>
+<p>某条轨道的信号标记若全部移除，最顶端的胜利分图标也计入，因此清空一条轨道等于把该轨的倍率推到最高一档。<span class="pg">p.18</span></p>
+<div class="note">原书写「架设第 6 座与第 9 座基站」，而玩家版图上的基站格位编号为 2 至 9 共 8 格，另有 1 座备用，两套编号对不上。判定时按架设顺序，也就是自己放下的第几座基站计算，不按格位编号。<span class="pg">p.5</span><span class="pg">p.19</span></div>
+<h3>12.4 个人目标板块</h3>
+<p>每块已完成的个人目标板块，按其上印的胜利分乘以其左侧的信用标记数量。玩家版图上印着的信用标记也算完整的一枚。<span class="pg">p.19</span></p>
+<p>「已完成」的判定是：该板块上画出的所有国家的旗帜都在自己国家栏中。<span class="pg">p.19</span></p>
+<p>示例中亨宁完成第 1、第 2 块个人目标板块：第 1 块 3 分 × 3 得 9 分，第 2 块 5 分 × 4 得 20 分。第 3 块不得分，因为他尚未抵达巴西。<span class="pg">p.19</span></p>
+<div class="note">永久链路轨道上有一种格位，效果在终局结算：从信用区取回自己的 1 枚信用标记，放到某块已完成的个人目标板块左侧的空位。该板块的倍数因此加 1。若那块板块左侧没有空位，此项无法结算。<span class="pg">p.22</span></div>
+<h3>12.5 示例局逐项复算</h3>
+<table>
+  <tr><th>轨道倍率</th><th>图标构成</th><th>图标数</th><th>得分</th></tr>
+  <tr><td>×2</td><td>国家栏 6 面旗帜 + 大亨 1 个 + 合同 1 个</td><td>8</td><td>16<span class="pg">p.20</span></td></tr>
+  <tr><td>×4</td><td>永久链路 5 格 + 大亨 1 个 + 合同 2 个</td><td>8</td><td>32<span class="pg">p.20</span></td></tr>
+  <tr><td>×3</td><td>已激活专利 3 个</td><td>3</td><td>9<span class="pg">p.20</span></td></tr>
+  <tr><td>×2</td><td>付 5 元到达架设栏 1 个 + 基站 1 个 + 国家栏与永久链路 2 个 + 合同 1 个</td><td>5</td><td>10<span class="pg">p.20</span></td></tr>
+  <tr><td>×7</td><td>已完成的第 2 块个人目标板块 4 个</td><td>4</td><td>28<span class="pg">p.20</span></td></tr>
+  <tr><td>—</td><td>待发区剩余信号标记 2 枚</td><td>—</td><td>−2<span class="pg">p.20</span></td></tr>
+  <tr><td>合计</td><td>—</td><td>—</td><td>93<span class="pg">p.20</span></td></tr>
+</table>
+<p>黄玩家终局手上还剩 6 元。现金本身不计分，也不计入任何一项图标。<span class="pg">p.20</span></p>
+<div class="why"><span class="wt">规则作用</span>计分结构把整局的四个方向压进同一个乘法：轨道决定每图标分值，图标数量由四栏的行动格、地点奖励、大亨与合同提供。因此一条线的分数同时受两种东西制约——进度区的移除量（倍率）与版图上的图标堆叠（被乘数），任一为零则该项为零。待发区罚分是唯一的减法项，它与传输、调制的消耗方向相反：待发区的信号越多，发射次数越充裕，终局扣分越重。<span class="pg">p.18</span><span class="pg">p.19</span></div>
+</section>
+
+<section id="s13">
+<h2><span class="n">13</span>单人局：自动机</h2>
+<p>单人局由自动机扮演对手。它在游戏中与终局计分时都算一位玩家，但执行规则的方式与人类玩家完全不同：不花钱、不用行动板块、不做补给。<span class="pg">p.23</span></p>
+<h3>13.1 自动机的五条总则</h3>
+<table>
+  <tr><th>项目</th><th>做法</th></tr>
+  <tr><td>花钱</td><td>不花钱，因此不受空格金额影响<span class="pg">p.23</span></td></tr>
+  <tr><td>行动板块</td><td>不使用版图上的行动板块执行行动<span class="pg">p.23</span></td></tr>
+  <tr><td>补给</td><td>不执行补给行动<span class="pg">p.23</span></td></tr>
+  <tr><td>架设位置</td><td>只在版图上 14 个预先印号的地点格位架设，不需要相邻<span class="pg">p.23</span></td></tr>
+  <tr><td>玩家版图</td><td>只用技术与大亨板块，作用是抵达行动格；抵达后把对应专利放上去<span class="pg">p.23</span></td></tr>
+</table>
+<p>这 14 个格位大多对应旗帜，或者对应「一次传输或调制即可抵达旗帜」的位置。开局时自动机在传输栏的基本行动格上已经有 1 块专利。<span class="pg">p.23</span></p>
+<p>它的计分与人类玩家相同，唯一例外是待发区里的信号标记不计，也不扣分。<span class="pg">p.23</span></p>
+<h3>13.2 单人局额外配件</h3>
+<p>14 块安装板块，两种类型各 7 块：编号 1 至 7 为调制型，板上印白色竖箭头；编号 8 至 14 为未调制型，板上印黑色横箭头。这些板块只在单人局使用。<span class="pg">p.23</span></p>
+<div class="note">安装板块与架设行动不是一回事。架设是一种行动，由玩家的行动板块驱动；安装板块是单人局专用配件，只用来告诉自动机这次把基站架到指定编号的位置。<span class="pg">p.23</span></div>
+<h3>13.3 准备</h3>
+<p>公共准备与二人局完全相同。自己的个人准备按多人局执行，例外是抽取个人目标板块那一步：改为按 A、B、C 各发 1 块，自己与自动机各得 3 块。<span class="pg">p.23</span></p>
+<table>
+  <tr><th>自动机的配件</th><th>摆放位置</th></tr>
+  <tr><td>7 枚信用标记</td><td>自动机玩家版图的对应格位<span class="pg">p.24</span></td></tr>
+  <tr><td>9 座基站</td><td>其中 7 座放到版图专用格位，调制面与未调制面交替；余下 2 座放在版图下方，一座调制面朝上、一座未调制面朝上<span class="pg">p.24</span></td></tr>
+  <tr><td>30 枚信号标记</td><td>2 枚放待发区，其余 28 枚放到进度区，4 条轨道各 7 枚<span class="pg">p.24</span></td></tr>
+  <tr><td>12 块旗帜板块</td><td>任意排在自动机版图旁<span class="pg">p.24</span></td></tr>
+  <tr><td>3 块个人目标板块</td><td>按 A、B、C 自上而下摆放<span class="pg">p.24</span></td></tr>
+  <tr><td>1 枚永久链路标记</td><td>版图下缘轨道的第 3 格<span class="pg">p.24</span></td></tr>
+  <tr><td>1 块专利板块</td><td>自动机版图的传输栏基本行动格，朝上的面不限<span class="pg">p.24</span></td></tr>
+</table>
+<p>起始玩家标记交给自动机，由它先行动。起始位置按二人局取 2 块地点起始板块、2 块大亨起始板块、2 块技术起始板块，随机组成 2 组每组 3 块；自己选 1 组，剩下的地点起始板块弃掉，剩下的大亨与技术起始板块放进自动机版图对应栏。<span class="pg">p.24</span><span class="pg">p.25</span></p>
+<p>中立信号标记与二人局一样，在每个合同地点放 1 枚。把中立标记改放在旗帜地点可以使整体难度下降。<span class="pg">p.25</span></p>
+<h3>13.4 自动机的起始位置</h3>
+<p>14 块安装板块按类型分成两堆，各 7 块，背面朝下。翻开其中一堆最上面一块，正面朝上连同对应的基站放到版图上对应的地点格位；把该格位图标所对应进度轨道最低的 3 枚信号标记移入待发区，若该位置已被中立信号标记占据，只移 2 枚。对另一堆重复以上步骤。<span class="pg">p.25</span></p>
+<table>
+  <tr><th>地点格位上的图标</th><th>自动机获得的处理</th></tr>
+  <tr><td>旗帜</td><td>取对应旗帜，正面朝上放到国家栏最低的空格<span class="pg">p.25</span></td></tr>
+  <tr><td>合同</td><td>取对应合同板块，放到合同栏最低的空格，直接背面朝上视为已完成，不检查条件、忽略任何奖励<span class="pg">p.25</span></td></tr>
+  <tr><td>技术</td><td>随机取 1 块技术或超级技术板块，放进对应栏<span class="pg">p.25</span></td></tr>
+  <tr><td>大亨</td><td>从版图取最下方那块大亨板块放进对应栏，另一块滑到最下方，再翻出新的一块补上<span class="pg">p.25</span></td></tr>
+</table>
+<p>每当自动机抵达一个行动格，就把对应的专利板块放上去，朝上的面不限。<span class="pg">p.25</span></p>
+<h3>13.5 行动板块的四组</h3>
+<table>
+  <tr><th>组</th><th>板块数</th><th>使用顺序</th></tr>
+  <tr><td>A 组</td><td>6 块</td><td>最先使用<span class="pg">p.26</span></td></tr>
+  <tr><td>B 组</td><td>5 块</td><td>A 组用完后接着使用<span class="pg">p.26</span></td></tr>
+  <tr><td>C 组</td><td>5 块</td><td>B 组用完后接着使用<span class="pg">p.26</span></td></tr>
+  <tr><td>D 组</td><td>5 块</td><td>最后使用，游戏通常在此之前结束<span class="pg">p.26</span></td></tr>
+</table>
+<p>四组合计 21 块，分别洗混背面朝下摆成 4 堆。原书只用图示分组、未标各组块数，21 块为原书明写的总数，分组数量按图示清点。万一 D 组用尽仍要继续走回合，把 B 组重新组一堆把游戏打完。<span class="pg">p.26</span></p>
+<h3>13.6 难度三档</h3>
+<table>
+  <tr><th>档次</th><th>调整</th></tr>
+  <tr><td>标准</td><td>按上述规则<span class="pg">p.26</span></td></tr>
+  <tr><td>中等</td><td>移除安装板块 12 与 4 或 5<span class="pg">p.26</span></td></tr>
+  <tr><td>偏难</td><td>移除图中的 3 块安装板块（12、4、5），再随机移除 1 块黑色箭头的安装板块（8 至 14）；并可另随机取 3 块技术板块放到自动机版图，若因此抵达行动格同样补上专利板块<span class="pg">p.26</span></td></tr>
+</table>
+<h3>13.7 自动机的回合</h3>
+<p>由自动机开始，双方交替行动，每回合各执行 1 个行动，直到终局条件被触发。自动机的回合是翻开最左边那一堆最上面的一块行动板块，执行对应行动，然后弃掉这块板块。<span class="pg">p.26</span><span class="pg">p.27</span></p>
+<table>
+  <tr><th>翻到的行动</th><th>自动机的执行方式</th></tr>
+  <tr><td>架设</td><td>看自动机版图最下方那座基站：未调制面则翻开第一块指向未调制基站的安装板块（编号 8 至 14），调制面则翻开第一块指向调制基站的安装板块（编号 1 至 7）。把该板块连同这座基站放到版图对应地点格位，再从该格位图标所对应的进度轨道移 3 枚信号标记进待发区；格位不空时只移 2 枚<span class="pg">p.27</span></td></tr>
+  <tr><td>传输</td><td>在版图上找出编号最小的未调制安装板块（黑色横箭头），由它同时决定发射的基站与方向；从待发区取 2 枚信号标记放到箭头所指的 2 个地点格位，格位上的旗帜、合同、技术、大亨图标照常结算奖励，随后弃掉这块安装板块<span class="pg">p.27</span></td></tr>
+  <tr><td>调制</td><td>找出编号最小的调制安装板块（白色竖箭头），按传输同样的方式放置 2 枚信号标记；额外把自动机的永久链路标记推进 1 格，该格奖励忽略<span class="pg">p.27</span></td></tr>
+  <tr><td>融资</td><td>从自动机版图取最上面 1 枚信用标记放到信用区最上面的空格；再看生效大亨图标数，取对应等级的大亨板块放进对应栏（取最下方那块，加倍型则取最右一块），另一块滑到该位置并翻出新的一块<span class="pg">p.28</span></td></tr>
+</table>
+<p>终局触发后，游戏照常进行到自己的回合结束，随后进行一个最终轮，双方各再走 1 个回合。计分方式相同，自动机的待发区不计分。<span class="pg">p.26</span><span class="pg">p.28</span></p>
+<div class="why"><span class="wt">规则作用</span>自动机把所有需要判断的环节换成固定流程：行动由板块组决定，位置由编号最小的安装板块决定，等级由生效大亨数决定。它因此不参与资源循环，只按固定节奏向版图推进、向待发区搬信号、向信用区放标记。对单人玩家而言，规则上的实际变化只有两点：一是中立的合同地点与旗帜地点会占用格位，从而影响自己架设时的「是否为空」判定；二是信用区由双方共填，被填满这一条件会比多人局更早到来。<span class="pg">p.23</span><span class="pg">p.25</span><span class="pg">p.28</span></div>
+</section>
+
+<section id="s14">
+<h2><span class="n">14</span>常见误读与速查</h2>
+<p>以下条目按出现频率排列，均可在前述章节找到依据。<span class="pg">p.9</span></p>
+<h3>14.1 常见误读</h3>
+<table>
+  <tr><th>误读</th><th>正确做法</th></tr>
+  <tr><td>架设只能贴着自己已有的基站</td><td>贴着自己的基站或信号标记都算相邻；海洋格禁止架设<span class="pg">p.12</span></td></tr>
+  <tr><td>一格上可以放多个自己的标记</td><td>每格每人最多 2 个：1 座基站加 1 枚信号标记<span class="pg">p.13</span></td></tr>
+  <tr><td>已有自己信号标记的格位不能再架设</td><td>可以架设，但只取 2 枚信号标记，不取得地点奖励<span class="pg">p.13</span></td></tr>
+  <tr><td>传输总是可以选基本行动</td><td>两个目标格中任一不空，就必须执行进阶行动<span class="pg">p.14</span></td></tr>
+  <tr><td>两个信号标记可以分开放到两个方向</td><td>必须沿同一条线；线到某处终止时第二枚弃掉<span class="pg">p.13</span><span class="pg">p.14</span></td></tr>
+  <tr><td>大亨板块可以当行动板块使用</td><td>进入栏内的大亨永不移除，不能执行行动，只提供图标<span class="pg">p.15</span></td></tr>
+  <tr><td>补给不需要代价</td><td>补给不取板块，但必须支付 1 枚信用标记<span class="pg">p.16</span></td></tr>
+  <tr><td>信用区填满之后不能融资与补给</td><td>两者仍可执行，标记放在区外，只是不再提供图标<span class="pg">p.18</span></td></tr>
+  <tr><td>取得专利即计入终局专利图标</td><td>只有激活后的专利才计入；留在版图外侧的不算<span class="pg">p.17</span><span class="pg">p.19</span></td></tr>
+  <tr><td>超级技术板块只覆盖一格</td><td>覆盖两格，且两格都视为已付费<span class="pg">p.10</span></td></tr>
+  <tr><td>合同要到自己回合才可翻面</td><td>条件一旦满足即刻翻面，与回合顺序无关<span class="pg">p.17</span></td></tr>
+  <tr><td>待发区剩下的信号标记可以留到终局</td><td>每剩 1 枚扣 1 分<span class="pg">p.19</span></td></tr>
+</table>
+<h3>14.2 一局速查</h3>
+<div class="grid2">
+  <div class="card"><div class="t"><span class="s">回合</span>四步</div>选一种行动 → 翻该栏最上面一块板块 → 为到所选行动格为止的空格付钱 → 执行 → 板块回该栏下方个人供应。</div>
+  <div class="card blue"><div class="t"><span class="s">架设</span>相邻与信号</div>贴自己基站或信号标记的正交相邻格；基本行动放未调制面，进阶放调制面；从对应轨道取 2 枚信号进待发区，格位全空时取 3 枚。</div>
+  <div class="card green"><div class="t"><span class="s">传输</span>沿线两格</div>从未调制基站发 2 枚信号，沿同一条线放在相邻两格；任一目标格不空即须执行进阶行动。</div>
+  <div class="card gold"><div class="t"><span class="s">调制</span>加推进</div>规则与传输相同，基站须为调制面；额外把永久链路标记推进 1 格并取该格奖励。</div>
+  <div class="card"><div class="t"><span class="s">融资</span>大亨与现金</div>取 1 块板块并放 1 枚信用标记；取 1 块大亨（等级不超过生效大亨数），得 2 元加每个生效大亨 1 元，新取的立刻计入。</div>
+  <div class="card blue"><div class="t"><span class="s">补给</span>回栏与专利</div>放 1 枚信用标记；取 2 块板块，每个生效工厂加 1 块；按生效科学家数取 1 块专利放到栏上方。</div>
+  <div class="card green"><div class="t"><span class="s">终局</span>触发与收尾</div>8 座基站、8 面旗帜、7 块合同、链路第 7 格、信用区填满，任一满足即触发；走完当前轮，再走一整轮，然后计分。</div>
+  <div class="card gold"><div class="t"><span class="s">计分</span>乘积结构</div>每条轨道先读每图标分值，再乘图标数；四项发展线之外加个人目标板块，减去待发区剩余信号标记。</div>
+</div>
+<h3>14.3 中英术语对照</h3>
+<table>
+  <tr><th>中文</th><th>英文</th><th>中文</th><th>英文</th></tr>
+  <tr><td>架设</td><td>Installation</td><td>传输</td><td>Transmission</td></tr>
+  <tr><td>调制</td><td>Modulation</td><td>融资</td><td>Funding</td></tr>
+  <tr><td>补给</td><td>Supply</td><td>基站</td><td>Wireless Station</td></tr>
+  <tr><td>未调制面</td><td>Unmodulated side</td><td>调制面</td><td>Modulated side</td></tr>
+  <tr><td>信号标记</td><td>Signal token</td><td>信用标记</td><td>Credit token</td></tr>
+  <tr><td>待发区</td><td>Ready area</td><td>进度区</td><td>Progress column</td></tr>
+  <tr><td>行动板块</td><td>Action tile</td><td>行动格</td><td>Action Box</td></tr>
+  <tr><td>技术板块</td><td>Technology tile</td><td>超级技术板块</td><td>Super Technology tile</td></tr>
+  <tr><td>大亨</td><td>Tycoon</td><td>工厂</td><td>Factory</td></tr>
+  <tr><td>科学家</td><td>Scientist</td><td>专利</td><td>Patent</td></tr>
+  <tr><td>合同</td><td>Contract</td><td>旗帜</td><td>Flag</td></tr>
+  <tr><td>国家栏</td><td>Nations column</td><td>目标位</td><td>Target position</td></tr>
+  <tr><td>永久链路</td><td>Permanent Link</td><td>地点</td><td>Location</td></tr>
+  <tr><td>个人目标板块</td><td>Personal Objective tile</td><td>地点奖励</td><td>Location Bonus</td></tr>
+  <tr><td>安装板块</td><td>Installation tile</td><td>自动机</td><td>Automa</td></tr>
+</table>
+<h3>14.4 章节与页码</h3>
+<table>
+  <tr><th>原书章节</th><th>页码</th><th>本书位置</th></tr>
+  <tr><td>游戏概念与配件</td><td>p.2 至 p.3</td><td>2.1</td></tr>
+  <tr><td>准备</td><td>p.4 至 p.7</td><td>1.1 至 1.5</td></tr>
+  <tr><td>总览</td><td>p.7 至 p.8</td><td>3</td></tr>
+  <tr><td>基本概念</td><td>p.8 至 p.11</td><td>2.2 至 2.5、12.3</td></tr>
+  <tr><td>五种行动</td><td>p.12 至 p.17</td><td>5 至 11</td></tr>
+  <tr><td>结束与计分</td><td>p.18 至 p.20</td><td>12</td></tr>
+  <tr><td>附录</td><td>p.21 至 p.22</td><td>8.5、10.3 至 10.5、11.3 至 11.4</td></tr>
+  <tr><td>单人规则</td><td>p.23 至 p.28</td><td>13</td></tr>
+</table>
+<div class="note">页码写作 p.N，指英文原书 28 页的页序。专利与合同板块的条文分布在附录 p.21 与 p.22，合同条件按背面类型共 4 叠、每叠 10 块，专利共 24 块、按正面分 6 类。板块印值、地点奖励与图标细节以实体配件为准。<span class="pg">p.21</span><span class="pg">p.22</span><span class="pg">p.28</span></div>
+<h3>14.5 原书页图对照</h3>
+<details>
+<summary>展开原书页图（28 张，按页序）</summary>
+<figure><img src="images_wire/page_01.jpg" alt="原书第 1 页" loading="lazy"><figcaption>p.1 封面与标题</figcaption></figure>
+<figure><img src="images_wire/page_02.jpg" alt="原书第 2 页" loading="lazy"><figcaption>p.2 游戏概念与公共配件</figcaption></figure>
+<figure><img src="images_wire/page_03.jpg" alt="原书第 3 页" loading="lazy"><figcaption>p.3 个人配件与合同、地点板块</figcaption></figure>
+<figure><img src="images_wire/page_04.jpg" alt="原书第 4 页" loading="lazy"><figcaption>p.4 公共准备</figcaption></figure>
+<figure><img src="images_wire/page_05.jpg" alt="原书第 5 页" loading="lazy"><figcaption>p.5 个人准备</figcaption></figure>
+<figure><img src="images_wire/page_06.jpg" alt="原书第 6 页" loading="lazy"><figcaption>p.6 起始玩家与起始位置</figcaption></figure>
+<figure><img src="images_wire/page_07.jpg" alt="原书第 7 页" loading="lazy"><figcaption>p.7 二人三人补充、老手变体与总览</figcaption></figure>
+<figure><img src="images_wire/page_08.jpg" alt="原书第 8 页" loading="lazy"><figcaption>p.8 总览续与基本概念</figcaption></figure>
+<figure><img src="images_wire/page_09.jpg" alt="原书第 9 页" loading="lazy"><figcaption>p.9 玩家版图结构与行动四步</figcaption></figure>
+<figure><img src="images_wire/page_10.jpg" alt="原书第 10 页" loading="lazy"><figcaption>p.10 技术板块、版图与地点奖励</figcaption></figure>
+<figure><img src="images_wire/page_11.jpg" alt="原书第 11 页" loading="lazy"><figcaption>p.11 地点奖励细则与相邻判定</figcaption></figure>
+<figure><img src="images_wire/page_12.jpg" alt="原书第 12 页" loading="lazy"><figcaption>p.12 行动总览与架设</figcaption></figure>
+<figure><img src="images_wire/page_13.jpg" alt="原书第 13 页" loading="lazy"><figcaption>p.13 架设示例与传输</figcaption></figure>
+<figure><img src="images_wire/page_14.jpg" alt="原书第 14 页" loading="lazy"><figcaption>p.14 基本与进阶判定、连线规则</figcaption></figure>
+<figure><img src="images_wire/page_15.jpg" alt="原书第 15 页" loading="lazy"><figcaption>p.15 调制与融资</figcaption></figure>
+<figure><img src="images_wire/page_16.jpg" alt="原书第 16 页" loading="lazy"><figcaption>p.16 融资示例与补给</figcaption></figure>
+<figure><img src="images_wire/page_17.jpg" alt="原书第 17 页" loading="lazy"><figcaption>p.17 专利的使用与合同板块</figcaption></figure>
+<figure><img src="images_wire/page_18.jpg" alt="原书第 18 页" loading="lazy"><figcaption>p.18 结束条件与计分总则</figcaption></figure>
+<figure><img src="images_wire/page_19.jpg" alt="原书第 19 页" loading="lazy"><figcaption>p.19 六项计分细则</figcaption></figure>
+<figure><img src="images_wire/page_20.jpg" alt="原书第 20 页" loading="lazy"><figcaption>p.20 计分示例</figcaption></figure>
+<figure><img src="images_wire/page_21.jpg" alt="原书第 21 页" loading="lazy"><figcaption>p.21 附录：大亨与专利板块</figcaption></figure>
+<figure><img src="images_wire/page_22.jpg" alt="原书第 22 页" loading="lazy"><figcaption>p.22 附录：合同图标、条件与链路图标</figcaption></figure>
+<figure><img src="images_wire/page_23.jpg" alt="原书第 23 页" loading="lazy"><figcaption>p.23 单人总则与额外配件</figcaption></figure>
+<figure><img src="images_wire/page_24.jpg" alt="原书第 24 页" loading="lazy"><figcaption>p.24 自动机准备</figcaption></figure>
+<figure><img src="images_wire/page_25.jpg" alt="原书第 25 页" loading="lazy"><figcaption>p.25 起始位置与奖励处理</figcaption></figure>
+<figure><img src="images_wire/page_26.jpg" alt="原书第 26 页" loading="lazy"><figcaption>p.26 示例、四组行动板块与难度</figcaption></figure>
+<figure><img src="images_wire/page_27.jpg" alt="原书第 27 页" loading="lazy"><figcaption>p.27 自动机回合：架设、传输、调制</figcaption></figure>
+<figure><img src="images_wire/page_28.jpg" alt="原书第 28 页" loading="lazy"><figcaption>p.28 融资、计分与制作名单</figcaption></figure>
+</details>
+</section>
+
+<div class="foot">
+无线时代 · 学习版规则　｜　依据英文原书《Wireless》Rulebook（28 页）与中文版既定译法编写<br>
+按规则结构重排，非官方规则书；规则裁决以英文原书为准，板块印值与配件数量以实体配件为准。
+</div>
+</main>
+</div>
+</body>
+</html>
