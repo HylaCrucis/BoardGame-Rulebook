@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>海外之地 · 学习版规则（Outremer）</title>
+<style>
+  :root{
+    --bg:#fbf7f0; --paper:#fffdf9; --ink:#2f2a28; --soft:#6b615c;
+    --line:#e3d8c8; --line2:#d3c4ae;
+    --red:#a2303c; --red-l:#fbecec; --blue:#3b5b8c; --blue-l:#eaf0f9;
+    --gold:#a9761c; --gold-l:#fbf1dc; --green:#3d7a55; --green-l:#e9f4ec;
+    --purple:#6b4a86; --purple-l:#f1eaf7;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"PingFang SC","Microsoft YaHei","Noto Sans SC",Arial,sans-serif;
+    font-size:15.5px;line-height:1.85;}
+  .backbar{position:sticky;top:0;z-index:60;height:44px;box-sizing:border-box;
+    display:flex;align-items:center;gap:10px;padding:0 16px;
+    background:var(--paper);border-bottom:1px solid var(--line);font-size:13px;}
+  .backbar a{display:inline-flex;align-items:center;min-height:32px;padding:0 12px;
+    border:1px solid var(--line2);border-radius:8px;background:#fff;
+    color:var(--purple);text-decoration:none;white-space:nowrap;}
+  .backbar a:active{background:var(--purple-l);}
+  .backbar .bb-t{margin-left:auto;font-size:12px;color:var(--soft);}
+  .layout{display:flex;align-items:flex-start;max-width:1280px;margin:0 auto;}
+  nav.toc{position:sticky;top:44px;align-self:flex-start;width:238px;flex:0 0 238px;
+    height:calc(100vh - 44px);overflow-y:auto;background:#fffdf9;border-right:1px solid var(--line);
+    padding:22px 14px 40px;font-size:13px;}
+  nav.toc .brand{font-size:17px;font-weight:800;color:var(--red);margin:0 0 4px;}
+  nav.toc .brand-s{font-size:11.5px;color:var(--soft);margin:0 0 16px;letter-spacing:.04em;}
+  nav.toc .grp{margin:16px 0 5px;font-size:11px;color:var(--gold);font-weight:700;letter-spacing:.12em;}
+  nav.toc a{display:block;color:#49403b;text-decoration:none;padding:4px 9px;border-radius:6px;}
+  nav.toc a:hover{background:var(--red-l);color:var(--red);}
+  main{flex:1 1 auto;min-width:0;padding:0 42px 90px;}
+  .hero{background:linear-gradient(150deg,#7c1f2b,#a2303c 55%,#bd5a4a);
+    color:#fff8f0;border-radius:0 0 20px 20px;padding:40px 42px 34px;margin-bottom:26px;
+    box-shadow:0 8px 26px rgba(124,31,43,.18);}
+  .hero h1{margin:0;font-size:34px;letter-spacing:.02em;}
+  .hero .en{font-size:14px;opacity:.8;margin:2px 0 12px;letter-spacing:.06em;}
+  .hero .desc{font-size:16px;max-width:760px;line-height:1.8;}
+  .hero .meta{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px;}
+  .hero .meta span{border:1px solid rgba(255,255,255,.5);border-radius:20px;padding:3px 13px;font-size:12.5px;}
+  .stand{margin-top:14px;background:#fff6e2;border:1px solid #e8d2a2;border-left:5px solid var(--gold);
+    border-radius:0 10px 10px 0;padding:12px 18px;font-size:14px;color:#5c4a26;}
+  section{padding:22px 0 14px;border-bottom:1px dashed var(--line2);scroll-margin-top:14px;}
+  h2{font-size:25px;color:var(--red);margin:8px 0 4px;line-height:1.4;}
+  h2 .n{display:inline-block;background:var(--red);color:#fff;font-size:14px;
+    min-width:30px;height:30px;line-height:30px;text-align:center;border-radius:8px;
+    margin-right:10px;vertical-align:3px;font-weight:700;}
+  h3{font-size:18.5px;color:#3a3230;margin:26px 0 6px;border-left:4px solid var(--gold);padding-left:10px;}
+  h4{font-size:16px;color:var(--blue);margin:18px 0 4px;}
+  p{margin:9px 0;}
+  ul,ol{margin:9px 0 9px 2px;padding-left:22px;}
+  li{margin:5px 0;}
+  b,strong{color:var(--red);}
+  .goal{background:var(--blue-l);border:1px solid #cfdcf0;border-radius:9px;
+    padding:8px 14px;font-size:13.5px;color:#2f466c;margin:8px 0 16px;}
+  .goal b{color:#2f466c;}
+  .pg{display:inline-block;background:#f0e7d8;color:#7d6231;border:1px solid #e2d2b6;
+    border-radius:5px;font-size:11px;padding:0 6px;line-height:18px;vertical-align:1px;
+    margin-left:4px;font-weight:600;white-space:nowrap;font-family:Arial,sans-serif;}
+  .key{background:var(--green-l);border:1px solid #c9e2d1;border-left:5px solid var(--green);
+    padding:11px 16px;border-radius:0 10px 10px 0;margin:13px 0;}
+  .key b{color:var(--green);}
+  .warn{background:var(--red-l);border:1px solid #eed3d3;border-left:5px solid var(--red);
+    padding:11px 16px;border-radius:0 10px 10px 0;margin:13px 0;}
+  .warn b{color:var(--red);}
+  .tip{background:var(--gold-l);border:1px solid #eddcb8;border-left:5px solid var(--gold);
+    padding:11px 16px;border-radius:0 10px 10px 0;margin:13px 0;}
+  .tip b{color:var(--gold);}
+  .note{background:#f4f1ec;border:1px solid var(--line);border-radius:9px;padding:10px 15px;
+    margin:12px 0;font-size:14px;color:#514844;}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px;background:var(--paper);}
+  th,td{border:1px solid var(--line2);padding:8px 11px;text-align:left;vertical-align:top;}
+  th{background:#f4e9dd;color:#5d4022;font-weight:700;}
+  tr:nth-child(even) td{background:#fdf9f3;}
+  td.c,th.c{text-align:center;}
+  .steps{list-style:none;padding:0;counter-reset:st;margin:14px 0;}
+  .steps>li{position:relative;padding:10px 14px 10px 50px;margin:9px 0;background:var(--paper);
+    border:1px solid var(--line);border-radius:10px;}
+  .steps>li::before{counter-increment:st;content:counter(st);position:absolute;left:12px;top:11px;
+    width:26px;height:26px;background:var(--red);color:#fff;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;}
+  .steps>li>ol{margin:6px 0;padding-left:20px;}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:11px;
+    padding:13px 17px;margin:11px 0;box-shadow:0 2px 6px rgba(80,60,40,.04);}
+  .card .t{font-weight:800;color:var(--red);font-size:16px;margin-bottom:3px;}
+  .card .t .s{display:inline-block;background:var(--red);color:#fff;border-radius:5px;
+    font-size:12px;padding:1px 7px;margin-right:8px;}
+  .card.blue .t{color:var(--blue);} .card.blue .t .s{background:var(--blue);}
+  .card.green .t{color:var(--green);} .card.green .t .s{background:var(--green);}
+  .card.gold .t{color:var(--gold);} .card.gold .t .s{background:var(--gold);}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+  .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;}
+  .mini{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:11px 13px;}
+  .mini .h{font-weight:800;font-size:14px;margin-bottom:4px;}
+  .mini .v{font-size:13px;color:var(--soft);line-height:1.7;}
+  .fig{margin:18px 0;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;}
+  .fig svg{display:block;width:100%;height:auto;}
+  .figcap{font-size:12.5px;color:var(--soft);margin-top:8px;text-align:center;}
+  details{margin:12px 0;background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:8px 14px;}
+  summary{cursor:pointer;font-size:13.5px;color:var(--blue);font-weight:600;}
+  details img{display:block;max-width:100%;margin:12px auto;border:1px solid var(--line);border-radius:8px;}
+  .pit{counter-reset:pit;list-style:none;padding:0;margin:14px 0;}
+  .pit li{position:relative;padding:9px 14px 9px 46px;margin:7px 0;background:var(--paper);
+    border:1px solid var(--line);border-radius:9px;font-size:14.5px;}
+  .pit li::before{counter-increment:pit;content:"✕ " counter(pit);position:absolute;left:10px;top:9px;
+    color:#fff;background:var(--red);border-radius:6px;font-size:11px;padding:1px 6px;font-weight:700;}
+  .bad{color:var(--red);text-decoration:line-through;}
+  .good{color:var(--green);font-weight:700;}
+  .tagR{color:var(--red);font-weight:700;} .tagB{color:var(--blue);font-weight:700;}
+  .tagG{color:var(--gold);font-weight:700;}
+  .why{background:#eef3fa;border:1px solid #cddcee;border-left:5px solid var(--blue);
+    padding:12px 17px;border-radius:0 10px 10px 0;margin:13px 0;font-size:14.5px;}
+  .why b{color:#2f466c;}
+  .why .wt{font-weight:800;color:#2f466c;display:block;margin-bottom:3px;}
+  .idx{font-size:13.5px;}
+  .foot{margin-top:34px;font-size:12.5px;color:var(--soft);text-align:center;line-height:1.9;}
+  @media(max-width:960px){
+    .layout{flex-direction:column;} nav.toc{position:static;width:100%;height:auto;flex-basis:auto;border-right:0;border-bottom:1px solid var(--line);}
+    main{padding:0 18px 60px;} .grid2,.grid4{grid-template-columns:1fr 1fr;}
+  }
+  @media(max-width:640px){.backbar{height:40px;padding:0 10px;} .backbar a{min-height:30px;padding:0 9px;font-size:12.5px;} .backbar .bb-t{display:none;}
+  .grid2,.grid4{grid-template-columns:1fr;} main{padding:0 12px 50px;} .hero{padding:28px 20px;} .hero h1{font-size:26px;}}
+
+  /* == 窄屏目录：横向胶囊，正文首屏可见 == */
+  @media(max-width:960px){
+    nav.toc{display:flex;flex-wrap:nowrap;gap:6px;align-items:center;
+      height:auto;max-height:none;overflow-x:auto;overflow-y:hidden;
+      padding:10px 12px;border-right:0;border-bottom:1px solid var(--line);
+      -webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;}
+    nav.toc .brand,nav.toc .brand-s,nav.toc .grp{display:none;}
+    nav.toc a{flex:0 0 auto;white-space:nowrap;padding:6px 11px;
+      border:1px solid var(--line2);border-radius:16px;background:var(--paper);
+      font-size:12.5px;line-height:1.4;}
+    nav.toc a:hover{background:var(--red-l);}
+    nav.toc a[style]{padding-left:11px;}
+  }
+
+  /* == 学习版通用补充（各本共用） == */
+  .flow{margin:18px 0;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;}
+  .flow svg{display:block;width:100%;height:auto;}
+  .pgs{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin:14px 0;}
+  .pgs figure{margin:0;background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:8px;}
+  .pgs img{display:block;width:100%;height:auto;margin:0;border:1px solid var(--line);border-radius:6px;}
+  .pgs figcaption{font-size:12px;color:var(--soft);text-align:center;margin-top:6px;line-height:1.5;}
+  @media(max-width:640px){.pgs{grid-template-columns:1fr 1fr;gap:9px;}}
+  /* 窄屏压缩首屏：hero 与体例框收紧，第 0 节进入首屏 */
+  @media(max-width:640px){
+    .hero{padding:22px 18px 24px;margin-bottom:16px;}
+    .hero h1{font-size:24px;} .hero .desc{font-size:14px;line-height:1.65;margin-top:8px;}
+    .hero .meta{margin-top:12px;gap:6px;} .hero .meta span{font-size:11.5px;padding:2px 10px;}
+    .stand{margin-top:10px;padding:9px 12px;font-size:12.5px;line-height:1.6;}
+  }
+</style>
+</head>
+<body>
+<div class="backbar"><a href="index.html">← 学习版目录</a><span class="bb-t">海外之地 · 学习版规则</span></div>
+<div class="layout">
+<nav class="toc">
+  <div class="brand">海外之地</div>
+  <div class="brand-s">学习版规则 · Outremer</div>
+  <div class="grp">规则概要</div>
+  <a href="#s0">0 · 游戏概要与目标</a>
+  <a href="#s1">1 · 初局设置</a>
+  <a href="#s2">2 · 版图与三类轨道</a>
+  <div class="grp">一轮流程</div>
+  <a href="#s3">3 · 一轮的四个阶段</a>
+  <a href="#s4">4 · 事件阶段</a>
+  <div class="grp">命令</div>
+  <a href="#s5">5 · 计划阶段</a>
+  <a href="#s6">6 · 命令阶段</a>
+  <a href="#s7">7 · 建造命令</a>
+  <a href="#s8">8 · 祈祷命令</a>
+  <a href="#s9">9 · 征召命令</a>
+  <a href="#s10">10 · 行军命令</a>
+  <div class="grp">战斗与结算</div>
+  <a href="#s11">11 · 战斗</a>
+  <a href="#s12">12 · 收入阶段</a>
+  <a href="#s13">13 · 终局与计分</a>
+  <div class="grp">少人局与附录</div>
+  <a href="#s14">14 · 二至三人局</a>
+  <a href="#s15">15 · 常见误读与速查</a>
+</nav>
+
+<main>
+<header class="hero">
+  <h1>海外之地 · 学习版规则</h1>
+  <div class="en">OUTREMER　｜　按规则结构重排，不按原书章节顺序</div>
+  <div class="desc">以一条「放命令 → 结算命令 → 收税计分」的循环为主线，展开命令十字的内格与外格、四种命令的两种强度、圣徒轨与圣地、撒拉逊轨的劫掠与轨道奖励、战斗的四阶段，以及二至三人局的自动机。</div>
+  <div class="meta"><span>二至四人 · 每轮四阶段</span><span>外格命令跨轮生效</span><span>三条轨道各管一件事</span><span>依据英文原书 36 页</span></div>
+</header>
+
+<div class="stand">
+  <b>体例：</b>按学习顺序重排，章节与原书不对应；每条结论后的 <span class="pg">p.N</span> 为英文原书页码。
+  规则裁决以<b>英文原书页图</b>为准；术语沿用已上线中文版的既定译法。原书未列之处只记录、不代填，起始钱币与各国板印值以实体配件为准。第 15 节附 36 张原书页图。
+  正文按规则作用展开，先述状态变化，再列执行步骤。
+</div>
+
+<section id="s0">
+<h2><span class="n">0</span>游戏概要与目标</h2>
+<p>《海外之地》讲的是第一次十字军东征结束之后、黎凡特出现四个十字军国家的那段时期：它们彼此争夺影响力，与撒拉逊人开战，也在内部互相算计。玩家各领一国，在若干轮之内积累财富、发展城市、调度主教、率领骑士出征。<span class="pg">p.2</span></p>
+<p>史实底稿：一〇九九年七月十五日，十字军攻下耶路撒冷；此后相继立国——埃德萨伯国（一〇九八）、安条克公国（一〇九八）、耶路撒冷王国（一〇九九）、的黎波里伯国（一一〇九）。游戏取这段之后的一段时间为背景。<span class="pg">p.2</span></p>
+<div class="why"><span class="wt">规则主线</span>每一轮由四个阶段串成一条链：事件阶段由撒拉逊人增援与劫掠施压，计划阶段把命令放到命令十字上，命令阶段按固定顺序结算这些命令，收入阶段收钱、收分并把市场补满。玩家真正被反复考核的是三件事——控制的城市数量、在圣徒轨上的位置、以及手上的兵力与战术。这三条线分别由建造、祈祷与征召、行军四类命令推动。<span class="pg">p.16</span><span class="pg">p.18</span><span class="pg">p.23</span></div>
+<div class="grid2">
+  <div class="card"><div class="t">本作的结构特征</div>命令分两轮生效：放到内格的命令本轮结算，放到外格的命令下一轮才结算，且带强化效果。计划阶段因此同时在安排两轮，而不是只安排本轮。<span class="pg">p.18</span><span class="pg">p.19</span></div>
+  <div class="card blue"><div class="t">分数的来源</div>轮末两条线：总督卡上已满足的每条条件、自己拥有的每处圣地。<span class="pg">p.27</span>终局再加三项：诏书条件、霸权或圣德各 8 分（两项同时满足 16 分）、储藏区每 4 钱币 1 分。<span class="pg">p.28</span></div>
+</div>
+<table>
+  <tr><th>项目</th><th>取值</th><th>依据</th></tr>
+  <tr><td>人数与时长</td><td>二至四人，十二岁以上，一百二十至一百八十分钟<span class="pg">p.1</span></td><td>四块国家板与四色配件</td></tr>
+  <tr><td>轮数</td><td>至多六轮；事件牌堆用尽即终局<span class="pg">p.28</span></td><td>准备时事件牌堆为 6 张，每轮消耗 1 张</td></tr>
+  <tr><td>轮内结构</td><td>事件、计划、命令、收入，四段固定顺序<span class="pg">p.16</span></td><td>命令阶段的结算顺序另按扇区固定</td></tr>
+  <tr><td>每人每轮的命令数</td><td>2 枚，均可放内格；其中最多 1 枚可放外格，改在下一轮结算<span class="pg">p.17</span></td><td>外格每轮每人限 1 枚<span class="pg">p.18</span></td></tr>
+  <tr><td>胜负</td><td>影响分最高者胜；平手依次比终局条件数与圣徒轨位置<span class="pg">p.28</span></td><td>终局条件只在轮末检查<span class="pg">p.28</span></td></tr>
+</table>
+<h3>0.1 四个国家的起始差异</h3>
+<table>
+  <tr><th>国家</th><th>颜色</th><th>起始单位</th><th>对应的城市名</th></tr>
+  <tr><td>耶路撒冷</td><td>白<span class="pg">p.13</span></td><td>4<span class="pg">p.11</span></td><td>耶路撒冷</td></tr>
+  <tr><td>的黎波里</td><td>黄<span class="pg">p.13</span></td><td>5<span class="pg">p.11</span></td><td>的黎波里</td></tr>
+  <tr><td>埃德萨</td><td>蓝<span class="pg">p.13</span></td><td>5<span class="pg">p.11</span></td><td>埃德萨</td></tr>
+  <tr><td>安条克</td><td>红<span class="pg">p.13</span></td><td>6<span class="pg">p.11</span></td><td>安条克</td></tr>
+</table>
+<p>起始钱币印在各国的国家板上，规则书不另列数值；每人另有 1 枚与首都同色的资源，以及 5 张本国起始战术卡。<span class="pg">p.13</span></p>
+<div class="note">国家的首都与国名同名，且首都计数器始终放在国家板最左侧的城市格。这块格子是国家板上的固定位置，首都一旦失守，就要把另一座城的计数器移进这一格。<span class="pg">p.31</span></div>
+<h3>0.2 五种资源与钱币</h3>
+<table>
+  <tr><th>资源</th><th>产出城市</th><th>说明</th></tr>
+  <tr><td>木材</td><td>阿帕梅亚、塔德穆尔<span class="pg">p.11</span></td><td>与城市颜色、盾形图标一致</td></tr>
+  <tr><td>蜡烛</td><td>巴勒贝克、图贝塞尔<span class="pg">p.11</span></td><td>同上</td></tr>
+  <tr><td>钢铁</td><td>大马士革、托尔托萨<span class="pg">p.11</span></td><td>同上</td></tr>
+  <tr><td>马匹</td><td>阿卡、阿勒颇<span class="pg">p.11</span></td><td>同上</td></tr>
+  <tr><td>香料</td><td>霍姆斯<span class="pg">p.11</span></td><td>可当作任意一种资源使用<span class="pg">p.31</span></td></tr>
+</table>
+<p>钱币按面值计算，不按枚数：取用与支付都以标记上的数字为准。资源同样以标记为单位，支付时把标记翻到灰面，收入阶段再翻回。资源可以作为钱币的替代品付出，反过来也成立——两者之间恒为一比一。<span class="pg">p.13</span><span class="pg">p.20</span></p>
+</section>
+
+<section id="s1">
+<h2><span class="n">1</span>初局设置</h2>
+<p>设置分两段：先由全体共同布置主板上的七个区域，再由每位玩家布置自己的国家板。少人局的追加限制写在白框里，遇到白框必须照做。<span class="pg">p.9</span><span class="pg">p.13</span></p>
+<h3>1.1 公共准备 A 至 G</h3>
+<table>
+  <tr><th>区</th><th>做法</th></tr>
+  <tr><td>A 事件区</td><td>洗混事件卡，不看内容抽 6 张面朝下叠成事件牌堆，其余移出游戏；8 枚突袭标记面朝下洗混，在撒拉逊轨道每个空位各放 1 枚，余下 3 枚不看内容移出；撒拉逊卡洗混成堆，放在事件卡下方的卡槽。<span class="pg">p.9</span></td></tr>
+  <tr><td>B 建筑区</td><td>建筑卡按牌背分 3 叠，各自洗混后放进建筑区上方的卡槽；最右那叠是 0 级（牌背为圆规），翻到正面露出巴扎，0 级卡直接从牌堆买、不占市场格；最左那叠只放 IV 级，从顶上取 3 张填进市场最左 3 格；中间的 I–II 叠取 5 张填满其余格。<span class="pg">p.9</span></td></tr>
+  <tr><td>C 战术区</td><td>缎带下方印国家纹章的 20 张为 0 级，先放一边；IV 级洗混成堆放进单白剑卡槽，取 3 张填进市场最右 3 格；I–II 级洗混放进单黑剑卡槽，取 5 张填满其余格。<span class="pg">p.10</span></td></tr>
+  <tr><td>D 间谍区与总督区</td><td>间谍卡洗混放进黑瓶卡槽；第一局把起始总督卡（上缎带印纹章）取出，其余洗混放进单矛卡槽，取 5 张填进 5 个总督市场格；已玩过则全部总督卡一起洗混。<span class="pg">p.10</span></td></tr>
+  <tr><td>E 圣徒区</td><td>每个参战国取 1 枚木制盾形标记，放进圣徒轨上与本国纹章对应的格子；敕令按等级分两堆，I 级（渡鸦背）放轨道左边，II 级（鸽子背）放右边。<span class="pg">p.11</span></td></tr>
+  <tr><td>F 黎凡特地图</td><td>霍姆斯放绿色城墙标记、3 面朝上；其余非首都城市各放 1 枚城墙标记、2 面朝上，标记符号须与墙上图标相符；非首都城市各放 1 枚本城颜色的资源；非首都城市各放 1 枚撒拉逊单位，5 座中央城市再各加 1 枚；起始单位进首都；每人 1 枚 I 级主教面朝下进首都；钱币、影响分、剩余资源与撒拉逊单位、城市计数器构成公共供应堆，计数器顶片转到亮色扇区作为起始等级。<span class="pg">p.11</span><span class="pg">p.12</span></td></tr>
+  <tr><td>G 战场</td><td>战场板放在主板旁，战斗标记放在轨道 0 格、蓝面朝上。<span class="pg">p.12</span></td></tr>
+</table>
+<div class="note">城市等级的显示有两处必须一致：城墙标记（或墙上印的城墙图标）的数值，与三片式计数器顶片露出的扇区。升级费用另印在扇区里，与等级数值不相等；首都开局不放假城墙标记，直接以板上印的 1 级图标为准。<span class="pg">p.11</span><span class="pg">p.20</span></div>
+<h3>1.2 个人准备 11 步</h3>
+<table>
+  <tr><th>步</th><th>做法</th></tr>
+  <tr><td>1</td><td>选定国家的国家板放在面前；未使用的国家板移出，但其纹章标记翻到限制面，留在主板旁当限制标记。<span class="pg">p.9</span><span class="pg">p.13</span></td></tr>
+  <tr><td>2</td><td>领起始钱币，放进国家板的储藏区；数额按国家板所印。<span class="pg">p.13</span></td></tr>
+  <tr><td>3</td><td>领印有本国纹章的全部剩余单位标记与主教标记，构成个人供应堆；主教标记始终面朝下，只有所有者可查看数值。<span class="pg">p.13</span></td></tr>
+  <tr><td>4</td><td>领 4 枚本国颜色的命令标记（建造、祈祷、征召、行军各 1 枚，双面）。<span class="pg">p.13</span></td></tr>
+  <tr><td>5</td><td>从先前取出的 0 级战术卡中领 5 张起始战术，正面朝上放在国家板旁。<span class="pg">p.13</span></td></tr>
+  <tr><td>6</td><td>领首都的三片式城市计数器，放进国家板第一个城市格。<span class="pg">p.13</span></td></tr>
+  <tr><td>7</td><td>随机领 1 张教皇诏书卡，面朝下放好并保密；发完余下的移出游戏。老手变体：抽 2 张留 1 张，另一张移出。<span class="pg">p.13</span></td></tr>
+  <tr><td>8</td><td>领 1 枚与首都同色的资源标记，正面朝上放进储藏区。<span class="pg">p.13</span></td></tr>
+  <tr><td>9</td><td>第一局领本国起始总督卡，按图示插进首都计数器的中片与底片之间；已玩过则抽 2 张留 1 张，另一张放回总督牌堆底部。<span class="pg">p.13</span></td></tr>
+  <tr><td>10</td><td>领 1 张双面速查卡。<span class="pg">p.13</span></td></tr>
+  <tr><td>11</td><td>领 4 枚本国颜色盾形标记，以及每位对手颜色各 1 枚；这些标记也可当限制标记使用。<span class="pg">p.13</span></td></tr>
+</table>
+<h3>1.3 少人局的追加限制</h3>
+<table>
+  <tr><th>人数</th><th>地图</th><th>圣徒轨</th><th>市场与自动机</th></tr>
+  <tr><td>三人</td><td>未参战国的首都不可用：城墙图标盖上限制标记，该城整局当作不存在<span class="pg">p.12</span></td><td>未参战国各取 1 枚盾牌，放进最右格<span class="pg">p.11</span></td><td>建筑市场 4 爪锤位、战术市场 4 剑位、总督市场 4 矛位各放限制标记；自动机取 5 枚标记<span class="pg">p.9</span><span class="pg">p.10</span><span class="pg">p.12</span></td></tr>
+  <tr><td>二人</td><td>两个未参战国首都都不可用，夹在两者之间的那座城同样不可用<span class="pg">p.12</span></td><td>未参战国各取 1 枚盾牌，放进最右两格<span class="pg">p.11</span></td><td>建筑市场 3 与 4 爪锤位、战术市场 3 与 4 剑位、总督市场 3 与 4 矛位均不可用；自动机取全部 10 枚标记<span class="pg">p.9</span><span class="pg">p.10</span><span class="pg">p.12</span></td></tr>
+</table>
+<p>盾形标记的发放数随人数变化：四人局本国 4 枚、每位对手 1 枚；三人局本国 3 枚、每位对手 2 枚；二人局本国 4 枚、对手 3 枚。<span class="pg">p.13</span></p>
+<div class="warn"><b>二人局的组合限制</b>受上一条规则约束，二人局只能按四种组合对局：耶路撒冷对的黎波里、的黎波里对安条克、安条克对埃德萨、耶路撒冷对埃德萨。其余组合无法成立。<span class="pg">p.12</span></div>
+<div class="why"><span class="wt">规则作用</span>「当作不存在」是硬性删除，不是封锁：那座城不能放任何标记，任何人不能进入或穿过。它因此会切断地图上的通路，走廊被打断后，相邻关系随之改变，行军与劫掠的可达范围一并缩小。少人局的自动机与限制标记都服务于同一件事——把四人局的棋盘压缩到可用人数，而不改规则本身。<span class="pg">p.12</span></div>
+</section>
+
+<section id="s2">
+<h2><span class="n">2</span>版图与三类轨道</h2>
+<p>一局需要的版图有三块：主板承载黎凡特地图与五个公共区域，国家板承载每位玩家的城市、储藏与建筑，战场板只在战斗时使用。三块板之间靠三类轨道连接：圣徒轨、撒拉逊轨、战场轨道。<span class="pg">p.9</span><span class="pg">p.13</span><span class="pg">p.12</span></p>
+<h3>2.1 主板上的五个公共区域</h3>
+<table>
+  <tr><th>区域</th><th>内容</th><th>规则作用</th></tr>
+  <tr><td>事件区</td><td>事件牌堆、撒拉逊轨道、撒拉逊牌堆<span class="pg">p.9</span></td><td>每轮开一张事件卡；轨道定本轮激活色与轨道奖励<span class="pg">p.16</span><span class="pg">p.17</span></td></tr>
+  <tr><td>建筑区</td><td>三叠建筑牌堆与 8 格市场<span class="pg">p.9</span></td><td>建造命令的取卡来源；市场不自动补，只在收入阶段刷新<span class="pg">p.27</span></td></tr>
+  <tr><td>战术区</td><td>IV 堆、I–II 堆与 8 格市场<span class="pg">p.10</span></td><td>征召命令学习战术的来源；战斗中打出的卡来自手牌<span class="pg">p.24</span></td></tr>
+  <tr><td>间谍区与总督区</td><td>间谍牌堆、总督牌堆与 5 格总督市场<span class="pg">p.10</span></td><td>外格命令抽间谍卡；总督卡挂在城市计数器上并每轮产分<span class="pg">p.18</span><span class="pg">p.27</span></td></tr>
+  <tr><td>圣徒区</td><td>圣徒轨、两叠敕令牌堆<span class="pg">p.11</span></td><td>决定回合顺序，并在前进时发放敕令与主教行动<span class="pg">p.22</span></td></tr>
+</table>
+<h3>2.2 国家板的四个区块</h3>
+<table>
+  <tr><th>区块</th><th>内容</th><th>规则作用</th></tr>
+  <tr><td>城市格</td><td>左起第一个城市格放首都；右侧留有半格标记<span class="pg">p.31</span></td><td>计数器超出板面时沿右缘续排，该标记同时是霸权终局条件的凭据<span class="pg">p.31</span></td></tr>
+  <tr><td>储藏区</td><td>钱币与资源标记<span class="pg">p.13</span></td><td>支付时从这里取；已支付的资源翻灰面<span class="pg">p.20</span></td></tr>
+  <tr><td>建筑区</td><td>4 个建筑格<span class="pg">p.13</span></td><td>建筑卡按列叠放，每张盖住一个建筑符号<span class="pg">p.21</span></td></tr>
+  <tr><td>间谍区</td><td>左侧 3 个活跃间谍格<span class="pg">p.32</span></td><td>激活的间谍卡放这里，并压上目标玩家的盾形标记<span class="pg">p.32</span></td></tr>
+</table>
+<h3>2.3 两条决策轨道与一条战斗轨道</h3>
+<div class="grid2">
+  <div class="card"><div class="t"><span class="s">圣徒轨</span>顺序与奖励合一</div>从左到右排各国标记，最右者为起始玩家。前进时经过、停在或跳过带图标的格子都取得奖励，绕回起点继续循环。<span class="pg">p.22</span><span class="pg">p.29</span></div>
+  <div class="card blue"><div class="t"><span class="s">撒拉逊轨</span>激活色与奖励</div>5 个格子，开局各放 1 枚面朝下的突袭标记。第 1 轮先翻最上面那枚，第 2 轮起按已翻开的颜色行动；每轮结算完毕后移出该标记、领取其下方格子所印的奖励，再翻下一枚。<span class="pg">p.9</span><span class="pg">p.17</span></div>
+</div>
+<div class="why"><span class="wt">规则作用</span>圣徒轨把两件事绑在同一条进度上：走得越远，回合顺序越靠前，奖励也越多。因此祈祷命令的收益不是单一分数，而是「先手权 + 敕令 + 主教行动」的复合收益。撒拉逊轨正相反，它是一条倒计时：每轮消耗一枚标记，剩余格数即还能劫掠的轮数，而已经翻开的颜色决定本轮受打击的城市。<span class="pg">p.17</span><span class="pg">p.22</span></div>
+<h3>2.4 城市计数器的三片结构</h3>
+<p>计数器由顶片、中片、底片组成，用塑料铆钉固定，顶片可旋转。顶片露出的扇区显示三样信息：该城产出的资源、每轮收入阶段产出的钱币、以及升到下一级所需费用。1 级与 2 级的扇区印升级费用，3 级扇区不再印。<span class="pg">p.8</span><span class="pg">p.20</span></p>
+<p>等级变化时，顶片顺时针（升级）或逆时针（荒废）转一格，并同步换掉城墙标记；若该城只用板上印的城墙图标，则从公共供应堆取对应图标放上去。<span class="pg">p.20</span><span class="pg">p.25</span></p>
+<div class="note">中片与底片之间留有一道缝，总督卡就插在这里。城市易主时，计数器与总督卡一起交接；撒拉逊人夺城时，总督卡被弃掉，计数器退回公共供应堆。<span class="pg">p.13</span><span class="pg">p.16</span></div>
+<h3>2.5 霍姆斯的三条特例</h3>
+<p>霍姆斯在地图正中央，规则上处处例外：城墙标记为 3（其余非首都城市为 2）；永不获得撒拉逊增援；由十字军控制时，每轮事件阶段在常规劫掠目标之外必定额外被劫掠。<span class="pg">p.11</span><span class="pg">p.16</span><span class="pg">p.31</span></p>
+<p>夺取霍姆斯的玩家取得该城的特殊能力卡，放在自己国家板旁。每轮一次，控制者可把自己放进内格的一枚命令强化——但不因此抽间谍卡。<span class="pg">p.31</span></p>
+<p>霍姆斯产出香料。香料可当作任意一种资源使用，也可用于总督条件与教皇诏书。<span class="pg">p.31</span><span class="pg">p.33</span></p>
+</section>
+
+<section id="s3">
+<h2><span class="n">3</span>一轮的四个阶段</h2>
+<p>一局由若干轮构成，每轮按事件、计划、命令、收入四段顺序执行，不能调换。<span class="pg">p.16</span></p>
+<div class="fig">
+<svg viewBox="0 0 900 300" xmlns="http://www.w3.org/2000/svg">
+  <defs><marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#8c2f2f"/></marker></defs>
+  <rect x="0" y="0" width="900" height="300" fill="#fdf8ee"/>
+  <text x="20" y="30" font-size="16" font-weight="700" fill="#8c2f2f">一轮的四个阶段</text>
+  <g font-size="13" fill="#2f2a28">
+    <rect x="30" y="60" width="190" height="76" rx="9" fill="#f6ecd8" stroke="#c9a76a"/>
+    <text x="46" y="84" font-weight="700" fill="#8c2f2f">① 事件阶段</text>
+    <text x="46" y="106">翻事件卡 · 增援 · 劫掠</text>
+    <text x="46" y="126" fill="#6b615c">撒拉逊人先动手</text>
+
+    <rect x="250" y="60" width="190" height="76" rx="9" fill="#eef3fa" stroke="#9db4d0"/>
+    <text x="266" y="84" font-weight="700" fill="#2f4858">② 计划阶段</text>
+    <text x="266" y="106">每人放 2 枚命令标记</text>
+    <text x="266" y="126" fill="#6b615c">内格本轮 · 外格下轮</text>
+
+    <rect x="470" y="60" width="190" height="76" rx="9" fill="#eef3fa" stroke="#9db4d0"/>
+    <text x="486" y="84" font-weight="700" fill="#2f4858">③ 命令阶段</text>
+    <text x="486" y="106">建造→祈祷→征召→行军</text>
+    <text x="486" y="126" fill="#6b615c">只结算内格</text>
+
+    <rect x="690" y="60" width="180" height="76" rx="9" fill="#f6ecd8" stroke="#c9a76a"/>
+    <text x="706" y="84" font-weight="700" fill="#8c2f2f">④ 收入阶段</text>
+    <text x="706" y="106">征税 · 补市场</text>
+    <text x="706" y="126" fill="#6b615c">总督与圣地计分</text>
+  </g>
+  <line x1="222" y1="98" x2="246" y2="98" stroke="#8c2f2f" stroke-width="2" marker-end="url(#ar)"/>
+  <line x1="442" y1="98" x2="466" y2="98" stroke="#8c2f2f" stroke-width="2" marker-end="url(#ar)"/>
+  <line x1="662" y1="98" x2="686" y2="98" stroke="#8c2f2f" stroke-width="2" marker-end="url(#ar)"/>
+  <path d="M780 140 C780 190 470 190 470 200" fill="none" stroke="#8c2f2f" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#ar)"/>
+  <text x="520" y="215" font-size="12.5" fill="#6b615c">轮末检查终局条件；未触发则进入下一轮</text>
+
+  <rect x="30" y="235" width="840" height="46" rx="8" fill="#fff6e2" stroke="#e0c48c"/>
+  <text x="46" y="263" font-size="13" fill="#5c4a26">外格命令跨轮生效：本轮放的外格，在下一轮的命令阶段才结算，因此计划阶段同时在安排两轮。</text>
+</svg>
+<div class="figcap">四阶段流程与外格命令的跨轮关系</div>
+</div>
+<h3>3.1 阶段的交付关系</h3>
+<table>
+  <tr><th>阶段</th><th>产出</th><th>在下一阶段的用途</th></tr>
+  <tr><td>事件阶段</td><td>本轮生效的事件、激活色、劫掠结果<span class="pg">p.16</span></td><td>劫掠削弱城市单位，夺城则改变控制权与资源归属，进而影响命令阶段的可用兵力与收入阶段的收入<span class="pg">p.16</span></td></tr>
+  <tr><td>计划阶段</td><td>命令十字上的内格与外格布局<span class="pg">p.17</span></td><td>命令阶段只结算内格；外格整体平移到内格，留到下一轮<span class="pg">p.19</span></td></tr>
+  <tr><td>命令阶段</td><td>城市等级、建筑、战术、单位位置、主教分布、圣徒轨位置<span class="pg">p.19</span></td><td>收入阶段据此计税、判定圣地、结算总督条件<span class="pg">p.27</span></td></tr>
+  <tr><td>收入阶段</td><td>钱币、资源恢复、市场补满、影响分<span class="pg">p.27</span></td><td>下一轮计划阶段的支付能力，取决于这一段收到的钱币与资源</td></tr>
+</table>
+<h3>3.2 计分只发生在两处</h3>
+<p>轮末的计分出现在收入阶段第三步：总督卡上每条已满足的条件、以及每处圣地各 1 分。轮内其余步骤不产生影响分，命令与战斗本身也不直接给分。<span class="pg">p.27</span></p>
+<p>终局计分在游戏结束时一次结算，构成见 13 章。<span class="pg">p.28</span></p>
+<div class="why"><span class="wt">规则作用</span>四阶段的顺序决定压力的方向：事件阶段先削减你的单位与城市，命令阶段才提供补充的机会，收入阶段最后才结算分数。因此在同一轮里，被劫掠的城市既缺兵力、又缺收入、还可能失去总督带来的分——三处损失同时发生在不同步骤，不能只补一处。<span class="pg">p.16</span><span class="pg">p.27</span></div>
+</section>
+
+<section id="s4">
+<h2><span class="n">4</span>事件阶段</h2>
+<p>事件阶段由历史推动：撒拉逊人获得增援，并劫掠那些被夺走的城市。全部结算由起始玩家主持，起始玩家即圣徒轨上最靠右的那位。<span class="pg">p.16</span></p>
+<h3>4.1 事件卡</h3>
+<p>翻事件牌堆顶牌，朗读文字，然后结算。三种形态：立即结算、整轮持续有效、要求每位玩家做出选择。卡底绿框是撒拉逊劫掠的结果表，用来把劫掠差值换算成具体损失。<span class="pg">p.16</span></p>
+<p>卡上关键词与符号的含义，一律查书末的〈术语〉与〈符号速查〉两节；这两节同样适用于战术卡、敕令卡与总督卡。<span class="pg">p.16</span><span class="pg">p.32</span></p>
+<h3>4.2 撒拉逊行动的分轮差异</h3>
+<table>
+  <tr><th>轮次</th><th>做法</th></tr>
+  <tr><td>第 1 轮</td><td>跳过全部撒拉逊行动，只把位置最高的突袭标记翻到正面，然后直接进入计划阶段<span class="pg">p.16</span></td></tr>
+  <tr><td>第 2 轮起</td><td>看撒拉逊轨道上已翻开的那枚标记，其资源符号即本轮激活色；只有这一颜色的撒拉逊城市会启动<span class="pg">p.16</span></td></tr>
+</table>
+<p>轨道上的标记分两用：正面朝上的那枚决定本轮的激活色，其余面朝下的则是后续轮次的储备。每轮结算完劫掠后，翻开的标记被移出游戏，再翻下一枚。<span class="pg">p.16</span><span class="pg">p.17</span></p>
+<h3>4.3 增援</h3>
+<p>从公共供应堆，在每个颜色相符的撒拉逊城市各放 1 枚撒拉逊单位。供应堆若已无单位，这些城市本轮不再增援。<span class="pg">p.16</span></p>
+<div class="warn"><b>霍姆斯的例外</b>地图正中央的霍姆斯永远不获得增援——无论它由谁控制。<span class="pg">p.16</span><span class="pg">p.31</span></div>
+<h3>4.4 劫掠</h3>
+<p>撒拉逊人劫掠每座颜色相符的十字军城市。对每座这样的城市，从与它相邻的每个撒拉逊城市各派 1 枚单位过去；派出时不能取走该城的最后一枚单位。<span class="pg">p.16</span></p>
+<p>劫掠不是战斗：战斗规则不适用，玩家无法还击，只能承受。<span class="pg">p.16</span></p>
+<p>控制权的判定只有一条：城里有撒拉逊单位就是撒拉逊城市；城里有某位玩家的单位就是该玩家的十字军城市。劫掠与战斗中，防守方是当时控制该城的一方。<span class="pg">p.16</span></p>
+<div class="note">若被劫掠的城市分属不同玩家，按回合顺序（圣徒轨从右到左）结算，且必须把某位玩家全部被劫掠城市结算完，才开始下一位。若这些城市全属同一位玩家，该玩家可自定结算顺序。<span class="pg">p.16</span></div>
+<h3>4.5 劫掠结算</h3>
+<table>
+  <tr><th>项</th><th>算法</th></tr>
+  <tr><td>城市强度</td><td>城内单位数 ＋ 城墙加成（等于该城城墙标记或墙上城墙图标的数值）<span class="pg">p.16</span></td></tr>
+  <tr><td>劫掠方强度</td><td>参与劫掠的撒拉逊单位数 ＋ 撒拉逊轨道奖励<span class="pg">p.16</span><span class="pg">p.17</span></td></tr>
+  <tr><td>差值</td><td>城市强度减劫掠方强度，用结果对照本轮事件卡底部的结果表<span class="pg">p.16</span></td></tr>
+  <tr><td>未夺城</td><td>全部参与单位劫掠结束后各自返回原城<span class="pg">p.16</span></td></tr>
+</table>
+<div class="card"><div class="t"><span class="s">示例</span>埃德萨被劫掠</div>本轮激活色对应埃德萨。埃德萨有 3 座相邻撒拉逊城市，但只由阿勒颇与图贝塞尔各出 1 枚单位构成劫掠队（塔德穆尔只剩 1 枚，不能派最后一枚）；城内 3 枚单位、城墙标记为 3，结果值＝(3＋3)−2＝4。查事件卡：结果 4 表示控制埃德萨的玩家必须从该城移除 2 枚单位。结算后两枚撒拉逊单位各返阿勒颇与图贝塞尔。<span class="pg">p.17</span></div>
+<div class="note">「最后一枚」是一条通用保护：任何要求移除、消灭或移动单位的效果，都不得动到某座城的最后一枚单位；做不到时按能做到的最大限度执行。<span class="pg">p.32</span></div>
+<h3>4.6 如果撒拉逊人夺城</h3>
+<p>劫掠方强度大于或等于城市强度，该城失守，按四步处理：<span class="pg">p.17</span></p>
+<ol class="steps">
+  <li>城内该玩家的单位必须撤退到任意一座由同一玩家控制的相邻城市；若做不到，城内单位全部被消灭，退回个人供应堆。<span class="pg">p.17</span></li>
+  <li>撒拉逊人取得该城控制权，参与劫掠的全部单位留驻该城；城市等级不降低。<span class="pg">p.17</span></li>
+  <li>该城产出的全部资源标记退回公共供应堆。<span class="pg">p.17</span></li>
+  <li>从该城计数器上弃掉总督卡，计数器退回公共供应堆。<span class="pg">p.17</span></li>
+</ol>
+<h3>4.7 新目标与轨道奖励</h3>
+<p>劫掠结算完毕后，若撒拉逊轨道上有已翻开的标记，把它移出游戏，撒拉逊人取得该标记下方格子所印的奖励；然后翻开位置最高的突袭标记，作为下一轮的激活色。<span class="pg">p.17</span></p>
+<table>
+  <tr><th>奖励</th><th>效果</th><th>叠加规则</th></tr>
+  <tr><td>进攻与守备 +1</td><td>撒拉逊劫掠方强度与撒拉逊城市守备强度各 +1<span class="pg">p.17</span></td><td>多个此类效果可叠加</td></tr>
+  <tr><td>每城出兵 2 或 3</td><td>劫掠时每座撒拉逊城市改为贡献 2 枚或 3 枚非最后一枚单位<span class="pg">p.17</span></td><td>两者不叠加，只取较强的一个</td></tr>
+</table>
+<div class="why"><span class="wt">规则作用</span>劫掠的算法把城市等级直接换算成防御力：城墙加成等于等级，因此升级城市同时换来收入与守备。差值表又让损失可预期——同样的差值永远换算成同一档伤害，玩家可以据此判断某座城还能承受几次冲击。轨道奖励则是单向加压：+1 强度会同时抬高所有撒拉逊城市的守备，使后续夺城更难；出兵数则提高劫掠力度。两者只随时间变强，不回落。<span class="pg">p.16</span><span class="pg">p.17</span></div>
+</section>
+
+<section id="s5">
+<h2><span class="n">5</span>计划阶段</h2>
+<p>计划阶段决定本轮与下一轮的行动安排。玩家把命令标记放进命令十字，按回合顺序轮流放置，每人两次。<span class="pg">p.17</span></p>
+<h3>5.1 命令十字的四个扇区</h3>
+<p>每枚命令标记只能放进对应扇区：建造在左、祈祷在上、征召在右、行军在下。每个扇区有内格与外格两个位置。<span class="pg">p.18</span></p>
+<table>
+  <tr><th>位置</th><th>结算时机</th><th>附加规则</th></tr>
+  <tr><td>内格</td><td>本轮命令阶段<span class="pg">p.18</span></td><td>可压叠在已有标记之上，但要向被压住的每枚标记的所有者各付 1 钱币<span class="pg">p.18</span></td></tr>
+  <tr><td>外格</td><td>下一轮命令阶段，且带强化效果<span class="pg">p.18</span></td><td>放好立刻从间谍牌堆顶抽 1 张；外格被占用则不能放；每人每轮最多 1 枚<span class="pg">p.18</span></td></tr>
+</table>
+<h3>5.2 内格的压叠与付费</h3>
+<p>内格已被占用时仍可放入，把自己的标记压在那一叠上面。每压住一枚标记，就要向其所有者付 1 钱币。钱不够就必须改放另一枚命令标记到别处；若这也做不到，只能跳过。<span class="pg">p.18</span></p>
+<div class="note">同一格里的多枚标记在命令阶段自上而下逐个结算，压在上面的先结算，意味着后放的人先执行。<span class="pg">p.19</span></div>
+<h3>5.3 外格与强化命令</h3>
+<p>放进外格时标记必须强化面朝上。放好立刻抽 1 张间谍卡，外格上印的小瓶符号就是这条奖励的提醒。强化命令在下一轮结算，并附带额外效果；外格已经有人时不得放入。<span class="pg">p.18</span></p>
+<p>每人每轮最多把 1 枚命令放进外格。第一个命令放进外格，第二个就必须放内格。<span class="pg">p.18</span></p>
+<div class="why"><span class="wt">规则作用</span>内格与外格是同一套资源的两种时间安排：内格马上生效但可能要与别人叠着付钱，外格不会冲突、还能抽间谍卡并带强化效果，代价是晚一轮才结算。命令十字因此是一张跨轮排程表。<span class="pg">p.18</span><span class="pg">p.19</span></div>
+<h3>5.4 放置示例的结构</h3>
+<p>四人局第 1 轮，按圣徒轨顺序依次放置：耶路撒冷、的黎波里、埃德萨、安条克，再重复一轮，共八个动作。示例中耶路撒冷把第一个命令放进祈祷外格（因此本轮祈祷外格对其他人关闭），并抽到 1 张间谍卡；埃德萨要把建造压到的黎波里的建造上，须先付 1 钱币；耶路撒冷第二个命令因已用过外格，只能放内格，最终选择压到安条克的征召上并付 1 钱币。<span class="pg">p.18</span><span class="pg">p.19</span></p>
+<h3>5.5 自动机（二至三人局）</h3>
+<p>缺席国家的命令标记由自动机标记替代：三人局用 5 枚（四枚基础命令标记加 1 枚强化标记），二人局用全部 10 枚。<span class="pg">p.19</span></p>
+<table>
+  <tr><th>项</th><th>三人局</th><th>二人局</th></tr>
+  <tr><td>圣徒标记</td><td>未参战国的盾牌放最右格，永不移动<span class="pg">p.19</span></td><td>两枚盾牌放最右两格，永不移动<span class="pg">p.19</span></td></tr>
+  <tr><td>固定占位</td><td>每个计划阶段的第 1 与第 5 个行动<span class="pg">p.19</span></td><td>第 1、第 2、第 5、第 6 个行动<span class="pg">p.19</span></td></tr>
+  <tr><td>亮标记</td><td>翻面洗混后随机亮 1 枚，放进对应内格<span class="pg">p.19</span></td><td>同上，另有强化标记的例外<span class="pg">p.19</span></td></tr>
+</table>
+<p>亮出强化命令标记时，把它放到一边，立刻再亮 1 枚：能放外格就放外格，外格已占用则改为放对应内格。计划阶段结束时把强化标记退回自动机供应堆。<span class="pg">p.19</span></p>
+<p>二人局的例外：若在亮出强化标记之后立刻又亮出第二枚强化标记，两枚都放到一边，忽略第二枚，改为亮第三枚放进本轮外格。<span class="pg">p.19</span></p>
+<div class="note">替自动机付钱的规则另作对称处理：自动机要付你 1 钱币时，你从公共供应堆取 1 钱币；你要付自动机 1 钱币时，改为退回公共供应堆 1 钱币。与自动机的钱币往来不发生在玩家之间，一律经由公共供应堆：它付给你时你从供应堆取，你付给它时退回供应堆。<span class="pg">p.19</span></div>
+<p>命令阶段中自动机不执行任何命令：把它在命令十字上的标记收回自动机供应堆。<span class="pg">p.19</span></p>
+<div class="warn"><b>判定回合顺序时忽略自动机</b>圣徒轨上的自动机盾牌只影响计划阶段的占位顺序，不视为「玩家标记」，事件与敕令都不会以它们为目标。<span class="pg">p.29</span></div>
+<h3>5.6 间谍卡</h3>
+<p>每次把命令标记放进外格，就抽 1 张间谍卡。抽到后两种处理：正面朝上放进自己国家板左缘的 3 个活跃间谍格之一，并压上一枚目标玩家的盾形标记，标明所瞄准的对手；或留在手牌中保密。<span class="pg">p.32</span></p>
+<p>手牌里的间谍卡只能在命令阶段、自己的回合打出，数量不限。活跃间谍格已满时，要先弃掉一张已激活的间谍，才能放入新的。<span class="pg">p.32</span></p>
+<table>
+  <tr><th>人数</th><th>对同一位对手的瞄准上限</th></tr>
+  <tr><td>四人</td><td>每人只能被 1 张间谍瞄准<span class="pg">p.32</span></td></tr>
+  <tr><td>三人</td><td>每人 1 至 2 张，但全场总数不超过 3 张<span class="pg">p.32</span></td></tr>
+  <tr><td>二人</td><td>对手 3 张以内<span class="pg">p.32</span></td></tr>
+</table>
+<p>间谍卡上的箭头效果是条件效果：被瞄准的玩家完整执行左侧那项行动，持有者就免费结算箭头右侧的效果。每轮只触发一次；结算后把盾形标记翻到已用面，带标记的间谍不能再使用，收入阶段统一翻回。<span class="pg">p.32</span></p>
+<div class="why"><span class="wt">规则作用</span>间谍把外格的回报从「延迟的强化命令」扩展为一层针对具体对手的挂账：你无法控制它何时触发，只能选择挂在谁身上。触发条件由对手的行动满足，因此它惩罚活跃：对手越常执行那项行动，挂在他身上的间谍越容易结账。瞄准上限则约束同时挂账的数量，三人与二人局的数字差异也是为保持同一密度。<span class="pg">p.32</span></div>
+</section>
+
+<section id="s6">
+<h2><span class="n">6</span>命令阶段</h2>
+<p>命令阶段把命令十字上的命令换成实际状态：城市升级、建筑落位、战术入手、单位移动、主教铺开、圣徒轨推进。<span class="pg">p.19</span></p>
+<h3>6.1 结算顺序</h3>
+<p>只结算内格。从建造开始，按顺时针依次进行，行军最后结算：建造、祈祷、征召、行军。同一格里有多枚标记时，自上而下逐个结算。<span class="pg">p.19</span></p>
+<p>结算一枚命令时，由该标记的所有者执行，这一段就算作他的回合。「在你的回合中」这一措辞，指的就是「你在结算任一命令的期间」。<span class="pg">p.19</span></p>
+<p>各命令的效果印在命令十字对应扇区旁边，结算完毕后标记退回个人供应堆。<span class="pg">p.19</span></p>
+<h3>6.2 外格转入内格</h3>
+<p>内格全部结算完后，把外格上的所有命令标记移到对应内格，不翻面。这些命令在下一轮的命令阶段结算。<span class="pg">p.19</span></p>
+<div class="why"><span class="wt">规则作用</span>固定顺序让四种命令之间形成单向依赖：建造改城市等级与产出，排在最先；祈祷推进圣徒轨并铺主教；征召补兵与战术；行军最后发生，本轮的建造与征召成果可以先落地，再投入战场。<span class="pg">p.19</span><span class="pg">p.24</span></div>
+<div class="note">命令效果里的资源顶替是双向的：付钱时可用资源顶替，付资源时可用钱币顶替，一律一比一，且可以只替一部分。<span class="pg">p.20</span></div>
+</section>
+
+<section id="s7">
+<h2><span class="n">7</span>建造命令</h2>
+<p>建造命令发展城市经济，也是取得建筑的唯一常规途径。<span class="pg">p.20</span></p>
+<h3>7.1 城市的三个特征</h3>
+<table>
+  <tr><th>特征</th><th>内容</th><th>规则作用</th></tr>
+  <tr><td>城市等级</td><td>1 至 3，等于城墙标记／图标的数值，也等于计数器顶片露出的扇区<span class="pg">p.20</span></td><td>决定每轮收入、守备时的城墙加成、可产出的资源数量<span class="pg">p.20</span></td></tr>
+  <tr><td>资源</td><td>该城所属颜色的一种资源；控制该城时把资源标记放进储藏区<span class="pg">p.20</span></td><td>可作为建造与征召的支付手段<span class="pg">p.20</span><span class="pg">p.23</span></td></tr>
+  <tr><td>地形效果</td><td>攻打此城者的特殊修正<span class="pg">p.20</span></td><td>可选规则，只在困难难度下使用<span class="pg">p.20</span></td></tr>
+</table>
+<h3>7.2 基础建造命令</h3>
+<p>按任意顺序执行以下动作中的一项或两项：<span class="pg">p.20</span></p>
+<div class="grid2">
+  <div class="card"><div class="t"><span class="s">动作一</span>升级城市</div>支付该城的升级费用，等级 +1。费用印在计数器露出扇区里、虚线旁边。可用资源替代钱币，一比一。<span class="pg">p.20</span></div>
+  <div class="card blue"><div class="t"><span class="s">动作二</span>建造 0–II 级建筑</div>从建筑市场取 1 张 0、I 或 II 级卡，用资源支付其价格。建筑等级等于价格；巴扎为 0 级，免费。市场不补。<span class="pg">p.20</span></div>
+</div>
+<p>升级时把顶片顺时针转一格，并换掉城墙标记使数值与等级一致；若该城本无城墙标记，从公共供应堆取对应图标放上去。有些城市升到 3 级会额外产出 1 个资源标记，此时立刻取来放进储藏区，可立即支付。<span class="pg">p.20</span></p>
+<p>建成的建筑放在国家板的空建筑格里。多张建筑卡自下而上排成一列，每张正好盖住一个建筑符号，且逐张略微压住前一张。四个建筑格全满时，若要放新建筑，必须弃掉 1 张——可以是刚取得的那张，也可以是板上已有的任意一张。<span class="pg">p.21</span></p>
+<div class="note">支付资源不等于失去资源：把标记翻到灰面，收入阶段恢复。灰面资源在本轮内不能再花；若某效果恢复资源，把对应标记翻回彩色面即可。<span class="pg">p.20</span></div>
+<h3>7.3 强化建造命令</h3>
+<p>先以 2 钱币的折扣执行基础建造的效果（折扣可任意分配给两个动作），此外还可以额外建造 1 张任意等级的建筑——III–IV 级的常规取得途径只有这一条。折扣不适用于这个额外动作。<span class="pg">p.21</span></p>
+<p>因此一次强化建造命令总共能建 2 座建筑：一座来自基础动作，另一座来自额外动作。<span class="pg">p.21</span></p>
+<div class="card gold"><div class="t"><span class="s">示例</span>折扣的两种用法</div>的黎波里结算强化建造命令，想花 3 钱币升级城市：可以把折扣全部用掉，只付 1 钱币；也可以付 2 钱币，把剩下的 1 钱币折扣留给建造建筑。<span class="pg">p.21</span></div>
+<div class="why"><span class="wt">规则作用</span>城市等级在一处投入、三处回收：收入阶段的钱币、劫掠与战斗中的城墙加成、以及 3 级城额外产出的资源标记。升级费用用钱币计，但允许用资源一比一顶替，因此能否升级取决于手上两种资产的总和，而不只是钱。建筑提供的是长期修正，与等级互不替代：等级改的是城市本身的产出与防御，建筑改的是玩家执行命令时的附加效果。<span class="pg">p.20</span><span class="pg">p.21</span><span class="pg">p.27</span></div>
+</section>
+
+<section id="s8">
+<h2><span class="n">8</span>祈祷命令</h2>
+<p>祈祷命令推进圣徒轨。圣徒轨同时承担两件事：玩家在轨上的先后就是回合顺序，前进过程又会发放奖励。<span class="pg">p.22</span></p>
+<h3>8.1 基础祈祷命令</h3>
+<p>获得 2 点圣徒点数；可以最多花 4 个资源，每花 1 个额外获得 1 点。资源可用钱币一比一顶替。<span class="pg">p.22</span></p>
+<p>获得点数后必须立刻全部用于前进：1 点走 1 格，向右。下一格已被别人的标记占用时直接跳过，跳过不额外花点数。标记走完轨道末端后回到起点，轨道是环形的。<span class="pg">p.22</span></p>
+<div class="note">圣徒点数不能留存，也不能挪作他用：一旦获得，当次就全部换成格数。因此祈祷的实际上限是「本次能凑出的点数」，而不是累计存量。<span class="pg">p.22</span></div>
+<h3>8.2 轨上的图标奖励</h3>
+<p>标记停在、经过或跳过带图标的格子，都取得该图标所示的奖励，格子被占用也算。奖励在移动全部结束后才结算，因此同一次移动中经过的多个图标都在终点之后一并领取。<span class="pg">p.22</span></p>
+<table>
+  <tr><th>图标</th><th>奖励</th></tr>
+  <tr><td>渡鸦</td><td>从 I 级敕令牌堆（轨道左侧）顶上抽 1 张敕令<span class="pg">p.22</span></td></tr>
+  <tr><td>主教</td><td>执行 1 次主教行动：训练 1 名主教，或移动 1 名主教<span class="pg">p.22</span></td></tr>
+</table>
+<h3>8.3 敕令卡</h3>
+<p>敕令是圣座的一次性命令，两种用法：在卡上效果指定的时机弃掉它发动效果，打破常规流程；或在需要支付某种资源时弃掉它，按缎带标示充当 1 个或 2 个该类型资源。<span class="pg">p.30</span></p>
+<div class="warn"><b>敕令上限 3 张</b>超出上限时必须立刻弃到 3 张；在弃完之前，不能把任何敕令用于效果或兑换。<span class="pg">p.22</span></div>
+<p>与钱币、资源不同，敕令缎带上的资源符号不是它的费用——每张敕令都是免费打出的。<span class="pg">p.30</span></p>
+<h3>8.4 主教行动</h3>
+<table>
+  <tr><th>选项</th><th>做法</th><th>限制</th></tr>
+  <tr><td>训练</td><td>从个人供应堆取 1 枚主教标记，面朝下放进任意一座有自己主教的城；若场上还没有自己的主教，可放进任意一座自己控制的城<span class="pg">p.22</span></td><td>个人供应堆无标记时不能训练</td></tr>
+  <tr><td>移动</td><td>把自己任意 1 名主教移到任意相邻城市<span class="pg">p.22</span></td><td>可移进对手城市，甚至撒拉逊城市</td></tr>
+</table>
+<p>同一次命令或效果要求执行多次主教行动时，必须先做完全部训练，再做任何移动；同一命令中不能移动同一位主教超过一次。<span class="pg">p.22</span></p>
+<h3>8.5 圣地</h3>
+<p>某座城里，某位玩家的主教等级总和高于其他任何玩家，这座城就是该玩家的圣地——不论谁控制该城。每处圣地在每轮结束时给 1 影响分。<span class="pg">p.22</span><span class="pg">p.27</span></p>
+<p>多位玩家在同一座城都有主教时，圣地需要判定：在轮末或敕令要求时进行。判定时把该城全部主教翻开，只有等级总和最高者拥有圣地；平手则无人拥有。若城里只有一位玩家有主教，直接授予，不需判定。<span class="pg">p.22</span></p>
+<div class="why"><span class="wt">规则作用</span>圣地的判定依据是主教等级总和，与城市控制权、城墙、单位都无关。因此同一座城可以出现「你控制、他拥有圣地」的状态，两边的收益分开计算：控制者收税、产资源、满足总督条件，圣地持有者每轮得 1 分。判定需要翻牌，而主教数值平时保密，这使得圣地的归属在翻牌前始终存在不确定。<span class="pg">p.22</span><span class="pg">p.27</span></div>
+<h3>8.6 强化祈祷命令</h3>
+<p>执行基础祈祷的效果；走完圣徒轨之后，额外获得 1 次主教行动，并从 II 级敕令牌堆（轨道右侧）顶上抽 1 张敕令。II 级敕令的常规取得途径只有这一条。<span class="pg">p.23</span></p>
+<h3>8.7 示例的结构</h3>
+<p>耶路撒冷结算基础祈祷，想取得 4 点：基础的 2 点，花 1 资源换 1 点，再花 1 钱币换 1 点。标记右移 4 格，途中跳过安条克所占的格子。移动结束后取得 1 张 I 级敕令，并可执行 2 次主教行动，方式三选一：2 次训练；1 次训练加 1 次移动（只能先训练后移动）；2 次移动（须是两位不同的主教）。<span class="pg">p.22</span></p>
+<div class="note">绕回起点在设定上代表圣座命你组建新教区，规则上只表示位置重置：标记回到最左格，随后继续按点数前进，经过的图标照样领取。<span class="pg">p.22</span></div>
+</section>
+
+<section id="s9">
+<h2><span class="n">9</span>征召命令</h2>
+<p>征召命令处理两件事：补兵与换战术。战斗的成败由这两项共同决定——单位提供基础战斗力，战术卡决定机动阶段的博弈。<span class="pg">p.23</span></p>
+<h3>9.1 基础征召命令</h3>
+<p>按任意顺序执行以下动作中的一项或两项：<span class="pg">p.23</span></p>
+<div class="grid2">
+  <div class="card"><div class="t"><span class="s">动作一</span>招募单位</div>从个人供应堆取 2 枚单位，任意分配到自己的城市；可最多花 4 个资源，每花 1 个额外招募 1 枚。资源可用钱币顶替。<span class="pg">p.23</span></div>
+  <div class="card blue"><div class="t"><span class="s">动作二</span>学习战术</div>从战术市场选最多 2 张 I 级和／或 II 级卡，用资源付价后取走。战术等级等于价格。市场不补。<span class="pg">p.23</span></div>
+</div>
+<p>个人供应堆里已无单位时，无法再招募。<span class="pg">p.23</span></p>
+<h3>9.2 战术上限与弃牌去向</h3>
+<p>每人最多持有 5 张战术卡。获得新卡时先进手牌，再弃到 5 张。<span class="pg">p.23</span></p>
+<p>弃牌的去向分两种：若弃掉的是 0 级卡（印有本国纹章的起始战术），面朝下放在国家板下方，构成个人 0 级弃牌堆；其余弃牌正面朝上放到对应牌堆底部，构成公共弃牌堆。<span class="pg">p.23</span><span class="pg">p.30</span></p>
+<div class="note">起始战术卡是唯一不进入公共弃牌堆的卡。它们在「失去战术卡」类效果结算后可以自选取回，个人弃牌堆因此也是一份可回收的卡源。<span class="pg">p.25</span></div>
+<h3>9.3 强化征召命令</h3>
+<p>先以 2 钱币的折扣执行基础征召的效果（折扣可任意分配），此外可额外学习 1 张任意等级的战术——III–IV 级的常规取得途径只有这一条。折扣不适用于额外动作。<span class="pg">p.23</span></p>
+<p>因此一次强化征召命令总共能学 3 张战术：2 张来自基础动作，1 张来自额外动作。<span class="pg">p.23</span></p>
+<div class="why"><span class="wt">规则作用</span>兵力与战术的获取被绑在同一个命令上，且共用同一份资源：花在招募上的资源不能同时用来买战术，反之亦然。强化命令放宽这条约束：折扣降低基础动作的成本，额外动作再给一张不受等级限制的卡，于是 III–IV 级战术只能从外格取得。<span class="pg">p.23</span></div>
+</section>
+
+<section id="s10">
+<h2><span class="n">10</span>行军命令</h2>
+<p>行军命令把单位在自己城市之间调动，并在必要时开战。<span class="pg">p.24</span></p>
+<h3>10.1 基础行军命令</h3>
+<p>先选目标：一座与你至少一座城市相邻的城市。然后把最多 4 枚自己的单位从城市移到目标城；这些单位可以来自任何与目标相邻的你的城市。<span class="pg">p.24</span></p>
+<p>默认拥有 4 次单位移动行动，可最多花 4 个资源，每花 1 个额外获得 1 次。资源可用钱币顶替。移动完毕后判定是否发生战斗。<span class="pg">p.24</span></p>
+<h3>10.2 两条硬性限制</h3>
+<div class="warn"><b>不能搬空城市</b>结算行军命令时，只要能做到，就必须至少移动 1 枚单位。你不能把某座城的最后一枚单位调走——你控制的每座城都必须至少留 1 枚。<span class="pg">p.24</span></div>
+<p>这条限制同样约束其他要求移动或消灭单位的效果：涉及「最后一枚」时，按能做到的最大限度执行。<span class="pg">p.32</span></p>
+<h3>10.3 强化行军命令</h3>
+<p>执行基础行军的效果，并额外多 2 次移动：免费 6 次，再用资源或钱币购买最多 4 次。若这次行军引发战斗，该场战斗中你获得 +2 战斗力。<span class="pg">p.24</span></p>
+<p>此外，在强化行军的任意时刻，可以弃掉自己控制的一座城的总督卡，用总督市场上的一张替换他。这个额外效果可以放在移动之前或之后结算，甚至可以在新夺下的城市安放总督之后再结算。<span class="pg">p.24</span></p>
+<div class="why"><span class="wt">规则作用</span>行军是唯一能改变单位地理分布的命令，因此也是唯一能发动战斗的命令。次数上限（4 次，强化 6 次）与实际兵力分离：一次行军能调动的单位数由次数决定，而不是由你在某座城的驻军总量决定，这使得跨城集结需要消耗资源换次数。<span class="pg">p.24</span></div>
+</section>
+
+<section id="s11">
+<h2><span class="n">11</span>战斗</h2>
+<p>把单位行军进一座由撒拉逊人或别的玩家控制的城市，就为该城开战。<span class="pg">p.24</span></p>
+<h3>11.1 参战双方与手牌</h3>
+<p>参战玩家各自把手上战术卡组成手牌。与撒拉逊人作战时，另选一位玩家代表撒拉逊人：由城市离战场最近的那位玩家担任，他从撒拉逊牌堆顶取 5 张卡组成手牌。<span class="pg">p.24</span></p>
+<div class="note">撒拉逊牌堆用尽（顶牌是正面朝上的弃牌）时，把弃牌堆洗混、面朝下放好，继续抽牌。<span class="pg">p.24</span></div>
+<h3>11.2 四阶段的顺序</h3>
+<div class="fig">
+<svg viewBox="0 0 900 320" xmlns="http://www.w3.org/2000/svg">
+  <defs><marker id="ar2" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#2f4858"/></marker></defs>
+  <rect x="0" y="0" width="900" height="320" fill="#fdf8ee"/>
+  <text x="20" y="28" font-size="16" font-weight="700" fill="#2f4858">战斗四阶段</text>
+
+  <rect x="30" y="46" width="200" height="66" rx="8" fill="#eef3fa" stroke="#9db4d0"/>
+  <text x="46" y="68" font-size="13" font-weight="700" fill="#2f4858">1 比较战斗力</text>
+  <text x="46" y="88" font-size="12.5" fill="#2f2a28">单位数＋城墙加成</text>
+  <text x="46" y="104" font-size="12.5" fill="#2f2a28">＋轨道奖励 → 标差值</text>
+
+  <rect x="250" y="46" width="200" height="66" rx="8" fill="#eef3fa" stroke="#9db4d0"/>
+  <text x="266" y="68" font-size="13" font-weight="700" fill="#2f4858">2 战术机动</text>
+  <text x="266" y="88" font-size="12.5" fill="#2f2a28">防守方先，各 2 次</text>
+  <text x="266" y="104" font-size="12.5" fill="#2f2a28">出卡 → 挡半 → 结算</text>
+
+  <rect x="470" y="46" width="200" height="66" rx="8" fill="#eef3fa" stroke="#9db4d0"/>
+  <text x="486" y="68" font-size="13" font-weight="700" fill="#2f4858">3 判定胜者</text>
+  <text x="486" y="88" font-size="12.5" fill="#2f2a28">战斗力高者胜</text>
+  <text x="486" y="104" font-size="12.5" fill="#2f2a28">差为 0 则进攻方胜</text>
+
+  <rect x="690" y="46" width="180" height="66" rx="8" fill="#eef3fa" stroke="#9db4d0"/>
+  <text x="706" y="68" font-size="13" font-weight="700" fill="#2f4858">4 战斗结束</text>
+  <text x="706" y="88" font-size="12.5" fill="#2f2a28">结算 → 撤退</text>
+  <text x="706" y="104" font-size="12.5" fill="#2f2a28">→ 荒废 → 战利品</text>
+
+  <line x1="232" y1="79" x2="246" y2="79" stroke="#2f4858" stroke-width="2" marker-end="url(#ar2)"/>
+  <line x1="452" y1="79" x2="466" y2="79" stroke="#2f4858" stroke-width="2" marker-end="url(#ar2)"/>
+  <line x1="672" y1="79" x2="686" y2="79" stroke="#2f4858" stroke-width="2" marker-end="url(#ar2)"/>
+
+  <text x="30" y="152" font-size="13" font-weight="700" fill="#8c2f2f">战场轨道：战斗力差</text>
+  <line x1="70" y1="196" x2="830" y2="196" stroke="#c9a76a" stroke-width="3"/>
+  <g font-size="12" fill="#2f2a28" text-anchor="middle">
+    <line x1="70" y1="186" x2="70" y2="206" stroke="#c9a76a" stroke-width="2"/><text x="70" y="224">−5</text>
+    <line x1="260" y1="186" x2="260" y2="206" stroke="#c9a76a" stroke-width="2"/><text x="260" y="224">−3</text>
+    <line x1="450" y1="186" x2="450" y2="206" stroke="#c9a76a" stroke-width="2"/><text x="450" y="224">0</text>
+    <line x1="640" y1="186" x2="640" y2="206" stroke="#c9a76a" stroke-width="2"/><text x="640" y="224">+3</text>
+    <line x1="830" y1="186" x2="830" y2="206" stroke="#c9a76a" stroke-width="2"/><text x="830" y="224">+5</text>
+  </g>
+  <text x="70" y="252" font-size="12.5" fill="#6b615c">防守方一侧</text>
+  <text x="760" y="252" font-size="12.5" fill="#6b615c">进攻方一侧</text>
+  <rect x="30" y="268" width="840" height="40" rx="8" fill="#fff6e2" stroke="#e0c48c"/>
+  <text x="46" y="293" font-size="12.5" fill="#5c4a26">差值大于 5 时，把战斗标记翻到「5」面，并从轨道中央格重新计算偏移。</text>
+</svg>
+<div class="figcap">四阶段流程与战场轨道上的差值标记</div>
+</div>
+<h3>11.3 第一阶段：比较战斗力</h3>
+<p>双方各自计算初始战斗力：该方在该城的单位数。防守方另加城墙加成，撒拉逊人另加撒拉逊轨道奖励。<span class="pg">p.24</span></p>
+<p>用战斗标记在战场轨道上标出差值，偏向战斗力较高的一方。若差值大于 5，把标记翻到印着「5」的那一面，并从轨道中央格继续计算。<span class="pg">p.24</span></p>
+<h3>11.4 第二阶段：战术机动</h3>
+<p>防守方先打出机动，双方轮流，各 2 次，共 4 次。每次机动按四步结算：<span class="pg">p.24</span></p>
+<ol class="steps">
+  <li>当前行动方从手牌选 1 张战术卡，正面朝上打进战场板上编号最小的空机动格，竖直放置，使卡的两半都便于阅读。<span class="pg">p.24</span></li>
+  <li>对手指定抵消上半或下半，须说出声。<span class="pg">p.24</span></li>
+  <li>当前行动方从对手手牌中随机抽 1 张，横向、面朝下盖在对手指定要抵消的那一半上，不得查看。<span class="pg">p.24</span></li>
+  <li>立刻结算未被抵消的那一半效果。带「战斗结束时」标记的效果不在此刻结算。<span class="pg">p.24</span></li>
+</ol>
+<table>
+  <tr><th>效果</th><th>结算</th></tr>
+  <tr><td>+x 战斗力</td><td>战斗标记朝当前行动方移动 x 格<span class="pg">p.24</span></td></tr>
+  <tr><td>消灭 x 单位</td><td>对手把 x 枚单位从战场退回个人供应堆，标记同时移动 x 格<span class="pg">p.24</span></td></tr>
+  <tr><td>击溃 x 单位</td><td>对手把 x 枚单位移到其控制的一座相邻城市，这些单位退出本场战斗；无可去之处则改为消灭。撒拉逊单位退到一座相邻撒拉逊城市，由代表撒拉逊人的玩家选择<span class="pg">p.25</span></td></tr>
+  <tr><td>增援 x 单位</td><td>当前行动方从相邻的自己城市调入最多 x 枚非最后一枚单位，每调入 1 枚标记移动 1 格<span class="pg">p.25</span></td></tr>
+</table>
+<p>任一方在战场上已无单位时，另一方立刻获胜，直接进入战斗结束。<span class="pg">p.25</span></p>
+<div class="note">战斗中的敕令卡只能在自己打出并结算机动的前一刻或后一刻使用。撒拉逊人参战时，带十字军符号的效果同样适用于撒拉逊单位。<span class="pg">p.25</span></div>
+<h3>11.5 第三阶段：判定胜者</h3>
+<p>战斗力较高的一方获胜。双方差值为 0 时，进攻方获胜。<span class="pg">p.25</span></p>
+<h3>11.6 第四阶段：战斗结束</h3>
+<table>
+  <tr><th>步</th><th>内容</th></tr>
+  <tr><td>4A 战斗结束时效果</td><td>带此类标记的效果现在按行动顺序结算，可以不结算。最常见的一类是让对手失去 x 张战术卡：对手把本场打出的卡洗混后随机弃 x 张，再从个人 0 级弃牌堆自选取回同数量的起始卡；对撒拉逊人则改为把 x 张随机撒拉逊战术卡移出游戏。要求失去 3 张以上时只失去 2 张<span class="pg">p.25</span></td></tr>
+  <tr><td>4B 撤退</td><td>败方在战场还有单位时，先消灭其中 1 枚；其余必须撤到其控制的一座相邻城市，做不到则消灭。随后双方收回本场打出的剩余战术卡，撒拉逊战术卡全部弃掉<span class="pg">p.25</span></td></tr>
+  <tr><td>4C 荒废</td><td>发生战斗的城市总会受损，防守方获胜也一样。等级 ≥2 时降低 1 级：顶片逆时针转一格，并调整城墙标记。若因此不再产出额外资源标记，控制者立刻弃掉国家板上该类型的任意资源，即使已被封锁或支付<span class="pg">p.25</span></td></tr>
+  <tr><td>4D 战利品</td><td>进攻方获胜则取得该城控制权：取走计数器与该城产出的全部资源，分别放到国家板与储藏区。若从另一位玩家手中夺城，对方按当时状态交付自选资源，已支付的不恢复。城内无总督则从市场取 1 张插入；已有总督可保留或替换。市场不刷新<span class="pg">p.25</span></td></tr>
+</table>
+<div class="note">部分战术卡带保护：被保护的卡在本场战斗中不能成为「失去战术卡」效果的目标。必须失去 1 张而两张都带保护时，两张都不会失去。<span class="pg">p.25</span></div>
+<h3>11.7 示例的结构</h3>
+<p>安条克在第 2 轮结算基础行军，进攻撒拉逊城市阿帕梅亚，共做 6 次移动：从安条克出兵 4 枚、从图贝塞尔出兵 2 枚。托尔托萨离战场最近，由的黎波里代表撒拉逊人，抽 5 张撒拉逊卡。<span class="pg">p.26</span></p>
+<p>战斗力差：安条克 6，阿帕梅亚 2 枚单位加城墙 2、加轨道奖励 1，共 5，差值 1，进攻方领先。防守方先打《阿帕梅亚的弓手》，安条克选择抵消下半以避免战斗结束时损失战术卡；上半结算为撒拉逊 +2 战斗力、安条克 2 枚单位撤离，天平向防守方偏移 4 格，撒拉逊反超 3 点。安条克打出《火焰齐射》，撒拉逊选择抵消下半，上半结算为安条克 +2、阿帕梅亚 −1，偏移 3 格，差值回到 0。<span class="pg">p.26</span></p>
+<div class="why"><span class="wt">规则作用</span>机动的设计让每次出牌都被切成两半：出牌方只能决定打出的卡，被抵消的一侧由对手指定，盖卡所用的那张则从对手手里随机抽取。因此一次机动的结果取决于三方的信息差——自己手上剩余的卡、对手所选的抵消侧、以及被抽走的那张是否正是对方所需要的。战斗力差为 0 时判进攻方胜，等于把「打平」定义为推进成功。<span class="pg">p.24</span><span class="pg">p.25</span></div>
+</section>
+
+<section id="s12">
+<h2><span class="n">12</span>收入阶段</h2>
+<p>收入阶段兑现前三个阶段的经营结果：收税、恢复资源、刷新市场、结算总督与圣地，最后检查终局。<span class="pg">p.27</span></p>
+<h3>12.1 征税</h3>
+<p>按自己控制的每座城收取钱币，数额取决于该城等级所对应的产出，看计数器露出的扇区。首都另加 1 钱币。<span class="pg">p.27</span></p>
+<div class="note">取用与支付都以钱币面值为准，不数枚数。3 枚「1」与 1 枚「3」等价。<span class="pg">p.27</span></div>
+<h3>12.2 资源与市场</h3>
+<ol class="steps">
+  <li>恢复所有已支付的资源：把灰化标记翻回彩色面。压着封锁标记的不恢复。<span class="pg">p.27</span></li>
+  <li>刷新主板上的所有市场：每个空格从对应牌堆顶上取 1 张正面朝上补入。<span class="pg">p.27</span></li>
+  <li>移除所有建筑与资源上的封锁标记，并把活跃间谍上的标记翻回可用面。<span class="pg">p.27</span></li>
+</ol>
+<p>刷新后的市场格数为人数加一：二人局 3 张、三人局 4 张、四人局 5 张。III–IV 级市场是例外，刷新后恒为 3 张。<span class="pg">p.32</span></p>
+<h3>12.3 总督与圣地</h3>
+<p>先按总督卡结算：每条已满足的条件各得一次影响分。再进行圣地判定：每处圣地 1 影响分。两项都按标记数值计算，不按枚数。<span class="pg">p.27</span></p>
+<p>主教标记保持面朝下。需要判定圣地时，只有当该城至少还有另一位玩家的主教，才需要翻开自己的数值；判定结束后全部放回原城、仍面朝下。若城里只有一位玩家有主教，直接授予，不翻牌。<span class="pg">p.27</span></p>
+<h3>12.4 轮末</h3>
+<p>检查终局条件。未触发则进入下一轮。<span class="pg">p.27</span><span class="pg">p.28</span></p>
+<div class="card gold"><div class="t"><span class="s">示例</span>一轮的收入与分数</div>耶路撒冷控制 3 座城：耶路撒冷（2 级城 2 ＋ 首都加成 1，共 3 钱币），大马士革 1，阿卡 1，共 5 钱币。随后得 6 影响分：耶路撒冷总督 1 分（储藏区只有 1 个资源）、阿卡总督 2 分（城市等级合计 5）、大马士革总督 1 分（共 8 枚单位）、2 处圣地各 1 分。阿卡不算圣地，因为的黎波里在那里也有主教，且等级相同。<span class="pg">p.27</span></div>
+<div class="why"><span class="wt">规则作用</span>收入阶段是唯一同时恢复三类耗尽资源的时点：灰化的资源、被封锁的建筑与资源、以及被标记的活跃间谍。这一段的顺序也有意义——先恢复资源再刷新市场，意味着本轮刚恢复的资源可以直接用于下一轮的购买；而封锁标记在恢复之后才移除，所以被封锁的资源整轮不回来。<span class="pg">p.27</span></div>
+</section>
+
+<section id="s13">
+<h2><span class="n">13</span>终局与计分</h2>
+<h3>13.1 四个终局条件</h3>
+<table>
+  <tr><th>条件</th><th>内容</th></tr>
+  <tr><td>霸权</td><td>任意一位玩家控制 4 座城市<span class="pg">p.28</span></td></tr>
+  <tr><td>圣德</td><td>任意一位玩家拥有 5 处圣地<span class="pg">p.28</span></td></tr>
+  <tr><td>十字军覆灭</td><td>任意一位玩家失去最后一座城市，即在任何城里都没有单位<span class="pg">p.28</span></td></tr>
+  <tr><td>时代终结</td><td>事件牌堆用尽，即第 6 轮结束时<span class="pg">p.28</span></td></tr>
+</table>
+<div class="warn"><b>只在轮末检查</b>本轮内满足霸权或圣德，但轮末又失去第 4 座城或第 5 处圣地，游戏不结束。终局条件只在每轮结束时核对一次。<span class="pg">p.28</span></div>
+<h3>13.2 计算影响分</h3>
+<p>先算出影响分标记的总值，再加三项加成：<span class="pg">p.28</span></p>
+<table>
+  <tr><th>加成</th><th>算法</th></tr>
+  <tr><td>教皇诏书</td><td>按卡上所选的一条条件结算；分数依终局状态而定<span class="pg">p.28</span></td></tr>
+  <tr><td>霸权或圣德</td><td>满足其中一项得 8 分；两项同时满足得 16 分；多位玩家同时满足则各得 8 分<span class="pg">p.28</span></td></tr>
+  <tr><td>钱币</td><td>储藏区每 4 钱币得 1 分，向下取整，按面值计算<span class="pg">p.28</span></td></tr>
+</table>
+<h3>13.3 平手判定</h3>
+<p>总分最高者获胜。平手时，满足终局条件更多者胜，顺序为：同时满足霸权与圣德、只满足其一、都没满足。仍平手时，圣徒轨上标记更靠右者胜。<span class="pg">p.28</span></p>
+<h3>13.4 失去全部城市的玩家</h3>
+<p>触发十字军覆灭条件后，本轮结束游戏。该玩家在剩余阶段不能执行任何命令或行动，包括打出敕令、发动间谍效果；但仍可在收入阶段从总督卡取得影响分，也仍可参与圣德条件的争夺。<span class="pg">p.31</span></p>
+<div class="why"><span class="wt">规则作用</span>四条终局条件对应四种收束方式：领土、宗教、军事崩盘、时间。前三条都可能提前结束战局，第四条给出硬上限。计分里唯一可无限积累的是钱币，但换算比例是四分之一的钱币换 1 分，因此囤钱只得缓慢收益；主要增量来自诏书条件与 8 分或 16 分的终局加成。<span class="pg">p.28</span></div>
+</section>
+
+<section id="s14">
+<h2><span class="n">14</span>二至三人局：地图压缩与自动机</h2>
+<h3>14.1 被移除的城市</h3>
+<table>
+  <tr><th>人数</th><th>移除范围</th><th>处理</th></tr>
+  <tr><td>三人</td><td>未参战国的首都<span class="pg">p.12</span></td><td>城墙图标盖限制标记，该城不放任何配件，整局当作不存在<span class="pg">p.12</span></td></tr>
+  <tr><td>二人</td><td>两个未参战国的首都，以及夹在两者之间的那座城<span class="pg">p.12</span></td><td>同上<span class="pg">p.12</span></td></tr>
+</table>
+<p>「当作不存在」包括三件事：不能在该城放任何标记，任何人不能进入或穿过，该城不参与相邻关系的判定。<span class="pg">p.12</span></p>
+<h3>14.2 市场的缩位</h3>
+<table>
+  <tr><th>市场</th><th>三人局关闭</th><th>二人局关闭</th></tr>
+  <tr><td>建筑</td><td>4 爪锤位<span class="pg">p.9</span></td><td>3 与 4 爪锤位<span class="pg">p.9</span></td></tr>
+  <tr><td>战术</td><td>4 剑位<span class="pg">p.10</span></td><td>3 与 4 剑位<span class="pg">p.10</span></td></tr>
+  <tr><td>总督</td><td>4 矛位<span class="pg">p.10</span></td><td>3 与 4 矛位<span class="pg">p.10</span></td></tr>
+</table>
+<p>关闭的格子放限制标记，不在那里发牌。刷新市场时，常规卡的数量仍等于人数加一，因此关闭的格子使低等级卡的可选范围变窄。<span class="pg">p.9</span><span class="pg">p.32</span></p>
+<h3>14.3 自动机的行动方式</h3>
+<p>自动机只参与计划阶段，命令阶段不执行任何命令。它的放置次数由圣徒轨上的固定标记决定：三人局占第 1 与第 5 位，二人局占第 1、2、5、6 位。固定位置意味着它总在每轮开头先放，玩家随后才接连放置。<span class="pg">p.19</span></p>
+<p>需要放置时，把它的行动标记翻面洗混、随机亮 1 枚，放进对应内格；亮到强化标记则再亮一枚放外格，外格被占则改放内格。<span class="pg">p.19</span></p>
+<div class="note">判定回合顺序、以及事件与敕令指定目标时，圣徒轨上的自动机盾牌不计入玩家标记。<span class="pg">p.29</span></div>
+<div class="why"><span class="wt">规则作用</span>自动机不做决策，只占用命令十字的位置。它的作用是把四人局的格位竞争复原：外格被随机占据后可能整轮无法使用，内格被随机压叠后则要照付钱币。地图压缩与市场关闭同时缩小可争夺的城数与卡池，使少人局的空间密度接近四人局。<span class="pg">p.12</span><span class="pg">p.19</span></div>
+</section>
+
+<section id="s15">
+<h2><span class="n">15</span>常见误读与速查</h2>
+<p>以下条目按出现频率排列，依据见前述各章。<span class="pg">p.19</span></p>
+<h3>15.1 常见误读</h3>
+<table>
+  <tr><th>误读</th><th>正确做法</th></tr>
+  <tr><td>外格的命令本轮也能结算</td><td>外格下一轮才结算；本轮只结算内格<span class="pg">p.18</span><span class="pg">p.19</span></td></tr>
+  <tr><td>一轮可以放两个外格</td><td>每人每轮最多 1 枚外格；放进外格，第二个必须放内格<span class="pg">p.18</span></td></tr>
+  <tr><td>外格可以压在别人上面</td><td>外格已被占用就不能放入<span class="pg">p.18</span></td></tr>
+  <tr><td>强化命令是另一种效果</td><td>强化命令＝基础效果（带 2 钱币折扣）＋额外动作，不是替代<span class="pg">p.21</span><span class="pg">p.23</span></td></tr>
+  <tr><td>2 钱币折扣可以用在额外动作上</td><td>折扣只用于基础动作，额外建造或额外学习一律按原价<span class="pg">p.21</span><span class="pg">p.23</span></td></tr>
+  <tr><td>花资源就是弃掉资源</td><td>翻到灰面，收入阶段恢复；灰面期间不能再花<span class="pg">p.20</span></td></tr>
+  <tr><td>被封锁的资源收入阶段会恢复</td><td>带封锁标记的不恢复，标记在本阶段才移除<span class="pg">p.27</span><span class="pg">p.32</span></td></tr>
+  <tr><td>控制城市就等于拥有圣地</td><td>圣地只看主教等级总和，与谁控制该城无关<span class="pg">p.22</span></td></tr>
+  <tr><td>圣地平手时双方共享</td><td>平手则无人拥有该圣地<span class="pg">p.22</span></td></tr>
+  <tr><td>圣徒点数可以攒着下轮用</td><td>获得即必须全部换成前进格数<span class="pg">p.22</span></td></tr>
+  <tr><td>花资源换祈祷可以无限加</td><td>最多花 4 个资源，即最多加 4 点<span class="pg">p.22</span></td></tr>
+  <tr><td>招募与行军可以随意花钱加次数</td><td>两项各最多花 4 个资源，且各自只加 4 次<span class="pg">p.23</span><span class="pg">p.24</span></td></tr>
+  <tr><td>可以把城市的最后一枚单位调走</td><td>不能调走最后一枚；且只要能做到就必须至少移动 1 枚<span class="pg">p.24</span></td></tr>
+  <tr><td>市场取卡后会自动补</td><td>取卡不补；只有收入阶段才刷新<span class="pg">p.20</span><span class="pg">p.27</span></td></tr>
+  <tr><td>牌堆顶的卡可以自行取舍</td><td>可以改取牌堆顶的卡，但必须亮出；付得出就必须买下，付不出则退回顶部、该动作作废，本轮不能再从市场买<span class="pg">p.30</span></td></tr>
+  <tr><td>战斗打平算防守方守住</td><td>差值为 0 时进攻方获胜<span class="pg">p.25</span></td></tr>
+  <tr><td>差值可以超过 5</td><td>大于 5 时翻到「5」面，并从轨道中央格重新起算<span class="pg">p.24</span></td></tr>
+  <tr><td>劫掠可以打战术卡</td><td>劫掠不是战斗，战斗规则不适用，不能还击<span class="pg">p.16</span></td></tr>
+  <tr><td>战斗失利后可以原地不动</td><td>败方剩余单位必须撤退；无相邻城市可撤则消灭<span class="pg">p.25</span></td></tr>
+  <tr><td>获胜城市的等级不会降</td><td>荒废对双方都生效，防守方获胜也一样降级<span class="pg">p.25</span></td></tr>
+  <tr><td>霍姆斯会被增援</td><td>霍姆斯永不获得增援；由十字军控制时则永远额外被劫掠<span class="pg">p.16</span><span class="pg">p.31</span></td></tr>
+  <tr><td>终局条件随时触发</td><td>只在每轮结束时检查一次<span class="pg">p.28</span></td></tr>
+</table>
+<h3>15.2 一局速查</h3>
+<div class="grid2">
+  <div class="card"><div class="t"><span class="s">一轮</span>四段</div>事件（翻卡、增援、劫掠）→ 计划（放 2 枚命令）→ 命令（建造→祈祷→征召→行军）→ 收入（税、市场、总督与圣地）。</div>
+  <div class="card blue"><div class="t"><span class="s">命令十字</span>内外格</div>内格本轮结算、可压叠但要付钱；外格下一轮结算、带强化、抽 1 张间谍卡，每轮限 1 枚。</div>
+  <div class="card green"><div class="t"><span class="s">建造</span>两动作</div>升级城市（+1 级，费用可用资源顶替）／建造 0–II 级建筑（付价，不补市场）；强化加折扣并多建 1 张任意等级。</div>
+  <div class="card gold"><div class="t"><span class="s">祈祷</span>2＋4 点</div>2 点基础，最多花 4 资源各加 1 点；全部立刻换成前进格数，经过图标领奖；强化多 1 次主教行动与 1 张 II 级敕令。</div>
+  <div class="card"><div class="t"><span class="s">征召</span>2＋4</div>2 枚单位，最多花 4 资源各加 1 枚；另可学最多 2 张 I–II 战术；强化加折扣并多学 1 张任意等级。</div>
+  <div class="card blue"><div class="t"><span class="s">行军</span>4 或 6 次</div>4 次移动，最多花 4 资源各加 1 次；强化共 6 次且战斗 +2 战斗力；不能搬空城市。</div>
+  <div class="card green"><div class="t"><span class="s">战斗</span>四阶段</div>比战斗力（含城墙与轨道奖励）→ 各 2 次机动（出卡、挡半、随机盖、结算）→ 判胜（平手归攻方）→ 结算、撤退、荒废、战利品。</div>
+  <div class="card gold"><div class="t"><span class="s">收入</span>三步一检查</div>征税（每城产出＋首都 1）→ 恢复资源与刷新市场 → 总督条件与圣地各计分 → 轮末检查终局。</div>
+</div>
+<h3>15.3 中英术语对照</h3>
+<table>
+  <tr><th>中文</th><th>英文</th><th>中文</th><th>英文</th></tr>
+  <tr><td>十字军国家</td><td>Crusader state</td><td>黎凡特</td><td>the Levant</td></tr>
+  <tr><td>撒拉逊</td><td>Saracen</td><td>撒拉逊城市</td><td>Saracen city</td></tr>
+  <tr><td>影响分</td><td>influence points</td><td>钱币</td><td>coin</td></tr>
+  <tr><td>资源</td><td>goods</td><td>单位</td><td>unit</td></tr>
+  <tr><td>城墙加成</td><td>wall bonus</td><td>城市等级</td><td>city level</td></tr>
+  <tr><td>命令十字</td><td>order cross</td><td>命令标记</td><td>order token</td></tr>
+  <tr><td>内格／外格</td><td>inner slot／outer slot</td><td>强化命令</td><td>enhanced order</td></tr>
+  <tr><td>建造</td><td>Build</td><td>祈祷</td><td>Pray</td></tr>
+  <tr><td>征召</td><td>Muster</td><td>行军</td><td>March</td></tr>
+  <tr><td>圣徒轨</td><td>sainthood track</td><td>圣徒点数</td><td>sainthood points</td></tr>
+  <tr><td>敕令</td><td>rescript</td><td>教皇诏书</td><td>papal bull</td></tr>
+  <tr><td>主教</td><td>bishop</td><td>圣地</td><td>holy land</td></tr>
+  <tr><td>总督</td><td>governor</td><td>称号</td><td>epithet</td></tr>
+  <tr><td>战术卡</td><td>tactics card</td><td>机动</td><td>maneuver</td></tr>
+  <tr><td>战斗力</td><td>combat power</td><td>荒废</td><td>devastation</td></tr>
+  <tr><td>劫掠</td><td>raid</td><td>增援</td><td>reinforcements</td></tr>
+  <tr><td>突袭标记</td><td>raid token</td><td>激活色</td><td>activation color</td></tr>
+  <tr><td>间谍</td><td>spy</td><td>限制标记</td><td>restriction token</td></tr>
+  <tr><td>自动机</td><td>automa</td><td>霸权／圣德</td><td>Supremacy／Sanctity</td></tr>
+  <tr><td>十字军覆灭</td><td>Crusaders Defeated</td><td>时代终结</td><td>End of an Era</td></tr>
+</table>
+<h3>15.4 章节与页码</h3>
+<table>
+  <tr><th>原书章节</th><th>页码</th><th>本书位置</th></tr>
+  <tr><td>背景与插画</td><td>p.2 至 p.3</td><td>0</td></tr>
+  <tr><td>配件与组装</td><td>p.6 至 p.8</td><td>0、2</td></tr>
+  <tr><td>游戏目标与准备</td><td>p.9 至 p.15</td><td>0、1</td></tr>
+  <tr><td>事件阶段</td><td>p.16 至 p.17</td><td>4</td></tr>
+  <tr><td>计划阶段</td><td>p.17 至 p.19</td><td>5</td></tr>
+  <tr><td>命令阶段与四种命令</td><td>p.19 至 p.26</td><td>6 至 11</td></tr>
+  <tr><td>收入阶段</td><td>p.27</td><td>12</td></tr>
+  <tr><td>终局与计分</td><td>p.28</td><td>13</td></tr>
+  <tr><td>规则澄清</td><td>p.28 至 p.32</td><td>5、7、9、11、12、13</td></tr>
+  <tr><td>术语与符号</td><td>p.32 至 p.35</td><td>15</td></tr>
+</table>
+<p>页码写作 p.N，指英文原书 36 页的页序。术语与符号两节为全书通用解释，任何卡面上的措辞都以此为准。<span class="pg">p.32</span><span class="pg">p.35</span></p>
+<h3>15.5 原书页图对照</h3>
+<details>
+<summary>展开 36 张原书全页图</summary>
+<div class="pgs">
+<figure><img src="images_out/page_01.jpg" alt="原书第 1 页" loading="lazy"><figcaption>p.1 封面</figcaption></figure>
+<figure><img src="images_out/page_02.jpg" alt="原书第 2 页" loading="lazy"><figcaption>p.2 游戏简介与历史背景</figcaption></figure>
+<figure><img src="images_out/page_03.jpg" alt="原书第 3 页" loading="lazy"><figcaption>p.3 插画说明</figcaption></figure>
+<figure><img src="images_out/page_04.jpg" alt="原书第 4 页" loading="lazy"><figcaption>p.4 配件图</figcaption></figure>
+<figure><img src="images_out/page_05.jpg" alt="原书第 5 页" loading="lazy"><figcaption>p.5 配件图</figcaption></figure>
+<figure><img src="images_out/page_06.jpg" alt="原书第 6 页" loading="lazy"><figcaption>p.6 配件清单</figcaption></figure>
+<figure><img src="images_out/page_07.jpg" alt="原书第 7 页" loading="lazy"><figcaption>p.7 配件清单与剧本扩展</figcaption></figure>
+<figure><img src="images_out/page_08.jpg" alt="原书第 8 页" loading="lazy"><figcaption>p.8 城市计数器组装</figcaption></figure>
+<figure><img src="images_out/page_09.jpg" alt="原书第 9 页" loading="lazy"><figcaption>p.9 目标、准备、A 事件区、B 建筑区</figcaption></figure>
+<figure><img src="images_out/page_10.jpg" alt="原书第 10 页" loading="lazy"><figcaption>p.10 C 战术区、D 间谍区与总督区</figcaption></figure>
+<figure><img src="images_out/page_11.jpg" alt="原书第 11 页" loading="lazy"><figcaption>p.11 E 圣徒区、F 黎凡特地图</figcaption></figure>
+<figure><img src="images_out/page_12.jpg" alt="原书第 12 页" loading="lazy"><figcaption>p.12 地图续、少人局限制、G 战场</figcaption></figure>
+<figure><img src="images_out/page_13.jpg" alt="原书第 13 页" loading="lazy"><figcaption>p.13 H 玩家区 11 步</figcaption></figure>
+<figure><img src="images_out/page_14.jpg" alt="原书第 14 页" loading="lazy"><figcaption>p.14 准备示例</figcaption></figure>
+<figure><img src="images_out/page_15.jpg" alt="原书第 15 页" loading="lazy"><figcaption>p.15 四人局布置图</figcaption></figure>
+<figure><img src="images_out/page_16.jpg" alt="原书第 16 页" loading="lazy"><figcaption>p.16 流程、事件阶段、增援与劫掠</figcaption></figure>
+<figure><img src="images_out/page_17.jpg" alt="原书第 17 页" loading="lazy"><figcaption>p.17 夺城、轨道奖励、计划阶段</figcaption></figure>
+<figure><img src="images_out/page_18.jpg" alt="原书第 18 页" loading="lazy"><figcaption>p.18 命令十字、内外格、放置示例</figcaption></figure>
+<figure><img src="images_out/page_19.jpg" alt="原书第 19 页" loading="lazy"><figcaption>p.19 示例续、自动机、命令阶段</figcaption></figure>
+<figure><img src="images_out/page_20.jpg" alt="原书第 20 页" loading="lazy"><figcaption>p.20 建造命令与升级</figcaption></figure>
+<figure><img src="images_out/page_21.jpg" alt="原书第 21 页" loading="lazy"><figcaption>p.21 建筑落位、强化建造、祈祷命令</figcaption></figure>
+<figure><img src="images_out/page_22.jpg" alt="原书第 22 页" loading="lazy"><figcaption>p.22 圣地、基础祈祷、主教行动</figcaption></figure>
+<figure><img src="images_out/page_23.jpg" alt="原书第 23 页" loading="lazy"><figcaption>p.23 强化祈祷、征召命令</figcaption></figure>
+<figure><img src="images_out/page_24.jpg" alt="原书第 24 页" loading="lazy"><figcaption>p.24 强化征召、行军命令、战斗开始</figcaption></figure>
+<figure><img src="images_out/page_25.jpg" alt="原书第 25 页" loading="lazy"><figcaption>p.25 机动、判胜、战斗结束</figcaption></figure>
+<figure><img src="images_out/page_26.jpg" alt="原书第 26 页" loading="lazy"><figcaption>p.26 战斗示例</figcaption></figure>
+<figure><img src="images_out/page_27.jpg" alt="原书第 27 页" loading="lazy"><figcaption>p.27 收入阶段与示例</figcaption></figure>
+<figure><img src="images_out/page_28.jpg" alt="原书第 28 页" loading="lazy"><figcaption>p.28 终局、计分、诏书与总督</figcaption></figure>
+<figure><img src="images_out/page_29.jpg" alt="原书第 29 页" loading="lazy"><figcaption>p.29 总督细则、回合顺序、建筑</figcaption></figure>
+<figure><img src="images_out/page_30.jpg" alt="原书第 30 页" loading="lazy"><figcaption>p.30 建筑示例、敕令、市场、弃牌堆</figcaption></figure>
+<figure><img src="images_out/page_31.jpg" alt="原书第 31 页" loading="lazy"><figcaption>p.31 首都、战术卡、霍姆斯</figcaption></figure>
+<figure><img src="images_out/page_32.jpg" alt="原书第 32 页" loading="lazy"><figcaption>p.32 间谍卡、术语</figcaption></figure>
+<figure><img src="images_out/page_33.jpg" alt="原书第 33 页" loading="lazy"><figcaption>p.33 术语续与制作名单</figcaption></figure>
+<figure><img src="images_out/page_34.jpg" alt="原书第 34 页" loading="lazy"><figcaption>p.34 符号速查</figcaption></figure>
+<figure><img src="images_out/page_35.jpg" alt="原书第 35 页" loading="lazy"><figcaption>p.35 符号速查续</figcaption></figure>
+<figure><img src="images_out/page_36.jpg" alt="原书第 36 页" loading="lazy"><figcaption>p.36 封底</figcaption></figure>
+</div>
+</details>
+</section>
+
+<div class="foot">
+海外之地 · 学习版规则　｜　依据英文原书《Outremer》Rulebook（36 页）与中文版既定译法编写<br>
+按规则结构重排，非官方规则书；规则裁决以英文原书为准，卡面数值与配件数量以实体配件为准。
+</div>
+</main>
+</div>
+</body>
+</html>
