@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>荒野生机 · 学习版规则（Wildscape）</title>
+<style>
+  :root{
+    --bg:#fbf7f0; --paper:#fffdf9; --ink:#2f2a28; --soft:#6b615c;
+    --line:#e3d8c8; --line2:#d3c4ae;
+    --red:#a2303c; --red-l:#fbecec; --blue:#3b5b8c; --blue-l:#eaf0f9;
+    --gold:#a9761c; --gold-l:#fbf1dc; --green:#3d7a55; --green-l:#e9f4ec;
+    --purple:#6b4a86; --purple-l:#f1eaf7;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"PingFang SC","Microsoft YaHei","Noto Sans SC",Arial,sans-serif;
+    font-size:15.5px;line-height:1.85;}
+  .backbar{position:sticky;top:0;z-index:60;height:44px;box-sizing:border-box;
+    display:flex;align-items:center;gap:10px;padding:0 16px;
+    background:var(--paper);border-bottom:1px solid var(--line);font-size:13px;}
+  .backbar a{display:inline-flex;align-items:center;min-height:32px;padding:0 12px;
+    border:1px solid var(--line2);border-radius:8px;background:#fff;
+    color:var(--purple);text-decoration:none;white-space:nowrap;}
+  .backbar a:active{background:var(--purple-l);}
+  .backbar .bb-t{margin-left:auto;font-size:12px;color:var(--soft);}
+  .layout{display:flex;align-items:flex-start;max-width:1280px;margin:0 auto;}
+  nav.toc{position:sticky;top:44px;align-self:flex-start;width:238px;flex:0 0 238px;
+    height:calc(100vh - 44px);overflow-y:auto;background:#fffdf9;border-right:1px solid var(--line);
+    padding:22px 14px 40px;font-size:13px;}
+  nav.toc .brand{font-size:17px;font-weight:800;color:var(--red);margin:0 0 4px;}
+  nav.toc .brand-s{font-size:11.5px;color:var(--soft);margin:0 0 16px;letter-spacing:.04em;}
+  nav.toc .grp{margin:16px 0 5px;font-size:11px;color:var(--gold);font-weight:700;letter-spacing:.12em;}
+  nav.toc a{display:block;color:#49403b;text-decoration:none;padding:4px 9px;border-radius:6px;}
+  nav.toc a:hover{background:var(--red-l);color:var(--red);}
+  main{flex:1 1 auto;min-width:0;padding:0 42px 90px;}
+  .hero{background:linear-gradient(150deg,#7c1f2b,#a2303c 55%,#bd5a4a);
+    color:#fff8f0;border-radius:0 0 20px 20px;padding:40px 42px 34px;margin-bottom:26px;
+    box-shadow:0 8px 26px rgba(124,31,43,.18);}
+  .hero h1{margin:0;font-size:34px;letter-spacing:.02em;}
+  .hero .en{font-size:14px;opacity:.8;margin:2px 0 12px;letter-spacing:.06em;}
+  .hero .desc{font-size:16px;max-width:760px;line-height:1.8;}
+  .hero .meta{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px;}
+  .hero .meta span{border:1px solid rgba(255,255,255,.5);border-radius:20px;padding:3px 13px;font-size:12.5px;}
+  .stand{margin-top:14px;background:#fff6e2;border:1px solid #e8d2a2;border-left:5px solid var(--gold);
+    border-radius:0 10px 10px 0;padding:12px 18px;font-size:14px;color:#5c4a26;}
+  section{padding:22px 0 14px;border-bottom:1px dashed var(--line2);scroll-margin-top:14px;}
+  h2{font-size:25px;color:var(--red);margin:8px 0 4px;line-height:1.4;}
+  h2 .n{display:inline-block;background:var(--red);color:#fff;font-size:14px;
+    min-width:30px;height:30px;line-height:30px;text-align:center;border-radius:8px;
+    margin-right:10px;vertical-align:3px;font-weight:700;}
+  h3{font-size:18.5px;color:#3a3230;margin:26px 0 6px;border-left:4px solid var(--gold);padding-left:10px;}
+  h4{font-size:16px;color:var(--blue);margin:18px 0 4px;}
+  p{margin:9px 0;}
+  ul,ol{margin:9px 0 9px 2px;padding-left:22px;}
+  li{margin:5px 0;}
+  b,strong{color:var(--red);}
+  .goal{background:var(--blue-l);border:1px solid #cfdcf0;border-radius:9px;
+    padding:8px 14px;font-size:13.5px;color:#2f466c;margin:8px 0 16px;}
+  .goal b{color:#2f466c;}
+  .pg{display:inline-block;background:#f0e7d8;color:#7d6231;border:1px solid #e2d2b6;
+    border-radius:5px;font-size:11px;padding:0 6px;line-height:18px;vertical-align:1px;
+    margin-left:4px;font-weight:600;white-space:nowrap;font-family:Arial,sans-serif;}
+  .key{background:var(--green-l);border:1px solid #c9e2d1;border-left:5px solid var(--green);
+    padding:11px 16px;border-radius:0 10px 10px 0;margin:13px 0;}
+  .key b{color:var(--green);}
+  .warn{background:var(--red-l);border:1px solid #eed3d3;border-left:5px solid var(--red);
+    padding:11px 16px;border-radius:0 10px 10px 0;margin:13px 0;}
+  .warn b{color:var(--red);}
+  .tip{background:var(--gold-l);border:1px solid #eddcb8;border-left:5px solid var(--gold);
+    padding:11px 16px;border-radius:0 10px 10px 0;margin:13px 0;}
+  .tip b{color:var(--gold);}
+  .note{background:#f4f1ec;border:1px solid var(--line);border-radius:9px;padding:10px 15px;
+    margin:12px 0;font-size:14px;color:#514844;}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px;background:var(--paper);}
+  th,td{border:1px solid var(--line2);padding:8px 11px;text-align:left;vertical-align:top;}
+  th{background:#f4e9dd;color:#5d4022;font-weight:700;}
+  tr:nth-child(even) td{background:#fdf9f3;}
+  td.c,th.c{text-align:center;}
+  .steps{list-style:none;padding:0;counter-reset:st;margin:14px 0;}
+  .steps>li{position:relative;padding:10px 14px 10px 50px;margin:9px 0;background:var(--paper);
+    border:1px solid var(--line);border-radius:10px;}
+  .steps>li::before{counter-increment:st;content:counter(st);position:absolute;left:12px;top:11px;
+    width:26px;height:26px;background:var(--red);color:#fff;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;}
+  .steps>li>ol{margin:6px 0;padding-left:20px;}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:11px;
+    padding:13px 17px;margin:11px 0;box-shadow:0 2px 6px rgba(80,60,40,.04);}
+  .card .t{font-weight:800;color:var(--red);font-size:16px;margin-bottom:3px;}
+  .card .t .s{display:inline-block;background:var(--red);color:#fff;border-radius:5px;
+    font-size:12px;padding:1px 7px;margin-right:8px;}
+  .card.blue .t{color:var(--blue);} .card.blue .t .s{background:var(--blue);}
+  .card.green .t{color:var(--green);} .card.green .t .s{background:var(--green);}
+  .card.gold .t{color:var(--gold);} .card.gold .t .s{background:var(--gold);}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+  .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;}
+  .mini{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:11px 13px;}
+  .mini .h{font-weight:800;font-size:14px;margin-bottom:4px;}
+  .mini .v{font-size:13px;color:var(--soft);line-height:1.7;}
+  .fig{margin:18px 0;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;}
+  .fig svg{display:block;width:100%;height:auto;}
+  .figcap{font-size:12.5px;color:var(--soft);margin-top:8px;text-align:center;}
+  details{margin:12px 0;background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:8px 14px;}
+  summary{cursor:pointer;font-size:13.5px;color:var(--blue);font-weight:600;}
+  details img{display:block;max-width:100%;margin:12px auto;border:1px solid var(--line);border-radius:8px;}
+  .pit{counter-reset:pit;list-style:none;padding:0;margin:14px 0;}
+  .pit li{position:relative;padding:9px 14px 9px 46px;margin:7px 0;background:var(--paper);
+    border:1px solid var(--line);border-radius:9px;font-size:14.5px;}
+  .pit li::before{counter-increment:pit;content:"✕ " counter(pit);position:absolute;left:10px;top:9px;
+    color:#fff;background:var(--red);border-radius:6px;font-size:11px;padding:1px 6px;font-weight:700;}
+  .bad{color:var(--red);text-decoration:line-through;}
+  .good{color:var(--green);font-weight:700;}
+  .tagR{color:var(--red);font-weight:700;} .tagB{color:var(--blue);font-weight:700;}
+  .tagG{color:var(--gold);font-weight:700;}
+  .why{background:#eef3fa;border:1px solid #cddcee;border-left:5px solid var(--blue);
+    padding:12px 17px;border-radius:0 10px 10px 0;margin:13px 0;font-size:14.5px;}
+  .why b{color:#2f466c;}
+  .why .wt{font-weight:800;color:#2f466c;display:block;margin-bottom:3px;}
+  .idx{font-size:13.5px;}
+  .foot{margin-top:34px;font-size:12.5px;color:var(--soft);text-align:center;line-height:1.9;}
+  @media(max-width:960px){
+    .layout{flex-direction:column;} nav.toc{position:static;width:100%;height:auto;flex-basis:auto;border-right:0;border-bottom:1px solid var(--line);}
+    main{padding:0 18px 60px;} .grid2,.grid4{grid-template-columns:1fr 1fr;}
+  }
+  @media(max-width:640px){.backbar{height:40px;padding:0 10px;} .backbar a{min-height:30px;padding:0 9px;font-size:12.5px;} .backbar .bb-t{display:none;}
+  .grid2,.grid4{grid-template-columns:1fr;} main{padding:0 12px 50px;} .hero{padding:28px 20px;} .hero h1{font-size:26px;}}
+
+  /* == 窄屏目录：横向胶囊，正文首屏可见 == */
+  @media(max-width:960px){
+    nav.toc{display:flex;flex-wrap:nowrap;gap:6px;align-items:center;
+      height:auto;max-height:none;overflow-x:auto;overflow-y:hidden;
+      padding:10px 12px;border-right:0;border-bottom:1px solid var(--line);
+      -webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;}
+    nav.toc .brand,nav.toc .brand-s,nav.toc .grp{display:none;}
+    nav.toc a{flex:0 0 auto;white-space:nowrap;padding:6px 11px;
+      border:1px solid var(--line2);border-radius:16px;background:var(--paper);
+      font-size:12.5px;line-height:1.4;}
+    nav.toc a:hover{background:var(--red-l);}
+    nav.toc a[style]{padding-left:11px;}
+  }
+
+  /* == 学习版通用补充（各本共用） == */
+  .flow{margin:18px 0;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;}
+  .flow svg{display:block;width:100%;height:auto;}
+  .pgs{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin:14px 0;}
+  .pgs figure{margin:0;background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:8px;}
+  .pgs img{display:block;width:100%;height:auto;margin:0;border:1px solid var(--line);border-radius:6px;}
+  .pgs figcaption{font-size:12px;color:var(--soft);text-align:center;margin-top:6px;line-height:1.5;}
+  @media(max-width:640px){.pgs{grid-template-columns:1fr 1fr;gap:9px;}}
+  /* 窄屏压缩首屏：hero 与体例框收紧，第 0 节进入首屏 */
+  @media(max-width:640px){
+    .hero{padding:22px 18px 24px;margin-bottom:16px;}
+    .hero h1{font-size:24px;} .hero .desc{font-size:14px;line-height:1.65;margin-top:8px;}
+    .hero .meta{margin-top:12px;gap:6px;} .hero .meta span{font-size:11.5px;padding:2px 10px;}
+    .stand{margin-top:10px;padding:9px 12px;font-size:12.5px;line-height:1.6;}
+  }
+</style>
+</head>
+<body>
+<div class="backbar"><a href="index.html">← 学习版目录</a><span class="bb-t">荒野生机 · 学习版规则</span></div>
+<div class="layout">
+<nav class="toc">
+  <div class="brand">荒野生机</div>
+  <div class="brand-s">学习版规则 · Wildscape</div>
+  <div class="grp">规则概要</div>
+  <a href="#s0">0 · 游戏概要与目标</a>
+  <a href="#s1">1 · 初局设置</a>
+  <a href="#s2">2 · 版图、组件与两类能量</a>
+  <div class="grp">引擎与回合</div>
+  <a href="#s3">3 · 核心引擎</a>
+  <a href="#s4">4 · 一个回合的结构</a>
+  <a href="#s5">5 · 轮盘扇区与能量循环</a>
+  <div class="grp">土地与动物</div>
+  <a href="#s6">6 · 栖息地与领地</a>
+  <a href="#s7">7 · 食草动物与蛇</a>
+  <div class="grp">行动与卡牌</div>
+  <a href="#s8">8 · 轮盘九项行动</a>
+  <a href="#s9">9 · 掠食者卡与灵长类卡</a>
+  <a href="#s10">10 · 专家、展列区与动物志卡</a>
+  <div class="grp">收尾与查考</div>
+  <a href="#s11">11 · 观鸟与回合结束</a>
+  <a href="#s12">12 · 终局计分</a>
+  <a href="#s13">13 · 单人模式：盗猎者</a>
+  <a href="#s14">14 · 常见误读、速查表与页码索引</a>
+</nav>
+
+<main>
+<header class="hero">
+  <h1>荒野生机 · 学习版规则</h1>
+  <div class="en">WILDSCAPE　｜　按规则结构重排，不按原书章节顺序</div>
+  <div class="desc">以一条「栖息地决定容量、数值触发放置与计分」的因果链为主线，展开轮盘扇区与两类能量、栖息地与领地、食草动物与蛇、九项轮盘行动、掠食者与灵长类卡、专家阈值、观鸟与回合结束、终局五组计分与单人模式。</div>
+  <div class="meta"><span>一至四人 · 约 30 分钟</span><span>轮盘取板块 · 能量即行动次数</span><span>五种栖息地 · 动物体型即容量</span><span>依据英文原书 24 页</span></div>
+</header>
+
+<div class="stand">
+  <b>体例：</b>按学习顺序重排，章节与原书不对应；每条结论后的 <span class="pg">p.N</span> 为英文原书页码。
+  规则裁决以<b>英文原书页图</b>为准；术语沿用已上线中文版的既定译法。原书未列之处只记录、不代填，板块印值、专家轨道各行数值与卡面细节以实体配件为准。第 14 节附 24 张原书页图。
+  正文按规则作用展开，先述状态变化，再列执行步骤。
+</div>
+
+<section id="s0">
+<h2><span class="n">0</span>游戏概要与目标</h2>
+<p>《荒野生机》以人类退场后的非洲为背景。玩家扮演留在荒野边缘的自然学者，用栖息地板块、野放的食草动物与河流绿洲，把一片退化土地重新连成完整的生态系统。一至四人，单局约 30 分钟，规则书 24 页。<span class="pg">p.1</span><span class="pg">p.4</span></p>
+<div class="why"><span class="wt">规则主线</span>全游戏的因果是一条单向链：轮盘扇区决定本回合可取的栖息地板块与可执行的行动；板块拼进领地后形成栖息地；栖息地的大小决定能容纳多少动物板块；动物板块的数值又决定掠食者能否落子、专家能否被吸引。终局计分读取的是这条链上留下的全部痕迹——河流与动物的印值、棋子周围的栖息地、手中卡牌与已打出的专家卡。<span class="pg">p.4</span><span class="pg">p.5</span><span class="pg">p.13</span></div>
+<div class="grid2">
+  <div class="card"><div class="t">两类得分来源</div>卡牌与棋子一侧有五项：终局观鸟、掠食者棋子、灵长类棋子、手中动物志卡、已打出的专家卡。领地一侧读取板块印值：全部河流的数值，以及全部食草动物与蛇正面朝上的数值。<span class="pg">p.13</span></div>
+  <div class="card blue"><div class="t">一项扣分</div>领地上每处仍露出的漏油扣 1 分。漏油视为空格，可以放置栖息地板块，覆盖后不再扣分。<span class="pg">p.5</span><span class="pg">p.13</span></div>
+</div>
+<table>
+  <tr><th>项目</th><th>取值</th><th>依据</th></tr>
+  <tr><td>人数</td><td>一至四人；另附单人模式</td><td><span class="pg">p.1</span><span class="pg">p.14</span></td></tr>
+  <tr><td>时长与年龄</td><td>约 30 分钟；10 岁以上</td><td><span class="pg">p.1</span></td></tr>
+  <tr><td>回合顺序</td><td>持起始玩家卡者先行动，其后顺时针</td><td><span class="pg">p.2</span><span class="pg">p.4</span></td></tr>
+  <tr><td>栖息地类型</td><td>河流、林地、湿地、稀树草原、沙漠，共五种</td><td><span class="pg">p.5</span></td></tr>
+  <tr><td>终局触发</td><td>最后剩下的栖息地板块堆翻出终局触发板块</td><td><span class="pg">p.2</span><span class="pg">p.4</span></td></tr>
+  <tr><td>胜负</td><td>分数最高者胜；并列时回合顺序靠后者胜</td><td><span class="pg">p.13</span></td></tr>
+</table>
+<h3>0.1 两种能量的固定含义</h3>
+<p>太阳能量印在轮盘上，玩家既不能取走也不能弃掉；它随使用自动回环，只是在形态之间转换。生物能量存放在个人供应区，可以花费，开局每人 2 枚。凡规则要求支付能量，两种能量都可以出。<span class="pg">p.7</span></p>
+<h3>0.2 动物板块的固定含义</h3>
+<p>一块动物板块代表一群动物，而不是单只。因此被掠食者猎食之后，这群动物仍可转为定居状态；食草动物板块的一面是野放，另一面是定居，数值随状态改变。<span class="pg">p.6</span><span class="pg">p.10</span></p>
+</section>
+
+<section id="s1">
+<h2><span class="n">1</span>初局设置</h2>
+<p>设置共 20 步，按轮盘、栖息地板块、专家板、卡牌展列区、公共供应、玩家设置六组完成。所有随机洗牌与发牌都在正式开局前一次性完成，之后只作补充；牌堆用尽时才把弃牌洗混。<span class="pg">p.2</span></p>
+<h3>1.1 轮盘</h3>
+<ol>
+  <li>轮盘版图放在桌面中央，多人局用多人面朝上。<span class="pg">p.2</span></li>
+  <li>随机选一个扇区作为起点，自此顺时针把 14 枚太阳能量标记按「2 枚、1 枚、2 枚、1 枚」交替放进轮盘中环，直到填满所有格位。<span class="pg">p.2</span></li>
+  <li>行动选择标记放在轮盘旁。<span class="pg">p.2</span></li>
+</ol>
+<h3>1.2 栖息地板块</h3>
+<ol>
+  <li>洗混栖息地板块，把 9 块正面朝上放在轮盘为其预留的格位上。<span class="pg">p.2</span></li>
+  <li>在轮盘旁按人数叠三堆背面朝上的栖息地板块：二人局每堆 8 块，三人局每堆 12 块，四人局每堆 16 块。<span class="pg">p.2</span></li>
+  <li>把一块观鸟板块放在其中两堆的顶上。<span class="pg">p.2</span></li>
+  <li>用剩余栖息地板块叠成第四堆，把终局触发板块放在这堆顶上。<span class="pg">p.2</span></li>
+</ol>
+<div class="note">短局变体：前几局或时间较少时，把三堆改为二人局每堆 6 块、三人局每堆 9 块、四人局每堆 12 块，其余不变。原书把短局列为变体而非默认设置。<span class="pg">p.2</span></div>
+<h3>1.3 专家板与专家卡</h3>
+<ol>
+  <li>专家板按人数选面朝上：三人与四人用同面，二人用另一面。<span class="pg">p.2</span></li>
+  <li>5 枚专家标记各放到对应颜色轨道的起始格上。<span class="pg">p.2</span></li>
+  <li>5 类专家卡分别洗混，背面朝上放在专家板旁。<span class="pg">p.2</span></li>
+</ol>
+<h3>1.4 卡牌展列区</h3>
+<ol>
+  <li>动物卡按动物志、灵长类、掠食者分别洗混。每类占一行，各翻开顶上 3 张，形成三行三列的展列区；每叠剩下的牌背面朝下放在对应行右侧。<span class="pg">p.2</span></li>
+  <li>洗混鸟类卡，在每对相邻玩家之间发 2 张，随机决定朝上的一面；其余放回盒中。二人局双方之间共发 4 张。<span class="pg">p.2</span></li>
+</ol>
+<h3>1.5 公共供应</h3>
+<ol>
+  <li>洗混 16 块土地板块叠成一堆，把顶上一块翻到正面。<span class="pg">p.2</span></li>
+  <li>随机翻出掠食者奖励板块，数量为玩家人数的 3 倍；其余放回盒中。<span class="pg">p.2</span></li>
+  <li>把下列配件放在手边：按栖息地类型与数值分类的食草动物板块（野放面朝上）、按栖息地类型分类的蛇板块、按体型分类的河流板块、按附带栖息地分类的绿洲板块、掠食者棋子、灵长类棋子、生物能量标记。<span class="pg">p.2</span></li>
+</ol>
+<div class="note">掠食者棋子、灵长类棋子与生物能量标记不设数量上限；用尽时以合适替代物补足。<span class="pg">p.2</span></div>
+<h3>1.6 玩家设置</h3>
+<ol>
+  <li>洗混 4 块起始土地板块，每人发 1 块。<span class="pg">p.2</span></li>
+  <li>每人取 2 枚生物能量标记。<span class="pg">p.2</span></li>
+  <li>最近一次见到野生动物的人先手，取起始玩家卡。<span class="pg">p.2</span></li>
+  <li>每人抽 6 张卡：动物志、掠食者、灵长类各 2 张。<span class="pg">p.2</span></li>
+  <li>每人从手牌中任选 3 张动物卡弃掉，并为自己的起始土地板块选定一面朝上。<span class="pg">p.2</span></li>
+</ol>
+<div class="why"><span class="wt">规则作用</span>设置把两项节奏固定下来：三堆栖息地板块加第四堆，决定全局能撑多少回合；两堆顶上的观鸟板块与第四堆顶上的终局触发板块，决定观鸟与终局的插入时机。玩家手牌从 6 张减到 3 张，使开局第一次出牌就必须在灵长类、掠食者与动物志三类之间取舍。<span class="pg">p.2</span><span class="pg">p.12</span></div>
+<h3>1.7 专家变体一：提前选定</h3>
+<p>熟悉规则并希望提前规划专家效果时使用。设置时每类专家各随机发 2 张给每位玩家；到玩家设置第 20 步，每人从每类中留 1 张，其余弃掉。留下的专家卡按第 10 节的吸引流程进入游戏。<span class="pg">p.2</span><span class="pg">p.11</span></p>
+</section>
+
+<section id="s2">
+<h2><span class="n">2</span>版图、组件与两类能量</h2>
+<p>先认轮盘上的扇区与中环能量，再认领地的三种地形状态——可放板块的空格、不可放板块的山脉、必须覆盖的漏油，最后认卡牌与棋子。<span class="pg">p.2</span><span class="pg">p.5</span></p>
+<h3>2.1 配件数量</h3>
+<table>
+  <tr><th>配件</th><th>数量</th><th>说明</th></tr>
+  <tr><td>栖息地板块</td><td>70 块</td><td>含五种栖息地类型的组合<span class="pg">p.1</span></td></tr>
+  <tr><td>食草动物板块</td><td>108 块</td><td>双面：野放面与定居面<span class="pg">p.1</span><span class="pg">p.6</span></td></tr>
+  <tr><td>蛇板块</td><td>24 块</td><td>双面：体型 1 与体型 2<span class="pg">p.1</span><span class="pg">p.9</span></td></tr>
+  <tr><td>河流板块</td><td>46 块</td><td>18 块 1 格、16 块 2 格、12 块 3 格<span class="pg">p.1</span></td></tr>
+  <tr><td>绿洲板块</td><td>15 块</td><td>含林地、湿地、稀树草原或纯沙漠<span class="pg">p.1</span><span class="pg">p.9</span></td></tr>
+  <tr><td>土地板块</td><td>16 块，另 4 块起始土地</td><td>每块各有一座带水边的山<span class="pg">p.1</span><span class="pg">p.9</span></td></tr>
+  <tr><td>太阳能量标记</td><td>14 枚</td><td>置于轮盘中环，不可取走<span class="pg">p.1</span><span class="pg">p.7</span></td></tr>
+  <tr><td>生物能量标记</td><td>30 枚以上</td><td>不设上限，存个人供应区<span class="pg">p.1</span><span class="pg">p.7</span></td></tr>
+  <tr><td>动物卡</td><td>动物志 28、灵长类 28、掠食者 28、鸟类 10</td><td>三类动物卡各成一行<span class="pg">p.1</span><span class="pg">p.2</span></td></tr>
+  <tr><td>专家卡与专家标记</td><td>40 张卡、5 枚标记、1 块板</td><td>五类各 8 张卡<span class="pg">p.1</span><span class="pg">p.11</span></td></tr>
+  <tr><td>掠食者奖励板块</td><td>18 块</td><td>开局按人数 3 倍翻出<span class="pg">p.1</span><span class="pg">p.2</span></td></tr>
+  <tr><td>其他</td><td>观鸟板块 2、终局触发板块 1、行动选择标记 1、记录骰 10 枚以上、玩家帮助卡 4、单人卡 1</td><td><span class="pg">p.1</span></td></tr>
+</table>
+<h3>2.2 轮盘与扇区</h3>
+<p>轮盘是回合的入口。扇区上印三样东西：一块栖息地板块的取用权、2 至 3 项行动及各自代价、以及中环的能量数量。玩家每回合把行动选择标记放到任一扇区旁，该扇区当回合的这三样内容即归其使用。<span class="pg">p.7</span><span class="pg">p.8</span></p>
+<p>中环的太阳能量按「2、1、2、1」交替布置，因此各扇区可用能量从一开始就不相同；回合结束时用掉的能量逐格顺时针发回，格局随行动持续改变。<span class="pg">p.2</span><span class="pg">p.12</span></p>
+<h3>2.3 领地的三种地形状态</h3>
+<table>
+  <tr><th>地形</th><th>结构</th><th>规则作用</th></tr>
+  <tr><td>空格</td><td>土地板块上未放置栖息地板块的六角格</td><td>可放栖息地板块、绿洲、河流；也是动物志卡的计数对象<span class="pg">p.5</span><span class="pg">p.13</span></td></tr>
+  <tr><td>山脉</td><td>占据该格，不可放置栖息地板块</td><td>相邻山脉合成一条山脉；山上的瀑布可作河流的水源<span class="pg">p.5</span><span class="pg">p.9</span></td></tr>
+  <tr><td>漏油</td><td>视为空格，可以且应当覆盖</td><td>终局仍露出则每处扣 1 分<span class="pg">p.5</span><span class="pg">p.13</span></td></tr>
+</table>
+<h3>2.4 卡牌与棋子</h3>
+<p>三类动物卡各有用途：灵长类卡可以从手牌打出，换取一次放置与一项即时效果；掠食者卡可以从手牌打出，条件满足后落子并领取奖励板块；动物志卡不打出，留在手里到终局按卡面条件计分。鸟类卡不入手牌，摆在相邻玩家之间，供双方在观鸟时竞争。<span class="pg">p.8</span><span class="pg">p.10</span><span class="pg">p.13</span></p>
+<p>五种棋子各司其职：灵长类棋子落在栖息地板块上，掠食者棋子落在动物板块上，专家标记沿专家板轨道上移，行动选择标记标示本回合扇区，记录骰只用于提示栖息地剩余容量。<span class="pg">p.2</span><span class="pg">p.6</span><span class="pg">p.11</span></p>
+</section>
+
+<section id="s3">
+<h2><span class="n">3</span>核心引擎</h2>
+<p>规则书在核心概念一节只强调两件事：放置栖息地板块与放置食草动物。其余系统都挂在这两件事上——栖息地决定容量，容量决定动物，动物的数值再决定掠食者、专家与终局得分。<span class="pg">p.5</span><span class="pg">p.6</span></p>
+<svg viewBox="0 0 900 300" role="img" aria-label="荒野生机的核心循环">
+  <rect x="0" y="0" width="900" height="300" fill="#ffffff"/>
+  <text x="450" y="26" text-anchor="middle" font-size="15" font-weight="700" fill="#2f5d3a">选扇区 → 取板块或打灵长类卡 → 拼进领地 → 放食草动物 → 数值触发放置与计分 → 回合结束补充</text>
+  <g font-size="12.5" text-anchor="middle" fill="#22402c">
+    <rect x="12" y="46" width="152" height="64" rx="9" fill="#eef4ec" stroke="#bfd6c2"/>
+    <text x="88" y="70">选轮盘扇区</text><text x="88" y="92">定板块、行动与能量</text>
+    <rect x="180" y="46" width="152" height="64" rx="9" fill="#f4f1e6" stroke="#d8cfa8"/>
+    <text x="256" y="70">取板块或出灵长类</text><text x="256" y="92">二者只能选其一</text>
+    <rect x="348" y="46" width="152" height="64" rx="9" fill="#eaf1f5" stroke="#b8cfda"/>
+    <text x="424" y="70">拼进领地</text><text x="424" y="92">任意空格、任意朝向</text>
+    <rect x="516" y="46" width="152" height="64" rx="9" fill="#f6efe4" stroke="#dcc9a6"/>
+    <text x="592" y="70">野放食草动物</text><text x="592" y="92">体型合计不超栖息地</text>
+    <rect x="684" y="46" width="204" height="64" rx="9" fill="#f2eef7" stroke="#cfc2e2"/>
+    <text x="786" y="70">数值转为条件与分数</text><text x="786" y="92">掠食者门槛、专家阈值</text>
+  </g>
+  <g stroke="#4a7a55" stroke-width="2" fill="none">
+    <path d="M164 78 H176"/><path d="M332 78 H344"/><path d="M500 78 H512"/><path d="M668 78 H680"/>
+    <path d="M786 110 V146 H88 V110"/><path d="M88 110 l-5 8 h10 z" fill="#4a7a55"/>
+  </g>
+  <text x="450" y="168" text-anchor="middle" font-size="13" fill="#4a5f4d">回合结束：发回能量、补板块、补展列区、观鸟或触发终局</text>
+  <g font-size="12.5" text-anchor="middle" fill="#2f5d3a">
+    <rect x="12" y="188" width="212" height="44" rx="8" fill="#fbf9f4" stroke="#ddd6c6"/>
+    <text x="118" y="215">河流与动物印值计入终局</text>
+    <rect x="238" y="188" width="212" height="44" rx="8" fill="#fbf9f4" stroke="#ddd6c6"/>
+    <text x="344" y="215">专家沿用动物数值判定</text>
+    <rect x="464" y="188" width="212" height="44" rx="8" fill="#fbf9f4" stroke="#ddd6c6"/>
+    <text x="570" y="215">灵长类按周边边缘计分</text>
+    <rect x="690" y="188" width="198" height="44" rx="8" fill="#fbf9f4" stroke="#ddd6c6"/>
+    <text x="789" y="215">漏油未覆盖每处扣 1 分</text>
+  </g>
+  <text x="450" y="270" text-anchor="middle" font-size="12" fill="#4a5f4d">终局触发后，本轮补齐，再各进行一次完整回合</text>
+</svg>
+<h3>3.1 栖息地的大小</h3>
+<p>栖息地指领地内同一类型的栖息地板块连成的一片区域。大小等于与之相邻且边缘匹配的板块数。地块本身可以印一至三种栖息地类型，按类型分别计数；同一块板块可以为两种类型的栖息地各贡献一格。<span class="pg">p.5</span></p>
+<p>新芽图标为所在的那一种栖息地加 1 点大小，不增加同一块板块上其他类型的大小。因此一块板块可能同时让两种栖息地各得 1 点，而新芽只抬高其中印有标记的那一种。<span class="pg">p.5</span></p>
+<h3>3.2 三条相互牵引的数量</h3>
+<div class="grid2">
+  <div class="card"><div class="t">容量</div>栖息地内全部动物板块的体型合计不得超过该栖息地的大小。容量是硬上限，动物板块一旦放入不可取出。<span class="pg">p.6</span></div>
+  <div class="card blue"><div class="t">数值</div>动物板块的数值决定掠食者条件能否满足，也决定某类动物的数值合计能否越过专家板的阈值。<span class="pg">p.9</span><span class="pg">p.11</span></div>
+</div>
+<p>第三层是领地本身。河流板块的数值、食草动物与蛇的正面数值在终局直接相加；山脉、漏油与空格则通过动物志卡与扣分项进入分数。三层共用同一批板块，扩地越多，可用于容纳动物的格数越多，但每块土地板块上的山脉也固定占去一格。<span class="pg">p.9</span><span class="pg">p.13</span></p>
+<h3>3.3 能量作为行动次数</h3>
+<p>本作没有固定的行动次数，行动次数由能量折算。扇区上的每项行动都标价，执行一次即把相应数量的能量标记推到版图中央；推完即无能量可用。生物能量可以在任何时候补上不足的部分，因此个人供应区的存量等于额外的行动次数。<span class="pg">p.7</span><span class="pg">p.8</span></p>
+<div class="why"><span class="wt">规则作用</span>太阳能量只在扇区之间流动，从不离开轮盘；它决定的是「这一回合能做几次」，而不是「这一回合能存多少」。生物能量则相反，可以留存、可以跨回合使用，也是唯一会被观鸟上限截断的资源——观鸟后超过 8 枚的部分要退回供应区。<span class="pg">p.7</span><span class="pg">p.12</span></div>
+</section>
+
+<section id="s4">
+<h2><span class="n">4</span>一个回合的结构</h2>
+<p>每个回合有两项动作必须完成，另有五项可以自行选择。两项必做动作之间存在先后约束，可选动作之间没有。<span class="pg">p.7</span></p>
+<h3>4.1 两项必做动作</h3>
+<table>
+  <tr><th>顺序</th><th>动作</th><th>内容</th></tr>
+  <tr><td>第一</td><td>选择轮盘扇区</td><td>把行动选择标记放到任一扇区旁，取得该扇区的板块、行动与能量<span class="pg">p.7</span></td></tr>
+  <tr><td>第二</td><td>取免费栖息地板块，或打出灵长类卡</td><td>二者只能取其一，不能同时取得板块又打出灵长类卡<span class="pg">p.8</span></td></tr>
+</table>
+<h3>4.2 五项可选动作</h3>
+<ol>
+  <li>执行轮盘行动，可重复执行同一项。<span class="pg">p.8</span></li>
+  <li>打出掠食者卡。<span class="pg">p.10</span></li>
+  <li>吸引专家。<span class="pg">p.11</span></li>
+  <li>激活专家效果。<span class="pg">p.11</span></li>
+  <li>野放食草动物，任意次、任意时刻。<span class="pg">p.6</span></li>
+</ol>
+<h3>4.3 顺序与结算</h3>
+<p>除「先选扇区、后做依赖扇区的动作」这一条外，其余动作顺序自由。依赖扇区的动作有两项：取该扇区的免费栖息地板块、执行该扇区的轮盘行动，两者在选扇区之前都不能做。<span class="pg">p.7</span></p>
+<ul>
+  <li>每个动作必须完整结算，才能开始下一个动作。<span class="pg">p.7</span></li>
+  <li>所有增益效果可以全取、取一部分或不取，但必须当场取完，否则作废。<span class="pg">p.7</span></li>
+  <li>取得的板块必须立即放置或弃掉，不能留在手里。<span class="pg">p.7</span></li>
+  <li>同一次结算中取得多个奖励时，自行决定结算顺序。<span class="pg">p.7</span></li>
+  <li>凡标有代价的项目，必须先付代价才能取得对应效果。<span class="pg">p.7</span></li>
+</ul>
+<div class="note">打出灵长类卡与取免费栖息地板块互斥，但轮盘行动照常可做。原书给出的做法是把行动选择标记压在栖息地板块上作提示，以免忘记本回合已放弃板块。<span class="pg">p.7</span><span class="pg">p.8</span></div>
+<div class="why"><span class="wt">规则作用</span>回合结构把「取得资源」与「使用资源」分开：扇区只提供当回合的入口，真正的行动由能量逐次购买。因此一个回合的长短不固定，取决于该扇区的能量、个人供应区的存量，以及愿意投入的程度。<span class="pg">p.7</span><span class="pg">p.8</span></div>
+</section>
+
+<section id="s5">
+<h2><span class="n">5</span>轮盘扇区与能量循环</h2>
+<p>扇区是可以重复选取的公共资源。规则书明确允许选上一位玩家刚用过的扇区，也允许连续多回合选同一扇区；限制只来自该扇区当回合的能量数量。<span class="pg">p.7</span></p>
+<h3>5.1 选取扇区</h3>
+<p>把行动选择标记放到任一扇区旁。该扇区当回合提供三项内容：一块栖息地板块的取用权、2 至 3 项行动、以及中环上该扇区位置的能量枚数。<span class="pg">p.7</span><span class="pg">p.8</span></p>
+<h3>5.2 两种能量的差异</h3>
+<table>
+  <tr><th>能量</th><th>位置</th><th>取用与弃置</th><th>用途</th></tr>
+  <tr><td>太阳能量</td><td>轮盘中环，14 枚</td><td>不能取走，不能弃掉；用后推入中央，回合结束再发回扇区<span class="pg">p.7</span><span class="pg">p.12</span></td><td>支付轮盘行动<span class="pg">p.8</span></td></tr>
+  <tr><td>生物能量</td><td>个人供应区</td><td>可留存、可花费；开局 2 枚<span class="pg">p.2</span><span class="pg">p.7</span></td><td>可当作太阳能量支付，也可被卡牌效果消耗或获得<span class="pg">p.7</span><span class="pg">p.8</span></td></tr>
+</table>
+<p>支付时把相应数量的能量标记从本扇区推到版图中央，表示已花。太阳能量不足时，用生物能量补足；生物能量的存量本身不受扇区限制。<span class="pg">p.8</span></p>
+<h3>5.3 能量的回环</h3>
+<p>回合结束时把中央用掉的能量逐格发回：从行动选择标记所在扇区的下一格开始，顺时针每次放 1 枚，直到中央清空。本扇区尚未用掉的能量留在原处，不参与发回。<span class="pg">p.12</span></p>
+<div class="why"><span class="wt">规则作用</span>发回的起点是本回合所选扇区的下一格，因此用掉能量的扇区往往在下一位玩家手上先被补回。中央的能量总数固定为 14 枚，谁用得多，谁就把下一轮的能量推向相邻扇区；这一机制使各扇区的行动价格在一局中持续浮动，而不需要任何额外骰子。<span class="pg">p.2</span><span class="pg">p.12</span></div>
+</section>
+
+<section id="s6">
+<h2><span class="n">6</span>栖息地与领地</h2>
+<p>领地由起始土地与后续放置的土地板块拼成，栖息地板块再铺在土地的空格上。两种板块的放置规则不同：土地板块必须与领地相接，栖息地板块可以放在任意空格。<span class="pg">p.5</span><span class="pg">p.9</span></p>
+<h3>6.1 放置栖息地板块</h3>
+<ul>
+  <li>可放在领地内任意空格，朝向任意。<span class="pg">p.5</span></li>
+  <li>不需要与相邻板块的边缘匹配，也不需要与已有板块相邻。<span class="pg">p.5</span></li>
+  <li>不放入领地时可以直接弃掉。<span class="pg">p.5</span></li>
+  <li>山脉占据的格不能放置，漏油格可以且应当覆盖。<span class="pg">p.5</span></li>
+</ul>
+<p>板块可印一至三种栖息地类型。放置时不必考虑与相邻板块的边缘关系，但栖息地的大小只在边缘匹配时累计，因此朝向决定它能否并入已成型的那片栖息地。<span class="pg">p.5</span></p>
+<h3>6.2 山脉与水源</h3>
+<p>彼此相邻的山脉视为一条山脉，单独一座山也算大小为 1 的山脉。部分山上有瀑布，可作为在其旁边放置河流的水源。起始土地上的那座山有两条水边；之后放置的每块土地板块上各有一座带水边的山。<span class="pg">p.5</span><span class="pg">p.9</span></p>
+<h3>6.3 漏油</h3>
+<p>漏油视为空格，栖息地板块可以放在上面，而且应当尽早覆盖。终局时凡仍露出的漏油，每处扣 1 分。<span class="pg">p.5</span><span class="pg">p.13</span></p>
+<h3>6.4 活动堆</h3>
+<p>活动堆指准备阶段叠好的那几堆背面朝上的栖息地板块，具体是不带观鸟板块与终局触发板块的那一堆。凡规则要求抽栖息地板块，都从活动堆顶上取。<span class="pg">p.5</span></p>
+<p>活动堆抽空而仍需抽取时，从下一堆顶上取走观鸟板块；若已无观鸟板块，则取走终局触发板块，那一堆随即成为新的活动堆。取下的板块翻到正面放在轮盘中央，作为本回合结束时要执行对应流程的提示。<span class="pg">p.5</span><span class="pg">p.12</span></p>
+<h3>6.5 放置土地板块</h3>
+<p>取土地板块堆顶上的一块，放在现有领地旁的任意位置、任意朝向，必须与现有领地至少一个六角格边对边相接。放好后把堆上下一块翻到正面。<span class="pg">p.9</span></p>
+<div class="why"><span class="wt">规则作用</span>两种板块的松紧不同，构成两种扩张方式各自的代价。栖息地板块不受相邻限制，可以在领地任意角落单独起一片新栖息地，代价是它暂时只有大小 1；土地板块必须接边，一次扩地会同时带来新的空格与一座占格的山，代价是山脉永久占用一格。<span class="pg">p.5</span><span class="pg">p.9</span></div>
+</section>
+
+<section id="s7">
+<h2><span class="n">7</span>食草动物与蛇</h2>
+<p>动物板块是唯一占用栖息地容量的实体。食草动物与蛇共用同一套容量规则，差别在于食草动物可以转为定居，蛇不能；沙漠中的食草动物需要绿洲支撑，蛇不需要。<span class="pg">p.6</span><span class="pg">p.9</span></p>
+<h3>7.1 双面与数值</h3>
+<p>食草动物板块双面。进入游戏时都是野放面，之后才可以翻到定居面。两面都印名称、体型、数值与栖息地类型。<span class="pg">p.6</span></p>
+<table>
+  <tr><th>面</th><th>体型</th><th>数值</th><th>标记</th></tr>
+  <tr><td>野放面</td><td>与数值相等</td><td>基础数值</td><td>面旁的小点表示定居后能增加多少<span class="pg">p.6</span></td></tr>
+  <tr><td>定居面</td><td>与野放面相同</td><td>基础数值加上增量</td><td>心形图标<span class="pg">p.6</span></td></tr>
+</table>
+<div class="note">卡牌条件一律读取动物的数值，不读取体型。定居只抬高数值，不改变体型，因此不会挤占栖息地容量。<span class="pg">p.6</span></div>
+<h3>7.2 容量规则</h3>
+<p>一个栖息地内全部动物板块（食草动物与蛇）的体型合计，等于或小于该栖息地的大小时，都可以放入。放入数量不设上限，只看合计是否超限。<span class="pg">p.6</span></p>
+<p>例如大小为 6 的林地，可以放一块体型 6 的动物，也可以放两块体型 3 的动物；日后若再补 4 块林地板块使该栖息地扩到 10，还可以再加一块体型 4 的林地动物。<span class="pg">p.6</span></p>
+<h3>7.3 野放是自由动作</h3>
+<ul>
+  <li>野放食草动物不花能量，在回合内任意时刻执行，次数不限。<span class="pg">p.6</span></li>
+  <li>放入后不可从栖息地移出。<span class="pg">p.6</span></li>
+  <li>动物板块不占据具体六角格，属于整片栖息地，可以随时挪动位置以便查看。<span class="pg">p.6</span></li>
+  <li>记录骰可放在栖息地上，提示剩余可用容量，例如体型 7 的动物放进大小 9 的湿地后，骰子摆 2。<span class="pg">p.6</span></li>
+</ul>
+<h3>7.4 沙漠栖息地与绿洲</h3>
+<p>所有食草动物都需要水源。湿地、林地与稀树草原自带水源，沙漠没有。因此在沙漠栖息地野放食草动物之前，必须先在该栖息地放置绿洲板块。<span class="pg">p.6</span></p>
+<ul>
+  <li>绿洲板块大体是专门的沙漠栖息地板块，也可以带一小片其他类型的栖息地。<span class="pg">p.6</span></li>
+  <li>绿洲不在栖息地板块抽牌堆里，只能通过特定轮盘行动、卡牌与板块上的特殊奖励获得。<span class="pg">p.6</span><span class="pg">p.9</span></li>
+  <li>每块绿洲为其沙漠栖息地加 1 点大小。<span class="pg">p.6</span></li>
+  <li>每块沙漠食草动物板块都要有自己的一块绿洲支撑：沙漠栖息地内若有 2 块食草动物板块，就至少要放 2 块绿洲。<span class="pg">p.6</span></li>
+</ul>
+<div class="note">部分沙漠栖息地板块印有新芽图标，但新芽不等于绿洲，不能替代绿洲支撑食草动物。<span class="pg">p.6</span></div>
+<h3>7.5 蛇</h3>
+<p>蛇板块双面，一面体型 1、一面体型 2。放入时只要栖息地容量足够，可任选一面朝上；放入后不能再翻面。<span class="pg">p.9</span></p>
+<p>蛇与食草动物共用容量，也计入专家阈值与专家、掠食者、动物志的条件。沙漠中的蛇不需要绿洲，这是蛇与食草动物唯一的硬性差别。<span class="pg">p.9</span></p>
+<div class="why"><span class="wt">规则作用</span>容量规则把「扩地」与「放动物」绑成先后关系：动物一旦放入不可取出，容量用满之后只能靠继续扩充同类栖息地来腾出空间。定居不改体型，只抬数值，因此在容量已满的旧栖息地里，定居仍能提高数值与条件达成度。<span class="pg">p.6</span><span class="pg">p.9</span></div>
+</section>
+
+<section id="s8">
+<h2><span class="n">8</span>轮盘九项行动</h2>
+<p>扇区上列出的行动可以任意次执行，包括同一项重复执行，直到没有能量、能量不足或主动停止。九项行动分别属于转化、取得与铺设三组。<span class="pg">p.8</span><span class="pg">p.9</span></p>
+<table>
+  <tr><th>行动</th><th>代价</th><th>内容</th></tr>
+  <tr><td>获得生物能量</td><td>1</td><td>从供应区取 1 枚生物能量<span class="pg">p.9</span></td></tr>
+  <tr><td>拿取卡牌</td><td>2</td><td>从展列区取 1 张指定类型的正面朝上的卡：灵长类、掠食者或动物志<span class="pg">p.9</span></td></tr>
+  <tr><td>使食草动物定居</td><td>2</td><td>把一块食草动物板块翻到定居面，数值提高<span class="pg">p.9</span></td></tr>
+  <tr><td>拿取栖息地板块</td><td>2、3、4……</td><td>从本扇区逆时针方向取板块，紧邻 2、隔一格 3、再远 4<span class="pg">p.9</span></td></tr>
+  <tr><td>放置土地板块</td><td>3</td><td>取土地板块堆顶一块，与领地边对边相接<span class="pg">p.9</span></td></tr>
+  <tr><td>放置绿洲</td><td>3</td><td>把一块绿洲板块放在空格上<span class="pg">p.9</span></td></tr>
+  <tr><td>放置河流</td><td>2 或 3</td><td>按图标支付，放置体型 2 或体型 3 的河流板块<span class="pg">p.9</span></td></tr>
+  <tr><td>放置 2 个蛇板块</td><td>3</td><td>取 2 块蛇板块放进对应栖息地，可同可不同<span class="pg">p.9</span></td></tr>
+  <tr><td>蛇与河流</td><td>3</td><td>体型 1 的河流与蛇任选共 2 个<span class="pg">p.9</span></td></tr>
+</table>
+<div class="note">代价栏的数值取自原书第 9 页行动表的图标，各扇区印值以实物为准。「拿取栖息地板块」的代价随距离递增，原书给出 2、3、4 与「依此类推」，未列终点，实际受轮盘扇区数限制。<span class="pg">p.9</span></div>
+<h3>8.1 拿取卡牌</h3>
+<p>只能取展列区中正面朝上的卡，且必须是该行动图标指定的类型。展列区被取走的位置在回合结束前不补，空位留到补充阶段处理。<span class="pg">p.9</span><span class="pg">p.12</span></p>
+<h3>8.2 使食草动物定居</h3>
+<p>把一块食草动物板块翻到定居面。翻面后数值按定居面读取，此后这一数值同时用于专家阈值、掠食者条件、动物志条件与终局计分；体型不变。<span class="pg">p.6</span><span class="pg">p.9</span></p>
+<h3>8.3 拿取栖息地板块</h3>
+<p>只能从本扇区逆时针方向的扇区取，不能顺时针取。紧邻本扇区的板块付 2 枚能量，隔一格付 3 枚，再远付 4 枚。不必按由近到远取，可以跳过近处的板块直接取远处的。<span class="pg">p.9</span></p>
+<h3>8.4 放置河流</h3>
+<p>河流板块双面，可任选一面朝上；两面栖息地分布不同，板块本身相同。放置时必须至少有一条水边与领地内已有的水边相接，因此第一条河要紧贴起始土地上那座山的瀑布，之后的河可以接在已有河流上。<span class="pg">p.9</span></p>
+<h3>8.5 蛇与河流</h3>
+<p>这一项允许把体型 1 的河流板块与蛇板块混在一起，任取共 2 个。放置规则与前述单项行动相同，只是把两类的选择合并成一次。<span class="pg">p.9</span></p>
+<div class="note">凡因卡牌效果或奖励板块执行上述行动，按前述规则结算，但不支付轮盘上的能量代价。奖励给出的板块同样必须立即放置或弃掉。<span class="pg">p.9</span></div>
+<div class="why"><span class="wt">规则作用</span>九项行动可分三组：转化（生物能量）、取得（卡牌、栖息地板块）、铺设（土地、绿洲、河流、蛇）。前两组把公共资源转入手牌或手边，第三组把资源固定到领地上。由于定居不消耗板块、只翻面，它成为唯一能在容量已满时继续提高数值的行动。<span class="pg">p.9</span><span class="pg">p.6</span></div>
+</section>
+
+<section id="s9">
+<h2><span class="n">9</span>掠食者卡与灵长类卡</h2>
+<p>两种卡都从手牌打出，都不花能量；掠食者卡属自由动作，灵长类卡则替代本回合的免费栖息地板块。两者各自要求一个前置条件：掠食者卡要满足动物条件，灵长类卡要找到可放置的格。两者互不影响，同一回合可以各打一张或多张。<span class="pg">p.8</span><span class="pg">p.10</span></p>
+<h3>9.1 打出掠食者卡</h3>
+<ol>
+  <li>满足卡面写明的条件。<span class="pg">p.10</span></li>
+  <li>把一枚掠食者棋子放到用于满足条件的动物板块之一上；每块动物板块只能有 1 枚掠食者棋子，若没有可用的动物板块则不能打出此卡。<span class="pg">p.10</span></li>
+  <li>放好棋子后，可以任选一块正面朝上的掠食者奖励板块，取得其即时效果；奖励板块取完时仍可继续打掠食者卡。<span class="pg">p.10</span></li>
+</ol>
+<p>三条补充规则决定掠食者系统的松紧：已有掠食者棋子的动物板块仍可用于满足之后打出的掠食者卡的条件；掠食者棋子不计入栖息地大小；条件只用于初次放置，之后条件失效也不影响棋子留在原处。<span class="pg">p.10</span></p>
+<p>动物板块代表一群动物，因此被猎食之后仍可转为定居状态。定居提高数值，掠食者棋子的终局得分也随之提高。<span class="pg">p.10</span></p>
+<h3>9.2 掠食者条件的两类结构</h3>
+<table>
+  <tr><th>结构</th><th>写法</th><th>例子</th></tr>
+  <tr><td>按栖息地与数量</td><td>若干块指定栖息地的动物板块，或某栖息地内的组合<span class="pg">p.18</span></td><td>2 块定居的湿地食草动物；湿地栖息地内有 1 块数值 7 以上的食草动物与 1 条蛇<span class="pg">p.18</span></td></tr>
+  <tr><td>按相邻关系</td><td>某栖息地须与两条不同山脉、或两片不同河流栖息地相邻<span class="pg">p.18</span></td><td>湿地食草动物数值 5 以上，且其栖息地与两条不同山脉相邻<span class="pg">p.18</span></td></tr>
+</table>
+<div class="note">条件中出现「相邻」时，栖息地之间必须边对边相接；只在角上碰到不算相邻。同一对动物板块可以同处一个栖息地，也可以分处两个栖息地，但必须落在同一片连续的相邻栖息地之内。<span class="pg">p.18</span></div>
+<h3>9.3 打出灵长类卡</h3>
+<ol>
+  <li>把一枚灵长类棋子放到一块栖息地板块上，该板块须匹配卡面左上角列出的两种偏好栖息地之一；若两种都匹配，须选定其中一种作为这只灵长类的归属。<span class="pg">p.8</span></li>
+  <li>不得放在与另一枚灵长类棋子相邻的格上。若无处可放，则不能打出这张卡。<span class="pg">p.8</span></li>
+  <li>放好棋子后，取得卡面的即时效果。<span class="pg">p.8</span></li>
+</ol>
+<p>灵长类棋子不计入所在栖息地的大小，规则书的说法是它们住在树上。终局时按棋子所在板块的偏好栖息地计算周围匹配边缘数，因此放置位置同时决定即时效果能否打出与终局能得几分。<span class="pg">p.8</span><span class="pg">p.13</span></p>
+<h3>9.4 两类卡的差异</h3>
+<table>
+  <tr><th>项目</th><th>掠食者卡</th><th>灵长类卡</th></tr>
+  <tr><td>前置条件</td><td>满足卡面动物条件<span class="pg">p.10</span></td><td>存在不与灵长类相邻的匹配板块<span class="pg">p.8</span></td></tr>
+  <tr><td>棋子落点</td><td>动物板块，每块限 1 枚<span class="pg">p.10</span></td><td>栖息地板块，彼此不得相邻<span class="pg">p.8</span></td></tr>
+  <tr><td>即时收益</td><td>任选一块掠食者奖励板块<span class="pg">p.10</span></td><td>卡面即时效果<span class="pg">p.8</span></td></tr>
+  <tr><td>终局计分</td><td>按猎物数值分四档<span class="pg">p.13</span></td><td>按匹配的相邻边缘每个 1 分<span class="pg">p.13</span></td></tr>
+  <tr><td>占用栖息地容量</td><td>不占<span class="pg">p.10</span></td><td>不占<span class="pg">p.8</span></td></tr>
+</table>
+<div class="why"><span class="wt">规则作用</span>掠食者要求先有达标的动物组合，灵长类要求先有空出的非相邻板块，两者的门槛都落在领地上而非手牌上。因此这两类卡无法靠抽牌解决，只能靠前面几个回合的拼地与放动物积累出来；打出的时机取决于领地状态何时满足条件。<span class="pg">p.8</span><span class="pg">p.10</span></div>
+</section>
+
+<section id="s10">
+<h2><span class="n">10</span>专家、展列区与动物志卡</h2>
+<p>专家是本作唯一「先达阈值、再抽牌」的系统。展列区是三类动物卡的公共来源，动物志卡则是留在手里等终局结算的个人目标。<span class="pg">p.11</span><span class="pg">p.13</span></p>
+<h3>10.1 吸引专家的条件</h3>
+<p>五类专家各对应一种栖息地：河流、湿地、林地、稀树草原、沙漠。每位玩家在整局中每类只能吸引 1 位，合计最多 5 位。<span class="pg">p.11</span></p>
+<p>判定方式是把某一类栖息地的全部动物板块数值相加，不要求它们同处一片栖息地；河流专家则改为把全部河流板块的数值相加。合计达到或超过该专家标记正上方那一格的数值，即视为吸引成功。<span class="pg">p.11</span></p>
+<h3>10.2 吸引成功的两步</h3>
+<ol>
+  <li>把该专家标记沿轨道上移一格。<span class="pg">p.11</span></li>
+  <li>从对应牌堆抽 2 张专家卡，选 1 张正面朝上打出，另一张放到该牌堆底部。<span class="pg">p.11</span></li>
+</ol>
+<div class="note">同时达到多位专家的条件时，可以自行决定先后顺序，但每次选择必须单独完成，不得先查看后面几叠再作选择。<span class="pg">p.11</span></div>
+<p>专家板轨道的起始格没有数字，其上方依次为 6、7 与更高数值，因此开局阈值是 6。吸引成功后标记上移，同一位专家对后手的阈值随之提高；原书在示例中给出起始 6 与单人模式下的 8，其余各行按实体轨道印值读取。<span class="pg">p.11</span><span class="pg">p.14</span></p>
+<h3>10.3 五类专家的效果方向</h3>
+<table>
+  <tr><th>类型</th><th>效果方向</th></tr>
+  <tr><td>河流</td><td>食草动物的定居与特定栖息地食草动物的奖励<span class="pg">p.11</span></td></tr>
+  <tr><td>湿地</td><td>土地<span class="pg">p.11</span></td></tr>
+  <tr><td>林地</td><td>每局一次的效果<span class="pg">p.11</span></td></tr>
+  <tr><td>稀树草原</td><td>轮盘行动<span class="pg">p.11</span></td></tr>
+  <tr><td>沙漠</td><td>动物卡<span class="pg">p.11</span></td></tr>
+</table>
+<h3>10.4 激活专家效果</h3>
+<p>专家卡的效果按卡面图标决定使用频率：每局一次、每回合一次、或可重复。没有图标的卡，按附录中该卡标注的时机执行。<span class="pg">p.11</span></p>
+<ul>
+  <li>每局一次的卡使用后横置，表示不能再用。<span class="pg">p.11</span></li>
+  <li>每回合一次的卡在同回合内不能重复使用。<span class="pg">p.11</span></li>
+  <li>可重复的卡在回合内可用任意次。<span class="pg">p.11</span></li>
+  <li>多张卡同时触发时，自行决定结算顺序。<span class="pg">p.11</span></li>
+  <li>专家给出的行动不要求玩家处于对应扇区，除非卡面或附录另有说明。<span class="pg">p.11</span></li>
+</ul>
+<h3>10.5 展列区</h3>
+<p>三类动物卡各占一行，每行三张正面朝上，牌堆放在行右侧。取卡只取正面朝上的卡，空位在本回合内不补。回合结束的补充阶段先把同行剩余卡向左推移，再从牌堆翻出补足。<span class="pg">p.2</span><span class="pg">p.12</span></p>
+<h3>10.6 动物志卡</h3>
+<p>动物志卡取得后留在手里，不属于可打出的卡。它同时具备两种用途：可以当作「弃 1 张动物卡」的代价弃掉，也可以留到终局按卡面条件计分。<span class="pg">p.13</span></p>
+<ul>
+  <li>卡面右侧的图标指出计数的对象：栖息地、动物板块、某类六角板块等。<span class="pg">p.13</span></li>
+  <li>按玩家实际拥有的数量对应卡面分值，每张卡只计一次，超出部分不再加分。<span class="pg">p.13</span></li>
+  <li>同一件东西可以同时计入多张动物志卡。<span class="pg">p.13</span></li>
+</ul>
+<div class="why"><span class="wt">规则作用</span>专家与动物志卡都把「已经放在领地上的东西」二次利用：专家读取数值合计，动物志卡读取数量与形状。两者都不需要额外放置，因此领地的构成方式本身就在持续产生得分路径，而不只是容纳动物的容器。<span class="pg">p.11</span><span class="pg">p.13</span></div>
+</section>
+
+<section id="s11">
+<h2><span class="n">11</span>观鸟与回合结束</h2>
+<p>回合结束按四步执行，顺序固定：发回能量、补栖息地板块、补展列区、观鸟或触发终局。前三步是维护，第四步只在当回合取走观鸟板块或终局触发板块时才发生。<span class="pg">p.12</span></p>
+<h3>11.1 发回能量</h3>
+<p>从行动选择标记所在扇区的下一格开始，顺时针每次放 1 枚已用能量，直到版图中央清空。本扇区未用掉的能量留在原处，不参与发回。<span class="pg">p.12</span></p>
+<h3>11.2 补栖息地板块</h3>
+<p>从行动选择标记所在扇区起，顺时针把轮盘上空缺的扇区逐一用活动堆顶上的板块补满。<span class="pg">p.12</span></p>
+<h3>11.3 补展列区</h3>
+<p>先把每行的正面朝上卡向左推移填满空位，再从对应牌堆翻牌补足剩余空位。若牌堆已空，把该类弃牌洗混成新的抽牌堆。<span class="pg">p.12</span></p>
+<h3>11.4 观鸟</h3>
+<p>当回合若取走观鸟板块，执行一次观鸟，共三步。<span class="pg">p.12</span></p>
+<ol>
+  <li>刷新展列区：每行弃掉最左边那张动物卡，再按常规补满。此步只在中局观鸟时执行。<span class="pg">p.12</span></li>
+  <li>每对相邻玩家查看两人之间的 2 张鸟类卡（二人局为 4 张），逐张比较谁更符合该鸟的卡面条件。更符合的一方从供应区取 2 枚生物能量；若在计入卡面平手条件后仍然相同，双方各取 1 枚，双方都不满足条件时也算平手。<span class="pg">p.12</span></li>
+  <li>观鸟结束后，若生物能量超过 8 枚，超出的部分退回公共供应区。<span class="pg">p.12</span></li>
+</ol>
+<h3>11.5 终局触发</h3>
+<p>当回合若取走终局触发板块，先让所有玩家把当前这一轮走完，使每人回合数相同；随后所有玩家再各进行一次完整回合计入终局。<span class="pg">p.12</span></p>
+<div class="note">观鸟的 8 枚上限只作用于生物能量，太阳能量始终留在轮盘上，不受此限。上限在观鸟结算之后检查，因此同一次观鸟中先取得的能量也计入其中。<span class="pg">p.12</span></div>
+<div class="why"><span class="wt">规则作用</span>四步维护让轮盘与展列区在每个回合后恢复到可用的状态，同时把用掉的能量重新分配，使下一回合的能量格局与前几回合不同。观鸟则提供一个与领地结构无关的竞争面：它只看卡面条件，不看分数，因此不以领地规模为条件。<span class="pg">p.12</span></div>
+</section>
+
+<section id="s12">
+<h2><span class="n">12</span>终局计分</h2>
+<p>终局分五组相加，再减去漏油扣分。计分不区分来源，只读取终局那一刻的领地与手牌状态。<span class="pg">p.13</span></p>
+<svg viewBox="0 0 900 276" role="img" aria-label="荒野生机的终局计分构成">
+  <rect x="0" y="0" width="900" height="276" fill="#ffffff"/>
+  <text x="450" y="24" text-anchor="middle" font-size="15" font-weight="700" fill="#2f5d3a">终局分数 = 卡牌与棋子五项 + 领地板块印值 − 未覆盖漏油</text>
+  <g font-size="12.5" text-anchor="middle" fill="#22402c">
+    <rect x="12" y="42" width="168" height="76" rx="9" fill="#eef4ec" stroke="#bfd6c2"/>
+    <text x="96" y="64">终局观鸟</text><text x="96" y="86">每只 2 分</text><text x="96" y="106">平手各 1 分</text>
+    <rect x="190" y="42" width="168" height="76" rx="9" fill="#f4f1e6" stroke="#d8cfa8"/>
+    <text x="274" y="64">掠食者棋子</text><text x="274" y="86">按猎物数值</text><text x="274" y="106">1 至 4 分</text>
+    <rect x="368" y="42" width="168" height="76" rx="9" fill="#eaf1f5" stroke="#b8cfda"/>
+    <text x="452" y="64">灵长类棋子</text><text x="452" y="86">匹配边缘</text><text x="452" y="106">每个 1 分</text>
+    <rect x="546" y="42" width="168" height="76" rx="9" fill="#f6efe4" stroke="#dcc9a6"/>
+    <text x="630" y="64">手中动物志卡</text><text x="630" y="86">按卡面条件</text><text x="630" y="106">每卡计一次</text>
+    <rect x="724" y="42" width="164" height="76" rx="9" fill="#f2eef7" stroke="#cfc2e2"/>
+    <text x="806" y="64">已出专家卡</text><text x="806" y="86">按卡面印值</text><text x="806" y="106">计分</text>
+  </g>
+  <g font-size="12.5" text-anchor="middle" fill="#2f5d3a">
+    <rect x="12" y="140" width="288" height="60" rx="9" fill="#f7fbf4" stroke="#c9ddc4"/>
+    <text x="156" y="164">全部河流板块数值</text><text x="156" y="186">按印值相加</text>
+    <rect x="312" y="140" width="288" height="60" rx="9" fill="#f7fbf4" stroke="#c9ddc4"/>
+    <text x="456" y="164">全部食草动物与蛇</text><text x="456" y="186">只读正面朝上的数值</text>
+    <rect x="612" y="140" width="276" height="60" rx="9" fill="#fdf0ee" stroke="#e6bfb8"/>
+    <text x="750" y="164">未覆盖漏油</text><text x="750" y="186">每处扣 1 分</text>
+  </g>
+  <text x="450" y="238" text-anchor="middle" font-size="13" fill="#4a5f4d">未用掉的能量不计分；分数最高者获胜，并列时回合顺序靠后者胜</text>
+  <text x="450" y="262" text-anchor="middle" font-size="12" fill="#4a5f4d">终局观鸟在最后一位玩家回合结束后进行</text>
+</svg>
+<h3>12.1 终局观鸟</h3>
+<p>每对相邻玩家按与中局相同的方式比较 2 张鸟类卡（二人局 4 张），但奖励改为分数：赢下一只鸟得 2 分，平手各得 1 分。卡面的平手条件照常先比较。<span class="pg">p.13</span></p>
+<h3>12.2 掠食者棋子</h3>
+<table>
+  <tr><th>猎物数值</th><th>掠食者棋子得分</th></tr>
+  <tr><td>1 至 3</td><td>1 分<span class="pg">p.13</span></td></tr>
+  <tr><td>4 至 6</td><td>2 分<span class="pg">p.13</span></td></tr>
+  <tr><td>7 至 9</td><td>3 分<span class="pg">p.13</span></td></tr>
+  <tr><td>10 至 12</td><td>4 分<span class="pg">p.13</span></td></tr>
+</table>
+<p>猎物指该掠食者棋子所在的动物板块，读取的是终局时的数值。因此同一枚棋子所在板块若在中局转为定居，终局得分会落在更高一档。<span class="pg">p.13</span></p>
+<h3>12.3 灵长类棋子</h3>
+<p>按棋子所在栖息地板块的偏好栖息地类型，数出周围与之匹配的板块边缘，每条边缘 1 分。同一块板块若两种偏好类型都匹配，只按放置时选定的那一种计算，另一种的边缘不计分。<span class="pg">p.13</span></p>
+<h3>12.4 领地板块与扣分</h3>
+<ul>
+  <li>全部河流板块的数值相加。<span class="pg">p.13</span></li>
+  <li>全部食草动物与蛇的正面朝上数值相加，读的是黑底白字那一组数字。<span class="pg">p.13</span></li>
+  <li>每处仍露出的漏油扣 1 分。<span class="pg">p.13</span></li>
+  <li>未用掉的能量不计分。<span class="pg">p.13</span></li>
+</ul>
+<h3>12.5 胜负判定</h3>
+<p>分数最高者获胜。出现并列时，回合顺序靠后的玩家胜。<span class="pg">p.13</span></p>
+<div class="why"><span class="wt">规则作用</span>五组卡牌分与两组板块印值构成两条几乎独立的得分路径：一条靠打牌与落子，读取条件与位置；另一条靠铺板块，读取印值。两条路径共用同一片领地，谁占得多，另一条就少；终局分数记录资源在两条路径之间的分配。<span class="pg">p.13</span></div>
+</section>
+
+<section id="s13">
+<h2><span class="n">13</span>单人模式：盗猎者</h2>
+<p>单人模式中加入一个模拟对手「盗猎者」。它不取卡、不存生物能量、不经营栖息地，只按固定流程取走动物与河流，因此它的分数结构不同于真人对手，但取走的动物会直接减少你可用的板块。<span class="pg">p.14</span></p>
+<h3>13.1 难度与设置差异</h3>
+<p>开局先定难度 1 至 7。难度决定盗猎者的初始动物体型、之后取得的动物与河流数值，以及难度 6 以上时的专家阈值。<span class="pg">p.14</span></p>
+<table>
+  <tr><th>项目</th><th>单人局做法</th></tr>
+  <tr><td>轮盘</td><td>用单人面朝上<span class="pg">p.14</span></td></tr>
+  <tr><td>栖息地板块</td><td>不按堆设置；把终局触发板块放底、两张观鸟板块放顶，叠在单人卡中央；需要时从公共供应取背面朝上的板块<span class="pg">p.14</span></td></tr>
+  <tr><td>鸟类卡</td><td>不使用 B07；若发到则换一张<span class="pg">p.14</span></td></tr>
+  <tr><td>掠食者奖励板块</td><td>6 块随机排成一行，盗猎者自左向右取<span class="pg">p.14</span></td></tr>
+  <tr><td>盗猎者的初始配置</td><td>灵长类棋子与掠食者棋子各 1 枚；五种栖息地各 1 块动物板块，体型等于难度；河流板块数值合计等于难度<span class="pg">p.14</span></td></tr>
+  <tr><td>难度 6 以上</td><td>全部专家标记直接盖到第 6 行，你的起始阈值变为 8<span class="pg">p.14</span></td></tr>
+</table>
+<p>难度 5 时，盗猎者开局拥有四块体型 5 的食草动物各一种栖息地，外加一块体型 3 与一块体型 2 的河流板块；难度 1 或 2 时，其初始动物即体型 1 或 2 的蛇。<span class="pg">p.14</span></p>
+<h3>13.2 局数节奏</h3>
+<p>全局固定 12 轮。第 4 轮与第 8 轮之后各执行一次完整观鸟；第 12 轮盗猎者行动完毕后游戏结束。每轮你先行动，盗猎者后行动。<span class="pg">p.14</span></p>
+<h3>13.3 盗猎者的回合</h3>
+<ol>
+  <li>选一个轮盘扇区：永远选能量最多的扇区；并列时选你所在扇区顺时针方向最近的那个。<span class="pg">p.14</span></li>
+  <li>弃掉该扇区的栖息地板块，放进单人卡上的空位。<span class="pg">p.15</span></li>
+  <li>只执行该扇区标示的盗猎者专属行动。<span class="pg">p.14</span></li>
+  <li>按常规执行回合结束阶段。<span class="pg">p.14</span></li>
+</ol>
+<h3>13.4 盗猎者的取动物行动</h3>
+<p>专属行动一律先取动物板块，再结算附加行动。<span class="pg">p.15</span></p>
+<ul>
+  <li>取一块匹配该扇区「盗猎者环」所示栖息地的动物。若该环为全白，则取它目前合计数值最低的那一类栖息地；并列时由你选。<span class="pg">p.15</span></li>
+  <li>取用的体型等于该扇区现有的能量枚数，这些能量被推到版图中央。若扇区印有加号图标，体型等于能量数加难度。<span class="pg">p.15</span></li>
+  <li>没有对应体型的动物时，取次一级的体型，再补取另一块动物板块凑足差额，依此类推。<span class="pg">p.15</span></li>
+</ul>
+<p>难度 5 且扇区印有加号、能量为 5 时，合计为 10，盗猎者会取一块体型 8 的食草动物与一条体型 2 的蛇。<span class="pg">p.15</span></p>
+<h3>13.5 盗猎者的附加行动</h3>
+<table>
+  <tr><th>图标</th><th>做法</th></tr>
+  <tr><td>河流</td><td>取数值合计等于难度的河流板块，具体板块由你选定<span class="pg">p.15</span></td></tr>
+  <tr><td>定居</td><td>使其最大的 2 块食草动物转为定居，并列时由你选<span class="pg">p.15</span></td></tr>
+  <tr><td>弃卡</td><td>弃掉展列区所示类型最左边的一张；若为灵长类卡，盗猎者取 1 枚灵长类棋子；若为掠食者卡，盗猎者取 1 枚掠食者棋子并弃掉最左边一块掠食者奖励板块<span class="pg">p.15</span></td></tr>
+</table>
+<h3>13.6 盗猎者与专家</h3>
+<p>盗猎者不吸引专家。但在你尚未打出某位专家之前，若盗猎者的动物或河流达到 6 点，该专家标记直接移到轨道第 6 行，此后你吸引该专家的阈值为 8。<span class="pg">p.15</span></p>
+<h3>13.7 单人局的观鸟</h3>
+<p>单人卡上的 4 个空位全部填满时，把这 4 块板块移出另放成一叠，再结算单人卡中央那块板块所示的事件。<span class="pg">p.15</span></p>
+<ul>
+  <li>若中央是观鸟板块，与盗猎者进行一次完整观鸟；盗猎者照常赢取生物能量。<span class="pg">p.15</span></li>
+  <li>部分鸟类卡带有专用图标，表示对盗猎者按特殊方式评估，评估方法见附录。<span class="pg">p.15</span></li>
+  <li>观鸟之后，盗猎者不因超过 8 枚而退回能量；它持有的每枚生物能量在终局各计 1 分。<span class="pg">p.15</span></li>
+  <li>结算完毕后，把最上面一张观鸟板块放到那 4 块板块的叠上。<span class="pg">p.15</span></li>
+</ul>
+<h3>13.8 单人局终局计分</h3>
+<p>第 12 轮结束后照常进行终局观鸟，赢者 2 分、平手各 1 分。<span class="pg">p.15</span></p>
+<table>
+  <tr><th>一方</th><th>分数构成</th></tr>
+  <tr><td>你</td><td>按多人规则计分<span class="pg">p.15</span></td></tr>
+  <tr><td>盗猎者</td><td>终局观鸟得分、全部食草动物数值、全部蛇数值、全部河流数值、每枚生物能量 1 分<span class="pg">p.15</span></td></tr>
+</table>
+<p>你的分数高于盗猎者即获胜。<span class="pg">p.15</span></p>
+<div class="why"><span class="wt">规则作用</span>盗猎者的行动不需要经营，它按扇区能量与固定取用顺序消耗公共板块；因此单人局的压力来自板块存量，而不是对手的分数。它每取走一块动物，你可用的体型组合就少一块，掠食者条件因此更难满足。<span class="pg">p.14</span><span class="pg">p.15</span></div>
+</section>
+
+<section id="s14">
+<h2><span class="n">14</span>常见误读、速查表与页码索引</h2>
+<h3>14.1 常见误读逐条对照</h3>
+<table>
+  <tr><th>常见误读</th><th>规则陈述</th><th>依据</th></tr>
+  <tr><td>栖息地板块必须与相邻板块边缘匹配</td><td>可放在任意空格、任意朝向，不需要匹配边缘，也不需要相邻</td><td><span class="pg">p.5</span></td></tr>
+  <tr><td>新芽可以把整块板块的栖息地都加 1</td><td>新芽只为它所在的那一种栖息地加 1，同一块板块上的其他类型不变</td><td><span class="pg">p.5</span></td></tr>
+  <tr><td>山脉可以放栖息地板块</td><td>山脉占据该格，不能放置；漏油才是可以且应当覆盖的空格</td><td><span class="pg">p.5</span></td></tr>
+  <tr><td>沙漠板块有新芽就等于有水源</td><td>新芽不等于绿洲；沙漠食草动物每块都需要独立的一块绿洲支撑</td><td><span class="pg">p.6</span></td></tr>
+  <tr><td>沙漠蛇也需要绿洲</td><td>与食草动物不同，沙漠蛇不需要绿洲</td><td><span class="pg">p.9</span></td></tr>
+  <tr><td>动物板块放入后可以换位置或取回</td><td>放入后不可移出栖息地，只可挪动摆放位置以便查看</td><td><span class="pg">p.6</span></td></tr>
+  <tr><td>定居会改变体型</td><td>定居只提高数值，体型不变，因此不挤占容量</td><td><span class="pg">p.6</span></td></tr>
+  <tr><td>卡牌条件读体型</td><td>卡牌条件一律读数值，不读体型</td><td><span class="pg">p.6</span></td></tr>
+  <tr><td>取免费板块的同时还能打灵长类卡</td><td>两者互斥，每回合只能选一项；轮盘行动不受影响</td><td><span class="pg">p.8</span></td></tr>
+  <tr><td>灵长类可以放在任意匹配板块上</td><td>不得放在与另一枚灵长类棋子相邻的格上，无处可放则不能打这张卡</td><td><span class="pg">p.8</span></td></tr>
+  <tr><td>掠食者条件失效后棋子要移走</td><td>条件只用于初次放置，之后失效不影响棋子留在原处</td><td><span class="pg">p.10</span></td></tr>
+  <tr><td>已有掠食者棋子的板块不能再用于满足条件</td><td>仍可用于满足之后打出的掠食者卡的条件，只是不能再放第二枚棋子</td><td><span class="pg">p.10</span></td></tr>
+  <tr><td>被猎食的动物不能再定居</td><td>动物板块代表一群动物，仍可转为定居，数值提高后掠食者得分也提高</td><td><span class="pg">p.10</span></td></tr>
+  <tr><td>拿取栖息地板块可以顺时针取</td><td>只能从本扇区逆时针方向的扇区取</td><td><span class="pg">p.9</span></td></tr>
+  <tr><td>河流可以任意放置</td><td>至少一条水边须与领地内已有的水边相接</td><td><span class="pg">p.9</span></td></tr>
+  <tr><td>生物能量超过 8 枚可以留到下一回合</td><td>观鸟结算后超出部分退回供应区，太阳能量不受此限</td><td><span class="pg">p.12</span></td></tr>
+  <tr><td>终局触发后本局立即结束</td><td>先补齐当前轮，所有玩家再各进行一次完整回合</td><td><span class="pg">p.12</span></td></tr>
+</table>
+<h3>14.2 中英术语对照</h3>
+<table>
+  <tr><th>中文</th><th>英文</th><th>中文</th><th>英文</th></tr>
+  <tr><td>轮盘 / 扇区</td><td>Rondel / Segment</td><td>行动选择标记</td><td>Action selection token</td></tr>
+  <tr><td>太阳能量 / 生物能量</td><td>Sun energy / Bio energy</td><td>栖息地 / 栖息地板块</td><td>Habitat / Habitat tile</td></tr>
+  <tr><td>土地板块 / 领地</td><td>Land tile / Land</td><td>食草动物</td><td>Herbivore</td></tr>
+  <tr><td>野放 / 定居</td><td>Reintroduced / Established</td><td>蛇板块 / 河流板块</td><td>Snake tile / River tile</td></tr>
+  <tr><td>绿洲 / 纯沙漠绿洲</td><td>Oasis / Full desert oasis</td><td>掠食者 / 掠食者奖励板块</td><td>Predator / Predator bonus tile</td></tr>
+  <tr><td>灵长类 / 灵长类棋子</td><td>Primate / Primate pawn</td><td>动物志卡 / 动物卡</td><td>Fauna card / Animal card</td></tr>
+  <tr><td>专家 / 专家板 / 专家标记</td><td>Specialist / Specialist board / Specialist token</td><td>观鸟 / 观鸟板块</td><td>Bird watching / Bird watching tile</td></tr>
+  <tr><td>展列区 / 活动堆</td><td>Card tableau / Active stack</td><td>新芽 / 山脉 / 漏油</td><td>Sprout / Mountain (range) / Oil spill</td></tr>
+  <tr><td>终局触发板块</td><td>End game trigger tile</td><td>盗猎者 / 单人卡</td><td>Poachers / Solo card</td></tr>
+  <tr><td>体型 / 数值</td><td>Size / Value</td><td>胜利分</td><td>Victory points (VP)</td></tr>
+</table>
+<h3>14.3 一局速查</h3>
+<table>
+  <tr><th>环节</th><th>要点</th><th>依据</th></tr>
+  <tr><td>回合必做</td><td>选扇区；取免费栖息地板块或打 1 张灵长类卡</td><td><span class="pg">p.7</span><span class="pg">p.8</span></td></tr>
+  <tr><td>能量支付</td><td>太阳能量推向中央；生物能量可补足；行动可重复执行</td><td><span class="pg">p.8</span></td></tr>
+  <tr><td>放动物</td><td>动物体型合计不得超过栖息地大小；野放不花能量、不限次数</td><td><span class="pg">p.6</span></td></tr>
+  <tr><td>沙漠</td><td>先放绿洲；每块食草动物各需一块绿洲；蛇不需要</td><td><span class="pg">p.6</span><span class="pg">p.9</span></td></tr>
+  <tr><td>掠食者</td><td>满足条件后落子，每块动物板块 1 枚，可领 1 块奖励板块</td><td><span class="pg">p.10</span></td></tr>
+  <tr><td>灵长类</td><td>匹配偏好栖息地，且不得与另一枚灵长类相邻</td><td><span class="pg">p.8</span></td></tr>
+  <tr><td>专家</td><td>同类动物数值合计达标后标记上移一格，抽 2 选 1</td><td><span class="pg">p.11</span></td></tr>
+  <tr><td>回合结束</td><td>发能量、补板块、补展列区、观鸟或终局触发</td><td><span class="pg">p.12</span></td></tr>
+  <tr><td>观鸟上限</td><td>结算后生物能量超过 8 枚的部分退回供应区</td><td><span class="pg">p.12</span></td></tr>
+  <tr><td>终局</td><td>补齐本轮再各走一次完整回合，然后按五组卡牌分加两组印值减漏油计分</td><td><span class="pg">p.12</span><span class="pg">p.13</span></td></tr>
+</table>
+<h3>14.4 章节与原书页码对照</h3>
+<table>
+  <tr><th>章节</th><th>页码</th><th>章节</th><th>页码</th></tr>
+  <tr><td>0 游戏概要与目标</td><td>p.1、p.4</td><td>8 轮盘九项行动</td><td>p.8、p.9</td></tr>
+  <tr><td>1 初局设置</td><td>p.2</td><td>9 掠食者卡与灵长类卡</td><td>p.8、p.10</td></tr>
+  <tr><td>2 版图、组件与两类能量</td><td>p.1、p.2、p.7</td><td>10 专家、展列区与动物志卡</td><td>p.11、p.13</td></tr>
+  <tr><td>3 核心引擎</td><td>p.5、p.6</td><td>11 观鸟与回合结束</td><td>p.12</td></tr>
+  <tr><td>4 一个回合的结构</td><td>p.7、p.8</td><td>12 终局计分</td><td>p.13</td></tr>
+  <tr><td>5 轮盘扇区与能量循环</td><td>p.7、p.12</td><td>13 单人模式：盗猎者</td><td>p.14、p.15</td></tr>
+  <tr><td>6 栖息地与领地</td><td>p.5、p.9</td><td>14 常见误读与速查</td><td>p.1 至 p.24</td></tr>
+  <tr><td>7 食草动物与蛇</td><td>p.6、p.9</td><td>页图对照</td><td>24 张</td></tr>
+</table>
+<div class="note">页码写作 p.N，指英文原书 24 页的页序。附录部分的卡牌逐条效果分布在 p.16 至 p.22：鸟类 B01 至 B10、灵长类 M01 至 M28、掠食者 D01 至 D28 与奖励板块 P01 至 P18、动物志 F01 至 F28、专家 S01 至 S40，另有专家轮抽变体与名词表。板块印值、专家轨道各行数值与卡面细节以实体配件为准。<span class="pg">p.16</span><span class="pg">p.23</span><span class="pg">p.24</span></div>
+<h3>14.5 原书页图对照</h3>
+<details>
+<summary>展开原书页图（24 张，按页序）</summary>
+<figure><img src="images_wild/page_01.jpg" alt="原书第 1 页" loading="lazy"><figcaption>p.1 配件与目录</figcaption></figure>
+<figure><img src="images_wild/page_02.jpg" alt="原书第 2 页" loading="lazy"><figcaption>p.2 设置 20 步</figcaption></figure>
+<figure><img src="images_wild/page_03.jpg" alt="原书第 3 页" loading="lazy"><figcaption>p.3 设置示意</figcaption></figure>
+<figure><img src="images_wild/page_04.jpg" alt="原书第 4 页" loading="lazy"><figcaption>p.4 简介与游戏概览</figcaption></figure>
+<figure><img src="images_wild/page_05.jpg" alt="原书第 5 页" loading="lazy"><figcaption>p.5 核心概念与栖息地</figcaption></figure>
+<figure><img src="images_wild/page_06.jpg" alt="原书第 6 页" loading="lazy"><figcaption>p.6 野放食草动物与沙漠绿洲</figcaption></figure>
+<figure><img src="images_wild/page_07.jpg" alt="原书第 7 页" loading="lazy"><figcaption>p.7 回合与两类能量</figcaption></figure>
+<figure><img src="images_wild/page_08.jpg" alt="原书第 8 页" loading="lazy"><figcaption>p.8 栖息地板块或灵长类卡、轮盘行动</figcaption></figure>
+<figure><img src="images_wild/page_09.jpg" alt="原书第 9 页" loading="lazy"><figcaption>p.9 轮盘行动图标与代价</figcaption></figure>
+<figure><img src="images_wild/page_10.jpg" alt="原书第 10 页" loading="lazy"><figcaption>p.10 免费行动与掠食者卡</figcaption></figure>
+<figure><img src="images_wild/page_11.jpg" alt="原书第 11 页" loading="lazy"><figcaption>p.11 吸引与激活专家</figcaption></figure>
+<figure><img src="images_wild/page_12.jpg" alt="原书第 12 页" loading="lazy"><figcaption>p.12 回合结束与观鸟</figcaption></figure>
+<figure><img src="images_wild/page_13.jpg" alt="原书第 13 页" loading="lazy"><figcaption>p.13 终局计分</figcaption></figure>
+<figure><img src="images_wild/page_14.jpg" alt="原书第 14 页" loading="lazy"><figcaption>p.14 单人规则与难度</figcaption></figure>
+<figure><img src="images_wild/page_15.jpg" alt="原书第 15 页" loading="lazy"><figcaption>p.15 盗猎者行动与单人计分</figcaption></figure>
+<figure><img src="images_wild/page_16.jpg" alt="原书第 16 页" loading="lazy"><figcaption>p.16 鸟类卡 B01 至 B10</figcaption></figure>
+<figure><img src="images_wild/page_17.jpg" alt="原书第 17 页" loading="lazy"><figcaption>p.17 灵长类卡 M01 至 M28</figcaption></figure>
+<figure><img src="images_wild/page_18.jpg" alt="原书第 18 页" loading="lazy"><figcaption>p.18 掠食者卡 D01 至 D28</figcaption></figure>
+<figure><img src="images_wild/page_19.jpg" alt="原书第 19 页" loading="lazy"><figcaption>p.19 掠食者奖励板块与动物志卡</figcaption></figure>
+<figure><img src="images_wild/page_20.jpg" alt="原书第 20 页" loading="lazy"><figcaption>p.20 专家卡 S01 至 S24</figcaption></figure>
+<figure><img src="images_wild/page_21.jpg" alt="原书第 21 页" loading="lazy"><figcaption>p.21 专家卡 S25 至 S40</figcaption></figure>
+<figure><img src="images_wild/page_22.jpg" alt="原书第 22 页" loading="lazy"><figcaption>p.22 专家轮抽变体</figcaption></figure>
+<figure><img src="images_wild/page_23.jpg" alt="原书第 23 页" loading="lazy"><figcaption>p.23 名词表</figcaption></figure>
+<figure><img src="images_wild/page_24.jpg" alt="原书第 24 页" loading="lazy"><figcaption>p.24 图标速查</figcaption></figure>
+</details>
+</section>
+
+<div class="foot">
+荒野生机 · 学习版规则　｜　依据英文原书《Wildscape》Rulebook（24 页）与中文版既定译法编写<br>
+按规则结构重排，非官方规则书；规则裁决以英文原书为准，板块印值与配件数值以实体配件为准。
+</div>
+</main>
+</div>
+</body>
+</html>
