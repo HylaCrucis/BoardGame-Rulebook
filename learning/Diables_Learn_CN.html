@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>恶魔之舞 · 学习版规则（Diables）</title>
+<style>
+  :root{
+    --bg:#fbf7f0; --paper:#fffdf9; --ink:#2f2a28; --soft:#6b615c;
+    --line:#e3d8c8; --line2:#d3c4ae;
+    --red:#a2303c; --red-l:#fbecec; --blue:#3b5b8c; --blue-l:#eaf0f9;
+    --gold:#a9761c; --gold-l:#fbf1dc; --green:#3d7a55; --green-l:#e9f4ec;
+    --purple:#6b4a86; --purple-l:#f1eaf7;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"PingFang SC","Microsoft YaHei","Noto Sans SC",Arial,sans-serif;
+    font-size:15.5px;line-height:1.85;}
+  .backbar{position:sticky;top:0;z-index:60;height:44px;box-sizing:border-box;
+    display:flex;align-items:center;gap:10px;padding:0 16px;
+    background:var(--paper);border-bottom:1px solid var(--line);font-size:13px;}
+  .backbar a{display:inline-flex;align-items:center;min-height:32px;padding:0 12px;
+    border:1px solid var(--line2);border-radius:8px;background:#fff;
+    color:var(--purple);text-decoration:none;white-space:nowrap;}
+  .backbar a:active{background:var(--purple-l);}
+  .backbar .bb-t{margin-left:auto;font-size:12px;color:var(--soft);}
+  .layout{display:flex;align-items:flex-start;max-width:1280px;margin:0 auto;}
+  nav.toc{position:sticky;top:44px;align-self:flex-start;width:238px;flex:0 0 238px;
+    height:calc(100vh - 44px);overflow-y:auto;background:#fffdf9;border-right:1px solid var(--line);
+    padding:22px 14px 40px;font-size:13px;}
+  nav.toc .brand{font-size:17px;font-weight:800;color:var(--red);margin:0 0 4px;}
+  nav.toc .brand-s{font-size:11.5px;color:var(--soft);margin:0 0 16px;letter-spacing:.04em;}
+  nav.toc .grp{margin:16px 0 5px;font-size:11px;color:var(--gold);font-weight:700;letter-spacing:.12em;}
+  nav.toc a{display:block;color:#49403b;text-decoration:none;padding:4px 9px;border-radius:6px;}
+  nav.toc a:hover{background:var(--red-l);color:var(--red);}
+  main{flex:1 1 auto;min-width:0;padding:0 42px 90px;}
+  .hero{background:linear-gradient(150deg,#7c1f2b,#a2303c 55%,#bd5a4a);
+    color:#fff8f0;border-radius:0 0 20px 20px;padding:40px 42px 34px;margin-bottom:26px;
+    box-shadow:0 8px 26px rgba(124,31,43,.18);}
+  .hero h1{margin:0;font-size:34px;letter-spacing:.02em;}
+  .hero .en{font-size:14px;opacity:.8;margin:2px 0 12px;letter-spacing:.06em;}
+  .hero .desc{font-size:16px;max-width:760px;line-height:1.8;}
+  .hero .meta{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px;}
+  .hero .meta span{border:1px solid rgba(255,255,255,.5);border-radius:20px;padding:3px 13px;font-size:12.5px;}
+  .stand{margin-top:14px;background:#fff6e2;border:1px solid #e8d2a2;border-left:5px solid var(--gold);
+    border-radius:0 10px 10px 0;padding:12px 18px;font-size:14px;color:#5c4a26;}
+  section{padding:22px 0 14px;border-bottom:1px dashed var(--line2);scroll-margin-top:14px;}
+  h2{font-size:25px;color:var(--red);margin:8px 0 4px;line-height:1.4;}
+  h2 .n{display:inline-block;background:var(--red);color:#fff;font-size:14px;
+    min-width:30px;height:30px;line-height:30px;text-align:center;border-radius:8px;
+    margin-right:10px;vertical-align:3px;font-weight:700;}
+  h3{font-size:18.5px;color:#3a3230;margin:26px 0 6px;border-left:4px solid var(--gold);padding-left:10px;}
+  h4{font-size:16px;color:var(--blue);margin:18px 0 4px;}
+  p{margin:9px 0;}
+  ul,ol{margin:9px 0 9px 2px;padding-left:22px;}
+  li{margin:5px 0;}
+  b,strong{color:var(--red);}
+  .goal{background:var(--blue-l);border:1px solid #cfdcf0;border-radius:9px;
+    padding:8px 14px;font-size:13.5px;color:#2f466c;margin:8px 0 16px;}
+  .goal b{color:#2f466c;}
+  .pg{display:inline-block;background:#f0e7d8;color:#7d6231;border:1px solid #e2d2b6;
+    border-radius:5px;font-size:11px;padding:0 6px;line-height:18px;vertical-align:1px;
+    margin-left:4px;font-weight:600;white-space:nowrap;font-family:Arial,sans-serif;}
+  .key{background:var(--green-l);border:1px solid #c9e2d1;border-left:5px solid var(--green);
+    padding:11px 16px;border-radius:0 10px 10px 0;margin:13px 0;}
+  .key b{color:var(--green);}
+  .warn{background:var(--red-l);border:1px solid #eed3d3;border-left:5px solid var(--red);
+    padding:11px 16px;border-radius:0 10px 10px 0;margin:13px 0;}
+  .warn b{color:var(--red);}
+  .tip{background:var(--gold-l);border:1px solid #eddcb8;border-left:5px solid var(--gold);
+    padding:11px 16px;border-radius:0 10px 10px 0;margin:13px 0;}
+  .tip b{color:var(--gold);}
+  .note{background:#f4f1ec;border:1px solid var(--line);border-radius:9px;padding:10px 15px;
+    margin:12px 0;font-size:14px;color:#514844;}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px;background:var(--paper);}
+  th,td{border:1px solid var(--line2);padding:8px 11px;text-align:left;vertical-align:top;}
+  th{background:#f4e9dd;color:#5d4022;font-weight:700;}
+  tr:nth-child(even) td{background:#fdf9f3;}
+  td.c,th.c{text-align:center;}
+  .steps{list-style:none;padding:0;counter-reset:st;margin:14px 0;}
+  .steps>li{position:relative;padding:10px 14px 10px 50px;margin:9px 0;background:var(--paper);
+    border:1px solid var(--line);border-radius:10px;}
+  .steps>li::before{counter-increment:st;content:counter(st);position:absolute;left:12px;top:11px;
+    width:26px;height:26px;background:var(--red);color:#fff;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;}
+  .steps>li>ol{margin:6px 0;padding-left:20px;}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:11px;
+    padding:13px 17px;margin:11px 0;box-shadow:0 2px 6px rgba(80,60,40,.04);}
+  .card .t{font-weight:800;color:var(--red);font-size:16px;margin-bottom:3px;}
+  .card .t .s{display:inline-block;background:var(--red);color:#fff;border-radius:5px;
+    font-size:12px;padding:1px 7px;margin-right:8px;}
+  .card.blue .t{color:var(--blue);} .card.blue .t .s{background:var(--blue);}
+  .card.green .t{color:var(--green);} .card.green .t .s{background:var(--green);}
+  .card.gold .t{color:var(--gold);} .card.gold .t .s{background:var(--gold);}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+  .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;}
+  .mini{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:11px 13px;}
+  .mini .h{font-weight:800;font-size:14px;margin-bottom:4px;}
+  .mini .v{font-size:13px;color:var(--soft);line-height:1.7;}
+  .fig{margin:18px 0;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;}
+  .fig svg{display:block;width:100%;height:auto;}
+  .figcap{font-size:12.5px;color:var(--soft);margin-top:8px;text-align:center;}
+  details{margin:12px 0;background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:8px 14px;}
+  summary{cursor:pointer;font-size:13.5px;color:var(--blue);font-weight:600;}
+  details img{display:block;max-width:100%;margin:12px auto;border:1px solid var(--line);border-radius:8px;}
+  .pit{counter-reset:pit;list-style:none;padding:0;margin:14px 0;}
+  .pit li{position:relative;padding:9px 14px 9px 46px;margin:7px 0;background:var(--paper);
+    border:1px solid var(--line);border-radius:9px;font-size:14.5px;}
+  .pit li::before{counter-increment:pit;content:"✕ " counter(pit);position:absolute;left:10px;top:9px;
+    color:#fff;background:var(--red);border-radius:6px;font-size:11px;padding:1px 6px;font-weight:700;}
+  .bad{color:var(--red);text-decoration:line-through;}
+  .good{color:var(--green);font-weight:700;}
+  .tagR{color:var(--red);font-weight:700;} .tagB{color:var(--blue);font-weight:700;}
+  .tagG{color:var(--gold);font-weight:700;}
+  .why{background:#eef3fa;border:1px solid #cddcee;border-left:5px solid var(--blue);
+    padding:12px 17px;border-radius:0 10px 10px 0;margin:13px 0;font-size:14.5px;}
+  .why b{color:#2f466c;}
+  .why .wt{font-weight:800;color:#2f466c;display:block;margin-bottom:3px;}
+  .idx{font-size:13.5px;}
+  .foot{margin-top:34px;font-size:12.5px;color:var(--soft);text-align:center;line-height:1.9;}
+  @media(max-width:960px){
+    .layout{flex-direction:column;} nav.toc{position:static;width:100%;height:auto;flex-basis:auto;border-right:0;border-bottom:1px solid var(--line);}
+    main{padding:0 18px 60px;} .grid2,.grid4{grid-template-columns:1fr 1fr;}
+  }
+  @media(max-width:640px){.backbar{height:40px;padding:0 10px;} .backbar a{min-height:30px;padding:0 9px;font-size:12.5px;} .backbar .bb-t{display:none;}
+  .grid2,.grid4{grid-template-columns:1fr;} main{padding:0 12px 50px;} .hero{padding:28px 20px;} .hero h1{font-size:26px;}}
+
+  /* == 窄屏目录：横向胶囊，正文首屏可见 == */
+  @media(max-width:960px){
+    nav.toc{display:flex;flex-wrap:nowrap;gap:6px;align-items:center;
+      height:auto;max-height:none;overflow-x:auto;overflow-y:hidden;
+      padding:10px 12px;border-right:0;border-bottom:1px solid var(--line);
+      -webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;}
+    nav.toc .brand,nav.toc .brand-s,nav.toc .grp{display:none;}
+    nav.toc a{flex:0 0 auto;white-space:nowrap;padding:6px 11px;
+      border:1px solid var(--line2);border-radius:16px;background:var(--paper);
+      font-size:12.5px;line-height:1.4;}
+    nav.toc a:hover{background:var(--red-l);}
+    nav.toc a[style]{padding-left:11px;}
+  }
+
+  /* == 学习版通用补充（各本共用） == */
+  .flow{margin:18px 0;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;}
+  .flow svg{display:block;width:100%;height:auto;}
+  .pgs{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin:14px 0;}
+  .pgs figure{margin:0;background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:8px;}
+  .pgs img{display:block;width:100%;height:auto;margin:0;border:1px solid var(--line);border-radius:6px;}
+  .pgs figcaption{font-size:12px;color:var(--soft);text-align:center;margin-top:6px;line-height:1.5;}
+  @media(max-width:640px){.pgs{grid-template-columns:1fr 1fr;gap:9px;}}
+  /* 窄屏压缩首屏：hero 与体例框收紧，第 0 节进入首屏 */
+  @media(max-width:640px){
+    .hero{padding:22px 18px 24px;margin-bottom:16px;}
+    .hero h1{font-size:24px;} .hero .desc{font-size:14px;line-height:1.65;margin-top:8px;}
+    .hero .meta{margin-top:12px;gap:6px;} .hero .meta span{font-size:11.5px;padding:2px 10px;}
+    .stand{margin-top:10px;padding:9px 12px;font-size:12.5px;line-height:1.6;}
+  }
+</style>
+</head>
+<body>
+<div class="backbar"><a href="index.html">← 学习版目录</a><span class="bb-t">恶魔之舞 · 学习版规则</span></div>
+<div class="layout">
+<nav class="toc">
+  <div class="brand">恶魔之舞</div>
+  <div class="brand-s">学习版规则 · Diables</div>
+  <div class="grp">规则概要</div>
+  <a href="#s0">0 · 游戏概要与目标</a>
+  <a href="#s1">1 · 初局设置</a>
+  <a href="#s2">2 · 两块版图</a>
+  <div class="grp">引擎与回合</div>
+  <a href="#s3">3 · 核心引擎</a>
+  <a href="#s4">4 · 阶段一：三选一</a>
+  <div class="grp">街道与鼓手</div>
+  <a href="#s5">5 · 街道：列、三段与火力范围</a>
+  <a href="#s6">6 · 点燃烟花</a>
+  <a href="#s7">7 · 鼓手与声响</a>
+  <div class="grp">四类行动</div>
+  <a href="#s8">8 · 剧团行动</a>
+  <a href="#s9">9 · 社交媒体行动</a>
+  <a href="#s10">10 · 演出行动</a>
+  <a href="#s11">11 · 惊动观众与广场</a>
+  <div class="grp">计分与收尾</div>
+  <a href="#s12">12 · 阶段二：时间流逝</a>
+  <a href="#s13">13 · 前行、吸引观众与终局</a>
+  <a href="#s14">14 · 单人局：火械</a>
+  <a href="#s15">15 · 常见误读与速查</a>
+</nav>
+
+<main>
+<header class="hero">
+  <h1>恶魔之舞 · 学习版规则</h1>
+  <div class="en">DIABLES　｜　按规则结构重排，不按原书章节顺序</div>
+  <div class="desc">以一条「成员解锁 → 派上街道 → 点燃烟花 → 激活观众 → 换取行动」的循环为主线，展开街道 5 列三段与火力范围、鼓手长上位下位、四类行动、观众卡的两种去向、焰华与四场演出的计分、以及单人火械。</div>
+  <div class="meta"><span>一至四人 · 三轮四阶段</span><span>烟花是代价也是射程</span><span>四条边得分一条罚分</span><span>依据英文原书 40 页</span></div>
+</header>
+
+<div class="stand">
+  <b>体例：</b>按学习顺序重排，章节与原书不对应；每条结论后的 <span class="pg">p.N</span> 为英文原书页码。
+  规则裁决以<b>英文原书页图</b>为准；术语沿用已上线中文版的既定译法。原书未列之处只记录、不代填，棋子印值、兽卡能力与板块分割线以实体配件为准。第 15 节附 40 张原书页图。
+  正文按规则作用展开，先述状态变化，再列执行步骤。
+</div>
+
+<section id="s0">
+<h2><span class="n">0</span>游戏概要与目标</h2>
+<p>《恶魔之舞》取自加泰罗尼亚的「火奔」（correfoc）传统：一群扮成恶魔的人挥着顶端带烟花的狼牙棒，在人群之间奔跑起舞，鼓手以沉重的鼓点压住场面，巨兽在人群中穿行喷火。玩家各领一支剧团，在三轮之内把成员派上街道、点燃烟花、调动观众，换取名气分。<span class="pg">p.2</span></p>
+<div class="why"><span class="wt">规则主线</span>全游戏只有一条主循环：成员在剧团成员格上被解锁，进入表演者储备，再被派上街道点燃烟花，激活街道两侧的观众，换成各类行动；行动再把成员送回格盘、或把烟花补进烟花车。三轮之后名气分最高者胜。烟花与成员因此是两种会枯竭的资源：烟花每轮按成员格的空格补充一次，成员则要靠剧团行动逐格解锁。<span class="pg">p.9</span><span class="pg">p.11</span><span class="pg">p.27</span></div>
+<div class="grid2">
+  <div class="card"><div class="t">四条得分线</div>焰华板块（按全场元素数量排名取三档）、四场演出（按计分板块逐个棋子结算）、社交媒体墙（点赞数乘成员格上的社媒图标数）、剧团追随者（推进轨道并触发观众卡奖励）。<span class="pg">p.25</span><span class="pg">p.26</span><span class="pg">p.18</span><span class="pg">p.21</span></div>
+  <div class="card blue"><div class="t">一条罚分线</div>街道上每有一张没有表演者压着的街头观众卡，终局计分时扣 3 分。放表演者时选中间段，才会压住那张卡。<span class="pg">p.27</span></div>
+</div>
+<table>
+  <tr><th>项目</th><th>取值</th><th>依据</th></tr>
+  <tr><td>人数</td><td>一至四人；单人局对手为火械<span class="pg">p.3</span><span class="pg">p.29</span></td><td>版图与配件按四人满编设计</td></tr>
+  <tr><td>轮次</td><td>三轮，每轮四个阶段<span class="pg">p.9</span></td><td>时间轴三格各放一块焰华板块</td></tr>
+  <tr><td>每回合行动数</td><td>阶段一内每次轮到自己做一件事：派表演者、用鼓手演出、或跳过<span class="pg">p.10</span></td><td>跳过之后本阶段不再行动</td></tr>
+  <tr><td>胜负</td><td>名气分最高者胜；平手时按顺位规则判先行动者胜<span class="pg">p.28</span></td><td>名气分不低于 0</td></tr>
+  <tr><td>单人局</td><td>五档难度，火械每轮行动 3 至 6 次<span class="pg">p.29</span></td><td>火械不补车、不因观众卡失分</td></tr>
+</table>
+<h3>0.1 三轮的节奏差</h3>
+<p>前两轮结构相同：阶段一反复派人与鼓手，阶段二结算一场自选演出，阶段三收回成员，阶段四补观众。第三轮在三处不同：阶段二要把前两轮没选过的两场演出一并结算，并额外做一次社交媒体终局计分；阶段三与阶段四整段跳过；补烟花车一步也跳过。<span class="pg">p.9</span><span class="pg">p.26</span><span class="pg">p.28</span></p>
+<h3>0.2 三种棋子身份</h3>
+<table>
+  <tr><th>身份</th><th>包含</th><th>规则差异</th></tr>
+  <tr><td>表演者</td><td>恶魔、角色、小兽、大兽<span class="pg">p.10</span></td><td>派上街道或送去演出时点烟花，数量 1 至 4 枚<span class="pg">p.11</span></td></tr>
+  <tr><td>鼓手</td><td>鼓手<span class="pg">p.13</span></td><td>常驻街道，从不使用烟花；靠鼓手长标记激活<span class="pg">p.13</span></td></tr>
+  <tr><td>鼓手长</td><td>每人 2 枚标记<span class="pg">p.13</span></td><td>每轮可分别放到上位与下位各一次<span class="pg">p.13</span></td></tr>
+</table>
+<div class="note">「表演者」这一称呼不含鼓手。任何写「表演者」的规则都不适用于鼓手；写到鼓手时会另行注明，例如演出行动允许「表演者或鼓手」。<span class="pg">p.10</span><span class="pg">p.19</span></div>
+</section>
+
+<section id="s1">
+<h2><span class="n">1</span>初局设置</h2>
+<p>设置分公共与个人两段。公共段决定四场演出各自使用的一块计分板块、观众的来源与兽卡的张数；个人段决定每位玩家的起始成员分布、起始烟花与起始观众。<span class="pg">p.4</span><span class="pg">p.6</span></p>
+<h3>1.1 公共准备 A 至 L</h3>
+<table>
+  <tr><th>步</th><th>做法</th></tr>
+  <tr><td>A</td><td>主版图摊在桌面中央<span class="pg">p.4</span></td></tr>
+  <tr><td>B</td><td>16 块演出计分板块按类型分成 4 组，每组 4 块。每种演出随机取 1 块正面朝上放进对应演出区，其余放回盒中<span class="pg">p.4</span></td></tr>
+  <tr><td>C</td><td>洗混街头观众卡，背面朝下放在版图旁<span class="pg">p.4</span></td></tr>
+  <tr><td>D</td><td>四个演出区旁是观众聚集处。按人数从街头观众牌堆抽卡，并在每个观众区随机放上：二人局抽 12 张、每区 3 张；三人局抽 8 张、每区 2 张；四人局抽 4 张、每区 1 张<span class="pg">p.4</span></td></tr>
+  <tr><td>E</td><td>随机取 3 块焰华板块放进时间轴的三格，其余放回盒中<span class="pg">p.4</span></td></tr>
+  <tr><td>F</td><td>时间标记放在时间轴最上一格<span class="pg">p.4</span></td></tr>
+  <tr><td>G</td><td>版图右侧是社交媒体墙，帖子都挂在这里<span class="pg">p.5</span></td></tr>
+  <tr><td>H</td><td>洗混社交媒体帖牌堆，背面朝下放在墙的最下方。不足四人时从墙的最下方用广告盖格：三人局盖 1 格，二人局盖 2 格。随后每个空格正面朝上放 1 张帖子卡<span class="pg">p.5</span></td></tr>
+  <tr><td>I</td><td>洗混小兽牌堆，抽出「人数 +1」张，按对应格位摆好，让每张卡的下半部可见，其余放回盒中<span class="pg">p.5</span></td></tr>
+  <tr><td>J</td><td>大兽牌堆同样处理<span class="pg">p.5</span></td></tr>
+  <tr><td>K</td><td>沸腾观众标记与点赞标记在版图旁整理成公共供应区<span class="pg">p.5</span></td></tr>
+  <tr><td>L</td><td>烟花标记分成普通、哨音、彩色三堆储备<span class="pg">p.5</span></td></tr>
+</table>
+<h3>1.2 个人准备 11 步</h3>
+<ol>
+  <li>取一块玩家版图与一种颜色的全部配件。<span class="pg">p.6</span></li>
+  <li>把成员格上带 ★ 的格位按图示填满：上半区放 1 个角色与 2 只小兽，它们下方放 7 个恶魔；下半区放 7 个鼓手，它们下方放 1 个角色与 1 只大兽。<span class="pg">p.6</span></li>
+  <li>把剩下的 6 个鼓手放到鼓手区带 ★ 的格位上。<span class="pg">p.6</span></li>
+  <li>把剩下的 3 个恶魔、2 个角色与 1 只小兽放在版图旁，组成表演者储备。<span class="pg">p.6</span></li>
+  <li>烟花车板块放进自己的游戏区，上面放 5 枚普通、2 枚哨音、2 枚彩色烟花。<span class="pg">p.6</span></li>
+  <li>6 枚相机标记与 2 枚鼓手长标记整理成储备，放在版图旁。<span class="pg">p.6</span></li>
+  <li>名气分标记放在名气分轨道的 0 格；四场演出旁各自的追随者轨道起始格上各放 1 枚追随者标记，计分面朝上。<span class="pg">p.6</span></li>
+  <li>从街头观众牌堆抽 2 张，正面朝上放到街道最左侧两列的中央格。<span class="pg">p.7</span></li>
+  <li>取一套图标相同的人行道观众卡，共 12 张：上人行道 6 张、下人行道 6 张。其中 6 张起始卡随机正面朝上放到对应格位——3 张上人行道卡放在版图上方，3 张下人行道卡放在下方。其余放在自己的游戏区。<span class="pg">p.7</span></li>
+  <li>观众卡摆好之后，可以交换其中 2 张的位置，但必须同类型：上卡只能与上卡互换，下卡只能与下卡互换。<span class="pg">p.7</span></li>
+  <li>每位玩家的 1 枚声响标记随机放到顺位指示条上，另 1 枚放到声响轨道上。<span class="pg">p.7</span></li>
+</ol>
+<h3>1.3 少人局的额外准备</h3>
+<table>
+  <tr><th>人数</th><th>中央版图</th><th>个人部分</th></tr>
+  <tr><td>三人局</td><td>用本局不使用的颜色盖住印有第一种记号的格位，并在这些格位的恶魔上各放 1 枚对应烟花<span class="pg">p.5</span></td><td>从未使用的牌堆取一套人行道观众卡，背面朝下放在一旁，供阶段二的「新观众」使用<span class="pg">p.7</span></td></tr>
+  <tr><td>二人局</td><td>在三人局的基础上，再把印有第二种记号的格位盖住<span class="pg">p.5</span></td><td>同上<span class="pg">p.7</span></td></tr>
+</table>
+<table>
+  <tr><th>人数</th><th>街头观众抽取／每区</th><th>广告盖格</th><th>兽卡张数</th></tr>
+  <tr><td>二人</td><td>12 张／3 张<span class="pg">p.4</span></td><td>2 格<span class="pg">p.5</span></td><td>小兽 3 张、大兽 3 张<span class="pg">p.5</span></td></tr>
+  <tr><td>三人</td><td>8 张／2 张<span class="pg">p.4</span></td><td>1 格<span class="pg">p.5</span></td><td>小兽 4 张、大兽 4 张<span class="pg">p.5</span></td></tr>
+  <tr><td>四人</td><td>4 张／1 张<span class="pg">p.4</span></td><td>0 格<span class="pg">p.5</span></td><td>小兽 5 张、大兽 5 张<span class="pg">p.5</span></td></tr>
+</table>
+<div class="why"><span class="wt">规则作用</span>少人局用闲置颜色的恶魔盖格，盖上去的恶魔仍带着烟花留在演出区里。计分板块与焰华板块在清点「每个棋子」与「烟花多数」时把所有棋子都算进来，不论属于谁，因此这些中立恶魔会持续占位、并左右多数归属。人数越少，抽出的街头观众越集中于每区，街道两侧的观众密度随之提高。<span class="pg">p.5</span><span class="pg">p.36</span></div>
+</section>
+
+<section id="s2">
+<h2><span class="n">2</span>两块版图</h2>
+<p>中央版图承载四场演出、时间轴与社交媒体墙；每位玩家的版图承载成员格、鼓手区与街道。两块版图之间靠追随者轨道、名气分轨道与声响轨道连接。<span class="pg">p.4</span><span class="pg">p.6</span></p>
+<h3>2.1 中央版图的五个部分</h3>
+<table>
+  <tr><th>部分</th><th>结构</th><th>规则作用</th></tr>
+  <tr><td>四场演出区</td><td>轮火、言舞、兽聚、鼓阵，各有放置格位与 1 块计分板块位<span class="pg">p.19</span></td><td>接收表演者与鼓手，并提供即时奖励；送去的棋子不再收回<span class="pg">p.19</span></td></tr>
+  <tr><td>追随者轨道</td><td>每场演出旁一条，各 1 枚标记，双面：计分面与已计分面<span class="pg">p.6</span></td><td>位置决定可计分的棋子数量；翻面表示该场已计分<span class="pg">p.26</span></td></tr>
+  <tr><td>时间轴</td><td>左侧，三轮三格，各放 1 块焰华板块<span class="pg">p.4</span></td><td>标示当前轮次与该轮要结算的焰华板块<span class="pg">p.25</span></td></tr>
+  <tr><td>社交媒体墙</td><td>右侧，帖子卡槽与点赞位<span class="pg">p.5</span></td><td>拍照、录像、点赞都落在这里；条件满足时整墙更新并计分<span class="pg">p.18</span></td></tr>
+  <tr><td>三条轨道</td><td>名气分轨道、声响轨道、顺位指示条<span class="pg">p.4</span></td><td>分别记录分数、声响进度与阶段一的行动顺位<span class="pg">p.9</span><span class="pg">p.14</span></td></tr>
+</table>
+<h3>2.2 玩家版图的四个区块</h3>
+<table>
+  <tr><th>区块</th><th>结构</th><th>规则作用</th></tr>
+  <tr><td>阶段提示条</td><td>一轮四阶段的顺序<span class="pg">p.6</span></td><td>提示流程，无规则效力</td></tr>
+  <tr><td>剧团成员格</td><td>若干格位，成员按箭头方向逐格移动；部分格位印有烟花、社媒图标、火力范围图标<span class="pg">p.6</span><span class="pg">p.15</span></td><td>成员在此等待解锁；走到尽头即进入储备<span class="pg">p.15</span></td></tr>
+  <tr><td>鼓手区</td><td>三行格位，每格下方印声响值；旁侧有上位与下位两个鼓手长空格<span class="pg">p.13</span></td><td>放置鼓手长，产生声响或激活人行道观众<span class="pg">p.13</span></td></tr>
+  <tr><td>街道</td><td>5 列，每列分上段、中段、下段；街道上缘与下缘各有一排人行道观众卡<span class="pg">p.10</span></td><td>派表演者的唯一去处；相邻判定与火力范围都作用于街道<span class="pg">p.10</span></td></tr>
+</table>
+<h3>2.3 剧团成员格的三类标记</h3>
+<table>
+  <tr><th>标记</th><th>含义</th></tr>
+  <tr><td>★ 格位</td><td>开局预置成员的位置，按图示填满<span class="pg">p.6</span></td></tr>
+  <tr><td>箭头</td><td>整备行动的移动方向；成员沿箭头逐格走向尽头<span class="pg">p.15</span></td></tr>
+  <tr><td>空格与图标</td><td>空格在阶段二按印的烟花补充烟花车；图标分别提供社媒图标、火力范围提升与野兽解锁条件<span class="pg">p.15</span><span class="pg">p.27</span></td></tr>
+</table>
+<h3>2.4 街道两侧的三种观众</h3>
+<table>
+  <tr><th>观众</th><th>位置</th><th>激活方式</th></tr>
+  <tr><td>街头观众</td><td>街道中段的中央格<span class="pg">p.7</span></td><td>表演者放在中段，压在这张卡上<span class="pg">p.11</span></td></tr>
+  <tr><td>人行道观众</td><td>街道上缘与下缘各一排<span class="pg">p.7</span></td><td>表演者放在上段或下段；或由鼓手长的上位激活<span class="pg">p.11</span><span class="pg">p.13</span></td></tr>
+  <tr><td>剧团追随者</td><td>行动直接印在玩家版图上，被观众卡盖住<span class="pg">p.12</span></td><td>移走该格的人行道卡即露出，直到新卡盖回<span class="pg">p.23</span></td></tr>
+</table>
+<div class="why"><span class="wt">规则作用</span>观众不是装饰，而是行动的入口：每张观众卡提供 2 个行动，左侧无条件，右侧带条件。街道三段因此对应三种不同的邻居——上段取上方人行道卡，下段取下方人行道卡，中段取压住的街头卡。中段的差别在罚分：压住一张街头卡，阶段二就少扣 3 分。<span class="pg">p.11</span><span class="pg">p.27</span></div>
+</section>
+
+<section id="s3">
+<h2><span class="n">3</span>核心引擎</h2>
+<p>整局由一条循环驱动：解锁成员、派上街道、点燃烟花、激活观众、执行行动。行动的结果又反哺循环——剧团行动把成员往储备推，演出行动换取追随者，社媒行动留下相机标记。<span class="pg">p.9</span><span class="pg">p.15</span></p>
+<svg viewBox="0 0 900 300" role="img" aria-label="恶魔之舞的成员与烟花循环">
+  <rect x="0" y="0" width="900" height="300" fill="#ffffff"/>
+  <text x="450" y="26" text-anchor="middle" font-size="15" font-weight="700" fill="#5a2430">成员从格盘解锁上场，烟花从车里取出，两者在街道上合成一次行动</text>
+  <g font-size="12.5" text-anchor="middle" fill="#3f2530">
+    <rect x="8" y="46" width="158" height="64" rx="9" fill="#f7eef0" stroke="#d9bcc4"/>
+    <text x="87" y="70">剧团成员格</text><text x="87" y="92">整备逐格解锁</text>
+    <rect x="180" y="46" width="158" height="64" rx="9" fill="#f3f0e8" stroke="#d8cfb8"/>
+    <text x="259" y="70">表演者储备</text><text x="259" y="92">恶魔／角色／野兽</text>
+    <rect x="352" y="46" width="158" height="64" rx="9" fill="#eef3f5" stroke="#bcd0d8"/>
+    <text x="431" y="70">派上街道</text><text x="431" y="92">列内三段任选</text>
+    <rect x="524" y="46" width="158" height="64" rx="9" fill="#f6eae6" stroke="#dcbfb4"/>
+    <text x="603" y="70">点燃烟花</text><text x="603" y="92">恶魔 1 至大兽 4</text>
+    <rect x="696" y="46" width="196" height="64" rx="9" fill="#f0eef7" stroke="#c8c0dd"/>
+    <text x="794" y="70">激活邻接观众</text><text x="794" y="92">左侧随意／右侧带条件</text>
+  </g>
+  <g stroke="#7a4350" stroke-width="2" fill="none">
+    <path d="M166 78 H176"/><path d="M338 78 H348"/><path d="M510 78 H520"/><path d="M682 78 H692"/>
+    <path d="M794 110 V146 H87 V112"/>
+    <path d="M87 112 l-5 8 h10 z" fill="#7a4350"/>
+  </g>
+  <text x="450" y="168" text-anchor="middle" font-size="13" fill="#5a3b45">行动结算完毕，成员留在街道或送去演出；烟花随棋子消耗</text>
+  <g font-size="12.5" text-anchor="middle" fill="#5a2430">
+    <rect x="8" y="188" width="206" height="48" rx="8" fill="#fbfafa" stroke="#dcd6cf"/>
+    <text x="111" y="208">阶段二：按成员格空格补车</text><text x="111" y="226">末轮跳过此步</text>
+    <rect x="228" y="188" width="206" height="48" rx="8" fill="#fbfafa" stroke="#dcd6cf"/>
+    <text x="331" y="208">阶段三：成员回储备</text><text x="331" y="226">表演者与鼓手长同时收回</text>
+    <rect x="448" y="188" width="206" height="48" rx="8" fill="#fbfafa" stroke="#dcd6cf"/>
+    <text x="551" y="208">阶段四：街道补 3 张观众</text><text x="551" y="226">街头 1 张＋人行道 2 张</text>
+    <rect x="668" y="188" width="224" height="48" rx="8" fill="#fbfafa" stroke="#dcd6cf"/>
+    <text x="780" y="208">三轮之后结算名气分</text><text x="780" y="226">焰华／演出／社媒／罚分</text>
+  </g>
+  <text x="450" y="264" text-anchor="middle" font-size="12" fill="#5a3b45">成员是一次性投入：送去演出即永久留在广场；烟花是每轮一次的补给</text>
+</svg>
+<h3>3.1 烟花车的双重作用</h3>
+<p>烟花车既是代价也是射程。派 1 个表演者上街要按类型取 1 至 4 枚烟花，其中 1 枚留在棋子身上，其余退回公共储备；车里的烟花因此逐次减少。与此同时，烟花决定火力范围：默认只能把表演者派到街道前 3 列，解锁成员格上的两个图标后才推进到第 4 列与第 5 列。<span class="pg">p.11</span></p>
+<h3>3.2 成员的三种位置</h3>
+<table>
+  <tr><th>位置</th><th>可用性</th><th>回到储备的方式</th></tr>
+  <tr><td>剧团成员格上</td><td>不可用，需先解锁<span class="pg">p.6</span></td><td>整备走到尽头，或调度、催场直接取出<span class="pg">p.15</span><span class="pg">p.16</span></td></tr>
+  <tr><td>表演者储备中</td><td>随时可派上街道<span class="pg">p.10</span></td><td>本已可用</td></tr>
+  <tr><td>街道或演出区</td><td>街道上留到阶段三<span class="pg">p.28</span>；演出区永久<span class="pg">p.19</span></td><td>街道上的于阶段三收回；演出区的永不收回</td></tr>
+</table>
+<h3>3.3 三轮的补给次数</h3>
+<p>烟花车在阶段二按成员格的空格补充，前两轮各补 1 次，第 3 轮跳过。因此全场可用于点燃的烟花总量有限：初始 5 枚普通、2 枚哨音、2 枚彩色，加上两轮补充。成员方面，格盘上的成员整局只能解锁一次，解锁越晚，上场机会越少。<span class="pg">p.27</span><span class="pg">p.6</span></p>
+<div class="why"><span class="wt">规则作用</span>循环的收口在阶段三：街道上的表演者与鼓手长全部收回储备，烟花退回公共储备，而送去演出的棋子留在广场不动。于是每一轮都要在同一批成员里重新分配用途：留在街道换行动，或送去演出换追随者与即时奖励。演出区是单向出口，棋子一旦送去就不再回到循环。<span class="pg">p.28</span><span class="pg">p.19</span></div>
+</section>
+
+<section id="s4">
+<h2><span class="n">4</span>阶段一：三选一</h2>
+<p>阶段一是每轮的主阶段。玩家按顺位指示条上声响标记的位置依次行动，轮到时从三项中选一项：派表演者上街、用鼓手演出、跳过。<span class="pg">p.10</span></p>
+<h3>4.1 三项选择</h3>
+<table>
+  <tr><th>选择</th><th>内容</th><th>代价</th></tr>
+  <tr><td>派表演者上街</td><td>从储备取 1 名表演者放到街道某列某段，点烟花，激活相邻观众并结算行动<span class="pg">p.10</span></td><td>按类型消耗 1 至 4 枚烟花<span class="pg">p.11</span></td></tr>
+  <tr><td>用鼓手演出</td><td>把 1 枚鼓手长放到上位或下位：上位激活人行道观众，下位产生声响<span class="pg">p.13</span></td><td>不消耗烟花，消耗 1 枚鼓手长标记<span class="pg">p.13</span></td></tr>
+  <tr><td>跳过</td><td>本阶段剩余时间不再行动<span class="pg">p.14</span></td><td>放弃后续回合</td></tr>
+</table>
+<h3>4.2 顺位与阶段结束</h3>
+<p>阶段一的行动顺序看顺位指示条上声响标记的排列，与名气分、追随者都无关。所有玩家依次选择跳过之后，阶段一结束，进入阶段二。<span class="pg">p.9</span><span class="pg">p.10</span></p>
+<div class="note">跳过一经宣布即确定：本阶段内不会再轮到自己。因此阶段一的长度由玩家自己决定，先跳过的人放弃后续机会，也不再消耗资源。<span class="pg">p.10</span></div>
+<h3>4.3 一次派人的完整流程</h3>
+<ol>
+  <li>从储备取 1 名表演者，放到火力范围之内、且尚无其他表演者的某一列。<span class="pg">p.10</span></li>
+  <li>确定段位：上段、中段或下段。选中段时压在街头观众卡上。<span class="pg">p.10</span></li>
+  <li>从烟花车取对应数量的烟花，类型自选但必须一致；1 枚留在棋子身上，其余退回公共储备。<span class="pg">p.11</span></li>
+  <li>激活相邻观众：上段取上方人行道卡，下段取下方人行道卡，中段取压住的街头卡。<span class="pg">p.11</span></li>
+  <li>结算该卡的 2 个行动：左侧随时可做，右侧需满足卡上条件。<span class="pg">p.11</span></li>
+</ol>
+<div class="why"><span class="wt">规则作用</span>三选一把整轮压缩成一个重复决策：要么花烟花换观众行动，要么花鼓手长换声响或人行道行动。鼓手长每轮只有 2 枚，且上位与下位各对应一套结果，因此鼓手一侧的机会成本是固定的；表演者一侧的机会成本则随车里剩下的烟花类型浮动。<span class="pg">p.13</span><span class="pg">p.11</span></div>
+</section>
+
+<section id="s5">
+<h2><span class="n">5</span>街道：列、三段与火力范围</h2>
+<p>街道是派表演者的唯一去处，纵向分 5 列，横向分上段、中段、下段。列决定能不能到达，段决定所激活的观众卡。<span class="pg">p.10</span></p>
+<h3>5.1 三段与邻接的观众</h3>
+<table>
+  <tr><th>段位</th><th>相邻的观众卡</th><th>说明</th></tr>
+  <tr><td>上段</td><td>街道上缘的人行道卡<span class="pg">p.11</span></td><td>只与正上方那张卡相邻</td></tr>
+  <tr><td>中段</td><td>压住的街头观众卡<span class="pg">p.11</span></td><td>棋子放在卡上，卡与棋子同格</td></tr>
+  <tr><td>下段</td><td>街道下缘的人行道卡<span class="pg">p.11</span></td><td>只与正下方那张卡相邻</td></tr>
+</table>
+<h3>5.2 每列的占用限制</h3>
+<p>同一列只能有 1 名表演者，不论段位。两条规则可以突破这个限制：大兽卡中的一张允许把野兽放到已有表演者的列，但必须换一段；影片奖励中的一项允许每轮一次做同样的事。两种效果可以叠加。<span class="pg">p.10</span><span class="pg">p.35</span><span class="pg">p.39</span></p>
+<h3>5.3 火力范围</h3>
+<table>
+  <tr><th>状态</th><th>可达列</th></tr>
+  <tr><td>开局默认</td><td>第 1 至第 3 列<span class="pg">p.11</span></td></tr>
+  <tr><td>解锁成员格上第一个范围图标</td><td>增到第 4 列<span class="pg">p.11</span></td></tr>
+  <tr><td>解锁第二个范围图标</td><td>增到第 5 列<span class="pg">p.11</span></td></tr>
+</table>
+<p>范围提升是永久的，一次解锁之后整局有效。列数一律自左向右数。<span class="pg">p.11</span></p>
+<h3>5.4 观众卡的两个行动</h3>
+<p>每张观众卡印 2 个行动。左侧行动随时可做；右侧行动必须满足卡上标出的条件，条件有两类：激活这张卡的表演者不能是恶魔，或该表演者必须带着图示类型的烟花。<span class="pg">p.11</span></p>
+<div class="note">条件中的「不能是恶魔」意味着角色、小兽与大兽都能满足；「必须带某种烟花」只看棋子身上那 1 枚烟花，与从车上取走的其余烟花无关。<span class="pg">p.11</span></div>
+<h3>5.5 示例的结构</h3>
+<p>原书示例中，一名玩家想把表演者派到第 1 列，但那一列已有他的表演者；第 4、5 列又因未解锁范围图标而不可达。他把恶魔放到第 3 列上段，为做满整张卡的两个行动，在恶魔身上放一枚哨音烟花，以满足右侧行动的条件。<span class="pg">p.12</span></p>
+<div class="why"><span class="wt">规则作用</span>三段之分把「占位」与「取卡」拆成两件事：上段与下段只借用相邻人行道卡的行动，中段则连卡一起压住。压住街头卡会在阶段二消掉那 3 分罚分，代价是棋子占在街道中段；上段与下段取的是人行道卡，人行道卡被移走时那一格会露出追随者行动。范围图标决定能否够到第 4、5 列；开局时街头观众卡只放在最左两列的中段，其余各列要等阶段四从最左格补入、再经阶段三向右推进才有卡，人行道卡则在开局时随机占 3 个格位，其余格位要靠阶段四从最右格补入。<span class="pg">p.10</span><span class="pg">p.27</span><span class="pg">p.28</span></div>
+</section>
+
+<section id="s6">
+<h2><span class="n">6</span>点燃烟花</h2>
+<p>烟花是派出表演者的代价，也是这场演出的燃料。类型分为普通、哨音、彩色三种，任何时候取用的烟花必须同类型。<span class="pg">p.11</span></p>
+<h3>6.1 按类型取数</h3>
+<table>
+  <tr><th>表演者</th><th>取烟花数</th><th>去向</th></tr>
+  <tr><td>恶魔</td><td>1 枚<span class="pg">p.11</span></td><td>留在棋子身上，其余退回公共储备</td></tr>
+  <tr><td>角色</td><td>2 枚<span class="pg">p.11</span></td><td>同上</td></tr>
+  <tr><td>小兽</td><td>3 枚<span class="pg">p.11</span></td><td>同上</td></tr>
+  <tr><td>大兽</td><td>4 枚<span class="pg">p.11</span></td><td>同上</td></tr>
+</table>
+<p>这组数字同时印在玩家版图的提示区。棋子身上永远只有 1 枚烟花，多取的其余各枚只是被消耗。<span class="pg">p.11</span></p>
+<h3>6.2 送去演出时的同一条规则</h3>
+<p>把表演者送去四场演出，同样要按类型点燃烟花，处理方式与上街一致。差别在于部分恶魔格与角色格上印着特定类型的烟花，把表演者放到这些格位时，从车上取的烟花必须是该类型。<span class="pg">p.19</span></p>
+<div class="note">鼓手不点烟花。鼓手送去演出或留在街道都不消耗烟花，这是鼓手与表演者在资源上的主要差异。<span class="pg">p.13</span><span class="pg">p.19</span></div>
+<h3>6.3 烟花的三个来源</h3>
+<table>
+  <tr><th>来源</th><th>数量</th></tr>
+  <tr><td>开局放置</td><td>5 枚普通、2 枚哨音、2 枚彩色<span class="pg">p.6</span></td></tr>
+  <tr><td>阶段二按成员格空格补充</td><td>按空格所印的烟花与数量<span class="pg">p.27</span></td></tr>
+  <tr><td>行动与奖励</td><td>演出格位、观众卡、影片被动能力等<span class="pg">p.19</span><span class="pg">p.33</span></td></tr>
+</table>
+<div class="why"><span class="wt">规则作用</span>烟花数量与表演者体型绑定：大兽一上场就消耗 4 枚，等于用掉车里近半的存量。因此「把谁派出去」同时是「花多少烟花」的决定。成员格上的空格决定每轮补回多少，空格越多，补充越多；而空格本身要靠成员解锁才露出——解锁成员与补充烟花因此是同一枚硬币的两面。<span class="pg">p.11</span><span class="pg">p.27</span></div>
+</section>
+
+<section id="s7">
+<h2><span class="n">7</span>鼓手与声响</h2>
+<p>鼓手不走烟花路线。他们常驻街道，用手打鼓，因此需要一个指挥者：把鼓手长标记放到鼓手区旁的空格上才能激活。<span class="pg">p.13</span></p>
+<h3>7.1 两个鼓手长空格</h3>
+<table>
+  <tr><th>位置</th><th>结果</th></tr>
+  <tr><td>上位</td><td>激活人行道观众卡：站在激活图标上的鼓手，对应图标所连的那一侧行动；右侧行动的条件一律忽略<span class="pg">p.13</span></td></tr>
+  <tr><td>下位</td><td>产生声响：把有鼓手的格位下方所印的声响值相加，得到等量声响点<span class="pg">p.13</span></td></tr>
+</table>
+<p>每人有 2 枚鼓手长标记，因此每轮可以把上位与下位各用一次，顺序自定。<span class="pg">p.13</span></p>
+<h3>7.2 激活图标与连锁</h3>
+<p>鼓手区的若干格位上印着激活图标。每个图标只连到相邻人行道卡的一侧——有的连左侧行动，有的连右侧行动。只有当图标所在的格位上有自己的鼓手时，该图标才生效；图案位置决定它所连接的一侧。<span class="pg">p.13</span></p>
+<p>若某个行动使鼓手增加、从而够到原本够不到的图标，可以把该图标对应的行动一并执行。同一张卡的两侧都够到时，2 个行动的先后顺序自定。<span class="pg">p.13</span></p>
+<div class="note">原书示例中，上排有 4 个鼓手的玩家能做满上方人行道卡的两个行动，而下排只有 3 个鼓手的玩家只能做下方卡片的左侧行动。差别来自鼓手数量能否覆盖到两个图标。<span class="pg">p.14</span></div>
+<h3>7.3 声响轨道</h3>
+<table>
+  <tr><th>规则</th><th>内容</th></tr>
+  <tr><td>前进</td><td>获得若干声响点，就把声响标记沿轨道前进同样格数<span class="pg">p.14</span></td></tr>
+  <tr><td>越轨</td><td>越过最后一格时，每有 1 格走不完，改为得 1 分<span class="pg">p.14</span></td></tr>
+  <tr><td>沸腾图标</td><td>移动中每经过一个沸腾观众图标，执行一次惊动观众行动<span class="pg">p.14</span></td></tr>
+  <tr><td>顺位</td><td>阶段二据声响标记在轨道上的位置重排下一轮的行动顺位<span class="pg">p.14</span><span class="pg">p.27</span></td></tr>
+</table>
+<h3>7.4 声响的三重结果</h3>
+<p>一次声响点可以同时产生三样结果：推进声响轨道、途中触发惊动观众、抬高下一轮的顺位。三者不是可选项，而是同一次移动的连带效果；惊动观众可以放弃，但轨道前进与顺位变化照常生效。<span class="pg">p.14</span></p>
+<div class="why"><span class="wt">规则作用</span>鼓手一侧提供的是「不花烟花的机会」：上位把人行道卡的行动换成可执行项，下位把鼓手数量换成声响。声响轨道的长度固定，越往后越容易越轨换分，也越容易在途中经过沸腾图标，把观众卡推向广场。顺位则由声响决定，因此声响高的玩家下一轮先行动。<span class="pg">p.13</span><span class="pg">p.14</span><span class="pg">p.27</span></div>
+</section>
+
+<section id="s8">
+<h2><span class="n">8</span>剧团行动</h2>
+<p>剧团行动共三种，作用都是搬动剧团成员格上的棋子：让它们沿箭头前进一步、在格盘内换位、或直接取出。三者都不消耗烟花，也不消耗相机标记。<span class="pg">p.15</span></p>
+<h3>8.1 三种剧团行动</h3>
+<table>
+  <tr><th>行动</th><th>做法</th><th>限制</th></tr>
+  <tr><td>整备</td><td>把格盘上 1 名成员沿箭头指示方向移动 1 格<span class="pg">p.15</span></td><td>走到尽头才算离场；无空位可放的鼓手不能离场<span class="pg">p.15</span></td></tr>
+  <tr><td>调度</td><td>把格盘上任意 1 名鼓手、恶魔或角色移到格盘内任意空格<span class="pg">p.16</span></td><td>不必符合该格原本的类型；野兽不能用此行动<span class="pg">p.16</span><span class="pg">p.33</span></td></tr>
+  <tr><td>催场</td><td>把格盘上任意 1 名成员直接移入储备；若选鼓手，直接放进鼓手区<span class="pg">p.16</span></td><td>野兽也可以选，即使尚未满足解锁条件<span class="pg">p.16</span></td></tr>
+</table>
+<h3>8.2 整备的离场判定</h3>
+<p>整备只推 1 格。成员走到格盘尽头时才离场：表演者进表演者储备，鼓手进鼓手区任意一行的最左格。若鼓手区没有空位放这名鼓手，就不得把它移出格盘。<span class="pg">p.15</span></p>
+<p>野兽有一次提前离场的机会：只在第一次移动时可以直接移出，但必须满足它的解锁条件。解锁条件印在格盘上，两种野兽各不相同。<span class="pg">p.15</span></p>
+<table>
+  <tr><th>野兽</th><th>解锁条件</th></tr>
+  <tr><td>大兽</td><td>相邻的 3 个鼓手格必须为空<span class="pg">p.15</span></td></tr>
+  <tr><td>小兽</td><td>相邻的 2 个恶魔格必须为空<span class="pg">p.15</span></td></tr>
+</table>
+<h3>8.3 兽卡</h3>
+<p>第一次放出小兽、以及第一次放出大兽时，必须从版图上取 1 张对应类型的兽卡放在街道旁。兽卡为野兽提供独特能力：此后每次把野兽放上街道，除常规激活观众之外，还要额外激活同类型兽卡的能力。<span class="pg">p.16</span></p>
+<table>
+  <tr><th>规则</th><th>内容</th></tr>
+  <tr><td>共享</td><td>同一类型的所有野兽共用同一张兽卡的能力<span class="pg">p.16</span></td></tr>
+  <tr><td>不触发的场合</td><td>把野兽送去中央版图的演出区时不触发兽卡能力<span class="pg">p.16</span></td></tr>
+  <tr><td>起始小兽</td><td>开局在储备里的小兽没有能力，直到解锁格盘上两只小兽中的一只<span class="pg">p.16</span></td></tr>
+</table>
+<div class="why"><span class="wt">规则作用</span>三种剧团行动处理的是同一件事——把成员从格盘移出，区别在路径。整备沿箭头逐格推进，野兽可以在第一次移动时离盘，但须先满足解锁条件；调度只在格盘内部换位，不增加储备，也不能动野兽；催场无视解锁条件，把任意 1 名成员直接取出，代价是每次只取 1 名。兽卡把「解锁野兽」变成一次性投资：解锁之后，每次派野兽上街都多一次额外效果。<span class="pg">p.15</span><span class="pg">p.16</span></div>
+</section>
+
+<section id="s9">
+<h2><span class="n">9</span>社交媒体行动</h2>
+<p>社交媒体墙记录观众在火奔中拍下的照片与影片。两类行动都围绕这面墙：拍照或录像把相机标记放到要求上，点赞把点赞标记放到卡片的空位上。<span class="pg">p.17</span></p>
+<h3>9.1 拍照与录像</h3>
+<p>照片卡印 1 个要求，写明被拍的是谁；影片卡印 3 个要求，代表 3 个不同的场景。执行这个行动时，只要触发行动的表演者或鼓手满足对应要求，就可以出现在墙上任意一张可用卡片的某个要求位上。把 1 枚相机标记放到所选要求上，表示该位已被占用。<span class="pg">p.17</span></p>
+<table>
+  <tr><th>落点</th><th>所得</th></tr>
+  <tr><td>照片卡</td><td>立刻获得该要求所示的奖励<span class="pg">p.17</span></td></tr>
+  <tr><td>影片卡</td><td>获得一项被动能力，影片留在墙上期间持续有效<span class="pg">p.17</span></td></tr>
+</table>
+<h3>9.2 八类要求</h3>
+<table>
+  <tr><th>要求</th><th>判定</th></tr>
+  <tr><td>带哨音烟花的恶魔</td><td>同时满足类型与烟花两项<span class="pg">p.34</span></td></tr>
+  <tr><td>带彩色烟花的恶魔</td><td>同上<span class="pg">p.34</span></td></tr>
+  <tr><td>角色</td><td>只看棋子类型<span class="pg">p.34</span></td></tr>
+  <tr><td>带哨音烟花</td><td>任何带该烟花的成员<span class="pg">p.34</span></td></tr>
+  <tr><td>带彩色烟花</td><td>同上<span class="pg">p.34</span></td></tr>
+  <tr><td>带普通烟花，或为鼓手</td><td>两者满足其一<span class="pg">p.34</span></td></tr>
+  <tr><td>鼓手</td><td>只看棋子类型<span class="pg">p.34</span></td></tr>
+  <tr><td>野兽</td><td>小兽或大兽均可<span class="pg">p.34</span></td></tr>
+</table>
+<h3>9.3 点赞</h3>
+<p>从供应区取 1 枚点赞标记，放到任意一张还有空点赞位的照片或影片卡上，获得该位所示奖励。点赞标记本身不立即计分，它在墙更新时把分数带给「在这张卡上有相机标记」的玩家。<span class="pg">p.17</span></p>
+<h3>9.4 社交媒体墙的更新与计分</h3>
+<p>在任何一个回合结束时，只要满足下列两项之一，整面墙就更新：所有社交媒体卡上都至少有 1 枚相机标记；或已经没有卡还有可用的点赞位。<span class="pg">p.18</span></p>
+<ol>
+  <li>每位玩家数出「至少有 1 枚自己相机标记的那些卡上」一共有多少枚点赞标记。<span class="pg">p.18</span></li>
+  <li>把这个数乘以自己剧团成员格上可见的社交媒体图标数量，得到名气分。<span class="pg">p.18</span></li>
+  <li>计分完成后，若不是第 3 轮的终局计分，就把所有标记收回各自储备，弃掉墙上所有社交媒体卡，并从牌堆补满新卡。<span class="pg">p.18</span></li>
+</ol>
+<div class="note">终局还会再做一次同样的计分，那一次在阶段二执行，且不清墙、不补卡。<span class="pg">p.27</span></div>
+<h3>9.5 加倍效果的上限</h3>
+<p>某些影片与野兽效果组合，可以让同一项奖励重复领取。无论有多少效果允许翻倍，同一次奖励最多只算两次。<span class="pg">p.17</span><span class="pg">p.34</span></p>
+<div class="why"><span class="wt">规则作用</span>社交媒体是四条得分线里唯一把两项独立进度相乘的一条：点赞数由相机标记与点赞标记累积，倍率来自成员格上可见的社媒图标数。图标要靠解锁成员才露出，因此社媒分同时受两项进度约束。墙的更新由全体玩家的相机标记与点赞位共同触发，任何一方填满都会推动整墙结算，这一点与个人版图上的其余进度不同。<span class="pg">p.18</span><span class="pg">p.33</span></div>
+</section>
+
+<section id="s10">
+<h2><span class="n">10</span>演出行动</h2>
+<p>中央版图的四场演出是本作的主要出口：把表演者或鼓手放到对应格位，取即时奖励，同时在该场积累棋子，供阶段二计分。演出共 5 类行动——四场各一种，外加「任意一场」。<span class="pg">p.19</span></p>
+<h3>10.1 放置规则</h3>
+<table>
+  <tr><th>项目</th><th>规则</th></tr>
+  <tr><td>表演者来源</td><td>只能从表演者储备取<span class="pg">p.19</span></td></tr>
+  <tr><td>鼓手来源</td><td>只能从鼓手区取，取所选那一行最右格的鼓手<span class="pg">p.19</span></td></tr>
+  <tr><td>烟花</td><td>按 1／2／3／4 枚点燃；有指定类型的格位必须使用该类型<span class="pg">p.19</span></td></tr>
+  <tr><td>持久性</td><td>送去的棋子留在演出区直到游戏结束，不再收回<span class="pg">p.19</span></td></tr>
+</table>
+<h3>10.2 轮火</h3>
+<table>
+  <tr><th>放置</th><th>所得</th></tr>
+  <tr><td>鼓手放在鼓手格</td><td>4 点声响，外加该格位所印奖励<span class="pg">p.19</span></td></tr>
+  <tr><td>恶魔放在外圈，点燃指示烟花</td><td>所占据格位两侧的奖励，外加该恶魔所在圆环区段内的奖励<span class="pg">p.19</span></td></tr>
+  <tr><td>角色放在内圈，点燃指示烟花</td><td>所放那条线两端的 2 个奖励，外加角色所在两个圆环区段的奖励<span class="pg">p.19</span></td></tr>
+</table>
+<h3>10.3 鼓阵</h3>
+<p>把 1 名鼓手放到任意可用格位，立刻获得该格所在行与所在列末端所印的两个奖励。这是四场演出里换烟花最多的一场。<span class="pg">p.20</span></p>
+<h3>10.4 言舞</h3>
+<table>
+  <tr><th>放置</th><th>所得</th></tr>
+  <tr><td>鼓手放在鼓手格</td><td>一次免费的调度行动，外加该格上方所印的奖励<span class="pg">p.20</span></td></tr>
+  <tr><td>恶魔放在中央区段的两侧之一，点燃所需烟花</td><td>在指示的追随者轨道上获得 1 名追随者，外加一项额外奖励<span class="pg">p.20</span></td></tr>
+  <tr><td>角色放在上方两格之一，点燃所需烟花</td><td>一次免费的催场行动，并可在自选轨道上获得 1 名追随者<span class="pg">p.20</span></td></tr>
+</table>
+<h3>10.5 兽聚</h3>
+<p>把 1 名表演者送到对应格位，点燃自选类型（必须一致）的烟花，获得所在区域的奖励，即 1 枚点赞或 3 点声响；同时按格位所标获得追随者：恶魔 1 名、角色 2 名、小兽 3 名、大兽 4 名。每个象限的追随者归属一场特定演出，象限以演出图标标示。<span class="pg">p.21</span></p>
+<h3>10.6 任意一场</h3>
+<p>「任意一场」允许在四场之中任选一场执行，规则随所选演出的格位而定。<span class="pg">p.21</span></p>
+<h3>10.7 获得追随者</h3>
+<table>
+  <tr><th>情形</th><th>处理</th></tr>
+  <tr><td>获得 1 名追随者</td><td>把追随者标记在指定轨道或自选轨道上前进 1 格<span class="pg">p.21</span></td></tr>
+  <tr><td>落点旁有奖励</td><td>获得落点相邻卡上所印的奖励；落点若还没有卡，则无奖励<span class="pg">p.21</span></td></tr>
+  <tr><td>落点之后才补卡</td><td>不补发奖励<span class="pg">p.21</span></td></tr>
+  <tr><td>走到轨道末格仍有步数</td><td>每剩 1 步得 2 分<span class="pg">p.21</span></td></tr>
+</table>
+<h3>10.8 观众卡上的演出行动</h3>
+<p>演出行动太强，会占满整张观众卡。左侧可以做这场演出，但取不到那些增加追随者的奖励；要取得全部奖励并增加追随者，必须满足卡上条件。<span class="pg">p.22</span></p>
+<div class="note">原书示例写「条件要求表演者不是恶魔」，而示例派出的正是角色，按字面本应满足。该示例的结论与条件文字不一致，判定时以卡上印的条件为准：条件只有两类，一类限定棋子类型，一类限定烟花类型，逐条核对即可，不按示例的结论反推。<span class="pg">p.11</span><span class="pg">p.22</span></div>
+<div class="why"><span class="wt">规则作用</span>四场演出各有侧重：轮火给棋子型的即时奖励，鼓阵给烟花，言舞给剧团行动，兽聚给追随者。追随者是阶段二计分的前提——没有追随者，那场演出就没有可计分的名额。演出区因此是单向出口：棋子送出去即换成追随者进度与即时资源，不再回到街道。<span class="pg">p.19</span><span class="pg">p.21</span><span class="pg">p.26</span></div>
+</section>
+
+<section id="s11">
+<h2><span class="n">11</span>惊动观众与广场</h2>
+<p>惊动观众把观众从街道推向广场。每张观众卡收到第 3 枚沸腾观众标记时，这张卡就离场，转到某场演出旁，并为该场带来 1 名追随者。<span class="pg">p.23</span></p>
+<h3>11.1 触发与四步处理</h3>
+<table>
+  <tr><th>步</th><th>处理</th></tr>
+  <tr><td>1</td><td>把该卡上所有沸腾观众标记收回供应区<span class="pg">p.23</span></td></tr>
+  <tr><td>2</td><td>把这张观众卡从街道上移走<span class="pg">p.23</span></td></tr>
+  <tr><td>3</td><td>把卡翻面，放到 4 块演出计分板块中任意一场旁的第一个可用格位，按图示方向摆好<span class="pg">p.23</span></td></tr>
+  <tr><td>4</td><td>把追随者标记在该轨道上前进 1 格，并获得落点相邻图标对应的奖励<span class="pg">p.23</span></td></tr>
+</table>
+<p>若版图上已经没有可用格位放这张卡，就把它弃掉。<span class="pg">p.23</span></p>
+<h3>11.2 两个细节</h3>
+<table>
+  <tr><th>情形</th><th>处理</th></tr>
+  <tr><td>被移走的卡上还有表演者</td><td>表演者留在街道原位置不动<span class="pg">p.23</span></td></tr>
+  <tr><td>被移走的是人行道卡</td><td>该格露出印在玩家版图上的剧团追随者行动，直到阶段三有新卡盖回<span class="pg">p.23</span></td></tr>
+</table>
+<h3>11.3 卡背的指向图标</h3>
+<p>观众卡背面印有图标，指明下一张被推上广场的卡应放的演出。也就是说，第 3 步选的是本张卡的落点，第 4 步的追随者前进则按本张卡的落点轨道结算；下一张卡的落点由这张卡的背面决定。<span class="pg">p.23</span></p>
+<h3>11.4 广场上的奖励来源</h3>
+<p>追随者轨道上的奖励并不是印在轨道本身，而是来自摆在轨道旁的观众卡：卡放在某一格位，该格位相邻的图标即成为落点奖励。落点若还没有卡，前进照常，但取不到奖励，且之后补卡也不补发。<span class="pg">p.21</span><span class="pg">p.23</span></p>
+<div class="why"><span class="wt">规则作用</span>惊动观众是唯一能把观众卡从个人版图转移到中央版图的机制，它同时完成三件事：清掉街道上一张卡（露出追随者行动）、给某场演出加 1 名追随者、把这张卡的奖励铺进轨道。因此沸腾观众标记既是行动资源，也是轨道的铺设工具：推向某一场，就等于在那一条轨道上铺奖励。<span class="pg">p.23</span></div>
+</section>
+
+<section id="s12">
+<h2><span class="n">12</span>阶段二：时间流逝</h2>
+<p>所有玩家跳过之后，按时间轴上当前轮的标示，从左到右、由全体同时执行四个步骤，并用时间标记标示当前步骤。<span class="pg">p.25</span></p>
+<h3>12.1 四个步骤</h3>
+<table>
+  <tr><th>步</th><th>内容</th><th>末轮</th></tr>
+  <tr><td>1</td><td>焰华板块计分<span class="pg">p.25</span></td><td>照常</td></tr>
+  <tr><td>2</td><td>演出、街头观众与社交媒体墙计分<span class="pg">p.25</span></td><td>照常，并追加一次社媒终局计分</td></tr>
+  <tr><td>3</td><td>补充烟花车并调整行动顺位<span class="pg">p.25</span></td><td>两项都跳过<span class="pg">p.27</span></td></tr>
+  <tr><td>4</td><td>把时间标记移到下一条时间轴开头<span class="pg">p.25</span></td><td>跳过<span class="pg">p.28</span></td></tr>
+</table>
+<h3>12.2 焰华板块计分</h3>
+<p>焰华板块给出一个条件——某类棋子或某种烟花——以及 3 档名气分奖励。每位玩家清点自己在整个广场、也就是四场演出里符合该条件的元素数量。<span class="pg">p.25</span></p>
+<table>
+  <tr><th>清点规则</th><th>倍数</th></tr>
+  <tr><td>角色、小兽</td><td>本身及其身上的烟花算双倍<span class="pg">p.25</span></td></tr>
+  <tr><td>大兽</td><td>本身及其烟花算三倍<span class="pg">p.25</span></td></tr>
+  <tr><td>恶魔、鼓手、各类烟花</td><td>按 1 计<span class="pg">p.25</span></td></tr>
+</table>
+<p>数量最多的玩家用该数量乘以板块上最高那档奖励；数量第二多的乘以第二档；其余玩家乘以最低档。并列者按同一档结算。<span class="pg">p.25</span></p>
+<h3>12.3 演出计分</h3>
+<p>前两轮各选 1 场演出计分，条件是那场演出旁自己的追随者标记仍显示计分面。第 3 轮给自己前两轮没有选过的那两场计分。<span class="pg">p.26</span></p>
+<ol>
+  <li>看追随者标记在该轨道上的位置，到达或越过的最后一个图标决定可计分的棋子数量。<span class="pg">p.26</span></li>
+  <li>每有一个名额，从该场演出里取 1 个自己的棋子，按该场计分板块的条件给它计分。<span class="pg">p.26</span></li>
+  <li>同一棋子不能计两次，即使名额多于实际棋子。<span class="pg">p.26</span></li>
+  <li>计分完成后把追随者标记翻到已计分面，该场后续轮次不能再计分，但继续前进仍可取得常规奖励。<span class="pg">p.26</span></li>
+</ol>
+<h3>12.4 计分板块的通用规则</h3>
+<table>
+  <tr><th>规则</th><th>内容</th></tr>
+  <tr><td>名额上限</td><td>只能计数量不超过追随者轨道图标数值的棋子<span class="pg">p.36</span></td></tr>
+  <tr><td>逐棋子评估</td><td>同一场里的不同棋子可能因条件不同而得到不同分数<span class="pg">p.36</span></td></tr>
+  <tr><td>范围</td><td>所有计分只涉及正在计分的那一场演出<span class="pg">p.36</span></td></tr>
+  <tr><td>多数可共享</td><td>数量并列的玩家同样算拥有多数<span class="pg">p.36</span></td></tr>
+  <tr><td>烟花计数</td><td>评估烟花多数时每枚算 1，不论由谁携带<span class="pg">p.36</span></td></tr>
+  <tr><td>所有棋子</td><td>规则提到「每个棋子」时，所有棋子都计入，包含少人局的中立恶魔<span class="pg">p.36</span></td></tr>
+  <tr><td>对面</td><td>言舞与轮火的鼓手格指水平对面的格位；兽聚与轮火其余格位指圆环上相差 180 度的格位<span class="pg">p.36</span></td></tr>
+</table>
+<h3>12.5 街头观众罚分</h3>
+<p>自己街道上每有 1 张上面没有表演者的街头观众卡，扣 3 分。只有把表演者放在中段、压住这张卡，才算「有表演者」；放在上段或下段不算。<span class="pg">p.27</span></p>
+<h3>12.6 补充烟花车</h3>
+<p>获得剧团成员格上空格所印的烟花：从储备取对应数量放进烟花车。末轮跳过这一步。<span class="pg">p.27</span></p>
+<h3>12.7 调整行动顺位</h3>
+<p>按声响标记在声响轨道上的位置重排顺位：走得最远的玩家在新顺位中先行动，第二远的其次，依此类推。出现并列时，并列者之间的相对顺序反转——原本顺位靠后的那位改排在前。新顺位确定后，把所有声响标记退回声响轨道的起始格。<span class="pg">p.27</span></p>
+<h3>12.8 少人局的新观众</h3>
+<p>二人与三人局的第 1 轮：从准备时放在一旁的那叠人行道观众牌堆取最上面 4 张，各随机放到 4 块演出计分板块旁的下一个可用格位，每场演出各得 1 张。二人局在第 2 轮再做一次。<span class="pg">p.28</span></p>
+<div class="why"><span class="wt">规则作用</span>阶段二把三轮的积累一次性兑成名气分：焰华看全场的元素数量，演出看追随者轨道的进度与棋子数量，社媒看点赞与图标。四场演出各只能计分一次，因此先计的顺序决定后续两轮还能补的范围；第 3 轮的两场是一次性补齐，名额仍受追随者轨道限制。<span class="pg">p.26</span></div>
+</section>
+
+<section id="s13">
+<h2><span class="n">13</span>前行、吸引观众与终局</h2>
+<p>阶段三与阶段四不产生分数，只负责把街道与观众恢复到下一轮的起点：收回成员与烟花、把两类观众卡各推一格、补上新观众。第 3 轮整段跳过。<span class="pg">p.28</span></p>
+<h3>13.1 阶段三：前行</h3>
+<ol>
+  <li>把街道上表演者携带的烟花退回公共储备。<span class="pg">p.28</span></li>
+  <li>把街道上的表演者与鼓手长收回个人储备，下一轮可再用。<span class="pg">p.28</span></li>
+  <li>街头观众卡向右移 1 格，人行道观众卡向左移 1 格。<span class="pg">p.28</span></li>
+  <li>移到最右格的街头卡已越出版图，移到与鼓手区同列的最左格的人行道卡也已出界；处在这两个位置的卡再移一次即移出游戏。<span class="pg">p.28</span></li>
+</ol>
+<h3>13.2 阶段四：吸引观众</h3>
+<p>按顺位，每位玩家从街头观众牌堆抽最上面 1 张，放到自己街道中央标有箭头的格位。随后所有人同时从自己的那套观众卡里选 2 张人行道观众卡——1 张上、1 张下——放到街道上下标有箭头的格位。全部放好之后，新一轮开始。<span class="pg">p.28</span></p>
+<div class="note">阶段三把两类卡往相反方向推：街头卡向右，人行道卡向左。两种卡每次移动都朝各自的出口前进一步，因此街道上的观众始终在更替，固定不动的只有鼓手。<span class="pg">p.28</span></div>
+<h3>13.3 终局与平手</h3>
+<p>终局计分发生在第 3 轮的阶段二。该阶段一结束，游戏立即结束，名气分最多的玩家获胜。出现平手时，按 12.7 的顺位规则重排一次，按新顺位本应先行动的那位玩家获胜。<span class="pg">p.28</span></p>
+<h3>13.4 计分构成</h3>
+<svg viewBox="0 0 900 320" role="img" aria-label="恶魔之舞第 3 轮阶段二的计分构成">
+  <rect x="0" y="0" width="900" height="320" fill="#ffffff"/>
+  <text x="450" y="24" text-anchor="middle" font-size="15" font-weight="700" fill="#5a2430">第 3 轮阶段二：四个得分项与两项罚分／清零</text>
+  <g font-size="12.5" fill="#3f2530">
+    <rect x="10" y="42" width="212" height="86" rx="9" fill="#f7eef0" stroke="#d9bcc4"/>
+    <text x="24" y="64" font-weight="700">① 焰华板块</text>
+    <text x="24" y="86">元素数 × 档位</text>
+    <text x="24" y="106">角色／小兽及烟花 ×2</text>
+    <text x="24" y="122">大兽及烟花 ×3</text>
+    <rect x="232" y="42" width="212" height="86" rx="9" fill="#f3f0e8" stroke="#d8cfb8"/>
+    <text x="246" y="64" font-weight="700">② 演出计分</text>
+    <text x="246" y="86">名额 = 追随者轨道图标</text>
+    <text x="246" y="106">逐棋子按计分板块条件</text>
+    <text x="246" y="122">同一棋子不得计两次</text>
+    <rect x="454" y="42" width="212" height="86" rx="9" fill="#eef3f5" stroke="#bcd0d8"/>
+    <text x="468" y="64" font-weight="700">③ 社交媒体墙</text>
+    <text x="468" y="86">点赞数 × 可见图标数</text>
+    <text x="468" y="106">只算有自己相机标记的卡</text>
+    <text x="468" y="122">终局这一次不清墙</text>
+    <rect x="676" y="42" width="212" height="86" rx="9" fill="#f8f2f4" stroke="#dcc6cd"/>
+    <text x="690" y="64" font-weight="700">④ 街头观众罚分</text>
+    <text x="690" y="86">无表演者压住的卡 × 3</text>
+    <text x="690" y="106">放在中段才算压住</text>
+    <text x="690" y="122">只罚自己的街道</text>
+  </g>
+  <g stroke="#7a4350" stroke-width="2" fill="none">
+    <path d="M116 128 V152"/><path d="M338 128 V152"/><path d="M560 128 V152"/>
+    <path d="M782 128 V152"/>
+    <path d="M116 152 H782"/><path d="M450 152 V172"/>
+    <path d="M450 172 l-6 -9 h12 z" fill="#7a4350"/>
+  </g>
+  <rect x="286" y="178" width="328" height="46" rx="10" fill="#f2eef7" stroke="#c8c0dd"/>
+  <text x="450" y="200" text-anchor="middle" font-size="13.5" font-weight="700" fill="#3f2530">四项相加，名气分最高者胜</text>
+  <text x="450" y="219" text-anchor="middle" font-size="12" fill="#5a3b45">平手时按声响顺位判定</text>
+  <g font-size="12" fill="#5a3b45">
+    <text x="24" y="256">计分顺序由时间轴决定：焰华 → 演出／罚分／社媒 → 补车与顺位 → 时间标记。</text>
+    <text x="24" y="280">末轮跳过补车、顺位调整与时间标记三步，阶段三、阶段四整段跳过。</text>
+    <text x="24" y="304">本条示例中的各项数值取自原书各节算例，不代表同一局的合计。</text>
+  </g>
+</svg>
+<div class="why"><span class="wt">规则作用</span>四项计分之中有两项受同一个要素约束——广场上的棋子数量。焰华按全场元素计数，演出只结算场内棋子，能计几个又由追随者轨道决定。因此把棋子送进演出是全局投入：它同时抬高焰华的数量、增加演出可计的棋子、并推动该场追随者前进。观众卡与社交媒体则完全独立于广场，只与街道和成员格有关。<span class="pg">p.25</span><span class="pg">p.26</span><span class="pg">p.27</span></div>
+</section>
+
+<section id="s14">
+<h2><span class="n">14</span>单人局：火械</h2>
+<p>单人局的对手是火械。它不经营资源，只按决策牌堆逐张执行行动；难度决定它每轮能行动几次。<span class="pg">p.29</span></p>
+<h3>14.1 设置的改动</h3>
+<table>
+  <tr><th>项</th><th>改动</th></tr>
+  <tr><td>先手</td><td>你先行动<span class="pg">p.29</span></td></tr>
+  <tr><td>配件</td><td>火械不取玩家版图、鼓手长标记与烟花；其余配件构成火械储备<span class="pg">p.29</span></td></tr>
+  <tr><td>决策牌堆</td><td>从分给火械的 12 张人行道卡里取出带剧团行动的 2 张放一边，剩下 10 张洗混背面朝下<span class="pg">p.29</span></td></tr>
+  <tr><td>追随者牌堆</td><td>从街头观众牌堆抽 4 张，与那 2 张洗混，共 6 张背面朝下<span class="pg">p.29</span></td></tr>
+  <tr><td>大兽</td><td>放到时间轴第 2 轮的第一格<span class="pg">p.29</span></td></tr>
+  <tr><td>指定标记</td><td>看墙上最上面那张帖子的点赞奖励所指向的演出，把 1 只小兽放到该场追随者轨道旁；它是火械的指定标记<span class="pg">p.29</span></td></tr>
+  <tr><td>兽卡</td><td>只用 2 张小兽卡与 2 张大兽卡<span class="pg">p.29</span></td></tr>
+  <tr><td>难度</td><td>从入门、普通、困难、极难、魔鬼级中选定<span class="pg">p.29</span></td></tr>
+</table>
+<h3>14.2 每轮行动次数</h3>
+<table>
+  <tr><th>难度</th><th>第 1 轮</th><th>第 2 轮</th><th>第 3 轮</th></tr>
+  <tr><td>入门</td><td>3</td><td>3</td><td>4<span class="pg">p.29</span></td></tr>
+  <tr><td>普通</td><td>3</td><td>4</td><td>5<span class="pg">p.29</span></td></tr>
+  <tr><td>困难</td><td>4</td><td>5</td><td>5<span class="pg">p.29</span></td></tr>
+  <tr><td>极难</td><td>4</td><td>5</td><td>6<span class="pg">p.29</span></td></tr>
+  <tr><td>魔鬼级</td><td>5</td><td>5</td><td>6<span class="pg">p.29</span></td></tr>
+</table>
+<p>翻开火械的卡之后把卡摊在桌上，便于统计它已经行动几次。同一轮里你的行动次数可以多于火械。<span class="pg">p.29</span></p>
+<h3>14.3 演出行动的选位优先级</h3>
+<ol>
+  <li>选能推进偏好追随者标记的格位。<span class="pg">p.30</span></li>
+  <li>若仍有多个，按尚未计分的焰华所对应的棋子类型或烟花类型来选。<span class="pg">p.30</span></li>
+  <li>若仍有多个，选能放下需要最多烟花的表演者的格位。<span class="pg">p.30</span></li>
+  <li>若仍有多个，由你决定格位，必要时也由你决定烟花类型。<span class="pg">p.30</span></li>
+</ol>
+<p>随后火械按常规领取奖励：先领不涉及追随者轨道前进的部分，再领推进追随者标记的部分。<span class="pg">p.30</span></p>
+<h3>14.4 偏好轨道与焰华偏好</h3>
+<table>
+  <tr><th>概念</th><th>规则</th></tr>
+  <tr><td>偏好追随者轨道</td><td>指定标记所在的那条；若无法推进该轨，改选顺时针方向下一条尚未计分的轨道<span class="pg">p.30</span></td></tr>
+  <tr><td>指定标记换位</td><td>每次完成演出行动后，若同一场尚未计分且火械在该场棋子最多且不并列，就把指定标记移过去<span class="pg">p.30</span></td></tr>
+  <tr><td>未计分的焰华</td><td>优先满足最上面那块的条件；无法满足时依次参考其下方的焰华<span class="pg">p.30</span></td></tr>
+</table>
+<h3>14.5 社交媒体行动</h3>
+<table>
+  <tr><th>行动</th><th>选位规则</th></tr>
+  <tr><td>拍照／录像</td><td>点赞最多的帖子；若并列，优先照片而非影片；若仍并列，取墙上位置更靠上的<span class="pg">p.31</span></td></tr>
+  <tr><td>点赞</td><td>先放在有自己相机标记的卡上；否则放在没有自己相机标记的卡上；再否则选能推进偏好轨道的点赞位；最后取墙上最靠上的卡<span class="pg">p.31</span></td></tr>
+</table>
+<p>火械绝不在自己已有相机标记的影片上再放标记；往影片上放标记时一律放在最右侧可用位置。它忽略带相机标记的影片的被动能力，但照片奖励照常领取。<span class="pg">p.31</span></p>
+<p>社交媒体墙计分时，火械的可见图标数在第 1／2／3 轮分别视为 2／5／8。若翻到的卡同时显示拍照／录像与点赞，它按这个顺序把两个行动都做；在极难与魔鬼级下，只要条件允许，拍照／录像做两次。<span class="pg">p.31</span></p>
+<h3>14.6 其他行动的折算</h3>
+<table>
+  <tr><th>火械遇到</th><th>折算为</th></tr>
+  <tr><td>剧团行动</td><td>在相应位置放 1 枚点赞标记；带数字则放同样数量<span class="pg">p.31</span></td></tr>
+  <tr><td>赢得烟花</td><td>每枚改为 2 点声响<span class="pg">p.31</span></td></tr>
+  <tr><td>惊动观众</td><td>把 1 枚沸腾观众标记放到观众牌堆顶上；第 3 枚时退回 3 枚，把牌堆最上面一张放到偏好轨道旁的下一个可用格位<span class="pg">p.31</span></td></tr>
+</table>
+<h3>14.7 火械的阶段二至终局</h3>
+<p>焰华照常计分。演出计分时它选指定标记所在的那场，第 3 轮则给尚未计分的两场计分；它忽略计分板块上的条件，改为按固定公式结算。<span class="pg">p.32</span></p>
+<table>
+  <tr><th>步骤</th><th>内容</th></tr>
+  <tr><td>1</td><td>数它在该场演出里的棋子数量<span class="pg">p.32</span></td></tr>
+  <tr><td>2</td><td>乘以 2<span class="pg">p.32</span></td></tr>
+  <tr><td>3</td><td>再乘以它在追随者轨道上到达或越过的最后一个计分图标的数值<span class="pg">p.32</span></td></tr>
+</table>
+<p>随后把指定标记移到它棋子最多且尚未计分的演出；并列时按顺时针方向取下一场。火械不因街头观众卡失分，也不补充烟花车；第 1 轮结束时把大兽加入储备。阶段三与阶段四它不按常规执行，而是从决策牌堆移走一张「本轮刚计分的那场演出」的行动卡，再把本轮抽出的卡洗回。<span class="pg">p.32</span></p>
+<div class="note">若火械在该场追随者轨道上尚未到达任何计分图标，第 3 步的乘数在原文中没有定义。按「标记未到即无从计分」的通用逻辑取 0，该场得 0 分；也可在开局约定改用 1。<span class="pg">p.32</span></div>
+<div class="why"><span class="wt">规则作用</span>火械把玩家每一步的判断换成固定序列：动作由牌堆决定，落点由偏好轨道与焰华条件层层收窄，计分公式取代计分板块。它不参与资源循环，也不受烟花与成员储备的限制，只按难度表规定的次数向广场投棋子。玩家一侧的规则不变，单人局的全部变化都落在对手一侧。<span class="pg">p.29</span><span class="pg">p.32</span><span class="pg">p.36</span></div>
+</section>
+
+<section id="s15">
+<h2><span class="n">15</span>常见误读与速查</h2>
+<p>以下条目按出现频率排列，均可在前述章节找到依据。<span class="pg">p.10</span></p>
+<h3>15.1 常见误读</h3>
+<table>
+  <tr><th>误读</th><th>正确做法</th></tr>
+  <tr><td>表演者可以放进同一列的另一段</td><td>同一列只能有 1 名表演者；只有大兽卡与影片奖励各提供一次例外<span class="pg">p.10</span><span class="pg">p.35</span></td></tr>
+  <tr><td>上段与下段也能压住街头观众卡</td><td>只有中段压在街头卡上；罚分按「卡上有无表演者」判定<span class="pg">p.10</span><span class="pg">p.27</span></td></tr>
+  <tr><td>观众卡右侧行动随便做</td><td>右侧必须满足条件：表演者不是恶魔，或带指定类型烟花<span class="pg">p.11</span></td></tr>
+  <tr><td>车上取几枚就贴几枚</td><td>只有 1 枚留在棋子身上，其余退回公共储备<span class="pg">p.11</span></td></tr>
+  <tr><td>取烟花可以混类型</td><td>一次取用的烟花必须全部同类型<span class="pg">p.11</span></td></tr>
+  <tr><td>鼓手派出去也要点烟花</td><td>鼓手从不使用烟花<span class="pg">p.13</span></td></tr>
+  <tr><td>两枚鼓手长可以都放上位</td><td>上位与下位各一枚，分别对应激活观众与产生声响<span class="pg">p.13</span></td></tr>
+  <tr><td>调度可以把野兽换位</td><td>调度只限鼓手、恶魔与角色；野兽要用催场<span class="pg">p.16</span><span class="pg">p.33</span></td></tr>
+  <tr><td>送去演出的棋子还能收回</td><td>演出区的棋子留在那里直到游戏结束<span class="pg">p.19</span></td></tr>
+  <tr><td>追随者轨道每一格都有奖励</td><td>奖励来自摆在轨道旁的观众卡，空格没有奖励，之后补卡也不补发<span class="pg">p.21</span></td></tr>
+  <tr><td>同一场演出可以反复计分</td><td>计分后把标记翻到已计分面，后续轮次不能再计该场<span class="pg">p.26</span></td></tr>
+  <tr><td>一个棋子能占多个计分名额</td><td>同一棋子不能计两次<span class="pg">p.26</span></td></tr>
+  <tr><td>并列时无人算多数</td><td>多数可以共享，并列者同样算拥有多数<span class="pg">p.36</span></td></tr>
+  <tr><td>只有自己的棋子参与比较</td><td>规则写「每个棋子」时所有棋子都计入，含少人局中立恶魔<span class="pg">p.36</span></td></tr>
+  <tr><td>加倍效果可以叠加</td><td>无论多少效果允许翻倍，同一奖励最多算两次<span class="pg">p.17</span></td></tr>
+</table>
+<h3>15.2 一局速查</h3>
+<div class="grid2">
+  <div class="card"><div class="t"><span class="s">阶段一</span>三选一</div>派表演者上街、用鼓手演出、跳过。跳过之后本阶段不再行动；全员跳过即进入阶段二。</div>
+  <div class="card blue"><div class="t"><span class="s">上街</span>三步</div>选列（火力范围内、该列无表演者）→ 选段（上段取上方卡、中段压街头卡、下段取下方卡）→ 按类型点 1／2／3／4 枚烟花 → 结算卡的 2 个行动。</div>
+  <div class="card green"><div class="t"><span class="s">鼓手</span>上位与下位</div>上位：图标上的鼓手激活相邻人行道卡对应一侧，忽略条件；下位：有鼓手格位下方数值相加得声响。</div>
+  <div class="card gold"><div class="t"><span class="s">声响</span>一次移动三结果</div>轨道前进；每经过一个沸腾图标做一次惊动观众；轨道位置决定下一轮顺位，越轨每格 1 分。</div>
+  <div class="card"><div class="t"><span class="s">演出</span>五类行动</div>轮火给分区与两侧奖励，鼓阵给行列末端，言舞给剧团行动与追随者，兽聚给追随者 1／2／3／4，任意一场任选。</div>
+  <div class="card blue"><div class="t"><span class="s">惊动观众</span>三枚成行</div>第 3 枚沸腾标记：收回标记 → 移卡 → 翻面放到某场演出旁 → 追随者前进 1 格并取落点奖励。</div>
+  <div class="card green"><div class="t"><span class="s">阶段二</span>四步</div>焰华 → 演出／街头罚分／社媒 → 补车与顺位（并列反转）→ 时间标记。末轮跳过补车与顺位。</div>
+  <div class="card gold"><div class="t"><span class="s">终局</span>三处补齐</div>第 3 轮计两场演出 + 一次社媒终局计分；游戏在该阶段结束即止，名气分最高者胜。</div>
+</div>
+<h3>15.3 中英术语对照</h3>
+<table>
+  <tr><th>中文</th><th>英文</th><th>中文</th><th>英文</th></tr>
+  <tr><td>火奔</td><td>correfoc</td><td>剧团</td><td>colla</td></tr>
+  <tr><td>恶魔</td><td>diable</td><td>角色</td><td>character</td></tr>
+  <tr><td>小兽／大兽</td><td>small beast／large beast</td><td>表演者</td><td>performer</td></tr>
+  <tr><td>鼓手</td><td>tabaler</td><td>鼓手长</td><td>tabaler leader</td></tr>
+  <tr><td>轮火</td><td>carretillada</td><td>言舞</td><td>ball parlat</td></tr>
+  <tr><td>兽聚</td><td>trobada de bèsties</td><td>鼓阵</td><td>tabalada</td></tr>
+  <tr><td>焰华</td><td>lluïment</td><td>烟花车</td><td>cart</td></tr>
+  <tr><td>普通／哨音／彩色烟花</td><td>regular／whistling／colorful</td><td>点燃</td><td>light</td></tr>
+  <tr><td>街道</td><td>street</td><td>列</td><td>column</td></tr>
+  <tr><td>上段／中段／下段</td><td>upper／middle／lower section</td><td>人行道</td><td>pavement</td></tr>
+  <tr><td>街头观众</td><td>street spectator</td><td>人行道观众</td><td>pavement spectator</td></tr>
+  <tr><td>沸腾观众</td><td>thrilled crowd</td><td>剧团追随者</td><td>colla follower</td></tr>
+  <tr><td>追随者轨道</td><td>follower track</td><td>名气分</td><td>fame points</td></tr>
+  <tr><td>声响</td><td>sound</td><td>声响轨道</td><td>sound track</td></tr>
+  <tr><td>点赞</td><td>like</td><td>相机标记</td><td>camera token</td></tr>
+  <tr><td>社交媒体墙</td><td>social media wall</td><td>帖子</td><td>post</td></tr>
+  <tr><td>剧团成员格</td><td>colla member grid</td><td>整备／调度／催场</td><td>prepare／reorganize／hasten</td></tr>
+  <tr><td>演出计分板块</td><td>show scoring tile</td><td>时间轴</td><td>timeline</td></tr>
+  <tr><td>顺位指示条</td><td>turn indicator</td><td>火械</td><td>Firebot</td></tr>
+</table>
+<h3>15.4 章节与页码</h3>
+<table>
+  <tr><th>原书章节</th><th>页码</th><th>本书位置</th></tr>
+  <tr><td>背景与配件</td><td>p.2 至 p.3</td><td>0、2</td></tr>
+  <tr><td>准备</td><td>p.4 至 p.7</td><td>1</td></tr>
+  <tr><td>游戏概览与四阶段</td><td>p.8 至 p.9</td><td>0、2</td></tr>
+  <tr><td>阶段一：演出</td><td>p.10 至 p.14</td><td>4 至 7</td></tr>
+  <tr><td>行动四类</td><td>p.15 至 p.24</td><td>8 至 11</td></tr>
+  <tr><td>阶段二：时间流逝</td><td>p.25 至 p.27</td><td>12</td></tr>
+  <tr><td>阶段三、阶段四与终局</td><td>p.28</td><td>13</td></tr>
+  <tr><td>单人模式</td><td>p.29 至 p.32</td><td>14</td></tr>
+  <tr><td>附录</td><td>p.33 至 p.40</td><td>9 至 12、15</td></tr>
+</table>
+<div class="note">页码写作 p.N，指英文原书 40 页的页序。附录分六段：图标速查 p.33、拍照奖励 p.34、录像奖励 p.34 至 p.35、演出计分板块 p.36 至 p.38、兽卡 p.39、制作名单 p.40。烟花与棋子的实际印值、兽卡能力与板块分割线以实体配件为准。<span class="pg">p.33</span><span class="pg">p.40</span></div>
+<h3>15.5 原书页图对照</h3>
+<details>
+<summary>展开原书页图（40 张，按页序）</summary>
+<figure><img src="images_dia/page_01.jpg" alt="原书第 1 页" loading="lazy"><figcaption>p.1 封面</figcaption></figure>
+<figure><img src="images_dia/page_02.jpg" alt="原书第 2 页" loading="lazy"><figcaption>p.2 火奔背景与游戏目标</figcaption></figure>
+<figure><img src="images_dia/page_03.jpg" alt="原书第 3 页" loading="lazy"><figcaption>p.3 配件清单 30 项</figcaption></figure>
+<figure><img src="images_dia/page_04.jpg" alt="原书第 4 页" loading="lazy"><figcaption>p.4 公共准备 A 至 F 与版图结构</figcaption></figure>
+<figure><img src="images_dia/page_05.jpg" alt="原书第 5 页" loading="lazy"><figcaption>p.5 社交媒体墙、兽卡与少人局盖格</figcaption></figure>
+<figure><img src="images_dia/page_06.jpg" alt="原书第 6 页" loading="lazy"><figcaption>p.6 个人准备与玩家版图区块</figcaption></figure>
+<figure><img src="images_dia/page_07.jpg" alt="原书第 7 页" loading="lazy"><figcaption>p.7 起始观众卡与声响标记</figcaption></figure>
+<figure><img src="images_dia/page_08.jpg" alt="原书第 8 页" loading="lazy"><figcaption>p.8 游戏概览与专有名词</figcaption></figure>
+<figure><img src="images_dia/page_09.jpg" alt="原书第 9 页" loading="lazy"><figcaption>p.9 四阶段与名气分</figcaption></figure>
+<figure><img src="images_dia/page_10.jpg" alt="原书第 10 页" loading="lazy"><figcaption>p.10 阶段一与街道 5 列三段</figcaption></figure>
+<figure><img src="images_dia/page_11.jpg" alt="原书第 11 页" loading="lazy"><figcaption>p.11 点燃烟花、邻接判定与火力范围</figcaption></figure>
+<figure><img src="images_dia/page_12.jpg" alt="原书第 12 页" loading="lazy"><figcaption>p.12 派人示例与剧团追随者</figcaption></figure>
+<figure><img src="images_dia/page_13.jpg" alt="原书第 13 页" loading="lazy"><figcaption>p.13 鼓手区、激活图标与声响</figcaption></figure>
+<figure><img src="images_dia/page_14.jpg" alt="原书第 14 页" loading="lazy"><figcaption>p.14 鼓手示例与声响轨道</figcaption></figure>
+<figure><img src="images_dia/page_15.jpg" alt="原书第 15 页" loading="lazy"><figcaption>p.15 行动总览与整备</figcaption></figure>
+<figure><img src="images_dia/page_16.jpg" alt="原书第 16 页" loading="lazy"><figcaption>p.16 调度、催场与兽卡</figcaption></figure>
+<figure><img src="images_dia/page_17.jpg" alt="原书第 17 页" loading="lazy"><figcaption>p.17 拍照、录像与点赞</figcaption></figure>
+<figure><img src="images_dia/page_18.jpg" alt="原书第 18 页" loading="lazy"><figcaption>p.18 社媒示例与墙计分</figcaption></figure>
+<figure><img src="images_dia/page_19.jpg" alt="原书第 19 页" loading="lazy"><figcaption>p.19 演出行动总览与轮火</figcaption></figure>
+<figure><img src="images_dia/page_20.jpg" alt="原书第 20 页" loading="lazy"><figcaption>p.20 鼓阵与言舞</figcaption></figure>
+<figure><img src="images_dia/page_21.jpg" alt="原书第 21 页" loading="lazy"><figcaption>p.21 兽聚与获得追随者</figcaption></figure>
+<figure><img src="images_dia/page_22.jpg" alt="原书第 22 页" loading="lazy"><figcaption>p.22 观众卡上的演出行动与示例</figcaption></figure>
+<figure><img src="images_dia/page_23.jpg" alt="原书第 23 页" loading="lazy"><figcaption>p.23 惊动观众</figcaption></figure>
+<figure><img src="images_dia/page_24.jpg" alt="原书第 24 页" loading="lazy"><figcaption>p.24 惊动观众示例</figcaption></figure>
+<figure><img src="images_dia/page_25.jpg" alt="原书第 25 页" loading="lazy"><figcaption>p.25 阶段二与焰华计分</figcaption></figure>
+<figure><img src="images_dia/page_26.jpg" alt="原书第 26 页" loading="lazy"><figcaption>p.26 演出计分与示例</figcaption></figure>
+<figure><img src="images_dia/page_27.jpg" alt="原书第 27 页" loading="lazy"><figcaption>p.27 补车、罚分、社媒与顺位</figcaption></figure>
+<figure><img src="images_dia/page_28.jpg" alt="原书第 28 页" loading="lazy"><figcaption>p.28 阶段三四与终局</figcaption></figure>
+<figure><img src="images_dia/page_29.jpg" alt="原书第 29 页" loading="lazy"><figcaption>p.29 单人模式概览与难度表</figcaption></figure>
+<figure><img src="images_dia/page_30.jpg" alt="原书第 30 页" loading="lazy"><figcaption>p.30 火械选位优先级</figcaption></figure>
+<figure><img src="images_dia/page_31.jpg" alt="原书第 31 页" loading="lazy"><figcaption>p.31 火械的社媒与其他行动</figcaption></figure>
+<figure><img src="images_dia/page_32.jpg" alt="原书第 32 页" loading="lazy"><figcaption>p.32 火械计分与阶段三四</figcaption></figure>
+<figure><img src="images_dia/page_33.jpg" alt="原书第 33 页" loading="lazy"><figcaption>p.33 附录：图标速查 1 至 21</figcaption></figure>
+<figure><img src="images_dia/page_34.jpg" alt="原书第 34 页" loading="lazy"><figcaption>p.34 附录：拍照奖励与社媒要求</figcaption></figure>
+<figure><img src="images_dia/page_35.jpg" alt="原书第 35 页" loading="lazy"><figcaption>p.35 附录：录像奖励 26 至 40</figcaption></figure>
+<figure><img src="images_dia/page_36.jpg" alt="原书第 36 页" loading="lazy"><figcaption>p.36 附录：计分通用规则与焰华条件</figcaption></figure>
+<figure><img src="images_dia/page_37.jpg" alt="原书第 37 页" loading="lazy"><figcaption>p.37 附录：轮火与言舞计分板块</figcaption></figure>
+<figure><img src="images_dia/page_38.jpg" alt="原书第 38 页" loading="lazy"><figcaption>p.38 附录：兽聚与鼓阵计分板块</figcaption></figure>
+<figure><img src="images_dia/page_39.jpg" alt="原书第 39 页" loading="lazy"><figcaption>p.39 附录：小兽与大兽卡</figcaption></figure>
+<figure><img src="images_dia/page_40.jpg" alt="原书第 40 页" loading="lazy"><figcaption>p.40 制作名单</figcaption></figure>
+</details>
+</section>
+
+<div class="foot">
+恶魔之舞 · 学习版规则　｜　依据英文原书《Diables》Rulebook（40 页）与中文版既定译法编写<br>
+按规则结构重排，非官方规则书；规则裁决以英文原书为准，棋子印值与配件数量以实体配件为准。
+</div>
+</main>
+</div>
+</body>
+</html>
