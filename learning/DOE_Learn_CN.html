@@ -171,7 +171,7 @@
   <a href="#s3">3 · 核心引擎</a>
   <a href="#s4">4 · 一轮四阶段与三个轮</a>
   <a href="#s5">5 · 五个行动棋子</a>
-  <a href="#why" style="padding-left:22px;color:var(--blue);font-weight:700;">↳ 5.0 行动结构与格子差异</a>
+  <a href="#why" style="padding-left:22px;color:var(--blue);font-weight:700;">↳ 5.0 · 使魔与格位的对应</a>
   <div class="grp">全局机制</div>
   <a href="#s6">6 · 全局系统</a>
   <a href="#s7">7 · 资源与费用</a>
@@ -370,22 +370,18 @@
 
 <section id="s5">
 <h2><span class="n">5</span>五个行动棋子逐条深挖</h2>
-<h3 id="why">5.0 · 行动结构与格子差异</h3>
+<h3 id="why">5.0 · 使魔与格位的对应</h3>
 <div class="why"><span class="wt">采集范围与结算速度的对应</span>四类使魔各对应一种格子：乌鸦占林间空地采集格、猫占双箭头格、蟾蜍占四箭头格、蛇占下箭头格。可采集格数由 1 递增至整列，结算次序却由最先退至最后，故同一格被多个使魔指向时，速度快者先取走资源，速度慢者按空格数改取虫。行动棋子一经放置即占据该格，其余棋子不可再进入；钱袋不采集资源，只能落在助手面板上。<span class="pg">p.4</span><span class="pg">p.5</span></div>
 <table>
-  <tr><th>位置</th><th>格子差异</th><th>影响范围</th><th>依据</th></tr>
+  <tr><th>位置</th><th>差异</th><th>影响范围</th><th>依据</th></tr>
   <tr><td>林间空地采集格</td><td>浅绿实线边框，每格印虫图标</td><td>乌鸦唯一可放的采集格；空格补偿按每格 1 虫</td><td><span class="pg">p.4</span><span class="pg">p.5</span></td></tr>
   <tr><td>灌木丛采集格</td><td>虚线边框，位于林间空地之外</td><td>仅寻路者助手可让乌鸦放入，并额外获得 1 虫</td><td><span class="pg">p.4</span><span class="pg">p.13</span></td></tr>
   <tr><td>双箭头格</td><td>箭头指向 2 个采集格</td><td>猫的采集范围；驯鸦人可让乌鸦当作猫放入</td><td><span class="pg">p.4</span><span class="pg">p.13</span></td></tr>
   <tr><td>四箭头格</td><td>箭头指向 4 个采集格</td><td>蟾蜍的采集范围；猫女士可让猫当作蟾蜍放入</td><td><span class="pg">p.4</span><span class="pg">p.13</span></td></tr>
   <tr><td>下箭头格</td><td>箭头指向整列采集格</td><td>蛇的采集范围；其左右位置决定下一轮回合顺序</td><td><span class="pg">p.4</span><span class="pg">p.5</span></td></tr>
   <tr><td>助手面板</td><td>仅容纳钱袋；面板标注所属阶段，放置阶段类另印回合顺序图标</td><td>助手能力的激活时机与替代所得</td><td><span class="pg">p.12</span></td></tr>
-  <tr><td>熬制器药瓶</td><td>各瓶格数不同，可跨列；列底火焰数不同</td><td>完成瓶的毒分、解锁的奖励标记与收益图标数</td><td><span class="pg">p.7</span></td></tr>
-  <tr><td>蒸馏器药瓶</td><td>自最低瓶向上排列，顶端瓶可反复填</td><td>蘑菇的填充顺序与奖励标记取得次数</td><td><span class="pg">p.8</span></td></tr>
-  <tr><td>鼠区两格</td><td>自由鼠扣分、捕获鼠计分，均无容量上限</td><td>收入阶段扣分与终局捕获鼠分值</td><td><span class="pg">p.8</span><span class="pg">p.10</span></td></tr>
-  <tr><td>毒性轨道六轨</td><td>各轨对应一类资源，起始值印在图标格</td><td>完成瓶与捕获鼠计分所据的当前毒分值</td><td><span class="pg">p.3</span><span class="pg">p.10</span></td></tr>
 </table>
-<p>各采集格的初始资源、药瓶格数与火焰数量、毒性轨道起始毒分值、奖励标记与面板印值均以实体配件为准，原书正文未逐项列出。结算时不代填数值。<span class="pg">p.2</span><span class="pg">p.3</span><span class="pg">p.7</span></p>
+<p>各采集格的初始资源与面板印值以实体配件为准，原书正文未逐项列出，结算时不代填数值。<span class="pg">p.2</span><span class="pg">p.3</span></p>
 
 <h3>5.1 · 乌鸦</h3>
 <div class="why"><span class="wt">作用</span>乌鸦取得单一采集格内的全部资源，且在四类使魔中最先结算。其落点若同时被猫、蟾蜍或蛇的箭头指向，该格在后续取回时已空，按空格补偿改取 1 虫。<span class="pg">p.4</span><span class="pg">p.5</span></div>

@@ -155,7 +155,7 @@
   <a href="#s3">3 · 核心引擎</a>
   <a href="#s4">4 · 回合结构</a>
   <a href="#s5">5 · 四类行动</a>
-  <a href="#why" style="padding-left:22px;color:var(--blue);font-weight:700;">↳ 5.0 行动结构与格子差异</a>
+  <a href="#why" style="padding-left:22px;color:var(--blue);font-weight:700;">↳ 5.0 四类行动的格位差异</a>
   <div class="grp">全局机制</div>
   <a href="#s6">6 · 爱丽丝 / 皇冠 / 猫咪 / 市场</a>
   <a href="#s7">7 · 资源与时间</a>
@@ -436,34 +436,20 @@
   <h2><span class="n">5</span>四类行动</h2>
   <p>四类行动共用同一结构：触发（落在对应列）→ 支付（按棋子颜色）→ 按固定步骤执行 → 结算奖励 → 检查里程碑 → 终点授予皇冠。差异见 §5.1–5.4。<span class="pg">p.13</span></p>
 
-  <h3 id="why">5.0 行动的共同结构与格子差异</h3>
+  <h3 id="why">5.0 四类行动的格位差异</h3>
   <div class="why">
-    <span class="wt">四类行动的共同结构</span>
-    每类行动均以资源换取一次位移或放置，<b>落点决定所得奖励</b>。版图各格印制的奖励、费用与占用状态互不相同，构成实际的奖励表。
-    各格印制的奖励、费用与占用状态决定单次行动的所得。
+    <span class="wt">同一动作在不同格位的结果</span>
+    四类行动均以资源换取一次位移或放置。同一动作落在不同格位时，可覆盖范围、费用与所得奖励不同；执行前先确定落点所在的区域与格位，再按该格印值结算。
   </div>
-  <h4>各版图格子差异</h4>
   <table class="idx">
     <tr><th style="width:17%">位置</th><th style="width:41%">差异项</th><th style="width:34%">影响</th><th style="width:8%">页码</th></tr>
-    <tr><td><b>棋盘 5×8 格</b></td><td><b>行</b>＝资源种类，<b>列</b>＝行动种类；中央两行是百搭资源行、中央 ★ 列是通用行动列；格子亦可能被对方棋子占据</td><td>决定本回合所得资源与所执行的行动；落在对方格触发俘获</td><td><span class="pg">p.8</span><span class="pg">p.11</span><span class="pg">p.13</span></td></tr>
     <tr><td><b>花园格</b></td><td>各格印制奖励不同：四种花（黄 / 蓝 / 橙 / 粉）以及爪印、书、卡等非花图标；并分属 <b>4 个区域</b></td><td>园丁当前区域决定可覆盖的格子，进而决定所得永久加成的种类</td><td><span class="pg">p.14</span></td></tr>
     <tr><td><b>朝臣版图<br>红心 / 方块格</b></td><td>每枚标记所在格印的奖励不同（银卡、爪印、时间、爱丽丝推进、迷你行动等均可能出现）</td><td>移除的标记决定所得奖励；<b>红心须取走编号最小者</b>，方块允许任选</td><td><span class="pg">p.14</span><span class="pg">p.17</span></td></tr>
     <tr><td><b>信使路径格</b></td><td>格奖励各不相同；格后横幅颜色代表可购卡层级（铜 / 银 / 金）；另有印章格、中央金区、岔路、终点等特殊格</td><td>步数决定落格；<b>首位</b>越过印章与<b>后续</b>玩家所得奖励不同</td><td><span class="pg">p.15</span></td></tr>
     <tr><td><b>双子之树格</b></td><td>印的书本颜色与其他奖励不同、高度不同（标在格下方的书签图标内）；部分格上还放着<b>实体书本标记</b></td><td>高度触发里程碑；实体书本标记被取走后，同一格后续到访获得的奖励会变</td><td><span class="pg">p.16</span></td></tr>
     <tr><td><b>矮胖子墙格</b></td><td>左红右白各成一片；每格印不同奖励；每行费用不同（印在行首），部分列另加 1 茶</td><td>格位同时决定费用与所得奖励；与矮胖子同一行另有额外 IP</td><td><span class="pg">p.17</span></td></tr>
-    <tr><td><b>爱丽丝路径格</b></td><td>每格印不同 IP 数值；心愿格、王座格、被皇冠占住的格是特殊格</td><td>推进所至之格决定即时 IP、是否触发全体心愿、是否加冕；有皇冠的格须跳过</td><td><span class="pg">p.8</span><span class="pg">p.9</span></td></tr>
-    <tr><td><b>猫咪轨道格</b></td><td>沿途每格印不同奖励，×1 / ×2 是阈值格</td><td>落格与跳过的所有格均给予奖励；终局位置决定可计入的心愿数量</td><td><span class="pg">p.9</span><span class="pg">p.19</span></td></tr>
     <tr><td><b>卡牌市场格</b></td><td>铜 / 银 / 金三层 × 左中右三格，费用依次免费 / 1 时间 / 1 自选资源</td><td>同一层级内格位决定成本；最右格为牌库顶牌</td><td><span class="pg">p.9</span></td></tr>
   </table>
-
-  <table>
-    <tr><th style="width:12%">行动</th><th style="width:22%">费用</th><th style="width:24%">产出</th><th style="width:22%">里程碑（按每色各自计）</th><th>迷你行动</th></tr>
-    <tr><td><b class="tagR">♥ 红心</b></td><td>园丁移动 1 茶/格；放红心的费用（樱桃蛋糕 / 黄油吐司）</td><td><b>花（永久加成）</b>、版图与花园两处奖励</td><td>第 3 枚 → 爱丽丝 1 格<br>第 4 枚 → 迷你行动<br>第 5 枚 → 皇冠</td><td>免费移除任一色<b>编号最小</b>的红心，获得翻出的奖励，标记置于一旁</td></tr>
-    <tr><td><b class="tagB">♠ 黑桃</b></td><td>1 格 = 1 资源；2 格 = 2 资源；3 格 = 2 资源 + 1 茶</td><td><b>购卡或邀请</b>、落格奖励、印章奖励</td><td>首次越过印章获得大印章奖励，后续获得小印章奖励；进入中央金区 ≥1 次即推进爱丽丝；穿越中央给予免费迷你行动；<b>路径终点授予皇冠</b></td><td>任一信使免费前进<b>恰好 1 格</b>，照常获得全部奖励</td></tr>
-    <tr><td><b class="tagG">♣ 梅花</b></td><td>箭头标示的费用（黄箭头分红白两色，黑箭头统一）</td><td><b>书本</b>、可选购书签</td><td>从第 2 层爬到第 3 层 → 对应色爱丽丝 1 格；<b>树顶授予皇冠</b></td><td>任一双子沿相邻黑箭头免费移动，照常获得奖励 + 可购买书签</td></tr>
-    <tr><td><b class="tagR">♦ 方块</b></td><td>所选<b>行费用 + 列费用</b>（部分列另需 1 茶）</td><td>版图奖励 + 墙上被盖住的奖励 + IP</td><td>第 3 枚 → 爱丽丝 1 格<br>第 4 枚 → 迷你行动<br>第 5 枚 → 皇冠</td><td>免费移除任一色 1 枚方块，获得图示奖励，不放置于墙上</td></tr>
-  </table>
-  <p><span class="pg">p.14</span><span class="pg">p.15</span><span class="pg">p.16</span><span class="pg">p.17</span></p>
 
   <h3>5.1 <span class="tagR">♥</span> 红心 · 百花花园 <span class="pg">p.14</span></h3>
   <div class="why">
